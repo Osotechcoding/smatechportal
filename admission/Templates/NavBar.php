@@ -1,8 +1,8 @@
 <header class="main-header" id="header">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="./">
-                <img src="assets/images/logo.png" class="img-fluid" alt="SmatechHome">
+            <a class="navbar-brand" href="../">
+                <img src="../assets/images/logo.png" class="img-fluid" alt="SmatechHome">
             </a>
             <span class="navbar-toggler">
                 <i class="ti-align-left" onclick="openNav()"></i>
@@ -10,7 +10,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="./">Home</a>
+                        <a class="nav-link" href="../">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">About</a>

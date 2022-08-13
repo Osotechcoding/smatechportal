@@ -116,7 +116,7 @@
             <div class="footer-top border-bottom pt-5">
                 <div class="row">
                     <div class="col-lg-3 col-md-6" data-aos="fade-in" data-aos-duration="1050">
-                        <a href="index-2.html"><img src="assets/images/logo-footer.png" class="img-fluid mb-3" alt="Edusquad"></a>
+                        <a href="index-2.html"><img src="../assets/images/logo-footer.png" class="img-fluid mb-3" alt="Edusquad"></a>
                         <p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
                         <ul class="social-icon">
                             <li><a href="javascript:"><i class="fa fa-facebook-f"></i></a></li>
@@ -142,22 +142,22 @@
                         <h5 class="font-weight-bold mb-3">Recent News</h5>
                         <div class="row">
                             <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                                <img src="assets/images/thumb_1.jpg" class="img-fluid" alt="Gallery">
+                                <img src="../assets/images/thumb_1.jpg" class="img-fluid" alt="Gallery">
                             </div>
                             <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                                <img src="assets/images/thumb_2.jpg" class="img-fluid" alt="Gallery">
+                                <img src="../assets/images/thumb_2.jpg" class="img-fluid" alt="Gallery">
                             </div>
                             <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                                <img src="assets/images/thumb_3.jpg" class="img-fluid" alt="Gallery">
+                                <img src="../assets/images/thumb_3.jpg" class="img-fluid" alt="Gallery">
                             </div>
                             <div class="col-md-4 col-sm-2 col-2 pr-0">
-                                <img src="assets/images/thumb_4.jpg" class="img-fluid" alt="Gallery">
+                                <img src="../assets/images/thumb_4.jpg" class="img-fluid" alt="Gallery">
                             </div>
                             <div class="col-md-4 col-sm-2 col-2 pr-0">
-                                <img src="assets/images/thumb_5.jpg" class="img-fluid" alt="Gallery">
+                                <img src="../assets/images/thumb_5.jpg" class="img-fluid" alt="Gallery">
                             </div>
                             <div class="col-md-4 col-sm-2 col-2 pr-0">
-                                <img src="assets/images/thumb_6.jpg" class="img-fluid" alt="Gallery">
+                                <img src="../assets/images/thumb_6.jpg" class="img-fluid" alt="Gallery">
                             </div>
                         </div>
                     </div>
