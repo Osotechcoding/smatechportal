@@ -27,6 +27,7 @@
                             <a class="dropdown-item" href="result">Result</a>
                             <a class="dropdown-item" href="student">Student</a>
                             <a class="dropdown-item" href="course">Course</a>
+                            <a class="dropdown-item" href="./eportal/admission/">Online Registration</a>
                         </div>
                     </li>
                     <li class="nav-item">

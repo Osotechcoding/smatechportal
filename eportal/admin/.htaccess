@@ -1,0 +1,5 @@
+RewriteEngine on
+#php_value session.auto_start 1
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

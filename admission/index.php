@@ -1,195 +1,197 @@
+<?php include_once 'helper.php'; ?>
+
+<?php date_default_timezone_set("Africa/Lagos"); ?>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <!-- ========== Meta Tags ========== -->
-  <?php include_once 'Templates/MetaTags.php'; ?>
-    <!-- ========== Page Title ========== -->
-    <title>Edusquad</title>
-    <?php if (!file_exists("Templates/HeaderScript.php")): ?>
-      <?php die("Access not Aallowed") ; ?>
-      <?php else: ?>
-        <?php include_once 'Templates/HeaderScript.php'; ?>
-    <?php endif; ?>
-</head>
-<body>
-
-<!--start preloader-->
-<div class="preloader">
-    <div class="spinner">
-        <div class="double-bounce1"></div>
-        <div class="double-bounce2"></div>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Online Registration Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container mt-5">
+    <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">SMATECH</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="howtoapply">FAQs</a>
+        <a class="nav-link" href="http://localhost/smatechportal/eportal/" target="_blank">Student Portal</a>
+      </div>
     </div>
+  <button class="btn btn-outline-danger" type="button">Logout</button>
+
+  </div>
+</nav>
+<br>
+    <div class="accordion mt-1" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        How To Apply
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+
 </div>
-<!--end preloader-->
-<div class="page-wrapper">
-    <!-- start top header -->
-    <header class="top-header py-2">
-        <?php include_once ("Templates/TopNavBar.php"); ?>
-    </header>
-    <!-- end top header -->
-    <!-- start main header -->
-    <?php if (!file_exists("Templates/NavBar.php")): ?>
-      <?php die("Access not Aallowed") ; ?>
-      <?php else: ?>
-        <?php include_once 'Templates/NavBar.php'; ?>
-    <?php endif; ?>
+<br>
+<!--  -->
+<div class="text-center mb-1" id="server-response">
 
-    <!-- end main header -->
-    <!-- start side menu -->
-  <?php if (file_exists("Templates/SideBar.php")):
-    include_once 'Templates/SideBar.php'; ?>
-  <?php endif; ?>
-    <!-- end side menu -->
-    <!-- start inner-banner -->
-    <section class="inner-banner">
-        <h1 class="font-weight-bold text-center">Career</h1>
-    </section>
-    <!-- end inner-banner -->
-    <!-- start contact -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
-                <span class="title">View our job listing around the world</span>
-                <h2>Find a Career Opportunity</h2>
-                <div class="divider">
-                    <span class="fa fa-mortar-board"></span>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-12">
-                    <div class="career-form p-5" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="border-line"></div>
-                        <h3 class="font-weight-bold color-orange">Drop Message</h3>
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputName">Name</label>
-                                    <input class="form-control" id="exampleInputName" placeholder="Enter Name" type="text">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail1">Email Address</label>
-                                    <input class="form-control" id="exampleInputEmail1" placeholder="Enter Email"
-                                           type="email">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputNumber">Phone Number</label>
-                                    <input class="form-control" id="exampleInputNumber"
-                                           placeholder="Enter Number" type="email">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputState">Position</label>
-                                    <select class="form-control" id="inputState">
-                                        <option selected>Choose...</option>
-                                        <option>Position 1</option>
-                                        <option>Position 2</option>
-                                        <option>Position 3</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputMessage">Message</label>
-                                <textarea class="form-control" id="exampleInputMessage" placeholder="Message"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label>
-                                    <span class="mb-0 resume">Drop Your Resume</span>
-                                    <input class="form-control-file pl-0 d-none border-0" id="resume" name="resume" type="file">
-                                </label>
-                            </div>
-                            <button class="btn theme-orange border-0" type="submit">Send Message</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- end contact -->
-    <!-- start footer -->
-    <footer class="theme-blue">
-        <div class="container">
-            <div class="footer-top border-bottom pt-5">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6" data-aos="fade-in" data-aos-duration="1050">
-                        <a href="index-2.html"><img src="../assets/images/logo-footer.png" class="img-fluid mb-3" alt="Edusquad"></a>
-                        <p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
-                        <ul class="social-icon">
-                            <li><a href="javascript:"><i class="fa fa-facebook-f"></i></a></li>
-                            <li><a href="javascript:"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="javascript:"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="javascript:"><i class="fa fa-skype"></i></a></li>
-                            <li><a href="javascript:"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-md-6" data-aos="fade-in" data-aos-duration="550">
-                        <h5 class="font-weight-bold mb-3">Quick Links</h5>
-                        <ul>
-                            <li><a href="index-2.html"><i class="fa fa-angle-double-right mr-2"></i>Home</a></li>
-                            <li><a href="about.html"><i class="fa fa-angle-double-right mr-2"></i>About Us</a></li>
-                            <li><a href="student.html"><i class="fa fa-angle-double-right mr-2"></i>Student Corner</a></li>
-                            <li><a href="faculties.html"><i class="fa fa-angle-double-right mr-2"></i>Faculties</a></li>
-                            <li><a href="achievement.html"><i class="fa fa-angle-double-right mr-2"></i>Achievenment</a></li>
-                            <li><a href="career.html"><i class="fa fa-angle-double-right mr-2"></i>Career</a></li>
-                            <li><a href="contact.html"><i class="fa fa-angle-double-right mr-2"></i>Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-md-5 mb-4" data-aos="fade-in" data-aos-duration="1050">
-                        <h5 class="font-weight-bold mb-3">Recent News</h5>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                                <img src="../assets/images/thumb_1.jpg" class="img-fluid" alt="Gallery">
-                            </div>
-                            <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                                <img src="../assets/images/thumb_2.jpg" class="img-fluid" alt="Gallery">
-                            </div>
-                            <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                                <img src="../assets/images/thumb_3.jpg" class="img-fluid" alt="Gallery">
-                            </div>
-                            <div class="col-md-4 col-sm-2 col-2 pr-0">
-                                <img src="../assets/images/thumb_4.jpg" class="img-fluid" alt="Gallery">
-                            </div>
-                            <div class="col-md-4 col-sm-2 col-2 pr-0">
-                                <img src="../assets/images/thumb_5.jpg" class="img-fluid" alt="Gallery">
-                            </div>
-                            <div class="col-md-4 col-sm-2 col-2 pr-0">
-                                <img src="../assets/images/thumb_6.jpg" class="img-fluid" alt="Gallery">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 pl-lg-5  mb-md-5" data-aos="fade-in" data-aos-duration="1050">
-                        <h5 class="font-weight-bold mb-3">Contact Us</h5>
-                        <ul class="address-icon">
-                            <li class="mb-3"><i class="fa fa-map-marker mr-3 color-orange"></i>503 Old Buffalo Street
-                                Northwest #205, New York-3087.</li>
-                            <li class="mb-3"><i class="fa fa-phone mr-3 color-orange"></i>+821 (2365) 456 90</li>
-                            <li class="mb-3"><i class="fa fa-envelope color-orange mr-3"></i>support@gmail.com</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="bottom-footer py-3 d-flex justify-content-between">
-                <p class="mb-0">All Rights Reserved by Edusquad.</p>
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item"><a href="javascript:">Terms of use</a></li>
-                    <li class="list-inline-item"><a href="javascript:">Privacy policy</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-    <!-- end footer -->
-    <a href="#" id="scroll"><span></span></a>
 </div>
-<!-- ===============jQuery Frameworks============= -->
-<?php if (!file_exists("Templates/FooterScript.php")): ?>
-  <?php die("Access not Aallowed"); ?>
-  <?php else: ?>
-    <?php include_once 'Templates/FooterScript.php'; ?>
-<?php endif; ?>
-</body>
+<br>
+<div class="col-md-12">
+    <h3 class="text-center">Scratch Card Information</h3>
+  <form id="newStudentAdmissionform">
+    <div class="row">
+      <input type="hidden" name="action" value="submit_first_step_admission">
+      <input type="hidden" name="osotech_csrf" value="<?php echo md5('iremideoizasamsonosotech');?>">
+      <div class="col-md-6 mb-2">
+        <div class="form-group">
+          <label for="card_pin" class="form-label">Scratch Card Pin</label>
+          <input type="password" name="card_pin" class="form-control form-control-lg" placeholder="**********" id="card_pin">
+          <div id="cardHelp" class="form-text text-danger">Enter the Card Pin and Serial in the space provided</div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+        <div class="form-group">
+          <label for="card_serial" class="form-label">Card Serial</label>
+          <input type="text" autocomplete="off" name="card_serial" id="card_serial" class="form-control form-control-lg" placeholder="**********">
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+         <span id="email-error"></span>
+        <div class="form-group">
+          <label for="student_email" class="form-label">Email address</label>
+          <input type="text" autocomplete="off" name="student_email" class="form-control form-control-lg" placeholder="student@smatechportal.edu.com">
+            <div id="emailHelp" class="form-text text-danger">I don't have an e-mail <a href="https://accounts.google.com/SignUp" target="_blank"> Create Email Account</a></div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+        <div class="form-group">
+          <label for="username" class="form-label">Father's Name (Username)</label>
+          <input type="text" autocomplete="off" id="username" name="username" class="form-control form-control-lg" placeholder="@osotech">
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+         <span id="phone-error"></span>
+        <div class="form-group">
+          <label for="student_phone" class="form-label">Phone</label>
+          <input type="text" autocomplete="off" name="student_phone" class="form-control form-control-lg" placeholder="080-0000-0000" id="student_phone">
+          <div id="phoneHelp" class="form-text text-danger">Allowed phone format 080-2311-3432 </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+        <div class="form-group">
+            <label for="student_class" class="form-label"> Class Level</label>
+          <select class="custom-select form-control form-control-lg" id="student_class" name="student_class">
+            <option value="pry" selected>Primary</option>
+            <option value="jnr">Junior </option>
+            <option value="snr">Senior</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+         <span id="phone-error"></span>
+        <div class="form-group">
+          <input type="datetime" autocomplete="off" name="regDateTime" class="form-control form-control-lg" value="<?php echo date("Y-m-d h:i:s") ?>" readonly>
+        </div>
+      </div>
+      <div class="col-md-6 mb-2">
+        <div class="form-group">
+          <div class="" id="captcha_load">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Agree to Terms &amp; Conditions</label>
+    </div>
+    <button type="submit" class="btn btn-dark btn-lg btn-round mb-5 __loadingBtn__" style="float:right">Continue Registration</button>
+  </form>
+</div>
+<br>
 
+
+
+<!-- Footer -->
+<?php
+if (file_exists("./footer.php")) {
+include_once ("./footer.php");
+}
+ ?>
+<!-- Footer -->
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script charset="utf-8">
+$(document).ready(function(){
+const ADMISSION_FORM_SUBMIT = $("#newStudentAdmissionform");
+ADMISSION_FORM_SUBMIT.on("submit", function(event){
+event.preventDefault();
+$(".__loadingBtn__").html('<img src="rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+$.post("Includes/actions",ADMISSION_FORM_SUBMIT.serialize(), function(result){
+  setTimeout(()=>{
+    $(".__loadingBtn__").html('Continue').attr("disabled",false);
+    console.log(result)
+    $("#server-response").html(result);
+  },1500);
+})
+});
+
+//check duplicate student email addres
+$("#student_phone").on("keyup", function(){
+let studentPhone = $(this).val();
+if (studentPhone!="") {
+let check_action = "check_student_phone";
+//send to server for checking
+$.post("Includes/checkStudentResult",{action:check_action,Phone:studentPhone},function(data){
+  $("#phone-error").html(data);
+  console.log(data);
+})
+}else{
+  $("#phone-error").html("");
+}
+
+})
+
+//check duplicate student email addres
+$("#studentEmail").on("keyup", function(){
+let studentEmail = $(this).val();
+if (studentEmail !="") {
+let check_action = "check_student_email";
+//send to server for checking
+$.post("Includes/checkStudentResult",{action:check_action,Email:studentEmail},function(res){
+  $("#email-error").html(res);
+})
+}else{
+  $("#email-error").html("");
+}
+
+})
+// setTimeout(()=>{
+//     $(".alert").alert('close').slideUp('slow');
+//   },5000);
+})
+
+
+    </script>
+    <?php
+    function loadCaptcha(){
+    echo'<script> $("#captcha_load").load("osotech_captcha.php");</script>';
+    }
+    loadCaptcha();
+    ?>
+  </body>
 </html>

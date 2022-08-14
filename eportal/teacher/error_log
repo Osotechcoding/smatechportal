@@ -1,0 +1,60 @@
+[30-May-2022 21:28:38 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:30:56 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:31:20 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:33:58 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:34:13 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:34:37 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:37:10 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:39:09 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:42:56 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:47:37 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:51:06 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24
+[30-May-2022 21:51:14 Africa/Lagos] PHP Fatal error:  Uncaught Error: Call to undefined method Staff::count_all_online_staff() in /home/glorysup/public_html/portal/teacher/template/website_analysis.php:24
+Stack trace:
+#0 /home/glorysup/public_html/portal/teacher/index.php(51): include_once()
+#1 {main}
+  thrown in /home/glorysup/public_html/portal/teacher/template/website_analysis.php on line 24

@@ -1,0 +1,87 @@
+Features
+Admin Panel
+Secure Login and Logout
+Dashboard
+Display the summary of lists.
+Manage Brands
+Add New Brand Type
+List All Brand Types
+Update Brand Type
+Delete Brand Type
+Category Management
+Add New Category
+List All Categories
+View Category Details
+Update Category Details
+Delete Category Details
+Service Management
+Add New Service
+List All Services
+View Service Details
+Update Service Details
+Delete Service Details
+Mechanics Management
+Add New Mechanic
+List All Mechanics
+View Mechanic Details
+Update Mechanic Details
+Delete Mechanic Details
+Registered Clients Management
+List All Clients
+Update Client Details
+Update Client's Account Status
+Delete Client Details
+Products Management
+Add New Product
+List All Products
+View Product Details
+Update Product Details
+Delete Product Details
+Inventory Management
+List All Product Available Stocks
+View Product Stock-in History
+Add New Product Stock
+Edit Product Stock
+Edit Product Stock
+Orders Management
+List All Clients' Orders
+View Order Details
+Update Order's Status
+Delete Order
+Service Requests Management
+List All Requests
+View Request Details
+Update Request's Status
+Delete Request
+Reports
+Date-wise Service Requests Report
+Date-wise Orders Report
+Print Reports
+Manage User List (CRUD)
+Manage Account Details/Credentials
+Manage System Information
+Public-Side
+Secure Registration
+Project Management
+Home Page
+Product List
+Filter Product by Brands
+Filter Product by Category
+Search Product
+View Product Details
+List All Services
+Search Service
+List All Brands
+Read 'About' Content
+Client-Side
+Secure Login and Logout
+Add Product to Cart
+List All Product in Shopping Cart
+Update Cart Items Quantity
+Remove Product from Cart List
+Checkout
+Place Order
+List all orders
+Submit Service Request
+List all service requests
+Manage Account Details and Credentials
