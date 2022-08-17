@@ -1,8 +1,10 @@
 <?php
+@session_start();
 /**
  *
  */
- include_once "initialize.php";
+ // include_once "initialize.php";
+ include_once "Database.php";
 class Osotech
 {
   private $dbh;
@@ -10,12 +12,13 @@ class Osotech
   protected $response;
 
 
-  function __construct($conn)
+  function __construct()
   {
     if ((substr($_SERVER['REQUEST_URI'], -4) == ".php") or (stripos($_SERVER['REQUEST_URI'], ".php")== true)) {
       self::redirect_root("error");
     }
-  $this->dbh = $conn;
+    $Database = new Database();
+  $this->dbh = $Database->osotech_connect();
   }
 
   public function osotech_session_kick(){
@@ -23,7 +26,7 @@ class Osotech
        }
 
        public function redirect_root($flink){
-        header("Location: ".APP_ROOT.$flink);
+        header("Location: ".ADMISSION_PORTAL_ROOT.$flink);
            exit();
            }
   public function Clean($data){
@@ -85,30 +88,31 @@ class Osotech
        return $this->response;
        }
 
-       public function process_first_step_admission($data){
-         return self::alert_msg("success","Welcome Guest","You are Highly welcome to Smatech School Portal admission Page");
-       }
+       // public function process_first_step_admission($data){
+       //
+       //   return self::alert_msg("success","Welcome Guest","You are Highly welcome to Smatech School Portal admission Page");
+       // }
        //LOAD CAPTCHA
 
               public function loadOsotechCaptcha(){
               print'<script> $("#captcha_load").load("../admission/Templates/osotech_captcha.php");</script>';
       }
               /*ADMISSION REGISTRATION STEP ONE*/
-              public function start_student_admission_first_step($admission_data){
-              $captcha_correct=self::Clean($admission_data['captcha_correct_answer']);
-              $user_captcha_anwser=self::Clean($admission_data['user_captcha_anwser']);
-              $osotech_csrf = self::Clean($admission_data['osotech_csrf']);
-              $card_pin = self::Clean($admission_data['card_pin']);
-              $card_serial = self::Clean($admission_data['card_serial']);
-              $stu_class = self::Clean($admission_data['student_class']);
-              $stu_phone = self::Clean($admission_data['student_phone']);
-              $username = self::Clean($admission_data['username']);
-              $stu_email = self::Clean($admission_data['student_email']);
+              public function process_first_step_admission($data){
+              $captcha_correct=self::Clean($data['captcha_correct_answer']);
+              $user_captcha_anwser=self::Clean($data['user_captcha_anwser']);
+              $osotech_csrf = self::Clean($data['osotech_csrf']);
+              $card_pin = self::Clean($data['card_pin']);
+              $card_serial = self::Clean($data['card_serial']);
+              $stu_class = self::Clean($data['class_level']);
+              $stu_phone = self::Clean($data['student_phone']);
+              $username = self::Clean($data['username']);
+              $stu_email = self::Clean($data['student_email']);
               //check for Auth access
               if (self::isEmptyStr($osotech_csrf) || $osotech_csrf !== md5("iremideoizasamsonosotech")) {
               $this->response = self::alert_msg("danger","WARNING","Authentication Failed, Please Check your Connection and Try again!").self::loadOsotechCaptcha();
-              }elseif (self::isEmptyStr($card_pin) || self::isEmptyStr($card_serial) || self::isEmptyStr($stu_class) || self::isEmptyStr($stu_phone) || self::isEmptyStr($username) || self::isEmptyStr($stu_email)) {
-              $this->response = self::alert_msg("danger" , "WARNING","Please fill in all the required fields and Try again!").self::loadOsotechCaptcha();
+              }elseif (self::isEmptyStr($card_pin) || self::isEmptyStr($card_serial) || self::isEmptyStr($stu_class) || self::isEmptyStr($stu_phone) || self::isEmptyStr($username) || self::isEmptyStr($stu_email) || self::isEmptyStr($user_captcha_anwser)) {
+              $this->response = self::alert_msg("danger" , "WARNING","Invalid Form submission, Check all your inputs and try again!").self::loadOsotechCaptcha();
               }elseif (!self::is_Valid_Email($stu_email)) {
               $this->response = self::alert_msg("danger", "WARNING","$stu_email is not a valid e-mail address, Please check and Try again!").self::loadOsotechCaptcha();
               }elseif (self::check_single_data("visap_student_tbl","stdEmail",$stu_email)) {
@@ -122,7 +126,10 @@ class Osotech
               }elseif (self::check_string_lenght_greater(13,$card_pin) || self::check_string_lenght_lesser(13,$card_pin)) {
               // code...
               $this->response = self::alert_msg("danger", "WARNING","You have entered an incorrect Card Pin! Re-check Your card Pin & try again...").self::loadOsotechCaptcha();
-              }else{
+            }elseif ($user_captcha_anwser <> $captcha_correct) {
+              $this->response = self::alert_msg("danger", "WARNING","Incorrect CAPTCHA Value Entered!").self::loadOsotechCaptcha();
+            }
+              else{
               //lets connect to db and check the status of the Pin
               //SELECT * FROM `tbl_reg_pins, pin_code,pin_serial,pin_status=0;
               $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE pin_code=? AND pin_serial=? LIMIT 1");
@@ -168,8 +175,8 @@ class Osotech
               if ($this->stmt->execute(array($admission_no,$pinCode,$pinSerial,$date,$time))) {
               // code...
               $this->dbh->commit();
-              $this->response = self::alert_msg("success", "WARNING","You have successfully completed step one of your online registration!")."<script>setTimeout(()=>{
-              window.location.href='".ADMISSION_ROOT."step2?applicant=".$admission_no."&page=2';
+              $this->response = self::alert_msg("success", "SUCCESS","You have successfully completed step one of your online registration!")."<script>setTimeout(()=>{
+              window.location.href='".ADMISSION_PORTAL_ROOT."step2?applicant=".self::saltifyString($admission_no)."&page=2';
             },1500);</script>";
               }
               }
@@ -181,37 +188,38 @@ class Osotech
               }
               }else{
               //show the user that The PIN he/she enters is not found
-              $this->response = self::alert_msg("danger", "WARNING","The Card PIN you entered does not exists! check the Pin and try again...").self::loadOsotechCaptcha();
+              $this->response = self::alert_msg("danger", "WARNING","Invalid Card Details! check and try again...").self::loadOsotechCaptcha();
               }
               }
               return $this->response;
               unset($this->dbh);
               }
-
               /*ADMISSION REGISTRATION STEP ONE ENDS*/
+
               /*ADMISSION REGISTRATION STEP TWO*/
-              public function start_student_admission_second_step($admission_data){
-              $bypass = 			self::Clean($admission_data['bypass']);
-              $admission_no = self::Clean($admission_data['admission_no']);
-              $applicant_id = self::Clean($admission_data['auth_code_applicant_id']);
-              $surname = 			self::Clean($admission_data['surname']);
-              $first_name = 	self::Clean($admission_data['first_name']);
-              $middle_name = 	self::Clean($admission_data['middle_name']);
-              $dateofbirth = 	self::Clean(date("Y-m-d",strtotime($admission_data['dateofbirth'])));
-              $gender = 			self::Clean($admission_data['gender']);
-              $birth_cert = 	self::Clean($admission_data['birth_cert']);
-              $nationality = 	self::Clean($admission_data['nationality']);
-              $state_origin = self::Clean($admission_data['state_origin']);
-              $localgvt = 		self::Clean($admission_data['localgovt']);
-              $hometown = 		self::Clean($admission_data['hometown']);
-              $religion = 		self::Clean($admission_data['religion']);
-              $home_address = self::Clean($admission_data['home_address']);
-              $challenges = 	self::Clean($admission_data['challenges']);
+              public function process_student_admission_second_step($data){
+              $osotech_csrf = self::Clean($data['osotech_csrf']);
+              $admission_no = self::Clean($data['admission_no']);
+              $applicant_id = self::Clean($data['auth_code_applicant_id']);
+              $surname = 			self::Clean($data['surname']);
+              $first_name = 	self::Clean($data['first_name']);
+              $middle_name = 	self::Clean($data['middle_name']);
+              $dateofbirth = 	self::Clean(date("Y-m-d",strtotime($data['dateofbirth'])));
+              $gender = 			self::Clean($data['gender']);
+              $birth_cert = 	self::Clean($data['birth_cert']);
+              $nationality = 	self::Clean($data['nationality']);
+              $state_origin = self::Clean($data['state_origin']);
+              $localgvt = 		self::Clean($data['localgovt']);
+              $hometown = 		self::Clean($data['hometown']);
+              $religion = 		self::Clean($data['religion']);
+              $home_address = self::Clean($data['home_address']);
+              $challenges = 	self::Clean($data['challenges']);
               //check for auth
-              if (self::isEmptyStr($bypass) || $bypass!= md5("oiza123456")) {
-              $this->response = self::alert_msg("Authentication Failed, Please Check your Connection and Try again!","danger");
-              }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($surname) || self::isEmptyStr($first_name) || self::isEmptyStr($middle_name) || self::isEmptyStr($dateofbirth) || self::isEmptyStr($gender) || self::isEmptyStr($birth_cert) || self::isEmptyStr($nationality) || self::isEmptyStr($state_origin) || self::isEmptyStr($localgvt) || self::isEmptyStr($hometown) || self::isEmptyStr($religion) || self::isEmptyStr($home_address) || self::isEmptyStr($challenges)) {
-              $this->response = self::alert_msg("Please fill in all the required fields and Try again!","danger");
+              if (self::isEmptyStr($osotech_csrf) || $osotech_csrf!= md5("iremideoizasamsonosotech")) {
+              $this->response = self::alert_msg("danger","WARNING","Authentication Failed, Please Check your Connection and Try again!");
+              }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($surname) || self::isEmptyStr($first_name) || self::isEmptyStr($middle_name) || self::isEmptyStr($dateofbirth) || self::isEmptyStr($gender) || self::isEmptyStr($birth_cert) || self::isEmptyStr($nationality) || self::isEmptyStr($state_origin) ||
+                self::isEmptyStr($localgvt) || self::isEmptyStr($hometown) || self::isEmptyStr($religion) || self::isEmptyStr($home_address) || self::isEmptyStr($challenges)) {
+              $this->response = self::alert_msg("danger","WARNING","Please fill in all the required fields and Try again!");
               }else{
               //continue with the registration steps
               try {
@@ -224,15 +232,14 @@ class Osotech
               if ($this->stmt->execute(array($applicant_id,$birth_cert,$nationality,$state_origin,$localgvt,$hometown,$religion,$challenges,$home_address))) {
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
               $this->dbh->commit();
-              $this->response = self::alert_msg("Step Two completed successfully, Pls wait...","success")."<script>setTimeout(()=>{
-              window.location.href='".ADMISSION_ROOT."step3?applicant=".$admission_no."&page=3';
+              $this->response = self::alert_msg("success","SUCCESS","Step Two completed successfully, Pls wait...")."<script>setTimeout(()=>{
+              window.location.href='".ADMISSION_PORTAL_ROOT."step3?applicant=".self::saltifyString($admission_no)."&page=3';
               },500);</script>";
               }
               }
-
               } catch (PDOException $e) {
               $this->dbh->rollback();
-              $this->response  = self::alert_msg("Error Occurred!: Error Info: ".$e->getMessage(),"danger");
+              $this->response  = self::alert_msg("danger","ERROR","Error Occurred!: Error Info: ".$e->getMessage());
               }
               }
               return $this->response;
@@ -241,33 +248,35 @@ class Osotech
               /*ADMISSION REGISTRATION STEP TWO*/
 
               /*ADMISSION REGISTRATION STEP THREE*/
-              public function start_student_admission_third_step($admission_data){
-              $bypass = 			self::Clean($admission_data['bypass']);
-              $admission_no = self::Clean($admission_data['admission_no']);
-              $applicant_id = self::Clean($admission_data['auth_code_applicant_id']);
-              $mg_title = 			self::Clean($admission_data['mg_title']);
-              $mg_name = 	self::Clean($admission_data['mg_name']);
-              $mg_relation = 	self::Clean($admission_data['mg_relation']);
-              $mg_phone = 			self::Clean($admission_data['mg_phone']);
-              $mg_email = 	self::Clean($admission_data['mg_email']);
-              $mg_address = 	self::Clean($admission_data['mg_address']);
-              $mg_occu = 	self::Clean($admission_data['mg_occu']);
+              public function process_student_admission_third_step($data){
+              $osotech_csrf = self::Clean($data['osotech_csrf']);
+              $admission_no = self::Clean($data['admission_no']);
+              $applicant_id = self::Clean($data['auth_code_applicant_id']);
+              $mg_title = 		self::Clean($data['mg_title']);
+              $mg_name = 	    self::Clean($data['mg_name']);
+              $mg_relation = 	self::Clean($data['mg_relation']);
+              $mg_phone = 		self::Clean($data['mg_phone']);
+              $mg_email = 	  self::Clean($data['mg_email']);
+              $mg_address = 	self::Clean($data['mg_address']);
+              $mg_occu = 	    self::Clean($data['mg_occu']);
               //Female guardian details
-              $fg_title = 			self::Clean($admission_data['fg_title']);
-              $fg_name = 	self::Clean($admission_data['fg_name']);
-              $fg_relation = 	self::Clean($admission_data['fg_relation']);
-              $fg_phone = 			self::Clean($admission_data['fg_phone']);
-              $fg_email = 	self::Clean($admission_data['fg_email']);
-              $fg_address = 	self::Clean($admission_data['fg_address']);
-              $fg_occu = 	self::Clean($admission_data['fg_occu']);
+              $fg_title = 		self::Clean($data['fg_title']);
+              $fg_name = 	    self::Clean($data['fg_name']);
+              $fg_relation = 	self::Clean($data['fg_relation']);
+              $fg_phone = 		self::Clean($data['fg_phone']);
+              $fg_email = 	  self::Clean($data['fg_email']);
+              $fg_address = 	self::Clean($data['fg_address']);
+              $fg_occu = 	    self::Clean($data['fg_occu']);
 
               //check for auth
-              if (self::isEmptyStr($bypass) || $bypass!= md5("oiza1234567")) {
+              if (self::isEmptyStr($osotech_csrf) || $osotech_csrf!= md5("iremideoizasamsonosotech")) {
               $this->response = self::alert_msg("Authentication Failed, Please Check your Connection and Try again!","danger");
-              }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($mg_title) || self::isEmptyStr($mg_name) || self::isEmptyStr($mg_relation) || self::isEmptyStr($mg_phone) || self::isEmptyStr($mg_email) || self::isEmptyStr($fg_occu) || self::isEmptyStr($fg_address) || self::isEmptyStr($admission_no) || self::isEmptyStr($fg_title) || self::isEmptyStr($fg_name) || self::isEmptyStr($fg_relation) || self::isEmptyStr($fg_phone) || self::isEmptyStr($fg_email) || self::isEmptyStr($fg_occu) || self::isEmptyStr($fg_address)) {
-              $this->response = self::alert_msg("Please fill in all the required fields and Try again!","danger");
+              }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($mg_title) || self::isEmptyStr($mg_name) || self::isEmptyStr($mg_relation) || self::isEmptyStr($mg_phone) || self::isEmptyStr($mg_email) || self::isEmptyStr($fg_occu) || self::isEmptyStr($fg_address) ||
+              self::isEmptyStr($admission_no)|| self::isEmptyStr($fg_title)
+              ||self::isEmptyStr($fg_name) || self::isEmptyStr($fg_relation)||self::isEmptyStr($fg_phone) || self::isEmptyStr($fg_email) || self::isEmptyStr($fg_occu) || self::isEmptyStr($fg_address)) {
+              $this->response = self::alert_msg("danger","WARNING","Please fill in all the required fields and Try again!");
               }elseif (!self::is_Valid_Email($mg_email) || !self::is_Valid_Email($fg_email)) {
-              $this->response = self::alert_msg("Invalid email address format!","danger");
+              $this->response = self::alert_msg("danger","WARNING","Invalid email address format!");
               }
               else{
               //continue with the registration steps
@@ -278,14 +287,14 @@ class Osotech
               if ($this->stmt->execute(array($mg_title,$mg_name,$mg_relation,$mg_phone,$mg_email,$mg_occu,$mg_address,$fg_title,$fg_name,$fg_relation,$fg_phone,$fg_email,$fg_occu,$fg_address,$applicant_id))) {
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
               $this->dbh->commit();
-              $this->response = self::alert_msg("Step Three completed successfully, Pls wait...","success")."<script>setTimeout(()=>{
-              window.location.href='".ADMISSION_ROOT."step4?applicant=".$admission_no."&page=4';
-              },500);</script>";
+              $this->response = self::alert_msg("success","SUCCESS","Step Three completed successfully, Pls wait...")."<script>setTimeout(()=>{
+              window.location.href='".ADMISSION_PORTAL_ROOT."step4?applicant=".self::saltifyString($admission_no)."&page=4';
+            },1500);</script>";
               }
 
               } catch (PDOException $e) {
               $this->dbh->rollback();
-              $this->response  = self::alert_msg("Error Occurred!: Error Info: ".$e->getMessage(),"danger");
+              $this->response  = self::alert_msg("danger","ERROR","Error Occurred!: Error Info: ".$e->getMessage());
               }
               }
               return $this->response;
@@ -294,63 +303,42 @@ class Osotech
               /*ADMISSION REGISTRATION STEP THREE*/
 
               /*ADMISSION REGISTRATION STEP FOUR*/
-              public function start_student_admission_fourth_step($admission_data,$file){
-              $bypass = 			self::Clean($admission_data['bypass']);
-              $admission_no = self::Clean($admission_data['admission_no']);
-              $applicant_id = self::Clean($admission_data['auth_code_applicant_id']);
-              $schoolname = 	self::Clean($admission_data['prev_schoolname']);
-              $proprietress = self::Clean($admission_data['proprietress']);
-              $schl_phone = 	self::Clean($admission_data['prev_schl_phone']);
-              $prev_schl_loca = 	self::Clean($admission_data['prev_schl_loca']);
-              $edu_offered = 	self::Clean($admission_data['edu_offered']);
-              $category = 	self::Clean($admission_data['category']);
-              $present_class = 	self::Clean($admission_data['present_class']);
-              $reason_to = 	self::Clean($admission_data['reason_to']);
-              $reportsheet_name = $file['report_sheet']['name'];
-              $reportsheet_size = $file['report_sheet']['size']/1024;
-              $reportsheet_temp = $file['report_sheet']['tmp_name'];
-              $reportsheet_error = $file['report_sheet']['error'];
-              $allowed = array("jpg","jpeg","png","pdf");
-              $name_div = explode(".", $reportsheet_name);
-              $image_ext = strtolower(end($name_div));
-
+              public function process_student_admission_fourth_step($data){
+              $osotech_csrf = 			self::Clean($data['osotech_csrf']);
+              $admission_no = self::Clean($data['admission_no']);
+              $applicant_id = self::Clean($data['auth_code_applicant_id']);
+              $schoolname = 	self::Clean($data['prev_schoolname']);
+              $proprietress = self::Clean($data['proprietress']);
+              $schl_phone = 	self::Clean($data['prev_schl_phone']);
+              $prev_schl_loca = 	self::Clean($data['prev_schl_loca']);
+              $edu_offered = 	self::Clean($data['edu_offered']);
+              $category = 	self::Clean($data['category']);
+              $present_class = 	self::Clean($data['present_class']);
+              $reason_to = 	self::Clean($data['reason_to']);
               //check for auth
-              if (self::isEmptyStr($bypass) || $bypass!= md5("oiza12345678")) {
-              $this->response = self::alert_msg("Authentication Failed, Please Check your Connection and Try again!","danger");
-              }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($schoolname) || self::isEmptyStr($proprietress) || self::isEmptyStr($schl_phone) || self::isEmptyStr($prev_schl_loca) || self::isEmptyStr($edu_offered) || self::isEmptyStr($category) || self::isEmptyStr($present_class) || self::isEmptyStr($reason_to) || self::isEmptyStr($reportsheet_name)) {
-              $this->response = self::alert_msg("Please fill in all the required fields and Try again!","danger");
-              }elseif (!in_array($image_ext, $allowed)) {
-              $this->response = self::alert_msg("Your File format is not supported, Only PNG,JPG,JPEG!","danger");
-              //
-              }elseif ($reportsheet_size > 50) {
-              $this->response = self::alert_msg("Your File Size should not exceed 50KB, Selected file Size is :".number_format($reportsheet_size,2)."KB","danger");
-              }elseif ($reportsheet_error !=0) {
-              $this->response = self::alert_msg("There was an error Uploading your Report Sheet","danger");
-              }
+              if (self::isEmptyStr($osotech_csrf) || $osotech_csrf!= md5("iremideoizasamsonosotech")) {
+              $this->response = self::alert_msg("danger","WARNING","Authentication Failed, Please Check your Connection and Try again!");
+              }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($schoolname) || self::isEmptyStr($proprietress) || self::isEmptyStr($schl_phone) || self::isEmptyStr($prev_schl_loca) || self::isEmptyStr($edu_offered) || self::isEmptyStr($category) || self::isEmptyStr($present_class)
+              || self::isEmptyStr($reason_to)) {
+              $this->response = self::alert_msg("danger","WARNING", "Please fill in all the required fields and Try again!");
+            }
               else{
               //continue with the registration steps
-              $student_data = self::get_student_details_byRegNo($admission_no);
-              $reportsheet_realName = "report_sheet_".$student_data->stdRegNo.mt_rand(10,9999999).".".$image_ext;
-              //lets update the student passport in the db
-              $destination = "../eportal/schoolImages/".$reportsheet_realName;
               try {
               $this->dbh->beginTransaction();
               //update the student info on student tbl
-              $this->stmt = $this->dbh->prepare("INSERT INTO `visap_stdpreschlinfo` (student_id,stdSchoolName,stdDirectorName,stdSchoolPhone,stdSchLocation,stdSchlCat,stdSchlEduLevel,stdPresentClass,stdReasonInPreClass,stdLastReportSheet) VALUES (?,?,?,?,?,?,?,?,?,?);");
-              if ($this->stmt->execute(array($applicant_id,$schoolname,$proprietress,$schl_phone,$prev_schl_loca,$category,$edu_offered,$present_class,$reason_to,$reportsheet_realName))) {
+              //,stdLastReportSheet
+              $this->stmt = $this->dbh->prepare("INSERT INTO `visap_stdpreschlinfo` (student_id,stdSchoolName,stdDirectorName,stdSchoolPhone,stdSchLocation,stdSchlCat,stdSchlEduLevel,stdPresentClass,stdReasonInPreClass) VALUES (?,?,?,?,?,?,?,?,?);");
+              if ($this->stmt->execute(array($applicant_id,$schoolname,$proprietress,$schl_phone,$prev_schl_loca,$category,$edu_offered,$present_class,$reason_to))) {
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
-              if (move_uploaded_file($reportsheet_temp, $destination)) {
               $this->dbh->commit();
-              $this->response = self::alert_msg("Step Four completed successfully, Pls wait...","success")."<script>setTimeout(()=>{
-              window.location.href='".ADMISSION_ROOT."step5?applicant=".$admission_no."&page=5';
-              },500);</script>";
+              $this->response = self::alert_msg("success", "SUCCESS", "Step Four completed successfully,Loading Medical Information Form, Pls wait...")."<script>setTimeout(()=>{
+              window.location.href='".ADMISSION_PORTAL_ROOT."step5?applicant=".self::saltifyString($admission_no)."&page=5';
+            },1500);</script>";
               }
-
-              }
-
               } catch (PDOException $e) {
               $this->dbh->rollback();
-              $this->response  = self::alert_msg("Error Occurred!: Error Info: ".$e->getMessage(),"danger");
+              $this->response  = self::alert_msg("danger","ERROR","Error Occurred!: Error Info: ".$e->getMessage());
               }
               }
               return $this->response;
@@ -359,27 +347,26 @@ class Osotech
               /*ADMISSION REGISTRATION STEP FOUR*/
 
               /*ADMISSION REGISTRATION STEP FIVE*/
-              public function start_student_admission_fifth_step($admission_data){
-              $bypass = 			self::Clean($admission_data['bypass']);
-              $admission_no = self::Clean($admission_data['admission_no']);
-              $applicant_id = self::Clean($admission_data['auth_code_applicant_id']);
-
-              $hospital_name = self::Clean($admission_data['hospital_name']);
-              $doctor_name = self::Clean($admission_data['doctor_name']);
-              $phone = self::Clean($admission_data['phone']);
-              $member_since = self::Clean(date("Y-m-d",strtotime($admission_data['member_since'])));
-              $address = self::Clean($admission_data['address']);
-              $blood_group = self::Clean($admission_data['blood_group']);
-              $genotype = self::Clean($admission_data['genotype']);
-              $illness = self::Clean($admission_data['illness']);
-              //$family_illness = self::Clean($admission_data['family_illness']);
-              $hospitalized = self::Clean($admission_data['hospitalized']);
-              $surgical_operation = self::Clean($admission_data['surgical_operation']);
+              public function process_student_admission_fifth_step($data){
+              $osotech_csrf = self::Clean($data['osotech_csrf']);
+              $admission_no = self::Clean($data['admission_no']);
+              $applicant_id = self::Clean($data['auth_code_applicant_id']);
+              $hospital_name = self::Clean($data['hospital_name']);
+              $doctor_name = self::Clean($data['doctor_name']);
+              $phone = self::Clean($data['phone']);
+              $member_since = self::Clean(date("Y-m-d",strtotime($data['member_since'])));
+              $address = self::Clean($data['address']);
+              $blood_group = self::Clean($data['blood_group']);
+              $genotype = self::Clean($data['genotype']);
+              $illness = self::Clean($data['illness']);
+              //$family_illness = self::Clean($data['family_illness']);
+              $hospitalized = self::Clean($data['hospitalized']);
+              $surgical_operation = self::Clean($data['surgical_operation']);
               //check for auth
-              if (self::isEmptyStr($bypass) || $bypass!= md5("oiza123456789")) {
-              $this->response = self::alert_msg("Authentication Failed, Please Check your Connection and Try again!","danger");
+              if (self::isEmptyStr($osotech_csrf) || $osotech_csrf!= md5("iremideoizasamsonosotech")) {
+              $this->response = self::alert_msg("danger","WARNING","Authentication Failed, Please Check your Connection and Try again!");
               }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no) || self::isEmptyStr($hospital_name) || self::isEmptyStr($doctor_name) || self::isEmptyStr($phone) || self::isEmptyStr($member_since) || self::isEmptyStr($address) || self::isEmptyStr($blood_group) || self::isEmptyStr($genotype) || self::isEmptyStr($illness) || self::isEmptyStr($hospitalized) || self::isEmptyStr($surgical_operation)) {
-              $this->response = self::alert_msg("Please fill in all the required fields and Try again!","danger");
+              $this->response = self::alert_msg("danger","WARNING","Please fill in all the required fields and Try again!");
               }
               else{
               //continue with the registration steps
@@ -390,13 +377,13 @@ class Osotech
               if ($this->stmt->execute(array($applicant_id,$hospital_name,$doctor_name,$phone,$member_since,$address,$blood_group,$genotype,$illness,$hospitalized,$surgical_operation))) {
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
               $this->dbh->commit();
-              $this->response = self::alert_msg("Step Five completed successfully, Pls wait...","success")."<script>setTimeout(()=>{
-              window.location.href='".ADMISSION_ROOT."submitapplication?applicant=".$admission_no."&page=6';
-              },500);</script>";
+              $this->response = self::alert_msg("success","SUCCESS","Submitted successfully, Generating Passport upload Page, Pls wait...")."<script>setTimeout(()=>{
+              window.location.href='".ADMISSION_PORTAL_ROOT."submitapplication?applicant=".self::saltifyString($admission_no)."&page=6';
+            },2500);</script>";
               }
               } catch (PDOException $e) {
               $this->dbh->rollback();
-              $this->response  = self::alert_msg("Error Occurred!: Error Info: ".$e->getMessage(),"danger");
+              $this->response  = self::alert_msg("danger","ERROR","Error Occurred!: Error Info: ".$e->getMessage());
               }
               }
               return $this->response;
@@ -405,10 +392,10 @@ class Osotech
               /*ADMISSION REGISTRATION STEP FIVE*/
 
               /*ADMISSION REGISTRATION FINAL STEP*/
-              public function start_student_admission_final_step($admission_data,$file){
-              $bypass = 			self::Clean($admission_data['bypass']);
-              $admission_no = self::Clean($admission_data['admission_no']);
-              $applicant_id = self::Clean($admission_data['auth_code_applicant_id']);
+              public function process_student_admission_final_step($data,$file){
+              $osotech_csrf = self::Clean($data['osotech_csrf']);
+              $admission_no = self::Clean($data['admission_no']);
+              $applicant_id = self::Clean($data['auth_code_applicant_id']);
               $passport_name = $file['student_passport']['name'];
               $passport_size = $file['student_passport']['size']/1024;
               $passport_temp = $file['student_passport']['tmp_name'];
@@ -418,7 +405,7 @@ class Osotech
               $image_ext = strtolower(end($name_div));
 
               //check for auth
-              if (self::isEmptyStr($bypass) || $bypass!= md5("oiza123456789")) {
+              if (self::isEmptyStr($osotech_csrf) || $osotech_csrf!= md5("iremideoizasamsonosotech")) {
               $this->response = self::alert_msg("Authentication Failed, Please Check your Connection and Try again!","danger");
               }elseif (self::isEmptyStr($applicant_id) || self::isEmptyStr($admission_no)|| self::isEmptyStr($passport_name)) {
               $this->response = self::alert_msg("Please select your passport to continue!","danger");
@@ -426,16 +413,16 @@ class Osotech
               $this->response = self::alert_msg("Your File format is not supported, Only PNG,JPG,JPEG!","danger");
               //
               }elseif ($passport_size > 25) {
-              $this->response = self::alert_msg("Your passport Size should not exceed 25KB, Selected file Size is :".number_format($passport_size,2)."KB","danger");
+              $this->response = self::alert_msg("danger","WARNING","Your passport Size should not exceed 25KB, Selected file Size is :".number_format($passport_size,2)."KB");
               }elseif ($passport_error !=0) {
-              $this->response = self::alert_msg("There was an error Uploading your passport, try again!","danger");
+              $this->response = self::alert_msg("danger","WARNING","There was an error Uploading your passport, try again!");
               }
               else{
               //continue with the registration steps
               $student_data = self::get_student_details_byRegNo($admission_no);
               $passport_realName =$student_data->stdRegNo.mt_rand(10,9999999).".".$image_ext;
               //lets update the student passport in the db
-              $destination = "../eportal/schoolImages/students/".$passport_realName;
+              $destination = "../../eportal/schoolImages/students/".$passport_realName;
               try {
               $studentEmail = $student_data->stdEmail;
               $studentSurname = $student_data->stdSurName;
@@ -448,13 +435,13 @@ class Osotech
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
               if (move_uploaded_file($passport_temp, $destination)) {
               //send registrationmessage to the new student
-              /*  $Osotech_mailing = new Osotech_mailing();
-              if ($Osotech_mailing->SendUserConfirmationEmail($studentEmail,$studentSurname,$confirmation_code,$userType)) {*/
+              /*  $OsotechMailer = new OsotechMailer();
+              if (self::SendStudentConfirmationEmail($studentEmail,$studentSurname,$confirmation_code,$userType)) {*/
               // Generate the student registration photo card...
               $this->dbh->commit();
-              $this->response = self::alert_msg("Congratulations, Your registration with us was successful, Pls wait... while we generate your Photo Card","success")."<script>setTimeout(()=>{
-              window.location.href='".ADMISSION_ROOT."regphotocard?applicant=".$admission_no."&page=photocard';
-              },1500);</script>";
+              $this->response = self::alert_msg("success","SUCCESS","Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card")."<script>setTimeout(()=>{
+              window.location.href='".ADMISSION_PORTAL_ROOT."registrationphotocard?applicant=".self::saltifyString($admission_no)."&page=photocard';
+            },3500);</script>";
               /*}*/
 
               }
@@ -463,7 +450,7 @@ class Osotech
 
               } catch (PDOException $e) {
               $this->dbh->rollback();
-              $this->response  = self::alert_msg("Error Occurred!: Error Info: ".$e->getMessage(),"danger");
+              $this->response  = self::alert_msg("danger","ERROR","Error Occurred!: Error Info: ".$e->getMessage());
               }
               }
               return $this->response;
@@ -471,24 +458,25 @@ class Osotech
               }
               /*ADMISSION REGISTRATION FINAL STEP*/
 
-              public function check_duplicate_phone($phone){
+              public function check_duplicate_phone($myPhone){
               $this->stmt =$this->dbh->prepare("SELECT * FROM `visap_student_tbl` WHERE stdPhone=? LIMIT 1");
-              $this->stmt->execute(array($phone));
+              $this->stmt->execute(array($myPhone));
               if ($this->stmt->rowCount()==1) {
-              // phone no is already taken...
-              $this->response ='<i class="text-danger">'.$phone.' is not allowed on this portal.</i>';
+              // myPhone no is already taken...
+              $this->response ='<i class="text-danger">'.$myPhone.' is not allowed on this portal.</i>';
               }else{
-              //let check staff for this phone
+              //let check staff for this myPhone
               $this->stmt =$this->dbh->prepare("SELECT * FROM `visap_staff_tbl` WHERE staffPhone=? LIMIT 1");
-              $this->stmt->execute(array($phone));
+              $this->stmt->execute(array($myPhone));
               if ($this->stmt->rowCount()==1) {
-              // phone no is already taken...
-              $this->response ='<i class="text-danger">'.$phone.' is not allowed on this portal.</i>';
+              // myPhone no is already taken...
+              $this->response ='<i class="text-danger">'.$myPhone.' is not allowed on this portal.</i>';
               }else{
-              $this->response ='<i class="text-success">'.$phone.' usage granted.</i>';
+              $this->response ='<i class="text-success">'.$myPhone.' can be used.</i>';
               }
               }
               return $this->response;
+                unset($this->dbh);
               }
 
       public function osotech_password_encryption($password){
@@ -499,7 +487,7 @@ class Osotech
               }
 
       public function check_duplicate_email($Email){
-              $this->stmt =$this->dbh->prepare("SELECT * FROM `visap_student_tbl` WHERE stdEmail=? LIMIT 1");
+              $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_tbl` WHERE stdEmail=? LIMIT 1");
               $this->stmt->execute(array($Email));
               if ($this->stmt->rowCount()==1) {
               // phone no is already taken...
@@ -512,11 +500,11 @@ class Osotech
               // phone no is already taken...
               $this->response ='<i class="text-danger">'.$Email.' is not allowed on this portal.</i>';
               }else{
-              $this->response ='<i class="text-success">'.$Email.' usage permission is granted.</i>';
+              $this->response ='<i class="text-success">'.$Email.' can be used.</i>';
               }
               }
               return $this->response;
-              unset($this->dbh);
+              //unset($this->dbh);
               }
 
       public function validate_Mobile_Number($mobile) {
@@ -535,6 +523,155 @@ class Osotech
               return FALSE;
               }
               }
+              public function checkAdmissionPortalStatus(): bool{
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_admission_open_tbl` WHERE status = 1 LIMIT 1");
+        $this->stmt->execute();
+        $this->response = $this->stmt->rowCount();
+        return ($this->response == 1) ? true : false;
+        }
 
+        public function getConfigData(){
+        $this->query ="SELECT * FROM `visap_school_profile` WHERE id=1";
+        $this->stmt =$this->dbh->prepare($this->query);
+        $this->response =$this->stmt->execute();
+        if ($this->stmt->rowCount()>0) {
+        // code...
+        $this->response = $this->stmt->fetch();
+        return $this->response;
+        }
+        }
 
+        public function get_schoolLogoImage(){
+        $schoolDatas = self::getConfigData();
+        //school real logo
+        $schoolLogo = $schoolDatas->school_logo;
+        if ($schoolLogo == NULL || $schoolLogo =="") {
+        $ourLogo = APP_ROOT."eportal/schoolImages/Logo/smatech.png";
+        }else{
+        $ourLogo = APP_ROOT."eportal/schoolImages/Logo/".$schoolLogo;
+        }
+        $this->response = $ourLogo;
+        return $this->response;
+        }
+
+        //STUDENT DATA BY REGNO
+          public function get_student_details_byRegNo($stdRegNo){
+          $this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM `visap_student_tbl` WHERE stdRegNo=? LIMIT 1");
+          $this->stmt->execute(array($stdRegNo));
+          if ($this->stmt->rowCount()==1) {
+          $this->response = $this->stmt->fetch();
+          return $this->response;
+          unset($this->dbh);
+          }
+          }
+
+  public function generate_admission_number($ady){
+        $this->response ="";
+        $schoolDatas = self::getConfigData();
+        $schoolCode= $schoolDatas->govt_approve_number;//school Code
+        $this->stmt = $this->dbh->prepare("SELECT stdRegNo FROM `visap_student_tbl` ORDER BY stdRegNo DESC LIMIT 1");
+        $this->stmt->execute();
+        if ($this->stmt->rowCount() > 0) {
+        if ($row = $this->stmt->fetch());
+        $value2 = $row->stdRegNo;
+        //separating numeric part
+        $value2 = substr($value2, 10,14);
+        //incrementing numeric value
+        $value2 = $value2 + 1;
+        //concatenating incremented value
+        $value2 = $ady.$schoolCode.sprintf('%04s',$value2);
+        $this->response = $value2;
+        }else{
+        // "2021C120040001"
+        $value2 =$ady.$schoolCode."0001";
+        $this->response =$value2;
+        }
+        return $this->response;
+        unset($this->dbh);
+        }
+        public function get_states_of_origin_InDropDown(){
+                $this->response ="";
+                $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_state_tbl` ORDER BY name ASC");
+                $this->stmt->execute();
+                if ($this->stmt->rowCount()>0) {
+                while ($row = $this->stmt->fetch()) {
+                $this->response.='<option value="'.$row->name.'">'.$row->name.'</option>';
+                }
+                }else{
+                $this->response = false;
+                }
+                return $this->response;
+                }
+
+                public function fetch_all_local_govt_state($state){
+                $this->response ="";
+                $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_state_tbl` WHERE name=? LIMIT 1");
+                $this->stmt->execute(array($state));
+                if ($this->stmt->rowCount() ==1) {
+                $state_list = $this->stmt->fetch();
+                //grab all local govt that have this state id
+                $this->stmt= $this->dbh->prepare("SELECT * FROM `local_govt_tbl` WHERE state_id=? ORDER BY local_name ASC");
+                $this->stmt->execute(array($state_list->state_id));
+                if ($this->stmt->rowCount() > 0) {
+                while ($rows = $this->stmt->fetch()) {
+                $this->response.='<option value="'.$rows->local_name.'">'.$rows->local_name.'</option>';
+                }
+                }else{
+                $this->response = false;
+                }
+                }
+                return $this->response;
+                unset($this->dbh);
+                }
+
+    public function get_student_infoId($studentId){
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_info_tbl` WHERE studentId=? LIMIT 1");
+        $this->stmt->execute([$studentId]);
+        if ($this->stmt->rowCount()==1) {
+        $this->response = $this->stmt->fetch();
+        return $this->response;
+        unset($this->dbh);
+        }
+        }
+
+        public function get_student_medical_infoId($studentId){
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdmedical_tbl` WHERE studId=? LIMIT 1");
+        $this->stmt->execute([$studentId]);
+        if ($this->stmt->rowCount()==1) {
+        $this->response = $this->stmt->fetch();
+        return $this->response;
+        unset($this->dbh);
+        }
+        }
+
+public function getAdmissionCardUser($stdRegNo){
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE usedBy=? AND pin_status=1 LIMIT 1");
+  $this->stmt->execute(array($stdRegNo));
+  if ($this->stmt->rowCount()==1) {
+  $this->response = $this->stmt->fetch();
+  return $this->response;
+  unset($this->dbh);
+    }
+        }
+
+public function check_user_activity_allowed($module){
+                $status ='1';
+                $this->stmt = $this->dbh->prepare("SELECT * FROM `api_module_config` WHERE module=? AND status=? LIMIT 1");
+                $this->stmt->execute(array($module,$status));
+                if ($this->stmt->rowCount()==1) {
+                $this->response = true;
+                return $this->response;
+                unset($this->dbh);
+                }
+                }
+    public function get_school_session_info(){
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `current_session_tbl` LIMIT 1");
+          $this->stmt->execute();
+      if ($this->stmt->rowCount()==1) {
+      $this->response = $this->stmt->fetch();
+      return $this->response;
+      unset($this->dbh);
+          }
+              }
 }
+$Osotech = new Osotech();

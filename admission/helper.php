@@ -6,6 +6,8 @@ spl_autoload_register(function($filename){
   require_once __DIR__.'/Includes/'. ucfirst($filename).".php";
 });
 
+
 $database = new Database();
 $conn = $database->osotech_connect();
 $Osotech = new Osotech($conn);
+$OsotechMailer = new OsotechMailer();

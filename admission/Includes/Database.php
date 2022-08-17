@@ -12,6 +12,7 @@ class Database {
 	public function __construct(){
 		return $this->dbh;
 	}
+
 public function osotech_connect(){
 	$dsn = $this->dbDriver.":host=".$this->dbHost.";dbname=".$this->dbname.";charset=".$this->dbCharset;
 		$options = array(PDO::ATTR_PERSISTENT =>false,
@@ -28,4 +29,5 @@ public function osotech_connect(){
 }
 }
 
+$Database = new Database();
  ?>

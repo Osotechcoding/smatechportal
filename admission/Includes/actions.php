@@ -1,5 +1,10 @@
 <?php
-require_once '../helper.php';
+//@ob_start();
+@session_start();
+date_default_timezone_set("Africa/Lagos");
+require_once 'Database.php';
+require_once 'Osotech.php';
+require_once 'OsotechMailer.php';
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
@@ -14,71 +19,44 @@ if ($request_method === 'POST') {
       }
     }
 
-    if ($_POST['action'] ==="fetch_local_govt") {
-            $state = $_POST['state'];
-            $output = $Osotech->fetch_all_local_govt_state($state);
-            if ($output) {
-                echo $output;
-            }
-        }
-
-        //submit_first_step_admission
-        if ($_POST['action'] ==="submit_first_step_admission") {
-            $output = $Osotech->start_student_admission_first_step($_POST);
-            if ($output) {
-                echo $output;
+    if ($_POST['action'] === "fetch_local_govt") {
+            $state_name = $_POST['state_name'];
+            $result = $Osotech->fetch_all_local_govt_state($state_name);
+            if ($result) {
+              echo $result;
             }
         }
         //submit_second_step_admission
-        if ($_POST['action'] ==="submit_second_step_admission") {
-            $output = $Osotech->start_student_admission_second_step($_POST);
+        if ($_POST['action'] === "submit_second_step_admission") {
+            $output = $Osotech->process_student_admission_second_step($_POST);
             if ($output) {
                 echo $output;
             }
         }
         //submit_third_step_admission
         if ($_POST['action'] ==="submit_third_step_admission") {
-            $output = $Osotech->start_student_admission_third_step($_POST);
+            $output = $Osotech->process_student_admission_third_step($_POST);
             if ($output) {
                 echo $output;
             }
         }
         //submit_fourth_step_admission
         if ($_POST['action'] ==="submit_fourth_step_admission") {
-            $output = $Osotech->start_student_admission_fourth_step($_POST,$_FILES);
+            $output = $Osotech->process_student_admission_fourth_step($_POST);
             if ($output) {
                 echo $output;
             }
         }
-
         //submit_fifth_step_admission
-
         if ($_POST['action'] ==="submit_fifth_step_admission") {
-            $output = $Osotech->start_student_admission_fifth_step($_POST);
+            $output = $Osotech->process_student_admission_fifth_step($_POST);
             if ($output) {
                 echo $output;
             }
         }
         //submit_final_step_admission
         if ($_POST['action'] ==="submit_final_step_admission") {
-            $output = $Osotech->start_student_admission_final_step($_POST,$_FILES);
-            if ($output) {
-                echo $output;
-            }
-        }
-        //check_student_phone
-        if ($_POST['action'] ==="check_student_phone") {
-            $phone = $_POST['Phone'];
-            $output = $Osotech->check_duplicate_phone($phone);
-            if ($output) {
-                echo $output;
-            }
-        }
-
-        //check_student_phone
-        if ($_POST['action'] ==="check_student_email") {
-            $email = $_POST['Email'];
-            $output = $Osotech->check_duplicate_email($email);
+            $output = $Osotech->process_student_admission_final_step($_POST,$_FILES);
             if ($output) {
                 echo $output;
             }

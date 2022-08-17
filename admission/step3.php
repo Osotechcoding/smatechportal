@@ -1,115 +1,184 @@
+<?php
+@session_start();
+error_reporting(1);
+@ob_start();
+if (!file_exists("Includes/Osotech.php")){
+    die("Access to this Page is Denied! <p>Please Contact the school Admin for assistance</p>");
+}
+require_once ("Includes/Osotech.php");
+require_once ("Includes/Database.php");
+$Osotech->osotech_session_kick();
+?>
+<?php if ($Osotech->checkAdmissionPortalStatus() !== true): ?>
+   <?php header("Location: ./");
+   exit();?>
+<?php endif ?>
+
+<?php
+
+if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMATECH_APPLICANT_ID'])) {
+  $auth_code_applicant_id = $_SESSION['AUTH_SMATECH_APPLICANT_ID'];
+  $admission_no = $_SESSION['AUTH_CODE_ADMISSION_NO'];
+  $student_data = $Osotech->get_student_details_byRegNo($admission_no);
+}else{
+  header("Location: ./");
+  exit();
+}
+
+ ?>
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Online Registration Portal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title><?php echo ($Osotech->getConfigData()->school_name);?>:: Student Online Registration Portal</title>
+    <?php include_once ("Head.php");?>
   </head>
   <body>
-    <div class="container mt-5">
-    <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">SMATECH</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
-        <a class="nav-link" href="howtoapply">FAQs</a>
-        <a class="nav-link" href="http://localhost/smatechportal/eportal/" target="_blank">Student Portal</a>
-      </div>
-    </div>
-  <button class="btn btn-outline-danger" type="button">Logout</button>
-
-  </div>
-</nav>
-<br>
-    <div class="accordion mt-1" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        How To Apply
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-
-</div>
-<br>
-<!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> -->
+    <div class="container mt-2">
+  <?php include_once 'HeadNavBar.php'; ?>
 <br>
 <div class="col-md-12">
-  <form>
-      <h3 class="text-center">Scratch Card Information</h3>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <div class="form-group">
-          <label for="exampleInputEmail1" class="form-label">Scratch Card Pin</label>
-          <input type="text" name="" class="form-control form-control-lg" placeholder="**********">
-          <div id="cardHelp" class="form-text text-danger">Enter the Card Pin and Serial in the space provided</div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="form-group">
-          <label for="cardserial" class="form-label">Card Serial</label>
-          <input type="text" autocomplete="off" name="cardserial" id="cardserial" class="form-control form-control-lg" placeholder="**********">
-        </div>
-      </div>
+  <section class="h-100 bg-white">
+    <div class="container py-2 h-60">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-12 col-md-12 mb-3">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase text-center text-info">Admission Form (Parents/Guardian Information)</h3>
+                  <form id="thirdStepForm">
+                    <div class="text-center" id="server-response">
+                    </div>
+                  <div class="row">
+              <input type="hidden" name="osotech_csrf" value="<?php echo md5('iremideoizasamsonosotech');?>">
+              <input type="hidden" name="action" value="submit_third_step_admission">
+ <input type="hidden" name="admission_no" value="<?php echo strtoupper($student_data->stdRegNo);?>">
+ <input type="hidden" name="auth_code_applicant_id" value="<?php echo $auth_code_applicant_id;?>">
+                    <div class="col-md-4 mb-3">
+                      <div class="form-group">
+      <input type="text" class="form-control" value="<?php echo $student_data->stdEmail;?>" readonly>
+          </div></div>
+                    <div class="col-md-4 mb-3">
+                      <div class="form-group">
+                  <input type="text" class="form-control" name="surname" value="<?php echo ucwords($student_data->stdUserName);?>" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                       <span id="email-error"></span>
+                      <div class="form-group">
+  <input type="text" class="form-control" value="<?php echo ucwords($student_data->studentClass);?>" readonly>
+                      </div>
+                    </div>
+                    <h3 class="text-muted mt-2">FATHER/MALE GUARDIAN DETAILS</h3>
+                 <div class="row">
+                      <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                         <label>Title </label>
+                        <input type="text" autocomplete="off" name="mg_title" class="form-control" placeholder="High Chief">
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                         <label>Full Name</label>
+                          <input type="text" autocomplete="off" name="mg_name" class="form-control" placeholder="Prof. Hamad Sani O">
+                        </div>
+                 </div>
+                  <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                        <label> Relationship </label>
+                        <input type="text" autocomplete="off" name="mg_relation" class="form-control" placeholder=" Father">
+                     </div>
+                 </div>
 
-        <h3 class="mt-3 text-info text-center">Academic Information</h3>
-      <div class="col-md-6 mb-3">
-        <div class="form-group">
-          <label for="student_email" class="form-label">Email address</label>
-          <input type="text" autocomplete="off" name="student_email" class="form-control form-control-lg" placeholder="student@smatechportal.edu.com">
-            <div id="emailHelp" class="form-text text-danger">I don't have e-mail <a href="#"> Create Email Account</a></div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="form-group">
-          <label for="student_username" class="form-label">Father's Name (Username)</label>
-          <input type="text" autocomplete="off" name="student_username" class="form-control form-control-lg" placeholder="@osotech">
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="form-group">
-          <label for="exampleInputEmail1" class="form-label">Phone</label>
-          <input type="text" autocomplete="off" name="" class="form-control form-control-lg" placeholder="080-0000-0000">
-          <div id="phoneHelp" class="form-text text-danger">Allowed phone format 080-2311-3432 </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <div class="form-group">
-            <label for="student_class" class="form-label"> Class Level</label>
-          <select class="custom-select form-control form-control-lg" id="student_class" name="student_class">
-            <option value="pry" selected>Primary</option>
-            <option value="jnr">Junior </option>
-            <option value="snr">Senior</option>
-          </select>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+
+                       <label> Phone </label>
+                       <input type="text" autocomplete="off" name="mg_phone" class="form-control" placeholder="082135432123">
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+
+                        <label> Email </label>
+                        <input type="text" autocomplete="off" name="mg_email" class="form-control" placeholder=" myfather@gmail.com" />
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                        <label> Occupation </label>
+                        <input type="text" autocomplete="off" name="mg_occu" class="form-control" placeholder="Doctor" />
+                     </div>
+                 </div>
+                 <div class="col-md-12 mb-3">
+                     <div class="form-group">
+                        <label> Address </label>
+                        <textarea type="text" autocomplete="off" name="mg_address" class="form-control" placeholder=" Sango Ota Ogun State"></textarea>
+                     </div>
+                 </div>
+                 </div>
+                  <h3 class="text-muted">MOTHER/FEMALE GUARDIAN DETAILS</h3>
+                 <div class="row">
+                    <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                         <label>Title </label>
+                        <input type="text" autocomplete="off" name="fg_title" class="form-control" placeholder="High Chief">
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                         <label>Full Name</label>
+                         <input type="text" autocomplete="off" name="fg_name" class="form-control" placeholder="Osotech Software">
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                        <label> Relationship </label>
+                        <input type="text" autocomplete="off" name="fg_relation" class="form-control" placeholder="Mother">
+                     </div>
+                 </div>
+
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+
+                       <label> Phone </label>
+                       <input type="text" autocomplete="off" name="fg_phone" class="form-control" placeholder="082135432123">
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+
+                        <label> Email </label>
+                        <input type="text" autocomplete="off" name="fg_email" class="form-control" placeholder="mymother@gmail.com" />
+                     </div>
+                 </div>
+                 <div class="col-md-6 mb-3">
+                     <div class="form-group">
+                        <label> Occupation </label>
+                        <input type="text" autocomplete="off" name="fg_occu" class="form-control" placeholder="Doctor" />
+                     </div>
+                 </div>
+                 <div class="col-md-12 mb-3">
+                     <div class="form-group">
+                        <label> Address </label>
+                        <textarea type="text" autocomplete="off" name="fg_address" class="form-control" placeholder=" Sango Ota Ogun State"></textarea>
+                     </div>
+                 </div>
+                  </div>
+                </div>
+                   <div style="float: left; margin-top:10px;"><a href="step2?applicant=<?php echo $Osotech->saltifyString($_GET['applicant'])?>&page=2" class="btn-shop green-color" onclick="return confirm('Are you Sure you want to go Back to Previous page?');"><button type="button" name="button" class="btn btn-secondary btn-md mt-2"> Previous Page</button></a></div>
+                  <button type="submit" class="btn btn-dark btn-lg btn-round mb-1 __loadingBtn__ mt-5" style="float:right">Continue Registration</button>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-
-    <div class="mb-3 form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Agree to Terms &amp; Conditions</label>
-    </div>
-    <button type="submit" class="btn btn-dark btn-lg btn-round mb-5" style="float:right">Submit &amp; Continue</button>
-  </form>
+  </section>
 </div>
-<br>
-
-
-
 <!-- Footer -->
 <?php
 if (file_exists("footer.php")) {
@@ -118,8 +187,22 @@ require_once ("footer.php");
  ?>
 <!-- Footer -->
       </div>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    <script src="" charset="utf-8"></script>
+    <?php include_once ("FooterScript.php");?>
+    <script>
+    $(document).ready(function(){
+    const ADMISSION_FORM3_SUBMIT = $("#thirdStepForm");
+    ADMISSION_FORM3_SUBMIT.on("submit", function(event){
+      event.preventDefault();
+      $(".__loadingBtn__").html('<img src="rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $.post("Includes/actions",ADMISSION_FORM3_SUBMIT.serialize(), function(result){
+        setTimeout(()=>{
+          $(".__loadingBtn__").html('Continue Registration').attr("disabled",false);
+          $("#server-response").html(result);
+        },1500);
+      })
+    });
+
+  })
+    </script>
   </body>
 </html>
