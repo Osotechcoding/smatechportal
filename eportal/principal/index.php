@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "helpers/helper.php";
  ?>
 <!DOCTYPE html>
@@ -6,7 +6,7 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name ?> :: <?php echo $_SESSION['STAFF_ROLE'] ?> Dashboard </title>
+    <title>Dashboard :: <?php echo $SmappDetails->school_name ?> :: <?php echo $_SESSION['STAFF_ROLE'] ?> </title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->
@@ -70,7 +70,7 @@ require_once "helpers/helper.php";
     </div>
     <!-- END: Content-->
 
-  
+
     </div>
     <!-- demo chat-->
     <!-- BEGIN: Footer-->

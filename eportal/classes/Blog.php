@@ -502,8 +502,8 @@ public function delete_galleryById($Id){
 	$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
 		}elseif (!in_array($image_ext, $allowed)) {
 		$this->response = $this->alert->alert_toastr("error","Your file format is not supported, Please check and try again!",__OSO_APP_NAME__." Says");
-		}elseif ($SliderFile_size > 200) {
-	$this->response = $this->alert->alert_toastr("error","Slider Image Size should not exceed 200KB, Selected Image Size is :".number_format($SliderFile_size,2)."KB",__OSO_APP_NAME__." Says");
+  }elseif ($SliderFile_size > 600) {
+	$this->response = $this->alert->alert_toastr("error","Slider Image Size should not exceed 600KB, Selected Image Size is :".number_format($SliderFile_size,2)."KB",__OSO_APP_NAME__." Says");
 		}elseif ($SliderFile_error !==0) {
 	 $this->response = $this->alert->alert_toastr("error","There was an error Uploading Slider Image, Try again!",__OSO_APP_NAME__." Says");
 		}else{

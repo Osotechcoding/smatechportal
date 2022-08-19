@@ -70,10 +70,10 @@ class Student{
 
       	$token = $this->config->generateRandomUserToken(35);
             $_SESSION['student_log_token'] = $token;
-      //check token 
+      //check token
        $this->stmt =$this->dbh->prepare("SELECT * FROM `visap_student_login_token` WHERE username=? AND email=?LIMIT 1");
       $this->stmt->execute([$_SESSION['STD_USERNAME'],$_SESSION['STD_EMAIL']]);
- 
+
       if ($this->stmt->rowCount() == 1) {
             // code... update the token
 	  $this->stmt = $this->dbh->prepare("UPDATE `visap_student_login_token` SET token=? WHERE username=? AND email=? LIMIT 1");
@@ -587,7 +587,7 @@ $this->response = false;
 		 $this->config->isEmptyStr($student_class) ||
 		 $this->config->isEmptyStr($adm_date) ||
 		 $this->config->isEmptyStr($auth_pass2) ||
-		 $this->config->isEmptyStr($cardpin) || 
+		 $this->config->isEmptyStr($cardpin) ||
 		 $this->config->isEmptyStr($cardserial) ) {
 		$this->response =$this->alert->alert_toastr("error","All fileds are Required!",__OSO_APP_NAME__." Says");
 		}elseif (!$this->config->is_Valid_Email($student_email)) {
@@ -634,7 +634,7 @@ $this->response = false;
 						},500);</script>";
         }
       }
-		
+
 			 	}else{
 				$this->response = $this->alert->alert_toastr("error","Something went wrong, Please try again ...",__OSO_APP_NAME__." Says");
 			 	}
@@ -1437,5 +1437,18 @@ public function deleteStudentSessionToken($name,$email,$token){
 		return $this->response;
 		 unset($this->dbh);
 }
+
+public function searchStudentByRegEmailPhone($q){
+  if (!$this->config->isEmptyStr($q)) {
+    	$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM `{$this->table_name}` WHERE `stdRegNo`=? OR `stdEmail`=? OR `stdPhone`=? LIMIT 1");
+      $this->stmt->execute(array($q,$q,$q));
+      if ($this->stmt->rowCount() == '1') {
+      $this->response = $this->stmt->fetch();
+      return $this->response;
+      unset($this->dbh);
+      }
+  }
+}
+
 
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "helpers/helper.php";
  ?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ require_once "helpers/helper.php";
           </div>
            <!-- Statistics Cards Starts -->
     <div class="row">
-       
+
         <div class="col-xl-12 col-md-12">
           <div class="row">
             <div class="col-md-4 dashboard-users-success">
@@ -62,7 +62,7 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">School Gallery</h3></div>
                   <h2 class="text-white mb-0"><?php echo $Blog->countGalleryByType('gallery');?></h2>
-                 
+
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Students Yearbook </h3></div>
                   <h2 class="text-white mb-0"><?php echo $Blog->countGalleryByType('yearbook');?></h2>
-                  
+
                 </div>
               </div>
             </div>
@@ -88,7 +88,7 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">All Gallery </h3></div>
                   <h2 class="text-white mb-0"><?php echo $Blog->countAllGallery();?></h2>
-                  
+
                 </div>
               </div>
             </div>
@@ -112,11 +112,11 @@ require_once "helpers/helper.php";
         </tr>
       </thead>
         <tbody class="text-center">
-            <?php 
+            <?php
                 $all_gallery = $Blog->getAllGallery();
                 if ($all_gallery) {
                   foreach ($all_gallery as $gallery) {
-                   
+
                     ?>
           <tr>
             <td><img src="../gallery/<?php echo $gallery->image;?>" alt="<?php echo $gallery->type;?>" width="100"></td>
@@ -144,7 +144,7 @@ require_once "helpers/helper.php";
    <div class="modal fade" id="addGalleryModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <!-- modal-dialog-scrollable -->
-            <div class="modal-dialog modal-md">
+            <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
                   <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><span class="fa fa-camera fa-1x"></span> Add Event Gallery</h2>
@@ -163,7 +163,7 @@ require_once "helpers/helper.php";
                     </div>
                     <div class="col-md-6 offset-md-3" id="uploaded_passport">
   <img id="previewImg" width="200" src="../assets/loaders/placeholder.png" alt="Placeholder" style="border: 2px solid darkblue;border-radius:10px;">
-  <p>Your File Size: <span id="ImageSize"></span></p> 
+  <p>Your File Size: <span id="ImageSize"></span></p>
 </div>
                   </div>
                <div class="col-md-12">
@@ -177,8 +177,9 @@ require_once "helpers/helper.php";
                   <label for="galleryType"> Type </label>
                 <select name="galleryType" id="galleryType" class="form-control form-control-lg">
                   <option value="" selected>Choose...</option>
-                <option value="yearbook">Student Yearbook</option>
-                <option value="gallery">School Gallery</option>
+                <option value="yearbook"> Student Yearbook</option>
+                <option value="gallery"> School Gallery</option>
+                <option value="anniversary"> Special Events</option>
                </select>
                 </div>
               </div>
@@ -188,7 +189,7 @@ require_once "helpers/helper.php";
               <input type="password" autocomplete="off" class="form-control form-control-lg" name="auth_code" placeholder="*********">
                     </div>
                </div>
-            
+
                  </div>
                   </div>
                 </div>
@@ -206,12 +207,12 @@ require_once "helpers/helper.php";
           </div>
     <!-- BUS MODAL  END -->
 
-    
+
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
    <?php include ("../template/DataTableFooterScript.php"); ?>
-  
+
    <script>
      $(document).ready(function(){
       //when the delete gallery btn is clicked
@@ -222,7 +223,7 @@ require_once "helpers/helper.php";
          let is_true = confirm("Are you Sure you want to Remove this Image?");
       if (is_true) {
         $(".__loadingBtn2__"+tId).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Processing...').attr("disabled",true);
-        //send request 
+        //send request
         $.post("../actions/delete_actions",{action:action,tId:tId},function(response){
           setTimeout(()=>{
             $(".__loadingBtn2__"+tId).html("Delete").attr("disabled",false);
@@ -263,16 +264,16 @@ require_once "helpers/helper.php";
    <script>
     function previewFile(input){
         var file = $("#galleryImage").get(0).files[0];
- 
+
         if(file){
             var reader = new FileReader();
- 
+
             reader.onload = function(){
                 $("#previewImg").attr("src", reader.result);
                 //$("#imagename").html(file.name);
                 $("#ImageSize").html((file.size/1024).toFixed(2) +"KB");
             }
- 
+
             reader.readAsDataURL(file);
         }
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "helpers/helper.php";
  ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ require_once "helpers/helper.php";
     </div>
      <!-- Statistics Cards Starts -->
     <div class="row">
-       
+
         <div class="col-xl-12 col-md-12">
           <div class="row">
             <div class="col-md-4 dashboard-users-success">
@@ -60,11 +60,11 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Today </h3></div>
                   <h2 class="text-white mb-0">&#8358;<?php echo number_format($Administration->get_all_money_paid_today(),2);?></h2>
-                  
+
                 </div>
               </div>
             </div>
-           
+
 
              <div class="col-md-4 dashboard-users-success">
               <div class="card text-center bg-info">
@@ -74,7 +74,7 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">This Term </h3></div>
                   <h2 class="text-white mb-0">&#8358;<?php echo number_format($Administration->get_all_money_paid_by_term($activeSess->session_desc_name,$activeSess->term_desc),2) ?></h2>
-                  
+
                 </div>
               </div>
             </div>
@@ -87,15 +87,15 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Outstanding </h3></div>
                   <h2 class="text-white mb-0">&#8358;<?php echo number_format($Administration->get_all_money_outstanding_by_term($activeSess->session_desc_name,$activeSess->term_desc),2) ?></h2>
-                  
+
                 </div>
               </div>
             </div>
-           
-            
+
+
           </div>
         </div>
-    
+
       </div>
            <!-- Revenue Growth Chart Starts -->
      <div class="card">
@@ -103,7 +103,7 @@ require_once "helpers/helper.php";
        <div class="users-list-filter px-1">
         <form action="" method="post">
             <div class="row border rounded py-2 mb-2">
-                
+
                 <div class="col-md-4">
                     <label for="ClassGrade">Student Class</label>
                     <fieldset class="form-group">
@@ -128,7 +128,7 @@ require_once "helpers/helper.php";
     </div>
       <!-- filter student ends -->
       <div class="card-body">
-        <?php 
+        <?php
         if (isset($_POST['submit_search_btn'])) {
           // code...
           $stdClass = $Configuration->Clean($_POST['ClassGrade']);
@@ -154,7 +154,12 @@ require_once "helpers/helper.php";
         <tbody class="text-center">
           <tr>
           <td><?php if ($search_data->stdPassport==NULL || $search_data->stdPassport==""): ?>
-    <img src="../author.jpg" width="100" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+
+    <?php if ($search_data->stdGender == "Male"): ?>
+        <img src="../schoolImages/students/male.png" width="100" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+      <?php else: ?>
+          <img src="../schoolImages/students/female.png" width="100" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+    <?php endif; ?>
       <?php else: ?>
         <img src="../schoolImages/students/<?php echo $search_data->stdPassport;?>" width="100" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
     <?php endif ?></td>

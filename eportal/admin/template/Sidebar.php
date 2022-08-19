@@ -17,25 +17,24 @@
             <ul class="menu-content">
               <li class="nav-item"><a href="acaSession"><i class="fa fa-calendar fa-1x"></i><span class="menu-title text-truncate" data-i18n="academic year">Academic Year</span></a>
           </li>
-           <li><a class="d-flex align-items-center" href="create_subject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Subject">Manage Subject</span></a>
+           <li><a class="d-flex align-items-center" href="create_subject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Subject Management">Subject Management</span></a>
               </li>
                <li><a class="d-flex align-items-center" href="upload_lecture"><i class="bx bx-video-plus"></i><span class="menu-item text-truncate" data-i18n="Online Class"> Online Class</span></a>
               </li>
-               <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="School Classes">School Classes</span></a>
+               <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Class Management">Class Management</span></a>
               </li>
-               <li><a class="d-flex align-items-center" href="registerStudentSubject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Register Subject I">Register Subject I</span></a>
-              </li>
-              <li><a class="d-flex align-items-center" href="bulkSubjectReg"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Register Subject II"> Register Subject II</span></a>
+               <!-- <li><a class="d-flex align-items-center" href="registerStudentSubject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Exam Subject I">Exam Subject I</span></a>
+              </li> -->
+              <li><a class="d-flex align-items-center" href="bulkSubjectReg"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Exam Subject"> Exam Subject</span></a>
              </li>
-             <li><a class="d-flex align-items-center" href="examSubjectList"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Filter Subjects">Filter Subjects</span></a>
+             <li><a class="d-flex align-items-center" href="examSubjectList"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Search Exam Subject">Search Exam Subject</span></a>
             </li>
-           <li class=" nav-item"><a href="student_assignment"><i class="fa fa-book fa-1x"></i><span class="menu-title text-truncate" data-i18n="Assignment">Assignment</span></a>
+           <li class=" nav-item"><a href="student_assignment"><i class="fa fa-book fa-1x"></i><span class="menu-title text-truncate" data-i18n="Student Assignment"> Student Assignment</span></a>
           </li>
            <li class=" nav-item"><a href="markstudentass"><i class="fa fa-pencil fa-1x"></i><span class="menu-title text-truncate" data-i18n="Mark Assignment">Mark Assignment</span></a>
           </li>
-         
-           <li class=" nav-item"><a href="dutyAssignment"><i class="fa fa-briefcase fa-1x"></i><span class="menu-title text-truncate" data-i18n="Assign Duty">Assign Duty</span></a>
-          </li>
+
+
             </ul>
           </li>
           <!-- ADMISSION -->
@@ -71,13 +70,13 @@
           </li>
           <li class=" nav-item"><a href="deleteExamResults"><i class="fa fa-trash fa-1x"></i><span class="menu-title text-truncate" data-i18n="Remove Result">Remove Result</span></a>
           </li>
-        
+
            <li class=" nav-item"><a href="publishResult"><i class="fa fa-paper-plane fa-1x"></i><span class="menu-title text-truncate" data-i18n="Publish Results">Publish Results</span></a>
           </li>
 
             <li class=" nav-item"><a href="viewPublishedResult"><i class="fa fa-eye fa-1x"></i><span class="menu-title text-truncate" data-i18n="View Published">View Published</span></a>
-          </li> 
-        
+          </li>
+
             </ul>
           </li>
           <!-- RESULT ENDS -->
@@ -97,16 +96,21 @@
           </li>
           <li class="nav-item"><a href="massPromotion"><i class="fa fa-line-chart fa-1x"></i><span class="menu-title text-truncate" data-i18n="Student Promotion">Student Promotion</span></a>
           </li>
+
+          <li class="nav-item"><a href="searchstudent"><i class="fa fa-search fa-1x"></i><span class="menu-title text-truncate" data-i18n="Search Student">Search Student</span></a>
+          </li>
             </ul>
           </li>
           <!-- STUDENT ENDS -->
            <!-- STUDENT -->
           <li class="nav-item"><a href="javascript:void(0)"><i class="fa fa-users fa-1x" data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="MANAGE STAFF"> MANAGE STAFF</span></a>
             <ul class="menu-content">
-          <li class="nav-item"><a href="staffs"><i class="fa fa-user-plus fa-1x"></i><span class="menu-title text-truncate" data-i18n="Staff">Staff</span></a>
+          <li class="nav-item"><a href="staffs"><i class="fa fa-user-plus fa-1x"></i><span class="menu-title text-truncate" data-i18n="Staff">View Staff</span></a></li>
+          <li class=" nav-item"><a href="dutyAssignment"><i class="fa fa-briefcase fa-1x"></i><span class="menu-title text-truncate" data-i18n="Assign Staff Duty">Assign Staff Duty</span></a>
+         </li>
              <li class="nav-item"><a href="HODs"><i class="fa fa-briefcase fa-1x"></i><span class="menu-title text-truncate" data-i18n="Staff Office">Staff Office</span></a>
           </li>
-           <li class="nav-item"><a href="staff_office_list"><i class="fa fa-briefcase fa-1x"></i><span class="menu-title text-truncate" data-i18n="Create Office">Create Office</span></a>
+           <li class="nav-item"><a href="staff_office_list"><i class="fa fa-pen fa-1x"></i><span class="menu-title text-truncate" data-i18n="Create Office">Create Office</span></a>
           </li>
             </ul>
           </li>
@@ -155,7 +159,7 @@
                <li><a class="d-flex align-items-center" href="create_hostel"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Hostel">Manage Hostel</span></a>
               </li>
             </ul>
-          </li> 
+          </li>
            <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-book fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="LIBRARY">LIBRARY</span></a>
             <ul class="menu-content">
                <li><a class="d-flex align-items-center" href="add_book"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Add Book">Add Book</span></a>
@@ -177,7 +181,7 @@
               <li><a class="d-flex align-items-center" href="running_cost"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Bus Maintenance">Bus Maintenance</span></a>
               </li>
             </ul>
-          </li> 
+          </li>
 
           <!--  <li class=" navigation-header text-truncate"><span data-i18n="EVENT & BLOG">EVENT & BLOG</span>
           </li>  -->
@@ -205,14 +209,14 @@
                <li><a class="d-flex align-items-center" href="javascript:void(0)"><i class="bx bx-calendar"></i><span class="menu-item text-truncate" data-i18n="Exam Timetable">Exam Timetable</span></a>
               </li>
             </ul>
-          </li> 
+          </li>
           <!-- MSG -->
            <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-envelope fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="Messages">MESSAGES</span></a>
             <ul class="menu-content">
                <li><a class="d-flex align-items-center" href="javaScript:void(0)"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Send Message">Send </span></a> </li>
                  <li><a class="d-flex align-items-center" href="javaScript:void(0)"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Inbox"> Inbox</span></a> </li>
             </ul>
-          </li> 
+          </li>
           <!-- MSG -->
        <!--  <li class=" navigation-header text-truncate"><span data-i18n="SETTINGS">SETTINGS</span>
           </li> -->
@@ -228,10 +232,10 @@
           </li>
             </ul>
           </li>
-         
+
 
               <li>
-               <a onclick="return confirm('Are you sure to open a new tab for the Homepage?');" class="d-flex align-items-center" href="http://localhost/diamondlight/" target="_blank"><i class="fa fa-globe"></i>
+               <a onclick="return confirm('Are you sure to open a new tab for the Homepage?');" class="d-flex align-items-center" href="<?php echo WEBSITE_HOME_PAGE;?>" target="_blank"><i class="fa fa-globe"></i>
                 <span class="menu-item text-truncate"> <?php echo 'Visit Homepage'?></span></a>
               </li>
               <li>

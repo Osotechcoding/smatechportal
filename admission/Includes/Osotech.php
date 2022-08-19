@@ -30,7 +30,7 @@ class Osotech
            exit();
            }
   public function Clean($data){
-      if (!empty($data)) {
+      if (!$this->isEmptyStr($data)) {
           $string = trim($data);
           $string = stripslashes($string);
           $string = filter_var($string,FILTER_SANITIZE_STRING);

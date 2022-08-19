@@ -714,7 +714,7 @@ a.right-btn:after {
 
 /*12. Search Course*/
 .search-course {
-    background: url("../images/online-course-bg.jpg");
+    background: url("../images/computer-labs.jpg");
     background-size: cover;
 }
 .online-course-inner {
@@ -735,7 +735,7 @@ a.right-btn:after {
     background: #0c0b39;
 }
 .video-area {
-    background: url("../images/video-bg.jpg");
+    background: url("../images/chemistry-lab.jpg");
     background-size: cover;
     padding: 250px 0;
     height: 100%;

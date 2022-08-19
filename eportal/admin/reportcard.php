@@ -143,7 +143,7 @@ tbody >tr:nth-child(odd) {
 }
 .signarea{
   width: 195px;
-  background-image: url(../../assets/images/resultstamp.png);
+  background-image: url('../stamp.png');
   background-repeat: no-repeat;
   background-size:contain;
 }
@@ -151,7 +151,7 @@ tbody >tr:nth-child(odd) {
 </head>
 <body>
   <section id="result">
-    <img src="../../assets/images/resulttop1.jpg" alt="" class="schname">
+    <img src="../schoolbanner.jpg" alt="" class="schname">
     <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_data->studentClass);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp; <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp; <b><?php echo date("M jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $Administration->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
@@ -159,9 +159,9 @@ tbody >tr:nth-child(odd) {
     <?php if ($student_data->stdGender == "Male"): ?>
       <img src="../schoolImages/students/male.png" alt="photo" style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
       <?php else: ?>
-        <img src="../schoolImages/students/female.png" alt="photo" style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
+        <img src="../schoolImages/students/female.png" alt="photo" style="float: right; width: 100px;height: 125px; margin-top: -160px; border: 4px solid #625D5D; padding: 2px;">
     <?php endif ?>
-     
+
       <?php else: ?>
         <img src="../schoolImages/students/<?php echo $student_data->stdPassport;?>" alt="passport" style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
     <?php endif ?>
@@ -598,7 +598,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
             </tr>
            <tr>
         </table>
-        <br> 
+        <br>
         <table style="table-layout: auto; width: 100%;" id="gradeAnalysis">
           <thead>
             <tr>
@@ -641,7 +641,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
           <h4>Class Teacher's Remark:</h4>
           <hr>
           <?php if ($teacher_res_comment = $Administration->get_student_result_comment_details($student_reg_number,$student_class,$term,$rsession)) {?>
-            <p><b><?php echo ucwords($student_data->full_name); ?></b> <?php echo $teacher_res_comment->teacher_comment; ?></p>
+            <p> <?php echo $teacher_res_comment->teacher_comment; ?></p>
             <?php
             // code...
           } ?>
@@ -661,7 +661,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
           <h4>Head Of School's Remark:</h4>
           <hr>
           <?php if ($principal_res_comment = $Administration->get_student_result_comment_details($student_reg_number,$student_class,$term,$rsession)) {?>
-            <p><b><?php echo ucwords($student_data->full_name); ?></b> <?php echo $principal_res_comment->principal_coment; ?></p>
+            <p><?php echo $principal_res_comment->principal_coment; ?></p>
             <?php
             // code...
           } ?>
@@ -680,7 +680,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
         <div class="signarea">
           <h4 style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">Next Term Begins: <?php echo date("l jS F, Y",strtotime($schl_session_data->new_term_begins)); ?>.</h4>
           <br>
-          <img src="../../assets/images/signSample.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+          <img src="../sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
         </div>
       </div>
       <br>

@@ -19,6 +19,8 @@ if (!defined("__OSOTECH__DEV_COMPANY__")) {
 	define("__OSO_APP_NAME__","SMAPP");
 	define("__SCHOOL_NAME__","School Management Application E-Portal");
 	define("__SCHOOL_LOCATION_ADDRESS__","No 8,Road 20, Smatech Estate, Ikeja, Lagos,Nigeria");
+	define("WEBSITE_HOME_PAGE","http://localhost/smatechportal/");
+	//define("WEBSITE_HOME_PAGE","https://smatechportal.com/");
 	define("APP_ROOT","http://localhost/smatechportal/eportal/");
 	//define("APP_ROOT","https://eportal.smatechportal.com/");
 

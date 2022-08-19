@@ -1,45 +1,46 @@
 <div id="demo" class="carousel slide" data-ride="carousel">
     <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-        <li data-target="#demo" data-slide-to="3"></li>
+      <?php
+        $all_sliders = $Osotech->getAllSliders();
+        if ($all_sliders) {
+          $cnt=0;
+            foreach ($all_sliders as $slider) {
+              $cnt++;?>
+              <?php if ($cnt <= 1): ?>
+                  <li data-target="#demo" data-slide-to="<?php echo $cnt;?>" class="active"></li>
+                <?php else: ?>
+              <li data-target="#demo" data-slide-to="<?php echo $cnt;?>"></li>
+              <?php endif; ?>
+        <!-- <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li> -->
+        <?php
+      }
+  }
+   ?>
     </ul>
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="assets/images/banner_1.jpg" alt="education" class="img-fluid">
-            <div class="carousel-caption animated fadeInLeft delay-0.5s">
-                <h1 class="font-weight-bold">An investment in knowledge pays the best interest.</h1>
-                <h6 class="banner-desc">We had such a great time in Education</h6>
-                <a href="javascript:" class="theme-orange btn mt-3 apply-now">Apply Now</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="assets/images/banner_2.jpg" alt="education" class="img-fluid">
-            <div class="carousel-caption animated fadeInUp delay-0.5s">
-                <h1 class="font-weight-bold">Education is what remains after one has forgotten what one has learned
-                    in
-                    school.</h1>
-                <h6 class="banner-desc">We had such a great time in Education</h6>
-                <a href="javascript:" class="theme-orange btn mt-3 apply-now">Apply Now</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="assets/images/banner_3.jpg" alt="education" class="img-fluid">
-            <div class="carousel-caption animated fadeInDown delay-0.5s">
-                <h1 class="font-weight-bold">Education is not the filling of a pail, but the lighting of a
-                    fire.</h1>
-                <h6 class="banner-desc">We had such a great time in Education</h6>
-                <a href="javascript:" class="theme-orange btn mt-3 apply-now">Apply Now</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="assets/images/banner_4.jpg" alt="education" class="img-fluid">
-            <div class="carousel-caption animated zoomIn delay-0.5s">
-                <h1 class="font-weight-bold">Education is not preparation for life; education is life itself.</h1>
-                <h6 class="banner-desc">We had such a great time in Education</h6>
-                <a href="javascript:" class="theme-orange btn mt-3 apply-now">Apply Now</a>
-            </div>
-        </div>
+      <?php
+        $all_sliders = $Osotech->getAllSliders();
+        if ($all_sliders) {
+            $cnt=0;
+            foreach ($all_sliders as $slider) {
+                $cnt++;?>
+              <div id="myslidep<?php echo $cnt;?>" class="carousel-item <?php if ($cnt <= 1) {
+              echo 'active';
+              }else{
+                echo '';
+              }; ?>">
+                  <img src="./eportal/gallery/Sliders/<?php echo $slider->image;?>" alt="education" class="img-fluid">
+                  <div class="carousel-caption animated fadeInLeft delay-0.5s">
+                      <h1 class="font-weight-bold"><?php echo $slider->title;?></h1>
+                      <h6 class="banner-desc"><?php echo $slider->slider_desc;?></h6>
+                      <a href="javascript:" class="theme-orange btn mt-3 apply-now">Apply Now</a>
+                  </div>
+              </div>
+              <?php
+            }
+        }
+         ?>
+
     </div>
 </div>
