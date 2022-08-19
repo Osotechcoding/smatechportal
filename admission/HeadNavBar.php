@@ -8,10 +8,10 @@
   <div class="navbar-nav">
     <a class="nav-link active" aria-current="page" href="./">Home</a>
     <a class="nav-link" href="howtoapply">FAQs</a>
-    <a class="nav-link" href="http://localhost/smatechportal/eportal/" target="_blank">Student Login</a>
+    <a class="nav-link" href="<?php echo APP_ROOT;?>" target="_blank">Student Portal</a>
   </div>
 </div>
-<a href="logout?action=logoutapplicant&applicant=newstudent"><button class="btn btn-outline-danger" type="button">Logout</button></a>
+<a onclick="return confirm('Are you sure you anto to logout?');" href="logout?action=logoutapplicant&applicant=newstudent"><button class="btn btn-outline-danger" type="button">Logout</button></a>
 
 </div>
 </nav>

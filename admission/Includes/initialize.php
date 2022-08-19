@@ -13,8 +13,8 @@ if (!defined("__OSO_DEV_COMPANY__")) {
 	define("__OSO_APP_DEV_YEAR__","2020");
 	define("__OSO_APP_NAME__","SMATECH");
 	define("ADMISSION_PORTAL_ROOT","http://localhost/smatechportal/admission/");
-	define("APP_ROOT","http://localhost/smatechportal/");
-	//define("APP_ROOT","https://smatechportal/");
+	define("APP_ROOT","http://localhost/smatechportal/eportal/");
+	//define("APP_ROOT","https://smatechportal/eportal/");
 	//define("ADMISSION_PORTAL_ROOT","https://admission.smatechportal.com/");
 
 }

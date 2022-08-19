@@ -67,7 +67,7 @@
                     <div class="about-img">
                         <div class="img_1" data-aos="zoom-in" data-aos-duration="550">
                             <div class="border-line"></div>
-                            <img src="assets/images/about1.jpg" class="img-fluid" alt="About">
+                            <img src="assets/images/computer-labs.jpg" class="img-fluid" alt="About">
                         </div>
                         <div class="img_2 d-flex"  data-aos="zoom-in" data-aos-duration="1000">
                             <h5 class="mb-0 text-white">Our Story</h5>

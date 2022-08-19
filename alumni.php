@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="video my-4" data-aos="zoom-in" data-aos-duration="1000">
-                        <img class="img-fluid" src="assets/images/event_1.jpg" alt="video">
+                        <img class="img-fluid" src="assets/images/playground.jpg" alt="video">
                         <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" data-fancybox="gallery"
                            class="video-btn text-white">
                             <i class="fa fa-play-circle fa-3x"></i>
@@ -153,7 +153,7 @@
                         <div class="col-md-6 mb-xl-0 mb-lg-0 mb-md-0 mb-sm-4 mb-4 ">
                             <div class="student-block">
                                 <div class="student-img">
-                                    <img src="assets/images/student_3.jpg" class="img-fluid d-block m-auto" alt="Student">
+                                    <img src="assets/images/student_1.jpg" class="img-fluid d-block m-auto" alt="Student">
                                 </div>
                                 <div class="student-desc" data-aos="fade-up" data-aos-duration="1000">
                                     <div class="border-line"></div>
@@ -173,7 +173,7 @@
                         <div class="col-md-6">
                             <div class="student-block">
                                 <div class="student-img">
-                                    <img src="assets/images/student_4.jpg" class="img-fluid d-block m-auto" alt="Student">
+                                    <img src="assets/images/student_2.jpg" class="img-fluid d-block m-auto" alt="Student">
                                 </div>
                                 <div class="student-desc" data-aos="fade-up" data-aos-duration="1000">
                                     <div class="border-line"></div>

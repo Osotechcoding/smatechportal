@@ -88,13 +88,8 @@ class Osotech
        return $this->response;
        }
 
-       // public function process_first_step_admission($data){
-       //
-       //   return self::alert_msg("success","Welcome Guest","You are Highly welcome to Smatech School Portal admission Page");
-       // }
        //LOAD CAPTCHA
-
-              public function loadOsotechCaptcha(){
+      public function loadOsotechCaptcha(){
               print'<script> $("#captcha_load").load("../admission/Templates/osotech_captcha.php");</script>';
       }
               /*ADMISSION REGISTRATION STEP ONE*/

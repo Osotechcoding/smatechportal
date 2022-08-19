@@ -166,7 +166,7 @@ if (isset($_GET['bId']) && ($_GET['bId'] !="") && isset($_GET['action']) && $_GE
                     <div class="recent-blog ">
                         <h6 class="text-uppercase font-weight-bold mb-3">Recent blog</h6>
                         <div class="media">
-                            <img src="assets/images/thumb_6.jpg" alt="John Doe" class="mr-3">
+                            <img src="assets/images/playground.jpg" alt="John Doe" class="mr-3">
                             <div class="media-body">
                                 <p class="font-weight-bold mb-2">Contrary to popular belief.Lorem Ipsum is not simply random
                                     text. </p>

@@ -8,7 +8,7 @@ if ($request_method === 'GET') {
     if ($_GET['action'] === "logout" && $_GET['student'] === "cstudent") {
     //destroy all the session applicant info
     unset($_SESSION);
-    @session_destroy();
+    //@session_destroy();
     header("Location: ".APP_ROOT);
     exit();
     }

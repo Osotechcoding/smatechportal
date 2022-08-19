@@ -335,14 +335,14 @@
                                         by the injected for users.</h6>
                                 </div>
                                 <div class="text-center py-4">
-                                    <img src="assets/images/2.png" class="img-fluid m-auto d-block" alt="Student">
+                                    <img src="assets/images/1.png" class="img-fluid m-auto d-block" alt="Student">
                                     <h5 class="mt-3 font-weight-bold">John Leo</h5>
                                     <h6>Suffered are many variation of passages lorem availle there on alterati of some
                                         form
                                         by the injected for users.</h6>
                                 </div>
                                 <div class="text-center py-4">
-                                    <img src="assets/images/3.png" class="img-fluid m-auto d-block" alt="Student">
+                                    <img src="assets/images/1.png" class="img-fluid m-auto d-block" alt="Student">
                                     <h5 class="mt-3 font-weight-bold">Lisa Devis</h5>
                                     <h6>Suffered are many variation of passages lorem availle there on alterati of some
                                         form

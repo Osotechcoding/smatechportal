@@ -76,7 +76,7 @@
                     <div class="img-block">
                         <div class="border-line"></div>
                         <div class="cust_img">
-                            <img class="img-fluid" data-aos="zoom-in" data-aos-duration="1000" src="assets/images/gallery_1.jpg" alt="Achievement">
+                            <img class="img-fluid" data-aos="zoom-in" data-aos-duration="1000" src="assets/images/gallery_3.jpg" alt="Achievement">
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="img-block left-block">
                         <div class="border-line"></div>
                         <div class="cust_img">
-                            <img class="img-fluid" data-aos="zoom-in" data-aos-duration="1000" src="assets/images/gallery_2.jpg" alt="Achievement">
+                            <img class="img-fluid" data-aos="zoom-in" data-aos-duration="1000" src="assets/images/gallery_3.jpg" alt="Achievement">
                         </div>
                     </div>
                 </div>
