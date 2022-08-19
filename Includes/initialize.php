@@ -14,6 +14,8 @@ if (!defined("__OSO_DEV_COMPANY__")) {
     define("APP_ROOT","http://localhost/smatechportal/");
     define("ADMISSION_ROOT","http://localhost/smatechportal/admission/");
     define("RESULT_ROOT","http://localhost/smatechportal/e-result/");
+    define("EPORTAL_ROOT","http://localhost/smatechportal/eportal/");
+    //define("EPORTAL_ROOT","https://eportal.smatechportal/");
       //define("RESULT_ROOT","https://e-result.smatechportal.com/");
     //define("APP_ROOT","https://smatechportal.com/");
     //define("ADMISSION_ROOT","https://admission.smatechportal.com/");

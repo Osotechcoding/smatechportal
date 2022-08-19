@@ -22,7 +22,7 @@
                         <li><a href="./admission/"><i class="fa fa-angle-double-right mr-2"></i>Online Registration</a></li>
                         <li><a href="./e-result/"><i class="fa fa-angle-double-right mr-2"></i>Online Result</a></li>
                         <li><a href="career"><i class="fa fa-angle-double-right mr-2"></i>Career</a></li>
-                        <li><a href="contact"><i class="fa fa-angle-double-right mr-2"></i>Contact</a></li>
+                        <li><a href="<?php echo EPORTAL_ROOT;?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>e-Portal</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-md-5 mb-4" data-aos="fade-in" data-aos-duration="1050">
