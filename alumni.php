@@ -18,6 +18,14 @@
       <?php else: ?>
         <?php include_once 'Templates/HeaderScript.php'; ?>
     <?php endif; ?>
+    <style type="text/css">
+        .osotech-img{
+            width: 330px;
+            height: 360px;
+            border: 4px solid orange;
+            border-radius: 15px;
+        }
+    </style>
 </head>
 <body>
 
@@ -68,10 +76,7 @@
                     <div class="search-student border px-4 py-3">
                         <h4 class="font-weight-bold color-orange">Search Old Student</h4>
                         <form>
-                            <div class="form-group">
-                                <label for="exampleIDNumber">REG No</label>
-                                <input type="text" class="form-control" id="exampleIDNumber" placeholder="Enter Your ID">
-                            </div>
+                           
                             <div class="form-group">
                                 <label for="exampleDepartment">Graduation Year</label>
                                 <select id="exampleDepartment" class="form-control">
@@ -82,20 +87,7 @@
                                     <option>2023-2024</option>
                                 </select>
                             </div>
-                            <!-- <div class="form-group">
-                                <label for="exampleClass">Position Held</label>
-                                <select id="exampleClass" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Student</option>
-                                    <option>Head Boy</option>
-                                    <option>Head Girl</option>
-                                </select>
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label for="exampleStduntname">Student Name</label>
-                                <input type="text" class="form-control" id="exampleStduntname"
-                                       placeholder="Enter Student Name">
-                            </div> -->
+                            
                             <button type="submit" class="btn theme-orange border-0 mt-2">Search Now</button>
                         </form>
                     </div>
@@ -113,7 +105,7 @@
                         <div class="col-md-6 mb-4">
                             <div class="student-block">
                                 <div class="student-img">
-                                    <img src="assets/images/student_1.jpg" class="img-fluid d-block m-auto" alt="Student">
+                                    <img src="assets/images/male.png" class="img-fluid d-block m-auto osotech-img" alt="Student">
                                 </div>
                                 <div class="student-desc" data-aos="fade-up" data-aos-duration="1000">
                                     <div class="border-line"></div>
@@ -133,7 +125,7 @@
                         <div class="col-md-6 mb-4">
                             <div class="student-block">
                                 <div class="student-img">
-                                    <img src="assets/images/student_2.jpg" class="img-fluid d-block m-auto" alt="Student">
+                                    <img src="assets/images/male.png" class="img-fluid d-block m-auto osotech-img" alt="Student">
                                 </div>
                                 <div class="student-desc" data-aos="fade-up" data-aos-duration="1000">
                                     <div class="border-line"></div>
@@ -153,7 +145,7 @@
                         <div class="col-md-6 mb-xl-0 mb-lg-0 mb-md-0 mb-sm-4 mb-4 ">
                             <div class="student-block">
                                 <div class="student-img">
-                                    <img src="assets/images/student_1.jpg" class="img-fluid d-block m-auto" alt="Student">
+                                    <img src="assets/images/male.png" class="img-fluid d-block m-auto osotech-img" alt="Student">
                                 </div>
                                 <div class="student-desc" data-aos="fade-up" data-aos-duration="1000">
                                     <div class="border-line"></div>
@@ -173,7 +165,7 @@
                         <div class="col-md-6">
                             <div class="student-block">
                                 <div class="student-img">
-                                    <img src="assets/images/student_2.jpg" class="img-fluid d-block m-auto" alt="Student">
+                                    <img src="assets/images/male.png" class="img-fluid d-block m-auto osotech-img" alt="Student">
                                 </div>
                                 <div class="student-desc" data-aos="fade-up" data-aos-duration="1000">
                                     <div class="border-line"></div>

@@ -209,5 +209,13 @@ class Osotech
       unset($this->dbh);
           }
               }
+
+    public function get_session_details(){
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_session_tbl` WHERE seId=1 LIMIT 1");
+  $this->stmt->execute();
+  $this->response = $this->stmt->fetch();
+  return $this->response;
+  unset($this->dbh);
+  }
 }
 $Osotech = new Osotech();

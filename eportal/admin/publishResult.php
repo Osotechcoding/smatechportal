@@ -151,15 +151,28 @@ require_once "helpers/helper.php";
            <th> Session</th>
             <th> Term</th>
             <th>Status</th>
-            
                 </tr>
               </thead>
               <tbody class="text-center">
                 <?php 
-                $viewdAll = $Result->view_published_result();
+                switch ($activeSess->term_desc) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+                $viewdAll = $Result->view_published_result($resultTable);
                 if ($viewdAll) {
                   foreach ($viewdAll as $value) {
-                  $count_student = $Result->getNumberOfStudentSitForExamByClass($value->studentGrade,$value->term,$value->aca_session); ?>
+                  $count_student = $Result->getNumberOfStudentSitForExamByClass($resultTable,$value->studentGrade,$value->term,$value->aca_session); ?>
                   <tr>
                   <td><?php echo $value->studentGrade;?></td>
                   <td><span class="badge badge-pill badge-info"><?php echo $count_student; ?></span></td>

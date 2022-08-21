@@ -60,7 +60,7 @@ require_once "helpers/helper.php";
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="btn btn-danger btn-lg round">Show Hidden Pins</button>
+          <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="btn btn-danger btn-md round">Show Hidden Pins</button>
         </div>
         <div class="card-body card-dashboard">
 
@@ -70,7 +70,7 @@ require_once "helpers/helper.php";
                 <tr>
                  <th>S/N</th>
                   <th>Card Serial</th>
-                   <th>Pin <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="btn btn-outline-danger btn-sm round">Show Pin</button></th>
+                   <th>Pin</th>
                   <th>Price</th>
                   <th>Created</th>
                   <th>Status</th>

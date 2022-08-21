@@ -10,7 +10,7 @@
     <!-- ========== Meta Tags ========== -->
 <?php include_once 'Templates/MetaTags.php'; ?>
     <!-- ========== Page Title ========== -->
-    <title> Home :: <?php echo ($Osotech->getConfigData()->school_name);?></title>
+    <title> Homepage :: <?php echo ($Osotech->getConfigData()->school_name);?></title>
 
     <?php if (!file_exists("Templates/HeaderScript.php")): ?>
       <?php die("Access not Aallowed") ; ?>
@@ -107,16 +107,11 @@
                 <i class="fa fa-mortar-board"></i>
             </div>
             <h5 data-aos="fade-up" data-aos-duration="1050">Chairman Message</h5>
-            <h5 data-aos="fade-up" data-aos-duration="1050">Key to unlock the golden door of freedom.</h5>
-            <h3 class="font-weight-bold pb-3 px-5 mb-0" data-aos="fade-up" data-aos-duration="1050">Education develop a
-                passion for learning.If you do, you will never cease to grow.</h3>
-            <p class="pt-3">Ensuring quality higher education is one of the most important things we can do for
-                future generations.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <p class="bottom-line">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h3 class="font-weight-bold pb-3 px-5 mb-0" data-aos="fade-up" data-aos-duration="1050">Education develop a passion for learning.If you do, you will never cease to grow.</h3>
+            <p class="pt-3 bottom-line" style="line-height: 40px;font-size: 20px;"><?php echo ($Osotech->getConfigData()->school_history);?></p>
+             
 
-            <h5 class="pt-3">Alexa Devid</h5>
+            <h5 class="pt-3"><?php echo ($Osotech->getConfigData()->school_director);?></h5>
             <p>Founrder & Chairman</p>
             <div class="button-box">
                 <a href="./about" class="left-btn">More About Us</a>
@@ -192,7 +187,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-up" data-aos-duration="550">
                     <div class="team-block">
                         <div class="team-img">
-                            <img src="assets/images/team_1.png" class="img-fluid" alt="team member">
+                            <img src="assets/images/teacher.jpg" class="img-fluid" alt="team member">
                         </div>
                         <ul class="social-connect pl-0">
                             <li><i class="fa fa-facebook-f"></i></li>
@@ -207,7 +202,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-up" data-aos-duration="550">
                     <div class="team-block mt-xl-0 mt-lg-0 mt-md-0 mt-sm-2 mt-2">
                         <div class="team-img">
-                            <img src="assets/images/team_2.png" class="img-fluid" alt="team member">
+                            <img src="assets/images/teacher.jpg" class="img-fluid" alt="team member">
                         </div>
                         <ul class="social-connect pl-0">
                             <li><i class="fa fa-facebook"></i></li>
@@ -221,7 +216,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-up" data-aos-duration="550">
                     <div class="team-block  mt-xl-0 mt-lg-0 mt-mb-2 mt-sm-2 mt-2">
                         <div class="team-img">
-                            <img src="assets/images/team_1.png" class="img-fluid" alt="team member">
+                            <img src="assets/images/teacher.jpg" class="img-fluid" alt="team member">
                         </div>
                         <ul class="social-connect pl-0">
                             <li><i class="fa fa-facebook"></i></li>
@@ -235,7 +230,7 @@
                 <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12" data-aos="fade-up" data-aos-duration="550">
                     <div class="team-block">
                         <div class="team-img mt-xl-0 mt-lg-0 mt-mb-2 mt-sm-2 mt-2">
-                            <img src="assets/images/team_2.png" class="img-fluid" alt="team member">
+                            <img src="assets/images/teacher.jpg" class="img-fluid" alt="team member">
                         </div>
                         <ul class="social-connect pl-0">
                             <li><i class="fa fa-facebook"></i></li>

@@ -14,7 +14,7 @@ $dbh = $con->osotech_connect();
 // $resultmi = $_SESSION['resultmi'];
  $result_regNo = $_SESSION['result_regNo'];
 if (isset($_SESSION['resultmi'])) {
-  $stmt = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
+  $stmt = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
   $stmt->execute(array($_SESSION['resultmi']));
                 if ($stmt->rowCount()>0) {
               while ($rowResult = $stmt->fetch()) {
@@ -36,7 +36,7 @@ $ab = 'Absent';
 $timePresent = $Student->get_student_attendance_details($student_reg_number,$student_class,$pre,$term,$rsession);
 $timeAbsent = $Student->get_student_attendance_details($student_reg_number,$student_class,$ab,$term,$rsession);
 
-$presentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
+/*$presentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
 $presentQuery->execute(array($student_reg_number,$student_class,$pre,$term,$rsession));
 if ($presentQuery->rowCount()>0) {
   $rows = $presentQuery->fetch();
@@ -48,8 +48,8 @@ $absentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class
 $absentQuery->execute(array($student_reg_number,$student_class,$ab,$term,$rsession));
 if ($absentQuery->rowCount()>0) {
   $rows = $absentQuery->fetch();
-  $timeAbsent = $rows->cnt;
-}
+  $timeAbsent = $rows->cnt;*/
+// }
  ?>
 
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ if ($absentQuery->rowCount()>0) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <?php echo ucwords($SmappDetails->school_name);?> :: <?php echo ucwords($student_data->full_name);?> Report Card for <?php echo $schl_session_data->active_session;?> </title>
+    <title> <?php echo ucwords($SmappDetails->school_name);?> :: <?php echo ucwords($student_data->full_name);?> Report Card for <?php echo $schl_session_data->active_session;?> <?php echo $term ?></title>
 <style>
 html {
   font-family:arial;
@@ -186,7 +186,7 @@ tbody >tr:nth-child(odd) {
                   </tr>
                 </thead>
               <?php
-               $resultScore = $dbh->prepare("SELECT * FROM  `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+               $resultScore = $dbh->prepare("SELECT * FROM  `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession));
   if ($resultScore->rowCount()>0) {
    while ($showResult = $resultScore->fetch()) {
@@ -236,7 +236,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                   <td>Remarks</td>
                 </tr>
                 <?php
-                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
                 $stmt42->execute(array($student_reg_number,$student_class,$term,$rsession));
                 if ($stmt42->rowCount()>0) {
                   $reSet = $stmt42->fetch();
@@ -246,7 +246,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                 }
                 //visap_offered_subject_tbl
                 //id,student_class,subject,aca_session
-              $stmt = $dbh->prepare("SELECT count(`reportId`) as total_subjects FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+              $stmt = $dbh->prepare("SELECT count(`reportId`) as total_subjects FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
                 $stmt->execute(array($student_reg_number,$student_class,$term,$rsession));
                 if ($stmt->rowCount()>0) {
                   $reSet = $stmt->fetch();
@@ -685,7 +685,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
       </div>
       <br>
 <hr>
-<h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b> <span style="float: right;"> Powered by: SMATech</span></h4>
+<h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b> <span style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
 <button onclick="javascript:window.print();" type="button" style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
 
     <!-- End of result -->

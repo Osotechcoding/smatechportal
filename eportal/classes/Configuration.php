@@ -302,5 +302,13 @@ public function check_user_activity_allowed($module){
     }
   }
 
+  function saltifyString($string){
+        return urlencode(base64_encode($string));
+        }
+
+    function unsaltifyString($string){
+    return base64_decode(urldecode($string));
+    }
+
 }
 $Configuration = new Configuration();

@@ -1,21 +1,30 @@
-
 <?php 
+@session_start();
+error_reporting(1);
 spl_autoload_register(function($classname){
-  require "../Inc/$classname.php";
+  require __DIR__."/src/".ucfirst($classname).".php";
 });
+
 $Database = new Database();
 $Osotech = new Osotech();
 $Osotech->osotech_session_kick();
-$Osotech->check_resultmi_session();
+$StudentResult = new StudentResult();
 $dbh = $Database->Osotech_connect();
-//
+$schoolSesDetail = $Osotech->get_session_details();
+
+ date_default_timezone_set("Africa/Lagos"); ?>
+ <?php if ($StudentResult->checkResultPortalStatus() === true): ?>
+   <?php header("Location: ../");
+   exit();?>
+<?php endif ?>
+<?php
+$StudentResult->check_resultmi_session();
+
   $pin = $_SESSION['pin'];
   $serial = $_SESSION['serial'];
-//   $stdSession=  $_SESSION['result_session'];
-// $resultmi = $_SESSION['resultmi'];
  $result_regNo = $_SESSION['result_regNo'];
 if (isset($_SESSION['resultmi'])) {
-  $stmt = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
+  $stmt = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
   $stmt->execute(array($_SESSION['resultmi']));
                 if ($stmt->rowCount()>0) {
               while ($rowResult = $stmt->fetch()) {
@@ -23,34 +32,17 @@ if (isset($_SESSION['resultmi'])) {
         $student_class =$rowResult->studentGrade;
         $term =$rowResult->term;
         $rsession =$rowResult->aca_session;
-                  
                   }
                 }
-
 }
 
-$student_data = $Osotech->get_student_details_byRegNo($student_reg_number);
+$student_data = $StudentResult->get_student_details_byRegNo($student_reg_number);
 $schl_session_data = $Osotech->get_school_session_info();
 //get time present and absent
 $pre ='Present';
 $ab = 'Absent';
-$timePresent = $Osotech->get_student_attendance_details($student_reg_number,$student_class,$pre,$term,$rsession);
-$timeAbsent = $Osotech->get_student_attendance_details($student_reg_number,$student_class,$ab,$term,$rsession);
-
-$presentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$presentQuery->execute(array($student_reg_number,$student_class,$pre,$term,$rsession));
-if ($presentQuery->rowCount()>0) {
-  $rows = $presentQuery->fetch();
-  $timePresent = $rows->cnt;
-}
-
-//Time absent
-$absentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$absentQuery->execute(array($student_reg_number,$student_class,$ab,$term,$rsession));
-if ($absentQuery->rowCount()>0) {
-  $rows = $absentQuery->fetch();
-  $timeAbsent = $rows->cnt;
-}
+$timePresent = $StudentResult->get_student_attendance_details($student_reg_number,$student_class,$pre,$term,$rsession);
+$timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number,$student_class,$ab,$term,$rsession);
  ?>
 
 <!DOCTYPE html>
@@ -59,7 +51,7 @@ if ($absentQuery->rowCount()>0) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <?php echo ucwords($Osotech->getConfigData()->school_name);?> :: <?php echo ucwords($student_data->full_name);?> Report Card for <?php echo $schl_session_data->active_session;?> </title>
+    <title> <?php echo ucwords($Osotech->getConfigData()->school_name);?> :: <?php echo ucwords($student_data->full_name);?> Report Card for <?php echo $schl_session_data->active_session;?> <?php echo $term; ?> </title>
 <style>
 html {
   font-family:arial;
@@ -142,7 +134,7 @@ tbody >tr:nth-child(odd) {
 }
 .signarea{
   width: 195px;
-  background-image: url(../assets/images/sign.png);
+  background-image: url('stamp.png');
   background-repeat: no-repeat;
   background-size:contain;
 }
@@ -153,9 +145,9 @@ tbody >tr:nth-child(odd) {
     <!-- <img src="../assets/images/resulttop.jpg" alt="" class="schname"> -->
 
     <!-- <hr> -->
-   <img src="../assets/images/resulttop1.jpg" alt="" class="schname">
+   <img src="schoolbanner.jpg" alt="" class="schname">
     <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_data->studentClass);?></b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
-    <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp; <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp; <b><?php echo date("F jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $Osotech->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
+    <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp; <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp; <b><?php echo date("F jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $StudentResult->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
    <?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
       <?php if ($student_data->stdGender == "Male"): ?>
@@ -187,8 +179,8 @@ tbody >tr:nth-child(odd) {
                   </tr>
                 </thead>
               <?php
-               $resultScore = $dbh->prepare("SELECT * FROM  `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
-$resultScore->execute(array($student_reg_number,$student_class,$term,$rsession));
+               $resultScore = $dbh->prepare("SELECT * FROM  `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
+$resultScore->execute(array($student_reg_number,$student_class,$rsession));
   if ($resultScore->rowCount()>0) {
    while ($showResult = $resultScore->fetch()) {
     $myTotalMark = intval($showResult->overallMark);
@@ -237,8 +229,8 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                   <td>Remarks</td>
                 </tr>
                 <?php 
-                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
-                $stmt42->execute(array($student_reg_number,$student_class,$term,$rsession));
+                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
+                $stmt42->execute(array($student_reg_number,$student_class,$rsession));
                 if ($stmt42->rowCount()>0) {
                   $reSet = $stmt42->fetch();
                   $total = $reSet->totalMark;
@@ -247,8 +239,8 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                 }
                 //visap_offered_subject_tbl
                 //id,student_class,subject,aca_session
-              $stmt = $dbh->prepare("SELECT count(id) as total_sub FROM `visap_registered_subject_tbl` WHERE subject_class=?");
-                $stmt->execute(array($student_class));
+              $stmt = $dbh->prepare("SELECT count(reportId) as total_sub FROM `visap_1st_term_result_tbl` WHERE studentGrade=? AND stdRegCode=? AND aca_session=?");
+                $stmt->execute(array($student_class,$student_reg_number,$rsession));
                 if ($stmt->rowCount()>0) {
                   $reSet = $stmt->fetch();
                   $subjectOffered = $reSet->total_sub;
@@ -322,7 +314,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
             </thead>
             <tr>
                 <td>No of Times School Opened </td> 
-                <td><?php echo $schl_session_data->Days_open; ?> </td>
+                <td><?php echo $schoolSesDetail->Days_open; ?> </td>
             </tr>
             <tr>
               <td>No of Times Present </td> 
@@ -334,7 +326,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
           </tr>
            <tr>
             <td style="background-color: rgba(21, 10, 10, .3);color: black;">Scratch Usage Info</td> 
-            <td><?php echo $Osotech->get_scratch_card_usage($pin,$serial,$result_regNo);?> of 5</td>
+            <td><?php echo $StudentResult->get_scratch_card_usage($pin,$serial,$result_regNo);?> of 3</td>
           </tr>
         </table>
         <br>
@@ -349,7 +341,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                   <td><b style="font-size: 9px;">&nbsp;1&nbsp;</b> </td>
               </tr>
           </thead>
-  <?php $affective = $Osotech->getStudentAffectiveDomainDetails($student_reg_number,$student_class,$term,$rsession); ?>
+  <?php $affective = $StudentResult->getStudentAffectiveDomainDetails($student_reg_number,$student_class,$term,$rsession); ?>
           <tr style="text-align:center;">
               <td style="font-size: 8px;">Punctuality</td>
               <td><?php if ($affective->punctuality == 5): ?>
@@ -471,7 +463,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                   <td><b style="font-size: 9px;">&nbsp;1&nbsp;</b> </td>
               </tr>
           </thead>
-          <?php $psychomotors = $Osotech->getStudentPsychomotorDetails($student_reg_number,$student_class,$term,$rsession) ?>
+          <?php $psychomotors = $StudentResult->getStudentPsychomotorDetails($student_reg_number,$student_class,$term,$rsession) ?>
           <tr style="text-align:center;">
             <td style="font-size: 8px;">Handwriting</td>
             <td><?php if ($psychomotors->Handwriting == 5): ?>
@@ -585,7 +577,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
             <?php endif; ?></td>
           </tr>
         </table>
-       <!--  <br>
+         <br>
         <table style="table-layout: auto; width:100%;" id="ratingIndices">
           <thead>
               <tr>
@@ -603,7 +595,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
             </tr>
            <tr>
         </table>
-        <br> -->
+        <br> 
         <table style="table-layout: auto; width: 100%;" id="gradeAnalysis">
           <thead>
             <tr>
@@ -645,13 +637,13 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
         <div class="teacher">
           <h4>Class Teacher's Remark:</h4>
           <hr>
-          <?php if ($teacher_res_comment = $Osotech->get_student_result_comment_details($student_reg_number,$student_class,$term,$rsession)) {?>
+          <?php if ($teacher_res_comment = $StudentResult->get_student_result_comment_details($student_reg_number,$student_class,$term,$rsession)) {?>
             <p><b><?php echo ucwords($student_data->full_name); ?></b> <?php echo $teacher_res_comment->teacher_comment; ?></p>
             <?php
             // code...
           } ?>
           
-          <p style="text-align: right;"><b> <?php $staff_data_details = $Osotech->get_class_teacher_class_name($student_class)?> <?php if ($staff_data_details): ?>
+          <p style="text-align: right;"><b> <?php $staff_data_details = $StudentResult->get_class_teacher_class_name($student_class)?> <?php if ($staff_data_details): ?>
             <?php $staff_Gender = $staff_data_details->staffGender;
             if ($staff_Gender =="Male") {
               $tTitle = "Mr. ";
@@ -665,13 +657,13 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
         <div class="principal">
           <h4>Head of school's Remark:</h4>
           <hr>
-          <?php if ($principal_res_comment = $Osotech->get_student_result_comment_details($student_reg_number,$student_class,$term,$rsession)) {?>
+          <?php if ($principal_res_comment = $StudentResult->get_student_result_comment_details($student_reg_number,$student_class,$term,$rsession)) {?>
             <p><b><?php echo ucwords($student_data->full_name); ?></b> <?php echo $principal_res_comment->principal_coment; ?></p>
             <?php
             // code...
           } ?>
           
-          <p style="text-align: right;"><b> <?php $principal_details = $Osotech->get_principal_info();?> <?php if ($principal_details): ?>
+          <p style="text-align: right;"><b> <?php $principal_details = $StudentResult->get_principal_info();?> <?php if ($principal_details): ?>
             <?php $staff_Gender = $principal_details->staffGender;
             if ($staff_Gender =="Male") {
               $tTitle = "Mr. ";
@@ -685,12 +677,12 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
         <div class="signarea">
           <h4 style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">Next Term Begins: <?php echo date("l jS F, Y",strtotime($schl_session_data->new_term_begins)); ?>.</h4>
           <br>
-          <img src="../assets/images/signSample.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+          <img src="sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
         </div>
       </div>
       <br>
 <hr>
-<h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span style="float: right;"> Powered by: SMATech</span></h4>
+<h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span style="float: right;"> Powered by: <?php echo __OSO_DEV_COMPANY__ ?></span></h4>
 <button onclick="javascript:window.print();" type="button" style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
 
     <!-- End of result -->

@@ -122,7 +122,21 @@ if (isset($_POST['show_uploaded_result_btn'])) {?>
           $result_class = $_POST['show_result_class'];
           $result_term = $_POST['show_result_term'];
           $result_session = $_POST['show_result_session'];
-           $get_all_uploaded_results = $Result->getUploadedResultByClass($result_class,$result_subject,$result_term,$result_session); ?>
+          switch ($result_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+           $get_all_uploaded_results = $Result->getUploadedResultByClass($resultTable,$result_class,$result_subject,$result_term,$result_session); ?>
             <?php if ($get_all_uploaded_results): ?>
               <section id="column-selectors">
   <div class="row">
@@ -157,7 +171,7 @@ if (isset($_POST['show_uploaded_result_btn'])) {?>
                   <td><?php echo $value->subjectName;?></td>
                   <td><?php echo $value->term;?></td>
                   <td><?php echo $value->aca_session;?></td>
-                  <td><button class="btn btn-danger btn-md btn-rounded __loadingBtn__<?php echo $value->reportId;?> delete_exam_btn" data-id="<?php echo $value->reportId;?>" data-action="remove_subject_from_result_tbl">Delete</button> </td>
+                  <td><button class="btn btn-danger btn-md btn-rounded __loadingBtn__<?php echo $value->reportId;?> delete_exam_btn" data-id="<?php echo $value->reportId;?>" data-action="remove_subject_from_result_tbl" data-term="<?php echo $result_term;?>">Delete</button> </td>
                 </tr>
                 <?php }
                            ?>
@@ -217,11 +231,12 @@ if (isset($_POST['show_uploaded_result_btn'])) {?>
       delete_exam_btn.on("click", function(){
         let Id = $(this).data("id");
         let action = $(this).data("action");
+        let myTerm = $(this).data("term");
          let is_true = confirm("Are you Sure you want to Remove this Result, this Action cannot be undo?");
       if (is_true) {
         $(".__loadingBtn__"+Id).html('<img src="../assets/loaders/rolling_loader.svg" width="20">').attr("disabled",true);
         //send request 
-        $.post("../actions/delete_actions",{action:action,rId:Id},function(response){
+        $.post("../actions/delete_actions",{action:action,rId:Id,term:myTerm},function(response){
           setTimeout(()=>{
             $(".__loadingBtn__"+Id).html("Delete").attr("disabled",false);
             $("#server-response").html(response);

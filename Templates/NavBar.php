@@ -2,8 +2,8 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <a class="navbar-brand" href="./">
-                <img src="<?php echo $Osotech->get_schoolLogoImage();?>" width="60px" class="img-fluid" alt="SmatechHome">
-            </a><span class="navbar-brand text-black fw-bold" style="color:black"><?php echo (__OSO_APP_NAME__);?></span>
+                <img src="<?php echo $Osotech->get_schoolLogoImage();?>" width="60px" class="img-fluid">
+            </a><span class="navbar-brand text-black fw-bold" style="color:black"><?php echo ($Osotech->getConfigData()->school_short_name);?></span>
             <span class="navbar-toggler">
                 <i class="ti-align-left" onclick="openNav()"></i>
             </span>

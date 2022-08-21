@@ -11,19 +11,15 @@ require_once "helpers/helper.php";
     <?php include ("../template/MetaTag.php"); ?>
     <title><?php echo $SmappDetails->school_name; ?> :: Student Admission Portal</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
-   
   </head>
   <!-- END: Head-->
 
   <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
-
     <!-- BEGIN: Header-->
     <?php include ("template/HeaderNav.php"); ?>
     <!-- headerNav.php -->
     <!-- END: Header-->
-
-
     <!-- BEGIN: Main Menu-->
   <!--  -->
   <?php include ("template/Sidebar.php"); ?>
@@ -76,14 +72,15 @@ require_once "helpers/helper.php";
           <th>CLASS</th>
           <th>VERIFICATION</th>
           <th>STATUS</th>
+          <th>PHOTOCARD</th>
           <th>ACTION</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
-          $all_active_students = $Student->get_all_students_by_status("pending");
-          if ($all_active_students) {
-           foreach ($all_active_students as $students) {?>
+          $all_pending_students = $Student->get_all_students_by_status("pending");
+          if ($all_pending_students) {
+           foreach ($all_pending_students as $students) {?>
             <tr>
              <td>
               <?php if ($students->stdPassport ==""||$students->stdPassport ==NULL): ?>
@@ -109,6 +106,7 @@ require_once "helpers/helper.php";
               <span class="badge badge-success badge-pill">Admitted</span>
            <?php endif ?> 
             </td>
+            <td><a href="studentphotocard?action=view&newstudentdata=<?php echo $Configuration->saltifyString($students->stdId);?>" target="_blank"><button class="btn btn-primary btn-sm round">View</button></a> </td>
          <td>
           <div class="btn-group mb-1">
             <a class="text-info" href="editstudentinfo?student-data=<?php echo ($students->stdId);?>">

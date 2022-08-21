@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  *
  */
@@ -389,5 +388,34 @@ public function __construct(){
         unset($this->dbh);
         }
         }
+
+    public function get_student_attendance_details($stdRegNo,$stdGrade,$rollType,$term,$session){
+$this->stmt = $this->dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
+$this->stmt->execute(array($stdRegNo,$stdGrade,$rollType,$term,$session));
+if ($this->stmt->rowCount()>0) {
+  $rollCall = $this->stmt->fetch();
+  $this->response = $rollCall->cnt;
+  return $this->response;
+    unset($this->dbh);
+}
+  }
+
+  public function get_student_age($dateOfBirth){
+    $today = date("Y-m-d");
+  $diff = date_diff(date_create($dateOfBirth), date_create($today));
+return $diff->format('%y');
+  }
+
+  public function get_scratch_card_usage($pin,$serial,$stdRegNo){
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE pin_code=? AND pin_serial=? AND studentRegNo=? LIMIT 1");
+        $this->stmt->execute(array($pin,$serial,$stdRegNo));
+        if ($this->stmt->rowCount()==1) {
+            $res = $this->stmt->fetch();
+            $this->response = $res->pin_counter;
+            return $this->response;
+            unset($this->dbh);
+        }
+
+    }
 }
 $StudentResult = new StudentResult();

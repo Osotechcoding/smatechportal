@@ -11,7 +11,7 @@ $Osotech->osotech_session_kick();
 $schoolSesDetail = $Osotech->get_school_session_info();
 ?>
 <?php if ($Osotech->checkAdmissionPortalStatus() !== true): ?>
-   <?php header("Location: ../");
+   <?php header("Location:".APP_ROOT);
    exit();?>
 <?php endif ?>
 <?php
@@ -36,44 +36,32 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo ($Osotech->getConfigData()->school_name);?> :: <?php echo ucwords($student_data->full_name);?> REGISTRATION PHOTO SLIP</title>
       <?php include_once ("Head.php");?>
-<link rel="stylesheet" href="./assets/css/photocard.css">
+<link rel="stylesheet" href="assets/css/photocard.css">
 <style>
-@media print {
-       #myprintbtn {display: none;}
-        #mylogoutbtn {display: none;}
-        .applicant_details{
-          display: column;
-          justify-content: center;
-          align-items: center;
-        }
-    }
+
 </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container osotech-bg-color">
       <section id="result" style="margin-top:20px">
           <div class="card card-body">
             <div class="col-md-12 col-sm-12 col-lg-12">
 <img src="schoolbanner.jpg" class="img-fluid">
-
             <div class="row">
-              <h4 class="text-center"><?php echo strtoupper(($schoolSesDetail->session_desc_name)) ?> Registration Photocard</h4>
-
+              <h4 class="text-center text-muted"><?php echo strtoupper(($schoolSesDetail->session_desc_name)) ?> Registration Photocard</h4>
               <div class="col-md-8 applicant_details">
-                <h4>Application ID: <b style="color: red; font-weight: 1000;"><?php echo $student_data->stdRegNo; ?> </b>  </h4>
-                <h3>Applicant Gender: <b style="color: rgb(0, 17, 255); font-weight: 1000;"><?php echo $student_data->stdGender; ?></b>  </h3>
-                <h4>Admission Level: <b style="color: rgb(0, 17, 255); font-weight: 1000;"><?php echo $student_data->studentClass; ?></b>  </h4>
+                <h4>Application ID: <b style="color: red; font-weight: 900;"><?php echo $student_data->stdRegNo; ?> </b>  </h4>
+                <h3>Applicant Gender: <b style="color: rgb(0, 17, 255); font-weight: 900;"><?php echo $student_data->stdGender; ?></b>  </h3>
+                <h4>Admission Level: <b style="color: rgb(0, 17, 255); font-weight: 900;"><?php echo $student_data->studentClass; ?></b>  </h4>
                 <h4>Scratch Card Pin: <b class="text-muted"><?php echo $CardUserDetails->pin_code; ?></b> </h4>
                 <h4>Scratch Card Serial: <b class="text-muted"><?php echo $CardUserDetails->pin_serial; ?></b> </h4>
                   <h4>Admission Status: <span class="badge text-bg-danger">Not Yet Admitted</span> </h4>
-
               </div>
               <div class="col-md-4 col-sm-4 col-lg-4">
-<img src="<?php echo APP_ROOT."eportal/schoolImages/students/".$student_data->stdPassport;?>" alt="passport" style="width: 100px; margin-top:2px; border: 3px solid #625D5D; padding: 5px;border-radius:15px;"><br>
+<img src="<?php echo EPORTAL_ROOT."/schoolImages/students/".$student_data->stdPassport;?>" alt="passport" style="width: 100px; margin-top:2px; border: 3px solid #625D5D; padding: 5px;border-radius:15px;"><br>
 <small class="text-center text-muted">Registered: <?php print date("D jS F, Y",strtotime($student_data->stdApplyDate)); ?></small>
               </div>
               <div class="clearfix">
-
               </div>
             </div>
   </div>
@@ -153,7 +141,7 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
           </div>
    <h4 align="center" class="text-center mt-1">Thanks for choosing <?php echo ($Osotech->getConfigData()->school_name);?>!</h4>
    <hr>
-   <button id="myprintbtn" onclick="javascript:window.print();" type="button" style="background: black; color: white; margin-bottom: 15px;border-radius: 10px; @media print()">Print Now</button>
+   <button id="myprintbtn" onclick="javascript:window.print();" type="button" style="background: black; color: white; margin-bottom: 15px;border-radius: 10px;">Print Now</button>
    <a href="logout?action=logoutapplicant&applicant=newstudent" id="mylogoutbtn"> <button onclick="return confirm('Ensure you print put your entrance examination Photo-card before signing out');" type="button" style="background: darkred; color: white; margin-bottom: 15px;border-radius: 10px;">Logout</button></a>
      </div>
    </section>

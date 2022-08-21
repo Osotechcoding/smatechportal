@@ -37,12 +37,12 @@ background-repeat: no-repeat;">
 <div class="login-left">
 <img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="150" class="img-fluid" alt="logo" style="border: 2px solid deepskyblue;border-radius:10px;background: #ffffff;">
 <h4 class="text-center text-warning mt-2"><?php echo ucwords($SmappDetails->school_name); ?><h4>
-<p class="text-center mt-2 p-2" style="font-size: 13px;"><a href="../" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger">SmaTech</span></a></p>
+<p class="text-center mt-2 p-2" style="font-size: 13px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
 </div>
 <div class="login-right">
 <div class="login-right-wrap">
-<div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="50" class="img-fluid" alt="logo"></div>
-<h1 class="mb-3 mt-2" style="color: #593128;">STAFF PORTAL </h1>
+<div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="80" class="img-fluid" alt="logo"></div>
+<h1 class="mb-3 mt-2" style="color: #593128;">STAFF LOGIN </h1>
 <form id="staffLoginForm">
     <input type="hidden" name="action" value="staff_login">
     <input type="hidden" name="txss_token" value="<?php echo $tses_token;?>">
@@ -62,25 +62,24 @@ background-repeat: no-repeat;">
         } ?>" id="exampleInputPassword1"
         placeholder="<?php echo $lang['password'];?>">
 </div>
-<div class="form-group">
+<!-- <div class="form-group">
     <select name="login_as" id="" class="select2 form-control">
         <option value="">Choose Account Type...</option>
-        <?php echo $Administration->get_role_InDropDown_list();?>
+        <?php //echo $Administration->get_role_InDropDown_list();?>
     </select>
-</div>
+</div> -->
 <div class="checkbox form-group form-box clearfix">
     <a href="javascript:void(0);" style="float: right;color: red;">Forgot Password</a>
        <div class="form-check checkbox-theme">
        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberme">
         <label class="form-check-label" for="rememberMe">Remember me</label></div>
-        
         </div>
 <div class="form-group">
 <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Login</button>
 </div>
 </form>
-<div class="text-center dont-have"><a style="cursor: pointer;" class="navigate_to_student_login">Student Login</a>
-<p class="text-center text-info" style="font-size: 13px; margin-top: 10px;"><a href="../" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger">SmaTech</span></a></p>
+<div class="text-center dont-have">Are you a Student? <a class="link navigate_to_student_login" style="cursor: pointer;"> Login here</a>  
+<p class="text-center text-info" style="font-size: 13px; margin-top: 10px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
 </div>
 
 </div>

@@ -2,9 +2,10 @@
     <div class="container">
         <div class="footer-top border-bottom pt-5">
             <div class="row">
-                <div class="col-lg-3 col-md-6" data-aos="fade-in" data-aos-duration="1050">
-                    <a href="index-2.html"><img src="assets/images/logo-footer.png" class="img-fluid mb-3" alt="Edusquad"></a>
-                    <p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.</p>
+                <div class="col-lg-3 col-md-6 text-center" data-aos="fade-in" data-aos-duration="1050">
+                    <!-- <img src="<?php //echo $Osotech->get_schoolLogoImage();?>" width="60px" class="img-fluid"> -->
+                    <a href="./" class="text-center"><span class="color-orange navbar-brand fw-bold" style="font-size: 30px;"><?php echo ($Osotech->getConfigData()->school_short_name);?></span></a>
+                    <p><?php echo ($Osotech->getConfigData()->school_name);?></p>
                     <ul class="social-icon">
                         <li><a href="javascript:"><i class="fa fa-facebook-f"></i></a></li>
                         <li><a href="javascript:"><i class="fa fa-google-plus"></i></a></li>
@@ -18,10 +19,10 @@
                     <h5 class="font-weight-bold mb-3">Quick Links</h5>
                     <ul>
                         <li><a href="./"><i class="fa fa-angle-double-right mr-2"></i>Home</a></li>
-                        <li><a href="about"><i class="fa fa-angle-double-right mr-2"></i>About Us</a></li>
-                        <li><a href="./admission/"><i class="fa fa-angle-double-right mr-2"></i>Online Registration</a></li>
-                        <li><a href="./e-result/"><i class="fa fa-angle-double-right mr-2"></i>Online Result</a></li>
-                        <li><a href="career"><i class="fa fa-angle-double-right mr-2"></i>Career</a></li>
+                        <li><a href="./about"><i class="fa fa-angle-double-right mr-2"></i>About Us</a></li>
+                        <li><a href="<?php echo ADMISSION_ROOT; ?>"><i class="fa fa-angle-double-right mr-2"></i>Online Registration</a></li>
+                        <li><a href="<?php echo RESULT_ROOT; ?>"><i class="fa fa-angle-double-right mr-2"></i>Online Result</a></li>
+                        <li><a href="./career"><i class="fa fa-angle-double-right mr-2"></i>Career</a></li>
                         <li><a href="<?php echo EPORTAL_ROOT;?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>e-Portal</a></li>
                     </ul>
                 </div>
@@ -33,7 +34,7 @@
             if ($all_blogs_posted) {
             foreach ($all_blogs_posted as $value) {?>
                         <div class="col-md-4 col-sm-2 col-2 mb-2 pr-0">
-                            <img src="./eportal/news-images/<?php echo $value->blog_image;?>" class="img-fluid" alt="Gallery">
+                            <img src="<?php echo EPORTAL_ROOT;?>news-images/<?php echo $value->blog_image;?>" class="img-fluid" alt="News-Image">
                         </div>
                         <?php
             }
@@ -56,9 +57,9 @@
         <div class="bottom-footer py-3 d-flex justify-content-between">
             <p class="mb-0">All Rights Reserved by <?php echo ($Osotech->getConfigData()->school_name);?>.</p>
             <ul class="list-inline mb-0">
-                <li class="list-inline-item"><a href="javascript:void(0)">Terms of use</a></li>
-                <!-- <li class="list-inline-item"><a href="javascript:">Privacy policy</a></li> -->
-                <li class="list-inline-item"><a href="javascript:">Powered By: <?php echo __OSO_DEV_COMPANY__; ?></a></li>
+                <li class="list-inline-item"><a href="javascript:void(0)">Terms</a></li>
+                <li class="list-inline-item"><a href="javascript:">Policy</a></li>
+                <li class="list-inline-item"><a href="javascript:"><span class="color-orange">Developer:</span> <?php echo __OSO_DEV_COMPANY__; ?></a></li>
             </ul>
         </div>
     </div>

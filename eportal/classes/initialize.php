@@ -4,10 +4,7 @@ if (!defined("__OSOTECH__DEV_COMPANY__")) {
 	define("__OSO_HOST__",'localhost');
 	define("__OSO_USER__",'root');
 	define("__OSO_PASS__",'osotech');
-  define("__OSO_DBNAME__",'smatech_portal');
-  /*define("__OSO_USER__",'smatechportal_admin');
-  define("__OSO_PASS__",'@smatech');
-  define("__OSO_DBNAME__",'smatech_portal');*/
+  	define("__OSO_DBNAME__",'smatech_portal');
 	define("__OSO_SCHOOL_CODE__","C24314");
 	define("__OSO_DB_DRIVER__",'mysql');
 	define("__OSO_CHARSET__",'utf8mb4');

@@ -146,7 +146,21 @@ require_once "helpers/helper.php";
           $result_class = $_POST['result_class'];
           $result_term = $_POST['result_term'];
           $result_session = $_POST['result_session'];
-           $get_all_uploaded_results = $Result->get_all_uploaded_school_result($result_class,$result_subject,$result_term,$result_session); ?>
+          switch ($result_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+           $get_all_uploaded_results = $Result->get_all_uploaded_school_result($resultTable,$result_class,$result_subject,$result_term,$result_session); ?>
            <?php if ($get_all_uploaded_results): ?>
             <div class="card">
             <div class="card-body">

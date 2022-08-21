@@ -165,11 +165,25 @@ class Result {
 	$result_term = $this->config->Clean($data['result_term']);
 	$result_class = $this->config->Clean($data['result_class']);
 	$auth_pass = $this->config->Clean($data['auth_code']);
+	switch ($result_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
 	if ($this->config->isEmptyStr($status) || $this->config->isEmptyStr($result_session) || $this->config->isEmptyStr($result_term) || $this->config->isEmptyStr($result_class) || $this->config->isEmptyStr($auth_pass)) {
 	$this->response = $this->alert->alert_toastr("error","Invalid Submission: Unable to Process your Request!",__OSO_APP_NAME__." Says");
 	}elseif ($auth_pass !== __OSO__PUBLISH_RESULT__KEY__) {
 	$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
-	}elseif (!self::checkResultUploadedByClass($result_class,$result_term,$result_session)) {
+	}elseif (!self::checkResultUploadedByClass($resultTable,$result_class,$result_term,$result_session)) {
 	$this->response = $this->alert->alert_toastr("error","Result not found for $result_class",__OSO_APP_NAME__." Says");
 	}
 	else{
@@ -192,10 +206,24 @@ class Result {
 				break;
 		}
 		//let's do the result publishing
+		switch ($result_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
 		try {
 
 			$this->dbh->beginTransaction();
-			$this->stmt = $this->dbh->prepare("UPDATE `visap_termly_result_tbl` SET rStatus=? WHERE studentGrade=? AND term=? AND aca_session=?");
+			$this->stmt = $this->dbh->prepare("UPDATE `{$resultTable}` SET rStatus=? WHERE studentGrade=? AND term=? AND aca_session=?");
 	if ($this->stmt->execute(array($resStatus,$result_class,$result_term,$result_session))) {
 		 $this->dbh->commit();
 	 $this->response = $this->alert->alert_toastr("success","Result for $result_class ".strtoupper($status)." Successfully...",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
@@ -215,8 +243,8 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 	}
 
 	//View published result method
-	public function view_published_result(){
-		$this->stmt = $this->dbh->prepare("SELECT DISTINCT (`studentGrade`),term, aca_session,rStatus FROM `visap_termly_result_tbl`");
+	public function view_published_result($resultTable){
+		$this->stmt = $this->dbh->prepare("SELECT DISTINCT (`studentGrade`),term, aca_session,rStatus FROM `{$resultTable}`");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
@@ -226,8 +254,8 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 	}
 
 	//check if the result have been uploaded 
-	public function checkResultUploadedByClass($stdGrade,$term,$session): bool{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE studentGrade=? AND term=? AND aca_session=?");
+	public function checkResultUploadedByClass($resultTable,$stdGrade,$term,$session): bool{
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE studentGrade=? AND term=? AND aca_session=?");
 		$this->stmt->execute(array($stdGrade,$term,$session));
 		if ($this->stmt->rowCount() > 0) {
 		return true;
@@ -236,8 +264,8 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 		}
 	}
 
-	public function filterStudentResultByAction($status,$term,$session){
-		$this->stmt = $this->dbh->prepare("SELECT DISTINCT (`studentGrade`),term, aca_session,rStatus FROM `visap_termly_result_tbl` WHERE rStatus=? AND term=? AND aca_session=?");
+	public function filterStudentResultByAction($resultTable,$status,$term,$session){
+		$this->stmt = $this->dbh->prepare("SELECT DISTINCT (`studentGrade`),term, aca_session,rStatus FROM `{$resultTable}` WHERE rStatus=? AND term=? AND aca_session=?");
 		$this->stmt->execute(array($status,$term,$session));
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
@@ -247,8 +275,8 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 	}
 
 	// count no of student that wrote a perticular exam
-	public function getNumberOfStudentSitForExamByClass($stdGrade,$term,$session){
-		$this->stmt= $this->dbh->prepare("SELECT DISTINCT(`stdRegCode`) FROM `visap_termly_result_tbl` WHERE studentGrade=? AND term=? AND aca_session=?");
+	public function getNumberOfStudentSitForExamByClass($resultTable,$stdGrade,$term,$session){
+		$this->stmt= $this->dbh->prepare("SELECT DISTINCT(`stdRegCode`) FROM `{$resultTable}` WHERE studentGrade=? AND term=? AND aca_session=?");
 		$this->stmt->execute(array($stdGrade,$term,$session));
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->rowCount();
@@ -280,7 +308,21 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
             }elseif (!self::checkResultReadyModule("visap_psycho_tbl",$stdRegNo,$stdGrade,$stdTerm,$stdSession)) {
             	$this->response = $this->alert->alert_toastr("error","This Result is not yet Ready!",__OSO_APP_NAME__." Says");
             }else{
-$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+            	switch ($stdTerm) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 	$this->stmt->execute(array($stdRegNo,$stdGrade,$stdTerm,$stdSession));
 	if ($this->stmt->rowCount()> 0) {
 		while($result_data = $this->stmt->fetch()){
@@ -369,8 +411,8 @@ $this->response = $this->alert->alert_toastr("error","Sorry No result found!",__
 		}
 	}
 
-	public function get_student_result_gradeByRegNo($stdRegNo,$stdgrade,$term,$session){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? LIMIT 1");
+	public function get_student_result_gradeByRegNo($table,$stdRegNo,$stdgrade,$term,$session){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$table}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? LIMIT 1");
 		$this->stmt->execute(array($stdRegNo,$stdgrade,$term,$session));
 		if ($this->stmt->rowCount()==1) {
 			$this->response = $this->stmt->fetch();
@@ -406,6 +448,20 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 		}elseif (!$this->config->check_user_activity_allowed('student_result_uploading')) {
 	$this->response = $this->alert->alert_toastr("error","Result Uploading is not allowed at the moment!",__OSO_APP_NAME__." Says");
 		}else{
+			switch ($result_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
 			//count the number of student result subjects to be uploaded
 			for ($i=0; $i < (int)$total_count; $i++) { 
 				//$arr_stdId = $stdId[$i];
@@ -417,7 +473,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 				$arr_exam = $exam[$i];
 				$arr_subject = $subject[$i];
 				//check if the subject already uploaded
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? AND subjectName=?");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? AND subjectName=?");
 		$this->stmt->execute(array($arr_student_regNo,$arr_result_class,$result_term,$result_session,$arr_subject));
 		if ($this->stmt->rowCount()>0) {
 		$this->response = $this->alert->alert_toastr("error","$arr_subject is already Uploaded!",__OSO_APP_NAME__." Says");
@@ -425,7 +481,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			try {
 		$this->dbh->beginTransaction();
 		$rStatus ='1';
-		$this->stmt = $this->dbh->prepare("INSERT INTO `visap_termly_result_tbl` (stdRegCode,studentGrade,term,aca_session,subjectName,ca,exam,overallMark,mark_average,uploadedTime,uploadedDate,rStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
+		$this->stmt = $this->dbh->prepare("INSERT INTO `{$resultTable}` (stdRegCode,studentGrade,term,aca_session,subjectName,ca,exam,overallMark,mark_average,uploadedTime,uploadedDate,rStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
 		$total_sum =doubleval($arr_cass+$arr_exam);
 		$average_score = round(($total_sum/2)); 
 		$time = date("h:i:s");
@@ -443,7 +499,6 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
     $this->response  =$this->alert->alert_toastr("error","Upload Failed: Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 				
 			}
-		//$this->response = $this->alert->alert_msg("Result Uploaded Successfully!","success");
 		}
 
 			}
@@ -453,8 +508,8 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 		unset($this->dbh);
 	}
 
-	public function get_all_uploaded_school_result($stdGrade,$subject,$term,$session){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE studentGrade=? AND subjectName=? AND term=? AND aca_session=? ORDER BY stdRegCode ASC");
+	public function get_all_uploaded_school_result($resultTable,$stdGrade,$subject,$term,$session){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE studentGrade=? AND subjectName=? AND term=? AND aca_session=? ORDER BY stdRegCode ASC");
 		$this->stmt->execute(array($stdGrade,$subject,$term,$session));
 		if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
@@ -477,8 +532,8 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			return $this->response;
 	}
 
-	public function filter_students_result_by_admission_no_subject($studentClass,$admission_no,$subject,$term,$session){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND subjectName=? AND term=? AND aca_session=? LIMIT 1");
+	public function filter_students_result_by_admission_no_subject($mytable,$studentClass,$admission_no,$subject,$term,$session){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$mytable}` WHERE stdRegCode=? AND studentGrade=? AND subjectName=? AND term=? AND aca_session=? LIMIT 1");
 			$this->stmt->execute(array($admission_no,$studentClass,$subject,$term,$session));
 			if ($this->stmt->rowCount() == 1) {
 				$this->response = $this->stmt->fetch();
@@ -506,11 +561,26 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
 		}else{
 			//let update the result score now
+			 switch ($term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+            
 			try {
 				$sumOfMark = intval($cass + $exam);
 				$average_score = intval(($cass + $exam)/2);
 				$this->dbh->beginTransaction();
-    	$this->stmt = $this->dbh->prepare("UPDATE `visap_termly_result_tbl` SET ca=?,exam=?,overallMark=?,mark_average=? WHERE reportId=? AND stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? LIMIT 1");
+    	$this->stmt = $this->dbh->prepare("UPDATE `{$resultTable}` SET ca=?,exam=?,overallMark=?,mark_average=? WHERE reportId=? AND stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? LIMIT 1");
     	if ($this->stmt->execute(array($cass,$exam,$sumOfMark,$average_score,$resultId,$stdRegNo,$result_class,$result_term,$result_session))) {
     		$this->dbh->commit();
     $this->response = $this->alert->alert_toastr("success","Result Updated  Successfully...",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
@@ -557,8 +627,8 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 	}
 
 	//get student termly offered subjects
-	public function getMyTermylyOfferedSubjects($stdRegNo,$stdgrade,$term,$session){
-		$this->stmt = $this->dbh->prepare("SELECT count(`reportId`) as total_subjects FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+	public function getMyTermylyOfferedSubjects($resultTable,$stdRegNo,$stdgrade,$term,$session){
+		$this->stmt = $this->dbh->prepare("SELECT count(`reportId`) as total_subjects FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 			$this->stmt->execute(array($stdRegNo,$stdgrade,$term,$session));
 			if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();
@@ -570,8 +640,8 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 		unset($this->dbh);
 	}
 
-	public function getUploadedResultByClass($stdgrade,$subject, $term,$session){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE studentGrade=? AND subjectName=? AND term=? AND aca_session=? ORDER BY subjectName ASC");
+	public function getUploadedResultByClass($resultTable,$stdgrade,$subject, $term,$session){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE studentGrade=? AND subjectName=? AND term=? AND aca_session=? ORDER BY subjectName ASC");
 			$this->stmt->execute(array($stdgrade,$subject,$term,$session));
 			if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
@@ -581,12 +651,26 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 	}
 
 
-	public function deleteTermlyResult($rId){
-		if (!$this->config->isEmptyStr($rId)) {
+	public function deleteTermlyResult($rId,$term){
+		if (!$this->config->isEmptyStr($rId) && ! $this->isEmptyStr($term)) {
+			switch ($result_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
 			try {
 		$this->dbh->beginTransaction();
 	//Delete the selected Subject
-		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_termly_result_tbl` WHERE reportId=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("DELETE FROM `{$resultTable}` WHERE reportId=? LIMIT 1");
 		if ($this->stmt->execute([$rId])) {
 			// code...
 			 $this->dbh->commit();
@@ -685,7 +769,21 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 	if ($this->stmt->execute(array($phId))) {
 	//get the result details
 	//reportId
-	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+	switch ($stdTerm) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+	$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 	$this->stmt->execute(array($stdRegNo,$stdGrade,$stdTerm,$stdSession));
 	if ($this->stmt->rowCount()> 0) {
 	while($result_data = $this->stmt->fetch()){
@@ -751,7 +849,21 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 	if ($this->stmt->execute(array($updated_pin_status,$PinId))) {
 	//get the result details
 	//reportId
-	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+		switch ($stdTerm) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+	$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 	$this->stmt->execute(array($stdRegNo,$stdGrade,$stdTerm,$stdSession));
 	if ($this->stmt->rowCount()> 0) {
 	$this->dbh->commit();

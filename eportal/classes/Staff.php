@@ -27,18 +27,18 @@ class Staff {
 		global $lang;
 		$email = $this->config->Clean($data['login_email']);
 		$password = $this->config->Clean($data['login_password']);
-		$userType = $this->config->Clean(ucfirst($data['login_as']));
+		//$userType = $this->config->Clean(ucfirst($data['login_as']));
 		if (!$this->config->check_user_activity_allowed("staff_login")) {
 		$this->response =$this->alert->alert_toastr("error","Login is currently not allowed!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($email) || $this->config->isEmptyStr($password) || $this->config->isEmptyStr($userType)) {
+		}elseif ($this->config->isEmptyStr($email) || $this->config->isEmptyStr($password)) {
 			// code...
 			$this->response =$this->alert->alert_toastr("error","Login Details are required!",__OSO_APP_NAME__." Says");
 		}elseif (! $this->config->is_Valid_Email($email)) {
 			// code...
 			$this->response =$this->alert->alert_toastr("error","Invalid Login Details!",__OSO_APP_NAME__." Says");
 		}else{
-    $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? AND staffRole=? LIMIT 1");
-    $this->stmt->execute(array($email,$userType));
+    $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? LIMIT 1");
+    $this->stmt->execute(array($email));
     if ($this->stmt->rowCount()==1) {
       $result = $this->stmt->fetch();
       $db_password = $result->staffPass;
@@ -100,6 +100,10 @@ $this->stmt->execute(array($_SESSION['STAFF_USERNAME'],$_SESSION['STAFF_EMAIL'],
       			$urlLink = APP_ROOT."principal/";
       			break;
 
+      			case 'H.M':
+      			$urlLink = APP_ROOT."principal/";
+      			break;
+
       				case 'Registrar':
       			$urlLink = APP_ROOT."principal/";
       			break;
@@ -138,13 +142,13 @@ $this->stmt->execute(array($_SESSION['STAFF_USERNAME'],$_SESSION['STAFF_EMAIL'],
 		global $lang;
   $email = $this->config->Clean($data['cemail']);
 		$password = $this->config->Clean($data['cpass']);
-		$crole = $this->config->Clean(ucfirst($data['crole']));
+		//$crole = $this->config->Clean(ucfirst($data['crole']));
 		if ($this->config->isEmptyStr($password)) {
 			// code...
 			$this->response =$this->alert->alert_toastr("warning","Please Enter Password to Unlock your Session",__OSO_APP_NAME__." Says");
 		}else{
-    $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? AND staffRole=? LIMIT 1");
-    $this->stmt->execute(array($email,$crole));
+    $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? LIMIT 1");
+    $this->stmt->execute(array($email));
     if ($this->stmt->rowCount()==1) {
       $result = $this->stmt->fetch();
       $db_password = $result->staffPass;
@@ -190,6 +194,11 @@ $this->stmt->execute(array($_SESSION['STAFF_USERNAME'],$_SESSION['STAFF_EMAIL'],
       			case 'Principal':
       			$urlLink = APP_ROOT."principal/";
       			break;
+      			
+      			case 'H.M':
+      			$urlLink = APP_ROOT."principal/";
+      			break;
+
       			case 'Vice Principal':
       			$urlLink = APP_ROOT."principal/";
       			break;

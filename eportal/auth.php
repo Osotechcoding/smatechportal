@@ -12,7 +12,7 @@ $tses_token = Session::set_xss_token();
 
 <head>
 <?php include_once ("template/MetaTag.php");?>
-<title><?php echo ucwords($SmappDetails->school_name); ?> :: Admin Login</title>
+<title>Admin Login :: <?php echo ucwords($SmappDetails->school_name); ?> </title>
 
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
@@ -41,18 +41,18 @@ background-repeat: no-repeat;">
 <div class="login-left">
 <img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="150" class="img-fluid" alt="logo" style="border: 2px solid deepskyblue;border-radius:10px;background: #ffffff;">
 <h3 class="text-center text-warning"><?php echo ucwords($SmappDetails->school_name); ?> <h3>
-<p class="text-center" style="font-size: 13px;"><a href="../" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger"><?php echo __OSO_APP_NAME__ ?></span></a></p>
+<p class="text-center" style="font-size: 13px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__ ?></span></a></p>
 </div>
 <div class="login-right">
 <div class="login-right-wrap">
 <div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="50" class="img-fluid" alt="logo"></div>
-<h1 class="mb-3 mt-2" style="color: #593128;">ADMIN PORTAL</h1>
+<h1 class="mb-3 mt-2" style="color: #593128;">ADMIN LOGIN</h1>
 <form id="adminLoginForm">
 <input type="hidden" name="action" value="logAdminIn">
 <input type="hidden" name="txss_token" value="<?php echo $tses_token;?>">
 <div class="form-group">
-<input type="text" autocomplete="off" class="form-control" name="ad_email" id="exampleInputEmail1"
-placeholder="<?php echo $lang['email'];?>" value="<?php if(isset($_COOKIE['login_email'])){
+<input type="text" autocomplete="off" class="form-control" name="ad_email"
+placeholder="Enter your e-mail" value="<?php if(isset($_COOKIE['login_email'])){
     echo $_COOKIE['login_email'];
 }else{
     echo '';
@@ -63,28 +63,20 @@ placeholder="<?php echo $lang['email'];?>" value="<?php if(isset($_COOKIE['login
 echo $_COOKIE['login_pass'];
 }else{
 echo '';
-} ?>" id="exampleInputPassword1"
-placeholder="<?php echo $lang['password'];?>">
+} ?>" placeholder="Enter your password">
 </div>
-<div class="form-group">
-   <select name="login_as" id="login_as" class="select2 form-control">
-       <option value="" selected>Choose...</option>
-       <option value="1234509876">Admin</option>
-       <option value="5432106789">Propietor/Propietress</option>
-   </select>
-</div>
+<input type="hidden" name="login_as" value="5432106789">
 <div class="checkbox form-group form-box clearfix">
        <div class="form-check checkbox-theme">
        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberme">
         <label class="form-check-label" for="rememberMe">Remember me</label></div>
-        
         </div>
 <div class="form-group">
 <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Login</button>
 </div>
 </form>
-<p class="text-center"><a href="../" target="_blank">School Website</a></p> 
-<p class="text-center text-info" style="font-size: 13px;"><a href="../" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger">SmaTech</span></a></p>
+<p class="text-center"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" target="_blank">School Website</a></p> 
+<p class="text-center text-info" style="font-size: 13px;"><a href="javascript:void(0);" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
 </div>
 </div>
 </div>

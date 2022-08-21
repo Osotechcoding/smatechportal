@@ -34,31 +34,31 @@ background-repeat: no-repeat;">
 <div class="login-left">
 <img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="150" class="img-fluid" alt="logo" style="border: 2px solid deepskyblue;border-radius:10px;background: #ffffff;">
 <h3 class="text-center text-warning"><?php echo ucwords($SmappDetails->school_name); ?></h3>
-<p class="text-center" style="font-size: 13px;"><a href="../" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger">SmaTech</span></a></p>
+<p class="text-center" style="font-size: 13px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
 </div>
 <div class="login-right">
 <div class="login-right-wrap">
-<div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="50" class="img-fluid" alt="logo"></div>
+<div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="80" class="img-fluid" alt="logo"></div>
 <h1 class="mb-3 mt-2" style="color: #593128;">STUDENT PORTAL</h1>
 <form id="student-login-form">
     <input type="hidden" name="txss_token" value="<?php echo $tses_token;?>">
     <input type="hidden" name="action" value="stud_login">
 <div class="form-group">
-    <label for="">Portal E-mail</label>
+   <!--  <label for="">Portal E-mail</label> -->
 <input type="text" autocomplete="off" class="form-control" name="student_email" id="exampleInputEmail1"
- placeholder="<?php echo $lang['email'];?>" value="<?php if(isset($_COOKIE['login_student_email'])){echo $_COOKIE['login_student_email'];
+ placeholder="Enter your e-mail" value="<?php if(isset($_COOKIE['login_student_email'])){echo $_COOKIE['login_student_email'];
      }else{
      echo '';
      } ?>">
 </div>
 <div class="form-group">
-    <label for="">Password</label>
+   <!--  <label for="">Password</label> -->
 <input type="password" autocomplete="off" class="form-control" name="student_password" value="<?php if(isset($_COOKIE['login_student_pass'])){
   echo $_COOKIE['login_student_pass'];
      }else{
     echo '';
   } ?>" id="exampleInputPassword1"
- placeholder="**********">
+ placeholder="Enter your password">
 </div>
 <div class="checkbox form-group form-box clearfix">
     <a href="forgot-password" style="float: right;color: red;">Forgot Password</a>
@@ -71,7 +71,7 @@ background-repeat: no-repeat;">
 </div>
 </form>
 <div class="text-center dont-have">Are you a Staff? <a class="link navigate_to_staff_login" style="cursor: pointer;"> Login here</a> 
-<p class="text-center text-info mt-2 p-2" style="font-size: 13px;"><a href="../" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger">SmaTech</span></a></p>
+<p class="text-center text-info mt-2 p-2" style="font-size: 13px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
 </div>
 </div>
 </div>

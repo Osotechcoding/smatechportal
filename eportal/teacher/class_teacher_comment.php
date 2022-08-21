@@ -119,6 +119,20 @@ require_once "helpers/helper.php";
     $get_all_uploaded_results_students = $Student->get_students_byClassDesc($comment_class);
     ?>
     <?php 
+    switch ($comment_term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
 
 if ($get_all_uploaded_results_students) {
   $total_count =0;
@@ -157,7 +171,7 @@ if ($get_all_uploaded_results_students) {
                     <?php foreach ($get_all_uploaded_results_students as $value): ?>
                       <?php $total_count++;
                       //get_student_result_gradeByRegNo
-          $student_result_data = $Result->get_student_result_gradeByRegNo($value->stdRegNo,$value->studentClass,$comment_term,$comment_sess);?>
+          $student_result_data = $Result->get_student_result_gradeByRegNo($resultTable,$value->stdRegNo,$value->studentClass,$comment_term,$comment_sess);?>
           <?php if ($student_result_data): ?>
             <?php 
             $exam_score = intval($student_result_data->exam);

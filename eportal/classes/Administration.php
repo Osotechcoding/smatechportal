@@ -2176,6 +2176,7 @@ public function send_resend_confirmation_code($data){
   public function update_school_profile_details($data){
   	$school_name = $this->config->Clean($data['school_name']);
   	$slogan = $this->config->Clean($data['slogan']);
+  	$shortname = $this->config->Clean($data['shortname']);
   	$approval_number = $this->config->Clean($data['approval_number']);
   	$school_history = $this->config->Clean($data['school_history']);
   	$founded_year = $this->config->Clean($data['founded_year']);
@@ -2190,12 +2191,12 @@ public function send_resend_confirmation_code($data){
   	$school_gmail = $this->config->Clean($data['school_gmail']);
   	$website_link = $this->config->Clean($data['website_link']);
   	$auth_pass = $this->config->Clean($data['auth_pass5']);
-  	if ($this->config->isEmptyStr($school_name) ||$this->config->isEmptyStr($slogan) || $this->config->isEmptyStr($approval_number) || $this->config->isEmptyStr($school_history) || $this->config->isEmptyStr($founded_year) || $this->config->isEmptyStr($school_address)|| $this->config->isEmptyStr($school_state) || $this->config->isEmptyStr($school_city) || $this->config->isEmptyStr($country) || $this->config->isEmptyStr($default_language) || $this->config->isEmptyStr($school_phone) || $this->config->isEmptyStr($school_fax) || $this->config->isEmptyStr($school_email) || $this->config->isEmptyStr($school_gmail) || $this->config->isEmptyStr($website_link)) {
+  	if ($this->config->isEmptyStr($school_name) || $this->config->isEmptyStr($slogan) || $this->config->isEmptyStr($shortname)|| $this->config->isEmptyStr($approval_number) || $this->config->isEmptyStr($school_history) || $this->config->isEmptyStr($founded_year) || $this->config->isEmptyStr($school_address)|| $this->config->isEmptyStr($school_state) || $this->config->isEmptyStr($school_city) || $this->config->isEmptyStr($country) || $this->config->isEmptyStr($default_language) || $this->config->isEmptyStr($school_phone) || $this->config->isEmptyStr($school_fax) || $this->config->isEmptyStr($school_email) || $this->config->isEmptyStr($school_gmail) || $this->config->isEmptyStr($website_link)) {
   		$this->response = $this->alert->alert_toastr("error","Invalid Form submission",__OSO_APP_NAME__." Says");
   	}elseif ($this->config->isEmptyStr($auth_pass)) {
-  	$this->response = $this->alert->alert_toastr("error","Enter an Authentication Passcode to Continue",__OSO_APP_NAME__." Says");
+  	$this->response = $this->alert->alert_toastr("error","Enter an Authentication Code to Continue",__OSO_APP_NAME__." Says");
   	}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
-  	$this->response = $this->alert->alert_toastr("error","Invalid Authentication Entered",__OSO_APP_NAME__." Says");
+  	$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code",__OSO_APP_NAME__." Says");
   }else{
   	$id =1;
   	//update action now
@@ -2203,11 +2204,11 @@ public function send_resend_confirmation_code($data){
 					$this->dbh->beginTransaction();
 					//create the new Classroom
 				$date = date("Y-m-d");
-				$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET school_name=?,govt_approve_number=?,school_address=?,school_slogan=?,school_state=?,school_city=?,country=?,school_email=?,school_phone=?,school_fax=?,website_url=?,default_language=?,school_history=?,school_gmail=? WHERE id=? LIMIT 1");
-				if ($this->stmt->execute(array($school_name,$approval_number,$school_address,$slogan,$school_state,$school_city,$country,$school_email,$school_phone,$school_fax,$website_link,$default_language,$school_history,$school_gmail,$id))) {
+				$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET school_name=?,govt_approve_number=?,school_address=?,school_slogan=?,school_state=?,school_city=?,country=?,school_email=?,school_phone=?,school_fax=?,website_url=?,default_language=?,school_history=?,school_gmail=?,school_short_name=? WHERE id=? LIMIT 1");
+				if ($this->stmt->execute(array($school_name,$approval_number,$school_address,$slogan,$school_state,$school_city,$country,$school_email,$school_phone,$school_fax,$website_link,$default_language,$school_history,$school_gmail,$shortname,$id))) {
 					// code...
 					 $this->dbh->commit();
-			$this->response = $this->alert->alert_toastr("success","Details updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+			$this->response = $this->alert->alert_toastr("success","School Details updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
 				}

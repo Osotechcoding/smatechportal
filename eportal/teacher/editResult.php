@@ -116,7 +116,21 @@ require_once "helpers/helper.php";
           if ($Configuration->isEmptyStr($studentClass) || $Configuration->isEmptyStr($admission_no) || $Configuration->isEmptyStr($subject) || $Configuration->isEmptyStr($term) || $Configuration->isEmptyStr($session)) {
             echo $Alert->alert_msg("Notice: All fields are required to proceed","danger");
           }else{
-            $search_result_data =  $Result->filter_students_result_by_admission_no_subject($studentClass,$admission_no,$subject,$term,$session);
+            switch ($term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+            $search_result_data =  $Result->filter_students_result_by_admission_no_subject($resultTable,$studentClass,$admission_no,$subject,$term,$session);
             if ($search_result_data) { ?>
  <?php   
              

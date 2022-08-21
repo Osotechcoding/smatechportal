@@ -14,7 +14,7 @@ $dbh = $con->osotech_connect();
 // $resultmi = $_SESSION['resultmi'];
  $result_regNo = $_SESSION['result_regNo'];
 if (isset($_SESSION['resultmi'])) {
-  $stmt = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
+  $stmt = $dbh->prepare("SELECT * FROM `visap_2nd_term_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
   $stmt->execute(array($_SESSION['resultmi']));
                 if ($stmt->rowCount()>0) {
               while ($rowResult = $stmt->fetch()) {
@@ -184,7 +184,7 @@ tbody >tr:nth-child(odd) {
                   <td>REMARKS</td>
                 </thead>
                 <?php
-               $resultScore = $dbh->prepare("SELECT * FROM  `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+               $resultScore = $dbh->prepare("SELECT * FROM  `visap_2nd_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession));
   if ($resultScore->rowCount()>0) {
    while ($showResult = $resultScore->fetch()) {
@@ -192,7 +192,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
     ?>
     <!-- First Term scores -->
     <?php
-     $stmt4 = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE studentGrade='$student_class' AND term='1st Term' AND aca_session='$rsession' AND stdRegCode='$student_reg_number' AND subjectName='$showResult->subjectName'");
+     $stmt4 = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE studentGrade='$student_class' AND aca_session='$rsession' AND stdRegCode='$student_reg_number' AND subjectName='$showResult->subjectName'");
   $stmt4->execute();
   if ($stmt4->rowCount()>0) {
   $firstTermTotal =$stmt4->fetch();
@@ -267,7 +267,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                   <td>Remarks</td>
                 </tr>
                 <?php
-                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_2nd_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
                 $stmt42->execute(array($student_reg_number,$student_class,$term,$rsession));
                 if ($stmt42->rowCount()>0) {
                   $reSet = $stmt42->fetch();
@@ -277,8 +277,8 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                 }
                 //visap_offered_subject_tbl
                 //id,student_class,subject,aca_session
-              $stmt = $dbh->prepare("SELECT count(`reportId`) as total_subjects FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
-                $stmt->execute(array($student_reg_number,$student_class,$term,$rsession));
+              $stmt = $dbh->prepare("SELECT count(`reportId`) as total_subjects FROM `visap_2nd_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
+                $stmt->execute(array($student_reg_number,$student_class,$rsession));
                 if ($stmt->rowCount()>0) {
                   $reSet = $stmt->fetch();
                   $subjectOffered = $reSet->total_subjects;
@@ -713,7 +713,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
       </div>
       <br>
 <hr>
-<h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span style="float: right;"> Powered by: SMATech</span></h4>
+<h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
 <button onclick="javascript:window.print();" type="button" style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
 
     <!-- End of result -->

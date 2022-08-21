@@ -150,7 +150,8 @@ if (isset($_POST['action']) && $_POST['action']!="") {
   //remove_subject_from_result_tbl
   if ($_POST['action'] ==="remove_subject_from_result_tbl") {
    $rId = $Configuration->Clean($_POST['rId']);
-    $result = $Result->deleteTermlyResult($rId);
+    $term = $Configuration->Clean($_POST['term']);
+    $result = $Result->deleteTermlyResult($rId,$term);
     if ($result) {
       echo $result;
     }

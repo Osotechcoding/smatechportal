@@ -10,7 +10,7 @@
     <!-- ========== Meta Tags ========== -->
   <?php include_once 'Templates/MetaTags.php'; ?>
     <!-- ========== Page Title ========== -->
-    <title>Edusquad</title>
+    <title>Gallery :: <?php echo ($Osotech->getConfigData()->school_name);?></title>
     <?php if (!file_exists("Templates/HeaderScript.php")): ?>
       <?php die("Access not Aallowed") ; ?>
       <?php else: ?>

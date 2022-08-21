@@ -10,7 +10,7 @@ require_once ("Includes/Database.php");
 $Osotech->osotech_session_kick();
 ?>
 <?php if ($Osotech->checkAdmissionPortalStatus() !== true): ?>
-   <?php header("Location: ./");
+   <?php header("Location:".APP_ROOT);
    exit();?>
 <?php endif ?>
 
@@ -39,31 +39,27 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
 <div class="col-md-12">
   <section class="h-100 bg-white">
     <div class="container py-2 h-60">
-      <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row d-flex justify-content-center align-items-center h-70">
         <div class="col">
-          <div class="card card-registration my-4">
+          <div class="card card-registration my-4 osotech-bg-color">
             <div class="row g-0">
               <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card-body p-md-5 text-black">
-                  <h3 class="mb-5 text-uppercase text-center text-info">Admission Form (STUDENT BIO-DATA)</h3>
+                <div class="card-body p-md-3 text-black">
+                  <h3 class="mb-5 text-uppercase text-center text-black">Admission Form (STUDENT BIO-DATA)</h3>
                   <form id="secondStepForm">
-                    <div class="text-center" id="server-response">
-
-                    </div>
+                    <div class="text-center" id="server-response"></div>
                   <div class="row">
               <input type="hidden" name="osotech_csrf" value="<?php echo md5('iremideoizasamsonosotech');?>">
               <input type="hidden" name="action" value="submit_second_step_admission">
  <input type="hidden" name="admission_no" value="<?php echo strtoupper($student_data->stdRegNo);?>">
  <input type="hidden" name="auth_code_applicant_id" value="<?php echo $auth_code_applicant_id;?>">
-                    <div class="col-md-4 mb-3">
+ <div class="col-md-4 mb-3">
                       <div class="form-group">
-
                 <input type="text" class="form-control" value="<?php echo $student_data->stdEmail;?>" readonly>
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <div class="form-group">
-
                   <input type="text" class="form-control" name="surname" value="<?php echo ucwords($student_data->stdUserName);?>" readonly>
                       </div>
                     </div>
@@ -73,19 +69,17 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
                <input type="text" class="form-control" value="<?php echo ucwords($student_data->studentClass);?>" readonly>
                       </div>
                     </div>
-
                     <div class="col-md-6 mb-3">
                       <div class="form-group">
                         <label for="first_name" class="form-label">First Name</label>
-                        <input type="text" autocomplete="off" id="first_name" name="first_name" class="form-control form-control-lg" placeholder="Smatech">
+                        <input type="text" autocomplete="off" id="first_name" name="first_name" class="form-control form-control-lg" placeholder="First Name">
                       </div>
                     </div>
                     <div class="col-md-6 mb-3">
                        <span id="phone-error"></span>
                       <div class="form-group">
                         <label for="middle_name" class="form-label">Middle Name</label>
-                        <input type="text" autocomplete="off" name="middle_name" class="form-control form-control-lg" placeholder="Michael" id="middle_name">
-
+                        <input type="text" autocomplete="off" name="middle_name" class="form-control form-control-lg" placeholder="Middle Name" id="middle_name">
                       </div>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -108,7 +102,7 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
 
                     <div class="col-md-6 mb-3">
                       <div class="form-group">
-                          <label for="birth_cert">Gender </label>
+                          <label for="birth_cert">Birth Certification </label>
                         <select name="birth_cert" id="birth_cert" class="custom-select form-control">
                           <option value="" selected>Choose...</option>
                           <option value="Certificate">Certificate</option>
@@ -124,16 +118,15 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
                     <select name="nationality" id="nationality" class="custom-select form-control">
                     <option value="" selected>Choose...</option>
                     <option value="Nigerian">Nigerian</option>
-                    <option value="Non Nigerian">None Nigerian </option>
+                    <option value="Non Nigerian">Non Nigerian </option>
                     </select>
                  </div>
              </div>
-
              <div class="col-md-6 mb-3">
                  <div class="form-group">
                     <label for="state_origin">STATE OF ORIGIN</label>
                 <select name="state_origin" id="state_origin" class="custom-select form-control">
-                <option selected>Choose...</option>
+                <option value="" selected>Choose...</option>
                 <?php echo $Osotech->get_states_of_origin_InDropDown();?>
                 </select>
                  </div>
@@ -144,11 +137,10 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
                 <select name="localgovt" id="localgovt" class="custom-select form-control" required></select>
                  </div>
              </div>
-
              <div class="col-md-6 mb-3">
                  <div class="form-group">
                      <label for="hometown">Home Town</label>
-                <input type="text" name="hometown" class="form-control" id="hometown" placeholder="Ibeju Lekki">
+                <input type="text" name="hometown" class="form-control" id="hometown" placeholder="Home town">
                  </div>
              </div>
              <div class="col-md-6 mb-3">
@@ -187,7 +179,7 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
              </div>
                   </div>
 
-                  <button type="submit" class="btn btn-dark btn-lg btn-round mb-5 __loadingBtn__" style="float:right">Continue Registration</button>
+                  <button type="submit" class="btn btn-dark btn-lg btn-round mb-2 __loadingBtn__" style="float:right">Continue Registration</button>
                   </form>
                   </div>
                 </div>
@@ -198,15 +190,16 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
       </div>
     </div>
   </section>
-</div>
-<!-- Footer -->
-<?php
-if (file_exists("footer.php")) {
-require_once ("footer.php");
+  <!-- Footer -->
+    <?php
+if (file_exists("./footer.php")) {
+include_once ("./footer.php");
 }
  ?>
 <!-- Footer -->
+</div>
       </div>
+
     <?php include_once ("FooterScript.php");?>
     <script>
     $(document).ready(function(){
@@ -221,7 +214,6 @@ require_once ("footer.php");
       },1000);
     })
   });
-
 
 $('#state_origin').on('change', function() {
           let state_name = $(this).val();

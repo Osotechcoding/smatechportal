@@ -67,7 +67,7 @@
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/team_1.png" class="img-fluid d-block m-auto" alt="Team">
+                            <img src="assets/images/teacher.jpg" class="img-fluid d-block m-auto" alt="Team">
                         </div>
                         <div class="faculties-info theme-orange py-2 mt-3" data-aos="zoom-in" data-aos-duration="550">
                             <div class="fac-text text-center">
@@ -90,7 +90,7 @@
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/team_2.png" class="img-fluid d-block m-auto" alt="Team">
+                            <img src="assets/images/teacher.jpg" class="img-fluid d-block m-auto" alt="Team">
                         </div>
                         <div class="faculties-info theme-orange py-2 mt-3" data-aos="zoom-in" data-aos-duration="550">
                             <div class="fac-text text-center">
@@ -113,7 +113,7 @@
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/team_1.png" class="img-fluid d-block m-auto" alt="Team">
+                            <img src="assets/images/teacher.jpg" class="img-fluid d-block m-auto" alt="Team">
                         </div>
                         <div class="faculties-info theme-orange py-2 mt-3" data-aos="zoom-in" data-aos-duration="550">
                             <div class="fac-text text-center">
@@ -137,7 +137,7 @@
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/team_2.png" class="img-fluid d-block m-auto" alt="Team">
+                            <img src="assets/images/teacher.jpg" class="img-fluid d-block m-auto" alt="Team">
                         </div>
                         <div class="faculties-info theme-orange py-2 mt-3" data-aos="zoom-in" data-aos-duration="550">
                             <div class="fac-text text-center">
@@ -160,7 +160,7 @@
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/team_1.png" class="img-fluid d-block m-auto" alt="Team">
+                            <img src="assets/images/teacher.jpg" class="img-fluid d-block m-auto" alt="Team">
                         </div>
                         <div class="faculties-info theme-orange py-2 mt-3" data-aos="zoom-in" data-aos-duration="550">
                             <div class="fac-text text-center">
@@ -183,7 +183,7 @@
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/team_2.png" class="img-fluid d-block m-auto" alt="Team">
+                            <img src="assets/images/teacher.jpg" class="img-fluid d-block m-auto" alt="Team">
                         </div>
                         <div class="faculties-info theme-orange py-2 mt-3" data-aos="zoom-in" data-aos-duration="550">
                             <div class="fac-text text-center">

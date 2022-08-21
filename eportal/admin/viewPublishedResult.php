@@ -119,7 +119,21 @@ if (isset($_POST['view_published_btn'])) {?>
 $status = $Configuration->Clean($_POST['result_action']);
 $term = $Configuration->Clean($_POST['result_term']);
 $session = $Configuration->Clean($_POST['result_session']);
- $viewdAll = $Result->filterStudentResultByAction($status,$term,$session);
+switch ($term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+ $viewdAll = $Result->filterStudentResultByAction($resultTable,$status,$term,$session);
 if ($viewdAll) {?>
 <section id="column-selectors">
   <div class="row">

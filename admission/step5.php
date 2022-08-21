@@ -10,7 +10,7 @@ require_once ("Includes/Database.php");
 $Osotech->osotech_session_kick();
 ?>
 <?php if ($Osotech->checkAdmissionPortalStatus() !== true): ?>
-   <?php header("Location: ./");
+   <?php header("Location:".APP_ROOT);
    exit();?>
 <?php endif ?>
 
@@ -21,7 +21,7 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
   $admission_no = $_SESSION['AUTH_CODE_ADMISSION_NO'];
   $student_data = $Osotech->get_student_details_byRegNo($admission_no);
 }else{
-  header("Location: ./");
+  header("Location: ./step4");
   exit();
 }
 
@@ -41,11 +41,11 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
     <div class="container py-2 h-60">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col">
-          <div class="card card-registration my-4">
+          <div class="card card-registration my-4 osotech-bg-color">
             <div class="row g-0">
               <div class="col-xl-12 col-md-12 mb-3">
                 <div class="card-body p-md-5 text-black">
-                  <h3 class="mb-5 text-uppercase text-center text-info">Admission Form (STUDENT MEDICAL HISTORY)</h3>
+                  <h3 class="mb-5 text-uppercase text-center text-black">Admission Form (STUDENT MEDICAL HISTORY)</h3>
                   <div class="text-center" id="server-response">
                   </div>
                   <form id="fifthStepForm">
@@ -170,14 +170,15 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && ! empty($_SESSION['AUTH_SMA
       </div>
     </div>
   </section>
-</div>
-<!-- Footer -->
-<?php
-if (file_exists("footer.php")) {
-require_once ("footer.php");
+  <!-- Footer -->
+    <?php
+if (file_exists("./footer.php")) {
+include_once ("./footer.php");
 }
  ?>
 <!-- Footer -->
+</div>
+
       </div>
     <?php include_once ("FooterScript.php");?>
     <script>

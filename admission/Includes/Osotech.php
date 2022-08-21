@@ -1,7 +1,7 @@
 <?php
 @session_start();
 /**
- *
+ * 
  */
  // include_once "initialize.php";
  include_once "Database.php";
@@ -38,7 +38,6 @@ class Osotech
           return $string;
           }
             }
-
 
     function saltifyString($string){
         return urlencode(base64_encode($string));
@@ -81,8 +80,7 @@ class Osotech
         }
 
     public function alert_msg($alert_type="warning", $alert_title="",$alert_msg=""){
-       $this->response ='<div class="alert alert-'.$alert_type.' alert-dismissible fade show" role="alert">
-         <strong>'.$alert_title.'!</strong> '.$alert_msg.'
+       $this->response ='<div class="alert alert-'.$alert_type.' alert-dismissible fade show" role="alert"><h5><strong>'.$alert_title.'!</strong> '.$alert_msg.'</h5>
          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
        </div>';
        return $this->response;
@@ -90,7 +88,7 @@ class Osotech
 
        //LOAD CAPTCHA
       public function loadOsotechCaptcha(){
-              print'<script> $("#captcha_load").load("../admission/Templates/osotech_captcha.php");</script>';
+              return '<script> $("#captcha_load").load("osotech_captcha.php");</script>';
       }
               /*ADMISSION REGISTRATION STEP ONE*/
               public function process_first_step_admission($data){
@@ -172,7 +170,7 @@ class Osotech
               $this->dbh->commit();
               $this->response = self::alert_msg("success", "SUCCESS","You have successfully completed step one of your online registration!")."<script>setTimeout(()=>{
               window.location.href='".ADMISSION_PORTAL_ROOT."step2?applicant=".self::saltifyString($admission_no)."&page=2';
-            },1500);</script>";
+            },2500);</script>";
               }
               }
               }
@@ -229,7 +227,7 @@ class Osotech
               $this->dbh->commit();
               $this->response = self::alert_msg("success","SUCCESS","Step Two completed successfully, Pls wait...")."<script>setTimeout(()=>{
               window.location.href='".ADMISSION_PORTAL_ROOT."step3?applicant=".self::saltifyString($admission_no)."&page=3';
-              },500);</script>";
+              },2500);</script>";
               }
               }
               } catch (PDOException $e) {
@@ -284,7 +282,7 @@ class Osotech
               $this->dbh->commit();
               $this->response = self::alert_msg("success","SUCCESS","Step Three completed successfully, Pls wait...")."<script>setTimeout(()=>{
               window.location.href='".ADMISSION_PORTAL_ROOT."step4?applicant=".self::saltifyString($admission_no)."&page=4';
-            },1500);</script>";
+            },2500);</script>";
               }
 
               } catch (PDOException $e) {
@@ -327,9 +325,9 @@ class Osotech
               if ($this->stmt->execute(array($applicant_id,$schoolname,$proprietress,$schl_phone,$prev_schl_loca,$category,$edu_offered,$present_class,$reason_to))) {
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
               $this->dbh->commit();
-              $this->response = self::alert_msg("success", "SUCCESS", "Step Four completed successfully,Loading Medical Information Form, Pls wait...")."<script>setTimeout(()=>{
+              $this->response = self::alert_msg("success", "SUCCESS", "Completed successfully, Loading Medical Information Form, Pls wait...")."<script>setTimeout(()=>{
               window.location.href='".ADMISSION_PORTAL_ROOT."step5?applicant=".self::saltifyString($admission_no)."&page=5';
-            },1500);</script>";
+            },2500);</script>";
               }
               } catch (PDOException $e) {
               $this->dbh->rollback();
@@ -541,9 +539,9 @@ class Osotech
         //school real logo
         $schoolLogo = $schoolDatas->school_logo;
         if ($schoolLogo == NULL || $schoolLogo =="") {
-        $ourLogo = APP_ROOT."eportal/schoolImages/Logo/smatech.png";
+        $ourLogo = EPORTAL_ROOT."schoolImages/Logo/smatech.png";
         }else{
-        $ourLogo = APP_ROOT."eportal/schoolImages/Logo/".$schoolLogo;
+        $ourLogo = EPORTAL_ROOT."schoolImages/Logo/".$schoolLogo;
         }
         $this->response = $ourLogo;
         return $this->response;

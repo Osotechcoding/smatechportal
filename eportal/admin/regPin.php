@@ -60,7 +60,7 @@ $_Pins_ = new Pins();
     <div class="col-xl-12 col-lg-12 col-md-12 col-12">
       <div class="card">
         <div class="card-header">
-          <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="btn btn-danger btn-lg round">Show Hidden Pins</button>
+          <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="btn btn-danger btn-md round">Show Hidden Pins</button>
         </div>
         <div class="card-body card-dashboard">
 

@@ -1450,5 +1450,34 @@ public function searchStudentByRegEmailPhone($q){
   }
 }
 
+public function get_student_infoId($studentId){
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_info_tbl` WHERE studentId=? LIMIT 1");
+        $this->stmt->execute([$studentId]);
+        if ($this->stmt->rowCount()==1) {
+        $this->response = $this->stmt->fetch();
+        return $this->response;
+        unset($this->dbh);
+        }
+        }
+
+        public function get_student_medical_infoId($studentId){
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdmedical_tbl` WHERE studId=? LIMIT 1");
+        $this->stmt->execute([$studentId]);
+        if ($this->stmt->rowCount()==1) {
+        $this->response = $this->stmt->fetch();
+        return $this->response;
+        unset($this->dbh);
+        }
+        }
+
+        public function getAdmissionCardUser($stdRegNo){
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE usedBy=? AND pin_status=1 LIMIT 1");
+  $this->stmt->execute(array($stdRegNo));
+  if ($this->stmt->rowCount()==1) {
+  $this->response = $this->stmt->fetch();
+  return $this->response;
+  unset($this->dbh);
+    }
+        }
 
 }
