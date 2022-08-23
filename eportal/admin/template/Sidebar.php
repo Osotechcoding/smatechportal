@@ -154,9 +154,9 @@
               <?php endif ?>
             </ul>
           </li>
-           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-hotel fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="HOSTEL">HOSTEL</span></a>
+           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-hotel fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="SCHOOL HOSTEL">SCHOOL HOSTEL</span></a>
             <ul class="menu-content">
-               <li><a class="d-flex align-items-center" href="create_hostel"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Hostel">Manage Hostel</span></a>
+               <li><a class="d-flex align-items-center" href="create_hostel"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Hostel">Create Hostels</span></a>
               </li>
             </ul>
           </li>

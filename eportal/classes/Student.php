@@ -126,7 +126,7 @@ public function count_recent_applicants(){
 }
 
 public function count_total_visap_students(){
-	$this->stmt = $this->dbh->prepare("SELECT count(`stdId`) as students FROM {$this->table_name}");
+	$this->stmt = $this->dbh->prepare("SELECT count(`stdId`) as students FROM `{$this->table_name}` WHERE stdAdmStatus='Active'");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();
@@ -671,6 +671,23 @@ $this->response = false;
 			if ($this->stmt->rowCount()>0) {
 			while ($row = $this->stmt->fetch()) {
 		$this->response.='<option value="'.$row->stdId.'">'.$row->full_name.' &raquo; '.$row->studentClass.'</option>';
+			}
+			}else{
+				$this->response = false;
+			}
+			return $this->response;
+			unset($this->dbh);
+
+	}
+
+	//GET ALL BOARDING HOUSE STUDENT
+	public function getBoardingStudentInDropDownList(){
+		$this->response ="";
+	$this->stmt = $this->dbh->prepare("SELECT stdId,stdGender,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdAdmStatus='Active' AND stdApplyType='Boarding' ORDER BY full_name ASC");
+			$this->stmt->execute();
+			if ($this->stmt->rowCount()>0) {
+			while ($row = $this->stmt->fetch()) {
+		$this->response.='<option value="'.$row->stdId.'">'.$row->full_name.' &raquo; '.$row->stdGender.'</option>';
 			}
 			}else{
 				$this->response = false;

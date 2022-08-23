@@ -18,6 +18,7 @@ $Student = new Student();
 $Visitor = new Visitors();
 $Result = new Result();
 $Administration = new Administration();
+$Hostel = new Hostel();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 if ($request_method ==="POST") {
@@ -557,6 +558,14 @@ if ($_POST['action'] ==="update_staff_office_title") {
     //update_portal
      if ($_POST['action'] ==="update_portal") {
         $result = $Administration->updateAdmissionPortal($_POST);
+        if ($result) {
+            echo $result;
+        }
+    }
+
+    //hostel_enable_disable_action
+     if ($_POST['action'] ==="hostel_enable_disable_action") {
+        $result = $Hostel->updateHostelById($_POST);
         if ($result) {
             echo $result;
         }

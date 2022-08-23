@@ -1334,18 +1334,7 @@ unset($this->dbh);
 	}
 
 // STAFF LOAN METHOD end
-	//Hostel management methods start
-	public function create_hostel($data){}
-	public function update_hostel_ById($hostel_id){}
-	public function create_hostel_rooms($data){}
-	public function update_hostel_room_ById($room_id){}
-	public function get_all_hostels(){}
-	public function get_hostel_ById($id){}
-	public function get_all_hostel_rooms($hostel_id){}
-	public function delete_hostel_ById($hostel_id){}
-	public function delete_hostel_room_ById($hostel_id,$room_id){}
-	//Hostel management methods end
-
+	
 	//Library Book management methods start
 	public function create_book($data){}
 	public function update_book($data){}

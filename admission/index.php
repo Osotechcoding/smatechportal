@@ -108,6 +108,15 @@ background-repeat: no-repeat;">
                     </div>
                     <div class="col-md-6 mb-3">
                       <div class="form-group">
+                          <label for="student_type" class="form-label">Admission Type</label>
+                        <select class="custom-select form-control form-control-lg" id="student_type" name="student_type">
+                          <option value="Day" selected>Day</option>
+                          <option value="Borading">Boarding</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <div class="form-group">
                         <div class="" id="captcha_load">
                         </div>
                       </div>

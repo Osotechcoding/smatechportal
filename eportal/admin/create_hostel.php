@@ -9,7 +9,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name ?> :: Manage Hostel</title>
+    <title><?php echo $SmappDetails->school_name ?> :: Hostel Management</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -32,7 +32,7 @@ require_once "helpers/helper.php";
         <div class="content-header row">
           <div class="content-header-left col-12 mb-2 mt-1">
             <div class="breadcrumbs-top">
-              <h5 class="content-header-title float-left pr-1 mb-0">VISAP PORTAL</h5>
+              <h5 class="content-header-title float-left pr-1 mb-0"><?php echo __OSO_APP_NAME__; ?> PORTAL</h5>
               <div class="breadcrumb-wrapper d-none d-sm-block">
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
@@ -49,7 +49,7 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-hotel fa-2x"></span> HOSTEL MANAGEMENT MODULE</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-hotel fa-1x"></span> HOSTEL MANAGEMENT MODULE</h3>
   </div>
 </div>
  <!-- Statistics Cards Starts -->
@@ -57,57 +57,44 @@ require_once "helpers/helper.php";
        
         <div class="col-xl-12 col-md-12">
           <div class="row">
-            <div class="col-md-3 dashboard-users-success">
+            <div class="col-md-4 dashboard-users-success">
               <div class="card text-center bg-warning">
                 <div class="card-body py-1">
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-home fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Total Hostels</h3></div>
-                  <h2 class="text-white mb-0"><?php echo 2; ?></h2>
+                  <div class="text-white line-ellipsis"><h3 class="text-white"> Hostels</h3></div>
+                  <h2 class="text-white mb-0"><?php echo number_format($Hostel->countDataByTableColumn("visap_hostel_tbl","hostel_id")); ?></h2>
                   
                 </div>
               </div>
             </div>
-            <div class="col-md-3 dashboard-users-success">
+            <div class="col-md-4 dashboard-users-success">
               <div class="card text-center bg-info">
                 <div class="card-body py-1">
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-hotel fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Total Rooms</h3></div>
-                  <h2 class="text-white mb-0"> <?php echo 20;?></h2>
+                  <div class="text-white line-ellipsis"><h3 class="text-white"> Rooms</h3></div>
+                  <h2 class="text-white mb-0"> <?php echo number_format($Hostel->countDataByTableColumn("visap_hostel_rooms_tbl","roomId")); ?></h2>
                  
                 </div>
               </div>
             </div>
 
-             <div class="col-md-3 dashboard-users-success">
-              <div class="card text-center bg-danger">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-hotel fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white"> Total Bed Space</h3></div>
-                  <h2 class="text-white mb-0"><?php echo 80;?></h2>
-                  
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 dashboard-users-success">
+             <div class="col-md-4 dashboard-users-success">
               <div class="card text-center bg-dark">
                 <div class="card-body py-1">
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-hotel fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Available Bed Space</h3></div>
-                  <h2 class="text-white mb-0"><?php echo 10; ?></h2>
+                  <div class="text-white line-ellipsis"><h3 class="text-white"> Bed Space</h3></div>
+                  <h2 class="text-white mb-0"><?php echo number_format($Hostel->countDataByTableColumn("visap_bed_space_tbl","bedId")); ?></h2>
                   
                 </div>
               </div>
             </div>
            
-            
           </div>
         </div>
        
@@ -115,31 +102,55 @@ require_once "helpers/helper.php";
        <!-- Revenue Growth Chart Starts -->
     <div class="card">
       <div class="card-header">
-        <button class="btn btn-outline-primary btn-md btn-round" type="button" data-toggle="modal" data-target="#addHostelModal"><span class="fa fa-hotel fa-1x"></span> Add Hostel</button>
-       <a href="view_hostel_rooms"> <button class="btn btn-outline-primary btn-md btn-round" type="button">View Rooms</button></a>
+        <button class="btn btn-dark btn-lg btn-round" type="button" data-toggle="modal" data-target="#addHostelModal"><span class="fa fa-hotel fa-1x"></span> Add Hostel</button>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-      <table class="table osotechExp table-hover table-bordered">
+      <table class="table table-striped table-bordered">
         <thead class="text-center">
           <tr>
           <th>S/N</th>
-          <th>HOSTEL DESC</th>
-          <th>TYPE</th>
-          <th>HOSTEL ADMIN</th>
-          <th>TOTAL ROOMS</th>
-          <th>STATUS</th>
-          <th>ACTION</th>
+          <th>Hostel</th>
+          <th>Type</th>
+          <th>Master</th>
+          <th>Status</th>
+          <th>Rooms</th>
+          <th>Action</th>
         </tr>
       </thead>
         <tbody class="text-center">
-          <tr>
-          <td>1</td>
-          <td>VISAP HOSTEL</td>
-          <td>Boys Hostel</td>
-          <td>Mr Ajayi Sam</td>
-          <td>5</td>
-           <td><span class="badge badge-success badge-pill"> <i class="fa fa-check"></i> active</span></td>
+            <?php $get_all_hostels = $Hostel->getHostels();
+
+            if ($get_all_hostels) {
+              $cnt = 0;
+              foreach ($get_all_hostels as $hostel) {
+                $hostel_status = (bool)$hostel->status;
+                $cnt++;?>
+                <tr>
+                <td><?php echo $cnt; ?> </td>
+                <td><?php echo ucwords($hostel->hostel_desc);?></td>
+                <td><?php echo ucwords($hostel->hostel_type);?> Hostel</td>
+                <td><?php echo ucwords($hostel->hostel_master);?></td>
+           <td> <?php 
+           switch($hostel_status){
+                case true:
+                echo '<span class="badge badge-success badge-pill"> <i class="fa fa-check-circle"></i> Opened</span>';
+                break;
+                 case false:
+                echo '<span class="badge badge-danger badge-pill"> <i class="fa fa-lock"></i> Closed</span>';
+                break;
+                default :
+                echo '<span class="badge badge-danger badge-pill"> <i class="fa fa-lock"></i> Closed</span>';
+                break;
+           }
+            ?> </td>
+            <td>
+              <?php if ($hostel_status == true): ?>
+                 <button onclick="window.location.href='hostel_rooms?hostel=<?php echo $hostel->hostel_id;?>&action=view'" type="button" title="View Rooms" class="btn btn-dark btn-rounded-0"><span class="fa fa-eye"></span> View</button></td>
+                <?php else: ?>
+                   <button type="button" disabled class="btn btn-danger btn-rounded-0 disabled"><span class="fa fa-eye-slash"></span>Closed</button></td>
+              <?php endif ?>
+                 
          <td>
            <div class="btn-group dropdown mb-1">
             <button type="button" class="btn btn-dark">Options</button>
@@ -147,17 +158,23 @@ require_once "helpers/helper.php";
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item add_hostel_room_btn" data-id="1" data-action="add_room" href="javascript:void(0);">Add Room</a>
-                <a class="dropdown-item view_hostel_room_btn" data-id="1" data-action="view_room" href="javascript:void(0);">View Room</a>
-              <a class="dropdown-item" href="javascript:void(0);">Active</a>
-              <a class="dropdown-item" href="javascript:void(0);">Inactive</a>
+              <?php if ($hostel_status == true): ?>
+                  <a class="dropdown-item text-center hostel_enable_disable_btn" data-id="<?php echo $hostel->hostel_id;?>" data-action="disable" href="javascript:void(0);"><span class="fa fa-times-circle mr-1"></span> Close</a> 
+                <?php else: ?>
+                   <a class="dropdown-item text-info hostel_enable_disable_btn" data-id="<?php echo $hostel->hostel_id;?>" data-action="enable" href="javascript:void(0);"><span class="fa fa-check-circle mr-1"></span> Open</a>
+              <?php endif ?>
+             
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="javascript:void(0);"><span class="fa fa-trash m-0"></span> Delete</a>
+              <a class="dropdown-item text-danger" href="javascript:void(0);"><span class="fa fa-trash mr-1"></span> Remove</a>
             </div>
           </div>
         </td>
-         
         </tr>
+                <?php
+              }
+             } ?>
+          
+        
       </tbody>
       </table>
     </div>
@@ -174,10 +191,9 @@ require_once "helpers/helper.php";
   
     <!-- BEGIN: Footer-->
    <!--  -->
-   <?php include ("../Modals/newHosteRoomModal.php");?>
+   <?php //include ("../Modals/newHosteRoomModal.php");?>
     <?php include ("../Modals/NewHostelModal.php"); ?>
 
-    
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
@@ -188,17 +204,35 @@ require_once "helpers/helper.php";
       $(document).on("click",".add_hostel_room_btn", function(){
         let hostel_id = $(this).data("id");
         let action = $(this).data("action");
-      //  alert(hostel_id+" "+ action);
-        //show modal form
         $("#hostelRoomModal").modal("show");
-        //when submit create room is clicked redirect to view_hostel_rooms.php
-        //here...
-      })
-      $("#ComponentFormFee").on("submit", function(event){
+      });
+
+      $("#NewHostelForm").on("submit", function(event){
         event.preventDefault();
-        const ComponentFormFee = $(this).serialize();
-        alert("Yes Component Fee Saved");
-        self.location.reload();
+        const NEW_HOSTEL_FORM = $(this);
+         $(".__loadingBtn__hostel").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+          //send request
+          $.post("../actions/actions",NEW_HOSTEL_FORM.serialize(),function(result){
+            setTimeout(()=>{
+             $(".__loadingBtn__hostel").html('Submit').attr("disabled",false);
+              $("#server-response").html(result);
+            },500);
+          })
+      });
+//hostel enable diable btn action
+      const enable_btn = $(".hostel_enable_disable_btn");
+      enable_btn.on("click", function(){
+         let myEnableAction = $(this).data('action');
+          let hostel_id = $(this).data('id');
+          let action = "hostel_enable_disable_action";
+        if (confirm(`Are you sure you wanto to ${myEnableAction.toUpperCase()} this Hostel?`)) {
+          //send request
+          $.post('../actions/update_actions',{action:action,myEnableAction:myEnableAction,hosId:hostel_id}, function(data){
+            $("#server-response").html(data);
+          });
+        }else{
+          return;
+        }
       })
      })
    </script>

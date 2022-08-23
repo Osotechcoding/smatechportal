@@ -99,12 +99,13 @@ class Osotech
               $card_serial = self::Clean($data['card_serial']);
               $stu_class = self::Clean($data['class_level']);
               $stu_phone = self::Clean($data['student_phone']);
+              $stu_type = self::Clean($data['student_type']);
               $username = self::Clean($data['username']);
               $stu_email = self::Clean($data['student_email']);
               //check for Auth access
               if (self::isEmptyStr($osotech_csrf) || $osotech_csrf !== md5("iremideoizasamsonosotech")) {
               $this->response = self::alert_msg("danger","WARNING","Authentication Failed, Please Check your Connection and Try again!").self::loadOsotechCaptcha();
-              }elseif (self::isEmptyStr($card_pin) || self::isEmptyStr($card_serial) || self::isEmptyStr($stu_class) || self::isEmptyStr($stu_phone) || self::isEmptyStr($username) || self::isEmptyStr($stu_email) || self::isEmptyStr($user_captcha_anwser)) {
+              }elseif (self::isEmptyStr($card_pin) || self::isEmptyStr($card_serial) || self::isEmptyStr($stu_class) || self::isEmptyStr($stu_phone) || self::isEmptyStr($username) || self::isEmptyStr($stu_email) || self::isEmptyStr($user_captcha_anwser) || self::isEmptyStr($stu_type)) {
               $this->response = self::alert_msg("danger" , "WARNING","Invalid Form submission, Check all your inputs and try again!").self::loadOsotechCaptcha();
               }elseif (!self::is_Valid_Email($stu_email)) {
               $this->response = self::alert_msg("danger", "WARNING","$stu_email is not a valid e-mail address, Please check and Try again!").self::loadOsotechCaptcha();
@@ -145,7 +146,7 @@ class Osotech
               //let begin with the registration
               //student Login Credentials
               $portal_username = $username."@".__OSO_APP_NAME__.".portal";//login email
-              $portal_password =__OSO_APP_NAME__."@portal";//loginpassword
+              $portal_password = $username."@portal";//loginpassword
               $hashed_password = self::osotech_password_encryption($portal_password);
               try {
               $this->dbh->beginTransaction();
@@ -154,8 +155,8 @@ class Osotech
               $time = date("h:i:s");
               $admission_no = self::generate_admission_number($admitted_year);
               $confirmation_code = substr(md5(uniqid(mt_rand(),true)),0,10);
-              $this->stmt =$this->dbh->prepare("INSERT INTO `visap_student_tbl`(stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdPhone,stdApplyDate,stdConfToken) VALUES(?,?,?,?,?,?,?,?);");
-              if ($this->stmt->execute(array($admission_no,$stu_email,$username,$hashed_password,$stu_class,$stu_phone,$date,$confirmation_code))) {
+              $this->stmt =$this->dbh->prepare("INSERT INTO `visap_student_tbl`(stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdPhone,stdApplyType,stdApplyDate,stdConfToken) VALUES(?,?,?,?,?,?,?,?,?);");
+              if ($this->stmt->execute(array($admission_no,$stu_email,$username,$hashed_password,$stu_class,$stu_phone,$stu_type,$date,$confirmation_code))) {
               // grab the LastInsertId...
               $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $this->dbh->lastInsertId();
               $_SESSION['AUTH_CODE_ADMISSION_NO'] = $admission_no;

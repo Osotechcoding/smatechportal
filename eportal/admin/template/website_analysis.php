@@ -52,7 +52,7 @@
               <span class="align-middle text-muted">Hostels</span>
               <div class="d-flex">
                 <div id="radial-success-chart"></div>
-                <h3 class="mt-1 ml-50">2</h3>
+                <h3 class="mt-1 ml-50"><?php echo number_format($Hostel->countDataByTableColumn("visap_hostel_tbl","hostel_id")); ?></h3>
               </div>
             </div>
             <div class="sessions-analytics mr-2">
@@ -60,7 +60,7 @@
               <span class="align-middle text-muted">Rooms</span>
               <div class="d-flex">
                 <div id="radial-warning-chart"></div>
-                <h3 class="mt-1 ml-50">20</h3>
+                <h3 class="mt-1 ml-50"><?php echo number_format($Hostel->countDataByTableColumn("visap_hostel_rooms_tbl","roomId")); ?></h3>
               </div>
             </div>
             <div class="bounce-rate-analytics">
@@ -68,7 +68,7 @@
               <span class="align-middle text-muted"> Bedspace</span>
               <div class="d-flex">
                 <div id="radial-danger-chart"></div>
-                <h3 class="mt-1 ml-50">80</h3>
+                <h3 class="mt-1 ml-50"><?php echo number_format($Hostel->countDataByTableColumn("visap_bed_space_tbl","bedId")); ?></h3>
               </div>
             </div>
              <div class="bounce-rate-analytics">
@@ -76,7 +76,7 @@
               <span class="align-middle text-muted">Available</span>
               <div class="d-flex">
                 <div id="radial-danger-chart"></div>
-                <h3 class="mt-1 ml-50">30</h3>
+                <h3 class="mt-1 ml-50"><?php echo number_format($Hostel->countBedByStatus(1)); ?></h3>
               </div>
             </div>
           </div>

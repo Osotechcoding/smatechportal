@@ -48,7 +48,7 @@ require_once "helpers/helper.php";
       <?php include_once ("template/dashboard_stats.php");?>
     </div>
     <?php include_once ("template/birthday_count.php");?>
-    <?php //include_once ("template/website_analysis.php");?>
+    <?php include_once ("template/website_analysis.php");?>
   </div>
   <div class="row">
     <?php include_once ("template/recent_payment.php");?>

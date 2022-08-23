@@ -4,64 +4,62 @@
             <div class="modal-dialog modal-lg modal-dialog-scrollable">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i class="fa fa-hotel fa-2x"></i> Add Room & Bed Space</h2>
+                  <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i class="fa fa-hotel fa-1x"></i> Add Room & Bed Space</h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="bx bx-x"></i>
                   </button>
                 </div>
+                <form id="NewHostelRoomsForm">
+                     <input type="hidden" name="action" value="create_hostel_room_bedspace_now">
                 <div class="modal-body">
                   <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
                   <div class="row">
-               <div class="col-md-6">
-                  <div class="form-group">
-                  <label for="route_name">HOSTEL DESC</label>
-                <input type="text" autocomplete="off" class="form-control form-control-lg" name="pin_view_code" placeholder="VISAP HOSTEL" readonly>
-                    </div>
-               </div>
-                <div class="col-md-6">
+              
+                <div class="col-md-12">
+                    <input type="hidden" name="hId" value="<?php echo $hostel_details->hostel_id;?>">
                      <div class="form-group">
-                  <label for="price">HOSTEL TYPE</label>
-                <input type="text" autocomplete="off" class="form-control form-control-lg" name="price" placeholder="Male Hostel" readonly>
+                  <label for="hostel_name">HOSTEL</label>
+                   <input type="text" autocomplete="off" class="form-control form-control-lg" name="hostel_name" id="hostel_name" value="<?php echo $hostel_details->hostel_desc;?> <?php echo $hostel_details->hostel_type;?> " readonly>
+           <!--    <select  class="form-control form-control-lg">
+                  <option value="">Choose...</option>
+                  <?php //echo $Hostel->getHostelsInDropDownMenu();?>
+              </select> -->
                     </div>
                   </div>
                    <div class="col-md-6">
                      <div class="form-group">
-                  <label for="bus_name">ROOM NAME</label>
-                <input type="text" autocomplete="off" class="form-control form-control-lg" name="bus_name" placeholder="Room One">
+                  <label for="bus_name">ROOM DESC</label>
+                <input type="text" autocomplete="off" class="form-control form-control-lg" name="roomname" placeholder="Enter room description">
                     </div>
                   </div>
                  
                    <div class="col-md-6">
                    <div class="form-group">
-                  <label for="bus_capacity">BED SPACE (No OF BONKS)</label>
-                <input type="number" autocomplete="off" min="4" step="1" class="form-control form-control-lg" name="bus_capacity" placeholder="45">
+                  <label for="bed_space">Bed space (No OF BONKS)</label>
+                <input type="number" autocomplete="off" min="4" step="1" max="50" class="form-control form-control-lg" name="bed_space" placeholder="e.g 8">
                     </div>
                   </div>
                      <div class="col-md-6">
                    <div class="form-group">
-                  <label for="bus_capacity">PRICE PER SPACE</label>
-                <input type="text" autocomplete="off" class="form-control form-control-lg" name="bus_capacity" placeholder="&#8358;55,000.00">
+                  <label for="amount_per_session">Bonk price per Term</label>
+                <input type="number" autocomplete="off" class="form-control form-control-lg" name="amount_per_session" placeholder="&#8358;55,000.00">
                     </div>
                   </div>
-                   <div class="col-md-6">
+                  
+               <div class="col-md-6">
                      <div class="form-group">
-                  <label for="route_name">ROUTE STATUS </label>
-               <select name="route_status" id="route_status" class="select2 form-control">
-                 <option value="">--select--</option>
-                 <option value="act">Active</option>
-                 <option value="not_act">Not Active</option>
-               </select>
-                </div>
-              </div>
+                  <label for="auth_code">AUTHENTICATION CODE</label>
+               <input type="password" autocomplete="off" name="auth_code" id="auth_code" class="form-control form-control-lg" placeholder="**********">
+                    </div>
+                  </div>
                  </div>
                   </div>
-                </div>
+                 </div>
                 <div class="modal-footer">
-                   <button type="submit" class="btn btn-success ml-1">
-                    <span class="d-none d-sm-block">Submit</span>
-                  <button type="button" class="btn btn-warning ml-1" data-dismiss="modal">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Back</span>
+                   <button type="submit" class="btn btn-dark ml-1 __loadingBtn__rooms">
+                    Submit </button>
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                   Back
                   </button>
                 </div>
                  </form>

@@ -1,4 +1,5 @@
  <?php
+ @ob_start();
 @session_start();
 include_once "../languages/config.php";
 // require_once "../classes/Configuration.php";
@@ -21,6 +22,7 @@ $Student = new Student();
 $Administration = new Administration();
 $Alert = new Alert();
 $Blog = new Blog();
+$Hostel = new Hostel();
 
 $request_method  = $_SERVER['REQUEST_METHOD'];
 if ($request_method ==="POST") {
@@ -512,12 +514,36 @@ if (isset($_POST['action']) && $_POST['action'] !="") {
 		}
 	}
 
+	//create_new_hostel_now
+	if ($_POST['action'] === "create_new_hostel_now") {
+		$result = $Hostel->createNewHostel($_POST);
+		if ($result) {
+			echo $result;
+		}
+	}
+
+	//create_hostel_room_bedspace_now
+	if ($_POST['action'] === "create_hostel_room_bedspace_now") {
+		$result = $Hostel->createHostelRoomsAndBedSpace($_POST);
+		if ($result) {
+			echo $result;
+		}
+	}
+
+	//assign_bedspace_to_occupant
+	if ($_POST['action'] === "assign_bedspace_to_occupant") {
+		$result = $Hostel->assignHostelBedspaceToStudent($_POST);
+		if ($result) {
+			echo $result;
+		}
+	}
+
 }
 }
 ?>
 <?php
-  /*header("Cache-Control: no-cache, must-revalidate");
+  header("Cache-Control: no-cache, must-revalidate");
   header("Pragma: no-cache");
   header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-  header("Cache-Control: max-age=2592000");*/
+  header("Cache-Control: max-age=2592000");
 ?>

@@ -398,7 +398,7 @@
         </div>
         <div class="col-12">
         <div class="form-group">
-        <label>Authentication Key</label>
+        <label>Authentication Code</label>
         <input autocomplete="off" type="password" class="form-control" placeholder="********"name="auth_pass55">
         </div>
         </div>
@@ -498,7 +498,7 @@
         <div class="controls">
         <label>Level of Education</label>
         <select name="education" id="education" class="custom-select form-control">
-        <option value="">Choose...</option>
+        <option value="" selected>Choose...</option>
         <option value="Pry">Pry Schl Cert</option>
         <option value="olevel">O'Level</option>
         <option value="OND">OND </option>
@@ -515,7 +515,7 @@
         <div class="controls">
         <label>Job Type</label>
         <select name="jobType" id="jobType" class="custom-select form-control">
-        <option value="">Choose...</option>
+        <option value="" selected>Choose...</option>
         <option value="Teaching">Teaching</option>
         <option value="Non-Teaching">Non-Teaching </option>
         </select>
@@ -527,7 +527,7 @@
         <div class="controls">
         <label>Gender</label>
         <select name="staff_gender" id="staff_gender" class="custom-select form-control">
-        <option value="">Choose...</option>
+        <option value="" selected>Choose...</option>
         <option value="Male">Male</option>
         <option value="Female">Female </option>
         </select>
@@ -538,7 +538,7 @@
         <div class="col-md-6">
         <div class="form-group">
         <div class="controls">
-        <label>AUTHENTICATION KEY</label>
+        <label>AUTHENTICATION Code</label>
         <input autocomplete="off" type="password"
         class="form-control"
         placeholder="Auth Code" name="auth_pass">
@@ -585,7 +585,6 @@
         </form>
         </div>
         <!-- Logo Form -->
-
 
         <div class="tab-pane fade" id="new-student-account-vertical-form" role="tabpanel"
         aria-labelledby="new-staff-account" aria-expanded="false">
@@ -656,19 +655,18 @@
         </div>
         </div>
 
-
         <div class="col-md-6">
         <div class="form-group">
         <div class="controls">
         <label>Student Present Class</label>
-        <select name="student_class" id="student_class" class="select2 form-control">
+        <select name="student_class" id="student_class" class="custom-select form-control">
         <option value="">Choose...</option>
         <?php echo $Administration->get_classroom_InDropDown_list() ?>
         </select>
         </div>
         </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
         <div class="controls">
         <label>Admission Date</label>
@@ -676,21 +674,32 @@
         </div>
         </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
         <div class="controls">
         <label>Gender</label>
         <select name="student_gender" id="gender" class="custom-select form-control">
         <option value="">Choose...</option>
-
         <option value="Male">Male</option>
         <option value="Female">Female </option>
         <option value="Other">Other </option>
-
         </select>
         </div>
         </div>
         </div>
+
+        <div class="col-md-4">
+        <div class="form-group">
+        <div class="controls">
+        <label for="student_type">Student Type</label>
+        <select name="student_type" id="student_type" class="custom-select form-control">
+        <option value="Day">Day</option>
+        <option value="Boarding">Boarding</option>
+        </select>
+        </div>
+        </div>
+        </div>
+
         <div class="col-md-6">
         <div class="form-group">
         <div class="controls">
@@ -732,7 +741,7 @@
         </div>
         </div>
         <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-        <button type="submit" class="btn btn-dark glow mr-sm-1 mb-1 __loadingBtn4__ btn-lg">Register</button>
+        <button type="submit" class="btn btn-dark glow mr-sm-1 mb-1 __loadingBtn4__ btn-lg">Submit Student Details</button>
 
         </div>
         </div>
@@ -790,7 +799,7 @@
         //send request 
         $.post("../actions/actions",NEWSTUDENTFORM.serialize(),function(res_data){
         setTimeout(()=>{
-        $(".__loadingBtn4__").html('Register').attr("disabled",false);
+        $(".__loadingBtn4__").html('Submit Student Details').attr("disabled",false);
         // $("#myResponseText3").html(res_data);
         $("#server-response").html(res_data);
         },1000);

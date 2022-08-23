@@ -185,6 +185,13 @@ require_once "helpers/helper.php";
                   <span class="fa fa-camera"></span> Upload</button></a>
                 <?php else: ?>
                   <img src="../schoolImages/students/<?php echo $filtered->stdPassport;?>" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
+                  <br>
+                  <?php if ($filtered->stdApplyType == 'Day'): ?>
+                     <span class="badge badge-pill badge-dark"><?php echo $filtered->stdApplyType ?></span>
+                     <?php else: ?>
+                       <span class="badge badge-pill badge-success"><?php echo $filtered->stdApplyType ?></span>
+                   <?php endif ?> 
+                 
               <?php endif ?>
               
               </td>
