@@ -87,25 +87,6 @@ require_once "helpers/helper.php";
             <div class="form-body">
               <div class="row">
                  <div class="col-md-12">
-                  <div class="form-group">
-                  <label for="vehicle_id">Vehicle &amp; Capacity</label>
-              <select name="" id="" class="custom-select form-control form-control-lg">
-                <option value="" selected>Choose...</option>
-                <?php echo $Bus->getAllVehiclesInDropDown();?>
-              </select>
-                    </div>
-               </div>
-               <div class="col-md-12">
-                     <div class="form-group">
-                  <label for="price">Driver</label>
-                <select name="" id="" class="custom-select form-control form-control-lg">
-                <option value="" selected>Choose...</option>
-                <?php echo $Bus->getAllVehiclesDriversInDropDown();?>
-              </select>
-                    </div>
-                  </div>
-
-                   <div class="col-md-12">
                      <div class="form-group">
                   <label for="routeDescName">Route Desc</label>
                 <select name="route_name" id="routeDescName" class="custom-select form-control form-control-lg">
@@ -114,7 +95,7 @@ require_once "helpers/helper.php";
               </select>
                     </div>
                   </div>
-        
+
                    <div class="col-md-12">
                      <div class="form-group">
                   <label for="busStops">Areas Covered</label>
@@ -122,6 +103,19 @@ require_once "helpers/helper.php";
                     </div>
                   </div>
                   <div class="col-md-12">
+                  <div class="form-group">
+                  <label for="routeVehicleCapacity">Vehicle &amp; Capacity</label>
+                   <input type="text" autocomplete="off" class="form-control form-control-lg" name="busname" id="routeVehicleCapacity" readonly>
+                    </div>
+               </div>
+               <div class="col-md-12">
+                     <div class="form-group">
+                  <label for="routeDriverName">Driver</label>
+                   <input type="text" autocomplete="off" class="form-control form-control-lg" name="awako" id="routeDriverName" readonly>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
                      <div class="form-group">
                   <label for="routeChargePerTerm">Charge per Term</label>
                 <input type="text" autocomplete="off" class="form-control form-control-lg" name="price" id="routeChargePerTerm" readonly>
@@ -143,6 +137,14 @@ require_once "helpers/helper.php";
                     <label for="password-vertical">Amount Paid</label>
                     <input type="number" id="school_session" class="form-control" name="school_session"
                       placeholder="e.g 25,000.00" >
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="password-vertical">Authentication Code</label>
+                    <input type="password" class="form-control" name="auth_code"
+                      placeholder="*************">
                   </div>
                 </div>
                   
@@ -168,55 +170,21 @@ require_once "helpers/helper.php";
     </div>
     <!-- demo chat-->
     <!-- BEGIN: Footer-->
-          <!--Basic Modal -->
-          <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h3 class="modal-title" id="myModalLabel1">Declare Active Session</h3>
-                  <button type="button" class="close rounded-pill" data-dismiss="modal" aria-label="Close">
-                    <i class="bx bx-x"></i>
-                  </button>
-                </div>
-                 <form id="submitNewSessionForm">
-                <div class="modal-body">
-                   <div class="form-group">
-                     <label for="session">Active Session</label>
-                     <input type="text" class="form-control form-control-lg" name="session" placeholder="eg 2021/2022">
-                   </div>
-                <input type="hidden" name="action" value="set_newsession">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-light-secondary" data-dismiss="modal">
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                  </button>
-                  <button type="submit" class="btn btn-primary ml-1">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Submit</span>
-                  </button>
-                </div>
-                 </form>
-              </div>
-            </div>
-          </div>
+       
    <?php include "../template/footer.php"; ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
-    <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
     <script>
       $(document).ready(function(){
 
         $("#routeDescName").on("change", function(){
           let routeId = $(this).val();
-          //console.log(routeId)
-          if (routeId.length>0 || routeId!="") {
+         // console.log(routeId)
+          if (routeId.length > 0 || routeId!="") {
             let action ="fetch_route_details";
        let myurl = "../actions/actions";
-       let data ='JSON';
        let myRouteData ={routeId:routeId,action:action};
        $.ajax({
         url:myurl,
@@ -227,32 +195,24 @@ require_once "helpers/helper.php";
            if (result) {
           $("#busStopsCovered").val(result.bus_stops);
           $("#routeChargePerTerm").val(result.route_price);
+          $("#routeDriverName").val(result.driver_name);
+          $("#routeVehicleCapacity").val(result.vehicle_desc);
         }else{
-           $("#busStopsCovered").val('');
-          $("#routeChargePerTerm").val('');
+            $("#busStopsCovered").val('');
+            $("#routeChargePerTerm").val('');
+            $("#routeDriverName").val('');
+            $("#routeVehicleCapacity").val('');
         }
         }
        });
      }else{
-       $("#busStopsCovered").val('');
-          $("#routeChargePerTerm").val('');
+        $("#busStopsCovered").val('');
+        $("#routeChargePerTerm").val('');
+        $("#routeDriverName").val('');
+        $("#routeVehicleCapacity").val('');
      }
-        
-
-  
         });
 
-
-        $("#activeSessionForm").submit(function(event){
-          event.preventDefault();
-          alert("Form submitted");
-          window.location.assign("./");
-        });
-        //submit new session form action
-        $("#submitNewSessionForm").on("submit",function(event){
-          event.preventDefault();
-          alert("text")
-        })
       })
     </script>
     <!-- END: Page JS-->

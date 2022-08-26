@@ -19,6 +19,7 @@ $Visitor = new Visitors();
 $Result = new Result();
 $Administration = new Administration();
 $Hostel = new Hostel();
+$Bus = new Bus();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 if ($request_method ==="POST") {
@@ -566,6 +567,22 @@ if ($_POST['action'] ==="update_staff_office_title") {
     //hostel_enable_disable_action
      if ($_POST['action'] ==="hostel_enable_disable_action") {
         $result = $Hostel->updateHostelById($_POST);
+        if ($result) {
+            echo $result;
+        }
+    }
+    //TODAY'S UPDATE 25TH AUGUST 2022
+    //submit_edited_driver_details
+
+    if ($_POST['action'] ==="submit_edited_driver_details") {
+        $result = $Bus->updateBusDriverById($_POST);
+        if ($result) {
+            echo $result;
+        }
+    }
+     //submit_edited_vehicle_details
+    if ($_POST['action'] ==="submit_edited_vehicle_details") {
+        $result = $Bus->updateSchoolBusById($_POST);
         if ($result) {
             echo $result;
         }

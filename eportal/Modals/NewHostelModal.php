@@ -1,7 +1,7 @@
  <!-- BUS MODAL Start -->
    <div class="modal fade" id="addHostelModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-scrollable">
+            <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
               <div class="modal-content">
                 <div class="modal-header">
                   <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i class="fa fa-hotel fa-1x"></i> Add New Hostel</h2>

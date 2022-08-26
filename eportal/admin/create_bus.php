@@ -76,7 +76,7 @@ require_once "helpers/helper.php";
                    <th>Vehicle Desc</th>
                   <th>Plate No</th>
                   <th>Capacity</th>
-                  <th>Status</th>
+                  <th>Date</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -93,12 +93,8 @@ require_once "helpers/helper.php";
                   <td><?php echo $vehicle->vehicle_desc ?></td>
                   <td><?php echo strtoupper($vehicle->vehicle_plate_no) ?></td>
                   <td><?php echo $vehicle->vehicle_capacity;?></td>
-                  <td> <?php if ($vehicle->vehicle_status == '1'): ?>
-                  <span class="badge badge-pill badge-success badge-md">Active</span>
-                    <?php else: ?>
-                    <span class="badge badge-pill badge-danger badge-md">Not Active</span>
-                  <?php endif ?> </td>
-                  <td><button type="button" data-action="delete_school_bus" data-id="<?php echo $vehicle->busId;?>" class="badge badge-pill badge-danger badge-md delete_bu_btn"><i class="fa fa-trash"></i> Delete</button></td>
+                  <td> <?php echo date("D jS M, Y",strtotime($vehicle->created_at)) ?> </td>
+                  <td><button type="button" data-name="<?php echo $vehicle->vehicle_desc;?>" data-plate="<?php echo $vehicle->vehicle_plate_no;?>" data-capacity="<?php echo $vehicle->vehicle_capacity;?>" data-id="<?php echo $vehicle->busId;?>" class="badge badge-pill badge-dark badge-md edit_btn m-1"><i class="fa fa-edit"></i> Edit</button> <button type="button" data-action="delete_school_bus" data-id="<?php echo $vehicle->busId;?>" class="badge badge-pill badge-danger badge-md delete_bu_btn myLoadingBtn_<?php echo $vehicle->busId;?>"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
                  <?php
                   }
@@ -164,18 +160,7 @@ require_once "helpers/helper.php";
                     </div>
 
                   </div>
-
-                  <div class="col-md-6">
-                 <div class="form-group">
-                  <label for="status"> Status </label>
-               <select name="status" id="status" class="custom-select form-control form-control-lg">
-                 <option value="1" selected>Active</option>
-                 <option value="2">Inctive</option>
-               </select>
-                    </div>
-                  </div>
-
-                   <div class="col-md-12">
+                   <div class="col-md-6">
                      <div class="form-group">
                   <label for="auth_code">Authentication Code</label>
                 <input type="password" autocomplete="off" class="form-control form-control-lg" name="auth_code" placeholder="*******">
@@ -200,6 +185,8 @@ require_once "helpers/helper.php";
             </div>
           </div>
     <!-- BUS MODAL  END -->
+
+    <?php include_once ("../Modals/editSchoolBusModal.php");?>
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
@@ -225,6 +212,50 @@ require_once "helpers/helper.php";
     }
 
   $(document).ready(function (){
+    //when submit update driver btn is clciked
+      const EditedSchoolModalForm = $("#editSchoolBusModalForm");
+      EditedSchoolModalForm.on("submit", function(e){
+        e.preventDefault();
+         $(".__loadingBtn__bus_edit").html('<img src="../assets/loaders/rolling_loader.svg" width="30""> Processing...').attr("disabled",true);
+       $.post("../actions/update_actions",EditedSchoolModalForm.serialize(),function(response){
+          setTimeout(()=>{
+        $(".__loadingBtn__bus_edit").html('Save Changes').attr("disabled",false);
+        $("#server-response").html(response);
+          },500);
+        })
+      })
+
+    //when edit bus btn is clicked
+    const EditBtnBus = $(".edit_btn");
+      EditBtnBus.on("click", function (){
+         let $this = $(this);
+        let vname =$this.data("name"),vplate =$this.data("plate"),vcapacity =$this.data("capacity"),
+        bcId = $this.data("id");
+       // console.log(name+ " "+phone+' '+ email+' '+ address+' '+ licensedNo);
+        $("#busName").val(vname);
+        $("#busNumber").val(vplate);
+        $("#busCapacity").val(vcapacity);
+        $("#bushiddenId").val(bcId);
+        $("#editSchoolBusModal").modal("show");
+      })
+
+    //when delete btn is clicked
+    const deleteVehicleBtn = $(".delete_bu_btn");
+    deleteVehicleBtn.on("click", function (){
+      let action = $(this).data("action"), vehicleId = $(this).data("id");
+      //send request
+      if (confirm("Are you sure to delete this Driver?")) {
+        $.post("../actions/delete_actions",{action:action,vehicleId:vehicleId}, function(res){
+          $(".myLoadingBtn_"+vehicleId).html('<img src="../assets/loaders/rolling_loader.svg" width="20">');
+          setTimeout(()=>{
+            $("#server-response").html(res);
+          },500);
+        })
+      }else{
+        return false;
+      }
+    })
+
     //when view btn is clicked
      $("#addNewBusModalForm").on("submit",function(event){
   event.preventDefault();

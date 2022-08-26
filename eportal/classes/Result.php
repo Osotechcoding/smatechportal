@@ -152,13 +152,6 @@ class Result {
 		$this->dbh = null;
 		}
 	}
-
-	//uploading cognitive domain
-	public function upload_cognitive($data){}
-
-	//view uploaded cognitive domain
-	public function view_uploaded_cognitive($data){}
-
 	//published result method
 	public function publishSchoolResultsByClass($data){
 	$status = $this->config->Clean($data['result_action']);

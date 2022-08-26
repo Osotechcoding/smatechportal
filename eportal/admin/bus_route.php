@@ -87,15 +87,27 @@ require_once "helpers/helper.php";
                     ?>
                  <tr>
                   <td><?php echo $cnt; ?></td>
-                  <td><?php echo $driver->driver_name;?></td>
-                  <td><?php echo $motor->vehicle_desc;?></td>
+                  <td><?php if (!$driver) {
+                   echo 'No Driver Assigned';
+                  }else{
+                    echo $driver->driver_name;
+                  }
+
+                ?></td>
+                  <td><?php if (!$motor) {
+                   echo 'No Vehicle Assigned';
+                  }else{
+                    echo $motor->vehicle_desc;
+                  }
+
+                ?></td>
                   <td><?php echo ucwords($route->route_desc);?></td>
                   <td><?php echo ucwords($route->bus_stops);?> <!-- <?php //foreach ($busstops_arr as $value): ?>
                     <span class="badge badge-pill badge-dark badge-md mb-1"><?php //echo $value;?></span>
                   <?php //endforeach ?> -->
                    </td>
                   <td>&#8358;<?php echo number_format($route->route_price,2);?></td>
-                  <td><button type="button" class="badge badge-pill badge-danger badge-md delete_route_btn" data-id="<?php echo $route->id;?>" data-action="delete"><i class="fa fa-trash"></i> Delete</button></td>
+                  <td><button type="button"  title="Edit" class="badge badge-pill badge-dark badge-md m-1 edit_route_btn"><span class="fa fa-edit"></span> Edit</button> <button type="button" class="badge badge-pill badge-danger badge-md delete_route_btn" data-id="<?php echo $route->id;?>" data-action="delete"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
                  <?php
                   }

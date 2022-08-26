@@ -82,9 +82,7 @@ class Bus {
 	$vehicle_desc = $this->config->Clean($data['vehicle_name']);
 		$vehicle_plate_no = $this->config->Clean($data['plate_no']);
 		$vehicle_capacity = $this->config->Clean($data['capacity']);
-		$vehicle_status = $this->config->Clean($data['status']);
 		$auth_pass = $this->config->Clean($data['auth_code']);
-
 		$photo_temp = $file['vehicleImage']['tmp_name'];
 		$photoName = $file['vehicleImage']['name'];
 		$photo_size = $file['vehicleImage']['size']/1024;
@@ -94,8 +92,7 @@ class Bus {
 		 $name_div = explode(".", $photoName);
    		$image_ext = strtolower(end($name_div));
 		//CHECK FOR EMPTY FIELDS
-		//
-		if ($this->config->isEmptyStr($vehicle_desc) || $this->config->isEmptyStr($vehicle_plate_no) || $this->config->isEmptyStr($vehicle_capacity) || $this->config->isEmptyStr($photoName) || $this->config->isEmptyStr($vehicle_status) ) {
+		if ($this->config->isEmptyStr($vehicle_desc) || $this->config->isEmptyStr($vehicle_plate_no) || $this->config->isEmptyStr($vehicle_capacity) || $this->config->isEmptyStr($photoName)) {
 
 			$this->response = $this->alert->alert_toastr("error","Invalid form Submission, Pls try again!",__OSO_APP_NAME__." Says");
 
@@ -127,8 +124,8 @@ class Bus {
 		try {
 	$created_at = date("Y-m-d");
     	$this->dbh->beginTransaction();
-    	$this->stmt = $this->dbh->prepare("INSERT INTO `{$this->bus_table}` (vehicle_desc,vehicle_plate_no,vehicle_capacity,vehicle_image,vehicle_status,created_at) VALUES (?,?,?,?,?,?);");
-    	if ($this->stmt->execute(array($vehicle_desc,$vehicle_plate_no,$vehicle_capacity,$vehicle_image,$vehicle_status,$created_at))) {
+    	$this->stmt = $this->dbh->prepare("INSERT INTO `{$this->bus_table}` (vehicle_desc,vehicle_plate_no,vehicle_capacity,vehicle_image,created_at) VALUES (?,?,?,?,?);");
+    	if ($this->stmt->execute(array($vehicle_desc,$vehicle_plate_no,$vehicle_capacity,$vehicle_image,$created_at))) {
     		if ($this->config->move_file_to_folder($photo_temp,$file_destination)) {
     			$this->dbh->commit();
     $this->response = $this->alert->alert_toastr("success","$vehicle_desc created successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
@@ -211,7 +208,7 @@ class Bus {
 	$this->response = $this->alert->alert_toastr("error","$email already Exists!, Please try again!",__OSO_APP_NAME__." Says");
 		}
 		else{
-			$driver_image = $email.uniqid().".".$image_ext;
+			$driver_image = $license_no.uniqid().".".$image_ext;
 		$file_destination = "../vehicles/".$driver_image;
 		try {
 	$created_at = date("Y-m-d");
@@ -297,7 +294,7 @@ class Bus {
 	}
 
 	public function fetchRouteDataById($routeId){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$this->route_table}` WHERE id=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT rt.*,v.vehicle_desc,d.driver_name,d.dId,v.busId FROM `{$this->route_table}` as rt,`{$this->driver_table}` as d, `{$this->bus_table}` as v WHERE rt.id=? AND rt.vehicleId=v.busId AND rt.driverId=d.dId LIMIT 1");
 	$this->stmt->execute([$routeId]);
 	if ($this->stmt->rowCount() == 1) {
 		$this->response =$this->stmt->fetch();
@@ -329,6 +326,145 @@ class Bus {
 	}
 	}
 
+	public function updateBusDriverById($data){
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		$driver_name = $this->config->Clean($data['dname']);
+		$phone = $this->config->Clean($data['dphone']);
+		// these tow fields do not need update
+		//$email = $this->config->Clean($data['demail']);
+		//$license_no = $this->config->Clean($data['dlicense_no']);
+		$address = $this->config->Clean($data['daddress']);
+		$driverId = $this->config->Clean($data['dhiddenId']);
+		if ($this->config->isEmptyStr($driver_name) || $this->config->isEmptyStr($phone) || $this->config->isEmptyStr($driverId) || $this->config->isEmptyStr($address) || $this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error","Invalid Submission, Pls try again!",__OSO_APP_NAME__." Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+		$this->response = $this->alert->alert_toastr("info","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
+		}else{
+			//do the update
+		try {
+				$created_at = date("Y-m-d");
+				$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("UPDATE `{$this->driver_table}` SET driver_name=?,driver_phone=?, driver_address=? WHERE dId=? LIMIT 1");
+				if ($this->stmt->execute([$driver_name,$phone,$address,$driverId])) {
+    			$this->dbh->commit();
+    			$this->dbh = null;
+    			$this->response = $this->alert->alert_toastr("success","$driver_name details Updated Successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1000);</script>";
+    		}
+				
+			} catch (PDOException $e) {
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");	
+			}
+
+		}
+
+		return $this->response;
+	}
+
+	public function deleteBusDriverById($id){
+		if (!$this->config->isEmptyStr($this->config->Clean($id))) {
+			$details = self::getSingleValue("visap_driver_tbl","dId",$id);
+			if ($details != NULL || $details != "") {
+				try {
+			// grab the details info
+				$imagePath = "../vehicles/".$details->driver_image;
+				//delete driver 
+				$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("DELETE FROM `{$this->driver_table}` WHERE dId=? LIMIT 1");
+				if ($this->stmt->execute([$id])) {
+						if (file_exists($imagePath)) {
+							if (unlink($imagePath)) {
+							$this->dbh->commit();
+    						$this->dbh = null;
+    		$this->response = $this->alert->alert_toastr("success","Removed Successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1000);</script>";
+							}
+						}
+				}
+					
+				} catch (Exception $e) {
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");		
+				}
+			}
+			// code...
+		}else{
+		$this->response = $this->alert->alert_toastr("info","Unknown Error Occurred!",__OSO_APP_NAME__." Says");	
+		}
+		return ($this->response);
+	}
+
+	//delete school bus
+	public function deleteSchoolBusById($id){
+	if (!$this->config->isEmptyStr($this->config->Clean($id))) {
+			$details = self::getSingleValue("visap_bus_tbl","busId",$id);
+			if ($details != NULL || $details != "") {
+				try {
+			// grab the details info
+				$imagePath = "../vehicles/".$details->vehicle_image;
+				//delete driver 
+				$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("DELETE FROM `{$this->bus_table}` WHERE busId=? LIMIT 1");
+				if ($this->stmt->execute([$id])) {
+						if (file_exists($imagePath)) {
+							if (unlink($imagePath)) {
+							$this->dbh->commit();
+    						$this->dbh = null;
+    		$this->response = $this->alert->alert_toastr("success","Removed Successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1000);</script>";
+							}
+						}
+				}
+					
+				} catch (Exception $e) {
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");		
+				}
+			}
+			// code...
+		}else{
+		$this->response = $this->alert->alert_toastr("info","Unknown Error Occurred!",__OSO_APP_NAME__." Says");	
+		}
+		return ($this->response);	
+	}
+
+	public function updateSchoolBusById($data){
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		$busName = $this->config->Clean($data['busName']);
+		$busNumber = $this->config->Clean($data['busNumber']);
+		$busCapacity = $this->config->Clean($data['busCapacity']);
+		$bId = $this->config->Clean($data['bushiddenId']);
+		if ($this->config->isEmptyStr($busName) || $this->config->isEmptyStr($busNumber) || $this->config->isEmptyStr($bId) || $this->config->isEmptyStr($busCapacity) || $this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error","Invalid Submission, Pls try again!",__OSO_APP_NAME__." Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+		$this->response = $this->alert->alert_toastr("info","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
+		}else{
+			//do the update
+		try {
+				//$created_at = date("Y-m-d");
+				$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("UPDATE `{$this->bus_table}` SET vehicle_desc=?,vehicle_plate_no=?, vehicle_capacity=? WHERE busId=? LIMIT 1");
+				if ($this->stmt->execute([$busName,$busNumber,$busCapacity,$bId])) {
+    			$this->dbh->commit();
+    			$this->dbh = null;
+    			$this->response = $this->alert->alert_toastr("success","$busName details Updated Successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1000);</script>";
+    		}
+				
+			} catch (PDOException $e) {
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");	
+			}
+
+		}
+
+		return $this->response;
+	}
 	public function assign_student_bus_route($data){}
 	public function update_student_bus_payment($data){}
 	public function delete_bus_route($data){}

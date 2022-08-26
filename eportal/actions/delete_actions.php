@@ -20,6 +20,7 @@ $Visitor = new Visitors();
 $Administration = new Administration();
 $Blog = new Blog();
 $Result = new Result();
+$Bus = new Bus();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
@@ -165,6 +166,24 @@ if (isset($_POST['action']) && $_POST['action']!="") {
       echo $result;
     }
 }
+
+      //delete_school_bus_driver_
+      if ($_POST['action'] === "delete_school_bus_driver_") {
+        $driver_id = $Configuration->Clean($_POST['driverId']);
+        $result = $Bus->deleteBusDriverById($driver_id);
+        if ($result) {
+          echo $result;
+        }
+      }
+
+      //delete_school_bus
+     if ($_POST['action'] === "delete_school_bus") {
+        $vehicleId = $Configuration->Clean($_POST['vehicleId']);
+        $result = $Bus->deleteSchoolBusById($vehicleId);
+        if ($result) {
+          echo $result;
+        }
+      } 
 
 }
 }

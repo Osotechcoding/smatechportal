@@ -572,7 +572,13 @@ if (isset($_POST['action']) && $_POST['action'] !="") {
 			echo $result;
 		}
 	}
-
+//upload new student in csv file
+	if ($_POST['action'] === "upload_student_bulk_csv_data") {
+		$result = $Student->registerBulkStudentUsingCSVFile($_POST,$_FILES);
+		if ($result) {
+			echo $result;
+		}
+	}
 
 }
 }

@@ -527,9 +527,24 @@ $this->response = false;
 	}
 
 	public function get_all_my_assessments_by_filter($stdRegNo,$stdGrade,$term,$aca_session){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? ORDER BY uploadedDate DESC");
+		// TODO LIST visap_termly_result_tbl will be dynamic
+		switch ($term) {
+          case '3rd Term':
+            $resultTable ='visap_termly_result_tbl';
+            break;
+            case '2nd Term':
+              $resultTable ='visap_2nd_term_result_tbl';
+              break;
+              case '1st Term':
+                $resultTable ='visap_1st_term_result_tbl';
+                break;
+          default:
+            $resultTable ='visap_1st_term_result_tbl';
+            break;
+        }
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? ORDER BY uploadedDate DESC");
 		$this->stmt->execute(array($stdRegNo,$stdGrade,$term,$aca_session));
-		if ($this->stmt->rowCount()>0) {
+		if ($this->stmt->rowCount() > 0) {
 			// code...
 			$this->response = $this->stmt->fetchAll();
 		}else{
@@ -1536,6 +1551,78 @@ public function get_student_infoId($studentId){
   return $this->response;
   $this->dbh = null;
     }
+        }
+
+  public function registerBulkStudentUsingCSVFile($data, $csv_file){
+      $auth_pass = $this->config->Clean($data['auth_code']);
+      $studentClass = $this->config->Clean($data['student_class']);
+     	$File_tmp = $file['studentCsvFile']['tmp_name'];
+			$FileName = $file['studentCsvFile']['name'];
+			$File_size = $file['studentCsvFile']['size'];
+			$File_error = $file['studentCsvFile']['error'];
+			$allowed = array("csv");
+		 $name_div = explode(".", $FileName);
+   		$image_ext = strtolower(end($name_div));
+   	if ($this->config->isEmptyStr($auth_pass) || $this->config->isEmptyStr($studentClass) ||
+   	 $this->config->isEmptyStr($FileName)) {
+   		$this->response = $this->alert->alert_toastr("warning","Invalid form Submission, Pls try again!",__OSO_APP_NAME__." Says");
+   		}elseif (!in_array($image_ext, $allowed)) {
+   		$this->response = $this->alert->alert_toastr("error","Only CSV format is allowed!",__OSO_APP_NAME__." Says");
+   		}else{
+   			$file_open = fopen($File_tmp, "r");
+   			while (($csv_data = fgetcsv($file_open,1000,","))!== false) {
+   				//name the columns ndeeded
+//surname,firstname,lastname,date_of_birth,gender,address,Phone,Admission_date,Type
+   				$stdSurName =  $this->config->Clean($csv_data[0]);
+   				$stdUserName = $stdSurName;
+   				$stdFirstName = $this->config->Clean($csv_data[1]);
+   				$stdMiddleName =  $this->config->Clean($csv_data[2]);
+   				$stdDob =  		$this->config->Clean($csv_data[3]);
+   				$stdGender =  	$this->config->Clean($csv_data[4]);
+   				$stdAddress =  $this->config->Clean($csv_data[5]);
+   				$stdPhone =  	$this->config->Clean($csv_data[6]);
+   				$stdApplyDate = $this->config->Clean(date("Y-m-d",strtotime($csv_data[7])));
+   				$stdEmail = $this->config->Clean($csv_data[8]);
+   				$stdApplyType = $this->config->Clean($csv_data[9]);
+   				$default_pass = "student";
+			$stdPassword = $this->config->encrypt_user_password($default_pass);
+			 $stdAdmStatus ="Active";
+   				$stdRegNo = self::generate_admission_number(date("Y",strtotime($stdApplyDate)));
+   			 $stdConfToken = substr(md5(uniqid(mt_rand(),true)),0,14);
+   				if ($this->config->check_single_data('visap_staff_tbl','staffEmail',$stdEmail)) {
+
+			$this->response = $this->alert->alert_toastr("error","$stdEmail is already taken, Please try another email address!",__OSO_APP_NAME__." Says");
+
+				}elseif ($this->config->check_single_data('visap_student_tbl','stdEmail',$stdEmail)) {
+
+			$this->response = $this->alert->alert_toastr("error","$stdEmail is already taken on this Portal, Please try another Email address!",__OSO_APP_NAME__." Says");
+				}else{
+					try {
+			$this->dbh->beginTransaction();
+    	$this->stmt = $this->dbh->prepare("INSERT INTO `{$this->table_name}` (stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdSurName,stdFirstName,stdMiddleName,stdDob,stdGender,stdAddress,stdPhone,stdAdmStatus,stdApplyDate,stdApplyType,stdConfToken) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+    	if ($this->stmt->execute(array($stdRegNo,$stdEmail,$stdUserName,$stdPassword,$studentClass,$stdSurName,$stdFirstName,$stdMiddleName,$stdDob,$stdGender,$stdAddress,$stdPhone,$stdAdmStatus,$stdApplyDate,$stdApplyType,$stdConfToken))) {
+    		$this->dbh->commit();
+    		$counter = $this->stmt->rowCount();
+    		$this->dbh = null;
+    $this->response = $this->alert->alert_toastr("success","$counter of Student Uploaded Successfully...",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1500);</script>";
+    	}else{
+    		$this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Please try again!",__OSO_APP_NAME__." Says");
+    	}
+						
+					} catch (PDOException $e) {
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");	
+					}
+				}
+   			}
+
+   			fclose($file_open);
+   		}
+
+   		return $this->response;
+
         }
 
 }

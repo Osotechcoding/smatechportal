@@ -69,7 +69,7 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
         <div class="content-body">
           <div class="row">
  <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-hotel fa-1x"></span> <?php echo strtoupper($hostel_details->hostel_desc) ?> &raquo; <?php echo strtoupper($roomDetails->room_desc) ?></h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-hotel fa-1x"></span> <?php echo strtoupper($hostel_details->hostel_desc) ?> &raquo; (<?php echo strtoupper($hostel_details->hostel_type) ?> HOSTEL) &raquo; <?php echo strtoupper($roomDetails->room_desc) ?> </h3>
   </div>
 </div>
 
@@ -132,17 +132,16 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
         </div>
         <div class="card-body card-dashboard">
           <div class="table-responsive">
-            <table class="table table-striped">
+            <table class="table table-striped text-center">
               <thead>
                  <tr>
                   <th>Hostel Desc</th>
-                  <th>Type</th>
-                 <th>Room Desc</th>
+                  <th>Duration</th>
                  <th>Space</th>
-                 <th>Per Session</th>
+                 <th>Amount</th>
                  <th>Paid</th>
                  <th>Status</th>
-                 <th>Action</th>
+                 <th>Action/ Payment</th>
                </tr>
               </thead>
               <tbody>
@@ -158,18 +157,17 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
                     //check for the gender
                     if ($student_data->stdPassport == NULL || $student_data->stdPassport =="") {
                      if ($student_data->stdGender == "Male") {
-                      echo '<img src="../schoolImages/students/male.png" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">';
+                      echo '<img src="../schoolImages/students/male.png" width="60" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">';
                      }else{
-                      echo '<img src="../schoolImages/students/female.png" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">';
+                      echo '<img src="../schoolImages/students/female.png" width="60" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">';
                      }
                     }else{
-                  echo ' <img src="../schoolImages/students/'.$student_data->stdPassport.'" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">';
+                  echo ' <img src="../schoolImages/students/'.$student_data->stdPassport.'" width="60" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">';
                     }
                   }else{
                       echo '<span class="badge badge-dark badge-pill">No occupant</span>';
                   } ?> </td>
-                <td><?php echo strtoupper($hostels->hostel_type);?></td>
-                <td><?php echo strtoupper($bonk->room);?></td>
+                <td><?php echo $bonk->book_duration ?? '<span class="badge badge-warning badge-pill">Not Booked</span>' ;?></td>
                 <td><?php echo ucwords($bonk->bed_space);?></td>
                 <td>&#8358;<?php echo number_format($bonk->amount,2);?></td>
                 <td>&#8358;<?php echo number_format($bonk->amount_paid,2);?></td>
@@ -177,6 +175,7 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
                  echo '<span class="badge badge-success badge-pill"> Available</span>';
                 }else{
                    echo '<span class="badge badge-danger badge-pill"> Occupied</span>';
+                    echo '<button onClick="return confirm('." 'are you sure' ".');" type="button" class="badge badge-dark badge-pill m-1"> Checkout</button>';
                 }
 
                  ?> </td>
@@ -184,7 +183,10 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
                   <?php if ($bonk->is_available == 1): ?>
                      <button type="button" title="Assign Bed Space to student" class="btn btn-dark btn-md btn-rounded-0 assign_bedspace_btn" data-id="<?php echo $bonk->bedId;?>" data-amount="<?php echo ($bonk->amount);?>" data-bed="<?php echo $bonk->bed_space;?>"><span class="fa fa-check-circle"></span> Assign</button>
                     <?php else: ?>
-                       <button onclick="window.location.href='bedspace_payments?occupant=<?php echo $bonk->occupant;?>&bed=<?php echo $bonk->bedId;?>&hoId=<?php echo $hostelId;?> &action=view-payments'" type="button" title="View Payment History" class="btn btn-outline-primary btn-md btn-rounded-0">Reciept</button>
+                      <?php if ($bonk->amount_paid == NULL || $bonk->amount_paid < $bonk->amount): ?>
+                        <button type="button" onclick="window.location.href='updateBedPayments?bed_occupant=<?php echo $Configuration->saltifyString($bonk->occupant);?>&bedspace=<?php echo $Configuration->saltifyString($bonk->bedId);?>&hoId=<?php echo $Configuration->saltifyString($hostelId);?>&action=topuppayment'"  title="Update Payment" class="badge badge-warning badge-pill m-1">Payment</button>
+                      <?php endif ?>
+                       <button onclick="window.location.href='bedspace_payments?occupant=<?php echo $bonk->occupant;?>&bed=<?php echo $bonk->bedId;?>&hoId=<?php echo $hostelId;?> &action=view-payments'" type="button" title="View Payment History" class="badge badge-info badge-pill">Reciept</button>
                   <?php endif ?>
                  </td>
                 </tr>

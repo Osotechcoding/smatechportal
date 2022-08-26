@@ -100,7 +100,7 @@ require_once "helpers/helper.php";
                   <td><?php echo $driver->driver_phone; ?> <br><?php echo $driver->driver_email; ?></td>
                   <td><?php echo $driver->driver_address; ?></td>
                   <!-- <td><?php //echo $driver->driver_license_no; ?></td> -->
-                  <td><button title="Edit" class="btn btn-secondary btn-sm m-1"><span class="fa fa-edit"></span> Edit</button> <button title="remove" data-id="<?php echo $driver->dId;?>" data-action="delete_driver" type="button" class="btn btn-danger btn-sm  delete_btn"><span class="fa fa-trash"></span> Delete</button></td>
+                  <td><button data-licensed="<?php echo $driver->driver_license_no;?>" data-name="<?php echo ucwords($driver->driver_name); ?>" data-id="<?php echo $driver->dId;?>" data-phone="<?php echo $driver->driver_phone; ?>" data-address="<?php echo $driver->driver_address; ?>" data-email="<?php echo $driver->driver_email; ?>" title="Edit" class="btn btn-secondary btn-sm m-1 edit_driver_btn"><span class="fa fa-edit"></span> Edit</button> <button title="remove" data-id="<?php echo $driver->dId;?>" data-action="delete_school_bus_driver_" type="button" class="btn btn-danger btn-sm  delete_driver_btn myLoadingBtn_<?php echo $driver->dId;?>"><span class="fa fa-trash"></span> Delete</button></td>
                 </tr>
                  <?php
                   }
@@ -209,6 +209,9 @@ require_once "helpers/helper.php";
             </div>
           </div>
     <!-- BUS MODAL  END -->
+
+    <!-- edit Modal -->
+    <?php include_once ("../Modals/editDriverModal.php");?>
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
@@ -233,7 +236,54 @@ require_once "helpers/helper.php";
     }
 
   $(document).ready(function (){
+
+    //when delete btn is clicked
+    const deleteDriverBtn = $(".delete_driver_btn");
+    deleteDriverBtn.on("click", function (){
+      let action = $(this).data("action"), driverId = $(this).data("id");
+      //send request
+      if (confirm("Are you sure to delete this Driver?")) {
+        $.post("../actions/delete_actions",{action:action,driverId:driverId}, function(res){
+          $(".myLoadingBtn_"+driverId).html('<img src="../assets/loaders/rolling_loader.svg" width="20">');
+          setTimeout(()=>{
+            $("#server-response").html(res);
+          },500);
+        })
+      }else{
+        return false;
+      }
+    });
+
+
+    //when submit update driver btn is clciked
+      const EditedDriverModalForm = $("#editDriverModalForm");
+      EditedDriverModalForm.on("submit", function(e){
+        e.preventDefault();
+         $(".__loadingBtn__driver_edit").html('<img src="../assets/loaders/rolling_loader.svg" width="30""> Processing...').attr("disabled",true);
+       $.post("../actions/update_actions",EditedDriverModalForm.serialize(),function(response){
+          setTimeout(()=>{
+        $(".__loadingBtn__driver_edit").html('Save Changes').attr("disabled",false);
+        $("#server-response").html(response);
+          },500);
+        })
+      })
     //when view btn is clicked
+
+    const edit_driver_btn = $(".edit_driver_btn");
+      edit_driver_btn.on("click", function (){
+         let $this = $(this);
+        let name =$this.data("name"),address =$this.data("address"),email =$this.data("email"),phone = $this.data("phone")
+        driverId = $this.data("id"),licensedNo =$this.data("licensed");
+       // console.log(name+ " "+phone+' '+ email+' '+ address+' '+ licensedNo);
+        $("#dname").val(name);
+        $("#demail").val(email);
+        $("#daddress").val(address);
+        $("#dphone").val(phone);
+        $("#dhiddenId").val(driverId);
+        $("#mydriver_license").val(licensedNo);
+        $("#EditbusDriverModal").modal("show");
+      })
+    //when submit driver form is clicked
      $("#addNewDriverModalForm").on("submit",function(event){
   event.preventDefault();
   $.ajax({
