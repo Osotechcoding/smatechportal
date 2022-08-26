@@ -166,7 +166,7 @@ class Pins{
  }
 		}
 return $this->response;
-unset($this->dbh);
+$this->dbh = null;
 	}
 
 public function get_pins($table){
@@ -215,7 +215,7 @@ $this->stmt = $this->dbh->prepare("DELETE FROM `$table` WHERE pin_id=? LIMIT 1")
 			}
 
 			return $this->response;
-				unset($this->dbh);
+				$this->dbh = null;
 		}
 	}
 
@@ -229,7 +229,7 @@ $this->stmt = $this->dbh->prepare("DELETE FROM `$table` WHERE pin_id=? LIMIT 1")
 				$data_count =$this->stmt->fetch();
 				$this->response = $data_count->cnt;
 				return $this->response;
-				unset($this->dbh);
+				$this->dbh = null;
 			}
 		}
 	}
@@ -244,7 +244,7 @@ $this->stmt = $this->dbh->prepare("DELETE FROM `$table` WHERE pin_id=? LIMIT 1")
 				$data_count =$this->stmt->fetch();
 				$this->response = $data_count->cnt;
 				return $this->response;
-				unset($this->dbh);
+				$this->dbh = null;
 			}
 		}
 	}
@@ -257,7 +257,7 @@ $this->stmt = $this->dbh->prepare("DELETE FROM `$table` WHERE pin_id=? LIMIT 1")
 			if ($this->stmt->rowCount()>0) {
 				$this->response =$this->stmt->fetch();
 				return $this->response;
-				unset($this->dbh);
+				$this->dbh = null;
 			}
 		}
 	}
@@ -270,7 +270,7 @@ $this->stmt = $this->dbh->prepare("DELETE FROM `$table` WHERE pin_id=? LIMIT 1")
 			if ($this->stmt->rowCount()>0) {
 				$this->response =$this->stmt->fetch();
 				return $this->response;
-				unset($this->dbh);
+				$this->dbh = null;
 			}
 		}
 	}
@@ -294,7 +294,7 @@ $this->stmt = $this->dbh->prepare("DELETE FROM `$table` WHERE pin_id=? LIMIT 1")
             $res = $this->stmt->fetch();
             $this->response = $res->pin_counter;
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
 
     }

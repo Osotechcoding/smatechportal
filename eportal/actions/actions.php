@@ -23,6 +23,7 @@ $Administration = new Administration();
 $Alert = new Alert();
 $Blog = new Blog();
 $Hostel = new Hostel();
+$Bus = new Bus();
 
 $request_method  = $_SERVER['REQUEST_METHOD'];
 if ($request_method ==="POST") {
@@ -538,12 +539,40 @@ if (isset($_POST['action']) && $_POST['action'] !="") {
 		}
 	}
 
+	//NEW UPDATE DONE
+
+	//create_student_bus_route_now
+	if ($_POST['action'] === "create_student_bus_route_now") {
+		$result = $Bus->createBusRoute($_POST);
+		if ($result) {
+			echo $result;
+		}
+	}
+//submit_new_school_bus
+	if ($_POST['action'] === "submit_new_school_bus") {
+		$result = $Bus->createNewVehicle($_POST,$_FILES);
+		if ($result) {
+			echo $result;
+		}
+	}
+
+	//resgister_new_vehicle_driver
+	if ($_POST['action'] === "resgister_new_vehicle_driver") {
+		$result = $Bus->createNewVehicleDriver($_POST,$_FILES);
+		if ($result) {
+			echo $result;
+		}
+	}
+
+	//fetch_route_details
+	if ($_POST['action'] === "fetch_route_details") {
+		$routeId = $Configuration->Clean($_POST['routeId']);
+		$result = $Bus->fetchRouteDataById($routeId);
+		if ($result) {
+			echo $result;
+		}
+	}
+
+
 }
 }
-?>
-<?php
-  header("Cache-Control: no-cache, must-revalidate");
-  header("Pragma: no-cache");
-  header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-  header("Cache-Control: max-age=2592000");
-?>

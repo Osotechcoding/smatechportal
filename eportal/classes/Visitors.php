@@ -21,6 +21,7 @@ class Visitors {
 	protected $alert;//default config
 
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -67,7 +68,7 @@ class Visitors {
 	}
 
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	//View uploaded result method
@@ -81,6 +82,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	//uploading cognitive domain
@@ -97,6 +99,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	//view uploaded cognitive domain
@@ -109,6 +112,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	//published result method
@@ -122,6 +126,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	public function filter_visitor_history_by_date($from_date,$to_date){
@@ -134,6 +139,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	public function get_today_visitors(){
@@ -144,9 +150,10 @@ class Visitors {
 			$count = $this->stmt->fetch();
 		$this->response= $count->cnt;
 		}else{
-			$this->response = false;
+		$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	// WHERE payment_date >= (DATE(CURDATE())- INTERVAL 1 YEAR)
@@ -161,6 +168,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	public function get_current_term_visitors($cterm,$cses){
@@ -174,6 +182,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 	public function get_current_session_visitors($cses){
@@ -187,6 +196,7 @@ class Visitors {
 			$this->response = false;
 		}
 		return $this->response;
+		$this->dbh = null;
 	}
 
 }

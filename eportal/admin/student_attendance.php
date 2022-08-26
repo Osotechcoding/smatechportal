@@ -53,7 +53,7 @@ require_once "helpers/helper.php";
         <div class="card">
           <div class="card-header">
             <!--<h3>Upload Cognitive Domain</h3>-->
-             <?php include_once 'Links/results_btn.php'; ?>
+             <?php //include_once 'Links/results_btn.php'; ?>
           </div>
           <div class="card-body">
              <!-- Basic Vertical form layout section start -->

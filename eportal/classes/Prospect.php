@@ -18,6 +18,7 @@ class Prospect
 	protected $config;//default config
 
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;

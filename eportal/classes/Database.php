@@ -10,7 +10,8 @@ class Database {
 	private $dbh;
 	private $error;
 	public function __construct(){
-		return $this->dbh;
+		$this->dbh = null;
+		//return $this->dbh;
 	}
 public function osotech_connect(){
 	$dsn = $this->dbDriver.":host=".$this->dbHost.";dbname=".$this->dbname.";charset=".$this->dbCharset;
@@ -23,6 +24,7 @@ public function osotech_connect(){
 			die($this->error);
 		}
 		return $this->dbh;
+		//$this->dbh = null;
 }
 }
 

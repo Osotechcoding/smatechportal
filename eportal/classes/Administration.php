@@ -19,6 +19,7 @@ class Administration {
 	protected $response;
 	protected $config;
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -50,6 +51,7 @@ class Administration {
 				$this->response = false;
 			}
 			return $this->response;
+			$this->dbh = null;
 	}
 
 	public function get_classroom_InDropDown(){
@@ -64,6 +66,7 @@ class Administration {
 				$this->response = false;
 			}
 			return $this->response;
+			$this->dbh = null;
 	}
 
 	public function create_classroom($data){
@@ -111,7 +114,7 @@ class Administration {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function update_classroom($data){
@@ -144,7 +147,7 @@ class Administration {
 				}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_classrooms(){
@@ -157,7 +160,7 @@ class Administration {
 				$this->response = false;
 			}
 			return $this->response;
-				unset($this->dbh);
+			$this->dbh = null;
 	}
 
 
@@ -297,7 +300,7 @@ return $this->response;
 
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_subjects(){
@@ -310,7 +313,7 @@ return $this->response;
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	public function get_all_subjects_by_status(string $status){
@@ -322,7 +325,7 @@ return $this->response;
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 	public function get_subject_ById($subjectId){
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` WHERE subject_id=? LIMIT 1");
@@ -333,7 +336,7 @@ return $this->response;
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	public function delete_subject_ById($subjectId){
@@ -358,7 +361,7 @@ return $this->response;
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function count_all_subjects(){
@@ -369,7 +372,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 
 	}
@@ -381,7 +384,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 	}
 
@@ -393,7 +396,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 	}
 
@@ -405,7 +408,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 	}
 
@@ -421,7 +424,7 @@ if ($this->stmt->rowCount()>0) {
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 	//Subject management methods end
 	//Fee management methods start
@@ -463,7 +466,7 @@ if ($this->stmt->rowCount()>0) {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function update_fee_component($data){
@@ -493,7 +496,7 @@ if ($this->stmt->rowCount()>0) {
 
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function fee_component_inDropDown(){
@@ -509,7 +512,7 @@ if ($this->stmt->rowCount()>0) {
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	public function get_all_fee_components(){
@@ -558,7 +561,7 @@ if ($this->stmt->rowCount()>0) {
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 	//Fee management methods end
 //FEE ALLOCATION METHODS
@@ -601,7 +604,7 @@ if ($this->stmt->rowCount()>0) {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function update_allocation_fee($data){
@@ -631,7 +634,7 @@ if ($this->stmt->rowCount()>0) {
 
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_feeTypeByType($type){
@@ -641,7 +644,7 @@ if ($this->stmt->rowCount()>0) {
 	if ($this->stmt->rowCount()==1) {
 		$this->response =$this->stmt->fetch();
 	return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 		}
 	}
@@ -655,7 +658,7 @@ if ($this->stmt->rowCount()>0) {
 				$this->response = false;
 			}
 			return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_allocated_fees(){
@@ -668,7 +671,7 @@ if ($this->stmt->rowCount()>0) {
 				$this->response = false;
 			}
 			return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	//public function delete_virtual_lecture_ById($id){}
@@ -687,7 +690,7 @@ if ($this->stmt->rowCount()>0) {
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function submit_student_update_payment($data){
@@ -761,7 +764,7 @@ if ($this->stmt->rowCount()>0) {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function submit_new_student_payment_cash($data){
@@ -833,7 +836,7 @@ if ($this->stmt->rowCount()>0) {
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_alloction_by_gradeComponentId($grade){
@@ -843,7 +846,7 @@ if ($this->stmt->rowCount()>0) {
 		if ($this->stmt->rowCount()==1) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -854,7 +857,7 @@ if ($this->stmt->rowCount()>0) {
 	if ($this->stmt->rowCount()==1) {
 		$this->response =$this->stmt->fetch();
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -866,7 +869,7 @@ if ($this->stmt->rowCount()>0) {
 	if ($this->stmt->rowCount()==1) {
 		$this->response =$this->stmt->fetch();
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -877,7 +880,7 @@ if ($this->stmt->rowCount()>0) {
 	if ($this->stmt->rowCount()==1) {
 		$this->response =$this->stmt->fetch();
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -889,7 +892,7 @@ if ($this->stmt->rowCount()>0) {
 		$row_data =$this->stmt->fetch();
 		$this->response = $row_data->total;
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -901,7 +904,7 @@ if ($this->stmt->rowCount()>0) {
 		$row_data =$this->stmt->fetch();
 		$this->response = $row_data->total;
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -911,7 +914,7 @@ if ($this->stmt->rowCount()>0) {
 	if ($this->stmt->rowCount()==1) {
 		$this->response =$this->stmt->fetch();
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -922,7 +925,7 @@ if ($this->stmt->rowCount()>0) {
 			// output json format...
 			$this->response = $this->stmt->fetch();
 			return json_encode($this->response, JSON_PRETTY_PRINT);
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -933,7 +936,7 @@ if ($this->stmt->rowCount()>0) {
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->paid;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -945,7 +948,7 @@ if ($this->stmt->rowCount()>0) {
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->paid;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -956,7 +959,7 @@ if ($this->stmt->rowCount()>0) {
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->paid;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -967,7 +970,7 @@ if ($this->stmt->rowCount()>0) {
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->paid;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1051,14 +1054,14 @@ $this->response = $this->alert->alert_toastr("error","Your file could not be mov
 	 	}
 	 }
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	// count total watch or listened
 	public function update_Virtual_counter_by_id($fid){
 		$this->stmt = $this->dbh->prepare("UPDATE `visap_virtual_lesson_tbl` SET counter=counter+1 WHERE lectureId=?");
 		$this->stmt->execute([$fid]);
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 	public function get_all_virtual_lectures(){
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_virtual_lesson_tbl` ORDER BY lesson_grade,uploaded_date DESC");
@@ -1066,7 +1069,7 @@ $this->response = $this->alert->alert_toastr("error","Your file could not be mov
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 	public function get_virtual_lecture_ById($id){
@@ -1075,7 +1078,7 @@ $this->response = $this->alert->alert_toastr("error","Your file could not be mov
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 	public function delete_virtual_lecture_ById($id){
@@ -1105,7 +1108,7 @@ $this->response = $this->alert->alert_toastr("error","Your file could not be mov
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 
@@ -1127,7 +1130,7 @@ $this->response = $this->alert->alert_toastr("error","Your file could not be mov
            }
         }
         }
-        unset($this->dbh);
+       $this->dbh = null;
     }
 	}
 
@@ -1214,7 +1217,7 @@ unset($this->dbh);
 	 	}
 	 }
 	 return $this->response;
-	 unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_assigned_staff_weekly_duty(){
@@ -1223,7 +1226,7 @@ unset($this->dbh);
 	 	if ($this->stmt->rowCount()>0) {
 	 	$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	 	}
 	}
 
@@ -1250,7 +1253,7 @@ unset($this->dbh);
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	//count all staff on assign to duties
@@ -1261,7 +1264,7 @@ unset($this->dbh);
 	 		$get_counted =$this->stmt->fetch();
 	 		$this->response = $get_counted->cnt;
 	 		return $this->response;
-	 		unset($this->dbh);
+	 	$this->dbh = null;
 	 	}
 	}
 // STAFF DUTY ASSIGN METHODS END
@@ -1311,7 +1314,7 @@ unset($this->dbh);
 	 	}
 	 }
 	 return $this->response;
-	 unset($this->dbh);
+	$this->dbh = null;
 	}
 	public function get_all_loans_list(){
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_loan_tbl` ORDER BY submitted_date DESC");
@@ -1319,7 +1322,7 @@ unset($this->dbh);
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1329,7 +1332,7 @@ unset($this->dbh);
 		if ($this->stmt->rowCount()==1) {
 			$this->response =$this->stmt->fetch();
 		return json_encode($this->response,JSON_PRETTY_PRINT);
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1345,14 +1348,6 @@ unset($this->dbh);
 	public function return_book($data){}
 	//Library Book management methods end
 
-	//School Bus management methods start
-	public function create_bus_route($data){}
-	public function update_bus_route($data){}
-	public function assign_student_bus_route($data){}
-	public function update_student_bus_payment($data){}
-	public function delete_bus_route($data){}
-	//School Bus management methods end
-
 	//EXPENSE METHOD
 	public function get_all_today_expenses(){
 		$this->stmt = $this->dbh->prepare("SELECT SUM(`cost`) as total FROM `visap_school_expense_tbl` WHERE DATE(`created_on`) = DATE(CURRENT_DATE())");
@@ -1361,7 +1356,7 @@ unset($this->dbh);
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->total;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1372,7 +1367,7 @@ unset($this->dbh);
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->total;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1383,7 +1378,7 @@ unset($this->dbh);
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->total;
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1426,7 +1421,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_school_expenses(){
@@ -1435,7 +1430,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1455,7 +1450,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 	$this->stmt->execute();
 	$this->response = $this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 
 	//get active session details
@@ -1469,7 +1464,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		$this->response =false;
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 
 	//set new academic session at visap_session_list
@@ -1511,7 +1506,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function update_academic_session($data){
@@ -1588,7 +1583,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_session_history_by_id($ses_name,$term){
@@ -1600,7 +1595,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		$this->response =false;
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 
 	//get_all_session_history_lists
@@ -1616,7 +1611,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	//get_all_session_history_lists
@@ -1632,7 +1627,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	//fetch all session list
@@ -1682,7 +1677,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	// School Session management methods end
@@ -1728,7 +1723,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		}
 	}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_staff_payroll(){
@@ -1737,7 +1732,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 	 if ( $this->stmt->rowCount()>0) {
 	 $this->response = $this->stmt->fetchAll();
 	 return $this->response;
-	 unset($this->dbh);
+	$this->dbh = null;
 	 }
 	}
 
@@ -1747,7 +1742,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 		 if ($this->stmt->rowCount()==1) {
 		 $this->response = $this->stmt->fetch();
 		 return json_encode($this->response,JSON_PRETTY_PRINT);
-		 unset($this->dbh);
+		$this->dbh = null;
 		 }
 	}
 
@@ -1764,7 +1759,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 				$med = $value->med_alawi;
 				$this->response =(int)($rent+$cloth+$transport+$med);
 				return $this->response;
-				 unset($this->dbh);
+				$this->dbh = null;
 			}
 		}
 	}
@@ -1776,7 +1771,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 			$result = $this->stmt->fetch();
 		$this->response = $result->tax_tds;
 		return $this->response;
-		 unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -1787,7 +1782,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 			$result = $this->stmt->fetch();
 		$this->response = $result->staff_salary;
 		return $this->response;
-		 unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 	//STAFF PAYROLL METHOD END
@@ -1836,7 +1831,7 @@ $date =$this->config->Clean(date("Y-m-d",strtotime($data['expense_date'])));
 
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 	//STUDENT ATTENDANT METHODS
 
@@ -1881,7 +1876,7 @@ return $diff->format('%y');
 		if ($this->stmt->rowCount()==1) {
 			$this->response = $this->stmt->fetch();
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
 		}
   }
 
@@ -1891,7 +1886,7 @@ return $diff->format('%y');
   	if ($this->stmt->rowCount()>0) {
   		$this->response = $this->stmt->fetchAll();
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   	}
   }
 
@@ -1901,7 +1896,7 @@ return $diff->format('%y');
   	if ($this->stmt->rowCount()>0) {
   		$this->response = $this->stmt->fetchAll();
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   	}
   }
 
@@ -1925,7 +1920,7 @@ return $diff->format('%y');
 
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 
@@ -1973,7 +1968,7 @@ return $diff->format('%y');
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	//get student result details to coment on
@@ -1986,7 +1981,7 @@ return $diff->format('%y');
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	/*RESEND CONFIRMATION CODE TO STAFF STARTs*/
@@ -2010,7 +2005,7 @@ public function send_resend_confirmation_code($data){
 				$this->response = false;
 			}
 			return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -2031,7 +2026,7 @@ public function send_resend_confirmation_code($data){
    $this->response  =$this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),"ERROR");
     }
     return $this->response;
-    unset($this->dbh);
+   $this->dbh = null;
   }
 //
   public function enable_disable_modules_by_id($status,$id){
@@ -2051,7 +2046,7 @@ public function send_resend_confirmation_code($data){
     }
 
     return $this->response;
-    unset($this->dbh);
+   $this->dbh = null;
   }
 
   public function get_office_InDropDown_list(){
@@ -2067,7 +2062,7 @@ public function send_resend_confirmation_code($data){
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
   }
 
   public function get_role_InDropDown_list(){
@@ -2082,7 +2077,7 @@ public function send_resend_confirmation_code($data){
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
   }
 
   public function get_all_staff_office(){
@@ -2091,7 +2086,7 @@ public function send_resend_confirmation_code($data){
   	if ($this->stmt->rowCount()>0) {
   		$this->response = $this->stmt->fetchAll();
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   	}
   }
 
@@ -2133,7 +2128,7 @@ public function send_resend_confirmation_code($data){
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
   }
 
   //get school profile details
@@ -2144,7 +2139,7 @@ public function send_resend_confirmation_code($data){
   		$rows = $this->stmt->fetch();
   		$this->response = $rows;
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   	}
   }
 
@@ -2156,7 +2151,7 @@ public function send_resend_confirmation_code($data){
   		$rows = $this->stmt->fetch();
   		$this->response = $rows;
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   	}
   }
 // TO BE UPLOADED TO SERVER
@@ -2209,7 +2204,7 @@ public function send_resend_confirmation_code($data){
 
   }
   return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   }
    public function update_school_administrator_details($data){
   	$owner_name = $this->config->Clean($data['owner_name']);
@@ -2248,7 +2243,7 @@ public function send_resend_confirmation_code($data){
 
   }
   return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
 
 }
 
@@ -2289,7 +2284,7 @@ public function send_resend_confirmation_code($data){
 
   }
   return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   }
 
   //JUST DONE TODAY 18 may 2022
@@ -2339,7 +2334,7 @@ for ($i=0; $i < (int)$total_count; $i++) {
 		}
 			}
 			return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 }
 
 //get all affective domain uploaded by class term and session
@@ -2349,7 +2344,7 @@ public function get_all_affective_domain($class,$term,$session){
 			if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 			}
 }
 
@@ -2401,7 +2396,7 @@ for ($i=0; $i < (int)$total_count; $i++) {
 		}
 			}
 			return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 }
 
 //get all affective domain uploaded by class term and session
@@ -2411,7 +2406,7 @@ public function get_all_psychomotor_domain($class,$term,$session){
 			if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 			}
 }
 // PSYCHOMOTOR METHOD
@@ -2423,7 +2418,7 @@ public function get_recent_payment_records(){
 			if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 			}
 }
 
@@ -2459,7 +2454,7 @@ try {
 		}
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 
 //get oastudent office title in drop down
@@ -2476,7 +2471,7 @@ public function get_student_office_title_inDropDown(){
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 }
 
 public function get_office_all_students_office_title(){
@@ -2485,7 +2480,7 @@ public function get_office_all_students_office_title(){
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 }
 
@@ -2495,7 +2490,7 @@ public function get_student_office_titleById($id){
 		if ($this->stmt->rowCount()==1) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 }
 
@@ -2525,7 +2520,7 @@ public function update_prefect_office_title($data){
 				}
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 //TO BE UPDLOADED TO PORTAL SERVER
 public function get_office_all_staff_office_title(){
@@ -2534,7 +2529,7 @@ public function get_office_all_staff_office_title(){
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 }
 
@@ -2544,7 +2539,7 @@ public function get_staff_office_titleById($id){
 		if ($this->stmt->rowCount()==1) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 }
 
@@ -2574,7 +2569,7 @@ public function update_staff_office_title($data){
 				}
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 //get total number of subject offered by a particular class
 public function get_number_of_subejct_offered_by_class($stdGrade){
@@ -2610,7 +2605,7 @@ $this->stmt->execute(array($admision_no,$stdGrade,$term,$session));
 if ($this->stmt->rowCount()==1) {
 	$this->response = $this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
   }
   public function get_class_teacher_class_name($stdGrade){
@@ -2620,7 +2615,7 @@ $this->stmt->execute(array($stdGrade,$staffRole));
 if ($this->stmt->rowCount()==1) {
 	$this->response = $this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
   }
   public function get_principal_info(){
@@ -2630,7 +2625,7 @@ $this->stmt->execute(array($staffRole));
 if ($this->stmt->rowCount()==1) {
 	$this->response = $this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
   }
 
@@ -2686,7 +2681,7 @@ public function upload_school_logoImage($data, $file){
     $this->response = $this->alert->alert_toastr("error","Please Select a Logo to Upload",__OSO_APP_NAME__." Says");
    }
    return $this->response;
-   unset($this->dbh);
+  $this->dbh = null;
   }
 
   public function get_school_session_info(){
@@ -2695,7 +2690,7 @@ public function upload_school_logoImage($data, $file){
   	if ($this->stmt->rowCount()==1) {
   		$this->response = $this->stmt->fetch();
   		return $this->response;
-  		unset($this->dbh);
+  	$this->dbh = null;
   	}
   }
 
@@ -2743,7 +2738,7 @@ public function upload_school_logoImage($data, $file){
 				 $this->response = $this->alert->alert_toastr("error","Please select at least a subject to register",__OSO_APP_NAME__." Says");
 			}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function declareAdmissionPortalOpen($data){
@@ -2802,7 +2797,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 		}
 
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function getAdmissionPortalDetails(){
@@ -2811,7 +2806,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -2850,7 +2845,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 				$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 
 	}
 	public function checkAdmissionPortalStatus(): bool{
@@ -2858,7 +2853,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 		$this->stmt->execute();
 		$this->response = $this->stmt->rowCount();
 			return ($this->response == 1) ? true : false;
-			unset($this->dbh);
+		$this->dbh = null;
 	}
 	public function deleteAdmissionPortal($Id){
 		if (!$this->config->isEmptyStr($Id)) {
@@ -2879,7 +2874,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function submitExamQuestions($data,$file){
@@ -2939,7 +2934,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 	}
 		}
  	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 
 	public function getAllUploadedExamQuestions(){
@@ -2948,7 +2943,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 	if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 	}
 
@@ -2958,7 +2953,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 	if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 	}
 
@@ -2968,7 +2963,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
 	if ($this->stmt->rowCount() == 1) {
 	$this->response =$this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 }
 
@@ -2996,7 +2991,7 @@ $exam_time=$this->config->Clean(date("h:i:s a",strtotime($data['exam_time'])));
     $this->response  = $this->alert->alert_toastr("error","Failed to Delete Gallery: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 			}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 
 	}
@@ -3042,7 +3037,7 @@ try {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function getAllHolidays(){
@@ -3051,7 +3046,7 @@ try {
 	if ($this->stmt->rowCount() > 0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 }
 	}
 
@@ -3074,7 +3069,7 @@ try {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 	public function deleteExamById($Id){
 		if (!$this->config->isEmptyStr($Id)) {
@@ -3095,7 +3090,7 @@ try {
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
   public function fetch_all_local_govt_state($state){
@@ -3116,7 +3111,7 @@ try {
         }
         }
         return $this->response;
-        unset($this->dbh);
+       $this->dbh = null;
         }
 
         public function get_states_of_origin_InDropDown(){
@@ -3131,6 +3126,7 @@ try {
         $this->response = false;
         }
         return $this->response;
+        $this->dbh = null;
         }
 
 }

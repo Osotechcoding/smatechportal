@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 //require_once 'initialize.php';
 //require_once 'Osotech.php';
 //Load Composer's autoloader
-require_once __DIR__'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 class Osotech_mailing extends Osotech {
 

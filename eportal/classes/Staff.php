@@ -16,6 +16,7 @@ class Staff {
 	protected $config;//default config
 
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -135,7 +136,7 @@ $this->stmt->execute(array($_SESSION['STAFF_USERNAME'],$_SESSION['STAFF_EMAIL'],
 		}
 		
    return $this->response;
-   unset($this->dbh);
+  $this->dbh = null;
 	}
 
 	 public function login_from_cookie_staff($data){
@@ -229,7 +230,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
       }
     }
     return $this->response;
-    unset($this->dbh);
+   $this->dbh = null;
 		}
 
 		//reset staff password
@@ -312,7 +313,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -337,7 +338,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 		
 	}
@@ -350,7 +351,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 		
 	}
@@ -361,7 +362,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 		if ($this->stmt->rowCount()==1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -371,7 +372,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 		if ($this->stmt->rowCount()==1) {
 			$this->response = $this->stmt->fetch();
 			return json_encode($this->response, JSON_PRETTY_PRINT);
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 		
 	}
@@ -411,7 +412,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 			 }
 	}
 	return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	public function assign_staff_class_teacher($data){}
@@ -421,7 +422,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 		if ($this->stmt->execute([$id])) {
 			$this->response = true;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -475,7 +476,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 	}
 	//create new staff
 	public function create_new_staff($d){
@@ -559,7 +560,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	public function checkBankDetails($staffId): bool{
@@ -571,7 +572,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 			$this->response = false;
 		}
 		return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 	}
 
 	//generate staff admission no
@@ -644,7 +645,7 @@ public function assign_staff_office($data){
 		}
 	}
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 
 //fetch office details json format
@@ -655,7 +656,7 @@ public function get_staff_office_details_json($office_id){
 		if ($this->stmt->rowCount()==1) {
 		$this->response =$this->stmt->fetch();
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 }
 
@@ -692,7 +693,7 @@ public function update_staff_office_post($data){
 			 }
 	}
 	return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 }
 
 public function count_staff_by_gender($gender){
@@ -702,7 +703,7 @@ public function count_staff_by_gender($gender){
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 		
 	}
@@ -731,7 +732,7 @@ public function count_staff_by_gender($gender){
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 		
 	}
@@ -742,7 +743,7 @@ public function count_staff_by_gender($gender){
 	if ($this->stmt->rowCount()==1) {
 		$this->response = $this->stmt->fetch();
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 	}
 }
 public function count_all_online_staff(){
@@ -752,7 +753,7 @@ public function count_all_online_staff(){
 			$rows = $this->stmt->fetch();
 			$this->response =$rows->online;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 		
 	}
@@ -811,7 +812,7 @@ public function count_all_online_staff(){
     $this->response = $this->alert->alert_toastr("error","Please Select a passport to Upload",__OSO_APP_NAME__." Says");
    }
    return $this->response;
-   unset($this->dbh);
+  $this->dbh = null;
 	}
 
 
@@ -832,7 +833,7 @@ public function checkStaffTokenExists($name,$email,$token){
 		}
 	}
 	return $this->response;
-	 unset($this->dbh);
+	$this->dbh = null;
 }
 
 //delete toke upon logged out
@@ -842,7 +843,7 @@ public function deleteSessionToken($name,$email,$token){
 		$this->response = true;
 		}
 		return $this->response;
-		 unset($this->dbh);
+		$this->dbh = null;
 }
 
 

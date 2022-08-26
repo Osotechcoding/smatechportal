@@ -6,35 +6,84 @@
         <div class="col-md-12">
           <h3>Student Info</h3>
           <div class="row">
-          <div class="col-md-4 dashboard-users-white">
+          <div class="col-md-3 dashboard-users-white">
               <div class="card text-center bg-dark">
                 <div class="card-body py-1">
                   <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
                     <i class="fa fa-child fa-2x font-medium-5"></i>
                   </div>
-                  <div class="text-white line-ellipsis">MALE STUDENTS</div>
-                  <h3 class="mb-0 text-white"><?php echo $Student->count_students_by_gender("Male");?></h3>
+                  <div class="text-white line-ellipsis">DAY</div>
+                  <h3 class="mb-0 text-white"><?php echo $Student->countStudentByType("Day");?></h3>
                 </div>
               </div>
             </div>
+            <div class="col-md-3 dashboard-users-white">
+              <div class="card text-center bg-dark">
+                <div class="card-body py-1">
+                  <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
+                    <i class="fa fa-hotel fa-2x font-medium-5"></i>
+                  </div>
+                  <div class="text-white line-ellipsis">BOARDING</div>
+                  <h3 class="mb-0 text-white"><?php echo $Student->countStudentByType("Boarding");?></h3>
+                </div>
+              </div>
+            </div>
+           <div class="col-md-3 dashboard-users-white">
+              <div class="card text-center bg-dark">
+                <div class="card-body py-1">
+                  <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
+                   <i class="fa fa-hotel fa-2x font-medium-5"></i>
+                  </div>
+                  <div class="text-white line-ellipsis">Male Boarding</div>
+                  <h3 class="mb-0 text-white"><?php echo $Student->countStudentTypeByGender("Boarding","Male");?></h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 dashboard-users-white">
+              <div class="card text-center bg-dark">
+                <div class="card-body py-1">
+                  <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
+                   <i class="fa fa-hotel fa-2x font-medium-5"></i>
+                  </div>
+                  <div class="text-white line-ellipsis">Female Boarding</div>
+                  <h3 class="mb-0 text-white"><?php echo $Student->countStudentTypeByGender("Boarding","Female");?></h3>
+                </div>
+              </div>
+            </div>
+
             <div class="col-md-4 dashboard-users-white">
-              <div class="card text-center bg-dark">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
-                    <i class="fa fa-child fa-2x font-medium-5"></i>
-                  </div>
-                  <div class="text-white line-ellipsis">FEMALE STUDENTS</div>
-                  <h3 class="mb-0 text-white"><?php echo $Student->count_students_by_gender("Female");?></h3>
-                </div>
-              </div>
-            </div>
-           <div class="col-md-4 dashboard-users-white">
               <div class="card text-center bg-dark">
                 <div class="card-body py-1">
                   <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
                    <i class="fa fa-graduation-cap fa-2x font-medium-5"></i>
                   </div>
-                  <div class="text-white line-ellipsis">ALL STUDENTS</div>
+                  <div class="text-white line-ellipsis">Male </div>
+                  <h3 class="mb-0 text-white"><?php echo $Student->count_students_by_gender("Male");?></h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 dashboard-users-white">
+              <div class="card text-center bg-dark">
+                <div class="card-body py-1">
+                  <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
+                   <i class="fa fa-graduation-cap fa-2x font-medium-5"></i>
+                  </div>
+                  <div class="text-white line-ellipsis">Female</div>
+                  <h3 class="mb-0 text-white"><?php echo $Student->count_students_by_gender("Female");?></h3>
+                </div>
+              </div>
+            </div>
+
+           
+            <div class="col-md-4 dashboard-users-white">
+              <div class="card text-center bg-dark">
+                <div class="card-body py-1">
+                  <div class="badge-circle badge-circle-lg badge-circle-light mx-auto mb-50">
+                   <i class="fa fa-graduation-cap fa-2x font-medium-5"></i>
+                  </div>
+                  <div class="text-white line-ellipsis">STUDENTS</div>
                   <h3 class="mb-0 text-white"><?php echo $Student->count_total_visap_students();?></h3>
                 </div>
               </div>

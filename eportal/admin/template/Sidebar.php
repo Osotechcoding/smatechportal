@@ -173,12 +173,24 @@
 
           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-bus fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="SCHOOL BUS"> SCHOOL BUS </span></a>
             <ul class="menu-content">
-               <li><a class="d-flex align-items-center" href="bus_route"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Bus">Manage Bus</span></a>
+            
+               <li>
+                <a class="d-flex align-items-center" href="bus_driver"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Drivers">Manage Drivers</span></a>
               </li>
 
-               <li><a class="d-flex align-items-center" href="student_n_bus"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Student & Bus">Student & Bus</span></a>
+               <li>
+                <a class="d-flex align-items-center" href="create_bus"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Vehicles">Manage Vehicles</span></a>
               </li>
-              <li><a class="d-flex align-items-center" href="running_cost"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Bus Maintenance">Bus Maintenance</span></a>
+
+               <li>
+                <a class="d-flex align-items-center" href="bus_route"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Routes"> Manage Routes</span></a>
+              </li>
+
+               <li>
+                <a class="d-flex align-items-center" href="student_n_bus"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Assign Bus">Assign Bus</span></a>
+              </li>
+              <li>
+                <a class="d-flex align-items-center" href="running_cost"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Vehicle Maintenance">Vehicle Maintenance</span></a>
               </li>
             </ul>
           </li>
@@ -187,15 +199,15 @@
           </li>  -->
           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-calendar fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="BLOGS &amp; EVENTS">BLOGS &amp; EVENTS</span></a>
             <ul class="menu-content">
-               <li><a class="d-flex align-items-center" href="add_event"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Add Events">Add Events</span></a> </li>
-                <li><a class="d-flex align-items-center" href="add_holidays"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Declare Holiday">Declare Holidays</span></a> </li>
+               <li><a class="d-flex align-items-center" href="add_event"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Upload Events">Upload Events</span></a> </li>
+                <li><a class="d-flex align-items-center" href="add_holidays"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Holiday">Manage Holidays</span></a> </li>
 
-               <li><a class="d-flex align-items-center" href="uploadblog"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n=" Add Blog Post"> Add Blog Post</span></a>
+               <li><a class="d-flex align-items-center" href="uploadblog"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Newsletter"> Manage Newsletter</span></a>
               </li>
-               <li><a class="d-flex align-items-center" href="add_gallery"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Add Gallery">Add Gallery </span></a>
-                <li><a class="d-flex align-items-center" href="add_slider"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Add Home Slider">Add Home Slider</span></a>
+               <li><a class="d-flex align-items-center" href="add_gallery"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Upload Gallery">Upload Gallery </span></a>
+                <li><a class="d-flex align-items-center" href="add_slider"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Upload Home Slider">Upload Home Slider</span></a>
               </li>
-              <li><a class="d-flex align-items-center" href="add_testimonial"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="People Testimonials">People Testimonials</span></a>
+              <li><a class="d-flex align-items-center" href="add_testimonial"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Upload Testimonials">Upload Testimonials</span></a>
               </li>
 
                 <li><a class="d-flex align-items-center" href="visitor_book"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Vistors Book">Vistors Book</span></a>
@@ -211,16 +223,16 @@
             </ul>
           </li>
           <!-- MSG -->
-           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-envelope fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="Messages">MESSAGES</span></a>
+         <!--   <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-envelope fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="Messages">MESSAGES</span></a>
             <ul class="menu-content">
                <li><a class="d-flex align-items-center" href="javaScript:void(0)"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Send Message">Send </span></a> </li>
                  <li><a class="d-flex align-items-center" href="javaScript:void(0)"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Inbox"> Inbox</span></a> </li>
             </ul>
-          </li>
+          </li> -->
           <!-- MSG -->
        <!--  <li class=" navigation-header text-truncate"><span data-i18n="SETTINGS">SETTINGS</span>
           </li> -->
-           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-cogs fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="Settings">Application Settings</span></a>
+           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-cogs fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="SETTINGS">SETTINGS</span></a>
             <ul class="menu-content">
                <li class=" nav-item"><a href="app_settings"><i class="fa fa-cogs fa-1x" data-icon="morph-folder"></i><span class="menu-title text-truncate" data-i18n="School Profile"> School Profile</span></a>
           </li>

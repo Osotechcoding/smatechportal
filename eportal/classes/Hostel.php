@@ -10,6 +10,7 @@ class Hostel {
 	protected $table_name ="visap_hostel_tbl";
 
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -51,11 +52,11 @@ class Hostel {
 		}
 
 		return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 	}
 
 	public function createHostelRoomsAndBedSpace($data){
-		$countInserted = 0;
+		
 		$amount = $this->config->Clean($data['amount_per_session']);
 		$hostel_id = $this->config->Clean($data['hId']);
 		$room_name = $this->config->Clean($data['roomname']);
@@ -74,15 +75,16 @@ class Hostel {
     	$this->stmt = $this->dbh->prepare("INSERT INTO `visap_hostel_rooms_tbl` (`hostel_id`,`room_desc`,`beds`,`amount`, `created_at`) VALUES (?,?,?,?,?);");
     	if ($this->stmt->execute(array($hostel_id,$room_name,$beds,$amount,$created_at))) {
     		$lastCreatedId = $this->dbh->lastInsertId();
+    		$countInserted = 0;
     		//lets create Bonks based on the Number of Beds Space provided
     		for ($counter=1; $counter <= (int)$beds; $counter++) { 
     			$beds_desc = "Bonk-".$counter;
     			//insert into bed_space table visap_bed_space_tbl
     		$this->stmt = $this->dbh->prepare("INSERT INTO `visap_bed_space_tbl` (`hostel_id`,`room_id`,`room`,`bed_space`,`amount`) VALUES (?,?,?,?,?);");
     		$this->stmt->execute ([$hostel_id,$lastCreatedId,$room_name,$beds_desc,$amount]);
+    		 $countInserted = $countInserted + $this->stmt->rowCount();
     		}
     		if ($this->stmt->rowCount() > 0) {
-    			 $countInserted = $countInserted + $this->stmt->rowCount();
     			$this->dbh->commit();
     	$this->response = $this->alert->alert_toastr("success",ucwords($room_name)." with $countInserted Bed Spaces was Created  Successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 							window.location.reload();
@@ -99,7 +101,7 @@ class Hostel {
 		}
 
 		return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		
 	}
 
@@ -133,7 +135,7 @@ class Hostel {
 			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 		}
 		return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 	}
 
 	public function getHostels(){
@@ -142,7 +144,7 @@ class Hostel {
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -152,7 +154,7 @@ class Hostel {
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -162,7 +164,7 @@ class Hostel {
 		if ($this->stmt->rowCount() ==1) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -172,7 +174,7 @@ class Hostel {
 		if ($this->stmt->rowCount() ==1) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -182,7 +184,7 @@ class Hostel {
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -192,7 +194,7 @@ class Hostel {
 		if ($this->stmt->rowCount()>0) {
 			$this->response =$this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -202,7 +204,7 @@ class Hostel {
 		if ($this->stmt->rowCount() ==1) {
 			$this->response =$this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -216,7 +218,7 @@ class Hostel {
 			$this->stmt->execute([$val1,$val2]);
 			$rowCount = $this->stmt->rowCount();
 			return $rowCount >= 1 ? true : false;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -232,7 +234,7 @@ class Hostel {
 			$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 	}
 
 	public function countDataByTableColumn($table,$column_name){
@@ -242,7 +244,7 @@ class Hostel {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -253,7 +255,7 @@ class Hostel {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->total_beds;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -264,7 +266,7 @@ class Hostel {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -275,7 +277,7 @@ class Hostel {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -286,7 +288,7 @@ class Hostel {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -339,7 +341,7 @@ class Hostel {
 		}
 
 		return  $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 	}
 
 	//check hostel already booked 
@@ -350,7 +352,7 @@ class Hostel {
 			$this->stmt->execute([$stuId,$bedId]);
 			$rowCount = $this->stmt->rowCount();
 			return $rowCount == 1 ? true : false;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -360,7 +362,7 @@ class Hostel {
 		if ($this->stmt->rowCount() > 0) {
 			 $this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 
@@ -370,7 +372,7 @@ class Hostel {
 		if ($this->stmt->rowCount() == 1) {
 			 $this->response = $this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 	}
 	//Hostel management methods end

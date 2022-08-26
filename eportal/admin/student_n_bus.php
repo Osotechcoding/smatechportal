@@ -58,69 +58,58 @@ require_once "helpers/helper.php";
 <!-- Column selectors with Export Options and print table -->
 <section id="column-selectors">
    <!-- Statistics Cards Starts -->
-        <div class="row">
-       
-        <div class="col-xl-12 col-md-12">
-          <div class="row">
-            <div class="col-md-3 dashboard-users-success">
-              <div class="card text-center bg-warning">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-user-plus fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Drivers</h3></div>
-                  <h2 class="text-white mb-0"><?php echo 10; ?></h2>
-                  
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 dashboard-users-success">
-              <div class="card text-center bg-info">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-bus fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Total Buses</h3></div>
-                  <h2 class="text-white mb-0"> <?php echo 20;?></h2>
-                 
-                </div>
-              </div>
-            </div>
-
-             <div class="col-md-3 dashboard-users-success">
-              <div class="card text-center bg-danger">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-graduation-cap fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white"> Total Female Assigned</h3></div>
-                  <h2 class="text-white mb-0"><?php echo 30;?></h2>
-                  
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 dashboard-users-success">
-              <div class="card text-center bg-dark">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-graduation-cap fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Total Male Assigned</h3></div>
-                  <h2 class="text-white mb-0"><?php echo 50; ?></h2>
-                  
-                </div>
-              </div>
-            </div>
-           
-            
-          </div>
-        </div>
-       
-      </div>
+       <?php include_once ("Links/schoolBusLinks.php"); ?>
        <!-- Revenue Growth Chart Starts -->
+       <div class="card">
+        <div class="card-body">
+          <div class="users-list-filter px-1">
+        <form action="" method="post">
+           <div class="row border rounded py-2 mb-2">
+                 <div class="col-12 col-md-4 col-sm-6 col-lg-4">
+                  <label for="users-list-verified">Student Class</label>
+                  <fieldset class="form-group">
+                    <select name="student_class" class="form-control form-control-lg select2" id="users-list-verified">
+                           <option value="">Choose...</option>
+                           <?php echo $Administration->get_classroom_InDropDown_list();?>
+                        </select>
+                   </fieldset>
+               </div>
+           <div class="col-12 col-md-4 col-sm-6 col-lg-4">
+                  <label for="users-list-role"> Student Type</label>
+                    <fieldset class="form-group">
+                        <select name="student_type" class="form-control">
+                            <option value="Day" selected>Day Students</option>
+                            <!-- <option value="Boaring">Boarding</option> -->
+                        </select>
+                    </fieldset>
+                </div>
+                <div class="col-12 col-md-4 col-sm-6 col-lg-4 d-flex align-items-center">
+                    <button type="submit" name="filter-btnn" value="show_list_of_students" class="btn btn-dark btn-block glow mb-0">Show students</button>
+                </div>
+            </div>
+        </form>
+    </div>
+        </div>
+      </div>
   <div class="row">
     <div class="col-12">
-      <div class="card">
+      <?php if (isset($_POST['filter-btnn']) && $_POST['filter-btnn']!=""): ?>
+         <?php if (empty($_POST['student_class'])) {
+          echo '<div class="text-center col-12 col-md-12">
+          '.$Alert->alert_msg("Fliter Class is required!","danger").'
+          </div>';
+         }elseif (empty($_POST['student_type'])) {
+           echo '<div class="text-center col-12 col-md-12">
+          '.$Alert->alert_msg("Students Status is Required!","danger").'
+          </div>';
+         }else{
+          $student_class = $Configuration->Clean($_POST['student_class']);
+          $student_type = $Configuration->Clean($_POST['student_type']);
+          $filtered_students =$Student->getStudentListByType($student_class,$student_type);
+          if ($filtered_students) {
+            $count=0;
+            ?>
+            <div class="card">
         <div class="card-header">
         </div>
         <div class="card-body card-dashboard">
@@ -133,38 +122,51 @@ require_once "helpers/helper.php";
                   <th>Student Name</th>
                   <th>Admission No</th>
                   <th>Class</th>
-                  <th>Address</th>
-                  <th>Assign To Bus</th>
+                  <th>Assign Bus</th>
+                  <th>Payment</th>
                 </tr>
               </thead>
               <tbody>
+                 <?php 
+                 foreach ($filtered_students as $filtered) { 
+            $count++;
+            ?>
+
                 <tr>
                   <!-- class="rounded-circle" -->
-                  <td><img src="result-asset/author.jpg" width="80" alt="photo"></td>
-                  <td>Osotech Sam</td>
-                  <td>VISAP/2012/005</td>
-                  <td>JSS1</td>
-                  <td>Sango Ota Ogun State</td>
-                 <td><div class="btn-group dropdown mb-1">
-            <button type="button" class="btn btn-warning">Options</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           <div class="dropdown-menu">
-              <a class="dropdown-item text-danger astb_btn" href="javascript:void(0);"  id="<?php echo urlencode(1);?>"><span class="fa fa-bus"></span>Assign to Bus</a>
-              <a class="dropdown-item text-warning vsbp_btn" id="<?php echo urlencode(123);?>" href="javascript:void(0);"><span class="fa fa-bar-chart"></span> Bus Fee History</a>
+                  <td><?php if ($filtered->stdPassport ==""||$filtered->stdPassport ==NULL): ?>
+                <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $filtered->stdRegNo;?>&actionId=<?php echo $filtered->stdId;?>"><button type="button" class="badge badge-dark">
+                  <span class="fa fa-camera"></span> Upload</button></a>
+                <?php else: ?>
+                  <img src="../schoolImages/students/<?php echo $filtered->stdPassport;?>" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
+              <?php endif ?></td>
+                 <td><?php echo ucwords($filtered->stdSurName." ".$filtered->stdFirstName." ".$filtered->stdMiddleName) ?></td>
+          <td><?php echo strtoupper($filtered->stdRegNo)?></td>
+          <td><?php echo strtoupper($filtered->studentClass)?></td>
+                  
+                 <td><button class="btn btn-dark btn-sm astb_btn" id="<?php echo $Configuration->saltifyString($filtered->stdId);?>"><span class="fa fa-bus"></span>Assign</button></td>
+                 <td><button class="btn btn-danger btn-sm vsbp_btn" id="<?php echo $Configuration->saltifyString($filtered->stdId);?>"><span class="fa fa-bar-chart"></span>Payments</button>
 
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="javascript:void(0);"><span class="fa fa-trash"></span> Delete</a>
-            </div>
-          </div></td>
+                  </td>
                 </tr>
+                 <?php }
+           ?>
                 
               </tbody>
             </table>
           </div>
         </div>
       </div>
+
+            <?php
+          }else{
+             echo '<div class="text-center col-12 col-md-12">
+          '.$Alert->alert_msg("No Result Found!, Please try again","danger").'
+          </div>';
+          }
+         } ?>
+       <?php endif ?>
+      
     </div>
   </div>
 </section>
@@ -197,7 +199,7 @@ require_once "helpers/helper.php";
          //when view payment history btn is clicked
         $(document).on("click",".vsbp_btn", function(){
           let st_id = $(this).attr("id");
-          href2 ="student_bus_payment_history?his_or_her_id=";
+          href2 ="student_bus_payment_history?student_id=";
          //redirect to assign_student_Bus
          setTimeout(()=>{
           self.location.href=href2+st_id;

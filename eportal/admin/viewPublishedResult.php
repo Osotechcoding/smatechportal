@@ -157,7 +157,7 @@ if ($viewdAll) {?>
               <tbody class="text-center">
                 <?php 
               foreach ($viewdAll as $value) {
-                  $count_student = $Result->getNumberOfStudentSitForExamByClass($value->studentGrade,$value->term,$value->aca_session); ?>
+                  $count_student = $Result->getNumberOfStudentSitForExamByClass($resultTable,$value->studentGrade,$value->term,$value->aca_session); ?>
                   <tr>
                   <td><?php echo $value->studentGrade;?></td>
                   <td><span class="badge badge-pill badge-info"><?php echo $count_student; ?></span></td>

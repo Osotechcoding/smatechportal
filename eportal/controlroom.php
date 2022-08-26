@@ -28,19 +28,19 @@ background-repeat: no-repeat;">
 <div class="loginbox">
 <div class="login-left">
 <img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="150" class="img-fluid" alt="logo" style="border: 2px solid deepskyblue;border-radius:10px;background: #ffffff;">
-<h3 class="text-center text-warning"><?php echo ucwords($SmappDetails->school_name); ?> <h3>
+<h3 class="text-center text-warning mt-3"><?php echo ucwords($SmappDetails->school_short_name); ?> <h3>
 <p class="text-center" style="font-size: 13px;">  <span class="text-white">Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></p>
 </div>
 <div class="login-right">
 <div class="login-right-wrap">
-<div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="50" class="img-fluid" alt="logo"></div>
-<h1 class="mb-3 mt-2" style="color: #593128;">ADMINISTRATOR</h1>
+<div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="70" class="img-fluid" alt="logo"></div>
+<h1 class="mb-3 mt-2" style="color: #593128;">SUPER ADMIN</h1>
 <form id="adminLoginForm">
 <input type="hidden" name="action" value="logAdminIn">
 <input type="hidden" name="txss_token" value="<?php echo $tses_token;?>">
 <div class="form-group">
-<input type="text" autocomplete="off" class="form-control" name="ad_email" id="exampleInputEmail1"
-placeholder="Enter your e-mail" value="<?php if(isset($_COOKIE['login_email'])){
+<input type="text" autocomplete="off" class="form-control" name="ad_email" 
+placeholder="admin@smatech.com" value="<?php if(isset($_COOKIE['login_email'])){
     echo $_COOKIE['login_email'];
 }else{
     echo '';

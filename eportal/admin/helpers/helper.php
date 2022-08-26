@@ -19,6 +19,7 @@ $Pin_serial     = new Pins();
 $Alert          = new Alert();
 $Blog          = new Blog();
 $Hostel        = new Hostel();
+$Bus = new Bus();
 
 @$Configuration->osotech_session_kick();
 $Admin->check_Auth_data();

@@ -19,6 +19,7 @@ class Result {
 	protected $config;//default config
 
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -79,7 +80,7 @@ class Result {
 		}
 
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	//upload head of school result comment
@@ -138,7 +139,7 @@ class Result {
 		}
 
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	//View uploaded result method
@@ -148,7 +149,7 @@ class Result {
 		if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -239,7 +240,7 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 
 	//View published result method
@@ -249,7 +250,7 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -270,7 +271,7 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -281,7 +282,7 @@ $this->response = $this->alert->alert_toastr("error","Unknown Error Occured, Ple
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->rowCount();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -364,7 +365,7 @@ $this->response = $this->alert->alert_toastr("error","Sorry No result found!",__
 
 		}
 	return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function update_school_result_grading($data){
@@ -407,7 +408,7 @@ $this->response = $this->alert->alert_toastr("error","Sorry No result found!",__
 		if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -417,7 +418,7 @@ $this->response = $this->alert->alert_toastr("error","Sorry No result found!",__
 		if ($this->stmt->rowCount()==1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -427,7 +428,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 		if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 
@@ -505,7 +506,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 		}
 		
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function get_all_uploaded_school_result($resultTable,$stdGrade,$subject,$term,$session){
@@ -514,7 +515,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 		if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -538,7 +539,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			if ($this->stmt->rowCount() == 1) {
 				$this->response = $this->stmt->fetch();
 				return $this->response;
-				unset($this->dbh);
+			$this->dbh = null;
 			}
 	}
 
@@ -595,7 +596,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			}
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function checkResultReadyModule($querytable,$stdReg,$stdGrade,$term,$session): bool{
@@ -637,7 +638,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			$this->response =0;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function getUploadedResultByClass($resultTable,$stdgrade,$subject, $term,$session){
@@ -646,7 +647,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			if ($this->stmt->rowCount()>0) {
 			$this->response = $this->stmt->fetchAll();
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 		}
 	}
 
@@ -687,7 +688,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function checkMyResultByMySelf($data){
@@ -923,7 +924,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 	}
 	}
 	return $this->response;
-	unset($this->dbh);
+$this->dbh = null;
 	}
 
 }

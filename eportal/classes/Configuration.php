@@ -90,6 +90,7 @@ public function check_two_passwords_hash($password,$db_password){
 		// code...
 		$this->response = $this->stmt->fetch();
 		return $this->response;
+    $this->dbh = null;
 	}
 	}
 
@@ -215,7 +216,7 @@ public function check_student_session_data(){
     if ($this->stmt->rowCount()>0) {
       $this->response = $this->stmt->fetchAll();
       return $this->response;
-      unset($this->dbh);
+     $this->dbh = null;
     }
   }
 public function check_user_activity_allowed($module){
@@ -225,7 +226,7 @@ public function check_user_activity_allowed($module){
     if ($this->stmt->rowCount()==1) {
       $this->response = true;
       return $this->response;
-       unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -298,7 +299,7 @@ public function check_user_activity_allowed($module){
     if ($this->stmt->rowCount()==1) {
       $this->response = true;
       return $this->response;
-       unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -311,4 +312,4 @@ public function check_user_activity_allowed($module){
     }
 
 }
-$Configuration = new Configuration();
+//$Configuration = new Configuration();

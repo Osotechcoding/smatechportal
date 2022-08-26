@@ -1,6 +1,6 @@
 <?php
 require_once "helpers/helper.php";
-$_Pins_ = new Pins();
+// $Pin_serial = new Pins();
  ?>
  <?php include_once("../actions/show_pins.php");?>
 <!DOCTYPE html>
@@ -80,7 +80,7 @@ $_Pins_ = new Pins();
               </thead>
               <tbody class="text-center">
                 <?php
-                $pin_datas = $_Pins_->get_pins("tbl_reg_pins");
+                $pin_datas = $Pin_serial->get_pins("tbl_reg_pins");
                  if ($pin_datas!="") {
                   $cnt =1;
                  foreach ($pin_datas as $pin_data):?>

@@ -10,6 +10,7 @@ class Blog {
 	protected $response;
 	protected $config;
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -85,7 +86,7 @@ try {
 
 		}
 		return $this->response;
-unset($this->dbh);
+	$this->dbh = null;
 	}
 
 public function osotech_resize_image($image_resource_id,$width,$height) {
@@ -103,7 +104,7 @@ $this->stmt->execute(array($blogStatus));
 if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -114,7 +115,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -125,7 +126,7 @@ $this->stmt->execute(array($status));
 if ($this->stmt->rowCount()>0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -135,7 +136,7 @@ $this->stmt->execute([$Id]);
 if ($this->stmt->rowCount()==1) {
 	$this->response = $this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -145,7 +146,7 @@ $this->stmt->execute(array($status));
 if ($this->stmt->rowCount()> 0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 //count all blogs
@@ -156,7 +157,7 @@ if ($this->stmt->rowCount()>0) {
 	$row =$this->stmt->fetch();
 	$this->response = $row->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -168,7 +169,7 @@ if ($this->stmt->rowCount()>0) {
 	$row =$this->stmt->fetch();
 	$this->response = $row->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -179,7 +180,7 @@ if ($this->stmt->rowCount()>0) {
 	$row =$this->stmt->fetch();
 	$this->response = $row->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -249,7 +250,7 @@ public function upload_upcomingEvents($data,$file){
 	}
 		}
  	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 
 public function get_event_ById($Id){
@@ -258,7 +259,7 @@ $this->stmt->execute([$Id]);
 if ($this->stmt->rowCount()==1) {
 	$this->response = $this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -269,7 +270,7 @@ $this->stmt->execute(array($status));
 if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -280,7 +281,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -291,7 +292,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -302,7 +303,7 @@ if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
 	$this->response = $rows->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -368,7 +369,7 @@ public function createNewGallery($data,$file){
 	}
 		}
  	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 
 //get gallery images
@@ -378,7 +379,7 @@ $this->stmt->execute();
 if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 public function countGalleryByType(string $type){
@@ -388,7 +389,7 @@ if ($this->stmt->rowCount() >0) {
 	$cont = $this->stmt->fetch();
 	$this->response = $cont->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 
@@ -399,7 +400,7 @@ if ($this->stmt->rowCount() >0) {
 	$cont = $this->stmt->fetch();
 	$this->response = $cont->cnt;
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 }
 public function getGalleryById($Id){
@@ -408,7 +409,7 @@ public function getGalleryById($Id){
 	if ($this->stmt->rowCount() == 1) {
 	$this->response =$this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 	}
 }
 
@@ -435,7 +436,7 @@ public function delete_galleryById($Id){
     $this->response  = $this->alert->alert_toastr("error","Failed to Delete Gallery: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 			}
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 
 	}
@@ -447,7 +448,7 @@ public function delete_galleryById($Id){
 	if ($this->stmt->rowCount() == 1) {
 	$this->response =$this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 	}
 }
 
@@ -475,7 +476,7 @@ public function delete_galleryById($Id){
     $this->response  = $this->alert->alert_toastr("error","Failed to Delete Gallery: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 			}
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 
 	}
@@ -539,7 +540,7 @@ public function delete_galleryById($Id){
 	}
 		}
  	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 	}
 
 	public function getAllSliders(){
@@ -548,7 +549,7 @@ public function delete_galleryById($Id){
 	if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 	}
 
@@ -613,7 +614,7 @@ public function delete_galleryById($Id){
 	}
 		}
  	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 	}
 
 
@@ -623,7 +624,7 @@ public function delete_galleryById($Id){
 	if ($this->stmt->rowCount() >0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 }
 	}
 
@@ -633,7 +634,7 @@ public function getTestimonialById($Id){
 	if ($this->stmt->rowCount() == 1) {
 	$this->response =$this->stmt->fetch();
 	return $this->response;
-	unset($this->dbh);
+	$this->dbh = null;
 	}
 }
 
@@ -661,7 +662,7 @@ public function getTestimonialById($Id){
     $this->response  = $this->alert->alert_toastr("error","Failed to Delete: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 			}
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 	}
 

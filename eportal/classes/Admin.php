@@ -13,6 +13,7 @@ class Admin{
 	protected $response;
 	protected $config;
 	public function __construct(){
+		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -98,7 +99,7 @@ class Admin{
 		}
 
    return $this->response;
-   unset($this->dbh);
+  $this->dbh = null;
   }
 
   public function getAdminDetails(){
@@ -111,7 +112,7 @@ class Admin{
   		$this->response = $this->stmt->fetch();
   	}
   	return $this->response;
-  	unset($this->dbh);
+  	$this->dbh = null;
   }
 
   public function isSuperAdmin($adminId){
@@ -121,7 +122,7 @@ class Admin{
 		if ($this->stmt->rowCount()==1) {
 			$this->response = $this->stmt->fetch();
   		return $this->response;
-  		unset($this->dbh);
+  		$this->dbh = null;
 		}
   }
 
@@ -175,7 +176,7 @@ $this->response = $this->alert->alert_toastr("error",$lang['login_error5'],__OSO
       }
     }
     return $this->response;
-    unset($this->dbh);
+   $this->dbh = null;
 		}
 
 		public function check_Auth_data(){
@@ -242,7 +243,7 @@ public function reset_admin_password($data){
 			}
 
 			return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 		public function update_admin_details_now($data){
 			$UserName = $this->config->Clean($data['UserName']);
@@ -275,7 +276,7 @@ public function reset_admin_password($data){
 						}
 			}
 			return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 
 		//GENERATE OAUTH CODE FOR SCHOOLS
@@ -319,7 +320,7 @@ public function reset_admin_password($data){
 			}
 
 			return $this->response;
-				unset($this->dbh);
+				$this->dbh = null;
 		}
 
 		public function getAllOauthCode(){
@@ -331,7 +332,7 @@ public function reset_admin_password($data){
 				$this->response = false;
 			}
 			return $this->response;
-			unset($this->dbh);
+			$this->dbh = null;
 		}
 
 
@@ -357,7 +358,7 @@ public function reset_admin_password($data){
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+		$this->dbh = null;
 		}
 
 		public function checkAdminTokenExists($name,$email,$token){
@@ -376,7 +377,7 @@ public function reset_admin_password($data){
 		}
 	}
 	return $this->response;
-	 unset($this->dbh);
+	$this->dbh = null;
 }
 
 //delete toke upon logged out
@@ -386,7 +387,7 @@ public function deleteAdminSessionToken($name,$email,$token){
 		$this->response = true;
 		}
 		return $this->response;
-		 unset($this->dbh);
+		$this->dbh = null;
 }
 			
 		

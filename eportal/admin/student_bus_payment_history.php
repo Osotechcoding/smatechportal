@@ -1,13 +1,21 @@
 <?php 
 require_once "helpers/helper.php";
  ?>
+  <?php 
+ if (isset($_GET['student_id']) && $_GET['student_id'] !== "") {
+   $studentId = $Configuration->unsaltifyString($_GET['student_id']);
+  $student_data = $Student->get_student_data_byId($studentId);
+ }else{
+  echo "<script> window.location.href='student_n_bus';</script>";
+ }
+  ?>
 <!DOCTYPE html>
 
 <html class="loading" lang="en" data-textdirection="ltr">
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name; ?> :: Online Assignments</title>
+    <title><?php echo $SmappDetails->school_name; ?> :: <?php echo strtoupper($student_data->full_name);?></title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->
@@ -41,37 +49,53 @@ require_once "helpers/helper.php";
           </div>
         </div>
         <div class="content-body">
+          <div class="row">
+             <div class="col-12">
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-bus fa-1x"></span><?php echo strtoupper($student_data->full_name);?> BUS PAYMENTS</h3>
+  </div>
+</div>
+          </div>
 <section id="basic-horizontal-layouts">
   <div class="row">
    
-    <div class="col-md-5 col-12">
-      <div class="card">
+    <div class="col-md-6 col-12">
+      <div class="card" style="border-radius: 12px;">
         <div class="text-center mt-1">
-         <h1 class="text-center text-bold" style="font-weight:bolder;">Student Info</h1>
+         <h3 class="text-center text-bold" style="font-weight:bolder;">Student Information</h3>
         </div>
         <div class="card-body">
+         
          <div class="text-center">
-           <center><img src="result-asset/author.jpg" width="150" class="rounded-circle" alt="photo"></center>
+           <center><?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
+    <?php if ($student_data->stdGender == "Male"): ?>
+      <img src="../schoolImages/students/male.png" width="100" height="100" alt="photo" style="border-radius: 10px;border: 4px solid dimgrey;">
+      <?php else: ?>
+        <img src="../schoolImages/students/female.png" width="100" height="100" alt="photo" style="border-radius: 10px;border: 4px solid dimgrey;">
+    <?php endif ?>
+      <?php else: ?>
+        <img  src="../schoolImages/students/<?php echo $student_data->stdPassport;?>" width="100" height="100" alt="photo" style="border-radius: 10px;border: 4px solid dimgrey;">
+    <?php endif ?> 
+           </center>
            <br>
-           <h4><strong>Adeola Ademola Joy</strong></h4>
-           <h4>Class: <strong> JSS1 </strong></h4>
-           <h4>Gender: <strong> Male</strong></h4>
-           <h4>Type: <strong> Day Student</strong></h4>
-           <h4> Address: <strong><i>45,Ifako Ijaye,Lagos</i></strong></h4>
+           <h5><strong><?php echo ucwords($student_data->full_name) ?></strong></h5>
+           <h5>Class: <strong> <?php echo $student_data->studentClass;?> </strong></h5>
+           <h5>Gender: <strong> <?php echo $student_data->stdGender;?></strong></h5>
+           <h5>Student Type: <strong> <?php echo $student_data->stdApplyType;?></strong></h5>
+           <h5> Address: <strong><i><?php echo $student_data->stdAddress;?></i></strong></h5>
          </div>
         </div>
       </div>
     </div>
-     <div class="col-md-7 col-12">
+     <div class="col-md-6 col-12">
       <div class="card">
         <div class="text-center mt-1">
          <h1 class="text-center text-bold" style="font-weight:bolder;">Transport Details</h1>
         </div>
         <div class="card-body">
-        <h5 class="text-center">No History for Adeola Ademola Joy</h5>
+        <h5 class="text-center">No History for <strong><?php echo ucwords($student_data->full_name) ?></strong></h5>
         <hr>
         <div class="card-footer text-center">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-warning btn-sm btn-round">Assign To Bus <i class="fa fa-bus fa-2x"></i></button> &nbsp;&nbsp;&nbsp;&nbsp;||  &nbsp;&nbsp;&nbsp; <a href="student_n_bus"><button type="button" class="btn btn-outline-danger btn-sm btn-round">Go Back <i class="fa fa-power-off fa-2x"></i></button></a>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-dark btn-sm btn-round vsbp_btn" id="<?php echo $Configuration->saltifyString($student_data->stdId);?>">Make Payment <span class="fa fa-line-chart fa-1x"></span></button> &nbsp;&nbsp;&nbsp;&nbsp;||  &nbsp;&nbsp;&nbsp; <a href="student_n_bus"><button type="button" class="btn btn-outline-danger btn-sm btn-round">Go Back <i class="fa fa-power-off fa-2x"></i></button></a>
         </div>
         </div>
       </div>
@@ -89,7 +113,7 @@ require_once "helpers/helper.php";
     
     </div>
     <!-- demo chat-->
-    <?php include ("template/ChatDemo.php");?>
+    <?php //include ("template/ChatDemo.php");?>
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
     <!-- BEGIN: Footer-->
@@ -128,19 +152,19 @@ require_once "helpers/helper.php";
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
-    <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
     <script>
       $(document).ready(function(){
-        $("#activeSessionForm").submit(function(event){
-          event.preventDefault();
-          alert("Form submitted");
-          window.location.assign("./");
+       
+         //when view payment history btn is clicked
+        $(document).on("click",".vsbp_btn", function(){
+          let st_id = $(this).attr("id");
+          href2 ="assign_Student_Bus?student_id=";
+         //redirect to assign_student_Bus
+         setTimeout(()=>{
+          self.location.href=href2+st_id;
+         },500);
         });
-        //submit new session form action 
-        $("#submitNewSessionForm").on("submit",function(event){
-          event.preventDefault();
-          alert("text")
-        })
+        //ends
       })
     </script>
     <!-- END: Page JS-->

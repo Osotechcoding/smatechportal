@@ -1,6 +1,13 @@
 <?php
 require_once "helpers/helper.php";
  ?>
+ <?php 
+ if (isset($_GET['student_id']) && $_GET['student_id'] !== "") {
+   $studentId = $Configuration->unsaltifyString($_GET['student_id']);
+ }else{
+  echo "<script> window.location.href='student_n_bus';</script>";
+ }
+  ?>
 <!DOCTYPE html>
 
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -44,74 +51,101 @@ require_once "helpers/helper.php";
 <section id="basic-horizontal-layouts">
   <div class="row">
 
-    <div class="col-md-5 col-12">
-      <div class="card">
+    <div class="col-md-6 col-12">
+      <div class="card" style="border-radius: 12px;">
         <div class="text-center mt-1">
-         <h1 class="text-center text-bold" style="font-weight:bolder;">Student Info</h1>
+         <h3 class="text-center text-bold" style="font-weight:bolder;">Student Info</h3>
         </div>
         <div class="card-body">
+          <?php $student_data = $Student->get_student_data_byId($studentId);?>
          <div class="text-center">
-           <center><img src="../result-asset/author.jpg" width="100" class="rounded-circle" alt="photo"></center>
+           <center><?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
+    <?php if ($student_data->stdGender == "Male"): ?>
+      <img src="../schoolImages/students/male.png" width="150" height="150" alt="photo" style="border-radius: 10px;border: 3px solid dimgrey;">
+      <?php else: ?>
+        <img src="../schoolImages/students/female.png" width="150" height="150" alt="photo" style="border-radius: 10px;border: 3px solid dimgrey;">
+    <?php endif ?>
+      <?php else: ?>
+        <img  src="../schoolImages/students/<?php echo $student_data->stdPassport;?>" width="150" height="150" alt="photo" style="border-radius: 10px;border: 3px solid dimgrey;">
+    <?php endif ?> 
+           </center>
            <br>
-           <h4><strong>Adeola Ademola Joy</strong></h4>
-           <h4>Class: <strong> JSS1 </strong></h4>
-           <h4>Gender: <strong> Male</strong></h4>
-           <h4>Type: <strong> Day Student</strong></h4>
-           <h4> Address: <strong><i>45,Ifako Ijaye,Lagos</i></strong></h4>
+           <h4><strong><?php echo ucwords($student_data->full_name) ?></strong></h4>
+           <h4>Class: <strong> <?php echo $student_data->studentClass;?> </strong></h4>
+           <h4>Gender: <strong> <?php echo $student_data->stdGender;?></strong></h4>
+           <h4>Student Type: <strong> <?php echo $student_data->stdApplyType;?></strong></h4>
+           <h4> Address: <strong><i><?php echo $student_data->stdAddress;?></i></strong></h4>
          </div>
-          <button type="button" class="btn btn-success btn-sm btn-round btn-block">View Bus Payment History <i class="fa fa-bar-chart fa-2x"></i></button>
+          <button type="button" class="btn btn-success btn-sm btn-round btn-block vsbp_btn" id="<?php echo $Configuration->saltifyString($student_data->stdId);?>">View Bus Payment History <i class="fa fa-bar-chart fa-2x"></i></button>
         </div>
       </div>
     </div>
-     <div class="col-md-7 col-12">
-      <div class="card">
-        <div class="text-center m-1">
-         <h1 class="text-center text-bold text-muted" style="font-weight:bolder;">ASSIGN ADEOLA ADEMOLA TO BUS ROUTE</h1>
-        </div>
+     <div class="col-md-6 col-12">
+      <div class="card"  style="border-radius: 12px;">
         <div class="card-body">
           <form class="form form-vertical">
             <div class="form-body">
               <div class="row">
-                <div class="col-12">
+                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="first-name-vertical">Bus, Driver & Route</label>
-                   <select name="" id="" class="select2 form-control">
-                     <option value="">--select--</option>
-                     <option value="">Bus One &raquo; Samson Ade &raquo; Ijaye Route</option>
-                   </select>
+                  <label for="vehicle_id">Vehicle &amp; Capacity</label>
+              <select name="" id="" class="custom-select form-control form-control-lg">
+                <option value="" selected>Choose...</option>
+                <?php echo $Bus->getAllVehiclesInDropDown();?>
+              </select>
+                    </div>
+               </div>
+               <div class="col-md-12">
+                     <div class="form-group">
+                  <label for="price">Driver</label>
+                <select name="" id="" class="custom-select form-control form-control-lg">
+                <option value="" selected>Choose...</option>
+                <?php echo $Bus->getAllVehiclesDriversInDropDown();?>
+              </select>
+                    </div>
                   </div>
-                </div>
-                <div class="col-12">
-                  <div class="form-group">
-                    <label for="email-id-vertical">Amount Charged</label>
-                    <input type="text" id="amount_charged" class="form-control" name="amount_charged"
-                      placeholder="&#8358;5,500.00" readonly>
+
+                   <div class="col-md-12">
+                     <div class="form-group">
+                  <label for="routeDescName">Route Desc</label>
+                <select name="route_name" id="routeDescName" class="custom-select form-control form-control-lg">
+                <option value="" selected>Choose...</option>
+                <?php echo $Bus->getAllBusRoutesInDropDown();?>
+              </select>
+                    </div>
                   </div>
-                </div>
-                <div class="col-12">
+        
+                   <div class="col-md-12">
+                     <div class="form-group">
+                  <label for="busStops">Areas Covered</label>
+               <textarea name="busStops" id="busStopsCovered" readonly class="form-control form-control-lg"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="form-group">
+                  <label for="routeChargePerTerm">Charge per Term</label>
+                <input type="text" autocomplete="off" class="form-control form-control-lg" name="price" id="routeChargePerTerm" readonly>
+                    </div>
+                  </div>
+                <div class="col-6">
                   <div class="form-group">
                     <label for="contact-info-vertical">Term</label>
-                     <select name="" id="" class="select2 form-control">
-                     <option value="">--select Term--</option>
-                     <option value="1">First Term</option>
+                     <select name="" id="" class="custom-select form-control form-control-lg">
+                     <option value="" selected>Choose...</option>
+                     <option value="1st Term">First Term</option>
+                     <option value="2nd Term">2nd Term</option>
+                     <option value="3rd Term">3rd Term</option>
                    </select>
                   </div>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                   <div class="form-group">
-                    <label for="password-vertical">Year/Session</label>
-                    <input type="text" id="school_session" class="form-control" name="school_session"
-                      placeholder="2021/2022" readonly>
+                    <label for="password-vertical">Amount Paid</label>
+                    <input type="number" id="school_session" class="form-control" name="school_session"
+                      placeholder="e.g 25,000.00" >
                   </div>
                 </div>
-                  <div class="col-12">
-                  <div class="form-group">
-                    <label for="password-vertical">To Balance</label>
-                    <input type="text" id="due" class="form-control" name="due"
-                      placeholder="2,000.00" readonly>
-                  </div>
-                </div>
-
+                  
                 <div class="col-12 d-flex justify-content-end">
                   <button type="submit" class="btn btn-primary mr-1">Submit</button>
                   <button type="reset" class="btn btn-light-secondary">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -175,6 +209,40 @@ require_once "helpers/helper.php";
     <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
     <script>
       $(document).ready(function(){
+
+        $("#routeDescName").on("change", function(){
+          let routeId = $(this).val();
+          //console.log(routeId)
+          if (routeId.length>0 || routeId!="") {
+            let action ="fetch_route_details";
+       let myurl = "../actions/actions";
+       let data ='JSON';
+       let myRouteData ={routeId:routeId,action:action};
+       $.ajax({
+        url:myurl,
+        type:"POST",
+        data:myRouteData,
+        dataType:'JSON',
+        success:function (result){
+           if (result) {
+          $("#busStopsCovered").val(result.bus_stops);
+          $("#routeChargePerTerm").val(result.route_price);
+        }else{
+           $("#busStopsCovered").val('');
+          $("#routeChargePerTerm").val('');
+        }
+        }
+       });
+     }else{
+       $("#busStopsCovered").val('');
+          $("#routeChargePerTerm").val('');
+     }
+        
+
+  
+        });
+
+
         $("#activeSessionForm").submit(function(event){
           event.preventDefault();
           alert("Form submitted");
@@ -188,7 +256,21 @@ require_once "helpers/helper.php";
       })
     </script>
     <!-- END: Page JS-->
-
+<script>
+      $(document).ready(function(){
+       
+         //when view payment history btn is clicked
+        $(document).on("click",".vsbp_btn", function(){
+          let st_id = $(this).attr("id");
+          href2 ="student_bus_payment_history?student_id=";
+         //redirect to assign_student_Bus
+         setTimeout(()=>{
+          self.location.href=href2+st_id;
+         },500);
+        });
+        //ends
+      })
+    </script>
     <!-- END: Page JS-->
   </body>
   <!-- END: Body-->
