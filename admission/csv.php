@@ -1,4 +1,5 @@
 <?php
+//CSV 
 if(isset($_POST["submit_file"]))
 {
  $file = $_FILES["file"]["tmp_name"];
