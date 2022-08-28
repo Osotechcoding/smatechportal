@@ -60,9 +60,33 @@ require_once "helpers/helper.php";
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="first-name-icon">Student Surname</label>
+                    <label for="email-id-icon">Scratch Card Pin</label>
                     <div class="position-relative has-icon-left">
-                      <input type="text" id="first-name-icon" class="form-control" name="student_surname"
+                     <input autocomplete="off" type="password"
+        class="form-control" name="cardpin" placeholder="**********">
+                      <div class="form-control-position">
+                        <i class="bx bx-credit-card"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email-id-icon">Card Serial</label>
+                    <div class="position-relative has-icon-left">
+                    <input autocomplete="off" type="text"
+        class="form-control" name="cardserial" placeholder="**********">
+                      <div class="form-control-position">
+                        <i class="bx bx-barcode"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="first-name-icon"> Surname</label>
+                    <div class="position-relative has-icon-left">
+                      <input type="text" autocomplete="off" class="form-control" name="student_surname"
                         placeholder="Father's Name">
                       <div class="form-control-position">
                         <i class="bx bx-user"></i>
@@ -126,7 +150,7 @@ require_once "helpers/helper.php";
                   <div class="form-group">
                     <label for="email-id-icon">Email</label>
                     <div class="position-relative has-icon-left">
-                      <input type="text" id="email-id-icon" class="form-control" name="student_email"
+                      <input type="text" autocomplete="off" class="form-control" name="student_email"
                         placeholder="Email">
                       <div class="form-control-position">
                         <i class="bx bx-mail-send"></i>
@@ -167,7 +191,6 @@ require_once "helpers/helper.php";
                   <option value="">Choose...</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female </option>
-                  <option value="Other">Other </option>
                   </select>
                       <div class="form-control-position">
                         <i class="bx bx-user"></i>
@@ -200,30 +223,7 @@ require_once "helpers/helper.php";
                     </div>
                   </div>
                 </div>
-                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="email-id-icon">Scratch Card Pin</label>
-                    <div class="position-relative has-icon-left">
-                     <input autocomplete="off" type="password"
-        class="form-control" name="cardpin" placeholder="**********">
-                      <div class="form-control-position">
-                        <i class="bx bx-credit-card"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                 <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="email-id-icon">Card Serial</label>
-                    <div class="position-relative has-icon-left">
-                    <input autocomplete="off" type="text"
-        class="form-control" name="cardserial" placeholder="**********">
-                      <div class="form-control-position">
-                        <i class="bx bx-barcode"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                 
                  <div class="col-md-6">
                   <div class="form-group">
                     <label for="email-id-icon">Authentication Code</label>
