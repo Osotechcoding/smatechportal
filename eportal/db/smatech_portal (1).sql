@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2022 at 08:09 AM
+-- Generation Time: Aug 28, 2022 at 11:38 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -902,16 +902,14 @@ CREATE TABLE IF NOT EXISTS `reg_pin_history_tbl` (
   `dated` date DEFAULT NULL,
   `timed` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reg_pin_history_tbl`
 --
 
 INSERT INTO `reg_pin_history_tbl` (`id`, `used_by`, `pin_code`, `pin_serial`, `dated`, `timed`) VALUES
-(1, '2022C263130002', '3804612193572', 'SMA144370', '2022-08-17', '08:25:06'),
-(2, '2022C263130003', '6214620135573', 'SMA378AB3', '2022-08-20', '09:05:27'),
-(3, '2022C263130004', '3908622451137', 'SMA312057', '2022-08-20', '12:17:22');
+(1, '2022C263130001', '3804612193572', 'SMA144370', '2022-08-28', '04:00:01');
 
 -- --------------------------------------------------------
 
@@ -944,7 +942,14 @@ CREATE TABLE IF NOT EXISTS `school_oauth_code_tbl` (
   `oauth_code` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `school_oauth_code_tbl`
+--
+
+INSERT INTO `school_oauth_code_tbl` (`id`, `school_name`, `term`, `active_ses`, `oauth_code`, `created_at`) VALUES
+(1, 'Glory Supreme School Ota', '1st Term', '2022/2023', 'SMA48778', '2022-08-28');
 
 -- --------------------------------------------------------
 
@@ -958,7 +963,7 @@ CREATE TABLE IF NOT EXISTS `school_offices` (
   `status` varchar(20) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `school_offices`
@@ -973,7 +978,8 @@ INSERT INTO `school_offices` (`id`, `office_desc`, `status`, `created_on`) VALUE
 (6, 'Receptionist', 'Active', '2022-05-17'),
 (7, 'Security', 'Active', '2022-05-17'),
 (8, 'Registrar', 'Active', '2022-05-17'),
-(9, 'Messenger', 'Inactive', '2022-07-02');
+(9, 'Messenger', 'Inactive', '2022-07-02'),
+(10, 'H.M', 'Active', '2022-08-27');
 
 -- --------------------------------------------------------
 
@@ -999,7 +1005,7 @@ CREATE TABLE IF NOT EXISTS `school_subjects` (
 INSERT INTO `school_subjects` (`subject_id`, `subject_desc`, `level`, `subject_teacher`, `status`, `subject_code`, `created_at`) VALUES
 (1, 'Mathematics', NULL, '', 'active', 'MTH 201', '2022-06-14'),
 (2, 'English Language', NULL, '', 'active', 'ENG20202', '2022-06-14'),
-(3, 'Yoruba Language', NULL, NULL, 'inactive', 'YOR203', '2022-06-14'),
+(3, 'Yoruba Language', NULL, '', 'inactive', 'YOR203', '2022-06-14'),
 (4, 'History', NULL, '', 'active', 'HIS204', '2022-06-14'),
 (5, 'French', NULL, '', 'active', 'FRE205', '2022-06-14'),
 (6, 'Christian Religion Studies', NULL, '', 'active', 'CRS206', '2022-06-14'),
@@ -1130,9 +1136,9 @@ INSERT INTO `tbl_reg_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `pri
 (2, '0733922156814', 'SMA114BF0', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
 (3, '0732386119452', 'SMA8A37B3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
 (4, '6112932784530', 'SMA034A14', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(5, '3908622451137', 'SMA312057', 'Registration Pins', 5000, 1, '2022-08-05', '2022C263130004'),
-(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 1, '2022-08-05', '2022C263130003'),
-(7, '3804612193572', 'SMA144370', 'Registration Pins', 5000, 1, '2022-08-05', '2022C263130002');
+(5, '3908622451137', 'SMA312057', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
+(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
+(7, '3804612193572', 'SMA144370', 'Registration Pins', 5000, 1, '2022-08-05', '2022C263130001');
 
 -- --------------------------------------------------------
 
@@ -1163,8 +1169,8 @@ INSERT INTO `tbl_result_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `
 (6, '106532527641', 'SMR11B3F', 'Result Checker Pins', 200, 0, '2022-08-05'),
 (7, '322851340679', 'SMRE83D3', 'Result Checker Pins', 200, 0, '2022-08-05'),
 (8, '261251043753', 'SMRF011B', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(9, '143659017322', 'SMR41704', 'Result Checker Pins', 200, 1, '2022-08-05'),
-(10, '330556421172', 'SMR69AFC', 'Result Checker Pins', 200, 1, '2022-08-05');
+(9, '143659017322', 'SMR41704', 'Result Checker Pins', 200, 0, '2022-08-05'),
+(10, '330556421172', 'SMR69AFC', 'Result Checker Pins', 200, 0, '2022-08-05');
 
 -- --------------------------------------------------------
 
@@ -1182,15 +1188,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins_history` (
   `used_term` varchar(20) DEFAULT NULL,
   `used_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pinId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_result_pins_history`
---
-
-INSERT INTO `tbl_result_pins_history` (`pinId`, `studentRegNo`, `student_class`, `pin_code`, `pin_serial`, `pin_counter`, `used_term`, `used_session`) VALUES
-(1, '2022C263130002', 'Basic 1 A', '330556421172', 'SMR69AFC', 3, '1st Term', '2022/2023'),
-(2, '2022C263130002', 'Basic 1 A', '143659017322', 'SMR41704', 1, '1st Term', '2022/2023');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1273,14 +1271,7 @@ CREATE TABLE IF NOT EXISTS `visap_1st_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_1st_term_result_tbl`
---
-
-INSERT INTO `visap_1st_term_result_tbl` (`reportId`, `studentId`, `stdRegCode`, `studentGrade`, `term`, `aca_session`, `subjectName`, `ca`, `test1`, `test2`, `exam`, `overallMark`, `subjectRank`, `mark_average`, `uploadedTime`, `uploadedDate`, `rStatus`) VALUES
-(1, NULL, '2022C263130002', 'BASIC 1 A', '1st Term', '2022/2023', 'BASIC SCIENCE', 38, NULL, NULL, 56, 94, NULL, 47, '10:43:09', '2022-08-21', 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1322,7 +1313,14 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_admin_login_token`
+--
+
+INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
+(53, 'Director', 'user@smatech.com', 'BLCLAbuQmRfLk5X8OIw9JWfkPndo3vtqo4MxsoNE');
 
 -- --------------------------------------------------------
 
@@ -1390,14 +1388,7 @@ CREATE TABLE IF NOT EXISTS `visap_bed_payment_history_tbl` (
   `payment_date` date DEFAULT NULL,
   `receiptNo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_bed_payment_history_tbl`
---
-
-INSERT INTO `visap_bed_payment_history_tbl` (`id`, `student_id`, `bed_id`, `amount`, `amount_paid`, `amount_due`, `status`, `payment_date`, `receiptNo`) VALUES
-(1, 1, 8, 15000, 10000, 5000, 1, '2022-08-23', '9043578');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1423,35 +1414,21 @@ CREATE TABLE IF NOT EXISTS `visap_bed_space_tbl` (
   `school_session` varchar(50) DEFAULT NULL,
   `payment_expire` date DEFAULT NULL,
   PRIMARY KEY (`bedId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_bed_space_tbl`
 --
 
 INSERT INTO `visap_bed_space_tbl` (`bedId`, `hostel_id`, `room_id`, `room`, `bed_space`, `is_available`, `occupant`, `book_duration`, `booked_today`, `amount`, `amount_paid`, `approve_booked`, `payment_status`, `payment_date`, `school_session`, `payment_expire`) VALUES
-(1, 1, 1, 'Legacy', 'Bonk-1', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
-(2, 1, 1, 'Legacy', 'Bonk-2', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
-(3, 1, 1, 'Legacy', 'Bonk-3', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
-(4, 1, 1, 'Legacy', 'Bonk-4', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
-(5, 2, 2, 'Cool A', 'Bonk-1', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(6, 2, 2, 'Cool A', 'Bonk-2', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(7, 2, 2, 'Cool A', 'Bonk-3', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(8, 2, 2, 'Cool A', 'Bonk-4', 2, 1, '2022/2023', '2022-08-23', 15000, 10000, 0, 1, NULL, '2022/2023', '2023-08-23'),
-(9, 2, 2, 'Cool A', 'Bonk-5', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(10, 2, 2, 'Cool A', 'Bonk-6', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(11, 2, 2, 'Cool A', 'Bonk-7', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(12, 2, 2, 'Cool A', 'Bonk-8', 1, NULL, NULL, NULL, 15000, NULL, 0, 0, NULL, NULL, NULL),
-(13, 2, 3, 'Cool B', 'Bonk-1', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(14, 2, 3, 'Cool B', 'Bonk-2', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(15, 2, 3, 'Cool B', 'Bonk-3', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(16, 2, 3, 'Cool B', 'Bonk-4', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(17, 2, 3, 'Cool B', 'Bonk-5', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(18, 2, 3, 'Cool B', 'Bonk-6', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(19, 2, 3, 'Cool B', 'Bonk-7', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(20, 2, 3, 'Cool B', 'Bonk-8', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(21, 2, 3, 'Cool B', 'Bonk-9', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL),
-(22, 2, 3, 'Cool B', 'Bonk-10', 1, NULL, NULL, NULL, 12000, NULL, 0, 0, NULL, NULL, NULL);
+(1, 1, 1, 'Room One', 'Bonk-1', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(2, 1, 1, 'Room One', 'Bonk-2', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(3, 1, 1, 'Room One', 'Bonk-3', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(4, 1, 1, 'Room One', 'Bonk-4', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(5, 1, 1, 'Room One', 'Bonk-5', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(6, 1, 1, 'Room One', 'Bonk-6', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(7, 1, 1, 'Room One', 'Bonk-7', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(8, 1, 1, 'Room One', 'Bonk-8', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1475,14 +1452,7 @@ CREATE TABLE IF NOT EXISTS `visap_behavioral_tbl` (
   `class_teacher` varchar(200) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_behavioral_tbl`
---
-
-INSERT INTO `visap_behavioral_tbl` (`id`, `student_id`, `reg_number`, `student_class`, `term`, `session`, `punctuality`, `neatness`, `honesty`, `self_control`, `attentiveness`, `leadership`, `class_teacher`, `uploaded_date`) VALUES
-(1, 2, '2022C263130002', 'BASIC 1 A', '1st Term', '2022/2023', 3, 5, 2, 3, 1, 5, 'Samson', '2022-08-19');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1546,8 +1516,7 @@ CREATE TABLE IF NOT EXISTS `visap_bus_tbl` (
 --
 
 INSERT INTO `visap_bus_tbl` (`busId`, `vehicle_desc`, `vehicle_plate_no`, `vehicle_capacity`, `vehicle_image`, `vehicle_status`, `created_at`) VALUES
-(1, 'BMW 2018 Model', 'KJA-123-XA', 18, '63065802b5c2b1.28757487.jpg', 0, '2022-08-24'),
-(2, 'Audi 2019 Model', 'JJJ-121-KA', 10, '630658b6a8e3f3.72561274.jpg', 1, '2022-08-24');
+(1, 'BMW 2019 Model', 'KJA-123-XB', 25, '63065802b5c2b1.28757487.jpg', 0, '2022-08-24');
 
 -- --------------------------------------------------------
 
@@ -1587,14 +1556,7 @@ CREATE TABLE IF NOT EXISTS `visap_class_attendance_tbl` (
   `schl_session` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`attend_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_class_attendance_tbl`
---
-
-INSERT INTO `visap_class_attendance_tbl` (`attend_id`, `stdReg`, `studentGrade`, `roll_call`, `attendant_date`, `term`, `schl_session`, `created_at`) VALUES
-(1, '2022C263130002', 'BASIC 1 A', 'Present', '2022-08-24', '1st Term', '2022/2023', '2022-08-24');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1605,8 +1567,6 @@ INSERT INTO `visap_class_attendance_tbl` (`attend_id`, `stdReg`, `studentGrade`,
 CREATE TABLE IF NOT EXISTS `visap_class_grade_tbl` (
   `gradeId` int(11) NOT NULL AUTO_INCREMENT,
   `gradeDesc` varchar(50) DEFAULT NULL,
-  `grade_division` varchar(2) DEFAULT NULL,
-  `grade_dept` varchar(50) DEFAULT NULL,
   `grade_teacher` int(11) DEFAULT NULL,
   `grade_status` enum('pending','active','closed') NOT NULL DEFAULT 'active',
   `created_at` date DEFAULT NULL,
@@ -1617,29 +1577,23 @@ CREATE TABLE IF NOT EXISTS `visap_class_grade_tbl` (
 -- Dumping data for table `visap_class_grade_tbl`
 --
 
-INSERT INTO `visap_class_grade_tbl` (`gradeId`, `gradeDesc`, `grade_division`, `grade_dept`, `grade_teacher`, `grade_status`, `created_at`) VALUES
-(2, 'Creche', 'A', 'none', NULL, 'active', '2022-06-14'),
-(3, 'KG 1', 'A', 'none', NULL, 'active', '2022-06-14'),
-(4, 'KG 2', 'A', 'none', NULL, 'active', '2022-06-14'),
-(5, 'Nursery 1', 'A', 'none', NULL, 'active', '2022-06-14'),
-(6, 'Nursery 2', 'A', 'none', NULL, 'active', '2022-06-14'),
-(7, 'Basic 1', 'A', 'none', 1, 'active', '2022-06-14'),
-(8, 'Basic 2', 'A', 'none', NULL, 'active', '2022-06-14'),
-(9, 'Basic 3', 'A', 'none', NULL, 'active', '2022-06-14'),
-(10, 'Basic 4', 'A', 'none', NULL, 'active', '2022-06-14'),
-(11, 'Basic 5', 'A', 'none', NULL, 'active', '2022-06-14'),
-(12, 'JSS 1', 'A', 'none', NULL, 'active', '2022-06-14'),
-(13, 'JSS 2', 'A', 'none', NULL, 'active', '2022-06-14'),
-(14, 'JSS 3', 'A', 'none', NULL, 'active', '2022-06-14'),
-(15, 'SSS 1', 'A', 'science', NULL, 'active', '2022-06-14'),
-(16, 'SSS 1', 'B', 'art', NULL, 'active', '2022-06-14'),
-(17, 'SSS 1', 'C', 'commercial', NULL, 'active', '2022-06-14'),
-(18, 'SSS 2', 'A', 'science', NULL, 'active', '2022-06-14'),
-(19, 'SSS 2', 'B', 'art', NULL, 'active', '2022-06-14'),
-(20, 'SSS 2', 'C', 'commercial', NULL, 'active', '2022-06-14'),
-(21, 'SSS 3', 'A', 'science', NULL, 'active', '2022-06-14'),
-(22, 'SSS 3', 'B', 'art', NULL, 'active', '2022-06-14'),
-(23, 'SSS 3', 'C', 'commercial', NULL, 'active', '2022-06-14');
+INSERT INTO `visap_class_grade_tbl` (`gradeId`, `gradeDesc`, `grade_teacher`, `grade_status`, `created_at`) VALUES
+(1, 'Creche', NULL, 'active', '2022-06-14'),
+(2, 'KG 1', NULL, 'active', '2022-06-14'),
+(3, 'KG 2', NULL, 'active', '2022-06-14'),
+(4, 'Nursery 1', NULL, 'active', '2022-06-14'),
+(5, 'Nursery 2', NULL, 'active', '2022-06-14'),
+(6, 'Basic 1', NULL, 'active', '2022-06-14'),
+(7, 'Basic 2', NULL, 'active', '2022-06-14'),
+(8, 'Basic 3', NULL, 'active', '2022-06-14'),
+(9, 'Basic 4', NULL, 'active', '2022-06-14'),
+(10, 'Basic 5', NULL, 'active', '2022-06-14'),
+(11, 'JSS 1', NULL, 'active', '2022-06-14'),
+(12, 'JSS 2', NULL, 'active', '2022-06-14'),
+(13, 'JSS 3', NULL, 'active', '2022-06-14'),
+(14, 'SSS 1', NULL, 'active', '2022-06-14'),
+(15, 'SSS 2', NULL, 'active', '2022-06-14'),
+(16, 'SSS 3', NULL, 'active', '2022-06-14');
 
 -- --------------------------------------------------------
 
@@ -1660,14 +1614,14 @@ CREATE TABLE IF NOT EXISTS `visap_driver_tbl` (
   PRIMARY KEY (`dId`),
   UNIQUE KEY `driver_email` (`driver_email`),
   KEY `driver_name` (`driver_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_driver_tbl`
 --
 
 INSERT INTO `visap_driver_tbl` (`dId`, `driver_name`, `driver_phone`, `driver_email`, `driver_address`, `driver_license_no`, `driver_image`, `status`, `created_at`) VALUES
-(1, 'Adekola Samuel Oni', '08131376654', 'adekola@smatech.edu.ng', 'xyz street, Sango Ota Ogun State', 'ADK090986420220321', 'adekola@smatech.edu.ng6306f053caa80.png', 1, '2022-08-25');
+(3, 'Adekola Idowu Samson', '08121343267', 'driver@expert.com', 'example address street xyz Abc Countries', 'ADK0908920221', 'ADK09089202216308968ff0d84.png', 1, '2022-08-26');
 
 -- --------------------------------------------------------
 
@@ -1758,16 +1712,14 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_rooms_tbl` (
   `amount` int(11) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`roomId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_hostel_rooms_tbl`
 --
 
 INSERT INTO `visap_hostel_rooms_tbl` (`roomId`, `hostel_id`, `room_desc`, `beds`, `amount`, `created_at`) VALUES
-(1, 1, 'Legacy', 4, 25000, '2022-08-23'),
-(2, 2, 'Cool A', 8, 15000, '2022-08-23'),
-(3, 2, 'Cool B', 10, 12000, '2022-08-25');
+(1, 1, 'Room One', 8, 25000, '2022-08-28');
 
 -- --------------------------------------------------------
 
@@ -1784,15 +1736,14 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`hostel_id`),
   UNIQUE KEY `hostel_desc` (`hostel_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_hostel_tbl`
 --
 
 INSERT INTO `visap_hostel_tbl` (`hostel_id`, `hostel_desc`, `hostel_type`, `status`, `hostel_master`, `created_at`) VALUES
-(1, 'Villa A', 'boys', 1, 'Mr John', '2022-08-23'),
-(2, 'Villa B', 'girls', 1, 'Mrs Joy', '2022-08-23');
+(1, 'Obasanjo Hostel', 'boys', 1, 'Mr Idowu John', '2022-08-28');
 
 -- --------------------------------------------------------
 
@@ -1887,7 +1838,7 @@ CREATE TABLE IF NOT EXISTS `visap_prefect_title_tbl` (
   `status` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_prefect_title_tbl`
@@ -1895,7 +1846,8 @@ CREATE TABLE IF NOT EXISTS `visap_prefect_title_tbl` (
 
 INSERT INTO `visap_prefect_title_tbl` (`id`, `title`, `status`, `created_at`) VALUES
 (1, 'Head Girl', 'Active', '2022-08-21'),
-(2, 'TimeKeeper', 'Active', '2022-08-21');
+(2, 'TimeKeeper', 'Active', '2022-08-21'),
+(3, 'Head Boy', 'Active', '2022-08-28');
 
 -- --------------------------------------------------------
 
@@ -1919,14 +1871,7 @@ CREATE TABLE IF NOT EXISTS `visap_psycho_tbl` (
   `class_teacher` varchar(100) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_psycho_tbl`
---
-
-INSERT INTO `visap_psycho_tbl` (`id`, `student_id`, `reg_number`, `student_class`, `term`, `session`, `Handwriting`, `Sports`, `Fluency`, `Handlingtools`, `Drawing`, `crafts`, `class_teacher`, `uploaded_date`) VALUES
-(1, 2, '2022C263130002', 'BASIC 1 A', '1st Term', '2022/2023', 1, 2, 3, 4, 5, 4, 'Samson', '2022-08-19');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1941,24 +1886,21 @@ CREATE TABLE IF NOT EXISTS `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_registered_subject_tbl`
 --
 
 INSERT INTO `visap_registered_subject_tbl` (`id`, `subject_class`, `subject_name`, `createdBy`, `created_at`) VALUES
-(1, 'SSS 1 A', 'Civic Education', 'SMATech', '2022-08-19'),
-(2, 'SSS 1 A', 'Economics', 'SMATech', '2022-08-19'),
-(3, 'SSS 1 A', 'English Language', 'SMATech', '2022-08-19'),
-(4, 'SSS 1 A', 'Financial Accounting', 'SMATech', '2022-08-19'),
-(5, 'SSS 1 A', 'Insurance', 'SMATech', '2022-08-19'),
-(6, 'SSS 1 A', 'Mathematics', 'SMATech', '2022-08-19'),
-(7, 'SSS 1 A', 'Yoruba Language', 'SMATech', '2022-08-19'),
-(8, 'Basic 1 A', 'Basic Science', 'SMATech', '2022-08-19'),
-(9, 'Basic 1 A', 'Business Studies', 'SMATech', '2022-08-19'),
-(10, 'Basic 1 A', 'Civic Education', 'SMATech', '2022-08-19'),
-(11, 'Basic 1 A', 'Diction', 'SMATech', '2022-08-19');
+(1, 'Basic 1', 'Basic Science', 'SMATech', '2022-08-27'),
+(2, 'Basic 1', 'CCA', 'SMATech', '2022-08-27'),
+(3, 'Basic 1', 'Civic Education', 'SMATech', '2022-08-27'),
+(4, 'Basic 1', 'Diction', 'SMATech', '2022-08-27'),
+(5, 'Basic 1', 'English Language', 'SMATech', '2022-08-27'),
+(6, 'Basic 1', 'Handwriting', 'SMATech', '2022-08-27'),
+(7, 'Basic 1', 'Home Economics', 'SMATech', '2022-08-27'),
+(8, 'Basic 1', 'Letter Work', 'SMATech', '2022-08-27');
 
 -- --------------------------------------------------------
 
@@ -1975,14 +1917,7 @@ CREATE TABLE IF NOT EXISTS `visap_result_comment_tbl` (
   `term` varchar(20) DEFAULT NULL,
   `schl_Sess` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_result_comment_tbl`
---
-
-INSERT INTO `visap_result_comment_tbl` (`commentId`, `stdRegNo`, `stdGrade`, `teacher_comment`, `principal_coment`, `term`, `schl_Sess`) VALUES
-(1, '2022C263130002', 'Basic 1 A', 'Good Result keep it Up', 'Nice Result', '1st Term', '2022/2023');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2051,7 +1986,7 @@ CREATE TABLE IF NOT EXISTS `visap_routes_tbl` (
 --
 
 INSERT INTO `visap_routes_tbl` (`id`, `route_desc`, `bus_stops`, `route_price`, `driverId`, `vehicleId`, `created_at`) VALUES
-(2, 'Ogba-Iyo Route', 'Oando plc, Sinai Junction, NNPC Ijoko, First Monac, Bamfort Hotel, Vulcanizer B/Stop', 15000, 1, 2, '2022-08-25');
+(2, 'Ogba-Iyo Route', 'Oando plc, Sinai Junction, NNPC Ijoko, First Monac, Bamfort Hotel, Vulcanizer B/Stop', 15000, 3, 1, '2022-08-25');
 
 -- --------------------------------------------------------
 
@@ -2101,16 +2036,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_prefect_tbl` (
   `activeness` tinyint(1) NOT NULL DEFAULT 1,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`prefectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_school_prefect_tbl`
---
-
-INSERT INTO `visap_school_prefect_tbl` (`prefectId`, `student_id`, `studentGrade`, `officeName`, `school_session`, `activeness`, `created_on`) VALUES
-(1, 4, 'SSS 1 A', 'Head Girl', '2022/2023', 1, '2022-08-21'),
-(2, 2, 'Basic 1 A', 'Head Girl', '2022/2023', 1, '2022-08-21'),
-(3, 1, 'Creche A', 'TimeKeeper', '2022/2023', 1, '2022-08-21');
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2148,6 +2074,14 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
   `founded_year` varchar(20) DEFAULT NULL,
   `school_gmail` varchar(100) DEFAULT NULL,
   `school_short_name` varchar(50) DEFAULT NULL,
+  `our_mission` text DEFAULT NULL,
+  `our_vision` text DEFAULT NULL,
+  `our_core_value` text DEFAULT NULL,
+  `key_of_success` text DEFAULT NULL,
+  `our_philosophy` text DEFAULT NULL,
+  `our_principle` text DEFAULT NULL,
+  `about_us` mediumtext DEFAULT NULL,
+  `principal_welcome` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
@@ -2155,8 +2089,8 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
 -- Dumping data for table `visap_school_profile`
 --
 
-INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`) VALUES
-(1, 'School Management Application', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Samson Idowu A', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', NULL, NULL, NULL, NULL, 'English', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education.', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH23');
+INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
+(1, 'School Management Application', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Samson Idowu A', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16616260312284396.jpg', NULL, NULL, NULL, 'English', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education.', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH PORTAL', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', 'Excellence,Moral, High Educative Activities', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\n\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\n\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2244,9 +2178,7 @@ INSERT INTO `visap_sliders_tbl` (`id`, `title`, `slider_desc`, `image`, `status`
 (7, 'Just Sample', 'Some Content here', 'SMAPP_63057ae9ea8f2_.jpg', 1, '2022-08-24'),
 (8, 'Just Testing', 'Testing Testing Microphone', 'SMAPP_63057b9d5550c_.jpg', 1, '2022-08-24'),
 (9, 'Testing Testing Microphone', 'Testing Testing Microphone', 'SMAPP_63057bd675bc7_.png', 1, '2022-08-24'),
-(10, 'Main Dashboard', 'Main Dashboard', 'SMAPP_63058cc56fb0f_.png', 1, '2022-08-24'),
-(11, 'Main Dashboard 2', 'Main Dashboard2', 'SMAPP_63058cd986829_.png', 1, '2022-08-24'),
-(12, 'School Bus Management', 'School Bus Management', 'SMAPP_63058d0a1a748_.png', 1, '2022-08-24');
+(10, 'Main Dashboard', 'Main Dashboard', 'SMAPP_63058cc56fb0f_.png', 1, '2022-08-24');
 
 -- --------------------------------------------------------
 
@@ -2321,7 +2253,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2423,15 +2355,16 @@ CREATE TABLE IF NOT EXISTS `visap_staff_tbl` (
   `appliedDate` date DEFAULT NULL,
   `staffAssignedClass` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`staffId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_staff_tbl`
 --
 
 INSERT INTO `visap_staff_tbl` (`staffId`, `staffRegNo`, `staffGrade`, `staffRole`, `firstName`, `lastName`, `staffEmail`, `staffPass`, `staffUser`, `staffDob`, `staffEducation`, `staffPhone`, `staffCourse`, `staffAddress`, `confirmation_code`, `staffToken`, `tokenExpire`, `staffPassport`, `staffGender`, `maritalStatus`, `portalEmail`, `jobStatus`, `online`, `staffType`, `appliedDate`, `staffAssignedClass`) VALUES
-(1, 'SMP22001', 'Basic 1 A', 'Class Teacher', 'Ademola Adeola', 'Ade', 'ademola@gmail.com', '$2y$10$skbk3cf44seMPfke6jiZPuDe/6lljb4YRpZ8JE6i3T0dAxDCIi3ke', 'Adeola', NULL, 'BSc', '09098765432', NULL, NULL, '9e29f6bec4c1820', NULL, NULL, NULL, 'Male', NULL, 'ademola@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
-(2, 'SMP22002', NULL, 'Principal', 'John Doe', 'Smith', 'doe@gmail.com', '$2y$10$T0ypu6cTUOMiG.yq9W6.UO9VWUnUVkEhHVZwHSeROSq2CapZT3MB2', 'Doe', NULL, 'Phd', '09087654323', NULL, NULL, '33ef8cfa5f157df', NULL, NULL, NULL, 'Male', NULL, 'doe@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL);
+(1, 'SMP22001', NULL, 'Class Teacher', 'Ademola Adeola', 'Ade', 'ademola@gmail.com', '$2y$10$skbk3cf44seMPfke6jiZPuDe/6lljb4YRpZ8JE6i3T0dAxDCIi3ke', 'Adeola', NULL, 'BSc', '09098765432', NULL, NULL, '9e29f6bec4c1820', NULL, NULL, 'SMP220017530549.jpg', 'Male', NULL, 'ademola@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
+(2, 'SMP22002', NULL, 'Principal', 'John Doe', 'Smith', 'doe@gmail.com', '$2y$10$T0ypu6cTUOMiG.yq9W6.UO9VWUnUVkEhHVZwHSeROSq2CapZT3MB2', 'Doe', NULL, 'Phd', '09087654323', NULL, NULL, '33ef8cfa5f157df', NULL, NULL, 'SMP220022481084.jpg', 'Male', NULL, 'doe@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
+(3, 'SMP22003', NULL, NULL, 'Gbenga Festus', 'Agberayi', 'festus@gmail.com', '$2y$10$sE4LfzbVe9P8UyDk/VWoA.PUwPxOr7jzshleaLHxINpyJf3MMGm0.', 'Gbenga', NULL, 'HND', '08140122566', NULL, NULL, '9ff06b06a638b0f', NULL, NULL, 'SMP220035091724.jpg', 'Male', NULL, 'festus@SMAPP.portal', 1, 0, 'Teaching', '2022-08-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -2511,16 +2444,7 @@ CREATE TABLE IF NOT EXISTS `visap_stdmedical_tbl` (
   `stdLastScanedReport` varchar(255) DEFAULT NULL,
   `stdBcertificate` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`medicalId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_stdmedical_tbl`
---
-
-INSERT INTO `visap_stdmedical_tbl` (`medicalId`, `studId`, `stdHospitalName`, `stdHospitalOwner`, `stdHospitalPhone`, `stdRegDate`, `stdHospitalAddress`, `stdBlood`, `stdGenotype`, `stdSickness`, `stdFamilySickness`, `stdIsHospitalized`, `stdSurgical`, `stdLastScanedReport`, `stdBcertificate`) VALUES
-(1, 2, 'Aturamu Specialist Hospital', 'Dr. Aturamu', '09887654322', '2020-01-17', 'Odo _oja Ikere Ekiti', 'A', 'AA', 'None', NULL, 'No', 'I Don Not know', NULL, NULL),
-(2, 3, 'Lifeline Hospital', 'Dr Agberayi Samson J', '08131375554', '2012-10-09', 'Gasline Bus/Stop Ijoko Ogun State', 'A', 'AA', 'None', NULL, 'No', 'I Don Not know', NULL, NULL),
-(3, 4, 'lifeline Hospital', 'Dr. Hammed', '09067563423', '2004-04-07', 'ijoko, ogun state.', 'O', 'AS', 'none', NULL, 'No', 'No', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2542,16 +2466,7 @@ CREATE TABLE IF NOT EXISTS `visap_stdpreschlinfo` (
   `stdReasonInPreClass` text DEFAULT NULL,
   `stdLastReportSheet` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`preId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_stdpreschlinfo`
---
-
-INSERT INTO `visap_stdpreschlinfo` (`preId`, `student_id`, `stdSchoolName`, `stdDirectorName`, `stdSchoolPhone`, `stdSchLocation`, `stdSchoolType`, `stdSchlCat`, `stdSchlEduLevel`, `stdPresentClass`, `stdReasonInPreClass`, `stdLastReportSheet`) VALUES
-(1, 2, 'Juli-T Schools Ota', 'Mrs Lawal J', '09032123465', 'Urban', NULL, 'PRIVATE', 'PRIMARY &amp; SECONDARY', 'Basic Four', 'Change of Environment', NULL),
-(2, 3, 'School of Art Ikeja', 'Mr Ojo Adeola', '09112123432', 'Urban', NULL, 'PRIVATE', 'PRIMARY &amp; SECONDARY', 'JSS One', 'Change of Location', NULL),
-(3, 4, 'Merit Comprehensive High School', 'Mrs Folorunsho', '08113234556', 'Rural', NULL, 'PRIVATE', 'PRIMARY &amp; SECONDARY', 'SS2', 'change of location', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2585,16 +2500,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_info_tbl` (
   `stdFGOccupation` varchar(255) DEFAULT NULL,
   `stdFGAddress` text DEFAULT NULL,
   PRIMARY KEY (`stdInfoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_student_info_tbl`
---
-
-INSERT INTO `visap_student_info_tbl` (`stdInfoId`, `studentId`, `stdBirthCert`, `stdCountry`, `stdSOR`, `stdLGA`, `stdHomeTown`, `stdReligion`, `stdDisability`, `stdPermaAdd`, `stdMGTitle`, `stdMGName`, `stdMGRelationship`, `stdMGPhone`, `stdMGEmail`, `stdMGOccupation`, `stdMGAddress`, `stdFGTitle`, `stdFGName`, `stdFGRelationship`, `stdFGPhone`, `stdFGEmail`, `stdFGOccupation`, `stdFGAddress`) VALUES
-(1, 2, 'Certificate', 'Nigerian', 'Ekiti State', 'Ikere', 'Ikere Ekiti', 'Christianity', 'None', '45, Isaoye Street, Odo-Oja Ikere', 'Mr', 'Agberayi John', 'Father', '08131374443', 'myfather@gmail.com', 'Doctor', 'Sango Ota', 'Mrs', 'Agberayi Blessing', 'Mother', '08132121223', 'mothercare@gmail.com', 'Nurse', 'Sango Ota'),
-(2, 3, 'Certificate', 'Nigerian', 'Ekiti State', 'Ikere', 'Ikere Ekiti', 'Christianity', 'None', '30 Olaotan Avenue Ijoko Road, Sango Ota Ogun State', 'Pastor', 'Sunday Ekundayo', 'Father', '08121223434', 'ogosunday@gmail.com', 'Pastor', 'Sango Ota Ogun State', 'Mrs', 'Idowu Ekundayo', 'Mother', '09890876543', 'mothercare@gmail.com', 'Trading', 'Sango Ota Ogun State'),
-(3, 4, 'Certificate', 'Nigerian', 'Osun State', 'Odo Otin', 'Oyan', 'Christianity', 'None', 'no 11, Onipetesi, Ijoko Ogun State.', 'Mr', 'Adelowo Emmanuel', 'Father', '07084736706', 'boluwatifecomfort8@gmail.com', 'Engineering', 'no 11, Onipetesi, Ijoko, Ogun State.', 'Mrs', 'Adelowo Racheal', 'Mother', '07057957186', 'boluwatifecomfort8@gmail.com', 'Banker', 'no 11, Onipetesi, Ijoko, Ogun State.');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2693,17 +2599,14 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
   `stdTokenExp` datetime DEFAULT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_student_tbl`
 --
 
 INSERT INTO `visap_student_tbl` (`stdId`, `stdRegNo`, `stdEmail`, `stdUserName`, `stdPassword`, `studentClass`, `stdSurName`, `stdFirstName`, `stdMiddleName`, `stdDob`, `stdGender`, `stdAddress`, `stdPhone`, `stdAdmStatus`, `stdApplyDate`, `stdApplyType`, `stdPassport`, `stdConfToken`, `stdTokenExp`, `is_online`) VALUES
-(1, '2022C263130001', 'samson@gmail.com', 'Idowu', '$2y$10$ubY7.xjYJVf56dWVSd/34uCsYVTPkSYmOeHWmmtZxDOKWpaTomT.K', 'Creche A', 'Yekeen', 'Tiwatope', 'Joy', '2022-08-02', 'Female', 'Sanog', '08121233345', 'Active', '2022-08-17', 'Boarding', NULL, '68fcc94a3f', NULL, 0),
-(2, '2022C263130002', 'samsonjec@gmail.com', 'Idowu', '$2y$10$oL2A49QG0ZDEoq7b4uQfTO2KGeF4XZ65DtLHNayR4HeKvLC0a34ua', 'Basic 1 A', 'Idowu', 'Omooluwa', 'Jerry', '2015-01-17', 'Male', '45, Isaoye Street, Odo-Oja Ikere', '08131374443', 'Active', '2022-08-17', 'Day', '2022C2631300024361670.jpg', '19507e6af6', NULL, 0),
-(3, '2022C263130003', 'idowuade@gmail.com', 'Ekundayo', '$2y$10$LN3eHgEdIO6wTlP5er./3O6sfMnX3ggpH9o9zHbbOgoppWitTDiYi', 'Junior', 'Ekundayo', 'Ogo', 'Deborah', '2014-09-04', 'Female', '30 Olaotan Avenue Ijoko Road, Sango Ota Ogun State', '08131374443', 'Pending', '2022-08-20', 'Day', NULL, 'a97529b108', NULL, 0),
-(4, '2022C263130004', 'boluwatifecomfort8@gmail.com', 'Adelowo', '$2y$10$dv26gOnkNBMDpxH77TEFZuc08Q4l5Dd1YpFJzuZeIWjdt/SlJ/06O', 'SSS 2 A', 'Adelowo', 'Adelowo', 'Folake', '2001-04-07', 'Female', 'no 11, Onipetesi, Ijoko Ogun State.', '08169780651', 'Active', '2022-08-20', 'Day', '2022C2631300046808619.jpg', 'e922e33572', NULL, 0);
+(1, '2022C263130001', 'samson@gmail.com', 'Agberayi', '$2y$10$uVCzx5fihp93lIXlGvlPc.EH.5JwI8aDCcKKq9ZEUrzysJY5zq1z6', 'JSS 1', 'Agberayi', 'Samson', 'Idowu', '2010-05-28', 'Male', 'sample home address', '08131374443', 'Active', '2022-08-28', 'Boarding', NULL, '50358e85d5943f', NULL, 0);
 
 -- --------------------------------------------------------
 
