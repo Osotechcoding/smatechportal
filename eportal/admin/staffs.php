@@ -155,7 +155,7 @@ require_once "helpers/helper.php";
     <a href="./uploadstaffpassport?staffRegId=<?php echo $value->staffRegNo;?>&actionId=<?php echo $value->staffId;?>"><button type="button" class="badge badge-dark">
                   <span class="fa fa-camera"></span> Upload</button></a>
       <?php else: ?>
-        <img src="../schoolImages/staff/<?php echo $value->staffPassport;?>" width="100" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+        <img src="../schoolImages/staff/<?php echo $value->staffPassport;?>" width="70" style="border-radius: 10px;border: 3px solid deepskyblue;">
     <?php endif ?></td>
                                 <td><?php echo strtoupper($value->staffRegNo);?></td>
                                 <td>

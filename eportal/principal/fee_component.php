@@ -7,7 +7,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title>Fee Component - <?php echo $SmappDetails->school_name ?></title>
+    <title><?php echo ucwords($SmappDetails->school_name);?> :: Fee Component </title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->

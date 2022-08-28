@@ -3,6 +3,7 @@
 } else {
   require 'Helper.php';
 }?>
+<?php  $allPrefects = $Osotech->get_all_prefect_list();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,104 +55,49 @@
     <section class="faculties">
         <div class="container">
             <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
-                <span class="title">Our Gallery</span>
-                <h2>Our Dedicated Student Prefects</h2>
+                <span class="title">Our School Prefects</span>
+                <h2>Our Dedicated Prefects</h2>
                 <div class="divider">
                     <span class="fa fa-mortar-board"></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-5">
+                <?php if ($allPrefects): ?>
+                    <?php foreach ($allPrefects as $prefect): ?>
+                        <?php $student_data = $Osotech->get_student_data_byId($prefect->student_id);?>
+                         <div class="col-lg-4 col-md-6 mb-5">
                     <div class="faculty-block">
                         <div class="team-image">
                             <div class="border-line"></div>
-                            <img src="assets/images/male.png" class="img-fluid d-block m-auto" alt="Team">
+                            <?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
+    <?php if ($student_data->stdGender == "Male"): ?>
+      <img src="eportal/schoolImages/students/male.png" class="img-fluid d-block m-auto" width="150">
+      <?php else: ?>
+        <img src="eportal/schoolImages/students/female.png" class="img-fluid d-block m-auto" width="150">
+    <?php endif ?>
+      <?php else: ?>
+        <img src="eportal/schoolImages/students/<?php echo $student_data->stdPassport;?>" class="img-fluid d-block m-auto" width="150">
+    <?php endif ?>
                         </div>
                         <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:10px;">
                             <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Idowu ademola Samuel</h5>
-                                <h6>Social Prefect Boy</h6>
-                                <h6>2021-2022</h6>
+                                <h5 class="font-weight-bold"><?php echo strtoupper($student_data->full_name);?></h5>
+                                <h6><?php echo ucwords($prefect->officeName);?></h6>
+                                <h6><?php echo $prefect->school_session;?></h6>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="faculty-block">
-                        <div class="team-image">
-                            <div class="border-line"></div>
-                            <img src="assets/images/male.png" class="img-fluid d-block m-auto" alt="Team">
-                        </div>
-                        <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:10px;">
-                            <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Idowu ademola Samuel</h5>
-                                <h6>Social Prefect Girl</h6>
-                                <h6>2021-2022</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-5">
-                    <div class="faculty-block">
-                        <div class="team-image">
-                            <div class="border-line"></div>
-                            <img src="assets/images/male.png" class="img-fluid d-block m-auto" alt="Team">
-                        </div>
-                        <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:10px;">
-                            <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Idowu ademola Samuel</h5>
-                                <h6>Social Prefect Boy</h6>
-                                <h6>2021-2022</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 mb-lg-0 lm-xl-0 mb-md-5  mb-sm-5 mb-5 ">
-                    <div class="faculty-block">
-                        <div class="team-image">
-                            <div class="border-line"></div>
-                            <img src="assets/images/male.png" class="img-fluid d-block m-auto" alt="Team">
-                        </div>
-                        <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:10px;">
-                            <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Idowu ademola Samuel</h5>
-                                <h6>Social Prefect Boy</h6>
-                                <h6>2021-2022</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6  mb-lg-0 lm-xl-0 mb-md-0  mb-sm-5 mb-5">
-                    <div class="faculty-block">
-                        <div class="team-image">
-                            <div class="border-line"></div>
-                            <img src="assets/images/male.png" class="img-fluid d-block m-auto" alt="Team">
-                        </div>
-                        <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:10px;">
-                            <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Idowu ademola Samuel</h5>
-                                <h6>Social Prefect Boy</h6>
-                                <h6>2021-2022</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="faculty-block">
-                        <div class="team-image">
-                            <div class="border-line"></div>
-                            <img src="assets/images/male.png" class="img-fluid d-block m-auto" alt="Team">
-                        </div>
-                        <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:10px;">
-                            <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Idowu ademola Samuel</h5>
-                                <h6>Social Prefect Boy</h6>
-                                <h6>2021-2022</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        
+                    <?php endforeach ?>
+                <?php else: ?>
+                  <div class="mt-3">
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+   <h4 class="text-center"> <strong>Looking for Prefect? </strong>No Prefects to display at the moment!</h4>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+</div>  
+                <?php endif ?>
             </div>
         </div>
     </section>

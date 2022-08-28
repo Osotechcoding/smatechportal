@@ -344,6 +344,54 @@ class Hostel {
 		$this->dbh = null;
 	}
 
+	public function updateStudentBedPayment($data){
+			$bonkId = $this->config->Clean($data['bonkHiddenId']);
+			$amount = $this->config->Clean($data['pricePeryear']);
+			$balance = $this->config->Clean($data['balance']);
+			$topup_amount = $this->config->Clean($data['topuppaid']);
+			$studentId = $this->config->Clean($data['occupant_id']);
+			$auth_pass = $this->config->Clean($data['auth_code']);
+			if ($this->config->isEmptyStr($bonkId) || $this->config->isEmptyStr($topup_amount) || $this->config->isEmptyStr($amount) || $this->config->isEmptyStr($studentId) || $this->config->isEmptyStr($auth_pass)) {
+				$this->response = $this->alert->alert_toastr("error","All fileds are required, Please try again!",__OSO_APP_NAME__." Says");
+			}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+		$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code, Please try again!",__OSO_APP_NAME__." Says");
+			}elseif ($topup_amount > $balance) {
+		$this->response = $this->alert->alert_toastr("error","Invalid Payment Amount, Please try again!",__OSO_APP_NAME__." Says");
+			}else{
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_bed_space_tbl` WHERE occupant=? AND bedId=? LIMIT 1 ");
+  				$this->stmt->execute(array($studentId,$bonkId));
+  				if ($this->stmt->rowCount() == 1) {
+  					$result = $this->stmt->fetch();
+  					$updatedBal = intval($result->amount_paid + $topup_amount); 
+  					$actutalCharge = intval($result->amount);
+  					$payment_status = intval(($actutalCharge === $updatedBal)) ? 2 : 1;
+  					$status_changed =2;
+  					$total_due_bal = intval($balance - $topup_amount);
+  					try {
+  						$this->dbh->beginTransaction();
+  				$created_at = date("Y-m-d");
+  				$this->stmt = $this->dbh->prepare("UPDATE `visap_bed_space_tbl` SET amount_paid=?,payment_status=? WHERE bedId=? AND occupant=? LIMIT 1");
+  				if ($this->stmt->execute(array($updatedBal,$payment_status,$bonkId,$studentId))) {
+  					$receiptNo = mt_rand(100,9999999);
+  					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_bed_payment_history_tbl` (`student_id`,`bed_id`,`amount`,`amount_paid`,`amount_due`,`status`,`payment_date`,`receiptNo`) VALUES (?,?,?,?,?,?,?,?);");
+    		if ($this->stmt->execute ([$studentId,$bonkId,$amount,$topup_amount,$total_due_bal,$payment_status,$created_at,$receiptNo])) {
+    			$this->dbh->commit();
+    			$this->dbh = null;
+			$this->response = $this->alert->alert_toastr("success","Payment submitted and updated successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1000);</script>";
+    		}
+  				}
+  					} catch (PDOException $e) {
+  					$this->dbh->rollback();
+					$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");	
+  					}
+  					}	
+			}
+		return  $this->response;
+			
+}
+
 	//check hostel already booked 
 
 	protected function bedSpaceAlreadyBooked($bedId,$stuId){
@@ -366,6 +414,16 @@ class Hostel {
 		}
 	}
 
+	public function getSumofTotalPaid($studentId,$bedId){
+		$this->stmt = $this->dbh->prepare("SELECT sum(`amount_paid`) as paid FROM `visap_bed_payment_history_tbl` WHERE `student_id`=? AND `bed_id`=?");
+		$this->stmt->execute([$studentId,$bedId]);
+		if ($this->stmt->rowCount() > 0) {
+			$rcount = $this->stmt->fetch();
+			 $this->response = $rcount->paid;
+			return $this->response;
+			$this->dbh = null;
+		}
+	}
 	public function get_receiptByPaymentId($paymentid){
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_bed_payment_history_tbl` WHERE `id`=? LIMIT 1");
 		$this->stmt->execute([$paymentid]);

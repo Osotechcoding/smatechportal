@@ -61,14 +61,14 @@ $_Pins_ = new Pins();
       <div class="card">
       
         <div class="card-body card-dashboard">
-       
+       <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="badge badge-pill badge-danger badge-md m-1 py-1">Show Pin</button>
           <div class="table-responsive">
             <table class="table table-bordered table-striped osotechExp table-hover">
               <thead class="text-sm-center">
                 <tr>
                  <th>S/N</th>
                   <th>Card Serial</th>
-                   <th>Pin <button type="button" data-target="#showPinPassModal" data-toggle="modal" class="btn btn-outline-danger btn-sm round">Show Pin</button></th>
+                   <th>Pin </th>
                   <th>Price</th>
                   <th>Created</th>
                   <th>Status</th>

@@ -129,60 +129,65 @@ if (isset($_GET['bed_occupant']) && $_GET['bed_occupant'] !="" && isset($_GET['b
       
         <div class="card-body">
           <div class="text-center"> <h4 class="text-uppercase text-center text-muted mt-1">Hostel & Bed Information</h4></div>
-          <form class="form form-vertical">
+          <form class="form form-vertical" id="update_student_bedspace_payment_form">
             <div class="form-body">
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
                     <label for="hostel">Hostel</label>
-                    <input type="text" class="form-control" name="hostel"
+                    <input type="text" class="form-control form-control-lg" name="hostel"
                       placeholder="Hostel Name" value="<?php echo $hostel_details->hostel_desc;?>" readonly>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <label>Room</label>
-                    <input type="text" class="form-control" name="room"
+                    <input type="text" class="form-control form-control-lg" name="room"
                      value="<?php echo $bedSpace->room;?>" readonly>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <label>Bonk No</label>
-                  <input type="text" class="form-control" name="bonk"
+                  <input type="text" class="form-control form-control-lg" name="bonk"
                      value="<?php echo $bedSpace->bed_space;?>" readonly>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <label>Amount</label>
-                   <input type="number" class="form-control" name="amount"
-                     value="<?php echo $bedSpace->amount;?>" readonly>
+                   <input type="text" class="form-control form-control-lg" name="amount"
+                     value="<?php echo number_format($bedSpace->amount,2);?>" readonly>
                   </div>
                 </div>
                  <div class="col-6">
                   <div class="form-group">
                     <label>Amount Paid</label>
-                   <input type="number" class="form-control form-control-lg" name="paid"
-                     value="<?php echo $bedSpace->amount_paid;?>" readonly>
+                   <input type="text" class="form-control form-control-lg" name="paid"
+                     value="<?php echo number_format($bedSpace->amount_paid,2);?>" readonly>
                   </div>
                 </div>
 
                 <div class="col-6">
                   <div class="form-group">
                     <label>Due Balance</label>
-                   <input type="number" class="form-control form-control-lg" name="paid"
-                     value="<?php echo ($bedSpace->amount - $bedSpace->amount_paid);?>" readonly>
+                    <input type="hidden" name="pricePeryear" value="<?php echo $bedSpace->amount;?>">
+                    <input type="hidden" name="balance" value="<?php echo ($bedSpace->amount - $bedSpace->amount_paid);?>">
+                    <input type="hidden" name="bonkHiddenId" value="<?php echo $bedSpace->bedId;?>">
+                    <input type="hidden" name="occupant_id" value="<?php echo $bedSpace->occupant;?>">
+                   <input type="text" class="form-control form-control-lg"
+                     value="<?php echo number_format($bedSpace->amount - $bedSpace->amount_paid,2);?>" readonly>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
                     <label>Make Payment <span class="text-danger">without coma (,)</span></label>
-                   <input type="number" class="form-control form-control-lg" name="touppaid"
-                     placeholder="e.g 50">
+                   <input type="number" class="form-control form-control-lg" name="topuppaid"
+                     placeholder="e.g 50000">
                   </div>
                 </div>
                  <div class="col-12">
+                  <input type="hidden" name="action" value="update_student_bedspace_payment_">
                   <div class="form-group">
                     <label>Authentication Code</label>
                    <input type="password" class="form-control form-control-lg" name="auth_code"
@@ -214,6 +219,25 @@ if (isset($_GET['bed_occupant']) && $_GET['bed_occupant'] !="" && isset($_GET['b
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
+     <script>
+      $(document).ready(function(){
+        //STUDENT FORM SUBMISSION METHOD
+        const BED_PAYMENT_UPDATE_FORM = $("#update_student_bedspace_payment_form");
+        BED_PAYMENT_UPDATE_FORM.on("submit", function(e){
+        e.preventDefault();
+        //myResponseText3
+        $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+        //send request 
+        $.post("../actions/update_actions",BED_PAYMENT_UPDATE_FORM.serialize(),function(res_data){
+        setTimeout(()=>{
+        $(".__loadingBtn__").html('Update Payment').attr("disabled",false);
+        // $("#myResponseText3").html(res_data);
+        $("#server-response").html(res_data);
+        },1000);
+        })
+        });
+      })
+    </script>
   </body>
   <!-- END: Body-->
 </html>

@@ -6,7 +6,7 @@ require_once '../classes/Session.php';
 date_default_timezone_set("Africa/Lagos");
 //create an autoload function
 spl_autoload_register(function($filename){
-  include_once "../classes/".$filename.".php";
+  require_once "../classes/".$filename.".php";
 });
 
 $ses_token = Session::set_xss_token();
@@ -74,59 +74,56 @@ if ($request_method ==="POST") {
 			// code...
 			$grade_id = $Configuration->Clean($_POST['grade_id']);
 			$result = $Administration->get_classroom_ById($grade_id);
+           
 			if ($result) {
+                if (isset($result->grade_teacher)) {
+                $staff_data = $Staff->get_staff_ById($result->grade_teacher);
+              $getva ="<option value='".$result->grade_teacher."' selected>".$staff_data->full_name."</option>";
+                }else{
+                 $getva ="<option value='' selected>Choose...</option>";
+                }
 			echo '
 			 <div class="row">
-               <div class="col-md-12">
+               <div class="col-md-6">
                   <div class="form-group">
                    <input type="hidden" name="classroom_id" value="'.$result->gradeId.'">
                   <label for="grade_name">CLASS DESC</label>
                 <input type="text" autocomplete="off" class="form-control form-control-lg" name="classroom_name" value="'.$result->gradeDesc.'">
                     </div>
                </div>
-                <div class="col-md-4">
-                     <div class="form-group">
-                  <label for="class_division"> DIVISION </label>
-               <select name="cdivision" id="class_division" class="form-control form-control-lg">
-               <option value="'.$result->grade_division.'">'.$result->grade_division.'</option>
-                 <option value="">Choose...</option>
-                 <option value="A">A</option>
-                 <option value="B">B</option>
-               </select>
-                </div>
-              </div>
-               <div class="col-md-4">
-                     <div class="form-group">
-                  <label for="class_sub_division"> SUB-DIVISION </label>
-               <select name="sdivision" id="class_sub_division" class="form-control form-control-lg">
-                <option value="'.$result->grade_dept.'">'.strtoupper($result->grade_dept).'</option>
-                 <option value="">Choose...</option>
-                 <option value="science">SCIENCE</option>
-                 <option value="art">ART</option>
-                 <option value="commercial">COMMERCIAL</option>
-                 <option value="none">None</option>
-               </select>
-                </div>
-              </div>
-                   <div class="col-md-4">
+                   <div class="col-md-6">
                      <div class="form-group">
                   <label for="status"> STATUS </label>
                <select name="status" id="status" class="form-control form-control-lg">
                <option value="'.$result->grade_status.'">'.$result->grade_status.'</option>
-                <option value="">Choose...</option>
                  <option value="active">Active</option>
                  <option value="pending">Pending</option>
                  <option value="closed">Locked</option>
                </select>
                 </div>
               </div>
+               <div class="col-md-6">
+                     <div class="form-group">
+                  <label for="status"> CLASS TEACHER </label>
+                <select name="teacher" id="teacher2" class="select2 form-control form-control-lg">
+               '.$getva.'
+                '.$Staff->show_staff_indropdown_list().'
+               </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                  <label for="auth_code">Authentication Code</label>
+                <input type="password" autocomplete="off" class="form-control form-control-lg" name="auth_code" placeholder="*********">
+                    </div>
+               </div>
                  </div>
 			';
 			}
 		}
 
 		if ($_POST['action'] ==="update_classroom_now") {
-			$result = $Administration->update_classroom($_POST);
+			$result = $Administration->updateClassroomDetails($_POST);
 			if ($result) {
 				echo $result;
 			}
@@ -583,6 +580,14 @@ if ($_POST['action'] ==="update_staff_office_title") {
      //submit_edited_vehicle_details
     if ($_POST['action'] ==="submit_edited_vehicle_details") {
         $result = $Bus->updateSchoolBusById($_POST);
+        if ($result) {
+            echo $result;
+        }
+    }
+
+    //update_student_bedspace_payment_
+    if ($_POST['action'] ==="update_student_bedspace_payment_") {
+        $result = $Hostel->updateStudentBedPayment($_POST);
         if ($result) {
             echo $result;
         }

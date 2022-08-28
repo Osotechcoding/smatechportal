@@ -244,7 +244,7 @@ require_once "helpers/helper.php";
     deleteVehicleBtn.on("click", function (){
       let action = $(this).data("action"), vehicleId = $(this).data("id");
       //send request
-      if (confirm("Are you sure to delete this Driver?")) {
+      if (confirm("Are you sure to delete this Vehicle?")) {
         $.post("../actions/delete_actions",{action:action,vehicleId:vehicleId}, function(res){
           $(".myLoadingBtn_"+vehicleId).html('<img src="../assets/loaders/rolling_loader.svg" width="20">');
           setTimeout(()=>{

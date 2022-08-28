@@ -36,10 +36,10 @@ public	function __construct()
     return date_default_timezone_set("Africa/Lagos");
   }
   public function check_single_data($table,$field,$field_val){
-  	$this->query ="SELECT * FROM {$table} WHERE {$field}=? LIMIT 1";
+  	$this->query ="SELECT * FROM `{$table}` WHERE `{$field}`=? LIMIT 1";
 		$this->stmt=$this->dbh->prepare($this->query);
 		$this->stmt->execute(array($field_val));
-		if ($this->stmt->rowCount()>0) {
+		if ($this->stmt->rowCount() == 1) {
 			$this->response = true;
 		}else{
 			$this->response = false;

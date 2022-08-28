@@ -24,7 +24,7 @@ if (isset($_GET['student-data']) && $_GET['student-data']!="") {
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name ?> :: Update <?php echo ucwords($student_data->full_name);?> Information</title>
+    <title><?php echo ucwords($SmappDetails->school_name);?> :: Update <?php echo ucwords($student_data->full_name);?> Information</title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->

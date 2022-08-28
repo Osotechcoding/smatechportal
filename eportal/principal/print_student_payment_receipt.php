@@ -27,7 +27,7 @@ if ($request_method!=="GET") {
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name ?> :: <?php echo  ucwords($student_data->full_name); ?> Payment receipt</title>
+    <title><?php echo ucwords($SmappDetails->school_name);?> :: <?php echo  ucwords($student_data->full_name); ?> Payment receipt</title>
    <!-- include template/HeaderLink.php -->
 
    <?php include "../template/HeaderLink.php";?>

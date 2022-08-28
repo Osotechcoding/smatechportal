@@ -68,7 +68,7 @@ require_once "helpers/helper.php";
                  <div class="col-12 col-md-4 col-sm-6 col-lg-4">
                   <label for="users-list-verified">Student Class</label>
                   <fieldset class="form-group">
-                    <select name="student_class" class="form-control form-control-lg select2" id="users-list-verified">
+                    <select name="student_class" class="custom-select form-control form-control-lg">
                            <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list();?>
                         </select>

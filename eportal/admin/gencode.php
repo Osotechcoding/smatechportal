@@ -208,14 +208,14 @@ code {
      </script>
      <script>
 	function generateSerial() {
-    
+    //ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
     'use strict';
     
-    var chars = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+    var chars = '1234567890',
         
-        serialLength = 10,
+        serialLength = 5,
         
-        randomSerial = "",
+        randomSerial = "SMA",
         
         i,
         

@@ -9,7 +9,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo __SCHOOL_NAME__ ?> :: Manage Classroom</title>
+    <title><?php echo ucwords($SmappDetails->school_name);?> :: Manage Classroom</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -110,7 +110,6 @@ require_once "helpers/helper.php";
           <tr>
             <th>S/N</th>
           <th>CLASS DESC</th>
-          <th> SUBDIVISION</th>
           <th>CLASS TEACHER</th>
           <th>STATUS</th>
         </tr>
@@ -125,8 +124,7 @@ require_once "helpers/helper.php";
               ?>
               <tr>
                 <td><?php echo $cnt; ?></td>
-          <td><?php echo strtoupper($classrooms->gradeDesc); ?> <?php echo strtoupper($classrooms->grade_division); ?></td>
-          <td><?php echo strtoupper($classrooms->grade_dept); ?></td>
+          <td><?php echo strtoupper($classrooms->gradeDesc); ?></td>
           <td><?php if ($classrooms->grade_teacher ==NULL): ?>
           <span class="badge badge-warning badge-md">Not Assigned</span>
             <?php else: ?>

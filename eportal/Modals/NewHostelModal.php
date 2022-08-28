@@ -36,9 +36,8 @@
                      <div class="form-group">
                   <label for="type">HOSTEL TYPE</label>
                <select name="type" id="type" class="form-control form-control-lg">
-                   <option value="boys" selected>Boys Hostel</option>
-                   <option value="girls">Girls Hostel</option>
-                   <option value="staff">Staff Quarters</option>
+                   <option value="boys" selected>Boy's Hostel</option>
+                   <option value="girls">Girl's Hostel</option>
                  </select>
                     </div>
                   </div>

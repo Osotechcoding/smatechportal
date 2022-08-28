@@ -5,7 +5,6 @@ require_once "helpers/helper.php";
 
 <html class="loading" lang="en" data-textdirection="ltr">
   <!-- BEGIN: Head-->
-
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
@@ -23,13 +22,9 @@ require_once "helpers/helper.php";
     <?php include ("template/HeaderNav.php"); ?>
     <!-- headerNav.php -->
     <!-- END: Header-->
-
-
     <!-- BEGIN: Main Menu-->
-  <!--  -->
   <?php include ("template/Sidebar.php"); ?>
     <!-- END: Main Menu-->
-
     <!-- BEGIN: Content-->
     <div class="app-content content">
       <div class="content-overlay"></div>
@@ -68,23 +63,23 @@ require_once "helpers/helper.php";
           <form class="form" id="student_office_form">
             <div class="form-body">
               <div class="row">
-                 <div class="col-md-5 col-12">
+                 <div class="col-md-4 col-12">
                    <label for="prefect_id">Student Name</label>
-                  <select name="student_uniq_id" id="prefect_id" class="select2 form-control">
+                  <select name="student_uniq_id" id="prefect_id" class="custom-select form-control">
                     <option value="" selected>Choose...</option>
                     <?php echo $Student->get_students_InDropDown();?>
                   </select>
                 </div>
                 <div class="col-md-4 col-12">
                      <label for="student_office_name">Assign Office</label>
-                  <select name="student_office_name" class="select2 form-control">
+                  <select name="student_office_name" class="custom-select form-control">
                     <option value="" selected>Choose...</option>
                    <?php echo $Administration->get_student_office_title_inDropDown(); ?>
                   </select>
                 </div>
-                <div class="col-md-3 col-12">
+                <div class="col-md-4 col-12">
                      <label for="auth_pass">Authentication Code</label>
-                  <input type="password" class="form-control" placeholder="Authentication Code" name="auth_pass">
+                  <input type="password" class="form-control" placeholder="**********" name="auth_pass">
                 </div>
   <!-- daterange end -->
                 </div>
@@ -109,18 +104,18 @@ require_once "helpers/helper.php";
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="text-center">STUDENT OFFICE FOR THE <?php echo $activeSess->session_desc_name;?> ACADEMIC SESSION </h4>
+          <h4 class="text-center">SCHOOL PREFECTS FOR THE <?php echo $activeSess->session_desc_name;?> ACADEMIC SESSION </h4>
         </div>
         <div class="card-body card-dashboard">
          
           <div class="table-responsive">
-            <table class="table osotechDatatable">
+            <table class="table osotechDatatable table-striped table-hover">
               <thead class="text-center">
                 <tr>
                   <th>Student</th>
                   <th>Class</th>
                   <th>Office Title</th>
-                  <th>Regime</th>
+                  <th>Regime/Tenure</th>
                   <th>Action</th>
                 </tr>
               </thead>

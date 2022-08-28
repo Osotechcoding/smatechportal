@@ -76,10 +76,12 @@
         return $this->response;
         unset($this->dbh);
         }
-        }
+            }
+
         public function isEmptyStr($str){
         return ($str === "" || empty($str))? true : false;
         }
+
         public function is_Valid_Email($email){
         if (filter_var($email,FILTER_VALIDATE_EMAIL)) {
         $this->response = true;
@@ -90,7 +92,7 @@
         }
 
         //GET RESULT DATA
-        public function get_session_result_details($resultmi){
+      /*  public function get_session_result_details($resultmi){
         $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE reportId=?");
         $this->stmt->execute(array($resultmi));
         if ($this->stmt->rowCount()>0) {
@@ -98,7 +100,17 @@
         return $this->response;
         unset($this->dbh);
         }
+        }*/
+
+            public function get_student_data_byId($stdId){
+        $this->stmt = $this->dbh->prepare("SELECT *,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM `visap_student_tbl` WHERE stdId=? LIMIT 1");
+        $this->stmt->execute(array($stdId));
+        if ($this->stmt->rowCount()==1) {
+            $this->response = $this->stmt->fetch();
+            return $this->response;
+            $this->dbh = null;
         }
+    }
 
         //STUDENT DATA BY REGNO
         public function get_student_details_byRegNo($stdRegNo){
@@ -321,6 +333,36 @@
         public function checkResultReleasedPortalStatus(){
             return false;
         }
+
+        public function get_all_prefect_list(){
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_prefect_tbl` WHERE activeness='1' ORDER BY school_session DESC");
+    $this->stmt->execute();
+    if ($this->stmt->rowCount()>0) {
+        $this->response = $this->stmt->fetchAll();
+        return $this->response;
+        $this->dbh = null;
+    }
+}
+
+        public function get_all_staff(){
+        $this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM `visap_staff_tbl` ORDER BY appliedDate DESC");
+        $this->stmt->execute();
+        if ($this->stmt->rowCount() > 0) {
+            $this->response = $this->stmt->fetchAll();
+            return $this->response;
+            $this->dbh = null;
+        }
+    }
+
+    public function get_staff_ById($staffId){
+    $this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM `visap_staff_tbl` WHERE staffId=? LIMIT 1");
+        $this->stmt->execute([$staffId]);
+        if ($this->stmt->rowCount()==1) {
+            $this->response = $this->stmt->fetch();
+            return $this->response;
+            $this->dbh = null;
+        }
+    }
 
         }
         $Osotech = new Osotech();

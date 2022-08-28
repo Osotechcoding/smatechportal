@@ -197,7 +197,7 @@ if ($request_method!=="GET") {
                 </div> -->
                 <div class="invoice-calc d-flex justify-content-between">
                   <span class="invoice-title">Paid to date</span>
-                  <span class="invoice-value">&#8358; <?php echo number_format($get_data->amount_paid,2);?></span>
+                  <span class="invoice-value">&#8358; <?php echo number_format($Hostel->getSumofTotalPaid($student_data->stdId,$bedId),2);?></span>
                 </div>
                 <div class="invoice-calc d-flex justify-content-between">
                   <span class="invoice-title">Balance (NGN)</span>

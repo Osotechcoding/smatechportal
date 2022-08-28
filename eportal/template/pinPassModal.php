@@ -17,11 +17,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                   <button type="submit" class="btn btn-success ml-1">
-                    <span class="d-none d-sm-block">Submit Password</span>
-                  <button type="button" class="btn btn-warning ml-1" data-dismiss="modal">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Back</span>
+                   <button type="submit" class="btn btn-dark ml-1">
+                    Submit Password</button>
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                   Cancel
                   </button>
                 </div>
                  </form>

@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo ($SmappDetails->school_name);?> :: Manage Students </title>
+    <title><?php echo ucwords($SmappDetails->school_name);?> :: Manage Students </title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -109,7 +109,7 @@ require_once "helpers/helper.php";
                  <div class="col-12 col-md-4 col-sm-6 col-lg-4">
                   <label for="users-list-verified">Student Class</label>
                   <fieldset class="form-group">
-                    <select name="student_class" class="form-control select2" id="users-list-verified">
+                    <select name="student_class" class="custom-select form-control form-control-lg" id="users-list-verified">
                            <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list();?>
                         </select>
@@ -131,7 +131,7 @@ require_once "helpers/helper.php";
                     </fieldset>
                 </div>
                 <div class="col-12 col-md-4 col-sm-6 col-lg-4 d-flex align-items-center">
-                    <button type="submit" name="filter-btn" value="show_list_of_students" class="btn btn-primary btn-block glow users-list-clear mb-0">Filter Students</button>
+                    <button type="submit" name="filter-btn" value="show_list_of_students" class="btn btn-dark btn-lg btn-block glow mb-0"><span class="fa fa-search"></span> Show Students</button>
                 </div>
             </div>
         </form>

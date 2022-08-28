@@ -492,41 +492,25 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 		$jobType = $this->config->Clean($d['jobType']);
 		$staff_gender = $this->config->Clean($d['staff_gender']);
 		$staff_status = 1;
-		//$jobPosition = $this->config->Clean($d['jobPosition']);
-		$auth = $this->config->Clean($d['auth_pass']);
+		$auth_pass = $this->config->Clean($d['auth_code']);
 		//check for error in form
-		if ($this->config->isEmptyStr($surName)) {
-			$this->response = $this->alert->alert_toastr("error","The staff Surname is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($firstName)) {
-	$this->response = $this->alert->alert_toastr("error","The staff First Name is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($middleName)) {
-		$this->response = $this->alert->alert_toastr("error","The staff Middle Name is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($email)) {
-	$this->response = $this->alert->alert_toastr("error","The staff Portal E-mail is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($mphone)) {
-		$this->response = $this->alert->alert_toastr("error","The staff Phone Number is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($musername)) {
-		$this->response = $this->alert->alert_toastr("error","The staff Portal Username is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($mpassword)) {
-		$this->response = $this->alert->alert_toastr("error","The staff Portal Password is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($education)) {
-		$this->response = $this->alert->alert_toastr("error","The staff Qualification is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($jobType)) {
-			$this->response = $this->alert->alert_toastr("error","The staff Job Type is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($staff_gender)) {
-			$this->response = $this->alert->alert_toastr("error","The staff Gender is Required!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($auth)) {
-			$this->response = $this->alert->alert_toastr("error","Authentication Key is Required!",__OSO_APP_NAME__." Says");
+		if ($this->config->isEmptyStr($surName) || $this->config->isEmptyStr($firstName) ||
+		$this->config->isEmptyStr($middleName) || $this->config->isEmptyStr($email) ||
+		$this->config->isEmptyStr($mphone) || $this->config->isEmptyStr($mpassword) ||
+		$this->config->isEmptyStr($education) || $this->config->isEmptyStr($jobType) ||
+		$this->config->isEmptyStr($staff_gender)) {
+			$this->response = $this->alert->alert_toastr("error","Invalid form Submission! Please check your inputs and try again.",__OSO_APP_NAME__." Says");
 		}elseif (!$this->config->is_Valid_Email($email)) {
-			$this->response = $this->alert->alert_toastr("error","A valid e-mail address is Required!",__OSO_APP_NAME__." Says");
-		}
-		else{
-			if ($auth !== __OSO__CONTROL__KEY__) {
-				$this->response = $this->alert->alert_toastr("error","Invalid Authentication Key!",__OSO_APP_NAME__." Says");
+			$this->response = $this->alert->alert_toastr("error","$email is not a valid e-mail address! check and try again.",__OSO_APP_NAME__." Says");
+		}elseif ($this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error","Authentication Code is Required!",__OSO_APP_NAME__." Says");
+		}else{
+			if ($auth_pass !== __OSO__CONTROL__KEY__) {
+				$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
 			}else{
 				//lets check if the email entered is already exists
 				if ($this->config->check_single_data('visap_staff_tbl','staffEmail',$email)) {
-				$this->response = $this->alert->alert_toastr("error","$email is already taken, Please try another email address!",__OSO_APP_NAME__." Says");
+				$this->response = $this->alert->alert_toastr("error","$email is already taken!",__OSO_APP_NAME__." Says");
 				}elseif ($this->config->check_single_data('visap_student_tbl','stdEmail',$email)) {
 	$this->response = $this->alert->alert_toastr("error","$email is already taken on this Portal, Please try another!",__OSO_APP_NAME__." Says");
 				}else{
@@ -535,6 +519,7 @@ $this->response = $this->alert->alert_toastr("error","Invalid Login Details",__O
 				$staffRegNo = self::generate_staff_registration_number();
 			 $confirmation_code = substr(md5(uniqid(mt_rand(),true)),0,15);
 			 $reg_date = date("Y-m-d");
+			 $musername = $firstName;
 			 $div_email = explode("@", $email);
 			 $portal_email = $div_email[0]."@".__OSO_APP_NAME__.".portal";
 			 $fullName = $firstName." ".$middleName;

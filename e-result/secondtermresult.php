@@ -185,12 +185,12 @@ $resultScore->execute(array($student_reg_number,$student_class,$rsession));
     $myTotalMark = intval($showResult->overallMark);
     ?>
     <?php
-    if ($showResult->studentGrade == 'JSS 1 A' || $showResult->studentGrade == 'JSS 2 A' || $showResult->studentGrade =='JSS 3 A') {
+   if ($showResult->studentGrade == 'JSS 1' || $showResult->studentGrade == 'JSS 2' || $showResult->studentGrade == 'JSS 3') {
       $amInClass ='Junior';
-    }elseif ($showResult->studentGrade == 'SSS 1 A' ||$showResult->studentGrade == 'SSS 1 B' || $showResult->studentGrade == 'SSS 1 C' || $showResult->studentGrade == 'SSS 2 A' || $showResult->studentGrade == 'SSS 2 B' || $showResult->studentGrade == 'SSS 2 C' || $showResult->studentGrade =='SSS 3 A' || $showResult->studentGrade =='SSS 3 B' || $showResult->studentGrade =='SSS 3 C') {
+    }elseif ($showResult->studentGrade == 'SSS 1' || $showResult->studentGrade == 'SSS 2' || $showResult->studentGrade =='SSS 3') {
      $amInClass ='Senior';
     }else{
-       $amInClass ='Pry';
+    $amInClass ='Pry';
     }
   $stmt2 = $dbh->prepare("SELECT * FROM `visap_result_grading_tbl` WHERE grade_class='$amInClass' AND $myTotalMark>=score_from AND $myTotalMark<=score_to");
   $stmt2->execute();

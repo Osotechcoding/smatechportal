@@ -102,17 +102,15 @@ require_once "helpers/helper.php";
       
     <div class="card">
       <div class="card-header">
-          <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#addClassModal"><span class="fa fa-list fa-1x"></span> Add Classroom</button>
+          <button type="button" class="btn btn-dark btn-lg" data-toggle="modal" data-target="#addClassModal"><span class="fa fa-plus fa-1x"></span> Add</button>
         </div>
       <div class="card-body">
         <div class="text-center col-md-12" id="delete_response"></div>
         <div class="table-responsive">
-      <table class="table osotechDatatable table-hover table-bordered">
+      <table class="table table-hover table-bordered">
         <thead class="text-center">
           <tr>
           <th>CLASS DESC</th>
-          <th> DIVISION</th>
-          <th> SUBDIVISION</th>
           <th>CLASS TEACHER</th>
           <th>STATUS</th>
           <th>ACTION</th>
@@ -126,9 +124,8 @@ require_once "helpers/helper.php";
               ?>
               <tr>
           <td><?php echo strtoupper($classrooms->gradeDesc); ?></td>
-          <td><?php echo strtoupper($classrooms->grade_division); ?></td>
-          <td><?php echo strtoupper($classrooms->grade_dept); ?></td>
-          <td><?php if ($classrooms->grade_teacher ==NULL): ?>
+
+          <td><?php if ($classrooms->grade_teacher == NULL): ?>
           <span class="badge badge-warning badge-md">Not Assigned</span>
             <?php else: ?>
               <?php $staff_data = $Staff->get_staff_ById($classrooms->grade_teacher);
@@ -146,17 +143,9 @@ require_once "helpers/helper.php";
               echo ' <span class="badge badge-success badge-md">Active</span>';
                 break;
             } ?></td>
-         <td>   <div class="btn-group dropdown mb-1">
-            <button type="button" class="btn btn-secondary">Options</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           <div class="dropdown-menu">
-              <a class="dropdown-item text-info update_btn" data-id="<?php echo $classrooms->gradeId;?>" href="javascript:void(0);"><span class="fa fa-edit"></span> Update </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger delete_btn" data-action="delete_classroom_now" data-id="<?php echo $classrooms->gradeId;?>" href="javascript:void(0);"> Delete</a>
-            </div>
-          </div></td>
+         <td> <button type="button" data-id="<?php echo $classrooms->gradeId;?>" class="badge badge-dark badge-pill badge-md update_btn"><span class="fa fa-edit"></span> Edit</button>
+          <button type="button" data-action="synchronize_teacher_btn" data-id="<?php echo $classrooms->gradeId;?>" data-teacher="<?php echo $classrooms->grade_teacher;?>" class="badge badge-danger badge-pill badge-md sync_btn"><span class="fa fa-refresh"></span> Sync C.T</button>
+           </td>
         </tr>
               <?php
             }
@@ -184,37 +173,23 @@ require_once "helpers/helper.php";
                   <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><span class="fa fa-plus fa-1x"></span> Add Classroom</h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="bx bx-x"></i></button>
                 </div>
-                <div class="col-md-12 text-center mt-2" id="result-response"></div>
+                <!-- <div class="col-md-12 text-center mt-2" id="result-response"></div> -->
                 <form id="add_ClassModal_form">
                 <div class="modal-body">
-                  <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
                   <div class="row">
-               <div class="col-md-12">
+               <div class="col-md-6">
                   <div class="form-group">
                   <label for="grade_name">CLASS DESC</label>
                 <input type="text" autocomplete="off" class="form-control form-control-lg" name="grade_name" placeholder="JSS3">
                     </div>
                </div>
-                <div class="col-md-6">
-                <div class="form-group">
-                  <label for="class_division"> DIVISION </label>
-               <select name="class_division" id="class_division" class="form-control form-control-lg">
-                 <option value="">Choose...</option>
-                 <option value="A">A</option>
-                 <option value="B">B</option>
-                 <option value="C">C</option>
-               </select>
-                </div>
-              </div>
                <div class="col-md-6">
                      <div class="form-group">
-                  <label for="class_sub_division"> SUB-DIVISION </label>
-               <select name="sub_division" id="class_sub_division" class="form-control form-control-lg">
+                  <label for="status"> STATUS </label>
+               <select name="status" id="status" class="form-control form-control-lg">
                  <option value="">Choose...</option>
-                 <option value="science">SCIENCE</option>
-                 <option value="art">ART</option>
-                 <option value="commercial">COMMERCIAL</option>
-                 <option value="none">None</option>
+                 <option value="active">Enable</option>
+                 <option value="pending">Disable</option>
                </select>
                 </div>
               </div>
@@ -222,34 +197,28 @@ require_once "helpers/helper.php";
                    <div class="col-md-6">
                      <div class="form-group">
                   <label for="teacher"> CLASS TEACHER </label>
-               <select name="teacher" id="teacher" class="select2 form-control form-control-lg">
+               <select name="teacher" id="teacher" class="form-control form-control-lg">
                  <option value="">Choose...</option>
                 <?php echo $Staff->show_staff_indropdown_list();?>
                </select>
                 </div>
               </div>
-                   <div class="col-md-6">
-                     <div class="form-group">
-                  <label for="status"> STATUS </label>
-               <select name="status" id="status" class="form-control form-control-lg">
-                 <option value="">Choose...</option>
-                 <option value="active">Active</option>
-                 <option value="pending">Pending</option>
-                 <option value="closed">Locked</option>
-               </select>
+                  <div class="col-md-6">
+                  <div class="form-group">
+                  <label for="auth_code">Authentication Code</label>
+                <input type="password" autocomplete="off" class="form-control form-control-lg" name="auth_code" placeholder="*********">
                 </div>
-              </div>
+               </div>
+                   
                  </div>
-                  </div>
+                 
                 </div>
-                <input type="hidden" name="bypass" value="<?php echo md5("oiza1");?>">
                 <input type="hidden" name="action" value="submit_new_classroom">
                 <div class="modal-footer">
-                   <button type="submit" class="btn btn-success ml-1 __loadingBtn__">
-                    <span class="fa fa-paper-plane"> Submit</span></button>
-                  <button type="button" class="btn btn-warning ml-1" data-dismiss="modal">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Back</span>
+                   <button type="submit" class="btn btn-dark ml-1 __loadingBtn__">
+                   Submit</button>
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                    Cancel
                   </button>
                 </div>
                 </form>
@@ -264,42 +233,93 @@ require_once "helpers/helper.php";
    <div class="modal fade" id="classUpdateModal" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <!-- modal-dialog-scrollable -->
-            <div class="modal-dialog modal-lg ">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i class="fa fa-edit fa-2x"></i> Update Classroom</h2>
+                  <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i class="fa fa-edit fa-1x"></i> Update Classroom</h2>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="bx bx-x"></i>
                   </button>
                 </div>
-                <div class="text-center col-md-12 mt-1" id="result-response2"></div>
                  <form id="update_classroom_form_modal">
                 <div class="modal-body">
-                     
                   <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12" id="show_classroom_details_div">
                   </div>
-                   <div class="row">
-                   <div class="col-md-12">
-                     <div class="form-group">
-                  <label for="teache2r"> CLASS TEACHER </label>
-               <select name="teacher" id="teacher2" class="select2 form-control form-control-lg">
-                 <option value="">Choose...</option>
-                <?php echo $Staff->show_staff_indropdown_list();?>
-               </select>
-                </div>
-              </div>
-               </div>
+                  
                 </div>
                 <input type="hidden" name="action" value="update_classroom_now">
                 <div class="modal-footer">
-                   <button type="submit" class="btn btn-success ml-1 __loadingBtn2__">
+                   <button type="submit" class="btn btn-dark ml-1 __loadingBtn2__">
                     <span class="fa fa-paper-plane"> Save Changes</span></button>
-                  <button type="button" class="btn btn-warning ml-1" data-dismiss="modal">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Back</span>
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                   Cancel
                   </button>
                 </div>
                  </form>
+              </div>
+            </div>
+          </div>
+    <!-- BUS MODAL  END -->
+
+     <!-- BUS MODAL Start -->
+   <div class="modal fade" id="synchronizeStaffModalForm" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <!-- modal-dialog-scrollable -->
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i class="fa fa-edit fa-1x"></i> Please upgrade to Premium version of <?php echo __OSO_APP_NAME__; ?>To use this functionality</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                  </button>
+                </div>
+                 <!-- <form id="update_classroom_form_modal">
+                <div class="modal-body">
+                 <div class="row">
+                   <div class="col-md-6">
+                     <div class="form-group">
+                       <label for="">Class Desc</label>
+                       <input type="text" class="form-control" readonly>
+                     </div>
+                   </div>
+                   <div class="col-md-6">
+                     <div class="form-group">
+                       <label for="">Class Status</label>
+                       <input type="text" class="form-control" readonly>
+                     </div>
+                   </div>
+                   <div class="col-md-6">
+                     <div class="form-group">
+                       <label for="">Current Class Teacher</label>
+                       <input type="text" class="form-control" readonly>
+                     </div>
+                   </div>
+                   <div class="col-md-6">
+                     <div class="form-group">
+                       <label for="">Change Class Teacher</label>
+                      <select name="new_clas_teacher" id="new_class_teacher" class="form-control form-control-lg custom-select">
+                        <option value="" selected>Choose...</option>
+                        <?php //echo $Staff->show_staff_indropdown_list();?>
+                      </select>
+                     </div>
+                   </div>
+                   <div class="col-md-6">
+                     <div class="form-group">
+                       <label for="">Enter Authentication</label>
+                       <input type="password" autocomplete="off" placeholder="**********" class="form-control">
+                     </div>
+                   </div>
+                 </div>
+                </div>
+                <input type="hidden" name="action" value="update_classroom_now">
+                <div class="modal-footer">
+                   <button type="submit" class="btn btn-dark ml-1 __loadingBtn2__">
+                    <span class="fa fa-paper-plane"> Save Changes</span></button>
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                   Cancel
+                  </button>
+                </div>
+                 </form> -->
               </div>
             </div>
           </div>
@@ -327,6 +347,12 @@ require_once "helpers/helper.php";
        }else{
         return false;
        }
+      });
+
+      //synchronize teacher action
+      const synchronizeTeacher = $(".sync_btn");
+      synchronizeTeacher.on("click", function(){
+        $("#synchronizeStaffModalForm").modal('show');
       })
 
       $(".osotechDatatable").DataTable();
@@ -351,7 +377,7 @@ require_once "helpers/helper.php";
         $.post("../actions/update_actions",update_classroom_form_modal,function(data){
           setTimeout(()=>{
         $(".__loadingBtn2__").html('Save Changes').attr("disabled",false);
-        $("#result-response2").html(data);
+        $("#server-response").html(data);
           },500);
         })
         // self.location.reload();
@@ -367,7 +393,7 @@ require_once "helpers/helper.php";
         $.post("../actions/actions",add_ClassModal_form,function(data){
           setTimeout(()=>{
         $(".__loadingBtn__").html('Submit').attr("disabled",false);
-        $("#result-response").html(data);
+        $("#server-response").html(data);
           },2000);
         })
         // self.location.reload();

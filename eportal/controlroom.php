@@ -56,6 +56,7 @@ placeholder="Enter your password">
 </div>
 <input type="hidden" name="login_as" value="1234509876">
 <div class="checkbox form-group form-box clearfix">
+    <a href="javascript:void(0);" style="float: right;color: red;">Forgot Password</a>
        <div class="form-check checkbox-theme">
        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberme">
         <label class="form-check-label" for="rememberMe">Remember me</label></div>

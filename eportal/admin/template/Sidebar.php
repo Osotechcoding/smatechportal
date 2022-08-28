@@ -83,6 +83,8 @@
           <!-- STUDENT -->
           <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-graduation-cap fa-1x" data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="MANAGE STUDENTS">MANAGE STUDENTS</span></a>
             <ul class="menu-content">
+               <li class="nav-item"><a href="add_student"><i class="fa fa-graduation-cap fa-1x"></i><span class="menu-title text-truncate" data-i18n="Register Student">Register Student</span></a>
+          </li>
           <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span class="menu-title text-truncate" data-i18n="View Students">View Students</span></a>
           </li>
           <!-- student_attendance -->
@@ -105,7 +107,8 @@
            <!-- STUDENT -->
           <li class="nav-item"><a href="javascript:void(0)"><i class="fa fa-users fa-1x" data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="MANAGE STAFF"> MANAGE STAFF</span></a>
             <ul class="menu-content">
-          <li class="nav-item"><a href="staffs"><i class="fa fa-user-plus fa-1x"></i><span class="menu-title text-truncate" data-i18n="Staff">View Staff</span></a></li>
+              <li class="nav-item"><a href="add_staff"><i class="fa fa-user-plus fa-1x"></i><span class="menu-title text-truncate" data-i18n="Register Staff">Register Staff</span></a></li>
+          <li class="nav-item"><a href="staffs"><i class="fa fa-users fa-1x"></i><span class="menu-title text-truncate" data-i18n="Staff">View Staff</span></a></li>
           <li class=" nav-item"><a href="dutyAssignment"><i class="fa fa-briefcase fa-1x"></i><span class="menu-title text-truncate" data-i18n="Assign Staff Duty">Assign Staff Duty</span></a>
          </li>
              <li class="nav-item"><a href="HODs"><i class="fa fa-briefcase fa-1x"></i><span class="menu-title text-truncate" data-i18n="Staff Office">Staff Office</span></a>

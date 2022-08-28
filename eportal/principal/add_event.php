@@ -9,7 +9,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo ucwords($SmappDetails->school_name) ?> EVENT MANAGEMENT</title>
+    <title><?php echo ucwords($SmappDetails->school_name) ?> :: EVENT MANAGEMENT</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
     <!-- include dataTableHeaderLink.php -->
 

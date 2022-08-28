@@ -83,21 +83,6 @@
         <span>Set Social links</span>
         </a>
         </li>
-        <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" id="account-pill-social" data-toggle="pill"
-        href="#new-account-vertical-form" aria-expanded="false">
-        <i class="fa fa-user-plus"></i>
-        <span>Add New Staff</span>
-        </a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" id="account-pill-social-two" data-toggle="pill"
-        href="#new-student-account-vertical-form" aria-expanded="false">
-        <i class="fa fa-graduation-cap"></i>
-        <span>Add New Student</span>
-        </a>
-        </li>
-
         </ul>
         </div>
         <!-- right content section -->
@@ -220,14 +205,14 @@
         <div class="form-group">
         <label>APPROVAL NUMBER</label>
         <input name="approval_number" autocomplete="off" type="text" class="form-control"
-        placeholder="OG/NAPPS/009" name="approval_number" value="<?php echo ucwords($VisaPSchoolDetails->govt_approve_number)?>">
+        placeholder="C24314" name="approval_number" value="<?php echo ucwords($VisaPSchoolDetails->govt_approve_number)?>">
         </div>
         </div>
 
         <div class="col-12">
         <div class="form-group">
         <label>CHAIRMAN/DIRECTOR'S WELCOME</label>
-        <textarea class="form-control" name="school_history" rows="3" placeholder="Brief History of the School here..."><?php echo ($VisaPSchoolDetails->school_history)?></textarea>
+        <textarea class="form-control" name="school_history" rows="10" placeholder="Brief History of the School here..."><?php echo ($VisaPSchoolDetails->school_history)?></textarea>
         </div>
         </div> 
         <div class="col-12">
@@ -325,6 +310,55 @@
         placeholder="19 NORTH (functionality is coming soon)" readonly>
         </div>
         </div>
+
+        <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>OUR MISSION</label>
+        <textarea name="mission_statement" class="form-control" rows="2" placeholder="Enter School Mission Statement here..."><?php echo $VisaPSchoolDetails->our_mission;?></textarea>
+        </div>
+        </div>
+        <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>OUR VISION</label>
+        <textarea name="vision_statement" id="" class="form-control" rows="2" placeholder="Enter School Vision Statement here..."><?php echo $VisaPSchoolDetails->our_vision;?></textarea>
+        </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>OUR CORE VALUES <small class="text-danger">(Comma separated values)</small></label>
+        <textarea name="core_value" class="form-control" rows="2" placeholder="e.g value one, value two , value three etc..."><?php echo $VisaPSchoolDetails->our_core_value;?></textarea>
+        </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>KEY OF SUCCESS</label>
+        <textarea name="key_of_success" id="" class="form-control" rows="2" placeholder="Enter About Us Message here..."><?php echo $VisaPSchoolDetails->key_of_success;?></textarea>
+        </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>OUR PHILOSOPHY</label>
+        <textarea name="philosophy_statement" class="form-control" rows="2" placeholder="Enter About Us Message here..."><?php echo $VisaPSchoolDetails->our_philosophy;?></textarea>
+        </div>
+        </div>
+
+         <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>OUR PRINCIPLE</label>
+        <textarea name="principle_statement" class="form-control" rows="2" placeholder="Enter About Us Message here..."><?php echo $VisaPSchoolDetails->our_principle;?></textarea>
+        </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>ABOUT US MESSAGE </label>
+        <textarea name="about_us_statement" class="form-control" rows="6" placeholder="Enter About Us Message here..."><?php echo $VisaPSchoolDetails->about_us;?></textarea>
+        </div>
+        </div>
+
         <div class="col-md-8 col-sm-12">
         <div class="form-group">
         <label>SCHOOL WEBSITE ADDRESS</label>
@@ -335,7 +369,7 @@
         <div class="form-group">
         <label>AUTH CODE</label>
         <input autocomplete="off" type="password" class="form-control"
-        placeholder="*********" name="auth_pass5">
+        placeholder="*********" name="auth_code">
         </div>
         </div>
         <input type="hidden" name="action" value="update_school_profile_">
@@ -411,147 +445,6 @@
         </form>
         </div>
 
-        <div class="tab-pane fade" id="new-account-vertical-form" role="tabpanel"
-        aria-labelledby="new-staff-account" aria-expanded="false">
-        <div class="col-md-12 text-center"><h3><span class="fa fa-user-plus"></span> Add New Staff</h3></div>
-        <div class="col-md-12 text-center" id="myResponseText3"></div>
-        <form class="validate-form" id="create_new_staff_form">
-        <div class="row">
-        <input type="hidden" name="action" value="submit_new_staff">
-
-        <div class="col-12">
-        <div class="form-group">
-        <div class="controls">
-        <label>Surname</label>
-        <input autocomplete="off" type="text" class="form-control"
-        placeholder="Surname"
-        name="sname">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>First Name </label>
-        <input autocomplete="off" type="text" class="form-control"
-        placeholder="First Name" name="fname">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Middle Name</label>
-        <input autocomplete="off" type="text"
-        class="form-control"
-        placeholder="Middle Name"
-        name="mname">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>E-mail</label>
-        <input autocomplete="off" type="text"
-        class="form-control"
-        placeholder="E-mail"
-        name="semail">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Mobile</label>
-        <input autocomplete="off" type="number"
-        class="form-control"
-        placeholder="Mobile"
-        name="mphone">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Username</label>
-        <input autocomplete="off" type="text"
-        class="form-control"
-        placeholder="Portal Username"
-        name="musername">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Password</label>
-        <input autocomplete="off" type="password"
-        class="form-control"
-        placeholder="Portal Password" name="mpassword">
-        </div>
-        </div>
-        </div>
-
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Level of Education</label>
-        <select name="education" id="education" class="custom-select form-control">
-        <option value="" selected>Choose...</option>
-        <option value="Pry">Pry Schl Cert</option>
-        <option value="olevel">O'Level</option>
-        <option value="OND">OND </option>
-        <option value="NCE">NCE</option>
-        <option value="HND">HND</option>
-        <option value="BSc">BSc </option>
-        <option value="Phd">Phd</option>
-        </select>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Job Type</label>
-        <select name="jobType" id="jobType" class="custom-select form-control">
-        <option value="" selected>Choose...</option>
-        <option value="Teaching">Teaching</option>
-        <option value="Non-Teaching">Non-Teaching </option>
-        </select>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Gender</label>
-        <select name="staff_gender" id="staff_gender" class="custom-select form-control">
-        <option value="" selected>Choose...</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female </option>
-        </select>
-        </div>
-        </div>
-        </div>
-
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>AUTHENTICATION Code</label>
-        <input autocomplete="off" type="password"
-        class="form-control"
-        placeholder="Auth Code" name="auth_pass">
-        </div>
-        </div>
-        </div>
-        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-        <button type="submit" class="btn btn-dark glow btn-lg mr-sm-1 mb-1 __loadingBtn3__">Register Now</button>
-
-        </div>
-        </div>
-        </form>
-        </div>
         <!-- Logo Form -->
         <div class="tab-pane active" id="logo-form" role="tabpanel"
         aria-labelledby="new-staff-account" aria-expanded="false">
@@ -585,169 +478,6 @@
         </form>
         </div>
         <!-- Logo Form -->
-
-        <div class="tab-pane fade" id="new-student-account-vertical-form" role="tabpanel"
-        aria-labelledby="new-staff-account" aria-expanded="false">
-        <div class="col-md-12 text-center"><h3><span class="fa fa-graduation-cap"></span> Register New Student</h3></div>
-        <div class="col-md-12 text-center" id="myResponseText5"></div>
-        <form class="validate-form" id="create_new_student_form">
-        <div class="row">
-        <input type="hidden" name="action" value="submit_new_student_details">
-
-        <div class="col-12">
-        <div class="form-group">
-        <div class="controls">
-        <label>Surname</label>
-        <input autocomplete="off" type="text" class="form-control"
-        placeholder="Surname"
-        name="student_surname">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>First Name </label>
-        <input autocomplete="off" type="text" class="form-control"
-        placeholder="First Name" name="student_first_name">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Middle Name</label>
-        <input autocomplete="off" type="text"
-        class="form-control"
-        placeholder="Middle Name"
-        name="student_middle_name">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-12">
-        <div class="form-group">
-        <div class="controls">
-        <label>Student Home Address</label>
-        <textarea name="student_home_address" id="home_address" class="form-control" placeholder="Student home address"></textarea>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-12">
-        <div class="form-group">
-        <div class="controls">
-        <label>Student E-mail</label>
-        <input autocomplete="off" type="text"
-        class="form-control"
-        placeholder="Portal Login e-mail"
-        name="student_email">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Mobile</label>
-        <input autocomplete="off" type="number"
-        class="form-control"
-        placeholder="080*********"
-        name="student_phone">
-        </div>
-        </div>
-        </div>
-
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Student Present Class</label>
-        <select name="student_class" id="student_class" class="custom-select form-control">
-        <option value="">Choose...</option>
-        <?php echo $Administration->get_classroom_InDropDown_list() ?>
-        </select>
-        </div>
-        </div>
-        </div>
-        <div class="col-md-4">
-        <div class="form-group">
-        <div class="controls">
-        <label>Admission Date</label>
-        <input type="date" name="admission_date" class="form-control">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-4">
-        <div class="form-group">
-        <div class="controls">
-        <label>Gender</label>
-        <select name="student_gender" id="gender" class="custom-select form-control">
-        <option value="">Choose...</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female </option>
-        <option value="Other">Other </option>
-        </select>
-        </div>
-        </div>
-        </div>
-
-        <div class="col-md-4">
-        <div class="form-group">
-        <div class="controls">
-        <label for="student_type">Student Type</label>
-        <select name="student_type" id="student_type" class="custom-select form-control">
-        <option value="Day">Day</option>
-        <option value="Boarding">Boarding</option>
-        </select>
-        </div>
-        </div>
-        </div>
-
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Date of Birth</label>
-        <input autocomplete="off" type="date"
-        class="form-control" name="student_dob">
-        </div>
-        </div>
-        </div>
-
-        <!-- SCRATCH CARD -->
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label for="">CARD PIN</label>
-        <input autocomplete="off" type="password"
-        class="form-control" name="cardpin" placeholder="**********">
-        </div>
-        </div>
-        </div>
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label for="">CARD SERIAL</label>
-        <input autocomplete="off" type="text"
-        class="form-control" name="cardserial" placeholder="**********">
-        </div>
-        </div>
-        </div>
-        <!-- SCRATCH CARD -->
-        <div class="col-md-6">
-        <div class="form-group">
-        <div class="controls">
-        <label>Authentication Code</label>
-        <input autocomplete="off" type="password"
-        class="form-control"
-        placeholder="Enter Pass Code to continue" name="auth_pass2">
-        </div>
-        </div>
-        </div>
-        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-        <button type="submit" class="btn btn-dark glow mr-sm-1 mb-1 __loadingBtn4__ btn-lg">Submit Student Details</button>
-
-        </div>
-        </div>
-        </form>
-        </div>
-
         </div>
         </div>
         </div>
@@ -775,38 +505,7 @@
         <!-- END: Page JS-->
         <script>
         $(document).ready(function(){
-        const NEWSTAFFFORM = $("#create_new_staff_form");
-        NEWSTAFFFORM.on("submit", function(e){
-        e.preventDefault();
-        //myResponseText3
-        $(".__loadingBtn3__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
-        //send request 
-        $.post("../actions/actions",NEWSTAFFFORM.serialize(),function(res_data){
-        setTimeout(()=>{
-        $(".__loadingBtn3__").html('Register Now').attr("disabled",false);
-        // $("#myResponseText3").html(res_data);
-        $("#server-response").html(res_data);
-        },1000);
-        })
-        })
-
-        //STUDENT FORM SUBMISSION METHOD
-        const NEWSTUDENTFORM = $("#create_new_student_form");
-        NEWSTUDENTFORM.on("submit", function(e){
-        e.preventDefault();
-        //myResponseText3
-        $(".__loadingBtn4__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
-        //send request 
-        $.post("../actions/actions",NEWSTUDENTFORM.serialize(),function(res_data){
-        setTimeout(()=>{
-        $(".__loadingBtn4__").html('Submit Student Details').attr("disabled",false);
-        // $("#myResponseText3").html(res_data);
-        $("#server-response").html(res_data);
-        },1000);
-        })
-        });
-
-
+        
         //update_school_administrator_form
         const UPDATE_ADMINISTRATOR_FORM = $("#update_school_administrator_form");
         UPDATE_ADMINISTRATOR_FORM.on("submit", function(evt){

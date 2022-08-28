@@ -9,7 +9,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name ?> :: AVAILABLE ROUTES</title>
+    <title><?php echo $SmappDetails->school_name ?> :: Manage Bus Routes</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -178,7 +178,7 @@ require_once "helpers/helper.php";
                <div class="col-md-12">
                   <div class="form-group">
                   <label for="busstops">Bus Stops <span class="text-danger">(B/Stops should be separarted by commas</span>) </label>
-                <input type="text" autocomplete="off" class="form-control form-control-lg" name="busstops" placeholder="e.g gasline,Poultry,NNPC, Four Junction etc">
+                <textarea class="form-control form-control-lg" name="busstops" placeholder="e.g gasline,Poultry,NNPC, Four Junction etc"></textarea>
                     </div>
                </div>
 

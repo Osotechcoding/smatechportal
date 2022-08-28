@@ -41,11 +41,11 @@ class Administration {
 //get_classroom_InDropDown_list
 	public function get_classroom_InDropDown_list(){
 		$this->response ="";
-	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeDesc ASC LIMIT 30");
+	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
 			$this->stmt->execute();
 			if ($this->stmt->rowCount()>0) {
 			while ($row = $this->stmt->fetch()) {
-	$this->response.='<option value="'.$row->gradeDesc.' '.$row->grade_division.'">'.$row->gradeDesc.' '.$row->grade_division.'</option>';
+	$this->response.='<option value="'.$row->gradeDesc.'">'.$row->gradeDesc.'</option>';
 			}
 			}else{
 				$this->response = false;
@@ -56,7 +56,7 @@ class Administration {
 
 	public function get_classroom_InDropDown(){
 		$this->response ="";
-	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeDesc ASC LIMIT 30");
+	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
 			$this->stmt->execute();
 			if ($this->stmt->rowCount()>0) {
 			while ($row = $this->stmt->fetch()) {
@@ -72,44 +72,46 @@ class Administration {
 	public function create_classroom($data){
 		//visap_class_grade_tbl
 		$grade_name = $this->config->Clean($data['grade_name']);
-		$class_division = $this->config->Clean($data['class_division']);
-		$sub_division = $this->config->Clean($data['sub_division']);
 		$teacher = $this->config->Clean($data['teacher']);
 		$status =$this->config->Clean($data['status']);
-		$bypass = $this->config->Clean($data['bypass']);
+		$auth_pass = $this->config->Clean($data['auth_code']);
 		//check for empty
-		if ($this->config->isEmptyStr($bypass) || $bypass!= md5("oiza1")) {
-			// code...
-			$this->response = $this->alert->alert_msg("Authentication Failed, Please Check your Connection and Try again!","danger");
-		}elseif ($this->config->isEmptyStr($grade_name) || $this->config->isEmptyStr($class_division) || $this->config->isEmptyStr($sub_division) || $this->config->isEmptyStr($status)) {
-			$this->response = $this->alert->alert_msg("Class Name, Class Division, Class sub-division and Class Status is required!","danger");
-		}else{
+		if ($this->config->isEmptyStr($grade_name) || $this->config->isEmptyStr($status) || $this->config->isEmptyStr($teacher)) {
+				$this->response = $this->alert->alert_toastr("error","All fields are required!",__OSO_APP_NAME__." Says");
+		}
+		elseif ($this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error","Authentication Code is Required!",__OSO_APP_NAME__." Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+		$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
+		}
+		else{
 			//check for duplicate Class name
-			$this->stmt = $this->dbh->prepare("SELECT gradeId FROM `visap_class_grade_tbl` WHERE gradeDesc=? AND grade_division=? LIMIT 1");
-			$this->stmt->execute([$grade_name,$class_division]);
+			$this->stmt = $this->dbh->prepare("SELECT gradeId FROM `visap_class_grade_tbl` WHERE gradeDesc=? LIMIT 1");
+			$this->stmt->execute([$grade_name]);
 			if ($this->stmt->rowCount()==1) {
-				// code...
-				$this->response = $this->alert->alert_msg("$grade_name with Division $class_division already Exists!","danger");
-			}else{
+			$this->response = $this->alert->alert_toastr("error","$grade_name  already Exists!",__OSO_APP_NAME__." Says");
+			}elseif ($this->config->check_single_data(`visap_class_grade_tbl`,"grade_teacher",$teacher)) {
+			$this->response = $this->alert->alert_toastr("error","This Teacher is already Assinged to Class!",__OSO_APP_NAME__." Says");
+			}
+			else{
 				try {
 					$this->dbh->beginTransaction();
 					//create the new Classroom
 				$date = date("Y-m-d");
-				$this->stmt = $this->dbh->prepare("INSERT INTO `visap_class_grade_tbl` (gradeDesc,grade_division,grade_dept,grade_teacher, grade_status,created_at) VALUES (?,?,?,?,?,?);");
-				if ($this->stmt->execute([$grade_name,$class_division,$sub_division,$teacher,$status,$date])) {
-				    $grade_name =$grade_name.' '.$class_division;
+				$this->stmt = $this->dbh->prepare("INSERT INTO `visap_class_grade_tbl` (gradeDesc,grade_teacher,grade_status,created_at) VALUES (?,?,?,?);");
+				if ($this->stmt->execute([$grade_name,$teacher,$status,$date])) {
 					// let update the staff class to the new created classroom
 						$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_tbl` SET staffGrade=? WHERE staffId=? LIMIT 1");
 						if ($this->stmt->execute(array($grade_name,$teacher))) {
 							$this->dbh->commit();
-			$this->response = $this->alert->alert_msg($grade_name." Classroom Added Successfully","success")."<script>setTimeout(()=>{
+							$this->response = $this->alert->alert_toastr("success",$grade_name." Classroom Added Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 			window.location.reload();
-			},2500);</script>";
+			},500);</script>";
 						}
 				}
 				} catch (PDOException $e) {
 			$this->dbh->rollback();
-    $this->response  =$this->alert->alert_msg("Failed to Add Classroom $grade_name: Error Occurred: ".$e->getMessage(),"danger");
+    $this->response  =$this->alert->alert_toastr("error","Failed to Add Classroom $grade_name: Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 				}
 			}
 		}
@@ -117,43 +119,50 @@ class Administration {
 	$this->dbh = null;
 	}
 
-	public function update_classroom($data){
+	public function updateClassroomDetails($data){
 		$classroom_id = $this->config->Clean($data['classroom_id']);
 		$grade_name = $this->config->Clean($data['classroom_name']);
-		$cdivision = $this->config->Clean($data['cdivision']);
-		$sdivision = $this->config->Clean($data['sdivision']);
 		$teacher = $this->config->Clean($data['teacher']);
 		$status = $this->config->Clean($data['status']);
-		if ($this->config->isEmptyStr($classroom_id) || $this->config->isEmptyStr($grade_name) || $this->config->isEmptyStr($cdivision) || $this->config->isEmptyStr($sdivision) || $this->config->isEmptyStr($status)) {
-		$this->response = $this->alert->alert_msg("Class Name, Class Division, Class sub-division and Class Status is required!","danger");
-		}else{
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		if ($this->config->isEmptyStr($classroom_id) || $this->config->isEmptyStr($grade_name) || $this->config->isEmptyStr($status)) {
+		$this->response = $this->alert->alert_toastr("error","All fields are required!",__OSO_APP_NAME__." Says");
+		}elseif ($this->config->isEmptyStr($auth_pass)) {
+		$this->response = $this->alert->alert_toastr("error","Authentication Code is required!",__OSO_APP_NAME__." Says");
+		} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+		$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
+		}elseif ($this->config->check_single_data("visap_class_grade_tbl","grade_teacher",$teacher)) {
+			$this->response = $this->alert->alert_toastr("error","This Teacher is already Assinged to Class!",__OSO_APP_NAME__." Says");
+		}
+		else{
 			try {
 					$this->dbh->beginTransaction();
+						//set the current staff grade to null
 					//Update the selected Subject
-				$this->stmt = $this->dbh->prepare("UPDATE `visap_class_grade_tbl` SET gradeDesc=?,grade_division=?,grade_dept=?,grade_teacher=?,grade_status=? WHERE gradeId=? LIMIT 1");
-				if ($this->stmt->execute([$grade_name,$cdivision,$sdivision,$teacher,$status,$classroom_id])) {
-				    $grade_name =$grade_name.' '.$cdivision;
+				$this->stmt = $this->dbh->prepare("UPDATE `visap_class_grade_tbl` SET gradeDesc=?,grade_teacher=?,grade_status=? WHERE gradeId=? LIMIT 1");
+				if ($this->stmt->execute([$grade_name,$teacher,$status,$classroom_id])) {
 					$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_tbl` SET staffGrade=? WHERE staffId=? LIMIT 1");
 					if ($this->stmt->execute(array($grade_name,$teacher))) {
 			 $this->dbh->commit();
-			$this->response = $this->alert->alert_msg($grade_name." Classroom Updated Successfully","success")."<script>setTimeout(()=>{
+			 $this->dbh = null;
+			 $this->response  = $this->alert->alert_toastr("success",$grade_name." Classroom Updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 			window.location.reload();
-			},2500);</script>";
+			},500);</script>";
 						}
 				}
 				} catch (PDOException $e) {
 			$this->dbh->rollback();
-    $this->response  =$this->alert->alert_msg("Failed to Update $grade_name Classroom: Error Occurred: ".$e->getMessage(),"danger");
+    $this->response  = $this->alert->alert_toastr("error","Failed to Update $grade_name Classroom: Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");
 				}
 		}
 		return $this->response;
-	$this->dbh = null;
+	
 	}
 
 	public function get_all_classrooms(){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeDesc ASC LIMIT 100");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
 			$this->stmt->execute();
-			if ($this->stmt->rowCount()>0) {
+			if ($this->stmt->rowCount() > 0) {
 				// code...
 			$this->response = $this->stmt->fetchAll();
 			}else{
@@ -2174,8 +2183,41 @@ public function send_resend_confirmation_code($data){
   	$school_email = $this->config->Clean($data['school_email']);
   	$school_gmail = $this->config->Clean($data['school_gmail']);
   	$website_link = $this->config->Clean($data['website_link']);
-  	$auth_pass = $this->config->Clean($data['auth_pass5']);
-  	if ($this->config->isEmptyStr($school_name) || $this->config->isEmptyStr($slogan) || $this->config->isEmptyStr($shortname)|| $this->config->isEmptyStr($approval_number) || $this->config->isEmptyStr($school_history) || $this->config->isEmptyStr($founded_year) || $this->config->isEmptyStr($school_address)|| $this->config->isEmptyStr($school_state) || $this->config->isEmptyStr($school_city) || $this->config->isEmptyStr($country) || $this->config->isEmptyStr($default_language) || $this->config->isEmptyStr($school_phone) || $this->config->isEmptyStr($school_fax) || $this->config->isEmptyStr($school_email) || $this->config->isEmptyStr($school_gmail) || $this->config->isEmptyStr($website_link)) {
+  	// new updated value
+  	$about = 				$this->config->Clean($data['about_us_statement']);
+  	$philosophy = 	$this->config->Clean($data['philosophy_statement']);
+  	$keyOfSuccess = $this->config->Clean($data['key_of_success']);
+  	$core_value = 	$this->config->Clean($data['core_value']);
+  	$vision = 			$this->config->Clean($data['vision_statement']);
+  	$mission = 			$this->config->Clean($data['mission_statement']);
+  	$principle =$this->config->Clean($data['principle_statement']);
+
+  	$auth_pass = $this->config->Clean($data['auth_code']);
+
+  	if ($this->config->isEmptyStr($school_name)||
+  	 $this->config->isEmptyStr($slogan) ||
+  	 $this->config->isEmptyStr($shortname)||
+  	  $this->config->isEmptyStr($approval_number)||
+  	  $this->config->isEmptyStr($school_history)||
+  	  $this->config->isEmptyStr($founded_year)||
+  	  $this->config->isEmptyStr($school_address)||
+  	  $this->config->isEmptyStr($school_state)||
+  	  $this->config->isEmptyStr($school_city)||
+  	  $this->config->isEmptyStr($country)||
+  	  $this->config->isEmptyStr($default_language)||
+  	  $this->config->isEmptyStr($school_phone)|| 
+  	  $this->config->isEmptyStr($school_fax)|| 
+  	  $this->config->isEmptyStr($school_email)|| 
+  	  $this->config->isEmptyStr($school_gmail)||
+  	  $this->config->isEmptyStr($website_link)||
+  	  $this->config->isEmptyStr($mission)||
+  	  $this->config->isEmptyStr($vision)||
+  	  $this->config->isEmptyStr($core_value)||
+  	  $this->config->isEmptyStr($keyOfSuccess)||
+  	  $this->config->isEmptyStr($philosophy)||
+  	  $this->config->isEmptyStr($principle)||
+  	  $this->config->isEmptyStr($about)
+  	    ) {
   		$this->response = $this->alert->alert_toastr("error","Invalid Form submission",__OSO_APP_NAME__." Says");
   	}elseif ($this->config->isEmptyStr($auth_pass)) {
   	$this->response = $this->alert->alert_toastr("error","Enter an Authentication Code to Continue",__OSO_APP_NAME__." Says");
@@ -2188,8 +2230,8 @@ public function send_resend_confirmation_code($data){
 					$this->dbh->beginTransaction();
 					//create the new Classroom
 				$date = date("Y-m-d");
-				$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET school_name=?,govt_approve_number=?,school_address=?,school_slogan=?,school_state=?,school_city=?,country=?,school_email=?,school_phone=?,school_fax=?,website_url=?,default_language=?,school_history=?,school_gmail=?,school_short_name=? WHERE id=? LIMIT 1");
-				if ($this->stmt->execute(array($school_name,$approval_number,$school_address,$slogan,$school_state,$school_city,$country,$school_email,$school_phone,$school_fax,$website_link,$default_language,$school_history,$school_gmail,$shortname,$id))) {
+				$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET school_name=?,govt_approve_number=?,school_address=?,school_slogan=?,school_state=?,school_city=?,country=?,school_email=?,school_phone=?,school_fax=?,website_url=?,default_language=?,school_history=?,school_gmail=?,school_short_name=?,our_mission=?,our_vision=?,our_core_value=?,key_of_success=?,our_philosophy=?,our_principle=?,about_us=? WHERE id=? LIMIT 1");
+				if ($this->stmt->execute(array($school_name,$approval_number,$school_address,$slogan,$school_state,$school_city,$country,$school_email,$school_phone,$school_fax,$website_link,$default_language,$school_history,$school_gmail,$shortname,$mission,$vision,$core_value,$keyOfSuccess,$philosophy,$principle,$about,$id))) {
 					// code...
 					 $this->dbh->commit();
 			$this->response = $this->alert->alert_toastr("success","School Details updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{

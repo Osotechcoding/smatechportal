@@ -21,7 +21,7 @@
              
           <li class="nav-item"><a href="registerStudentSubject"><i class="fa fa-book fa-1x"></i><span class="menu-title text-truncate" data-i18n="create_subject"> Subjects</span></a>
          
-          <li class=" nav-item"><a href="create_classroom"><i class="fa fa-home fa-1x"></i><span class="menu-title text-truncate" data-i18n="Upload Result">Classrooms</span></a>
+          <li class=" nav-item"><a href="classrooms"><i class="fa fa-home fa-1x"></i><span class="menu-title text-truncate" data-i18n="Upload Result">Classrooms</span></a>
           </li>
             </ul>
           </li>
@@ -30,9 +30,6 @@
           <!-- RESULT -->
           <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-bar-chart fa-1x" data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="MANAGE RESULTS">MANAGE RESULTS</span></a>
             <ul class="menu-content">
-             
-          <li class="nav-item"><a href="registerStudentSubject"><i class="fa fa-book fa-1x"></i><span class="menu-title text-truncate" data-i18n="Exam Subject"> Exam Subjects</span></a>
-         
           <li class=" nav-item"><a href="result_uploading"><i class="fa fa-eye fa-1x"></i><span class="menu-title text-truncate" data-i18n="Upload Result">Upload Results</span></a>
           </li>
            <li class=" nav-item"><a href="view_uploaded_result"><i class="fa fa-eye fa-1x"></i><span class="menu-title text-truncate" data-i18n="View Result">View Results</span></a>
@@ -51,8 +48,8 @@
           <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span class="menu-title text-truncate" data-i18n="Manage Students">Manage Students</span></a>
           </li>
           <!-- student_attendance -->
-           <li class="nav-item"><a href="student_attendance"><i class="fa fa-child fa-1x"></i><span class="menu-title text-truncate" data-i18n="Manage Prefects">Mark Attendance</span></a>
-          </li>
+          <!--  <li class="nav-item"><a href="student_attendance"><i class="fa fa-child fa-1x"></i><span class="menu-title text-truncate" data-i18n="Manage Prefects">Mark Attendance</span></a>
+          </li> -->
             <li class="nav-item"><a href="view_student_attendance"><i class="fa fa-user-secret fa-1x"></i><span class="menu-title text-truncate" data-i18n="Manage Prefects">View Attendance</span></a>
           </li> 
             </ul>

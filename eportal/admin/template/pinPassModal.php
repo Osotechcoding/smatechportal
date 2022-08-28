@@ -4,7 +4,7 @@
             <div class="modal-dialog modal-dialog-scrollable">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h3 class="text-uppercase text-sm-center">Enter Password to reveal Pins</h3>
+                  <h3 class="text-uppercase text-sm-center">Enter Pin Password</h3>
                   <button type="button" class="close rounded-pill" data-dismiss="modal" aria-label="Close">
                     <i class="bx bx-x"></i>
                   </button>
@@ -17,10 +17,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                   <button type="submit" class="btn btn-success ml-1">
-                   Submit Password</button>
-                  <button type="button" class="btn btn-warning ml-1" data-dismiss="modal">
-                   Back</button>
+                   <button type="submit" class="btn btn-dark ml-1">
+                    Submit Password</button>
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+                   Cancel
+                  </button>
                 </div>
                  </form>
               </div>

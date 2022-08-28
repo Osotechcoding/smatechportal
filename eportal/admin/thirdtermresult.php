@@ -35,28 +35,11 @@ $pre ='Present';
 $ab = 'Absent';
 $timePresent = $Student->get_student_attendance_details($student_reg_number,$student_class,$pre,$term,$rsession);
 $timeAbsent = $Student->get_student_attendance_details($student_reg_number,$student_class,$ab,$term,$rsession);
-/*
-$presentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$presentQuery->execute(array($student_reg_number,$student_class,$pre,$term,$rsession));
-if ($presentQuery->rowCount()>0) {
-  $rows = $presentQuery->fetch();
-  $timePresent = $rows->cnt;
-}
-
-//Time absent
-$absentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$absentQuery->execute(array($student_reg_number,$student_class,$ab,$term,$rsession));
-if ($absentQuery->rowCount()>0) {
-  $rows = $absentQuery->fetch();
-  $timeAbsent = $rows->cnt;
-}*/
  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include_once ("../template/MetaTag.php");?>
      <title><?php echo ucwords($SmappDetails->school_name);?> :: <?php echo ucwords($student_data->full_name);?> Report Card for <?php echo $schl_session_data->active_session;?> <?php echo $term; ?> </title>
 <style>
 html {
@@ -215,18 +198,14 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
   ?>
 <!--  -->
     <?php
-    if ($showResult->studentGrade == 'JSS 1 A' || $showResult->studentGrade == 'JSS 1 B' || $showResult->studentGrade =='JSS 1 C' || $showResult->studentGrade == 'JSS 2 A' || $showResult->studentGrade == 'JSS 2 B' || $showResult->studentGrade == 'JSS 2 C' || $showResult->studentGrade == 'JSS 3 A' || $showResult->studentGrade == 'JSS 3 B' || $showResult->studentGrade == 'JSS 3 C') {
+   if ($showResult->studentGrade == 'JSS 1' || $showResult->studentGrade == 'JSS 2' || $showResult->studentGrade == 'JSS 3') {
       $amInClass ='Junior';
-    }elseif ($showResult->studentGrade == 'SSS 1 A' || $showResult->studentGrade == 'SSS 1 B' || $showResult->studentGrade == 'SSS 1 C' || $showResult->studentGrade == 'SSS 2 A' || $showResult->studentGrade == 'SSS 2 B' || $showResult->studentGrade == 'SSS 2 C' || $showResult->studentGrade =='SSS 3 A' || $showResult->studentGrade =='SSS 3 B' || $showResult->studentGrade =='SSS 3 C') {
+    }elseif ($showResult->studentGrade == 'SSS 1' || $showResult->studentGrade == 'SSS 2' || $showResult->studentGrade =='SSS 3') {
      $amInClass ='Senior';
     }else{
-       $amInClass ='Pry';
+    $amInClass ='Pry';
     }
-    //let get if the student did first term exam
-
-    //$_firstTermTotal
-    //$_secondTermTotal
-    //$myTotalMark
+    //lets get if the student did first term exam
     if ($_firstTermTotal == 0 && $_secondTermTotal == 0 && $myTotalMark > 0) {
       // no exam for first term and second term... used the third term score only
       $grandScore = intval($myTotalMark);

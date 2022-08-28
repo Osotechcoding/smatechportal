@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title>SUBJECTS MANAGEMENT - VISAP</title>
+    <title><?php echo ucwords($SmappDetails->school_name);?> :: SUBJECTS MANAGEMENT</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->../

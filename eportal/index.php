@@ -109,7 +109,7 @@ login_form.on("submit", function(event){
 
              $(document).on("click",".navigate_to_staff_login", function(){
                  setTimeout(()=>{
-                     window.location.assign("./staffloginportal");
+                     window.location.assign("./stafflogin");
                 },500);
             });
         })

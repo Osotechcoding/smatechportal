@@ -16,7 +16,7 @@
                            <div class="card m-2">
                                <div class="client-block p-3"  data-aos="zoom-in" data-aos-duration="1000">
                                    <div class="media p-3 align-items-center">
-                                       <img src="eportal/testimonials/<?php echo $testi->image;?>" alt="Rony Devis" class="mr-3 rounded-circle">
+                                       <img src="eportal/testimonials/<?php echo $testi->image;?>"  class="mr-3 rounded-circle">
                                        <div class="media-body text-left">
                                            <h6 class="color-orange font-weight-bold mb-0"><?php echo ucwords($testi->fullname);?></h6>
                                            <p class="mb-0"><?php echo $testi->job;?></p>

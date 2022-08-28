@@ -343,7 +343,8 @@ public function get_all_students_by_status(string $status){
 
 public function generate_admission_number($admitted_year){
 	 $this->response ="";
-	 $schoolCode=__OSO_SCHOOL_CODE__;//school Code
+	 $schoolDatas = $this->config->getConfigData();
+   $schoolCode = $schoolDatas->govt_approve_number;//school Code
 	$this->stmt = $this->dbh->prepare("SELECT stdRegNo FROM $this->table_name ORDER BY stdRegNo DESC LIMIT 1");
 	$this->stmt->execute();
 	if ($this->stmt->rowCount() > 0) {
@@ -618,7 +619,7 @@ $this->response = false;
 		//$student_password = $this->config->Clean($d['student_password']);
 		$student_class = $this->config->Clean($d['student_class']);
 		$adm_date = $this->config->Clean(date("Y-m-d",strtotime($d['admission_date'])));
-		$auth_pass2 = $this->config->Clean($d['auth_pass2']);
+		$auth_pass = $this->config->Clean($d['auth_code']);
 
 		if ($this->config->isEmptyStr($surName) ||
 		 $this->config->isEmptyStr($firstName) ||
@@ -630,7 +631,7 @@ $this->response = false;
 		 $this->config->isEmptyStr($student_class) ||
 		 $this->config->isEmptyStr($adm_date) ||
 		 $this->config->isEmptyStr($student_type) ||
-		 $this->config->isEmptyStr($auth_pass2) ||
+		 $this->config->isEmptyStr($auth_pass) ||
 		 $this->config->isEmptyStr($cardpin) ||
 		 $this->config->isEmptyStr($cardserial) ) {
 		$this->response =$this->alert->alert_toastr("error","All fileds are Required!",__OSO_APP_NAME__." Says");
@@ -642,7 +643,7 @@ $this->response = false;
 		}elseif ($this->config->authenticateRegistrationCard($cardpin,$cardserial) === true) {
 			$this->response =$this->alert->alert_toastr("error","This Registration Card has been Used!",__OSO_APP_NAME__." Says");
 		}
-		elseif ($auth_pass2 !== __OSO__CONTROL__KEY__) {
+		elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
 			$this->response =$this->alert->alert_toastr("error","Invalid Authentication Code entered!",__OSO_APP_NAME__." Says");
 		}elseif ($this->config->check_single_data('visap_staff_tbl','staffEmail',$student_email)) {
 				$this->response = $this->alert->alert_toastr("error","$student_email is already taken, Please try another email address!",__OSO_APP_NAME__." Says");
@@ -758,19 +759,20 @@ public function assign_new_school_prefect($data){
 		$student_data = self::get_student_data_byId($studentId);
 		$student_class = $student_data->studentClass;
 		//check for duplicate office
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_prefect_tbl` WHERE student_id=? AND studentGrade=? AND school_session=? LIMIT 1");
-		$this->stmt->execute(array($studentId,$student_class,$session));
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_prefect_tbl` WHERE student_id=? AND school_session=? LIMIT 1");
+		$this->stmt->execute(array($studentId,$session));
 		if ($this->stmt->rowCount() ==1) {
-	$this->response = $this->alert->alert_toastr("warning","This Student is already an active Prefect!",__OSO_APP_NAME__." Says");
+	$this->response = $this->alert->alert_toastr("warning","This Student is already an active Prefect for the $session Academic Session!",__OSO_APP_NAME__." Says");
 		}else{
 try {
 					$this->dbh->beginTransaction();
 					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_school_prefect_tbl`(student_id,studentGrade,officeName,school_session,created_on) VALUES(?,?,?,?,?);");
 					if ($this->stmt->execute(array($studentId,$student_class,$office_name,$session,$date))) {
 					$this->dbh->commit();
-				$this->response = $this->alert->alert_toastr("success","$student_data->full_name is Now assigned as the $office_name Successfully, Please wait... ",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+					$this->dbh = null;
+				$this->response = $this->alert->alert_toastr("success","$student_data->full_name is Now assigned as the $office_name Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 				window.location.reload();
-			},500);</script>";
+			},1000);</script>";
 					}
 
 					} catch (PDOException $e) {
@@ -781,7 +783,6 @@ try {
 	}
 
 	return $this->response;
-	$this->dbh = null;
 }
 
 //get all prefects
@@ -803,6 +804,7 @@ public function remove_student_from_office_now($prefectId){
 		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_school_prefect_tbl` WHERE prefectId=? LIMIT 1");
 		if ($this->stmt->execute([$prefectId])) {
 			 $this->dbh->commit();
+			 	$this->dbh = null;
 			$this->response = $this->alert->alert_toastr("success","Deleted Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
@@ -813,7 +815,7 @@ public function remove_student_from_office_now($prefectId){
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
+	
 }
 
 public function get_prefect_ById($prefectId){
@@ -843,6 +845,7 @@ public function update_student_office_now($data){
 			 	$this->stmt = $this->dbh->prepare("UPDATE `visap_school_prefect_tbl` SET officeName=? WHERE prefectId=? AND school_session=? LIMIT 1");
 			 	if ($this->stmt->execute(array($updated_office,$prefect_id,$tenure))) {
 		 $this->dbh->commit();
+		 $this->dbh = null;
 				$this->response = $this->alert->alert_toastr("success","Office Updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 							window.location.reload();
 						},500);</script>";
@@ -855,7 +858,7 @@ public function update_student_office_now($data){
 			 }
 	}
 	return $this->response;
-		$this->dbh = null;
+		
 }
 
 //update student information
@@ -882,6 +885,7 @@ public function update_student_details($data){
 			 	$this->stmt = $this->dbh->prepare("UPDATE $this->table_name SET stdRegNo=?, studentClass=?,stdSurName=?,stdFirstName=?,stdMiddleName=?,stdDob=?,stdGender=?,stdAdmStatus=?, stdAddress=? WHERE stdId=? LIMIT 1");
 			 	if ($this->stmt->execute(array($stdRegNo,$presentClass,$surname,$fname,$lname,$dob,$gender,$student_status,$address,$stdId))) {
 		 $this->dbh->commit();
+		 $this->dbh = null;
 				$this->response = $this->alert->alert_toastr("success","Updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 							window.location.href='./ab_students';
 						},500);</script>";
@@ -894,7 +898,7 @@ public function update_student_details($data){
 			 }
 	}
 	return $this->response;
-		$this->dbh = null;
+		
 
 }
 
@@ -933,6 +937,7 @@ public function upload_student_passport($data,$file){
     	if ($this->stmt->execute(array($passport_realName,$studentId))) {
     		if ($this->config->move_file_to_folder($passport_temp,$passport_destination)) {
     			$this->dbh->commit();
+    			 $this->dbh = null;
     $this->response = $this->alert->alert_toastr("success","Passport Uploaded Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
 							window.location.href='./';
 						},500);</script>";
@@ -951,7 +956,7 @@ public function upload_student_passport($data,$file){
     $this->response = $this->alert->alert_toastr("error","Please Select a passport to Upload",__OSO_APP_NAME__." Says");
    }
    return $this->response;
-   $this->dbh = null;
+  
 }
 
 public function count_students_by_gender_class($stdGrade,$gender){

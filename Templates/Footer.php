@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center" data-aos="fade-in" data-aos-duration="1050">
                     <!-- <img src="<?php //echo $Osotech->get_schoolLogoImage();?>" width="60px" class="img-fluid"> -->
-                    <a href="./" class="text-center"><span class="color-orange navbar-brand fw-bold" style="font-size: 30px;"><?php echo ($Osotech->getConfigData()->school_short_name);?></span></a>
+                    <a href="./" class="text-center"><span class="color-orange navbar-brand fw-bold" style="font-size: 23px;"><?php echo ($Osotech->getConfigData()->school_short_name);?></span></a>
                     <p><?php echo ($Osotech->getConfigData()->school_name);?></p>
                     <ul class="social-icon">
                         <li><a href="javascript:"><i class="fa fa-facebook-f"></i></a></li>
@@ -24,6 +24,7 @@
                         <li><a href="<?php echo RESULT_ROOT; ?>"><i class="fa fa-angle-double-right mr-2"></i>Online Result</a></li>
                         <li><a href="./career"><i class="fa fa-angle-double-right mr-2"></i>Career</a></li>
                         <li><a href="<?php echo EPORTAL_ROOT;?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>e-Portal</a></li>
+                        <li><a href="<?php echo OSO_DOCUMENTATION_ROOT;?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>Documentation</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-md-5 mb-4" data-aos="fade-in" data-aos-duration="1050">
