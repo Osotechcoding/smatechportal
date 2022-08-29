@@ -213,6 +213,7 @@ require_once "helpers/helper.php";
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
    <?php include ("../template/DataTableFooterScript.php"); ?>
+   <script src="smappjs/add_holiday.js"></script>
    <script>
      $(document).ready(function(){
 

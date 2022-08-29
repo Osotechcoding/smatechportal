@@ -126,7 +126,7 @@ if (isset($_GET['hostel']) && $_GET['hostel'] !=="" && isset($_GET['action']) &&
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-            <button class="btn btn-dark btn-md btn-round add_hostel_room_btn" type="button">Create More Rooms</button>
+            <button class="btn btn-dark btn-md btn-round add_hostel_room_btn" type="button"><span class="fa fa-plus"></span> Add Room</button>
              <button onclick="window.location.href='create_hostel'" class="btn btn-primary btn-md btn-round" type="button">Go To Hostel</button>
         </div>
         <div class="card-body card-dashboard">
@@ -137,7 +137,7 @@ if (isset($_GET['hostel']) && $_GET['hostel'] !=="" && isset($_GET['action']) &&
                   <th>Hostel</th>
                  <th>Type</th>
                  <th>Room Desc</th>
-                 <th>Total Bed Space</th>
+                 <th>Bed Space</th>
                  <th>Price</th>
                  <th>Action</th>
                </tr>
@@ -188,32 +188,7 @@ if (isset($_GET['hostel']) && $_GET['hostel'] !=="" && isset($_GET['action']) &&
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/DataTableFooterScript.php"); ?>
-   <script>
-     $(document).ready(function(){
-      //when add room btn is clicked
-      $(document).on("click",".add_hostel_room_btn", function(){
-
-        let hostel_id = $(this).data("id");
-        let action = $(this).data("action");
-        $("#hostelRoomModal").modal("show");
-      });
-
-      //when rooms form is submitted
-      $("#NewHostelRoomsForm").on("submit", function(e){
-        e.preventDefault();
-        event.preventDefault();
-        const NEW_HOSTEL_ROOM_FORM = $(this);
-         $(".__loadingBtn__rooms").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
-          //send request
-          $.post("../actions/actions",NEW_HOSTEL_ROOM_FORM.serialize(),function(data){
-            setTimeout(()=>{
-             $(".__loadingBtn__rooms").html('Submit').attr("disabled",false);
-              $("#server-response").html(data);
-            },500);
-          })
-      });
-     })
-   </script>
+    <script src="smappjs/hostel_rooms.js"></script>
   </body>
   <!-- END: Body-->
 

@@ -507,7 +507,7 @@ require_once "helpers/helper.php";
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/DataTableFooterScript.php"); ?>
-   <!-- DataTableFooterScript.php -->
+  <script src="smappjs/add_book.js"></script>
   </body>
   <!-- END: Body-->
 

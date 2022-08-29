@@ -167,9 +167,6 @@ if (isset($_POST['result_upload_btn'])) {
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
-    <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
-    <!-- END: Page JS-->
-    <!-- END: Page JS-->
   </body>
   <!-- END: Body-->
 </html>

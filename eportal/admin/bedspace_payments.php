@@ -123,22 +123,16 @@ if ($request_method ==="GET") {
   </div>
 </section>
 <!-- Column selectors with Export Options and print table -->
-
-
         </div>
       </div>
     </div>
     <!-- END: Content-->
-
     </div>
-    <!-- onclick="window.location.href='topup_hostel_payment?payee=<?php //echo $occupId; ?>bedspace=<?php //echo $bedId; ?>'" -->
     <!-- BEGIN: Footer-->
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/DataTableFooterScript.php"); ?>
-   <!-- DataTableFooterScript.php -->
   </body>
   <!-- END: Body-->
-
 </html>

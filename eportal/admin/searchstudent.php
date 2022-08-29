@@ -171,19 +171,7 @@ require_once "helpers/helper.php";
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/FooterScript.php"); ?>
    <!-- DataTableFooterScript.php -->
-   <script>
-     $(document).ready(function(){
-      const go_back_home_btn = $(".go_back_home_btn");
-      go_back_home_btn.on("click", function(){
-        go_back_home_btn.html("wait...").attr("disabled",true);
-      var href ="./ab_students";
-      setTimeout(()=>{
- go_back_home_btn.html("wait...").attr("disabled",false);
- window.location.href=href;
-},1000);
-      })
-     })
-   </script>
+   <script src="smappjs/searchstudent.js"></script>
   </body>
   <!-- END: Body-->
 </html>

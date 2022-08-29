@@ -238,10 +238,7 @@ require_once "helpers/helper.php";
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/DataTableFooterScript.php"); ?>
-   <script>
-     $(document).ready(function(){
-     })
-   </script>
+   
   </body>
   <!-- END: Body-->
 </html>

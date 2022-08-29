@@ -167,24 +167,9 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
+    <script src="smappjs/blogedit.js"></script>
      <!-- BEGIN: Page JS-->
-     <script>
-    function previewFile(input){
-        var file = $("input[type=file]").get(0).files[0];
- 
-        if(file){
-            var reader = new FileReader();
- 
-            reader.onload = function(){
-                $("#previewImg").attr("src", reader.result);
-                $("#imagename").html(file.name);
-                $("#ImageSize").html((file.size/1024).toFixed(2) +"KB");
-            }
- 
-            reader.readAsDataURL(file);
-        }
-    }
-</script>
+    
   </body>
   <!-- END: Body-->
 </html>

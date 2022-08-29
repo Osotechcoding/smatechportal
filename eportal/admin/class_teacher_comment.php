@@ -267,9 +267,6 @@ require_once "helpers/helper.php";
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
-    <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
-    <!-- END: Page JS-->
-
     <!-- END: Page JS-->
   </body>
   <!-- END: Body-->
