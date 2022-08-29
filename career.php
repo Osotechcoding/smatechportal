@@ -86,19 +86,18 @@
                                            placeholder="Enter Number" type="email">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputState">Position</label>
+                                    <label for="inputState">Job Type</label>
                                     <select class="form-control" id="inputState">
-                                        <option selected>Choose...</option>
-                                        <option>Position 1</option>
-                                        <option>Position 2</option>
-                                        <option>Position 3</option>
+                                        <option value="" selected>Choose...</option>
+                                        <option value="Teaching">Teaching</option>
+                                        <option value="Non Teaching">Non Teaching</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="exampleInputMessage">Message</label>
-                                <textarea class="form-control" id="exampleInputMessage" placeholder="Message"></textarea>
+                                <textarea class="form-control" rows="4" id="exampleInputMessage" placeholder="Message"></textarea>
                             </div>
 
                             <div class="form-group">

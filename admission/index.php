@@ -122,10 +122,7 @@ background-repeat: no-repeat;">
                       </div>
                     </div>
                   </div>
-                  <!-- <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Agree to Terms &amp; Conditions</label>
-                  </div> -->
+                  
                   <button type="submit" class="btn btn-dark btn-lg btn-round mb-2 __loadingBtn__" style="float:right">Start Registration</button>
                   </form>
                   </div>

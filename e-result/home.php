@@ -34,7 +34,10 @@ require_once ("src/Osotech.php");
 }
 </style>
 </head>
-<body class="defult-home">
+<body style="background:rgba(0, 0, 0, 0.4) url('schoolbg.jpg');
+background-position:center;
+background-size: cover;
+background-repeat: no-repeat;">
 
 <!--Preloader area start here-->
 <?php include_once ("Templates/Preloader.php");?>

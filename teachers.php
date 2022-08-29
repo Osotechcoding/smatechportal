@@ -10,7 +10,7 @@
     <!-- ========== Meta Tags ========== -->
   <?php include_once 'Templates/MetaTags.php'; ?>
     <!-- ========== Page Title ========== -->
-    <title>Edusquad</title>
+    <title>Teachers :: <?php echo ucwords($Osotech->getConfigData()->school_name);?></title>
     <!-- ========== Favicon Icon ========== -->
     <?php if (!file_exists("Templates/HeaderScript.php")): ?>
       <?php die("Access not Aallowed") ; ?>

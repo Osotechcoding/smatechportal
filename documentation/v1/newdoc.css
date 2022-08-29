@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Pontano+Sans');
+
+html, body {
+  font-family: 'Pontano Sans', sans-serif;
+  font-size: 18px;
+  background-color: #fff;
+  color: #000;
+  letter-spacing: 1px;
+}
+
+/*------------NAV BAR----------------*/
+
+#navbar {
+  background-color: #f4f4f4;
+  height: 96%;
+  top: 10px;
+  position: fixed;
+  width: 22%;
+}
+
+.nav header {
+  display: block;
+  text-align:center;
+  margin: 0 10px;
+  padding: 5px;
+  border-bottom: 1px solid #30336b;
+  font-size: 120%;
+  font-weight: thin;
+  color: #95a5a6;
+}
+
+.nav-link:link {
+  color: #30336b;
+  margin-top: 10px;
+  padding-left: 30px;
+}
+.nav-link:hover,
+.nav-link:active {
+  color: #fff;
+  background-color: #2c3e50;
+  transition: 0.3s;
+}
+
+.nav-link:visited {
+  color: #fd79a8;
+}
+
+.head-box {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/*-------------BODY-----------*/
+
+header {
+  margin-top: 20px;
+}
+
+h2 {
+  font-weight: bold;
+  color: #130f40;
+}
+
+h3 {
+  margin-top: 20px;
+  padding-left: 15px;
+  color: #30336b;
+}
+
+p {
+  font-size: 90%;
+  line-height: 1.5;
+  padding-left: 30px;
+  padding-right: 20px;
+  text-align: justify;
+}
+
+section article {
+  padding-right: 20px;
+}
+
+article li {
+  font-size: 80%;
+  margin-left: 20px;
+}
+
+/*---CODE SECTION---*/
+
+pre {
+  display: inline-block;
+  background-color: #34495e;
+  color: #fff;
+  margin-left: 40px;
+  padding: 0 0 20px 30px;
+  font-size: 80%;
+  width: 90%;
+  white-space: pre-line;
+
+}
+
+/*-------FOOTER------*/
+
+hr {
+  border: 0.5px solid;
+  color: #34495e;
+}
+
+a {
+  color: #8e44ad;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #e84393;
+}
+
+.fa {
+  font-size: 22x;
+}
+
+footer {
+  text-align: center;
+}
+
+footer p {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 80%;
+}
+
+/*---------RESPONSIVE--------*/
+
+@media only screen and (max-width: 768px) {
+  #navbar {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  pre {
+    font-size: 60%;
+    max-width: 80%;
+    margin-left: 30px;
+    padding: 0 10px 10px 20px;
+  }
+}

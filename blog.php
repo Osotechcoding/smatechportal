@@ -48,7 +48,7 @@
     <!-- end side menu -->
     <!-- start inner banner -->
     <section class="inner-banner">
-        <h1 class="font-weight-bold text-center">Our Blog</h1>
+        <h1 class="font-weight-bold text-center">Our Newsletters</h1>
     </section>
     <!-- end inner-banner -->
     <!-- start blog -->

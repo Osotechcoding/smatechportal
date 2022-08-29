@@ -7,7 +7,7 @@
 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
   <div class="navbar-nav">
     <a class="nav-link active" aria-current="page" href="<?php echo APP_ROOT;?>">HOME</a>
-    <a class="nav-link" href="./howtoapply">FAQ</a>
+    <a class="nav-link" href="../documentation/v1/"  target="_blank">Documentation</a>
     <a class="nav-link" href="<?php echo EPORTAL_ROOT;?>" target="_blank">LOGIN</a>
   </div>
 </div>

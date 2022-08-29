@@ -7,7 +7,7 @@ if (!defined("__OSO_DEV_COMPANY__")) {
     define("__OSO_DBNAME__",'smatech_portal');
     define("__OSO_DB_DRIVER__",'mysql');
       define("__OSO_CHARSET__",'utf8mb4');
-  	define("OSO_DOCUMENTATION_ROOT",'http://localhost/smatechportal/documentation/');
+  	define("OSO_DOCUMENTATION_ROOT",'http://localhost/smatechportal/documentation/v1/');
     define("__OSO_APP_NAME__", strtoupper("smatech"));
     define("APP_ROOT","http://localhost/smatechportal/");
     define("ADMISSION_ROOT","http://localhost/smatechportal/admission/");
