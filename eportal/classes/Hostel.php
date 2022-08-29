@@ -433,5 +433,31 @@ class Hostel {
 			$this->dbh = null;
 		}
 	}
+
+	public function checkOutStudentFromBedSpace($data){
+			$studentId = $this->config->Clean($data['stId']);
+			$bonkId = $this->config->Clean($data['beId']);
+			try {
+			$this->dbh->beginTransaction();
+  			$created_at = date("Y-m-d");
+  			$this->stmt = $this->dbh->prepare("UPDATE `visap_bed_space_tbl` SET is_available=1, occupant =NULL,book_duration=NULL,booked_today=NULL,amount_paid=NULL,payment_status=0,school_session=NULL,payment_expire=NULL WHERE bedId=? AND occupant=? LIMIT 1");	
+				if ($this->stmt->execute([$studentId,$bonkId])) {
+					$this->stmt = $this->dbh->prepare("DELETE FROM `visap_bed_payment_history_tbl` WHERE student_id=? AND bed_id=?");
+					if ($this->stmt->execute([$studentId,$bonkId])) {
+				$this->dbh->commit();
+    			$this->dbh = null;
+			$this->response = $this->alert->alert_toastr("success","Checkout successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+							window.location.reload();
+						},1000);</script>";
+					}
+			
+				}
+			} catch (PDOException $e) {
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");		
+			}
+
+		return $this->response;
+	}
 	//Hostel management methods end
 }

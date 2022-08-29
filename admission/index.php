@@ -20,7 +20,7 @@ $Osotech = new Osotech($conn);
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Student Online Registration Portal :: <?php echo ($Osotech->getConfigData()->school_name);?></title>
+    <title> Online Registration Portal :: <?php echo ($Osotech->getConfigData()->school_name);?></title>
     <?php include_once ("Head.php");?>
 
   </head>

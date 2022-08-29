@@ -21,7 +21,7 @@ $StudentResult = new StudentResult();
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title> <?php echo ($Osotech->getConfigData()->school_name);?> :: Student Online Result Portal</title>
+    <title> Online Result Portal :: <?php echo ($Osotech->getConfigData()->school_name);?></title>
     <?php include_once ("Templates/Head.php");?>
     <style>
       .osotech-bg-color {

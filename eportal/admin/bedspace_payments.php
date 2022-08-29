@@ -103,7 +103,7 @@ if ($request_method ==="GET") {
                   <td>&#8358; <?php echo number_format($reciept->amount_due,2);?></td>
                   <td><?php echo date("D jS F, Y",strtotime($reciept->payment_date));?></td>
                   <td><?php if ($reciept->status=='2'): ?>
-                  <span class="badge badge-success- badge-md">Cleared</span>
+                  <span class="badge badge-success badge-md">Cleared</span>
                     <?php else: ?>
                       <button type="button" disabled class="badge badge-dark badge-sm mb-1 disabled" ><span class="fa fa-plus fa-1x"></span>coming soon</button>
                       <span class="badge badge-warning badge-md">Not Cleared</span>

@@ -21,6 +21,7 @@ $Administration = new Administration();
 $Blog = new Blog();
 $Result = new Result();
 $Bus = new Bus();
+$Hostel = new Hostel();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
@@ -184,6 +185,14 @@ if (isset($_POST['action']) && $_POST['action']!="") {
           echo $result;
         }
       } 
+
+      //checkout_bedspace
+      if ($_POST['action'] === "checkout_bedspace") {
+       $result = $Hostel->checkOutStudentFromBedSpace($_POST);
+        if ($result) {
+          echo $result;
+        }
+      }
 
 }
 }

@@ -170,12 +170,17 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
                 <td><?php echo $bonk->book_duration ?? '<span class="badge badge-warning badge-pill">Not Booked</span>' ;?></td>
                 <td><?php echo ucwords($bonk->bed_space);?></td>
                 <td>&#8358;<?php echo number_format($bonk->amount,2);?></td>
-                <td>&#8358;<?php echo number_format($bonk->amount_paid,2);?></td>
+                <td><?php if ($bonk->amount_paid == NULL OR $bonk->amount_paid == ""): ?>
+                  <span class="badge badge-dark badge-pill">No User</span>
+                <?php else: ?>
+                  &#8358;<?php echo number_format($bonk->amount_paid,2);?>
+                <?php endif ?> </td>
                 <td><?php if ($bonk->is_available == 1) {
                  echo '<span class="badge badge-success badge-pill"> Available</span>';
-                }else{
-                   echo '<span class="badge badge-danger badge-pill"> Occupied</span>';
-                    echo '<button onClick="return confirm('." 'are you sure' ".');" type="button" class="badge badge-dark badge-pill m-1"> Checkout</button>';
+                }else{?>
+                   <span class="badge badge-danger badge-pill"> Occupied</span>
+                    <button type="button" class="badge badge-dark badge-pill m-1 checkOutBtn_" data-id="<?php echo $bonk->bedId;?>" data-action="checkout_bedspace" data-occupant="<?php echo $bonk->occupant;?>"> Checkout</button>
+                      <?php
                 }
 
                  ?> </td>
@@ -184,7 +189,7 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
                      <button type="button" title="Assign Bed Space to student" class="btn btn-dark btn-md btn-rounded-0 assign_bedspace_btn" data-id="<?php echo $bonk->bedId;?>" data-amount="<?php echo ($bonk->amount);?>" data-bed="<?php echo $bonk->bed_space;?>"><span class="fa fa-check-circle"></span> Assign</button>
                     <?php else: ?>
                       <?php if ($bonk->amount_paid == NULL || $bonk->amount_paid < $bonk->amount): ?>
-                        <button type="button" onclick="window.location.href='updateBedPayments?bed_occupant=<?php echo $Configuration->saltifyString($bonk->occupant);?>&bedspace=<?php echo $Configuration->saltifyString($bonk->bedId);?>&hoId=<?php echo $Configuration->saltifyString($hostelId);?>&action=topuppayment'"  title="Update Payment" class="badge badge-warning badge-pill m-1">Payment</button>
+                        <button type="button" onclick="window.location.href='updateBedPayments?bed_occupant=<?php echo $Configuration->saltifyString($bonk->occupant);?>&bedspace=<?php echo $Configuration->saltifyString($bonk->bedId);?>&hoId=<?php echo $Configuration->saltifyString($hostelId);?>&action=topuppayment'" title="Update Payment" class="badge badge-warning badge-pill m-1">Pay More</button>
                       <?php endif ?>
                        <button onclick="window.location.href='bedspace_payments?occupant=<?php echo $bonk->occupant;?>&bed=<?php echo $bonk->bedId;?>&hoId=<?php echo $hostelId;?> &action=view-payments'" type="button" title="View Payment History" class="badge badge-info badge-pill">Reciept</button>
                   <?php endif ?>
@@ -219,6 +224,22 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
     <?php include ("../template/DataTableFooterScript.php"); ?>
    <script>
      $(document).ready(function(){
+      //when checkout ben is clicked
+      const checkOutBtn = $(".checkOutBtn_");
+      checkOutBtn.on("click", function(){
+        let studentId = $(this).data("occupant"),bedSpaceId = $(this).data("id"), action = $(this).data("action");
+          if (confirm("The information on the selected bed space will be removed, Are you sure you want to checkout this student?")) {
+         //send request to route
+         $.post("../actions/delete_actions",{action:action,stId:studentId,beId:bedSpaceId}, function(data){
+          setTimeout(()=>{
+            $("#server-response").html(data);
+          },500);
+         })
+          }else{
+            return false;
+          }
+      });
+
      $(".assign_bedspace_btn").on("click", function(){
       var bedId = $(this).data("id"),bed_desc = $(this).data("bed");
       const space_amount = $(this).data("amount");

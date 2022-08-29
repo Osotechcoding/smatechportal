@@ -20,8 +20,8 @@
                     <ul>
                         <li><a href="./"><i class="fa fa-angle-double-right mr-2"></i>Home</a></li>
                         <li><a href="./about"><i class="fa fa-angle-double-right mr-2"></i>About Us</a></li>
-                        <li><a href="<?php echo ADMISSION_ROOT; ?>"><i class="fa fa-angle-double-right mr-2"></i>Online Registration</a></li>
-                        <li><a href="<?php echo RESULT_ROOT; ?>"><i class="fa fa-angle-double-right mr-2"></i>Online Result</a></li>
+                        <li><a href="<?php echo ADMISSION_ROOT; ?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>Online Registration</a></li>
+                        <li><a href="<?php echo RESULT_ROOT; ?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>Online Result</a></li>
                         <li><a href="./career"><i class="fa fa-angle-double-right mr-2"></i>Career</a></li>
                         <li><a href="<?php echo EPORTAL_ROOT;?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>e-Portal</a></li>
                         <li><a href="<?php echo OSO_DOCUMENTATION_ROOT;?>" target="_blank"><i class="fa fa-angle-double-right mr-2"></i>Documentation</a></li>
