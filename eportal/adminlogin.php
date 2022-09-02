@@ -12,7 +12,7 @@ $tses_token = Session::set_xss_token();
 
 <head>
 <?php include_once ("template/MetaTag.php");?>
-<title>Admin Login :: <?php echo ucwords($SmappDetails->school_name); ?> </title>
+<title> Admin Login :: <?php echo ucwords($SmappDetails->school_name); ?> </title>
 
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
@@ -94,6 +94,8 @@ echo '';
 <script src="app-assets/js/scripts/extensions/toastr.min.js"></script>
  <div id="server-response"></div>
  <script>
+    //disable right click on mouse
+    $(document).on("contextmenu", function(e) { return !1 });
     $(document).ready(function(){
     $("#adminLoginForm").on("submit", function(event){
     event.preventDefault();

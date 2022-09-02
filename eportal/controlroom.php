@@ -82,6 +82,9 @@ placeholder="Enter your password">
 <script src="app-assets/js/scripts/extensions/toastr.min.js"></script>
  <div id="server-response"></div>
  <script>
+    //disable right click on mouse
+    $(document).on("contextmenu", function(e) { return !1 });
+    
     $(document).ready(function(){
     $("#adminLoginForm").on("submit", function(event){
     event.preventDefault();

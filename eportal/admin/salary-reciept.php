@@ -1,28 +1,38 @@
-<?php
+<?php 
 require_once "helpers/helper.php";
  ?>
+ <?php 
+
+if (isset($_GET['action']) && $_GET['action'] === "viewreceipt" && isset($_GET['teacherId']) && $_GET['teacherId'] !== "" && isset($_GET['receiptId']) && $_GET['receiptId'] !== "") {
+  $salaryId  =$Configuration->Clean($Configuration->unsaltifyString($_GET['receiptId']));
+ $staffId = $Configuration->Clean($Configuration->unsaltifyString($_GET['teacherId']));
+ $staff_data  = $Staff->get_staff_ById($staffId);
+ $salary_details = $Payroll->getStaffPaidSalaryById($salaryId);
+ $payroll_details = $Payroll->showPayrollByStaffId($staffId);
+}else{
+  echo "<script>window.history.back();</script>";
+  exit();
+}
+
+  ?>
 <!DOCTYPE html>
 
 <html class="loading" lang="en" data-textdirection="ltr">
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name ?> :: Salary Receipt</title>
+    <title><?php echo $SmappDetails->school_name ?> :: <?php echo $staff_data->full_name;?> Salary Receipt</title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->
   <!-- BEGIN: Body-->
-  <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
-    <!-- BEGIN: Header-->
-    <?php include "template/HeaderNav.php"; ?>
-    <!-- include headernav.php -->
+  <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
+     <!-- BEGIN: Header-->
+    <?php include ("template/HeaderNav.php"); ?>
     <!-- END: Header-->
     <!-- BEGIN: Main Menu-->
-    <?php include "template/Sidebar.php";?>
-    <!-- include Sidebar.php -->
+  <?php include ("template/Sidebar.php"); ?>
     <!-- END: Main Menu-->
-
-    <!-- BEGIN: Content-->
     <!-- BEGIN: Content-->
     <div class="app-content content">
       <div class="content-overlay"></div>
@@ -46,10 +56,11 @@ require_once "helpers/helper.php";
         </div>
         <div class="content-body">
           <div class="card">
+
             <div class="card-body">
               <div class="row">
                           <div class="col-sm-12 col-10 text-center">
-              <h3 class="text-center text-bold"> </strong> Payslip for the month of <?php //echo $deduction['paid_month'] ?>, <?php //echo $deduction['paid_year'] ?></span> </h3>
+              <h3 class="text-center text-bold"> </strong> Payslip for the month of <?php echo $salary_details->forMonth;?>, <?php echo $salary_details->csession;?></span> </h3>
               </div>
                   </div>
                   <!-- content goes here -->
@@ -60,31 +71,33 @@ require_once "helpers/helper.php";
               <div class="row">
 
               <div class="col-sm-6 m-b-20 mb-3">
-              <img src="result-asset/logo.png" width="80">
+              <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="80">
               <ul class="list-unstyled m-b-0">
                 <address>
-              <strong><?php echo strtoupper(__SCHOOL_NAME__);?></strong><br>
-              1-5, Glory Supreme Avenue, Ijagba,<br>
-              Onigbin, Ota,Ogun State.<br>
-              Phone: +(234)8038546164<br>
-              Email: support@julitschools.com
+                  <h3>
+              <strong><?php echo strtoupper($SmappDetails->school_name);?></strong><br>
+              <?php echo $SmappDetails->school_address ?>, <br><?php echo $SmappDetails->school_city ?>, 
+              <?php echo $SmappDetails->school_state?>, <?php echo $SmappDetails->country?>.<br>
+              Phone: <?php echo $SmappDetails->school_phone;?><br>
+              Email: <?php echo $SmappDetails->school_email;?>
+              </h3>
             </address>
               </ul>
               </div>
-              <div class="col-md-6 col-sm-4 m-b-10 float-right">
+              <div class="col-md-6" style="align-items: right; align-content: right;">
               <div class="invoice-details">
-              <h4 class="text-uppercase">Payslip: #49029</h4>
+              <h3 class="text-uppercase">Payslip: #49029</h3>
               <ul class="list-unstyled">
-              <li>Salary Month: <span><?php //echo $deduction['paid_month'] ?>, <?php //echo $deduction['paid_year'] ?></span></li>
-              <li>Payment Date: <span><?php //echo date("l F jS Y",strtotime($deduction['payment_date'])) ?></span></li>
+              <li>Salary Month: <span><?php echo $salary_details->forMonth; ?>, <?php echo $salary_details->csession;?></span></li>
+              <li>Payment Date: <span><?php echo date("l F jS Y",strtotime($salary_details->paymentDate)) ?></span></li>
               </ul>
-              <h4 class="text-uppercase">Staff Details</h4>
+              <h3 class="text-uppercase">Staff Details</h3>
               <ul class="list-unstyled">
-              <li>Name: <span> Agberayi Samson Idowu<?php //echo ucwords($staff_rows['name']) ?></span></li>
-              <li>Email: <span>osotech@gmail.com<?php //echo $staff_rows['email'] ?></span></li>
-              <li>Phone: <span>08131374443<?php //echo $staff_rows['phone'] ?></span></li>
-              <li>Address: <span>Ado Odo Ota, Ogun State<?php //echo $staff_rows['address'] ?></span></li>
-              <li>Designation: <span> Class Teacher<?php //echo $staff_rows['staff_role'] ?></span></li>
+              <li>Name: <span><?php echo ucwords($staff_data->full_name) ?></span></li>
+              <li>Email: <span><?php echo $staff_data->staffEmail; ?></span></li>
+              <li>Phone: <span><?php echo $staff_data->staffPhone; ?></span></li>
+              <li>Address: <span><?php echo $staff_data->staffAddress; ?></span></li>
+              <li>Designation: <span><?php echo $staff_data->staffRole; ?></span></li>
               </ul>
               </div>
               </div>
@@ -98,89 +111,81 @@ require_once "helpers/helper.php";
               <table class="table table-bordered">
               <tbody>
               <tr>
-              <td><strong>Basic Salary</strong> <span class="float-right">&#8358;<?php //echo number_format($staff_payroll['salary']) ?></span></td>
+              <td><strong>Basic Salary</strong> <span class="float-right">&#8358;<?php echo number_format($payroll_details->salary,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>House Rent Allowance (H.R.A.)</strong> <span class="float-right">&#8358;<?php //echo number_format($staff_payroll['rent_bonus']) ?></span></td>
+              <td><strong>House Rent Allowance (H.R.A.)</strong> <span class="float-right">&#8358;<?php echo number_format($payroll_details->rent_alawi,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>Conveyance</strong> <span class="float-right"><?php //echo number_format($staff_payroll['trans_bonus']) ?></span></td>
+              <td><strong>Conveyance</strong> <span class="float-right">&#8358;<?php echo number_format($payroll_details->transport_alawi,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>Medical Allowance</strong> <span class="float-right">&#8358;<?php //echo number_format($staff_payroll['med_bonus']) ?></span></td>
+              <td><strong>Medical Allowance</strong> <span class="float-right">&#8358;<?php echo number_format($payroll_details->med_alawi,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>Walldrobe Allowance</strong> <span class="float-right">&#8358;<?php //echo number_format($staff_payroll['cloth_bonus']) ?></span></td>
+              <td><strong>Walldrobe Allowance</strong> <span class="float-right">&#8358;<?php echo number_format($payroll_details->cloth_alawi,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>Total Earnings</strong> <span class="float-right"><strong>&#8358;<?php //echo number_format($staff_payroll['net_salary']) ?></strong></span></td>
+              <td><strong>Total Earnings</strong> <span class="float-right"><strong>&#8358;<?php echo number_format($payroll_details->salary+$payroll_details->rent_alawi+$payroll_details->med_alawi+$payroll_details->transport_alawi+$payroll_details->cloth_alawi,2) ?></strong></span></td>
               </tr>
               </tbody>
               </table>
               </div>
               </div>
+
               <div class="col-sm-6">
               <div>
               <h4 class="m-b-10"><strong>Deductions</strong></h4>
               <table class="table table-bordered">
               <tbody>
               <tr>
-              <td><strong>Tax Deducted at Source (T.D.S.)</strong> <span class="float-right">&#8358;<?php //echo number_format($staff_payroll['tds_minus']) ?></span></td>
+              <td><strong>Tax Deducted at Source (T.D.S.)</strong> <span class="float-right">&#8358;<?php echo number_format($payroll_details->tds,2) ?></span></td>
                </tr>
               <tr>
-              <td><strong>MISC</strong> <span class="float-right">&#8358;<?php //echo number_format($deduction['misc']) ?></span></td>
+              <td><strong>MISC</strong> <span class="float-right">&#8358;<?php echo number_format(0,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>Debt</strong> <span class="float-right">&#8358;<?php //echo number_format($deduction['debt']) ?></span></td>
+              <td><strong>Debt</strong> <span class="float-right">&#8358;<?php echo number_format(0,2) ?></span></td>
               </tr>
               <tr>
-              <td><strong>Total Deductions</strong> <span class="float-right"><strong>&#8358;<?php
-              //$total_deduct =  ($deduction['debt']+ $deduction['misc']+$deduction['iou']+$staff_payroll['tds_minus']);
-               //echo number_format(($deduction['debt']+ $deduction['misc']+$deduction['iou']+$staff_payroll['tds_minus'])) ?></strong></span></td>
+              <td><strong>Total Deductions</strong> <span class="float-right"><strong>&#8358;<?php echo number_format($payroll_details->tds,2);?></strong></span></td>
               </tr>
               </tbody>
               </table>
               </div>
               </div>
+               </div>
               <div class="col-sm-12">
-              <h2><strong>Net Salary: &#8358;<?php //echo number_format($staff_payroll['net_salary'] - $total_deduct) ?> </strong>
+              <h4><strong>Net Salary: &#8358;<?php echo number_format($payroll_details->net_salary) ?> (<?php  $locale = 'en_US';
+  $numberInput = (($payroll_details->salary+$payroll_details->rent_alawi+$payroll_details->med_alawi+$payroll_details->transport_alawi+$payroll_details->cloth_alawi) - $payroll_details->tds);
+    $fmt = numfmt_create($locale, NumberFormatter::SPELLOUT);
+    $in_words = numfmt_format($fmt, $numberInput);
+    echo ucwords($in_words); ?> Naira only). </strong>
 
-              </h2>
+              </h4>
               <div class="col-sm-7 col-8 text-right m-b-30" style="align-items: right; float: right;">
               <div class="btn-group btn-group-sm">
-              <a href="print_staff_reciept?reciept=<?php //echo ($sId)?>&action=<?php //echo ($pId) ?>" target="_blank"><button class="btn btn-dark"><i class="fa fa-print fa-lg"></i> Print</button></a>
-              </div>
-              </div>
-              </div>
-                          </div>
-                            </div>
+                 <button type="button" class="btn btn-danger btn-lg mr-1" onclick="window.history.back();"><span class="fa fa-arrow-left"></span> Back</button>
+              <a href="print_staff_reciept?teacherId=<?php echo $Configuration->saltifyString($staff_data->staffId)?>&action=printreceipt&receiptId=<?php echo $Configuration->saltifyString($salaryId)?>" target="_blank"><button class="btn btn-dark"><i class="fa fa-print fa-lg"></i> Print</button></a>
 
-                          </div>
-
-                        </div>
+              </div>
+              </div>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
-    <!-- END: Content-->
-
-  
-    </div>
-    <!-- demo chat-->
-
-    <!-- BEGIN: Footer-->
-   <!--  -->
+  </div>
+</div>
+</div>
+                         
    <?php include "../template/footer.php"; ?>
     <!-- END: Footer-->
 
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
-    <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
-    <!-- END: Page JS-->
-
     <!-- END: Page JS-->
   </body>
   <!-- END: Body-->

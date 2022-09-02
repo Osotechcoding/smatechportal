@@ -22,6 +22,7 @@ $Blog = new Blog();
 $Result = new Result();
 $Bus = new Bus();
 $Hostel = new Hostel();
+$Payroll    = new Payroll();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 

@@ -1505,7 +1505,7 @@ $this->dbh = null;
 	$this->dbh->commit();
 	$this->response = $this->alert->alert_msg("$new_ses is Now the Current Academic Session and $term is Active ","success")."<script>setTimeout(()=>{
 			window.location.reload();
-			},500);</script>";
+			},1000);</script>";
 			}
 		}
 			} catch (PDOException $e) {
@@ -1690,111 +1690,7 @@ $this->dbh = null;
 	}
 
 	// School Session management methods end
-	//STAFF PAYROLL METHOD
-
-	public function create_staff_payroll($data){
-		$staff_name = $this->config->Clean($data['staffId']);
-		$salary = $this->config->Clean($data['basic_salary']);
-		$rent_alawi = $this->config->Clean($data['rent']);
-		$transport_alawi = $this->config->Clean($data['transport']);
-		$cloth_alawi = $this->config->Clean($data['cloth']);
-		$med_alawi = $this->config->Clean($data['med']);
-		$tds = $this->config->Clean($data['tds_tax']);
-		$bypass = $this->config->Clean($data['bypass']);
-		//check if auth is set
-		if ($this->config->isEmptyStr($bypass) || $bypass!=md5("oiza1")) {
-			$this->response = $this->alert->alert_toastr("error","Authentication Failed, Please Check your Connection and Try again!",__OSO_APP_NAME__." Says");
-		}elseif ($this->config->isEmptyStr($staff_name) || $this->config->isEmptyStr($salary) || $this->config->isEmptyStr($tds)) {
-		$this->response = $this->alert->alert_toastr("error","Staff Name, Salary and Monthly Tax are required!",__OSO_APP_NAME__." Says");
-	}else{
-		//check for duplicate entry in db
-		$this->stmt = $this->dbh->prepare("SELECT payrollId FROM `visap_staff_payroll_tbl` WHERE staff_id=? LIMIT 1");
-		$this->stmt->execute(array($staff_name));
-		if ($this->stmt->rowCount()==1) {
-				$this->response = $this->alert->alert_toastr("error","Salary is already allocated for the selected staff!",__OSO_APP_NAME__." Says");
-		}else{
-			//create a fresh payroll for the staff
-			$net_salary = intval(($salary+$rent_alawi+$transport_alawi+$cloth_alawi+$med_alawi)-($tds));
-			$created_at = date("Y-m-d");
-			try {
-				$this->dbh->beginTransaction();
-				$this->stmt = $this->dbh->prepare("INSERT INTO `visap_staff_payroll_tbl` (staff_id,salary,rent_alawi,transport_alawi,cloth_alawi,med_alawi,tds,net_salary,created_at) VALUES (?,?,?,?,?,?,?,?,?);");
-				if ($this->stmt->execute(array($staff_name,$salary,$rent_alawi,$transport_alawi,	$cloth_alawi,$med_alawi,$tds,$net_salary,$created_at))) {
-				$this->dbh->commit();
-				$this->response = $this->alert->alert_toastr("success","Payroll Saved successfully, Please wait... ","success")."<script>setTimeout(()=>{
-				window.location.reload();
-			},500);</script>";
-				}
-			} catch (PDOException $e) {
-				$this->dbh->rollback();
-					$this->response  = $this->alert->alert_toastr("error"," Failed! Please try again...: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
-			}
-		}
-	}
-		return $this->response;
-	$this->dbh = null;
-	}
-
-	public function get_all_staff_payroll(){
-	$this->stmt =	$this->dbh->prepare("SELECT * FROM `visap_staff_payroll_tbl` ORDER BY DATE(`created_at`) DESC");
-	 $this->stmt->execute();
-	 if ( $this->stmt->rowCount()>0) {
-	 $this->response = $this->stmt->fetchAll();
-	 return $this->response;
-	$this->dbh = null;
-	 }
-	}
-
-	public function get_payrollById($pId,$staffId){
-		$this->stmt =	$this->dbh->prepare("SELECT * FROM `visap_staff_payroll_tbl` WHERE payrollId=? AND staff_id=? LIMIT 1");
-		 $this->stmt->execute([$pId,$staffId]);
-		 if ($this->stmt->rowCount()==1) {
-		 $this->response = $this->stmt->fetch();
-		 return json_encode($this->response,JSON_PRETTY_PRINT);
-		$this->dbh = null;
-		 }
-	}
-
-	//get total sum allowances
-	public function get_sum_of_allowances(){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_payroll_tbl`");
-		$this->stmt->execute();
-		if ($this->stmt->rowCount()>0) {
-			$result = $this->stmt->fetchAll();
-			foreach ($result as $value) {
-				$rent = $value->rent_alawi;
-				$cloth = $value->cloth_alawi;
-				$transport = $value->transport_alawi;
-				$med = $value->med_alawi;
-				$this->response =(int)($rent+$cloth+$transport+$med);
-				return $this->response;
-				$this->dbh = null;
-			}
-		}
-	}
-
-	public function get_sum_of_total_tds(){
-		$this->stmt = $this->dbh->prepare("SELECT sum(`tds`) as tax_tds FROM `visap_staff_payroll_tbl`");
-		$this->stmt->execute();
-		if ($this->stmt->rowCount()>0) {
-			$result = $this->stmt->fetch();
-		$this->response = $result->tax_tds;
-		return $this->response;
-		$this->dbh = null;
-		}
-	}
-
-	public function get_sum_of_total_salary_payout_monthly(){
-	$this->stmt = $this->dbh->prepare("SELECT sum(`salary`) as staff_salary FROM `visap_staff_payroll_tbl`");
-		$this->stmt->execute();
-		if ($this->stmt->rowCount()>0) {
-			$result = $this->stmt->fetch();
-		$this->response = $result->staff_salary;
-		return $this->response;
-		$this->dbh = null;
-		}
-	}
-	//STAFF PAYROLL METHOD END
+	
 	//STUDENT ATTENDANT METHODS
 	public function upload_student_attendance($data){
 		$todaydate = $this->config->Clean($data['attDate']);

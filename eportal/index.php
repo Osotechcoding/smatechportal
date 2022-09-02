@@ -2,14 +2,14 @@
 @session_start();
  require_once "helpers/helper.php";
 require_once "classes/Session.php";
-
+$xss_token = Session::set_xss_token();
  ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 <?php include_once ("template/MetaTag.php");?>
-<title><?php echo ucwords($SmappDetails->school_name); ?> :: Student Login</title>
+<title>Student Login :: <?php echo ucwords($SmappDetails->school_name); ?> </title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
 
 <link rel="stylesheet" href="bapps/plugins/bootstrap/css/bootstrap.min.css">
@@ -41,7 +41,7 @@ background-repeat: no-repeat;">
 <div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="80" class="img-fluid" alt="logo"></div>
 <h1 class="mb-3 mt-2" style="color: #593128;">STUDENT PORTAL</h1>
 <form id="student-login-form">
-    <input type="hidden" name="txss_token" value="<?php echo $tses_token;?>">
+    <input type="hidden" name="txss_token" value="<?php echo $xss_token;?>">
     <input type="hidden" name="action" value="stud_login">
 <div class="form-group">
    <!--  <label for="">Portal E-mail</label> -->
@@ -79,9 +79,7 @@ background-repeat: no-repeat;">
 </div>
 </div>
 </div>
-<!-- <div class="col-md-12 text-center mt-3 p-3">
-        <h1 class="text-center" style="font-size:40px;color: #fff;font-weight:bold;text-shadow: 4px 2px black; border-radius: 10px; border: 4px solid orangered; background-color: orangered; text-align: center;display: inline-flex;"> <?php //echo ucwords($SmappDetails->school_name);?></h1>
-    </div> -->
+
 <script src="bapps/js/jquery-3.6.0.min.js"></script>
 <script src="bapps/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="app-assets/vendors/js/extensions/toastr.min.js"></script>
@@ -90,6 +88,8 @@ background-repeat: no-repeat;">
 <script src="app-assets/js/scripts/extensions/toastr.min.js"></script>
  <div id="server-response"></div>
 <script>
+    //disable right click on mouse
+    $(document).on("contextmenu", function(e) { return !1 });
         $(document).ready(function(){
 //when a login btn is clicked
 const login_form = $("#student-login-form");

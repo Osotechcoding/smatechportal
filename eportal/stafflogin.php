@@ -96,6 +96,8 @@ background-repeat: no-repeat;">
  <div id="server-response"></div>
 
 <script>
+    //disable right click on mouse
+    $(document).on("contextmenu", function(e) { return !1 });
         $(document).ready(function(){
             $(document).on("click",".navigate-away", function(){
                 setTimeout(()=>{

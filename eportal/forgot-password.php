@@ -84,6 +84,7 @@ background-repeat: no-repeat;">
 <script src="app-assets/js/scripts/extensions/toastr.min.js"></script>
  <div id="server-response"></div>
 <script>
+     $(document).on("contextmenu", function(e) { return !1 });
         $(document).ready(function(){
 //when a login btn is clicked
 const login_form = $("#student-login-form");

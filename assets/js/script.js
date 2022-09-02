@@ -4,7 +4,7 @@ Template Name: Edusquad Bootstrap 4 Education Template
 Version: 1.0
 
 -----------------------------------------------------------*/
-
+ 
 /*pre loader*/
 $(window).on('load', function() {
     $('.preloader').fadeOut();

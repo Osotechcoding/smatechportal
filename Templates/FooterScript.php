@@ -10,3 +10,7 @@
 <script src="assets/js/page/about/about.js"></script>
 <script src="assets/js/page/home/home.js"></script>
 <script src="assets/js/script.js"></script>
+<script>
+	//disable right click on mouse
+    $(document).on("contextmenu", function(e) { return !1 });
+</script>

@@ -2,9 +2,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-//require_once 'initialize.php';
-//require_once 'Osotech.php';
-//Load Composer's autoloader
+
 require_once '../vendor/autoload.php';
 
 class Osotech_mailing extends Osotech {
@@ -55,31 +53,6 @@ class Osotech_mailing extends Osotech {
        
     }
     //end of class
-
-    public function mailHackingReport($schoolname, $messageBody)  {
-        $mailer                 = new PHPMailer();  //new instance of the mailer
-        $mailer->IsSMTP(); // telling the class to use SMTP
-        $mailer->SMTPDebug  = 0;                     // enables SMTP debug information (for testing), // 1 = errors and messages, // 2 = messages only
-        $mailer->SMTPAuth   = true;                  // enable SMTP authentication
-        $mailer->CharSet        = 'utf-8';
-        $mailer->Host       = $this->_Hostname; // sets the SMTP server
-        $mailer->Port       = $this->_Port;                // set the SMTP port for the GMAIL server
-        $mailer->Username   = $this->_Username; // SMTP account username
-        $mailer->Password   = $this->_Password;        // SMTP account password
-        $mailer->AddAddress($this->_HackReportMail, 'Hacking-Report');
-        $mailer->Subject        = $schoolname. ": Hacking Auto Generated Report";
-        $mailer->FromName       = $schoolname;
-        $mailer->From           = $schoolname;
-        $mailer->AddReplyTo($schoolname);
-
-        $mailer->MsgHTML($messageBody); // encoding the message body with html
-
-        if(!$mailer->Send()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     public function get_html_message_body(){
         $get_html_message = include("htmlMsg.php");

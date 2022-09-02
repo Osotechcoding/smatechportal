@@ -378,7 +378,7 @@ class Hostel {
     			$this->dbh->commit();
     			$this->dbh = null;
 			$this->response = $this->alert->alert_toastr("success","Payment submitted and updated successfully!",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
-							window.location.reload();
+							window.location.href='view_hostel_rooms?hostel=1&room=1';
 						},1000);</script>";
     		}
   				}

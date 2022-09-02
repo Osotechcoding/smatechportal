@@ -24,6 +24,7 @@ $Alert = new Alert();
 $Blog = new Blog();
 $Hostel = new Hostel();
 $Bus = new Bus();
+$Payroll    = new Payroll();
 
 $request_method  = $_SERVER['REQUEST_METHOD'];
 if ($request_method ==="POST") {
@@ -166,7 +167,7 @@ if (isset($_POST['action']) && $_POST['action'] !="") {
   //submit_new_payroll
 
   if ($_POST['action'] ==="submit_new_payroll") {
-		$result = $Administration->create_staff_payroll($_POST);
+		$result = $Payroll->create($_POST);
 		if ($result) {
 			echo $result;
 		}
@@ -176,7 +177,7 @@ if (isset($_POST['action']) && $_POST['action'] !="") {
   if ($_POST['action'] ==="show_pay_salary_modal") {
     $pId = $Configuration->Clean($_POST['payrollId']);
     $staffId = $Configuration->Clean($_POST['staffId']);
-		$result = $Administration->get_payrollById($pId,$staffId);
+		$result = $Payroll->get_payrollById($pId,$staffId);
 		if ($result) {
 			echo $result;
 		}
@@ -575,6 +576,14 @@ if (isset($_POST['action']) && $_POST['action'] !="") {
 //upload new student in csv file
 	if ($_POST['action'] === "upload_student_bulk_csv_data") {
 		$result = $Student->registerBulkStudentUsingCSVFile($_POST,$_FILES);
+		if ($result) {
+			echo $result;
+		}
+	}
+	//staff salary payment action
+	//pay_staff_salary_now
+	if ($_POST['action'] === "pay_staff_salary_now") {
+		$result = $Payroll->saveStaffSalaryPayment($_POST);
 		if ($result) {
 			echo $result;
 		}

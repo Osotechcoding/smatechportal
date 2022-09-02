@@ -5,12 +5,13 @@ require_once "helpers/helper.php";
 
 if (isset($_GET['action']) && $_GET['action'] === "viewsalary" && isset($_GET['staffId']) && $_GET['staffId'] !== "") {
  $staffId = $Configuration->Clean($_GET['staffId']);
- 
+ $staff_data  = $Staff->get_staff_ById($staffId);
+ $salary_details = $Payroll->showStaffSalaryHistoryById($staffId);
+ $payroll_details = $Payroll->showPayrollByStaffId($staffId);
 }else{
   header("Location: visap_payroll");
   exit();
 }
-
 
   ?>
 <!DOCTYPE html>
@@ -19,7 +20,7 @@ if (isset($_GET['action']) && $_GET['action'] === "viewsalary" && isset($_GET['s
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name ?> :: Staff Salary History</title>
+    <title><?php echo $SmappDetails->school_name ?> :: <?php echo $staff_data->full_name;?> Salary Details </title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -59,32 +60,36 @@ if (isset($_GET['action']) && $_GET['action'] === "viewsalary" && isset($_GET['s
   <div class="row">
     <div class="col-12">
       <div class="card">
+
         <div class="card-header">
+           <button type="button" class="btn btn-danger btn-lg ml-2 mt-3" onclick="window.history.back();"><span class="fa fa-arrow-left"></span> Back</button>
         </div>
         <div class="card-body card-dashboard">
           <div class="table-responsive">
-            <table class="table table-striped osotechExp">
+            <table class="table table-striped text-center">
               <thead>
                <tr>
-              <th>Date</th>
-              <th>Salary for</th>
-              <th>Gross</th>
-              <th>Allowances</th>
-              <th>Tax</th>
-              <th>Pay Status</th>
+              <th>Payment Date</th>
+              <th>Month</th>
+              <th>Paid Amount</th>
+              <th>Status</th>
               <th>Actions</th>
               </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><?php echo date("Y-m-d");?></td>
-                  <td><?php echo date("F");?></td>
-                  <td>&#8358;<?php  echo number_format(40000,2);?></td>
-                  <td>&#8358;<?php  echo number_format(3000,2);?></td>
-                  <td>&#8358;<?php  echo number_format(1000,2);?></td>
+                <?php if ($salary_details) {
+                 foreach ($salary_details as $sal) {?>
+                 <tr>
+                  <td><?php echo date("l jS F, Y",strtotime($sal->paymentDate));?></td>
+                  <td><?php echo date("F",strtotime($sal->forMonth));?></td>
+                  <td>&#8358;<?php  echo number_format($sal->amount,2);?></td>
                   <td><span class="badge badge-success badge-md">Paid</span></td>
-                  <td><a href="salary-reciept?ownerId=1& action=view-reciept"><button class="btn btn-dark" type="button"> Reciept</button></a></td>
+                  <td><a href="salary-reciept?teacherId=<?php echo $Configuration->saltifyString($sal->staff_id)?>&action=viewreceipt&receiptId=<?php echo $Configuration->saltifyString($sal->salaryId)?>"><button class="btn btn-dark" type="button"> Reciept</button></a></td>
                 </tr>
+                 <?php 
+                  }
+                } ?>
+                
               </tbody>
             </table>
           </div>

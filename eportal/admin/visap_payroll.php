@@ -60,7 +60,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-money fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Allowances</h3></div>
-                  <h2 class="text-white mb-0">&#8358; <?php echo number_format($Administration->get_sum_of_allowances(),2);?></h2>
+                  <h2 class="text-white mb-0">&#8358; <?php echo number_format($Payroll->get_sum_of_allowances(),2);?></h2>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-money fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white"> TAX (TDS)</h3></div>
-                  <h2 class="text-white mb-0">&#8358;<?php echo number_format($Administration->get_sum_of_total_tds(),2);?></h2>
+                  <h2 class="text-white mb-0">&#8358;<?php echo number_format($Payroll->get_sum_of_total_tds(),2);?></h2>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-money fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Monthly Salary</h3></div>
-                  <h2 class="text-white mb-0">&#8358;<?php echo number_format($Administration->get_sum_of_total_salary_payout_monthly(),2);?></h2>
+                  <h2 class="text-white mb-0">&#8358;<?php echo number_format($Payroll->get_sum_of_total_salary_payout_monthly(),2);?></h2>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@ require_once "helpers/helper.php";
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <button type="button" class="btn btn-dark btn-sm btn-rounded" data-toggle="modal" data-target="#uploadStaffSalaryModal"><i class="fa fa-bar-chart fa-2x"></i> Set Payroll</button>
+          <button type="button" class="btn btn-dark btn-md btn-rounded" data-toggle="modal" data-target="#uploadStaffSalaryModal"><span class="fa fa-money fa-1x"></span> Add Payroll</button>
         </div>
         <div class="card-body card-dashboard">
         <div class="table-responsive">
@@ -114,7 +114,7 @@ require_once "helpers/helper.php";
               </thead>
               <tbody class="text-center">
                 <?php
-                $get_all_payrolls = $Administration->get_all_staff_payroll();
+                $get_all_payrolls = $Payroll->index();
                 if ($get_all_payrolls) {
                 foreach ($get_all_payrolls as $payrolls) {
                   $staff_data = $Staff->get_staff_ById($payrolls->staff_id);
@@ -127,14 +127,14 @@ require_once "helpers/helper.php";
                     <td>&#8358;<?php echo number_format($payrolls->net_salary,2);?></td>
                     <td>  <div class="btn-group dropdown mr-1 mb-1">
               <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="5,20">
-                Click Me
+                <span class="fa fa-edit"></span> Action
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
                  <?php if ($Staff->checkBankDetails($staff_data->staffId) === true): ?>
                    <a class="dropdown-item text-info" data-toggle="modal" data-target="#viewbankInfoModalForm" href="javascript:void(0);"> Bank Details</a>
                  <?php endif ?>
-                <a class="dropdown-item text-warning pay_form_btn" data-id="<?php echo $payrolls->staff_id;?>" data-action="show_pay_salary_modal" data-payroll="<?php echo $payrolls->payrollId;?>" href="javascript:void(0);"> Pay Salary</a>
-                <a class="dropdown-item text-info" href="salary_history?staffId=1&action=viewsalary"> Payment History</a>
+                <a class="dropdown-item text-warning pay_form_btn" data-id="<?php echo $payrolls->staff_id;?>" data-action="show_pay_salary_modal" data-payroll="<?php echo $payrolls->payrollId;?>" href="javascript:void(0);"> Make Payment</a>
+                <a class="dropdown-item text-info" href="salary_history?staffId=1&action=viewsalary"> Salary History</a>
               </div>
             </div></td>
                   </tr>
@@ -207,12 +207,12 @@ require_once "helpers/helper.php";
                 <div class="modal-body">
                   <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
                   <div class="row">
-               <div class="col-md-12">
+               <div class="col-md-6">
                 <!--  <div class="text-center col-md-12" id="responseText">
                  </div> -->
                   <div class="form-group">
                   <label for="staff_name">STAFF NAME</label>
-                <select name="staffId" id="staff_name" class="select2 form-control">
+                <select name="staffId" id="staff_name" class="custom-select form-control form-control-lg">
                  <option value="" selected>Choose...</option>
                 <?php echo $Staff->show_staff_indropdown_list();?>
                </select>
@@ -221,44 +221,50 @@ require_once "helpers/helper.php";
                 <div class="col-md-6">
                   <div class="form-group">
                   <label for="class">BASIC SALARY</label>
-               <input type="number" autocomplete="off" class="form-control form-control-lg" name="basic_salary" value="0">
+               <input type="number" autocomplete="off" class="form-control form-control-lg" name="basic_salary" placeholder="required" min="5000">
                     </div>
                </div>
                 <div class="col-md-6">
                      <div class="form-group">
                   <label for="rent_alawi">RENT ALLOWANCE</label>
-                <input type="number" autocomplete="off" name="rent" class="form-control form-control-lg" value="0">
+                <input type="number" autocomplete="off" name="rent" class="form-control form-control-lg" placeholder="Optional">
                     </div>
                   </div>
                    <div class="col-md-6">
                   <div class="form-group">
                   <label for="transport_alawi">TRANSPORT ALLOWANCE</label>
-                <input type="number" autocomplete="off" name="transport" class="form-control form-control-lg" value="0">
+                <input type="number" autocomplete="off" name="transport" class="form-control form-control-lg" placeholder="Optional">
                     </div>
                </div>
                    <div class="col-md-6">
                      <div class="form-group">
                   <label for="cloth_alawi">WARDROBE ALLOWANCE</label>
-               <input type="number" class="form-control form-control-lg" name="cloth" value="0">
+               <input type="number" class="form-control form-control-lg" name="cloth" placeholder="Optional">
                     </div>
                   </div>
                    <div class="col-md-6">
                      <div class="form-group">
                   <label for="med_alawi">MEDICAL ALLOWANCE</label>
-               <input type="number" class="form-control form-control-lg" name="med" value="0">
+               <input type="number" class="form-control form-control-lg" name="med" placeholder="Optional">
                     </div>
                   </div>
                    <div class="col-md-6">
                      <div class="form-group">
                   <label for="tds">TAX DEDUCTED AT SOURCE (TDS)</label>
-              <input type="number" class="form-control form-control-lg" name="tds_tax" value="0">
+              <input type="number" class="form-control form-control-lg" name="tds_tax" required placeholder="required">
                     </div>
                   </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                  <label for="auth_code">AUTHENTICATION CODE</label>
+              <input type="password" class="form-control form-control-lg" name="auth_code" placeholder="*************">
+                    </div>
+                  </div>
+                  
                  </div>
                   </div>
                 </div>
                 <input type="hidden" name="action" value="submit_new_payroll">
-                <input type="hidden" name="bypass" value="<?php echo md5("oiza1") ?>">
                 <div class="modal-footer">
                <button type="submit" class="btn btn-dark ml-1 __loadingBtn__">Submit</button>
                   <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
@@ -275,7 +281,7 @@ require_once "helpers/helper.php";
 role="dialog">
 <div class="modal-dialog modal-lg" role="document">
 <div class="modal-content">
-    <form id="salary-Payment-Modal-Form">
+    <form id="salaryPaymentModalForm">
    <div class="modal-header">
        <h4 class="modal-title text-center">PAY STAFF SALARY</h4>
        <button type="button" class="close"
@@ -348,36 +354,31 @@ role="dialog">
               </div>
                </div>
               <div class="row" style="display: none;" id="hide-Bank-Details-Div">
-                 <div class="col-md-4">
+                 <div class="col-md-6">
                <div class="form-group">
                    <label for="bank_name">Bank Name:</label>
-                 <input class="form-control" id="bank_name" type="text"  name="bank_name">
+                 <input class="form-control" id="bank_name" type="text"  name="bank_name" placeholder="e.g First Bank Plc">
                </div>
                </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                <div class="form-group">
-                   <label for="bank_ref_no">Bank Ref No:</label>
-                 <input class="form-control" id="bank_ref_no" type="text" name="bank_ref_no">
-               </div>
-               </div>
-                <div class="col-md-4">
-               <div class="form-group">
-                   <label for="bank_response_status">Bank Response</label>
-                  <select name="bank_response_status" id="bank_response_status" class="form-control">
-              <option>Pending</option>
-              <option>Failed</option>
-              <option>Successful</option>
-              </select>
+                   <label for="bank_ref_no">Ref No:</label>
+                 <input class="form-control" id="bank_ref_no" type="text" name="bank_ref_no" placeholder="e.g 1234560-098754">
                </div>
                </div>
               </div>
+               <div class="col-md-6">
+               <div class="form-group">
+                   <label for="auth_code">Authentication Code:</label>
+                 <input class="form-control" id="auth_code" type="password" placeholder="*********" name="auth_code">
+               </div>
+               </div>
               <input type="hidden" name="action" value="pay_staff_salary_now">
               </div>
    </div>
-   <div class="text-center" id="response"></div>
    <div class="modal-footer">
        <button type="button"class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
-       <button type="submit"class="btn btn-dark btn-round btn-md">Save Payment</button>
+       <button type="submit"class="btn btn-dark btn-round btn-md __loadingBtnpaid__">Save Payment</button>
    </div>
     </form>
 </div>
@@ -426,6 +427,20 @@ pay_form_btn.on("click", function(){
     $("#my_basic_sal").val(result.salary);
     $("#myPayrollId").val(result.payrollId);
   },"JSON");
+});
+
+//when pay staff salary form is submitted
+const STAFF_SALARY_PAYMENT_FORM = $("#salaryPaymentModalForm");
+STAFF_SALARY_PAYMENT_FORM.on("submit", function(event){
+  event.preventDefault();
+  $(".__loadingBtnpaid__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+ //send request
+ $.post("../actions/actions",STAFF_SALARY_PAYMENT_FORM.serialize(),function(data){
+   setTimeout(()=>{
+ $(".__loadingBtnpaid__").html('Save Payment').attr("disabled",false);
+  $("#server-response").html(data);
+   },500);
+ })
 })
   })
 </script>

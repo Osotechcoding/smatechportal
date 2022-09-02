@@ -179,7 +179,10 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !=="") {
                  echo '<span class="badge badge-success badge-pill"> Available</span>';
                 }else{?>
                    <span class="badge badge-danger badge-pill"> Occupied</span>
-                    <button type="button" class="badge badge-dark badge-pill m-1 checkOutBtn_" data-id="<?php echo $bonk->bedId;?>" data-action="checkout_bedspace" data-occupant="<?php echo $bonk->occupant;?>"> Checkout</button>
+                   <?php if ($bonk->amount === $bonk->amount_paid): ?>
+                     <button type="button" class="badge badge-dark badge-pill m-1 checkOutBtn_" data-id="<?php echo $bonk->bedId;?>" data-action="checkout_bedspace" data-occupant="<?php echo $bonk->occupant;?>"> Checkout</button>
+                   <?php endif ?>
+                    
                       <?php
                 }
 
