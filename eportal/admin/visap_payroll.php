@@ -59,8 +59,8 @@ require_once "helpers/helper.php";
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-money fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Allowances</h3></div>
-                  <h2 class="text-white mb-0">&#8358; <?php echo number_format($Payroll->get_sum_of_allowances(),2);?></h2>
+                  <div class="text-white line-ellipsis"><h3 class="text-white">Staff Alawi</h3></div>
+                  <h2 class="text-white mb-0">&#8358; <?php echo number_format($Payroll->getAllSumOfAlawis(),2);?></h2>
                 </div>
               </div>
             </div>
@@ -82,7 +82,7 @@ require_once "helpers/helper.php";
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-money fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Monthly Salary</h3></div>
+                  <div class="text-white line-ellipsis"><h3 class="text-white">Monthly Salaries</h3></div>
                   <h2 class="text-white mb-0">&#8358;<?php echo number_format($Payroll->get_sum_of_total_salary_payout_monthly(),2);?></h2>
                 </div>
               </div>
@@ -101,7 +101,7 @@ require_once "helpers/helper.php";
         </div>
         <div class="card-body card-dashboard">
         <div class="table-responsive">
-            <table class="table osotechDatatable table-hover table-bordered table-striped">
+            <table class="table table-hover table-bordered table-striped">
               <thead class="text-center">
                 <tr>
                  <th>Staff Name</th>
@@ -134,7 +134,7 @@ require_once "helpers/helper.php";
                    <a class="dropdown-item text-info" data-toggle="modal" data-target="#viewbankInfoModalForm" href="javascript:void(0);"> Bank Details</a>
                  <?php endif ?>
                 <a class="dropdown-item text-warning pay_form_btn" data-id="<?php echo $payrolls->staff_id;?>" data-action="show_pay_salary_modal" data-payroll="<?php echo $payrolls->payrollId;?>" href="javascript:void(0);"> Make Payment</a>
-                <a class="dropdown-item text-info" href="salary_history?staffId=1&action=viewsalary"> Salary History</a>
+                <a class="dropdown-item text-info" href="salary_history?staffId=<?php echo $payrolls->staff_id;?>&action=viewsalary"> Salary History</a>
               </div>
             </div></td>
                   </tr>
@@ -293,8 +293,6 @@ role="dialog">
    </div>
    <div class="modal-body" id="show-salary-view">
     <div class="col-md-12">
-          <div class="text-center" id="res">
-          </div>
           <div class="row">
               <input type="hidden" name="staff_id" id="staff_id">
          <input type="hidden" name="payroll_id" id="myPayrollId">
@@ -324,14 +322,14 @@ role="dialog">
           </div>
           <div class="col-md-6">
            <div class="form-group">
-               <label for="my_net_salary">Net Salary</label>
+               <label for="my_net_salary">Net Salary (+ Allowances)</label>
              <input class="form-control" name="net_salary" id="my_net_salary" type="text" readonly>
            </div>
            </div>
            <div class="col-md-6">
             <div class="form-group">
-                <label for="amount_paid">Amount</label>
-              <input class="form-control" id="amount_paid" type="text" placeholder="&#8358; 50,000.00" name="amount_paid">
+                <label for="amount_paid">Amount (without comma)</label>
+              <input class="form-control" id="amount_paid" type="text" placeholder="Enter net salary e.g 20000" name="amount_paid" autocomplete="off">
             </div>
             </div>
           <div class="col-md-6">

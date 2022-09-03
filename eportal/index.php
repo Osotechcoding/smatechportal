@@ -90,6 +90,13 @@ background-repeat: no-repeat;">
 <script>
     //disable right click on mouse
     $(document).on("contextmenu", function(e) { return !1 });
+     document.onkeydown = function(e) {
+    if (e.ctrlKey &&
+        (e.keyCode === 85 )) {
+    alert("Not allowed!");
+    return false;
+    }
+};
         $(document).ready(function(){
 //when a login btn is clicked
 const login_form = $("#student-login-form");

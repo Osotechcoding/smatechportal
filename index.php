@@ -17,7 +17,41 @@
       <?php else: ?>
         <?php include_once 'Templates/HeaderScript.php'; ?>
     <?php endif; ?>
-
+<style>
+    .swiper-container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        background: #222;
+        align-items: center;
+        justify-content: center;
+    }
+    .swiper {
+  width: 100%;
+  height: fit-content;
+}
+.swiper-slide img{
+    width: 100%;
+}
+.swiper .swiper-button-prev, .swiper .swiper-button-next {
+    color: orangered;
+}
+.swiper .swiper-pagination-bullet-active {
+    background: orangered;
+}
+.swiper h1{
+    color: orangered;
+    font-weight: bold;
+    font-size: 40px;
+    text-shadow: 5px 8px 4px solid black;
+}
+.swiper h6{
+    color: olivedrab;
+    font-weight: bold;
+    font-size: 40px;
+    text-shadow: 5px 8px 4px solid black;
+}
+</style>
 </head>
 <!--start preloader-->
 <div class="preloader">
@@ -47,7 +81,7 @@
   <?php endif; ?>
     <!-- end side menu -->
     <!-- start slider -->
-      <?php include_once ("Templates/HomePageSlider.php");?>
+      <?php include_once ("Templates/HomeSwiperSlider.php");?>
     <!-- end slider -->
     <!-- start counter -->
     <section class="counter-section">
@@ -209,6 +243,27 @@
   <?php else: ?>
     <?php include_once 'Templates/FooterScript.php'; ?>
 <?php endif; ?>
+<script>
+    const swiper = new Swiper('.swiper', {
+autoplay:{
+delay: 3000,
+disableOnInteraction: false,
+},
+  loop: true,
+
+  pagination: {
+    el: '.swiper-pagination',
+    clickable:true,
+  },
+
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+
+});
+
+</script>
 </body>
 
 </html>

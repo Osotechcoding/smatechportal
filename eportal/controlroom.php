@@ -84,6 +84,13 @@ placeholder="Enter your password">
  <script>
     //disable right click on mouse
     $(document).on("contextmenu", function(e) { return !1 });
+     document.onkeydown = function(e) {
+    if (e.ctrlKey &&
+        (e.keyCode === 85 )) {
+    alert("Not allowed!");
+    return false;
+    }
+};
     
     $(document).ready(function(){
     $("#adminLoginForm").on("submit", function(event){

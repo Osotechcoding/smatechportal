@@ -2065,28 +2065,29 @@ public function send_resend_confirmation_code($data){
   public function update_school_profile_details($data){
   	$school_name = $this->config->Clean($data['school_name']);
   	$slogan = $this->config->Clean($data['slogan']);
-  	$shortname = $this->config->Clean($data['shortname']);
-  	$approval_number = $this->config->Clean($data['approval_number']);
+  	$shortname 			= $this->config->Clean($data['shortname']);
+  	$approval_number= $this->config->Clean($data['approval_number']);
   	$school_history = $this->config->Clean($data['school_history']);
-  	$founded_year = $this->config->Clean($data['founded_year']);
+  	$founded_year 	= $this->config->Clean($data['founded_year']);
   	$school_address = $this->config->Clean($data['school_address']);
-  	$school_state = $this->config->Clean($data['school_state']);
-  	$school_city = $this->config->Clean($data['school_city']);
-  	$country = $this->config->Clean($data['country']);
-  	$default_language = $this->config->Clean($data['default_language']);
-  	$school_phone = $this->config->Clean($data['school_phone']);
-  	$school_fax = $this->config->Clean($data['school_fax']);
-  	$school_email = $this->config->Clean($data['school_email']);
-  	$school_gmail = $this->config->Clean($data['school_gmail']);
-  	$website_link = $this->config->Clean($data['website_link']);
+  	$school_state 	= $this->config->Clean($data['school_state']);
+  	$school_city 		= $this->config->Clean($data['school_city']);
+  	$country 				= $this->config->Clean($data['country']);
+  	$default_language=$this->config->Clean($data['default_language']);
+  	$school_phone 	 =$this->config->Clean($data['school_phone']);
+  	$school_fax 		 =$this->config->Clean($data['school_fax']);
+  	$school_email 	 =$this->config->Clean($data['school_email']);
+  	$school_gmail 	 =$this->config->Clean($data['school_gmail']);
+  	$website_link 	 =$this->config->Clean($data['website_link']);
   	// new updated value
-  	$about = 				$this->config->Clean($data['about_us_statement']);
-  	$philosophy = 	$this->config->Clean($data['philosophy_statement']);
+  	$about 				= $this->config->Clean($data['about_us_statement']);
+  	$philosophy 	= $this->config->Clean($data['philosophy_statement']);
   	$keyOfSuccess = $this->config->Clean($data['key_of_success']);
-  	$core_value = 	$this->config->Clean($data['core_value']);
-  	$vision = 			$this->config->Clean($data['vision_statement']);
-  	$mission = 			$this->config->Clean($data['mission_statement']);
-  	$principle =$this->config->Clean($data['principle_statement']);
+  	$core_value 	= $this->config->Clean($data['core_value']);
+  	$vision 			= $this->config->Clean($data['vision_statement']);
+  	$mission 			= $this->config->Clean($data['mission_statement']);
+  	$principle 		=	$this->config->Clean($data['principle_statement']);
+  	$princiapl_text=$this->config->Clean($data['princiapl_text']);
 
   	$auth_pass = $this->config->Clean($data['auth_code']);
 
@@ -2112,11 +2113,12 @@ public function send_resend_confirmation_code($data){
   	  $this->config->isEmptyStr($keyOfSuccess)||
   	  $this->config->isEmptyStr($philosophy)||
   	  $this->config->isEmptyStr($principle)||
+  	   $this->config->isEmptyStr($princiapl_text)||
   	  $this->config->isEmptyStr($about)
   	    ) {
   		$this->response = $this->alert->alert_toastr("error","Invalid Form submission",__OSO_APP_NAME__." Says");
   	}elseif ($this->config->isEmptyStr($auth_pass)) {
-  	$this->response = $this->alert->alert_toastr("error","Enter an Authentication Code to Continue",__OSO_APP_NAME__." Says");
+  	$this->response = $this->alert->alert_toastr("error","Authentication Code is required to Continue!",__OSO_APP_NAME__." Says");
   	}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
   	$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code",__OSO_APP_NAME__." Says");
   }else{
@@ -2126,8 +2128,8 @@ public function send_resend_confirmation_code($data){
 					$this->dbh->beginTransaction();
 					//create the new Classroom
 				$date = date("Y-m-d");
-				$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET school_name=?,govt_approve_number=?,school_address=?,school_slogan=?,school_state=?,school_city=?,country=?,school_email=?,school_phone=?,school_fax=?,website_url=?,default_language=?,school_history=?,school_gmail=?,school_short_name=?,our_mission=?,our_vision=?,our_core_value=?,key_of_success=?,our_philosophy=?,our_principle=?,about_us=? WHERE id=? LIMIT 1");
-				if ($this->stmt->execute(array($school_name,$approval_number,$school_address,$slogan,$school_state,$school_city,$country,$school_email,$school_phone,$school_fax,$website_link,$default_language,$school_history,$school_gmail,$shortname,$mission,$vision,$core_value,$keyOfSuccess,$philosophy,$principle,$about,$id))) {
+				$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET school_name=?,govt_approve_number=?,school_address=?,school_slogan=?,school_state=?,school_city=?,country=?,school_email=?,school_phone=?,school_fax=?,website_url=?,default_language=?,school_history=?,school_gmail=?,school_short_name=?,our_mission=?,our_vision=?,our_core_value=?,key_of_success=?,our_philosophy=?,our_principle=?,about_us=?,principal_welcome=? WHERE id=? LIMIT 1");
+				if ($this->stmt->execute(array($school_name,$approval_number,$school_address,$slogan,$school_state,$school_city,$country,$school_email,$school_phone,$school_fax,$website_link,$default_language,$school_history,$school_gmail,$shortname,$mission,$vision,$core_value,$keyOfSuccess,$philosophy,$principle,$about,$princiapl_text,$id))) {
 					// code...
 					 $this->dbh->commit();
 			$this->response = $this->alert->alert_toastr("success","School Details updated Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{

@@ -3,3 +3,14 @@
 <!-- local devlopement -->
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
+<script>
+	//disable right click on mouse
+    $(document).on("contextmenu", function(e) { return !1 });
+     document.onkeydown = function(e) {
+    if (e.ctrlKey &&
+        (e.keyCode === 85 )) {
+    alert("Not allowed!");
+    return false;
+    }
+};
+</script>

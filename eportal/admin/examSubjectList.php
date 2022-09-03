@@ -11,14 +11,10 @@ require_once "helpers/helper.php";
     <title><?php echo $SmappDetails->school_name ?> :: Subjects Registration</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
-  <!-- END: Head-->../
-  <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Header-->
     <?php include ("template/HeaderNav.php"); ?>
     <!-- END: Header-->
-    <!-- BEGIN: Main Menu-->
-  <!--  -->
   <?php include ("template/Sidebar.php"); ?>
     <!-- END: Main Menu-->
     <!-- BEGIN: Content-->
@@ -106,7 +102,7 @@ require_once "helpers/helper.php";
          <div class="col-12 col-md-6 col-sm-12 col-lg-6">
                 <label for="users-list-role">class desc </label>
                   <fieldset class="form-group">
-                      <select name="subject_class" class="form-control select2" id="users-list-role">
+                      <select name="subject_class" class="custom-select form-control form-control-lg" id="users-list-role">
                           <option value="" selected>Choose...</option>
                           <?php echo $Administration->get_classroom_InDropDown_list();?>
                       </select>
@@ -174,7 +170,10 @@ if ($Configuration->isEmptyStr($_POST['subject_class'])) {
   }else{
     ?>
     <div class="text-center text-bold">
-  <?php echo $Alert->alert_msg("No result Found for ".strtoupper($subject_class)."!","danger"); ?>
+      <h4 class="text-center text-bold">
+        <?php echo $Alert->alert_msg("No Subjects Found for ".strtoupper($subject_class)."!","danger"); ?>
+      </h4>
+  
     </div>
   <?php
   }

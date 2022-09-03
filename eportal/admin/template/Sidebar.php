@@ -17,17 +17,18 @@
             <ul class="menu-content">
               <li class="nav-item"><a href="acaSession"><i class="fa fa-calendar fa-1x"></i><span class="menu-title text-truncate" data-i18n="academic year">Academic Year</span></a>
           </li>
-           <li><a class="d-flex align-items-center" href="create_subject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Subject Management">Subject Management</span></a>
+           <li><a class="d-flex align-items-center" href="create_subject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Subjects">Subjects</span></a>
+              </li>
+              
+               <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Class Management">Class Management</span></a>
               </li>
                <li><a class="d-flex align-items-center" href="upload_lecture"><i class="bx bx-video-plus"></i><span class="menu-item text-truncate" data-i18n="Online Class"> Online Class</span></a>
-              </li>
-               <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Class Management">Class Management</span></a>
               </li>
                <!-- <li><a class="d-flex align-items-center" href="registerStudentSubject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Exam Subject I">Exam Subject I</span></a>
               </li> -->
               <li><a class="d-flex align-items-center" href="bulkSubjectReg"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Exam Subject"> Exam Subject</span></a>
              </li>
-             <li><a class="d-flex align-items-center" href="examSubjectList"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Search Exam Subject">Search Exam Subject</span></a>
+             <li><a class="d-flex align-items-center" href="examSubjectList"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Search Exam Subject">Search Subject</span></a>
             </li>
            <li class=" nav-item"><a href="student_assignment"><i class="fa fa-book fa-1x"></i><span class="menu-title text-truncate" data-i18n="Student Assignment"> Student Assignment</span></a>
           </li>

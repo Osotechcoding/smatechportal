@@ -58,14 +58,14 @@
         <a class="nav-link d-flex align-items-center active" id="account-pill-social-two" data-toggle="pill"
         href="#logo-form" aria-expanded="false">
         <i class="fa fa-camera"></i>
-        <span>Upload School Logo</span>
+        <span>Upload Logo</span>
         </a>
         </li>
         <li class="nav-item">
         <a class="nav-link d-flex align-items-center" id="account-pill-general" data-toggle="pill"
         href="#account-vertical-general" aria-expanded="true">
         <i class="bx bx-cog"></i>
-        <span>Administrator Info</span>
+        <span>Administratives</span>
         </a>
         </li>
 
@@ -73,14 +73,14 @@
         <a class="nav-link d-flex align-items-center" id="account-pill-info" data-toggle="pill"
         href="#account-vertical-info" aria-expanded="false">
         <i class="bx bx-info-circle"></i>
-        <span>Set School Profile</span>
+        <span>Set Profile</span>
         </a>
         </li>
         <li class="nav-item">
         <a class="nav-link d-flex align-items-center" id="account-pill-social" data-toggle="pill"
         href="#account-vertical-social" aria-expanded="false">
         <i class="bx bxl-twitch"></i>
-        <span>Set Social links</span>
+        <span>Social links</span>
         </a>
         </li>
         </ul>
@@ -349,6 +349,13 @@
         <div class="form-group">
         <label>OUR PRINCIPLE</label>
         <textarea name="principle_statement" class="form-control" rows="2" placeholder="Enter About Us Message here..."><?php echo $VisaPSchoolDetails->our_principle;?></textarea>
+        </div>
+        </div>
+
+         <div class="col-md-12 col-sm-12">
+        <div class="form-group">
+        <label>PRINCIPAL WELCOME MESSAGE </label>
+        <textarea name="princiapl_text" class="form-control" rows="6" placeholder="Write the Princial welcome message here..."><?php echo $VisaPSchoolDetails->principal_welcome;?></textarea>
         </div>
         </div>
 

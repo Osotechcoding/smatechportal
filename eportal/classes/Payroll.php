@@ -35,7 +35,7 @@ class Payroll
 
 	//show single payroll by id
 	public function showPayrollByStaffId($staffId){
-		$this->stmt =	$this->dbh->prepare("SELECT * FROM `visap_staff_payroll_tbl` WHERE staff_id=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_payroll_tbl` WHERE staff_id=? LIMIT 1");
 	 $this->stmt->execute([$staffId]);
 	 if ( $this->stmt->rowCount()=='1') {
 	 $this->response = $this->stmt->fetch();
@@ -44,9 +44,9 @@ class Payroll
 	 }
 	}
 
-	public function getStaffPaidSalaryById($salaryId){
+	public function getStaffPaidSalaryById($salaId){
 	$this->stmt =$this->dbh->prepare("SELECT * FROM `visap_staff_paid_salary_tbl`WHERE salaryId = ? LIMIT 1");
-	 $this->stmt->execute([$salaryId]);
+	 $this->stmt->execute([$salaId]);
 	 if ( $this->stmt->rowCount() =='1') {
 	 $this->response = $this->stmt->fetch();
 	 return $this->response;
@@ -55,12 +55,12 @@ class Payroll
 	}
 
 	public function showStaffSalaryHistoryById($staffId){
-	$this->stmt =$this->dbh->prepare("SELECT * FROM `visap_staff_paid_salary_tbl`WHERE staff_id = ? ORDER BY DATE(`created_at`) DESC");
+	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_paid_salary_tbl` WHERE staff_id=? ORDER BY DATE(`created_at`) DESC");
 	 $this->stmt->execute([$staffId]);
-	 if ( $this->stmt->rowCount()>0) {
+	 if ( $this->stmt->rowCount() > 0) {
 	 $this->response = $this->stmt->fetchAll();
 	 return $this->response;
-	$this->dbh = null;
+		$this->dbh = null;
 	 }	
 	}
 	//start to create a staff Payroll
@@ -135,27 +135,58 @@ class Payroll
 		 $this->stmt->execute([$pId,$staffId]);
 		 if ($this->stmt->rowCount()==1) {
 		 $this->response = $this->stmt->fetch();
-		 return json_encode($this->response,JSON_PRETTY_PRINT);
+		 return json_encode($this->response);
 		$this->dbh = null;
 		 }
 	}
 
-	//get total sum allowances
-	public function get_sum_of_allowances(){
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_payroll_tbl`");
+	
+	public function getAllRentAlawi(){
+		$this->stmt = $this->dbh->prepare("SELECT sum(`rent_alawi`) as rent FROM `visap_staff_payroll_tbl`");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount()>0) {
-			$result = $this->stmt->fetchAll();
-			foreach ($result as $value) {
-				$rent = $value->rent_alawi;
-				$cloth = $value->cloth_alawi;
-				$transport = $value->transport_alawi;
-				$med = $value->med_alawi;
-				$this->response =(int)($rent+$cloth+$transport+$med);
-				return $this->response;
-				$this->dbh = null;
-			}
+			$result = $this->stmt->fetch();
+		$this->response = $result->rent;
+		return $this->response;
+		$this->dbh = null;
 		}
+		
+	}
+
+	public function getAllTransportAlawi(){
+		$this->stmt = $this->dbh->prepare("SELECT sum(`transport_alawi`) as mobile FROM `visap_staff_payroll_tbl`");
+		$this->stmt->execute();
+		if ($this->stmt->rowCount()>0) {
+			$result = $this->stmt->fetch();
+		$this->response = $result->mobile;
+		return $this->response;
+		$this->dbh = null;
+		}
+		
+	}
+
+	public function getAllClothingAlawi(){
+		$this->stmt = $this->dbh->prepare("SELECT sum(`cloth_alawi`) as cloth FROM `visap_staff_payroll_tbl`");
+		$this->stmt->execute();
+		if ($this->stmt->rowCount()>0) {
+			$result = $this->stmt->fetch();
+		$this->response = $result->cloth;
+		return $this->response;
+		$this->dbh = null;
+		}
+		
+	}
+
+	public function getAllMedicalAlawi(){
+		$this->stmt = $this->dbh->prepare("SELECT sum(`med_alawi`) as med FROM `visap_staff_payroll_tbl`");
+		$this->stmt->execute();
+		if ($this->stmt->rowCount()>0) {
+			$result = $this->stmt->fetch();
+		$this->response = $result->med;
+		return $this->response;
+		$this->dbh = null;
+		}
+		
 	}
 
 	public function get_sum_of_total_tds(){
@@ -167,6 +198,12 @@ class Payroll
 		return $this->response;
 		$this->dbh = null;
 		}
+	}
+
+	//get total sum allowances
+	public function getAllSumOfAlawis(){
+		$this->response = intval(self::getAllMedicalAlawi() + self::getAllClothingAlawi() + self::getAllTransportAlawi() + self::getAllRentAlawi());
+		return $this->response;
 	}
 
 	public function get_sum_of_total_salary_payout_monthly(){

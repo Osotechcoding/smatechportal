@@ -5,9 +5,15 @@ require_once "helpers/helper.php";
 
 if (isset($_GET['action']) && $_GET['action'] === "viewsalary" && isset($_GET['staffId']) && $_GET['staffId'] !== "") {
  $staffId = $Configuration->Clean($_GET['staffId']);
- $staff_data  = $Staff->get_staff_ById($staffId);
  $salary_details = $Payroll->showStaffSalaryHistoryById($staffId);
- $payroll_details = $Payroll->showPayrollByStaffId($staffId);
+ if ($salary_details == false) {
+   header("Location: visap_payroll");
+  exit();
+  
+ }else{
+  $staff_data  = $Staff->get_staff_ById($staffId);
+  $payroll_details = $Payroll->showPayrollByStaffId($staffId);
+ }
 }else{
   header("Location: visap_payroll");
   exit();
