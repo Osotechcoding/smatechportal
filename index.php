@@ -46,7 +46,7 @@
     text-shadow: 5px 8px 4px solid black;
 }
 .swiper h6{
-    color: olivedrab;
+    color: #fff;
     font-weight: bold;
     font-size: 40px;
     text-shadow: 5px 8px 4px solid black;
@@ -246,7 +246,7 @@
 <script>
     const swiper = new Swiper('.swiper', {
 autoplay:{
-delay: 3000,
+delay: 5000,
 disableOnInteraction: false,
 },
   loop: true,

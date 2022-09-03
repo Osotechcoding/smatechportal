@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2022 at 11:38 PM
+-- Generation Time: Sep 03, 2022 at 09:45 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -1137,8 +1137,7 @@ INSERT INTO `tbl_reg_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `pri
 (3, '0732386119452', 'SMA8A37B3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
 (4, '6112932784530', 'SMA034A14', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
 (5, '3908622451137', 'SMA312057', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(7, '3804612193572', 'SMA144370', 'Registration Pins', 5000, 1, '2022-08-05', '2022C263130001');
+(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 0, '2022-08-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -1313,14 +1312,14 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_admin_login_token`
 --
 
 INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
-(53, 'Director', 'user@smatech.com', 'BLCLAbuQmRfLk5X8OIw9JWfkPndo3vtqo4MxsoNE');
+(66, 'Director', 'user@smatech.com', 'tTa0dLGhLjWKFhHCkzNyTDK35WOT29ZfMfwI6TxY');
 
 -- --------------------------------------------------------
 
@@ -1388,7 +1387,16 @@ CREATE TABLE IF NOT EXISTS `visap_bed_payment_history_tbl` (
   `payment_date` date DEFAULT NULL,
   `receiptNo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_bed_payment_history_tbl`
+--
+
+INSERT INTO `visap_bed_payment_history_tbl` (`id`, `student_id`, `bed_id`, `amount`, `amount_paid`, `amount_due`, `status`, `payment_date`, `receiptNo`) VALUES
+(2, 1, 1, 25000, 15000, 10000, 1, '2022-08-30', '7454848'),
+(3, 1, 1, 25000, 5000, 5000, 1, '2022-08-30', '9510733'),
+(4, 1, 1, 25000, 5000, 0, 2, '2022-08-30', '4748757');
 
 -- --------------------------------------------------------
 
@@ -1421,7 +1429,7 @@ CREATE TABLE IF NOT EXISTS `visap_bed_space_tbl` (
 --
 
 INSERT INTO `visap_bed_space_tbl` (`bedId`, `hostel_id`, `room_id`, `room`, `bed_space`, `is_available`, `occupant`, `book_duration`, `booked_today`, `amount`, `amount_paid`, `approve_booked`, `payment_status`, `payment_date`, `school_session`, `payment_expire`) VALUES
-(1, 1, 1, 'Room One', 'Bonk-1', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
+(1, 1, 1, 'Room One', 'Bonk-1', 2, 1, '2022/2023', '2022-08-30', 25000, 25000, 0, 2, NULL, '2022/2023', '2023-10-25'),
 (2, 1, 1, 'Room One', 'Bonk-2', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
 (3, 1, 1, 'Room One', 'Bonk-3', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
 (4, 1, 1, 'Room One', 'Bonk-4', 1, NULL, NULL, NULL, 25000, NULL, 0, 0, NULL, NULL, NULL),
@@ -1886,21 +1894,7 @@ CREATE TABLE IF NOT EXISTS `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_registered_subject_tbl`
---
-
-INSERT INTO `visap_registered_subject_tbl` (`id`, `subject_class`, `subject_name`, `createdBy`, `created_at`) VALUES
-(1, 'Basic 1', 'Basic Science', 'SMATech', '2022-08-27'),
-(2, 'Basic 1', 'CCA', 'SMATech', '2022-08-27'),
-(3, 'Basic 1', 'Civic Education', 'SMATech', '2022-08-27'),
-(4, 'Basic 1', 'Diction', 'SMATech', '2022-08-27'),
-(5, 'Basic 1', 'English Language', 'SMATech', '2022-08-27'),
-(6, 'Basic 1', 'Handwriting', 'SMATech', '2022-08-27'),
-(7, 'Basic 1', 'Home Economics', 'SMATech', '2022-08-27'),
-(8, 'Basic 1', 'Letter Work', 'SMATech', '2022-08-27');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2090,7 +2084,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
 --
 
 INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
-(1, 'School Management Application', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Samson Idowu A', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16616260312284396.jpg', NULL, NULL, NULL, 'English', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education.', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH PORTAL', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', 'Excellence,Moral, High Educative Activities', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\n\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\n\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
+(1, 'School Management Portal', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Agberayi Idowu J', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16621978778659799.png', NULL, NULL, NULL, 'English', 'As the name School Management Portal implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMAPPWebsite. This webpage is designed to provide you with all available information related to SMAPP. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMAPP as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Portal. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH PORTAL', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\n\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\n\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2167,18 +2161,19 @@ CREATE TABLE IF NOT EXISTS `visap_sliders_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_sliders_tbl`
 --
 
 INSERT INTO `visap_sliders_tbl` (`id`, `title`, `slider_desc`, `image`, `status`, `created_at`) VALUES
-(6, 'Educationis Money', 'Some Content go here', 'SMAPP_6301ae4650781_.png', 1, '2022-08-21'),
-(7, 'Just Sample', 'Some Content here', 'SMAPP_63057ae9ea8f2_.jpg', 1, '2022-08-24'),
-(8, 'Just Testing', 'Testing Testing Microphone', 'SMAPP_63057b9d5550c_.jpg', 1, '2022-08-24'),
-(9, 'Testing Testing Microphone', 'Testing Testing Microphone', 'SMAPP_63057bd675bc7_.png', 1, '2022-08-24'),
-(10, 'Main Dashboard', 'Main Dashboard', 'SMAPP_63058cc56fb0f_.png', 1, '2022-08-24');
+(14, 'I am still learning', 'Tell me and I forget. Teach me and I remember. Involve me and I learn', 'SMAPP_63138ef78eca0_.jpg', 1, '2022-09-03'),
+(15, 'All learning has an emotional base', 'Life is an open book test. Learning how to learn is your most valuable skill in the online world', 'SMAPP_63138f5d8d4af_.jpg', 1, '2022-09-03'),
+(16, 'A little learning is a dangerous thing', 'You don’t understand anything until you learn it more than one way.', 'SMAPP_63138f93d1b64_.jpg', 1, '2022-09-03'),
+(17, 'A little learning is a dangerous thing.', 'Take what you learn and make a difference with it.', 'SMAPP_63138feabaadf_.jpg', 1, '2022-09-03'),
+(18, 'Be curious, not judgmental.', 'Being ignorant is not so much a shame, as being unwilling to learn.', 'SMAPP_631390215d3e2_.jpg', 1, '2022-09-03'),
+(19, 'The human mind is our fundamental resource', 'It is in fact a part of the function of education to help us escape, not from our own time – for we are bound by that—but from the intellectual and emotional limitations of our time', 'SMAPP_63139068caf7c_.jpg', 1, '2022-09-03');
 
 -- --------------------------------------------------------
 
@@ -2270,7 +2265,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_paid_salary_tbl` (
   `paymentDate` date DEFAULT NULL,
   `bank` varchar(100) DEFAULT NULL,
   `ref_no` varchar(100) DEFAULT NULL,
-  `bank_status` varchar(20) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
   `csession` varchar(20) DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
@@ -2362,7 +2357,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_tbl` (
 --
 
 INSERT INTO `visap_staff_tbl` (`staffId`, `staffRegNo`, `staffGrade`, `staffRole`, `firstName`, `lastName`, `staffEmail`, `staffPass`, `staffUser`, `staffDob`, `staffEducation`, `staffPhone`, `staffCourse`, `staffAddress`, `confirmation_code`, `staffToken`, `tokenExpire`, `staffPassport`, `staffGender`, `maritalStatus`, `portalEmail`, `jobStatus`, `online`, `staffType`, `appliedDate`, `staffAssignedClass`) VALUES
-(1, 'SMP22001', NULL, 'Class Teacher', 'Ademola Adeola', 'Ade', 'ademola@gmail.com', '$2y$10$skbk3cf44seMPfke6jiZPuDe/6lljb4YRpZ8JE6i3T0dAxDCIi3ke', 'Adeola', NULL, 'BSc', '09098765432', NULL, NULL, '9e29f6bec4c1820', NULL, NULL, 'SMP220017530549.jpg', 'Male', NULL, 'ademola@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
+(1, 'SMP22001', NULL, 'Class Teacher', 'Ademola Adeola', 'Ade', 'ademola@gmail.com', '$2y$10$skbk3cf44seMPfke6jiZPuDe/6lljb4YRpZ8JE6i3T0dAxDCIi3ke', 'Adeola', '1990-09-11', 'BSc', '09098765432', NULL, 'Ijoko road, Sango Ota', '9e29f6bec4c1820', NULL, NULL, 'SMP220017530549.jpg', 'Male', NULL, 'ademola@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
 (2, 'SMP22002', NULL, 'Principal', 'John Doe', 'Smith', 'doe@gmail.com', '$2y$10$T0ypu6cTUOMiG.yq9W6.UO9VWUnUVkEhHVZwHSeROSq2CapZT3MB2', 'Doe', NULL, 'Phd', '09087654323', NULL, NULL, '33ef8cfa5f157df', NULL, NULL, 'SMP220022481084.jpg', 'Male', NULL, 'doe@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
 (3, 'SMP22003', NULL, NULL, 'Gbenga Festus', 'Agberayi', 'festus@gmail.com', '$2y$10$sE4LfzbVe9P8UyDk/VWoA.PUwPxOr7jzshleaLHxINpyJf3MMGm0.', 'Gbenga', NULL, 'HND', '08140122566', NULL, NULL, '9ff06b06a638b0f', NULL, NULL, 'SMP220035091724.jpg', 'Male', NULL, 'festus@SMAPP.portal', 1, 0, 'Teaching', '2022-08-28', NULL);
 

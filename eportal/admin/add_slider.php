@@ -61,7 +61,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-camera fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Recent Upload</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Blog->countGalleryByType('gallery');?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Blog->countRecentUploadedSliderImages();?></h2>
                  
                 </div>
               </div>
@@ -74,7 +74,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-image fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Total Sliders </h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Blog->countGalleryByType('yearbook');?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Blog->countSliderImages();?></h2>
                   
                 </div>
               </div>
@@ -91,7 +91,7 @@ require_once "helpers/helper.php";
         </div>
       <div class="card-body">
         <div class="table-responsive">
-      <table class="table osotechDatatable table-bordered">
+      <table class="table osotechDatatable table-striped table-bordered">
         <thead class="text-center">
           <tr>
           <th>Image</th>

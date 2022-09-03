@@ -503,8 +503,8 @@ public function delete_galleryById($Id){
 	$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!",__OSO_APP_NAME__." Says");
 		}elseif (!in_array($image_ext, $allowed)) {
 		$this->response = $this->alert->alert_toastr("error","Your file format is not supported, Please check and try again!",__OSO_APP_NAME__." Says");
-  }elseif ($SliderFile_size > 600) {
-	$this->response = $this->alert->alert_toastr("error","Slider Image Size should not exceed 600KB, Selected Image Size is :".number_format($SliderFile_size,2)."KB",__OSO_APP_NAME__." Says");
+  }elseif ($SliderFile_size > 900) {
+	$this->response = $this->alert->alert_toastr("error","Slider Image Size should not exceed 900KB, Selected Image Size is :".number_format($SliderFile_size,2)."KB",__OSO_APP_NAME__." Says");
 		}elseif ($SliderFile_error !==0) {
 	 $this->response = $this->alert->alert_toastr("error","There was an error Uploading Slider Image, Try again!",__OSO_APP_NAME__." Says");
 		}else{
@@ -514,7 +514,11 @@ public function delete_galleryById($Id){
 	$this->stmt->execute(array($slider_title));
 	if ($this->stmt->rowCount() ==1) {
 		$this->response = $this->alert->alert_toastr("error","$slider_title is already Created, Please check and try again!",__OSO_APP_NAME__." Says");
-	}else {
+		//limit the amount of slider to 5 for this version of smatech
+	}elseif (self::checkSliderRowNumber() == false) {
+	$this->response = $this->alert->alert_toastr("error","Maximum Limit of Image Slider reached, upgrade to premium Version to Enjoy Unlimited Uploads!",__OSO_APP_NAME__." Says");
+	}
+	else {
 		try {
 	$created_at = date("Y-m-d");
     	$this->dbh->beginTransaction();
@@ -552,6 +556,43 @@ public function delete_galleryById($Id){
 	$this->dbh = null;
 }
 	}
+
+	//check total number of slider available
+	public function checkSliderRowNumber(){
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl`");
+			$this->stmt->execute();
+			$rows = $this->stmt->rowCount();
+			if ($rows >= '6') {
+			//maximum reached
+				//return false;
+				return false;
+			}
+	}
+
+	//count all slider by date
+	public function countRecentUploadedSliderImages(){
+$this->stmt = $this->dbh->prepare("SELECT count(`id`) as cnt FROM `visap_sliders_tbl` WHERE DATE(`created_at`) >= DATE(CURRENT_DATE() - INTERVAL 10 DAY)");
+$this->stmt->execute();
+if ($this->stmt->rowCount() >0) {
+	$cont = $this->stmt->fetch();
+	$this->response = $cont->cnt;
+	return $this->response;
+	$this->dbh = null;
+}
+}
+
+	//count total image sliders
+
+	public function countSliderImages(){
+$this->stmt = $this->dbh->prepare("SELECT count(`id`) as cnt FROM `visap_sliders_tbl`");
+$this->stmt->execute();
+if ($this->stmt->rowCount() >0) {
+	$cont = $this->stmt->fetch();
+	$this->response = $cont->cnt;
+	return $this->response;
+	$this->dbh = null;
+}
+}
 
 	//create what the people says
 
