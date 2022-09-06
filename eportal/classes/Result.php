@@ -19,7 +19,6 @@ class Result {
 	protected $config;//default config
 
 	public function __construct(){
-		$this->dbh = null;
 		$conn = new Database;
 		$this->dbh = $conn->osotech_connect();
 		$this->alert = new Alert;
@@ -646,8 +645,8 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
 
 
 	public function deleteTermlyResult($rId,$term){
-		if (!$this->config->isEmptyStr($rId) && ! $this->isEmptyStr($term)) {
-			switch ($result_term) {
+		if (!$this->config->isEmptyStr($rId) && !$this->config->isEmptyStr($term)) {
+			switch ($term) {
           case '3rd Term':
             $resultTable ='visap_termly_result_tbl';
             break;
@@ -661,6 +660,7 @@ public function get_exam_subjectsByClassName($grade_desc,$subject){
             $resultTable ='visap_1st_term_result_tbl';
             break;
         }
+
 			try {
 		$this->dbh->beginTransaction();
 	//Delete the selected Subject

@@ -179,9 +179,9 @@ tbody >tr:nth-child(odd) {
                   </tr>
                 </thead>
               <?php
-               $resultScore = $dbh->prepare("SELECT * FROM  `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
+               $resultScore = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
 $resultScore->execute(array($student_reg_number,$student_class,$rsession));
-  if ($resultScore->rowCount()>0) {
+  if ($resultScore->rowCount() > 0) {
    while ($showResult = $resultScore->fetch()) {
     $myTotalMark = intval($showResult->overallMark);
     ?>
@@ -231,7 +231,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$rsession));
                 <?php 
                 $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
                 $stmt42->execute(array($student_reg_number,$student_class,$rsession));
-                if ($stmt42->rowCount()>0) {
+                if ($stmt42->rowCount() > 0) {
                   $reSet = $stmt42->fetch();
                   $total = $reSet->totalMark;
                 }else{
@@ -241,7 +241,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$rsession));
                 //id,student_class,subject,aca_session
               $stmt = $dbh->prepare("SELECT count(reportId) as total_sub FROM `visap_1st_term_result_tbl` WHERE studentGrade=? AND stdRegCode=? AND aca_session=?");
                 $stmt->execute(array($student_class,$student_reg_number,$rsession));
-                if ($stmt->rowCount()>0) {
+                if ($stmt->rowCount() > 0) {
                   $reSet = $stmt->fetch();
                   $subjectOffered = $reSet->total_sub;
                 }else{

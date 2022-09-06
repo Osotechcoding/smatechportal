@@ -7,7 +7,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name;?> :: Uploaded Result Classes</title>
+    <title><?php echo $SmappDetails->school_name;?> :: Remove Student Result</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
