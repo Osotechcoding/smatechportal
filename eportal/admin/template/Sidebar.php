@@ -208,6 +208,8 @@
 
                <li><a class="d-flex align-items-center" href="uploadblog"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Newsletter"> Manage Newsletter</span></a>
               </li>
+              <li><a class="d-flex align-items-center" href="feedback"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage FeedBack"> FeedBack</span></a>
+              </li>
                <li><a class="d-flex align-items-center" href="add_gallery"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Upload Gallery">Upload Gallery </span></a>
                 <li><a class="d-flex align-items-center" href="add_slider"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Upload Home Slider">Upload Home Slider</span></a>
               </li>

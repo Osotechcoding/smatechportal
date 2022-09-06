@@ -124,6 +124,15 @@ if (isset($_POST['action']) && $_POST['action']!="") {
     }
   }
 
+  //delete_feedback
+   if ($_POST['action'] ==="delete_feedback") {
+    $fbId = $Configuration->Clean($_POST['fbId']);
+    $result = $Blog->delete_feedBackById($fbId);
+    if ($result) {
+     echo $result;
+    }
+  }
+
   //delete_holiday
    if ($_POST['action'] ==="delete_holiday") {
     $holidayId = $Configuration->Clean($_POST['holidayId']);

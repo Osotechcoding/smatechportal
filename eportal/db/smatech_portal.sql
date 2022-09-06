@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2022 at 09:45 PM
+-- Generation Time: Sep 06, 2022 at 03:38 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -902,14 +902,15 @@ CREATE TABLE IF NOT EXISTS `reg_pin_history_tbl` (
   `dated` date DEFAULT NULL,
   `timed` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reg_pin_history_tbl`
 --
 
 INSERT INTO `reg_pin_history_tbl` (`id`, `used_by`, `pin_code`, `pin_serial`, `dated`, `timed`) VALUES
-(1, '2022C263130001', '3804612193572', 'SMA144370', '2022-08-28', '04:00:01');
+(1, '2022C263130001', '3804612193572', 'SMA144370', '2022-08-28', '04:00:01'),
+(2, '2022C263130002', '6214620135573', 'SMA378AB3', '2022-09-05', '04:38:39');
 
 -- --------------------------------------------------------
 
@@ -1137,7 +1138,7 @@ INSERT INTO `tbl_reg_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `pri
 (3, '0732386119452', 'SMA8A37B3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
 (4, '6112932784530', 'SMA034A14', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
 (5, '3908622451137', 'SMA312057', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 0, '2022-08-05', NULL);
+(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 1, '2022-08-05', '2022C263130002');
 
 -- --------------------------------------------------------
 
@@ -1312,14 +1313,14 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_admin_login_token`
 --
 
 INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
-(66, 'Director', 'user@smatech.com', 'tTa0dLGhLjWKFhHCkzNyTDK35WOT29ZfMfwI6TxY');
+(68, 'Director', 'user@smatech.com', 'SK8RVNUPPotW1Ju81KItWmwXgfdfnVBsuw2fz98K');
 
 -- --------------------------------------------------------
 
@@ -1653,6 +1654,30 @@ CREATE TABLE IF NOT EXISTS `visap_exam_subject_tbl` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `visap_feedback_tbl`
+--
+
+CREATE TABLE IF NOT EXISTS `visap_feedback_tbl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client_name` varchar(255) DEFAULT NULL,
+  `client_email` varchar(255) DEFAULT NULL,
+  `client_phone` varchar(50) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `client_ip_address` varchar(100) DEFAULT NULL,
+  `created_at` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_feedback_tbl`
+--
+
+INSERT INTO `visap_feedback_tbl` (`id`, `client_name`, `client_email`, `client_phone`, `message`, `client_ip_address`, `created_at`) VALUES
+(2, 'samson Jerry', 'samson@gmail.com', NULL, 'This is  another Testing Feedback Message from Osotech Computer', '::1', '1970-01-01');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `visap_fee_component_tbl`
 --
 
@@ -1662,7 +1687,14 @@ CREATE TABLE IF NOT EXISTS `visap_fee_component_tbl` (
   `fee_status` enum('Pending','Active') DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`compId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_fee_component_tbl`
+--
+
+INSERT INTO `visap_fee_component_tbl` (`compId`, `feeType`, `fee_status`, `date`) VALUES
+(1, 'Tuition', 'Active', '2022-09-05');
 
 -- --------------------------------------------------------
 
@@ -2013,7 +2045,15 @@ CREATE TABLE IF NOT EXISTS `visap_school_fee_allocation_tbl` (
   `created_on` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`faId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_school_fee_allocation_tbl`
+--
+
+INSERT INTO `visap_school_fee_allocation_tbl` (`faId`, `component_id`, `gradeDesc`, `amount`, `created_on`, `updated_at`) VALUES
+(1, 'Tuition', 'Creche', 30000, '2022-09-05', NULL),
+(2, 'Tuition', 'Basic 4', 40000, '2022-09-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -2084,7 +2124,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
 --
 
 INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
-(1, 'School Management Portal', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Agberayi Idowu J', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16621978778659799.png', NULL, NULL, NULL, 'English', 'As the name School Management Portal implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMAPPWebsite. This webpage is designed to provide you with all available information related to SMAPP. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMAPP as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Portal. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH PORTAL', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\n\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\n\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
+(1, 'Smatech College of Education', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Agberayi Idowu J', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@scoe.edu.ng', '08131374443', '09036583063', 'www.scoe.edu.ng', 'www.smatechportal.com', 'logo_16624688677807934.png', NULL, NULL, NULL, 'English', 'As the name Smatech College of Education implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SCOE Website. This webpage is designed to provide you with all available information related to SMAPP. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SCOE as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Portal. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'scoe@gmail.com', 'SCOE', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2198,7 +2238,7 @@ CREATE TABLE IF NOT EXISTS `visap_social_link_tbl` (
 --
 
 INSERT INTO `visap_social_link_tbl` (`id`, `twitter`, `youtube`, `facebook`, `goggle`, `instagram`, `linkedin`, `WhatsApp`) VALUES
-(1, 'https://www.twitter.com/smatechportal', 'https://youtube.com/smatechportal', 'https://facebook.com/smatechportal', 'https://googleplus.com/smatechportal', 'https://instagram.com/smatechportal', 'https://www.linkedin.com/smatechportal', 'https://wa.me/2348131374443');
+(1, 'https://www.twitter.com/scoe', 'https://youtube.com/scoe', 'https://facebook.com/scoe', 'https://googleplus.com/scoe', 'https://instagram.com/scoe', 'https://www.linkedin.com/scoe', 'https://wa.me/2348131374443');
 
 -- --------------------------------------------------------
 
@@ -2270,7 +2310,14 @@ CREATE TABLE IF NOT EXISTS `visap_staff_paid_salary_tbl` (
   `term` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`salaryId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_staff_paid_salary_tbl`
+--
+
+INSERT INTO `visap_staff_paid_salary_tbl` (`salaryId`, `staff_id`, `amount`, `forMonth`, `paymentMethod`, `paymentDate`, `bank`, `ref_no`, `status`, `csession`, `term`, `created_at`) VALUES
+(1, 1, 69500, 'January', 'Cash', '2022-09-05', NULL, NULL, 'Paid', '2022/2023', '1st Term', '2022-09-05');
 
 -- --------------------------------------------------------
 
@@ -2290,7 +2337,14 @@ CREATE TABLE IF NOT EXISTS `visap_staff_payroll_tbl` (
   `net_salary` float DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`payrollId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_staff_payroll_tbl`
+--
+
+INSERT INTO `visap_staff_payroll_tbl` (`payrollId`, `staff_id`, `salary`, `rent_alawi`, `transport_alawi`, `cloth_alawi`, `med_alawi`, `tds`, `net_salary`, `created_at`) VALUES
+(1, 1, 60000, 2000, 1000, 5000, 2000, 500, 69500, '2022-09-05');
 
 -- --------------------------------------------------------
 
@@ -2537,7 +2591,14 @@ CREATE TABLE IF NOT EXISTS `visap_student_payment_history_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`phId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_student_payment_history_tbl`
+--
+
+INSERT INTO `visap_student_payment_history_tbl` (`phId`, `std_id`, `stdAdmNo`, `stdGrade`, `component_fee`, `total_fee`, `fee_paid`, `fee_due`, `payment_status`, `payment_date`, `term`, `sch_session`, `payment_method`, `teller`, `bank_name`, `collectedBy`, `today_date`) VALUES
+(1, 2, '2022C263130002', 'Basic 4', 'Tuition', 40000, 20000, 20000, 1, '2022-09-05', '1st Term', '2022/2023', 'Bank', '353637383903836', 'First Bank Plc', '\r\nNotice:  Undefined index: ADMIN_ID in C:\nmpphtdocssmatechportaleportaldmin	emplateStuPaymentFeeMo', '2022-09-05');
 
 -- --------------------------------------------------------
 
@@ -2564,7 +2625,14 @@ CREATE TABLE IF NOT EXISTS `visap_student_payment_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`paymentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_student_payment_tbl`
+--
+
+INSERT INTO `visap_student_payment_tbl` (`paymentId`, `std_id`, `stdAdmNo`, `stdGrade`, `component_fee`, `total_fee`, `fee_paid`, `fee_due`, `payment_status`, `payment_date`, `term`, `sch_session`, `payment_method`, `teller`, `bank_name`, `collectedBy`, `today_date`) VALUES
+(1, 2, '2022C263130002', 'Basic 4', 'Tuition', 40000, 20000, 20000, 1, '2022-09-05', '1st Term', '2022/2023', 'Bank', NULL, NULL, '\r\nNotice:  Undefined index: ADMIN_ID in C:\nmpphtdocssmatechportaleportaldmin	emplateStuPaymentFeeMo', '2022-09-05');
 
 -- --------------------------------------------------------
 
@@ -2594,14 +2662,15 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
   `stdTokenExp` datetime DEFAULT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `visap_student_tbl`
 --
 
 INSERT INTO `visap_student_tbl` (`stdId`, `stdRegNo`, `stdEmail`, `stdUserName`, `stdPassword`, `studentClass`, `stdSurName`, `stdFirstName`, `stdMiddleName`, `stdDob`, `stdGender`, `stdAddress`, `stdPhone`, `stdAdmStatus`, `stdApplyDate`, `stdApplyType`, `stdPassport`, `stdConfToken`, `stdTokenExp`, `is_online`) VALUES
-(1, '2022C263130001', 'samson@gmail.com', 'Agberayi', '$2y$10$uVCzx5fihp93lIXlGvlPc.EH.5JwI8aDCcKKq9ZEUrzysJY5zq1z6', 'JSS 1', 'Agberayi', 'Samson', 'Idowu', '2010-05-28', 'Male', 'sample home address', '08131374443', 'Active', '2022-08-28', 'Boarding', NULL, '50358e85d5943f', NULL, 0);
+(1, '2022C263130001', 'samson@gmail.com', 'Agberayi', '$2y$10$uVCzx5fihp93lIXlGvlPc.EH.5JwI8aDCcKKq9ZEUrzysJY5zq1z6', 'JSS 1', 'Agberayi', 'Samson', 'Idowu', '2010-05-28', 'Male', 'sample home address', '08131374443', 'Active', '2022-08-28', 'Boarding', NULL, '50358e85d5943f', NULL, 0),
+(2, '2022C263130002', 'alamin2012@smatech.com', 'Hammed', '$2y$10$rU6jKTcSPVPeaIMI8mqTyeMxkiWFFUFshoRCq9A15.Zhh4P3scWM.', 'Basic 4', 'Hammed', 'Alamin', 'Sodiq', '2009-05-14', 'Male', 'Somewhere in Sango Ota, Ogun State', '08131375554', 'Active', '2022-09-05', 'Day', NULL, 'dd012a132270bb', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -2701,7 +2770,14 @@ CREATE TABLE IF NOT EXISTS `visap_virtual_lesson_tbl` (
   `uploaded_date` date DEFAULT NULL,
   `counter` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`lectureId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `visap_virtual_lesson_tbl`
+--
+
+INSERT INTO `visap_virtual_lesson_tbl` (`lectureId`, `lesson_file`, `lesson_topic`, `lesson_grade`, `subject`, `teacher`, `file_type`, `message`, `date_to`, `uploaded_date`, `counter`) VALUES
+(6, '2022090663173f6ab35f17715166246.mp3', 'sample', 'Basic 4', 'Basic Science', 1, 'audio/mp3', 'Testing this mp3 file', '2022-09-08', '2022-09-06', 0);
 
 -- --------------------------------------------------------
 

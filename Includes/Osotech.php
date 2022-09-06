@@ -364,5 +364,39 @@
         }
     }
 
+    //send feedback message on contact Us Page
+    public function sendFeedBackMessage($data){
+        $name = self::Clean($data['feedback_name']);
+        $email = self::Clean($data['feedback_email']);
+        $phone = self::Clean($data['feedback_phone']);
+        $message = self::Clean($data['feedback_message']);
+        $ip = $_SERVER['REMOTE_ADDR'];
+        //check for empty fields
+        if (self::isEmptyStr($name) || self::isEmptyStr($email)|| self::isEmptyStr($message)) {
+           $this->response = self::alert_msg("danger","WARNING","Please fill in all the required fileds!");
+        }elseif (!self::is_Valid_Email($email)) {
+            $this->response = self::alert_msg("danger","WARNING","Please enter a valid email address!");
+        }elseif (self::check_single_data('visap_feedback_tbl',"client_email",$email)) {
+           $this->response = self::alert_msg("danger","WARNING","$email is already taken!");
+        }else{
+            //insert into db
+            try {
+                $this->dbh->beginTransaction();
+                $date = date("Y-m-d",strtotime($_SERVER['REQUEST_TIME']));
+                $this->stmt = $this->dbh->prepare("INSERT INTO `visap_feedback_tbl` (client_name,client_email,client_phone,message,client_ip_address,created_at) VALUES (?,?,?,?,?,?);");
+                if ($this->stmt->execute(array($name,$email,$phone,$message,$ip, $date))) {
+                   $this->dbh->commit();
+                  
+                   $this->response = self::alert_msg("success","SUCCESS","Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>".self::getConfigData()->school_name."!</strong>").'<script>setTimeout(()=>{location.reload();},4000); </script>';
+                }
+            } catch (PDOException $e) {
+                $this->dbh->rollback();
+               $this->response = self::alert_msg("danger","ERROR","Internal Error Occured:".$e->getMessage());
+            }
+             
+        }
+        return $this->response;
+        $this->dbh = NULL;
+    }
         }
         $Osotech = new Osotech();

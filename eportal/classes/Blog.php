@@ -706,6 +706,36 @@ public function getTestimonialById($Id){
 		$this->dbh = null;
 		}
 	}
-
+	public function getAllFeedBack(){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_feedback_tbl` ORDER BY id DESC");
+	$this->stmt->execute();
+	if ($this->stmt->rowCount() >0) {
+	$this->response = $this->stmt->fetchAll();
+	return $this->response;
+	$this->dbh = null;
+}
+	}
+//delete feed back 
+	public function delete_feedBackById($id){
+	if (!$this->config->isEmptyStr($id)) {
+			try {
+		$this->dbh->beginTransaction();
+	//Delete the selected Subject
+		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_feedback_tbl` WHERE id=? LIMIT 1");
+		if ($this->stmt->execute([$id])) {
+			$this->dbh->commit();
+			$this->dbh = null;
+			$this->response = $this->alert->alert_toastr("success","Deleted Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+			window.location.reload();
+			},500);</script>";
+		}
+			} catch (PDOException $e) {
+		$this->dbh->rollback();
+    $this->response  = $this->alert->alert_toastr("error","Failed to Delete: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
+			}
+		return $this->response;
+		
+		}
+	}
 
 }

@@ -65,34 +65,33 @@
                     <div class="contact-form p-5" data-aos="zoom-in" data-aos-duration="1000">
                         <div class="border-line"></div>
                         <h3 class="font-weight-bold color-orange">Drop Message</h3>
-                        <form>
+                        <form id="feedBAckMesageForm">
+                             <h5 id="server-response" class="text-center"></h5>
                             <div class="form-group">
                                 <label for="exampleInputName">Name</label>
-                                <input class="form-control" id="exampleInputName" placeholder="Enter Name" type="text">
+                                <input autocomplete="off" class="form-control form-control-lg" name="feedback_name" placeholder="Enter Name" type="text">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email Address</label>
-                                <input class="form-control" id="exampleInputEmail1"
-                                       placeholder="Enter Email" type="email">
+                                <input autocomplete="off" class="form-control form-control-lg"
+                                       placeholder="Enter Email" type="text" name="feedback_email">
                                 <small class="form-text text-muted" id="emailHelp">We'll never share your email with anyone
                                     else.
                                 </small>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputNumber">Phone Number</label>
-                                <input  class="form-control" id="exampleInputNumber"
-                                        placeholder="Enter Number" type="email">
+                                <input autocomplete="off"  class="form-control form-control-lg" id="exampleInputNumber"
+                                        placeholder="Optional" type="number" name="feedback_phone">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputMessage">Message</label>
-                                <input class="form-control" id="exampleInputMessage"
-                                       placeholder="Message" type="email">
+                                <textarea  class="form-control" name="feedback_message" 
+                                       placeholder="Write your Message here..." rows="5"></textarea>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" id="exampleCheck1" type="checkbox">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <button class="btn theme-orange border-0 mt-4" type="submit">Send Message</button>
+
+                           <input type="hidden" name="action" value="send_feed_back_msg">
+                            <button class="btn btn-dark btn-lg border-0 mt-2 __loadingBtn__" type="submit" style="border-radius: 10px;"> Send Message</button>
                         </form>
                     </div>
                 </div>
@@ -145,6 +144,8 @@
   <?php else: ?>
     <?php include_once 'Templates/FooterScript.php'; ?>
 <?php endif; ?>
+<script src="osotech_script/feedback.js"></script>
+
 </body>
 
 </html>
