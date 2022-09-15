@@ -164,7 +164,7 @@
               </li>
             </ul>
           </li>
-           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-book fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="LIBRARY">LIBRARY</span></a>
+          <!--  <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-book fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="LIBRARY">LIBRARY</span></a>
             <ul class="menu-content">
                <li><a class="d-flex align-items-center" href="add_book"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Add Book">Add Book</span></a>
              </li>
@@ -173,7 +173,7 @@
              <li><a class="d-flex align-items-center" href="return_books"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Return Book">Return Book</span></a>
             </li>
            </ul>
-         </li>
+         </li> -->
 
           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-bus fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="SCHOOL BUS"> SCHOOL BUS </span></a>
             <ul class="menu-content">

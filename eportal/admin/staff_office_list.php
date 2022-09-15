@@ -145,7 +145,7 @@ require_once "helpers/helper.php";
                    <div class="col-md-12">
                      <div class="form-group">
                   <label for="office_status">Status</label>
-                    <select name="office_status" id="office_status" class=" form-control form-control-lg">
+                    <select name="office_status" id="office_status" class="custom-select form-control form-control-lg">
                       <option value="">Choose...</option>
                       <option value="Active">Active</option>
                       <option value="Inactive">Inactive</option>

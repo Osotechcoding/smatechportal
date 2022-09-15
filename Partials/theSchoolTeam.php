@@ -18,7 +18,7 @@
                             <li><i class="fa fa-youtube"></i></li>
                             <li><i class="fa fa-instagram"></i></li>
                         </ul>
-                        <h4 class="pt-4 font-weight-bold">Prof. Wole Soyinka A</h4>
+                        <h4 class="pt-4 font-weight-bold">Prof. Wole Soyinka</h4>
                         
                     </div>
                 </div>

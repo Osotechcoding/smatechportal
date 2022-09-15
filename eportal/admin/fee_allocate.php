@@ -121,7 +121,7 @@ require_once "helpers/helper.php";
                <div class="col-md-6">
                   <div class="form-group">
                   <label for="fee_type_id">Component Type</label>
-             <select name="fee_type_id" id="fee_type_id" class="select2 w-100 form-control">
+             <select name="fee_type_id" id="fee_type_id" class="custom-select w-100 form-control">
                    <option value="">Choose...</option>
                 <?php echo $Administration->fee_component_inDropDown();?>
                   </select>
@@ -130,7 +130,7 @@ require_once "helpers/helper.php";
                <div class="col-md-6">
                      <div class="form-group">
                   <label for="grade_desc"> CLASS </label>
-               <select name="grade_desc" id="grade_desc" class="select2 w-100 form-control">
+               <select name="grade_desc" id="grade_desc" class="custom-select w-100 form-control">
                      <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list();?>
                   </select>

@@ -55,7 +55,6 @@
     <section class="contact-section">
         <div class="container">
             <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
-                <span class="title">View our job listing around the world</span>
                 <h2>Find a Career Opportunity</h2>
                 <div class="divider">
                     <span class="fa fa-mortar-board"></span>
@@ -65,29 +64,29 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="career-form p-5" data-aos="fade-up" data-aos-duration="1000">
                         <div class="border-line"></div>
-                        <h3 class="font-weight-bold color-orange">Drop Message</h3>
-                        <form>
+                        <h3 class="font-weight-bold color-orange">Start Your Career with Us!</h3>
+                        <form id="startCareerForm">
+                             <h5 id="server-response" class="text-center"></h5>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputName">Name</label>
-                                    <input class="form-control" id="exampleInputName" placeholder="Enter Name" type="text">
+                                <div class="form-group col-md-12">
+                                    <label for="applicant_name">FullName</label>
+                                    <input class="form-control" name="applicant_name" id="applicant_name" autocomplete="off" placeholder="Enter Name" type="text">
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail1">Email Address</label>
-                                    <input class="form-control" id="exampleInputEmail1" placeholder="Enter Email"
-                                           type="email">
+                                <div class="form-group col-md-12">
+                                    <label for="email">Email Address</label>
+                                    <input autocomplete="off" class="form-control" id="email" placeholder="Enter Email" type="text" name="email">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="exampleInputNumber">Phone Number</label>
-                                    <input class="form-control" id="exampleInputNumber"
-                                           placeholder="Enter Number" type="email">
+                                    <label for="phone">Phone Number</label>
+                                    <input class="form-control" id="phone"
+                                          autocomplete="off" placeholder="Enter Number" type="number" name="phone">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="inputState">Job Type</label>
-                                    <select class="form-control" id="inputState">
+                                    <label for="job_type">Job Type</label>
+                                    <select name="job_type" class="form-control" id="job_type">
                                         <option value="" selected>Choose...</option>
                                         <option value="Teaching">Teaching</option>
                                         <option value="Non Teaching">Non Teaching</option>
@@ -96,17 +95,18 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputMessage">Message</label>
-                                <textarea class="form-control" rows="4" id="exampleInputMessage" placeholder="Message"></textarea>
+                                <label for="coverLetter">Cover Letter</label>
+                                <textarea class="form-control" rows="4" id="coverLetter" placeholder="Write your cover letter here..." name="coverLetter" ></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label>
-                                    <span class="mb-0 resume">Drop Your Resume</span>
-                                    <input class="form-control-file pl-0 d-none border-0" id="resume" name="resume" type="file">
+                                    <span class="mb-0 resume">Drop Your Resume (<small class="text-danger">PDF max 1MB</small>)</span>
+                                    <input class="form-control-file pl-0 d-none border-0" id="resume" name="resume" type="file" accept=".pdf">
                                 </label>
                             </div>
-                            <button class="btn theme-orange border-0" type="submit">Send Message</button>
+                           <input type="hidden" name="action" value="submit_start_career_form">
+                            <button class="btn btn-dark btn-lg border-0 mt-2 mb-1 __loadingBtn__" type="submit" style="border-radius: 10px;"> Submit Application</button>
                         </form>
                     </div>
                 </div>
@@ -127,6 +127,7 @@
   <?php else: ?>
     <?php include_once 'Templates/FooterScript.php'; ?>
 <?php endif; ?>
+<script src="osotech_script/career.js"></script>
 </body>
 
 </html>

@@ -211,7 +211,7 @@ public function check_student_session_data(){
 
 //get all configuration modules
   public function get_configuration_modules_by_type($type){
-    $this->stmt = $this->dbh->prepare("SELECT * FROM `api_module_config` WHERE type=? ORDER BY id ASC ");
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `api_module_config` WHERE type=? AND module<>'card_generator' ORDER BY id ASC ");
     $this->stmt->execute(array($type));
     if ($this->stmt->rowCount()>0) {
       $this->response = $this->stmt->fetchAll();

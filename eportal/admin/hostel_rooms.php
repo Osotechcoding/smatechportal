@@ -34,12 +34,8 @@ if (isset($_GET['hostel']) && $_GET['hostel'] !=="" && isset($_GET['action']) &&
 
     <!-- BEGIN: Header-->
     <?php include ("template/HeaderNav.php"); ?>
-    <!-- headerNav.php -->
     <!-- END: Header-->
-
-
     <!-- BEGIN: Main Menu-->
-  <!--  -->
   <?php include ("template/Sidebar.php"); ?>
     <!-- END: Main Menu-->
 

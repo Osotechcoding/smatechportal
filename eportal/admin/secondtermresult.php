@@ -99,7 +99,11 @@ tbody >tr:nth-child(odd) {
     display: block;
      /*margin-left: auto;*/
     margin-right: auto;
-    width: 80%;
+  width: 79%;
+   border-left: 4px solid #625D5D;
+   border-right: 4px solid #625D5D;
+   border-bottom: 4px solid #625D5D;
+   border-top: 4px solid #625D5D;
 }
 .container-ca{
     display: flex;
@@ -149,7 +153,7 @@ tbody >tr:nth-child(odd) {
      <img src="../schoolbanner.jpg" alt="" class="schname">
   <!--   -->
     <!-- <hr> -->
-    <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_data->studentClass);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
+    <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_class);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp; <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp; <b><?php echo date("F jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $Administration->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
     <?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
@@ -201,12 +205,20 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
     ?>
 
     <?php
-if ($showResult->studentGrade == 'JSS 1' || $showResult->studentGrade == 'JSS 2' || $showResult->studentGrade == 'JSS 3') {
-      $amInClass ='Junior';
-    }elseif ($showResult->studentGrade == 'SSS 1' || $showResult->studentGrade == 'SSS 2' || $showResult->studentGrade =='SSS 3') {
-     $amInClass ='Senior';
-    }else{
-    $amInClass ='Pry';
+//grab the first three letters of the student class
+    $nthclass = substr($showResult->studentGrade, 0,3);
+    switch ($nthclass) {
+        case 'SSS':
+           $amInClass = "Senior";
+            break;
+
+             case 'JSS':
+           $amInClass = "Junior";
+            break;
+        
+        default:
+             $amInClass = "Pry";
+            break;
     }
 
     if ($_firstTermTotal == 0 && $myTotalMark > 0) {
@@ -647,10 +659,10 @@ if ($showResult->studentGrade == 'JSS 1' || $showResult->studentGrade == 'JSS 2'
           </tr>
           <tr style="text-align:center;">
             <td style="font-size: 8px;">NO</td>
-            <td>11</td>
-            <td>2</td>
             <td>-</td>
-            <td>1</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
             <td>-</td>
             <td>-</td>
         </tr>

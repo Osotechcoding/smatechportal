@@ -49,7 +49,7 @@
     <!-- end side menu -->
     <!-- start inner banner -->
     <section class="inner-banner">
-        <h1 class="font-weight-bold text-center">About Us</h1>
+        <h1 class="font-weight-bold text-center">About  <?php echo ($Osotech->getConfigData()->school_name);?></h1>
     </section>
     <!-- end inner banner -->
     <!-- start about us -->
@@ -58,8 +58,9 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <h1 class="color-orange font-weight-bold about-title" data-aos="fade-up" data-aos-duration="1000">11+</h1>
+                
                     <h5 class="font-weight-bold text-uppercase mb-3" data-aos="fade-up" data-aos-duration="1000">YEARS OF OUR EXISTENCE</h5>
-                    <?php echo ($Osotech->getConfigData()->about_us);?> 
+                    <?php echo nl2br($Osotech->getConfigData()->about_us);?> 
                     
                 </div>
                 <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0">
@@ -85,7 +86,7 @@
         <div class="container">
             <div class="sec-title text-center bg-fill" data-aos="fade-up" data-aos-duration="1000">
                 <span class="title">Why Choose Us</span>
-                <h2 class="text-white">Ethics Behind Success</h2>
+                <h2 class="text-white">Ethics Behind Our Success</h2>
                 <div class="divider">
                     <span class="fa fa-mortar-board"></span>
                 </div>
@@ -96,7 +97,7 @@
                         <div class="border-line"></div>
                         <i class="fa fa-bus fa-3x color-orange mb-3"></i>
                         <h4 class="font-weight-bold">Mission</h4>
-                        <p><?php echo ($Osotech->getConfigData()->our_mission);?></p>
+                        <p><?php echo nl2br($Osotech->getConfigData()->our_mission);?></p>
                        
                     </div>
                 </div>
@@ -106,7 +107,7 @@
                         <div class="border-line"></div>
                         <i class="fa fa-eye fa-3x color-orange mb-3"></i>
                         <h4 class="font-weight-bold">Vision</h4>
-                        <p><?php echo ($Osotech->getConfigData()->our_vision);?></p>
+                        <p><?php echo nl2br($Osotech->getConfigData()->our_vision);?></p>
                        
                     </div>
                 </div>
@@ -116,7 +117,7 @@
                         <div class="border-line"></div>
                         <i class="fa fa-check-circle fa-3x color-orange mb-3"></i>
                         <h4 class="font-weight-bold">Core Value</h4>
-                        <p><?php echo ($Osotech->getConfigData()->our_core_value);?></p>
+                        <p><?php echo nl2br($Osotech->getConfigData()->our_core_value);?></p>
                         
                     </div>
                 </div>
@@ -131,13 +132,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="sec-title" data-aos="fade-up" data-aos-duration="1000">
-                        <span class="title">Online Courses</span>
-                        <h2>Learn a new skills online on your time</h2>
+                        <span class="title">PRINCIPAL DESK</span>
+                        <h2>You are Welcome to   <?php echo ($Osotech->getConfigData()->school_name);?></h2>
                         <div class="divider">
                             <span class="fa fa-mortar-board"></span>
                         </div>
                     </div>
-                    <p class="p-17"><?php echo ($Osotech->getConfigData()->principal_welcome);?></p>
+                    <p class="p-17"><?php echo nl2br($Osotech->getConfigData()->principal_welcome);?></p>
                     <button type="button" class="btn theme-orange theme-btn mt-3 join-us">Join Us</button>
                 </div>
                 <div class="col-lg-6">
@@ -149,8 +150,8 @@
                                     <div class="counter-img">
                                         <img src="assets/images/icons/teacher.png" class="img-fluid" alt="Teacher">
                                     </div>
-                                    <h2 class="timer count-title count-number" data-to="30" data-speed="2500">30</h2>
-                                    <h5 class="count-text mt-2">Teachers</h5>
+                                    <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalStaff();?>" data-speed="2500"><?php echo $Osotech->getTotalStaff();?></h2>
+                                    <h5 class="count-text mt-2">Seasoned Teachers</h5>
                                 </div>
 
                                 <div class="counter aos-init aos-animate" data-aos="fade-up" data-aos-duration="550">
@@ -158,7 +159,7 @@
                                     <div class="counter-img">
                                         <img src="assets/images/icons/classroom.png" class="img-fluid" alt="Classroom">
                                     </div>
-                                    <h2 class="timer count-title count-number" data-to="48" data-speed="2500">48</h2>
+                                    <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalClassroom();?>" data-speed="2500"><?php echo $Osotech->getTotalClassroom();?></h2>
                                     <h5 class="count-text mt-2">Classroom</h5>
                                 </div>
                             </div>
@@ -169,16 +170,16 @@
                                     <div class="counter-img">
                                         <img src="assets/images/icons/career.png" class="img-fluid" alt="Career">
                                     </div>
-                                    <h2 class="timer count-title count-number" data-to="900" data-speed="2500">900</h2>
-                                    <h5 class="count-text mt-2">Career</h5>
+                                    <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalStudent();?>" data-speed="2500"><?php echo $Osotech->getTotalStudent();?></h2>
+                                    <h5 class="count-text mt-2">Students</h5>
                                 </div>
                                 <div class="counter margin-bottom aos-init aos-animate margin-bottom" data-aos="fade-up" data-aos-duration="550">
                                     <div class="border-line"></div>
                                     <div class="counter-img">
                                         <img src="assets/images/icons/activity.png" class="img-fluid" alt="Activities">
                                     </div>
-                                    <h2 class="timer count-title count-number" data-to="39" data-speed="2500">39</h2>
-                                    <h5 class="count-text mt-2">Activities</h5>
+                                    <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalSubjects();?>" data-speed="2500"><?php echo $Osotech->getTotalSubjects();?></h2>
+                                    <h5 class="count-text mt-2">Subjects</h5>
                                 </div>
                             </div>
                         </div>

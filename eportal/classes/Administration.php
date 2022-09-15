@@ -3069,4 +3069,53 @@ $this->dbh = null;
         $this->dbh = null;
         }
 
+        //`visap_career_portal_tbl`
+      public function getAllStaffResumeApplicationForm(){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_career_portal_tbl` ORDER BY application_date DESC");
+	$this->stmt->execute();
+	if ($this->stmt->rowCount() > 0) {
+	$this->response = $this->stmt->fetchAll();
+	return $this->response;
+	$this->dbh = null;
+}
+	}
+
+	public function getResumeApplicationById($id){
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_career_portal_tbl` WHERE job_portal_id=? LIMIT 1");
+	$this->stmt->execute([$id]);
+	if ($this->stmt->rowCount() > 0) {
+	$this->response = $this->stmt->fetch();
+	return $this->response;
+	$this->dbh = null;
+}
+	}
+
+	public function delete_ResumeApplicationById($job_portal_id){
+		if (!$this->config->isEmptyStr($job_portal_id)) {
+			$details = self::getResumeApplicationById($job_portal_id);
+			$filePath = "../resume/".$details->uploaded_cv;
+			try {
+		$this->dbh->beginTransaction();
+	//Delete the selected Subject
+		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_career_portal_tbl` WHERE job_portal_id=? LIMIT 1");
+		if ($this->stmt->execute([$job_portal_id])) {
+			if (file_exists($filePath)) {
+				if (unlink($filePath)) {
+				 $this->dbh->commit();
+			$this->response = $this->alert->alert_toastr("success","Deleted Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+			window.location.reload();
+			},1000);</script>";
+				}
+			}
+		}
+			} catch (PDOException $e) {
+		$this->dbh->rollback();
+    $this->response  = $this->alert->alert_toastr("error","Failed to Delete: Error: ".$e->getMessage(),__OSO_APP_NAME__." Says");
+			}
+		return $this->response;
+		$this->dbh = null;
+		}
+
+	}
+
 }

@@ -88,8 +88,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Our School at Night</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -98,8 +98,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Prayer Session</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -108,8 +108,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Assembly Ground</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -119,8 +119,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">School Hall</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -129,8 +129,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Swiming Pool</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue" href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                               <!--  <a class="btn theme-blue" href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -139,8 +139,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Footbal Pitch</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -151,8 +151,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Physics Laboratory</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -161,8 +161,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Chemistry Laboratory</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -171,8 +171,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Biology Laboratory</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -181,8 +181,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Computer Laboratory (ICT)</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
                         <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
@@ -190,8 +190,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Modern Library</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
                     </div>
@@ -202,8 +202,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Toyota 2019 Model</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">View Driver's Details<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                               <!--  <a class="btn theme-blue " href="#">View Driver's Details<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -212,8 +212,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Hummer Bumber 2013 Model</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">View Driver's Details<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                               <!--  <a class="btn theme-blue " href="#">View Driver's Details<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -223,8 +223,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Isuzu Long Bus 2013 Model</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">View Driver's Details<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                              <!--   <a class="btn theme-blue " href="#">View Driver's Details<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
                         <div class="Portfolio" data-aos="fade-up" data-aos-duration="1000">
@@ -232,8 +232,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Toyota Coaster 205 Model</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">View Driver's Details<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                               <!--  <a class="btn theme-blue " href="#">View Driver's Details<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
                     </div>
@@ -243,8 +243,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">Web Development</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 
@@ -253,8 +253,8 @@
                             <div class="course-desc py-4 px-3">
                                 <h5 class="font-weight-bold">UX/UX Design</h5>
                                 <p>Many desktop publishing packages and web on page editors now use lorem Ipsum</p>
-                                <a class="btn theme-blue " href="#">Course Detail<i
-                                        class="fa fa-angle-double-right ml-2"></i></a>
+                                <!-- <a class="btn theme-blue " href="#">Course Detail<i
+                                        class="fa fa-angle-double-right ml-2"></i></a> -->
                             </div>
                         </div>
 

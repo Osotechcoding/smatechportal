@@ -31,9 +31,9 @@
                 echo '';
               }; ?>">
                   <img src="./eportal/gallery/Sliders/<?php echo $slider->image;?>" alt="education" class="img-fluid">
-                  <div class="carousel-caption animated fadeInLeft delay-0.5s">
-                      <h1 class="font-weight-bold"><?php echo $slider->title;?></h1>
-                      <h6 class="banner-desc"><?php echo $slider->slider_desc;?></h6>
+                  <div class="carousel-caption animated fadeInLeft delay-0.5s" >
+                      <h1 class="font-weight-bold" style="text-shadow: 4px 4px solid black !important;"><?php echo $slider->title;?></h1>
+                      <h6 class="banner-desc" style=" text-shadow: 4px 4px solid black !important;"><?php echo $slider->slider_desc;?></h6>
                       <a href="javascript:" class="theme-orange btn mt-3 apply-now">Apply Now</a>
                   </div>
               </div>

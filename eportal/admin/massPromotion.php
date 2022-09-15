@@ -59,7 +59,7 @@ require_once "helpers/helper.php";
                  <div class="col-12 col-md-4 col-sm-6 col-lg-4">
                   <label for="users-list-verified">Student Current Class</label>
                   <fieldset class="form-group">
-                    <select name="student_class" class="form-control select2" id="users-list-verified">
+                    <select name="student_class" class="form-control custom-select" id="users-list-verified">
                            <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list();?>
                            <option value="Graduated">Graduated</option>
@@ -148,7 +148,7 @@ require_once "helpers/helper.php";
         <div class="col-md-6">
         <div class="form-group">
           <label for="promoted_to">PROMOTED TO</label>
-          <select name="promoted_to" id="promoted_to" class="form-control select2">
+          <select name="promoted_to" id="promoted_to" class="form-control custom-select">
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_classroom_InDropDown_list();?>
             <option value="Graduated">Graduated</option>

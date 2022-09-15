@@ -143,7 +143,7 @@ tbody >tr:nth-child(odd) {
 <body>
   <section id="result">
  <img src="schoolbanner.jpg" alt="" class="schname">
-    <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_data->studentClass);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
+    <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_class);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp;
       <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp;
       <b><?php echo date("F jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $Osotech->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
@@ -185,12 +185,20 @@ $resultScore->execute(array($student_reg_number,$student_class,$rsession));
     $myTotalMark = intval($showResult->overallMark);
     ?>
     <?php
-   if ($showResult->studentGrade == 'JSS 1' || $showResult->studentGrade == 'JSS 2' || $showResult->studentGrade == 'JSS 3') {
-      $amInClass ='Junior';
-    }elseif ($showResult->studentGrade == 'SSS 1' || $showResult->studentGrade == 'SSS 2' || $showResult->studentGrade =='SSS 3') {
-     $amInClass ='Senior';
-    }else{
-    $amInClass ='Pry';
+  //grab the first three letters of the student class
+    $nthclass = substr($showResult->studentGrade, 0,3);
+    switch ($nthclass) {
+        case 'SSS':
+           $amInClass = "Senior";
+            break;
+
+             case 'JSS':
+           $amInClass = "Junior";
+            break;
+        
+        default:
+             $amInClass = "Pry";
+            break;
     }
   $stmt2 = $dbh->prepare("SELECT * FROM `visap_result_grading_tbl` WHERE grade_class='$amInClass' AND $myTotalMark>=score_from AND $myTotalMark<=score_to");
   $stmt2->execute();
@@ -691,7 +699,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$rsession));
         <div class="signarea">
           <h4 style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">Next Term Begins: <?php echo date("l jS F, Y",strtotime($schl_session_data->new_term_begins)); ?>.</h4>
           <br>
-          <img src="../images/resultstamp.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+          <img src="../images/stamp.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
         </div>
       </div>
       <br>

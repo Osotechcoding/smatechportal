@@ -27,7 +27,7 @@ require_once "helpers/helper.php";
         <div class="content-header row">
           <div class="content-header-left col-12 mb-2 mt-1">
             <div class="breadcrumbs-top">
-              <h5 class="content-header-title float-left pr-1 mb-0">VISAP PORTAL</h5>
+              <h5 class="content-header-title float-left pr-1 mb-0"><?php echo __OSO_APP_NAME__; ?> PORTAL</h5>
               <div class="breadcrumb-wrapper d-none d-sm-block">
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
@@ -102,56 +102,56 @@ require_once "helpers/helper.php";
         <form action="" method="post">
             <div class="row border rounded py-2 mb-2">
                 
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label for="ClassGrade">Student Class</label>
                     <fieldset class="form-group">
-                        <select class="form-control select2" name="ClassGrade" id="ClassGrade">
-                            <option value="">Choose...</option>
+                        <select class="form-control custom-select" name="ClassGrade" id="ClassGrade">
+                           
                            <?php echo $Administration->get_classroom_InDropDown_list(); ?>
                         </select>
                     </fieldset>
                 </div>
-                  <div class="col-md-2">
-                    <label for="pstatus">Payment Status</label>
+                  <div class="col-md-4">
+                    <label for="pstatus">Status</label>
                     <fieldset class="form-group">
                         <select class="form-control" name="pstatus" id="pstatus">
-                            <option value="">Choose...</option>
+                          
                           <option value="1">Part Payment</option>
-                          <option value="2">Complete Payment</option>
+                          <option value="2">Full Payment</option>
                         </select>
                     </fieldset>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label for="feeType">Fee Type</label>
                     <fieldset class="form-group">
-                     <select class="form-control select2" name="feeType" id="feeType">
-                            <option value="">Choose...</option>
+                     <select class="form-control custom-select" name="feeType" id="feeType">
+                           
                            <?php echo $Administration->fee_component_inDropDown(); ?>
                         </select>
                     </fieldset>
                 </div>
-                 <div class="col-md-2">
+                 <div class="col-md-4">
                     <label for="term">Term</label>
                     <fieldset class="form-group">
-                    <select class="form-control" name="term" id="term">
-                            <option value="">Choose...</option>
+                    <select class="form-control custom-select" name="term" id="term">
+                            
                            <option value="1st Term">1st Term</option>
                      <option value="2nd Term">2nd Term</option>
                      <option value="3rd Term">3rd Term</option>
                         </select>
                     </fieldset>
                 </div>
-                 <div class="col-md-2">
+                 <div class="col-md-4">
                     <label for="session">Session</label>
                     <fieldset class="form-group">
-                    <select class="form-control select2" name="session" id="session">
-                            <option value="">Choose...</option>
+                    <select class="form-control custom-select" name="session" id="session">
+                           
                            <?php echo $Administration->get_all_session_lists(); ?>
                         </select>
                     </fieldset>
                 </div>
-                <div class="col-md-2 d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block glow users-list-clear mb-0" name="submit_search_payment">Submit</button>
+                <div class="col-md-4 d-flex align-items-center">
+                    <button type="submit" class="btn btn-dark btn-block glow users-list-clear mb-0" name="submit_search_payment">Submit</button>
                 </div>
             </div>
         </form>
@@ -173,15 +173,15 @@ require_once "helpers/helper.php";
             $search_data =  $Administration->filter_students_by_payments_type_status($studentClass,$feeType,$status,$term,$session);
             if ($search_data!=false) { ?>
   <div class="table-responsive">
-     <table class="table osotechDatatable table-hover table-bordered">
+     <table class="table table-hover table-bordered">
         <thead class="text-center">
           <tr>
-          <th>PASSPORT</th>
-          <th>FULLNAME</th>
-          <th>ADMISSION NO</th>
+          <th>PHOTO</th>
+          <th>NAME</th>
+          <!-- <th>ADMISSION NO</th> -->
           <th>CLASS</th>
-          <th>FEE TYPE</th>
-          <th>FEE AMOUNT</th>
+          <th>FEE </th>
+          <th> AMOUNT</th>
           <th> DUE</th>
           <th>Status</th>
           <th>ACTION</th>
@@ -192,9 +192,17 @@ require_once "helpers/helper.php";
               foreach ($search_data as $val) {
             $student_data = $Student->get_single_student_details_by_regId($val->std_id,$val->stdAdmNo);?>
             <tr>
-          <td><img src="../result-asset/author.jpg" width="80" alt="photo"></td>
+          <td><?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
+    <?php if ($student_data->stdGender == "Male"): ?>
+      <img src="../schoolImages/students/male.png" width="70" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+      <?php else: ?>
+        <img src="../schoolImages/students/female.png" width="70" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+    <?php endif ?>
+      <?php else: ?>
+        <img src="../schoolImages/students/<?php echo $student_data->stdPassport;?>" width="70" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+    <?php endif ?></td>
           <td><?php echo strtoupper($student_data->full_name) ?> </td>
-          <td><?php echo strtoupper($student_data->stdRegNo) ?></td>
+          <!-- <td><?php //echo strtoupper($student_data->stdRegNo) ?></td> -->
           <td><?php echo strtoupper($student_data->studentClass) ?></td>
           <td><?php echo ucwords($val->component_fee) ?></td>
           <td><?php echo number_format($val->total_fee,2) ?></td>
@@ -202,15 +210,15 @@ require_once "helpers/helper.php";
            <td><?php if ($val->payment_status=='0') {
             echo '<span class="badge badge-danger badge-md">Not Paid</span>';
            }elseif ($val->payment_status=='1') {
-          echo '<span class="badge badge-warning badge-md">Part Payment</span>';
+          echo '<span class="badge badge-warning badge-md">Part</span>';
            }else{
             $val->payment_status='2';
-             echo '<span class="badge badge-success badge-md"> Payment Completed</span>';
+             echo '<span class="badge badge-success badge-md">Full</span>';
            } 
             ?>
              </td>
          <td>
-          <a href="student_payment_info?std_regNo=<?php echo base64_encode(urlencode(($student_data->stdRegNo)));?>&stuId=<?php echo base64_encode(urlencode(($student_data->stdId)));?>&stuClass=<?php echo base64_encode(urlencode(($student_data->studentClass))) ?>"><button type="button" class="btn btn-dark btn-sm">Make Payment</button></a>
+          <a href="student_payment_info?std_regNo=<?php echo base64_encode(urlencode(($student_data->stdRegNo)));?>&stuId=<?php echo base64_encode(urlencode(($student_data->stdId)));?>&stuClass=<?php echo base64_encode(urlencode(($student_data->studentClass))) ?>"><button type="button" class="btn btn-dark btn-sm">Pay Now</button></a>
         </td>
         </tr>
             <?php

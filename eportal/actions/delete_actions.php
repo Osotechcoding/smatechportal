@@ -40,6 +40,16 @@ if (isset($_POST['action']) && $_POST['action']!="") {
     }
   }
 
+  if ($_POST['action'] ==="delete_applicant_resume_cv") {
+    // code...
+    $resumeId = $Configuration->Clean($_POST['resumeId']);
+    $result = $Administration->delete_ResumeApplicationById($resumeId);
+    if ($result) {
+      // code...
+      echo $result;
+    }
+  }
+
    // code...
   if ($_POST['action'] ==="delete_classroom_now") {
     // code...
@@ -199,6 +209,15 @@ if (isset($_POST['action']) && $_POST['action']!="") {
       //checkout_bedspace
       if ($_POST['action'] === "checkout_bedspace") {
        $result = $Hostel->checkOutStudentFromBedSpace($_POST);
+        if ($result) {
+          echo $result;
+        }
+      }
+
+      //approve_this_comment
+      if ($_POST['action'] === "approve_this_comment") {
+        $comtId = $Configuration->Clean($_POST['comtId']);
+       $result = $Blog->approveBlogCommentByAdmin($comtId);
         if ($result) {
           echo $result;
         }

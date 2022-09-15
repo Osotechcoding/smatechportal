@@ -7,12 +7,13 @@
                     <a href="./" class="text-center"><span class="color-orange navbar-brand fw-bold" style="font-size: 23px;"><?php echo ($Osotech->getConfigData()->school_short_name);?></span></a>
                     <p><?php echo ($Osotech->getConfigData()->school_name);?></p>
                     <ul class="social-icon">
-                        <li><a href="javascript:"><i class="fa fa-facebook-f"></i></a></li>
-                        <li><a href="javascript:"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="javascript:"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="javascript:"><i class="fa fa-skype"></i></a></li>
-                        <li><a href="javascript:"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="javascript:"><i class="fa fa-whatsapp"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->facebook;?>"><i class="fa fa-facebook-f"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->goggle;?>"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->twitter;?>"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->instagram;?>"><i class="fa fa-instagram"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->linkedin;?>"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->youtube;?>"><i class="fa fa-youtube"></i></a></li>
+                        <li><a href="<?php echo $Osotech->getAppSocialLinks()->WhatsApp;?>"><i class="fa fa-whatsapp"></i></a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-6" data-aos="fade-in" data-aos-duration="550">

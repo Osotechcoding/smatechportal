@@ -150,10 +150,9 @@ public function __construct(){
         $pin_data = $this->stmt->fetch();
         $status = $pin_data->pin_status;
         $PinId = $pin_data->pin_id;
-        //unset($this->dbh);
         if ($status =='1') {
         // pin has ben used let'a get the user details from pin history
-        $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history`WHERE pin_code=? AND pin_serial=? AND used_term=? AND used_session=? LIMIT 1");
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE pin_code=? AND pin_serial=? AND used_term=? AND used_session=? LIMIT 1");
         $this->stmt->execute(array($cardPin,$cardSerial,$stdTerm,$stdSession));
         if ($this->stmt->rowCount()==1) {
         //grab the regNo of the Checker and Compare
@@ -167,6 +166,7 @@ public function __construct(){
         $this->response = self::alert_msg("danger","WARNING","You Have Exhausted Your Time Usage Validity of this Pin!");
         }elseif (!self::checkResultReadyModule("visap_behavioral_tbl",$stdRegNo,$stdGrade,$stdTerm,$stdSession)) {
         $this->response = self::alert_msg("danger","WARNING","This Result is not yet Ready!");
+        
         }elseif (!self::checkResultReadyModule("visap_psycho_tbl",$stdRegNo,$stdGrade,$stdTerm,$stdSession)) {
         $this->response = self::alert_msg("danger","WARNING","This Result is not yet Ready!");
         }

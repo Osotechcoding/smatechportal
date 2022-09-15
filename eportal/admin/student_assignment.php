@@ -138,7 +138,7 @@ require_once "helpers/helper.php";
                 <input type="hidden" name="uploadedBy" value="1">
                   <div class="form-group">
                   <label for="subject"> SUBJECT</label>
-                <select name="subject" id="subject" class="select2 form-control">
+                <select name="subject" id="subject" class="custom-select form-control">
                  <option value="">Choose...</option>
                 <?php echo $Administration->get_all_subjects_InDropDown_list();?>
                </select>
@@ -147,7 +147,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-6">
                   <div class="form-group">
                   <label for="std_grade">FOR CLASS</label>
-               <select name="std_grade" id="std_grade" class="select2 form-control">
+               <select name="std_grade" id="std_grade" class="custom-select form-control">
                   <option value="" selected>Choose...</option>
                 <?php echo $Administration->get_classroom_InDropDown_list();?>
                </select>

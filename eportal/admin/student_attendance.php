@@ -71,7 +71,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="class_name"> Class</label>
-                    <select name="class_name" id="class_name" class="select2 form-control">
+                    <select name="class_name" id="class_name" class="custom-select form-control">
                       <option value="">Choose...</option>
                      <?php echo $Administration->get_classroom_InDropDown_list(); ?>
                     </select>

@@ -32,19 +32,19 @@
                     <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Status Code: 403</p>
                </div>
                <div class="col-md-10">
-                    <h3>OPPSSS!!!! Sorry...</h3>
+                    <h3>OPPSSS!!!! Sorry... :)</h3>
                     <p>Sorry, your access is refused due to security reasons of our server and also our sensitive data.<br/>Please go back to the previous page to continue browsing.</p>
-                    <a class="btn btn-danger" href="javascript:history.back()">Go Back</a>
+                    <a class="btn btn-danger" onclick="return window.history.back();" href="javascript:void(0);">Go Back</a>
                </div>
           </div>
 
 
           <footer class="py-1 my-2 text-center">
               <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Buy Scratch Card</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">How to Apply</a></li>
+                <li class="nav-item"><a href="./" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="./about" class="nav-link px-2 text-muted">About</a></li>
+                <li class="nav-item"><a href="javascript:void(0);" class="nav-link px-2 text-muted">Buy Scratch Card</a></li>
+                <li class="nav-item"><a href="javascript:void(0);" class="nav-link px-2 text-muted">How to Apply</a></li>
               </ul>
               <p class="text-center text-muted">&copy; <script>
                 document.write(new Date().getFullYear());

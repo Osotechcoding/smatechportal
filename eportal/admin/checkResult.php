@@ -64,13 +64,13 @@ require_once "helpers/helper.php";
                   <div class="form-group">
                      <label for="admission-no"> Admission Number</label>
                     <input type="text" autocomplete="off" id="admission-no" class="form-control" placeholder="***********"
-                      name="reg_number">
+                      name="reg_number" onpaste="false">
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-group">
                     <label for="result_class">Result Class</label>
-                   <select name="result_class" id="result_class" class="form-control select2">
+                   <select name="result_class" id="result_class" class="form-control custom-select">
                      <option value="" selected>Choose...</option>
                      <?php echo $Administration->get_classroom_InDropDown_list();?>
                    </select>
@@ -79,7 +79,7 @@ require_once "helpers/helper.php";
                 <div class="col-12">
                   <div class="form-group">
                     <label for="result_term">Result Term</label>
-                   <select name="result_term" id="result_term" class="form-control">
+                   <select name="result_term" id="result_term" class="custom-select form-control">
                      <option value="" selected>Choose...</option>
                      <option value="1st Term"> 1st Term</option>
                      <option value="2nd Term">2nd Term</option>
@@ -90,7 +90,7 @@ require_once "helpers/helper.php";
                 <div class="col-12">
                   <div class="form-group">
                     <label for="result_session">Result Session</label>
-                    <select name="result_session" id="result_session" class="form-control select2">
+                    <select name="result_session" id="result_session" class="form-control custom-select">
                       <option value="" selected>Choose...</option>
                       <?php echo $Administration->get_all_session_lists();?>
                     </select>

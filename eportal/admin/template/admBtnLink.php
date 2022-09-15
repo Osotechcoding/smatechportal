@@ -7,13 +7,15 @@
             <div class="col-md-4 dashboard-users-success">
               <div class="card bg-success">
                 <div class="card-body">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
+                <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-graduation-cap fa-2x font-medium-10"></i>
+                    <!-- <span class="badge badge-circle badge-warning badge-sm">6</span> -->
                   </div>
                   <div class="text-white line-ellipsis">
-                    <h3 class="text-white">Student Portal</h3>
+                    <h3 class="text-white">Student Admission </h3>
+
                   </div>
-                  <button type="button" class="btn btn-dark adm_btn_student">New Registration </button>
+                  <button type="button" class="btn btn-dark adm_btn_student">New Admission</button>
                 </div>
               </div>
             </div>
@@ -24,7 +26,7 @@
                     <i class="fa fa-briefcase fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis">
-                    <h3 class="text-white">Staff Portal</h3>
+                    <h3 class="text-white">Job Portal</h3>
                   </div>
                   <button type="button" class="btn btn-dark adm_btn_staff">New Applicants</button>
                 </div>

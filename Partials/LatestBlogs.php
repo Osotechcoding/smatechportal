@@ -18,13 +18,13 @@ foreach ($all_blogs_posted as $value) {?>
                     <img src="./eportal/news-images/<?php echo $value->blog_image;?>" class="img-fluid" alt="Blog">
                     <div class="post_inner p-3">
                         <p class="mb-1"><?php echo date("F j, Y",strtotime($value->created_at)) ?> </p>
-                        <h5 class="font-weight-bold"><?php echo $value->blog_title;?></h5>
-                        <p><?php
+                        <h5 class="font-weight-bold"><a href="blog-detail?bId=<?php echo $value->blog_id;?>&action=view"><?php echo $value->blog_title;?></a> </h5>
+                        <p class="lead"><?php
               if (str_word_count($value->blog_content) >= 50) {
-              echo substr($value->blog_content,0,100)."...";
+              echo substr(nl2br($value->blog_content),0,100)."...";
               ?><?php
               }else{
-                echo $value->blog_content;
+                echo nl2br($value->blog_content);
               }
               ?></p>
                         <div class="comment d-flex">

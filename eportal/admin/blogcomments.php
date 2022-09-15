@@ -41,9 +41,9 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
                   </li>
-                  <li class="breadcrumb-item"><a href="#"><?php echo $_SESSION['ADMIN_SES_TYPE'];?></a>
+                  <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo $_SESSION['ADMIN_SES_TYPE'];?></a>
                   </li>
-                  <li class="breadcrumb-item active">Current Page Title
+                  <li class="breadcrumb-item active">
                   </li>
                 </ol>
               </div>
@@ -67,7 +67,7 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
                     <i class="fa fa-edit fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white"> Unapproved</h3></div>
-                  <h2 class="text-white mb-0"> <?php echo $Administration->count_all_available_lessons_by_type("application/pdf");?></h2>
+                  <h2 class="text-white mb-0"> <?php echo $Blog->count_blog_comment_by_blogId($blogId,"2");?></h2>
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
                     <i class="fa fa-comment fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white"> Approved</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Administration->count_all_available_lessons_by_type("audio/mp3");?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Blog->count_blog_comment_by_blogId($blogId,"1");?></h2>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
                     <i class="fa fa-comments fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white"> Total Comments</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Administration->count_all_available_lessons();?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Blog->count_blogComments($blogId);?></h2>
                 </div>
               </div>
             </div>
@@ -111,14 +111,13 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
             <table class="table table-striped osotechDatatable">
               <thead class="text-center">
                 <tr>
-                  <th>S/N</th>
-                  <th>Client</th>
-                  <th>Email</th>
-                  <th>Website</th>
-                  <th>Comment</th>
-                  <th>Status</th>
-                  <th>Datetime</th>
-                  <th>Options</th>
+                  <th width="5%">S/N</th>
+                  <th width="15%">Client</th>
+                  <th width="15%">Email</th>
+                  <th width="25%">Comment</th>
+                  <th width="10%">Status</th>
+                  <th width="15%">Date</th>
+                  <th width="15%">Options</th>
                 </tr>
               </thead>
               <tbody class="text-center">
@@ -128,29 +127,20 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
                    foreach ($all_comments as $value): ?>
                     <?php $cnt++; ?>
                     <tr>
-                      <td><?php echo $cnt; ?></td>
-                  <td><?php echo $value->guestName;?></td>
-                  <td><?php echo $value->user_email;?> </td>
-                  <td><?php echo $value->website ?></td>
-                  <td><?php echo $value->comment;?></td>
-                  <td> <?php if ($value->status=='1'): ?>
+                      <td width="5%"><?php echo $cnt; ?></td>
+                  <td width="15%"><?php echo $value->guestName;?></td>
+                  <td width="15%"><?php echo $value->user_email;?> </td>
+                  <td width="25%"><?php echo $value->comment;?></td>
+                  <td width="10%"> <?php if ($value->status=='1'): ?>
                   <span class="badge badge-success badge-rounded badge-lg">Approved</span>
                     <?php else: ?>
                        <span class="badge badge-danger badge-rounded badge-lg">Pending</span>
                   <?php endif ?> </td>
-                  <td><?php echo date("Y-m-d h:i:s a",strtotime($value->comment_date));?></td>
-                  <td><div class="btn-group dropdown mb-1">
-            <button type="button" class="btn btn-warning">Options</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           <div class="dropdown-menu">
-              <a class="dropdown-item text-danger" href="javascript:void(0);"> Approved</a>
-              <a class="dropdown-item text-warning" href="javascript:void(0);"> Pending</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="javascript:void(0);"><span class="fa fa-trash"></span> Delete</a>
-            </div>
-          </div></td>
+                  <td width="15%"><?php echo date("Y-m-d h:i:s a",strtotime($value->comment_date));?></td>
+                  <td width="15%"> <?php if ($value->status=='0'): ?>
+                  <button class="btn btn-dark btn-sm btn-rounded approve_btn m-1" data-id="<?php echo $value->commentId;?>" data-action="<?php echo 'approve_this_comment';?>">Approve</button>
+                  <?php endif ?>
+                    <button type="button" class="btn btn-danger btn-sm delete_btn">Delete</button></td>
                 </tr>
                   <?php endforeach ?>
                 <?php endif ?>
@@ -172,6 +162,26 @@ if (isset($_GET['blogId']) && $_GET['blogId'] !=="" && isset($_GET['action']) &&
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/DataTableFooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
+     <script>
+       $(document).ready(function() {
+        const approve_btn = $(".approve_btn");
+        approve_btn.on("click", function(){
+          let commentId = $(this).data('id');
+          let comment_action = $(this).data('action');
+         // alert(commentId+ " "+comment_action);
+         //send request
+         if (confirm("Are you sure you want to approve this comment?")) {
+          $.post("../actions/delete_actions",{action:comment_action,comtId:commentId},function(data){
+          setTimeout(()=>{
+            $("#server-response").html(data);
+          },500);
+         })
+        }else{
+          return false;
+        }
+        })
+       });
+     </script>
   </body>
   <!-- END: Body-->
 </html>

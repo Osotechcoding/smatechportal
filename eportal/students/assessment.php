@@ -52,7 +52,7 @@
 </div>
 <div class="col-sm-6 col-md-3">
 <div class="form-group form-focus select-focus">
-<select name="aca_session" class="select2 form-control">
+<select name="aca_session" class="custom-select form-control">
 <option value="" selected>Choose Session...</option>
 <?php echo $Administration->get_all_session_lists();?>
 </select>
@@ -93,6 +93,7 @@
 </thead>
 <tbody>
 	<?php 
+	
 $filter_assessments = $Student->get_all_my_assessments_by_filter($student_data->stdRegNo,$student_data->studentClass,$term,$aca_session);
 if ($filter_assessments) {
 	// code...

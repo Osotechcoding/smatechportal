@@ -61,40 +61,38 @@ require_once "helpers/helper.php";
         </div>
         <div class="card-body card-dashboard">
           <div class="table-responsive">
-            <table class="table table-striped osotechDatatable">
+            <table class="table table-striped text-center">
               <thead>
                 <tr>
                   <th>Full Name</th>
-                  <th>Email Address</th>
+                  <th>Email| Phone</th>
                   <th>Job Desc</th>
                   <th>Cover Letter</th>
                   <th>Date</th>
-                  <th>Actions</th>
+                  <th>Resume</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tata Godwin E</td>
-                  <td>BSC</td>
-                  <td>Teaching Staff</td>
-                  <td><span class="badge badge-pill badge-dark" style="cursor: pointer;">Read</span></td>
-                  <td><?php echo date("Y-m-d");?></td>
-                  <td> <!-- new btn link -->
-                    <div class="btn-group dropdown mb-1">
-            <button type="button" class="btn btn-primary">Options</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           <div class="dropdown-menu">
-                <a class="dropdown-item text-warning" href="javascript:void(0);">Download CV</a>
-                <a class="dropdown-item text-success" href="javascript:void(0);"> Send Message</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="javascript:void(0);">Ignore Applicant</a>
-            </div>
-          </div>
-                   <!--new btn link ends  --> 
+                <?php $allResume = $Administration->getAllStaffResumeApplicationForm();
+                if ($allResume) {
+                  foreach ($allResume as $resume) {
+                    ?>
+               <tr>
+                  <td><?php echo strtoupper($resume->applicant_name);?></td>
+                  <td><?php echo $resume->applicant_email;?> <br> <?php echo $resume->phone_number;?></td>
+                  <td><?php echo ucwords($resume->jobType);?></td>
+                  <td><span class="badge badge-pill badge-dark view_cover_letter_btn" data-detail="<?php echo $resume->cover_letter; ?>" style="cursor: pointer;">Read</span></td>
+                  <td><?php echo date("l jS M, Y",strtotime($resume->application_date));?></td>
+                  <td> <a href="../resume/<?php echo $resume->uploaded_cv;?>" target="_blank"><button class="badge badge-pill badge-info badge-md" >Download CV</button></a> 
                  </td>
+                 <td><button type="button" class="btn btn-danger btn-sm delete_resume_btn __loadingBtn2__<?php echo $resume->job_portal_id;?>" data-id="<?php echo $resume->job_portal_id;?>">Delete</button></td>
                 </tr>
+
+                    <?php
+                  }
+                 } ?>
+               
               </tbody>
             </table>
           </div>
@@ -110,13 +108,62 @@ require_once "helpers/helper.php";
     <!-- END: Content-->
 
     </div>
-    
+    <!--Basic Modal -->
+          <div class="modal fade text-left" id="readCoverLetterModalCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title" id="myModalLabel1">Applicant Cover Letter</h3>
+                  <button type="button" class="close rounded-pill" data-dismiss="modal" aria-label="Close">
+                    <i class="bx bx-x"></i>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p class="mb-0" id="readCoverLetter">
+                  </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
     <!-- BEGIN: Footer-->
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/DataTableFooterScript.php"); ?>
   <?php include_once ("Links/adm_button_links.js.php") ?>
+  <script>
+    $(document).ready(function() {
+       const delete_resume = $(".delete_resume_btn");
+      delete_resume.on("click", function(){
+        let tId = $(this).data("id");
+        let action = 'delete_applicant_resume_cv';
+         let is_true = confirm("Are you Sure you want to delete this Resume Permanently?");
+      if (is_true) {
+        $(".__loadingBtn2__"+tId).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Processing...').attr("disabled",true);
+        //send request
+        $.post("../actions/delete_actions",{action:action,resumeId:tId},function(response){
+          setTimeout(()=>{
+            $(".__loadingBtn2__"+tId).html("Delete").attr("disabled",false);
+            $("#server-response").html(response);
+          },500);
+        });
+      }else{
+        return false;
+      }
+      })
+      //when a Read Note btn is clicked
+         const view_coverLetterBtn = $(".view_cover_letter_btn");
+  view_coverLetterBtn.on("click", function(){
+     let coverLetter = $(this).data("detail");
+      $("#readCoverLetter").html(coverLetter);
+    $("#readCoverLetterModalCard").modal("show");
+  })
+    })
+  </script>
   </body>
   <!-- END: Body-->
 

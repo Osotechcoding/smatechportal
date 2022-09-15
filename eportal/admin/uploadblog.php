@@ -110,7 +110,7 @@ require_once "helpers/helper.php";
                   <th>Content</th>
                   <th>Posted On</th>
                   <th>Comments</th>
-                  <th>Views</th>
+                  <!-- <th>Views</th> -->
                   <th>Options</th>
                 </tr>
               </thead>
@@ -119,7 +119,7 @@ require_once "helpers/helper.php";
                 $all_blogs = $Blog->get_all_active_blogs_post();
                 if ($all_blogs) {
                   foreach ($all_blogs as $values) {
-                    $count_comment = $Blog->count_blog_comment_by_blogId($values->blog_id);
+                    $count_comment = $Blog->count_blogComments($values->blog_id);
                     ?>
                     <tr>
                   <td><?php echo ucwords($values->blog_title);?></td>
@@ -134,7 +134,7 @@ require_once "helpers/helper.php";
                   ?></td>
                   <td><?php echo date("F j,  Y",strtotime($values->created_at));?></td>
                   <td><span class="badge badge-dark badge-rounded badge-lg"><?php echo $count_comment;?> </span></td>
-                  <td><span class="badge badge-pill badge-info badge-md"><?php echo ($values->total_view > 0 ) ? $values->total_view : '0';?> </span></td>
+                  <!-- <td><span class="badge badge-pill badge-info badge-md"><?php //echo ($values->total_view > 0 ) ? $values->total_view : '0';?> </span></td> -->
                   <td><div class="btn-group dropdown mb-1">
             <button type="button" class="btn btn-warning">Options</button>
             <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">

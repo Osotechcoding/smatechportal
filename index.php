@@ -95,7 +95,7 @@
                                 <img src="assets/images/icons/teacher.png" class="img-fluid" alt=teacher>
                             </div>
                             <h5 class="count-text mt-2">Teachers</h5>
-                            <h2 class="timer count-title count-number" data-to="300" data-speed="1500"></h2>
+                            <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalStaff();?>" data-speed="1500"></h2>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -105,7 +105,7 @@
                                 <img src="assets/images/icons/classroom.png" class="img-fluid" alt="classroom">
                             </div>
                             <h5 class="count-text mt-2">Classroom</h5>
-                            <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
+                            <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalClassroom();?>" data-speed="1500"></h2>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -115,7 +115,7 @@
                                 <img src="assets/images/icons/career.png" class="img-fluid" alt="career">
                             </div>
                             <h5 class="count-text mt-2">Student</h5>
-                            <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
+                            <h2 class="timer count-title count-number" data-to="<?php echo number_format($Osotech->getTotalStudent());?>" data-speed="1500"></h2>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -124,8 +124,8 @@
                             <div class="counter-img">
                                 <img src="assets/images/icons/activity.png" class="img-fluid" alt="activity">
                             </div>
-                            <h5 class="count-text mt-2">Graduated</h5>
-                            <h2 class="timer count-title count-number" data-to="157" data-speed="1500"></h2>
+                            <h5 class="count-text mt-2">Subjects</h5>
+                            <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalSubjects();?>" data-speed="1500"></h2>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
             </div>
             <h5 data-aos="fade-up" data-aos-duration="1050">Chairman Message</h5>
             <h3 class="font-weight-bold pb-3 px-5 mb-0" data-aos="fade-up" data-aos-duration="1050">Education develop a passion for learning.If you do, you will never cease to grow.</h3>
-            <p class="pt-3 bottom-line" style="line-height: 40px;font-size: 20px;"><?php echo ($Osotech->getConfigData()->school_history);?></p>
+            <p class="pt-3 bottom-line" style="font-size: 18px;"><?php echo nl2br($Osotech->getConfigData()->school_history);?></p>
              
 
             <h5 class="pt-3"><?php echo ($Osotech->getConfigData()->school_director);?></h5>
@@ -172,7 +172,7 @@
                         <div class="border-line"></div>
                         <i class="fa fa-users fa-3x color-orange mb-3 target-icon"></i>
                         <h4 class="font-weight-bold">Skilled Teachers</h4>
-                        <p>Aliquip exea conse quat nul duis crib irure dolor in reprehenderit</p>
+                        <p></p>
                      
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                         <div class="border-line"></div>
                         <i class="fa fa-mortar-board fa-3x color-orange mb-3 target-icon"></i>
                         <h4 class="font-weight-bold">Condusive Environment</h4>
-                        <p>Aliquip exea conse quat nul duis crib irure dolor in reprehenderit</p>
+                        <p></p>
                       
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                         <div class="border-line"></div>
                         <i class="fa fa-book fa-3x color-orange mb-3 target-icon"></i>
                         <h4 class="font-weight-bold">Book Library & Lab</h4>
-                        <p>Aliquip exea conse quat nul duis crib irure dolor in reprehenderit</p>
+                        <p></p>
                        
                     </div>
                 </div>
@@ -203,7 +203,8 @@
     </section>
     <!-- end target -->
     <!-- start team -->
-    <?php include_once("./Partials/theSchoolTeam.php");?>
+    <?php //include_once("./Partials/theSchoolTeam.php");?>
+    
     
     <!-- end team -->
     <!-- start principal welcome message -->

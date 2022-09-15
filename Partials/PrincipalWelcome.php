@@ -9,7 +9,7 @@
                             <span class="fa fa-mortar-board fa-2x"></span>
                         </div>
                     </div>
-                    <p class="p-17"><?php echo ($Osotech->getConfigData()->principal_welcome);?></p>
+                    <p class="p-17"><?php echo nl2br($Osotech->getConfigData()->principal_welcome);?></p>
                     
                     <button type="button" class="btn theme-orange theme-btn my-2 join-us">Enroll Your Ward(s) Now</button>
                 </div>
@@ -19,7 +19,7 @@
                         <img src="assets/images/icons/promotion.png" class="img-fluid m-auto" alt="Key Of Success">
                         <div class="course-text pl-5">
                             <h4>Key Of Success</h4>
-                            <p><?php echo ($Osotech->getConfigData()->key_of_success);?></p>
+                            <p><?php echo nl2br($Osotech->getConfigData()->key_of_success);?></p>
                         </div>
                     </div>
                     <div class="course-block  d-flex justify-content-between theme-blue pa-2 mx-5 my-3"
@@ -28,7 +28,7 @@
                         <img src="assets/images/icons/online-class.png" class="img-fluid m-auto" alt="Our Philosophy">
                         <div class="course-text pl-5">
                             <h4>Our Philosophy</h4>
-                            <p><?php echo ($Osotech->getConfigData()->our_philosophy);?></p>
+                            <p><?php echo nl2br($Osotech->getConfigData()->our_philosophy);?></p>
                         </div>
                     </div>
                     <div class="course-block  d-flex justify-content-between theme-orange pa-2 mx-5 mt-3"
@@ -37,7 +37,7 @@
                         <img src="assets/images/icons/feminism.png" class="img-fluid m-auto" alt="Our Principle">
                         <div class="course-text pl-5">
                             <h4>Our Principle</h4>
-                            <p><?php echo ($Osotech->getConfigData()->our_principle);?></p>
+                            <p><?php echo nl2br($Osotech->getConfigData()->our_principle);?></p>
                         </div>
                     </div>
                 </div>

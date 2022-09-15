@@ -231,7 +231,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-6 col-12">
                   <div class="form-group">
                      <label for="staff">Staff Name</label>
-                  <select name="staff" id="staff" class="select2 form-control">
+                  <select name="staff" id="staff" class="custom-select form-control">
                     <option value="">Choose...</option>
                     <?php echo $Staff->show_staff_name_indropdown();?>
                   </select>

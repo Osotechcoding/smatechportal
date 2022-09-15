@@ -108,8 +108,32 @@ if ($this->stmt->rowCount() >0) {
 }
 }
 
-public function count_blog_comment_by_blogId($blogId){
-	$this->stmt = $this->dbh->prepare("SELECT count(`commentId`) as cnt FROM `visap_blog_post_comments` WHERE blogId=?");
+public function count_blog_comment_by_blogId($blogId, string $status){
+	switch ($status) {
+		case '1':
+			$status = 1;
+			break;
+
+			case '2':
+			$status = 0;
+			break;
+		
+		default:
+			$status = 0;
+			break;
+	}
+	$this->stmt = $this->dbh->prepare("SELECT count(`commentId`) as cnt FROM `visap_blog_post_comments` WHERE blogId=? AND status=?");
+$this->stmt->execute([$blogId,$status]);
+if ($this->stmt->rowCount()>0) {
+	$rows = $this->stmt->fetch();
+	$this->response = $rows->cnt;
+	return $this->response;
+	$this->dbh = null;
+}
+}
+
+public function count_blogComments($blogId){
+		$this->stmt = $this->dbh->prepare("SELECT count(`commentId`) as cnt FROM `visap_blog_post_comments` WHERE blogId=?");
 $this->stmt->execute([$blogId]);
 if ($this->stmt->rowCount()>0) {
 	$rows = $this->stmt->fetch();
@@ -142,7 +166,7 @@ if ($this->stmt->rowCount()==1) {
 
 public function get_all_blog_comments($blogId){
   	$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_comments` WHERE  blogId=? ORDER BY comment_date DESC");
-$this->stmt->execute(array($status));
+$this->stmt->execute(array($blogId));
 if ($this->stmt->rowCount()> 0) {
 	$this->response = $this->stmt->fetchAll();
 	return $this->response;
@@ -171,6 +195,26 @@ if ($this->stmt->rowCount()>0) {
 	return $this->response;
 	$this->dbh = null;
 }
+}
+
+public function approveBlogCommentByAdmin($commentId){
+	if (!$this->config->isEmptyStr($commentId)) {
+			try {
+    	$this->dbh->beginTransaction();
+    	$this->stmt = $this->dbh->prepare("UPDATE `visap_blog_post_comments` SET status='1' WHERE commentId=? LIMIT 1");
+    	if ($this->stmt->execute(array($commentId))) {
+    	$this->dbh->commit();
+	$this->dbh = null;
+    $this->response = $this->alert->alert_toastr("success","Comment approved Successfully",__OSO_APP_NAME__." Says")."<script>setTimeout(()=>{
+	window.location.reload();
+	},500);</script>";
+    	}
+    } catch (PDOException $e) {
+    	$this->dbh->rollback();
+   $this->response = $this->alert->alert_toastr("error","Error Occurred: ".$e->getMessage(),__OSO_APP_NAME__." Says");
+    }
+    return $this->response;
+	}
 }
 
 public function CountLatestBlogs(){

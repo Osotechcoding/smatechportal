@@ -16,7 +16,7 @@ $dbh = $con->osotech_connect();
 // $resultmi = $_SESSION['resultmi'];
  $result_regNo = $_SESSION['result_regNo'];
 if (isset($_SESSION['resultmi'])) {
-  $stmt = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
+  $stmt = $dbh->prepare("SELECT * FROM `visap_2nd_term_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
   $stmt->execute(array($_SESSION['resultmi']));
                 if ($stmt->rowCount()>0) {
               while ($rowResult = $stmt->fetch()) {
@@ -142,7 +142,7 @@ tbody >tr:nth-child(odd) {
 }
 .signarea{
   width: 195px;
-  background-image: url(../../assets/images/sign.png);
+  background-image: url(../sign.png);
   background-repeat: no-repeat;
   background-size:contain;
 }
@@ -150,7 +150,7 @@ tbody >tr:nth-child(odd) {
 </head>
 <body>
   <section id="result">
- <img src="../../assets/images/resulttop1.jpg" alt="" class="schname">
+ <img src="../schoolbanner.jpg" alt="" class="schname">
     <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_data->studentClass);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp; <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp; <b><?php echo date("F jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $Administration->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
@@ -184,25 +184,33 @@ tbody >tr:nth-child(odd) {
                   <td>REMARKS</td>
                 </thead>
                 <?php 
-               $resultScore = $dbh->prepare("SELECT * FROM  `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+               $resultScore = $dbh->prepare("SELECT * FROM  `visap_2nd_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
 $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession));
   if ($resultScore->rowCount()>0) {
    while ($showResult = $resultScore->fetch()) { 
     $myTotalMark = intval($showResult->overallMark);
     ?>
     <?php 
-    if ($showResult->studentGrade == 'JSS 1 A' || $showResult->studentGrade == 'JSS 2 A' || $showResult->studentGrade =='JSS 3 A') {
-      $amInClass ='Junior';
-    }elseif ($showResult->studentGrade == 'SSS 1 A' ||$showResult->studentGrade == 'SSS 1 B' || $showResult->studentGrade == 'SSS 1 C' || $showResult->studentGrade == 'SSS 2 A' || $showResult->studentGrade == 'SSS 2 B' || $showResult->studentGrade == 'SSS 2 C' || $showResult->studentGrade =='SSS 3 A' || $showResult->studentGrade =='SSS 3 B' || $showResult->studentGrade =='SSS 3 C') {
-     $amInClass ='Senior';
-    }else{
-       $amInClass ='Pry';
+    //grab the first three letters of the student class
+    $nthclass = substr($showResult->studentGrade, 0,3);
+    switch ($nthclass) {
+        case 'SSS':
+           $amInClass = "Senior";
+            break;
+
+             case 'JSS':
+           $amInClass = "Junior";
+            break;
+        
+        default:
+             $amInClass = "Pry";
+            break;
     }
   $stmt2 = $dbh->prepare("SELECT * FROM `visap_result_grading_tbl` WHERE grade_class='$amInClass' AND $myTotalMark>=score_from AND $myTotalMark<=score_to");
   $stmt2->execute();
   if ($stmt->rowCount()>0) {
     while ($r = $stmt2->fetch()) {
-      $stmt4 = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE studentGrade='$student_class' AND term='1st Term' AND aca_session='$rsession' AND stdRegCode='$student_reg_number' AND subjectName='$showResult->subjectName'");
+      $stmt4 = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE studentGrade='$student_class' AND aca_session='$rsession' AND stdRegCode='$student_reg_number' AND subjectName='$showResult->subjectName'");
   $stmt4->execute();
   if ($stmt4->rowCount()>0) {
   $firstTermTotal =$stmt4->fetch();
@@ -250,7 +258,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
                   <td>Remarks</td>
                 </tr>
                 <?php 
-                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_termly_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
+                $stmt42 = $dbh->prepare("SELECT sum(`overallMark`) as totalMark FROM `visap_2nd_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
                 $stmt42->execute(array($student_reg_number,$student_class,$term,$rsession));
                 if ($stmt42->rowCount()>0) {
                   $reSet = $stmt42->fetch();
@@ -696,7 +704,7 @@ $resultScore->execute(array($student_reg_number,$student_class,$term,$rsession))
         <div class="signarea">
           <h4 style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">Next Term Begins: <?php echo date("l jS F, Y",strtotime($schl_session_data->new_term_begins)); ?>.</h4>
           <br>
-          <img src="../../images/resultstamp.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+          <img src="../stamp.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
         </div>
       </div>
       <br>

@@ -49,6 +49,8 @@
                     </div>
                     <?php
                   }
+                 }else{
+                    echo '<div class="alert alert-danger text-center"> <p style="font-size:20px; margin:10px 5px"> Sorry :) No upcoming event at the moment!</p></div>';
                  } ?>
 
 

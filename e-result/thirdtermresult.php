@@ -146,7 +146,7 @@ tbody >tr:nth-child(odd) {
 <body>
   <section id="result">
   <img src="schoolbanner.jpg" alt="" class="schname">
-    <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_data->studentClass);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
+    <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name);?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender)?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_class);?>&nbsp;</b> &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp; <b><?php echo strtoupper($student_data->stdRegNo);?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp; <b><?php echo date("F jS, Y",strtotime($student_data->stdDob));?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp; <b><?php echo $Osotech->get_student_age($student_data->stdDob);?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
     <?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
@@ -207,12 +207,20 @@ $resultScore->execute(array($student_reg_number,$student_class,$rsession));
   ?>
 <!--  -->
     <?php 
-    if ($showResult->studentGrade == 'JSS 1' || $showResult->studentGrade == 'JSS 2' || $showResult->studentGrade == 'JSS 3') {
-      $amInClass ='Junior';
-    }elseif ($showResult->studentGrade == 'SSS 1' || $showResult->studentGrade == 'SSS 2' || $showResult->studentGrade =='SSS 3') {
-     $amInClass ='Senior';
-    }else{
-    $amInClass ='Pry';
+    //grab the first three letters of the student class
+    $nthclass = substr($showResult->studentGrade, 0,3);
+    switch ($nthclass) {
+        case 'SSS':
+           $amInClass = "Senior";
+            break;
+
+             case 'JSS':
+           $amInClass = "Junior";
+            break;
+        
+        default:
+             $amInClass = "Pry";
+            break;
     }
     //let get if the student did first term exam 
     if ($_firstTermTotal == 0 && $_secondTermTotal == 0 && $myTotalMark > 0) {

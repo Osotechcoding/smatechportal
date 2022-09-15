@@ -21,14 +21,10 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Header-->
     <?php include "template/HeaderNav.php"; ?>
-    <!-- include headernav.php -->
     <!-- END: Header-->
     <!-- BEGIN: Main Menu-->
     <?php include "template/Sidebar.php";?>
-    <!-- include Sidebar.php -->
     <!-- END: Main Menu-->
-
-    <!-- BEGIN: Content-->
     <!-- BEGIN: Content-->
     <div class="app-content content">
       <div class="content-overlay"></div>
@@ -105,21 +101,13 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
       </div>
     </div>
     <!-- END: Content-->
-
    <!-- BEGIN: Customizer-->
-  
     </div>
-    <!-- demo chat-->
-  
-    <!-- BEGIN: Footer-->
-
    <?php include_once "../template/footer.php"; ?>
     <!-- END: Footer-->
-
     <!-- BEGIN: Vendor JS-->
     <?php include_once "../template/FooterScript.php"; ?>
     <script src="smappjs/genpin.js"></script>
-     <!-- BEGIN: Page JS-->
     <!-- END: Page JS-->
   </body>
   <!-- END: Body-->
