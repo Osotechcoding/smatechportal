@@ -1,4 +1,5 @@
 <?php 
+@ob_start();
 @session_start();
  require_once "helpers/helper.php";
 // require_once "languages/config.php";

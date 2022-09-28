@@ -1,4 +1,5 @@
 <?php 
+@ob_start();
 @session_start();
 include_once "../languages/config.php";
 // require_once "../classes/Configuration.php";

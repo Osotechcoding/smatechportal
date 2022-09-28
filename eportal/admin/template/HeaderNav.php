@@ -18,7 +18,7 @@
               </ul>
             </div>
             <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-language nav-item" id="google_translate_element"></li>
+              <!-- <li class="dropdown dropdown-language nav-item" id="google_translate_element"></li> -->
               
               <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon bx bx-fullscreen"></i></a></li> -->
               <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon bx bx-search"></i></a>

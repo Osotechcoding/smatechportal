@@ -1,4 +1,5 @@
 <?php
+@ob_start();
 @session_start();
 require_once 'classes/Database.php';
 require_once "languages/config.php";
@@ -8,6 +9,7 @@ date_default_timezone_set("Africa/Lagos");
 spl_autoload_register(function($filename){
   include_once "classes/".ucwords($filename).".php";
 });
+
 $Visitor = new Visitors();
 $Student = new Student();
 $Result = new Result();
@@ -21,4 +23,3 @@ $Alert = new Alert();
 $session_data = $Administration->get_session_details();
 $activeSess =$Administration->get_active_session_details();
 $SmappDetails = $Configuration->getConfigData();
- ?>
