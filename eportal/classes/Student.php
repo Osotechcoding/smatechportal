@@ -1722,13 +1722,13 @@ class Student
 
     public function registerBulkStudentUsingCSVFile($data, $csv_file)
     {
-    $counter = 0;
+
     $auth_pass = $this->config->Clean($data['auth_code']);
     $studentClass = $this->config->Clean($data['student_class']);
-    $admission_year = $this->config->Clean($data['admission_year']);
+    //$admission_year = $this->config->Clean($data['admission_year']);
     $File_tmp = $csv_file['studentCsvFile']['tmp_name'];
     $FileName = $csv_file['studentCsvFile']['name'];
-    $allowed = array("csv", "xlsx");
+    $allowed = array("csv");
     $name_div = explode(".", $FileName);
     $image_ext = strtolower(end($name_div));
     if (
