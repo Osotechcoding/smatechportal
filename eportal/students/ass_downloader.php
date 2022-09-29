@@ -1,18 +1,18 @@
-<?php 
+<?php
 require_once "visap_helper.php";
- ?>
+?>
 <?php
 /*if (isset($_GET['fileId']) && !$Configuration->isEmptyStr($_GET['fileId'])) {
     $lectureId = $_GET['fileId'];
     $Administration->update_Virtual_counter_by_id($lectureId);
 }*/
-function output_file($file, $name, $mime_type='')
+function output_file($file, $name, $mime_type = '')
 {
-    if(!is_readable($file)) die('File not found!');
+    if (!is_readable($file)) die('File not found!');
 
     $size = filesize($file);
     $name = rawurldecode($name);
-    $known_mime_types=array(
+    $known_mime_types = array(
         "pdf" => "application/pdf",
         "txt" => "text/plain",
         "html" => "text/html",
@@ -24,64 +24,62 @@ function output_file($file, $name, $mime_type='')
         "ppt" => "application/vnd.ms-powerpoint",
         "gif" => "image/gif",
         "png" => "image/png",
-        "jpeg"=> "image/jpg",
+        "jpeg" => "image/jpg",
         "jpg" => "image/jpg",
         "mp3" => "audio/mp3",
         "mp4" => "video/mp4",
         "php" => "text/plain"
     );
-    if($mime_type==''){
-        $file_extension = strtolower(substr(strrchr($file,"."),1));
-        if(array_key_exists($file_extension, $known_mime_types)){
-            $mime_type=$known_mime_types[$file_extension];
+    if ($mime_type == '') {
+        $file_extension = strtolower(substr(strrchr($file, "."), 1));
+        if (array_key_exists($file_extension, $known_mime_types)) {
+            $mime_type = $known_mime_types[$file_extension];
         } else {
-            $mime_type="application/force-download";
+            $mime_type = "application/force-download";
         };
     };
 
     @ob_end_clean();
 
 
-    if(ini_get('zlib.output_compression'))
+    if (ini_get('zlib.output_compression'))
         ini_set('zlib.output_compression', 'Off');
     header('Content-Type: ' . $mime_type);
-    header('Content-Disposition: attachment; filename="'.$name.'"');
+    header('Content-Disposition: attachment; filename="' . $name . '"');
     header("Content-Transfer-Encoding: binary");
     header('Accept-Ranges: bytes');
     header("Cache-control: private");
     header('Pragma: private');
     header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-    if(isset($_SERVER['HTTP_RANGE']))
-    {
-        list($a, $range) = explode("=",$_SERVER['HTTP_RANGE'],2);
-        list($range) = explode(",",$range,2);
+    if (isset($_SERVER['HTTP_RANGE'])) {
+        list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'], 2);
+        list($range) = explode(",", $range, 2);
         list($range, $range_end) = explode("-", $range);
-        $range=intval($range);
-        if(!$range_end) {
-            $range_end=$size-1;
+        $range = intval($range);
+        if (!$range_end) {
+            $range_end = $size - 1;
         } else {
-            $range_end=intval($range_end);
+            $range_end = intval($range_end);
         }
-        $new_length = $range_end-$range+1;
+        $new_length = $range_end - $range + 1;
         header("HTTP/1.1 206 Partial Content");
         header("Content-Length: $new_length");
         header("Content-Range: bytes $range-$range_end/$size");
     } else {
-        $new_length=$size;
-        header("Content-Length: ".$size);
+        $new_length = $size;
+        header("Content-Length: " . $size);
     }
-    $chunksize = 1*(1024*1024);
+    $chunksize = 1 * (1024 * 1024);
     $bytes_send = 0;
-    if ($file = fopen($file, 'r'))
-    {
-        if(isset($_SERVER['HTTP_RANGE']))
+    if ($file = fopen($file, 'r')) {
+        if (isset($_SERVER['HTTP_RANGE']))
             fseek($file, $range);
 
-        while(!feof($file) &&
+        while (
+            !feof($file) &&
             (!connection_aborted()) &&
-            ($bytes_send<$new_length)
-        )
-        {
+            ($bytes_send < $new_length)
+        ) {
             $buffer = fread($file, $chunksize);
             print($buffer);
             flush();
@@ -94,6 +92,5 @@ function output_file($file, $name, $mime_type='')
     die();
 }
 set_time_limit(0);
-$file_path='../assignments/'.$_REQUEST['assignment_file'];
-output_file($file_path, ''.$_REQUEST['assignment_file'].'', 'text/plain');
-?>
+$file_path = '../assignments/' . $_REQUEST['assignment_file'];
+output_file($file_path, '' . $_REQUEST['assignment_file'] . '', 'text/plain');
