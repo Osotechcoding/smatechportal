@@ -4,8 +4,8 @@
 require_once "../languages/config.php";
 date_default_timezone_set("Africa/Lagos");
 //create an autoload function
-spl_autoload_register(function($filename){
-  require_once "../classes/".ucfirst($filename).".php";
+spl_autoload_register(function ($filename) {
+  require_once "../classes/" . ucfirst($filename) . ".php";
 });
 
 $Visitor        = new Visitors();
@@ -14,7 +14,7 @@ $Result         = new Result();
 $Staff          = new Staff();
 $Configuration  = new Configuration();
 $Administration = new Administration();
- $Admin         = new Admin();
+$Admin         = new Admin();
 $Pin_serial     = new Pins();
 $Alert          = new Alert();
 $Blog          = new Blog();
@@ -39,8 +39,7 @@ $VisaPSchoolDetails = $Administration->get_school_profile_details();
 $VisaPSoicalLink = $Administration->get_schoolsocil_link_details();
 //Session Details
 $session_data = $Administration->get_session_details();
-$activeSess =$Administration->get_active_session_details();
-if ($Admin->checkAdminTokenExists($_SESSION['ADMIN_USERNAME'],$_SESSION['ADMIN_EMAIL'],$_SESSION['ADMIN_TOKEN']) === false) {
+$activeSess = $Administration->get_active_session_details();
+if ($Admin->checkAdminTokenExists($_SESSION['ADMIN_USERNAME'], $_SESSION['ADMIN_EMAIL'], $_SESSION['ADMIN_TOKEN']) === false) {
   $Configuration->destroy();
 }
- ?>
