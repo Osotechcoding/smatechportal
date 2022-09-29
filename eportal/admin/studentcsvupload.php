@@ -62,7 +62,7 @@ require_once "helpers/helper.php";
             <div class="text-center mt-3">
               <h3 class="text-center text-info"> Bulk
                 Student Registration Via CSV</h3>
-              <p><a href="../csv/student_csv.xlsx" target="_blank"
+              <p><a href="../csv/student_csv.csv" target="_blank"
                   style="text-decoration:none;color:red; font-weight:700;">Click
                   Here</a> to
                 Download Sample File</p>
@@ -74,9 +74,9 @@ require_once "helpers/helper.php";
                     <div class="col-6">
                       <input type="hidden" name="action" value="upload_student_bulk_csv_data">
                       <div class="form-group">
-                        <label for="studentCsvFile"> SELECT FILE</label>
+                        <label for="studentCsvFile"> SELECT (csv File Only)</label>
                         <input type="file" autocomplete="off" id="admission-no" class="form-control"
-                          placeholder="***********" name="studentCsvFile" id="studentCsvFile">
+                          placeholder="***********" name="studentCsvFile" id="studentCsvFile" accept=".csv">
                       </div>
                     </div>
                     <div class="col-6">
@@ -89,15 +89,15 @@ require_once "helpers/helper.php";
                       </div>
                     </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <!-- <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="admission_year"> Admission Year</label>
                         <input type="text" onpaste="return false;" autocomplete="off" id="admission_year"
                           class="form-control" placeholder="e.g 2022" name="admission_year">
 
                       </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    </div> -->
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="form-group">
                         <label for="auth_code">Pass Code</label>
                         <input type="password" onpaste="return false;" autocomplete="off" id="auth_code"
