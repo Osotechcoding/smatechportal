@@ -41,7 +41,7 @@ require_once "helpers/helper.php";
                 <li class="breadcrumb-item"><a
                     href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']); ?></a>
                 </li>
-                <li class="breadcrumb-item active">Student Result
+                <li class="breadcrumb-item active">Student Registration
                 </li>
               </ol>
             </div>
@@ -60,17 +60,19 @@ require_once "helpers/helper.php";
         <div class="col-lg-10 col-md-10 col-sm-12">
           <div class="card">
             <div class="text-center mt-3">
-              <h3 class="text-center text-info">Register Bulk
-                Student Via CSV</h3>
-              <p><a href="../avatar.jpg" style="text-decoration:none;color:red; font-weight:700;">Click Here</a> to
-                Download Sample Demo</p>
+              <h3 class="text-center text-info"> Bulk
+                Student Registration Via CSV</h3>
+              <p><a href="../csv/student_csv.xlsx" target="_blank"
+                  style="text-decoration:none;color:red; font-weight:700;">Click
+                  Here</a> to
+                Download Sample File</p>
             </div>
             <div class="card-body">
-              <form class="form" id="SingleStudentResult_form">
+              <form class="form" id="bulkStudentresgistration_form">
                 <div class="form-body">
                   <div class="row">
                     <div class="col-6">
-                      <input type="hidden" name="action" value="upload_students_via_csv">
+                      <input type="hidden" name="action" value="upload_student_bulk_csv_data">
                       <div class="form-group">
                         <label for="studentCsvFile"> SELECT FILE</label>
                         <input type="file" autocomplete="off" id="admission-no" class="form-control"
@@ -79,8 +81,8 @@ require_once "helpers/helper.php";
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="result_class"> Class/Grade</label>
-                        <select name="result_class" id="result_class" class="form-control custom-select">
+                        <label for="student_class"> Class/Grade</label>
+                        <select name="student_class" id="student_class" class="form-control custom-select">
                           <option value="" selected>Choose...</option>
                           <?php echo $Administration->get_classroom_InDropDown_list(); ?>
                         </select>
@@ -89,17 +91,17 @@ require_once "helpers/helper.php";
 
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="form-group">
-                        <label for="auth_pass"> Admission Year</label>
-                        <input type="text" onpaste="return false;" autocomplete="off" id="year" class="form-control"
-                          placeholder="2022" name="year">
+                        <label for="admission_year"> Admission Year</label>
+                        <input type="text" onpaste="return false;" autocomplete="off" id="admission_year"
+                          class="form-control" placeholder="e.g 2022" name="admission_year">
 
                       </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="form-group">
-                        <label for="auth_pass"> Authentication Code</label>
-                        <input type="password" autocomplete="off" id="auth_pass" class="form-control"
-                          placeholder="*******" name="auth_pass">
+                        <label for="auth_code">Pass Code</label>
+                        <input type="password" onpaste="return false;" autocomplete="off" id="auth_code"
+                          class="form-control" placeholder="*******" name="auth_code">
 
                       </div>
                     </div>
@@ -129,6 +131,36 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Vendor JS-->
   <?php include "../template/FooterScript.php"; ?>
   <script src="smappjs/bulkstudentcsvupload.js"></script>
+  <script>
+  $(document).ready(function() {
+    $("#bulkStudentresgistration_form").on("submit", function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: "../actions/actions",
+        type: "POST",
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend() {
+          $(".__loadingBtn__").html(
+            '<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",
+            true);
+        },
+        success: function(data) {
+          setTimeout(() => {
+            $(".__loadingBtn__").html('Upload').attr("disabled", false);
+            // $("#video_form")[0].reset();
+            $("#server-response").html(data);
+            //alert(data);
+          }, 2500);
+        }
+
+      });
+    })
+
+  })
+  </script>
   <!-- BEGIN: Page JS-->
 </body>
 <!-- END: Body-->

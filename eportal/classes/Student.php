@@ -1080,732 +1080,742 @@ class Student
 		//grade_class,mark_grade,score_from,score_to,score_remark,school_ses
 		$this->response = "";
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_result_grading_tbl` WHERE `grade_class`=? AND ?>=
-`score_from` AND ? <= `score_to`");
-		$this->stmt->execute(array($gClass, $markObtained, $markObtained));
-		if ($this->stmt->rowCount() > 0) {
-			$response = $this->stmt->fetchAll();
-			foreach ($response as $value) {
-				$this->response = $value;
-			}
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+`score_from` AND ? <= `score_to`"); $this->stmt->execute(array($gClass, $markObtained, $markObtained));
+  if ($this->stmt->rowCount() > 0) {
+  $response = $this->stmt->fetchAll();
+  foreach ($response as $value) {
+  $this->response = $value;
+  }
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	//get all subejcts offered by the students
-	public function get_student_offered_subjects($stdGrade)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT count(id) as total_sub FROM `visap_registered_subject_tbl` WHERE
+  //get all subejcts offered by the students
+  public function get_student_offered_subjects($stdGrade)
+  {
+  $this->stmt = $this->dbh->prepare("SELECT count(id) as total_sub FROM `visap_registered_subject_tbl` WHERE
   subject_class=?");
-		$this->stmt->execute(array($stdGrade));
-		if ($this->stmt->rowCount() > 0) {
-			$reSet = $this->stmt->fetch();
-			$this->response = $reSet->total_sub;
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+  $this->stmt->execute(array($stdGrade));
+  if ($this->stmt->rowCount() > 0) {
+  $reSet = $this->stmt->fetch();
+  $this->response = $reSet->total_sub;
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	public function count_all_online_students_by_class($stdGrade)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE is_online='1' AND studentClass=? AND
+  public function count_all_online_students_by_class($stdGrade)
+  {
+  $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE is_online='1' AND studentClass=? AND
   stdAdmStatus='Active' ORDER BY stdSurName ASC LIMIT 20");
-		$this->stmt->execute([$stdGrade]);
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+  $this->stmt->execute([$stdGrade]);
+  if ($this->stmt->rowCount() > 0) {
+  $this->response = $this->stmt->fetchAll();
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	public function get_all_my_class_mates($stdGrade)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE stdAdmStatus='Active' AND studentClass=?
+  public function get_all_my_class_mates($stdGrade)
+  {
+  $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE stdAdmStatus='Active' AND studentClass=?
   ORDER BY stdSurName ASC");
-		$this->stmt->execute([$stdGrade]);
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+  $this->stmt->execute([$stdGrade]);
+  if ($this->stmt->rowCount() > 0) {
+  $this->response = $this->stmt->fetchAll();
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	public function upload_student_assignments($data, $file)
-	{
-		$subject = $this->config->Clean($data['subject']);
-		$stdGrade = $this->config->Clean($data['std_grade']);
-		$sdate = $this->config->Clean(date("Y-m-d", strtotime($data['sdate'])));
-		$topic = $this->config->Clean($data['topic']);
-		$note = $this->config->Clean($data['note']);
-		$uploadedBy = $this->config->Clean($data['uploadedBy']);
-		$bypass = $this->config->Clean($data['bypass']);
-		$term = $this->config->Clean($data['term']);
-		$schl_sess = $this->config->Clean($data['school_session']);
+  public function upload_student_assignments($data, $file)
+  {
+  $subject = $this->config->Clean($data['subject']);
+  $stdGrade = $this->config->Clean($data['std_grade']);
+  $sdate = $this->config->Clean(date("Y-m-d", strtotime($data['sdate'])));
+  $topic = $this->config->Clean($data['topic']);
+  $note = $this->config->Clean($data['note']);
+  $uploadedBy = $this->config->Clean($data['uploadedBy']);
+  $bypass = $this->config->Clean($data['bypass']);
+  $term = $this->config->Clean($data['term']);
+  $schl_sess = $this->config->Clean($data['school_session']);
 
-		$assignmentFile_name = $file['assignmentFile']['name'];
-		$assignmentFile_size = $file['assignmentFile']['size'] / 1024;
-		$assignmentFile_temp = $file['assignmentFile']['tmp_name'];
-		$assignmentFile_error = $file['assignmentFile']['error'];
-		$allowed = array("docx", "docxs", "docs", "pdf", "xlsx", "xls");
-		$name_div = explode(".", $assignmentFile_name);
-		$image_ext = strtolower(end($name_div));
-		//check for values
-		if (
-			$this->config->isEmptyStr($subject) || $this->config->isEmptyStr($stdGrade) || $this->config->isEmptyStr($sdate)
-			|| $this->config->isEmptyStr($topic) || $this->config->isEmptyStr($note) || $this->config->isEmptyStr($uploadedBy) ||
-			$this->config->isEmptyStr($assignmentFile_name)
-		) {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"Invalid form Submission, Please check and try again!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		} elseif ($this->config->isEmptyStr($bypass) || $bypass !== md5("oiza1")) {
-			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication, Please check your Connection and try
+  $assignmentFile_name = $file['assignmentFile']['name'];
+  $assignmentFile_size = $file['assignmentFile']['size'] / 1024;
+  $assignmentFile_temp = $file['assignmentFile']['tmp_name'];
+  $assignmentFile_error = $file['assignmentFile']['error'];
+  $allowed = array("docx", "docxs", "docs", "pdf", "xlsx", "xls");
+  $name_div = explode(".", $assignmentFile_name);
+  $image_ext = strtolower(end($name_div));
+  //check for values
+  if (
+  $this->config->isEmptyStr($subject) || $this->config->isEmptyStr($stdGrade) || $this->config->isEmptyStr($sdate)
+  || $this->config->isEmptyStr($topic) || $this->config->isEmptyStr($note) || $this->config->isEmptyStr($uploadedBy) ||
+  $this->config->isEmptyStr($assignmentFile_name)
+  ) {
+  $this->response = $this->alert->alert_toastr(
+  "error",
+  "Invalid form Submission, Please check and try again!",
+  __OSO_APP_NAME__ . " Says"
+  );
+  } elseif ($this->config->isEmptyStr($bypass) || $bypass !== md5("oiza1")) {
+  $this->response = $this->alert->alert_toastr("error", "Invalid Authentication, Please check your Connection and try
   again!", __OSO_APP_NAME__ . " Says");
-		} elseif (!in_array($image_ext, $allowed)) {
-			$this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try
+  } elseif (!in_array($image_ext, $allowed)) {
+  $this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try
   again!", __OSO_APP_NAME__ . " Says");
-		} elseif ($assignmentFile_size > 100) {
-			$this->response = $this->alert->alert_toastr("error", "Your File Size should not exceed 100KB, Your Selected file Size
+  } elseif ($assignmentFile_size > 100) {
+  $this->response = $this->alert->alert_toastr("error", "Your File Size should not exceed 100KB, Your Selected file Size
   is :" . number_format($assignmentFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
-		} elseif ($assignmentFile_error !== 0) {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"There was an error Uploading your File, Try again!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		} else {
-			//check for duplicate entry
-			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE teacherId=? AND subject=? AND stdGrade=?
+  } elseif ($assignmentFile_error !== 0) {
+  $this->response = $this->alert->alert_toastr(
+  "error",
+  "There was an error Uploading your File, Try again!",
+  __OSO_APP_NAME__ . " Says"
+  );
+  } else {
+  //check for duplicate entry
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE teacherId=? AND subject=? AND stdGrade=?
   AND submission_date=? AND topic=? AND term=? AND schl_session=? LIMIT 1");
-			$this->stmt->execute(array($uploadedBy, $subject, $stdGrade, $sdate, $topic, $term, $schl_sess));
-			if ($this->stmt->rowCount() == 1) {
-				$this->response = $this->alert->alert_toastr("error", "This Assignment is already uploaded!", __OSO_APP_NAME__ . "
+  $this->stmt->execute(array($uploadedBy, $subject, $stdGrade, $sdate, $topic, $term, $schl_sess));
+  if ($this->stmt->rowCount() == 1) {
+  $this->response = $this->alert->alert_toastr("error", "This Assignment is already uploaded!", __OSO_APP_NAME__ . "
   Says");
-			} else {
-				$file_realName = $subject . "_" . mt_rand(1240, 99999999) . "." . $image_ext;
-				//lets update the student passport in the db
-				$file_destination = "../assignments/" . $file_realName;
-				try {
-					$this->dbh->beginTransaction();
-					$created_at = date("Y-m-d");
-					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_assignment_tbl`
+  } else {
+  $file_realName = $subject . "_" . mt_rand(1240, 99999999) . "." . $image_ext;
+  //lets update the student passport in the db
+  $file_destination = "../assignments/" . $file_realName;
+  try {
+  $this->dbh->beginTransaction();
+  $created_at = date("Y-m-d");
+  $this->stmt = $this->dbh->prepare("INSERT INTO `visap_assignment_tbl`
   (teacherId,subject,stdGrade,submission_date,topic,note,ass_content,created_at,term,schl_session) VALUES
   (?,?,?,?,?,?,?,?,?,?);");
-					if ($this->stmt->execute(array(
-						$uploadedBy, $subject, $stdGrade, $sdate, $topic, $note, $file_realName, $created_at,
-						$term, $schl_sess
-					))) {
-						if ($this->config->move_file_to_folder($assignmentFile_temp, $file_destination)) {
-							$this->dbh->commit();
-							$this->response = $this->alert->alert_toastr("success", "Assignment Uploaded Successfully", __OSO_APP_NAME__ . "
+  if ($this->stmt->execute(array(
+  $uploadedBy, $subject, $stdGrade, $sdate, $topic, $note, $file_realName, $created_at,
+  $term, $schl_sess
+  ))) {
+  if ($this->config->move_file_to_folder($assignmentFile_temp, $file_destination)) {
+  $this->dbh->commit();
+  $this->response = $this->alert->alert_toastr("success", "Assignment Uploaded Successfully", __OSO_APP_NAME__ . "
   Says") . "<script>
   setTimeout(() => {
     window.location.reload();
   }, 500);
   </script>";
-						}
-					} else {
-						$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ . "
+  }
+  } else {
+  $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ . "
   Says");
-					}
-				} catch (PDOException $e) {
-					$this->dbh->rollback();
-					if (file_exists($file_destination)) {
-						unlink($file_destination);
-					}
-					$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
+  }
+  } catch (PDOException $e) {
+  $this->dbh->rollback();
+  if (file_exists($file_destination)) {
+  unlink($file_destination);
+  }
+  $this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
   Says");
-				}
-			}
-		}
+  }
+  }
+  }
 
-		return $this->response;
-		$this->dbh = null;
-	}
+  return $this->response;
+  $this->dbh = null;
+  }
 
-	public function get_all_students_assignments()
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl`ORDER BY subject ASC");
-		$this->stmt->execute();
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+  public function get_all_students_assignments()
+  {
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl`ORDER BY subject ASC");
+  $this->stmt->execute();
+  if ($this->stmt->rowCount() > 0) {
+  $this->response = $this->stmt->fetchAll();
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	public function get_all_students_assignments_by_class($stdGrade)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE stdGrade=? ORDER BY subject ASC");
-		$this->stmt->execute([$stdGrade]);
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+  public function get_all_students_assignments_by_class($stdGrade)
+  {
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE stdGrade=? ORDER BY subject ASC");
+  $this->stmt->execute([$stdGrade]);
+  if ($this->stmt->rowCount() > 0) {
+  $this->response = $this->stmt->fetchAll();
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	//filter_class_assignmentByDate()
-	public function filter_class_assignmentByDate($stdGrade, $subject, $from, $to)
-	{
-		$from_date = $this->config->Clean(date("Y-m-d", strtotime($from)));
-		$to_date = $this->config->Clean(date("Y-m-d", strtotime($to)));
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE stdGrade=? AND subject=? AND
+  //filter_class_assignmentByDate()
+  public function filter_class_assignmentByDate($stdGrade, $subject, $from, $to)
+  {
+  $from_date = $this->config->Clean(date("Y-m-d", strtotime($from)));
+  $to_date = $this->config->Clean(date("Y-m-d", strtotime($to)));
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE stdGrade=? AND subject=? AND
   DATE(created_at) BETWEEN ? AND ? ORDER BY subject ASC");
-		$this->stmt->execute([$stdGrade, $subject, $from_date, $to_date]);
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+  $this->stmt->execute([$stdGrade, $subject, $from_date, $to_date]);
+  if ($this->stmt->rowCount() > 0) {
+  $this->response = $this->stmt->fetchAll();
+  return $this->response;
+  $this->dbh = null;
+  }
+  }
 
-	public function save_change_student_new_password($data)
-	{
-		$oldpass = $this->config->Clean($data['oldpassword']);
-		$newpass = $this->config->Clean($data['newpassword']);
-		$cpass = $this->config->Clean($data['cpassword']);
-		$stdId = $this->config->Clean($data['studentId']);
-		//check for empty
-		if ($this->config->isEmptyStr($oldpass)) {
-			$this->response = $this->alert->alert_toastr("error", "Your Current Password is Required!", __OSO_APP_NAME__ . "
+  public function save_change_student_new_password($data)
+  {
+  $oldpass = $this->config->Clean($data['oldpassword']);
+  $newpass = $this->config->Clean($data['newpassword']);
+  $cpass = $this->config->Clean($data['cpassword']);
+  $stdId = $this->config->Clean($data['studentId']);
+  //check for empty
+  if ($this->config->isEmptyStr($oldpass)) {
+  $this->response = $this->alert->alert_toastr("error", "Your Current Password is Required!", __OSO_APP_NAME__ . "
   Says");
-		} elseif ($this->config->isEmptyStr($newpass)) {
-			$this->response = $this->alert->alert_toastr("error", "Enter the new password to proceed!", __OSO_APP_NAME__ . "
+  } elseif ($this->config->isEmptyStr($newpass)) {
+  $this->response = $this->alert->alert_toastr("error", "Enter the new password to proceed!", __OSO_APP_NAME__ . "
   Says");
-		} elseif (strlen($newpass) < 8) {
-			$this->response = $this->alert->alert_toastr("error", "Password cannot be less than
+  } elseif (strlen($newpass) < 8) { $this->response = $this->alert->alert_toastr("error", "Password cannot be less than
     eight (8) characters!", __OSO_APP_NAME__ . " Says");
-		} elseif ($this->config->isEmptyStr($cpass)) {
-			$this->response = $this->alert->alert_toastr("error", "Confirm your new Password to continue!", __OSO_APP_NAME__ . "
+    } elseif ($this->config->isEmptyStr($cpass)) {
+    $this->response = $this->alert->alert_toastr("error", "Confirm your new Password to continue!", __OSO_APP_NAME__ . "
     Says");
-		} elseif ($newpass !== $cpass) {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"New Password and Confirm Password not match!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		} else {
-			//check for the current password entered
-			$student_data = self::get_student_data_byId($stdId);
-			$db_password = $student_data->stdPassword;
-			if (!$this->config->check_two_passwords_hash($oldpass, $db_password)) {
-				$this->response = $this->alert->alert_toastr("error", "Invalid Old Password Entered!", __OSO_APP_NAME__ . " Says");
-			} else {
-				try {
-					$this->dbh->beginTransaction();
-					$hashed_password = $this->config->encrypt_user_password($newpass);
-					$this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET stdPassword=? WHERE stdId=? LIMIT 1");
-					if ($this->stmt->execute(array($hashed_password, $stdId))) {
-						$this->dbh->commit();
-						$this->response = $this->alert->alert_toastr(
-							"success",
-							"Password Changed Successfully, logging out...",
-							__OSO_APP_NAME__ . " Says"
-						) . "<script>
+    } elseif ($newpass !== $cpass) {
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "New Password and Confirm Password not match!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    } else {
+    //check for the current password entered
+    $student_data = self::get_student_data_byId($stdId);
+    $db_password = $student_data->stdPassword;
+    if (!$this->config->check_two_passwords_hash($oldpass, $db_password)) {
+    $this->response = $this->alert->alert_toastr("error", "Invalid Old Password Entered!", __OSO_APP_NAME__ . " Says");
+    } else {
+    try {
+    $this->dbh->beginTransaction();
+    $hashed_password = $this->config->encrypt_user_password($newpass);
+    $this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET stdPassword=? WHERE stdId=? LIMIT 1");
+    if ($this->stmt->execute(array($hashed_password, $stdId))) {
+    $this->dbh->commit();
+    $this->response = $this->alert->alert_toastr(
+    "success",
+    "Password Changed Successfully, logging out...",
+    __OSO_APP_NAME__ . " Says"
+    ) . "<script>
     setTimeout(() => {
       window.location.href = 'logout?action=logout';
     }, 500);
     </script>";
-					} else {
-						$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
-							" Says");
-					}
-				} catch (PDOException $e) {
-					$this->dbh->rollback();
-					$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
+    } else {
+    $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+    " Says");
+    }
+    } catch (PDOException $e) {
+    $this->dbh->rollback();
+    $this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
     Says");
-				}
-			}
-		}
-		return $this->response;
-		$this->dbh = null;
-	}
+    }
+    }
+    }
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	public function get_assignmentById($assId)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE assId=? LIMIT 1");
-		$this->stmt->execute([$assId]);
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    public function get_assignmentById($assId)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE assId=? LIMIT 1");
+    $this->stmt->execute([$assId]);
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	public function submit_myassignment_answer($data, $file)
-	{
-		$subject = $this->config->Clean($data['subject']);
-		$stdId = $this->config->Clean($data['stdId']);
-		$teacherId = $this->config->Clean($data['teacher']);
-		$stdRegCode = $this->config->Clean($data['stdRegCode']);
-		$stdGrade = $this->config->Clean($data['student_class']);
-		$assignmentId = $this->config->Clean($data['assignmentId']);
-		$bypass = $this->config->Clean($data['bypass']);
-		$term = $this->config->Clean($data['academic_term']);
-		$schl_sess = $this->config->Clean($data['school_sess']);
-		$submitted_at = date("Y-m-d");
+    public function submit_myassignment_answer($data, $file)
+    {
+    $subject = $this->config->Clean($data['subject']);
+    $stdId = $this->config->Clean($data['stdId']);
+    $teacherId = $this->config->Clean($data['teacher']);
+    $stdRegCode = $this->config->Clean($data['stdRegCode']);
+    $stdGrade = $this->config->Clean($data['student_class']);
+    $assignmentId = $this->config->Clean($data['assignmentId']);
+    $bypass = $this->config->Clean($data['bypass']);
+    $term = $this->config->Clean($data['academic_term']);
+    $schl_sess = $this->config->Clean($data['school_sess']);
+    $submitted_at = date("Y-m-d");
 
-		$answerFile_name = $file['ass_file']['name'];
-		$answerFile_size = $file['ass_file']['size'] / 1024;
-		$answerFile_temp = $file['ass_file']['tmp_name'];
-		$answerFile_error = $file['ass_file']['error'];
-		$allowed = array("docx", "docxs", "docs", "pdf", "xlsx", "xls");
-		$name_div = explode(".", $answerFile_name);
-		$image_ext = strtolower(end($name_div));
-		//check for values
-		if (
-			$this->config->isEmptyStr($subject) || $this->config->isEmptyStr($stdGrade) ||
-			$this->config->isEmptyStr($answerFile_name)
-		) {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"Invalid form Submission, Please check and try again!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		} elseif ($this->config->isEmptyStr($bypass) || $bypass !== md5("oiza1")) {
-			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication, Please check your Connection and try
+    $answerFile_name = $file['ass_file']['name'];
+    $answerFile_size = $file['ass_file']['size'] / 1024;
+    $answerFile_temp = $file['ass_file']['tmp_name'];
+    $answerFile_error = $file['ass_file']['error'];
+    $allowed = array("docx", "docxs", "docs", "pdf", "xlsx", "xls");
+    $name_div = explode(".", $answerFile_name);
+    $image_ext = strtolower(end($name_div));
+    //check for values
+    if (
+    $this->config->isEmptyStr($subject) || $this->config->isEmptyStr($stdGrade) ||
+    $this->config->isEmptyStr($answerFile_name)
+    ) {
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "Invalid form Submission, Please check and try again!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    } elseif ($this->config->isEmptyStr($bypass) || $bypass !== md5("oiza1")) {
+    $this->response = $this->alert->alert_toastr("error", "Invalid Authentication, Please check your Connection and try
     again!", __OSO_APP_NAME__ . " Says");
-		} elseif (!in_array($image_ext, $allowed)) {
-			$this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try
+    } elseif (!in_array($image_ext, $allowed)) {
+    $this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try
     again!", __OSO_APP_NAME__ . " Says");
-		} elseif ($answerFile_size > 100) {
-			$this->response = $this->alert->alert_toastr("error", "Your File Size should not exceed 100KB, Your Selected file
+    } elseif ($answerFile_size > 100) {
+    $this->response = $this->alert->alert_toastr("error", "Your File Size should not exceed 100KB, Your Selected file
     Size is :" . number_format($answerFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
-		} elseif ($answerFile_error !== 0) {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"There was an error Uploading your File, Try again!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		} else {
-			//check for duplicate entry
-			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE question_id=? AND
+    } elseif ($answerFile_error !== 0) {
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "There was an error Uploading your File, Try again!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    } else {
+    //check for duplicate entry
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE question_id=? AND
     tId=? AND stdRegno=? AND subject=? AND stdGrade=? AND submitted_at=? AND term=? AND school_session=? LIMIT 1");
-			$this->stmt->execute(array(
-				$assignmentId, $teacherId, $stdRegCode, $subject, $stdGrade, $submitted_at, $term,
-				$schl_sess
-			));
-			if ($this->stmt->rowCount() == 1) {
-				$this->response = $this->alert->alert_toastr("error", "This Assignment is already Submitted!", __OSO_APP_NAME__ . "
+    $this->stmt->execute(array(
+    $assignmentId, $teacherId, $stdRegCode, $subject, $stdGrade, $submitted_at, $term,
+    $schl_sess
+    ));
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->alert->alert_toastr("error", "This Assignment is already Submitted!", __OSO_APP_NAME__ . "
     Says");
-			} else {
-				$file_realName = $stdId . $stdRegCode . "_" . mt_rand(140, 9999999) . "." . $image_ext;
-				//lets update the student passport in the db
-				$file_destination = "../student-assignments/" . $file_realName;
-				try {
-					$this->dbh->beginTransaction();
-					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_submitted_class_assignment_tbl`
+    } else {
+    $file_realName = $stdId . $stdRegCode . "_" . mt_rand(140, 9999999) . "." . $image_ext;
+    //lets update the student passport in the db
+    $file_destination = "../student-assignments/" . $file_realName;
+    try {
+    $this->dbh->beginTransaction();
+    $this->stmt = $this->dbh->prepare("INSERT INTO `visap_submitted_class_assignment_tbl`
     (question_id,tId,stdRegno,subject,stdGrade,answer,term,school_session,Submitted_at) VALUES (?,?,?,?,?,?,?,?,?);");
-					if ($this->stmt->execute(array(
-						$assignmentId, $teacherId, $stdRegCode, $subject, $stdGrade, $file_realName, $term,
-						$schl_sess, $submitted_at
-					))) {
-						if ($this->config->move_file_to_folder($answerFile_temp, $file_destination)) {
-							$this->dbh->commit();
-							$this->response = $this->alert->alert_toastr("success", "Assignment Uploaded Successfully", __OSO_APP_NAME__ . "
+    if ($this->stmt->execute(array(
+    $assignmentId, $teacherId, $stdRegCode, $subject, $stdGrade, $file_realName, $term,
+    $schl_sess, $submitted_at
+    ))) {
+    if ($this->config->move_file_to_folder($answerFile_temp, $file_destination)) {
+    $this->dbh->commit();
+    $this->response = $this->alert->alert_toastr("success", "Assignment Uploaded Successfully", __OSO_APP_NAME__ . "
     Says") . "<script>
     setTimeout(() => {
       window.location.reload();
     }, 500);
     </script>";
-						}
-					} else {
-						$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
-							" Says");
-					}
-				} catch (PDOException $e) {
-					$this->dbh->rollback();
-					if (file_exists($file_destination)) {
-						unlink($file_destination);
-					}
-					$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
+    }
+    } else {
+    $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+    " Says");
+    }
+    } catch (PDOException $e) {
+    $this->dbh->rollback();
+    if (file_exists($file_destination)) {
+    unlink($file_destination);
+    }
+    $this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
     Says");
-				}
-			}
-		}
+    }
+    }
+    }
 
-		return $this->response;
-		$this->dbh = null;
-	}
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	public function get_all_my_submitted_assignments($stdRegNo, $stdGrade)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE stdRegno=? AND
+    public function get_all_my_submitted_assignments($stdRegNo, $stdGrade)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE stdRegno=? AND
     stdGrade=? ORDER BY subject ASC");
-		$this->stmt->execute([$stdRegNo, $stdGrade]);
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    $this->stmt->execute([$stdRegNo, $stdGrade]);
+    if ($this->stmt->rowCount() > 0) {
+    $this->response = $this->stmt->fetchAll();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	public function get_all_student_submitted_assignments_by_staffId($staffId)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE tId=? ORDER BY subject
+    public function get_all_student_submitted_assignments_by_staffId($staffId)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE tId=? ORDER BY subject
     ASC");
-		$this->stmt->execute([$staffId]);
-		if ($this->stmt->rowCount() > 0) {
-			$this->response = $this->stmt->fetchAll();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    $this->stmt->execute([$staffId]);
+    if ($this->stmt->rowCount() > 0) {
+    $this->response = $this->stmt->fetchAll();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	//
-	public function submit_marked_student_assignments($data)
-	{
-		$stdRegNo = $this->config->Clean($data['admNo']);
-		$aId = $this->config->Clean($data['assIdd']);
-		$tId = $this->config->Clean($data['teacher']);
-		$subject = $this->config->Clean($data['subject']);
-		$mark = $this->config->Clean($data['mark_obtained']);
-		$remark = $this->config->Clean($data['rnote']);
-		$studclass = $this->config->Clean($data['studclass']);
-		$bypass = $this->config->Clean($data['bypass']);
-		//check for null values
-		if ($this->config->isEmptyStr($bypass) || $bypass !== md5("oiza1")) {
-			$this->response = $this->alert->alert_toastr("error", "Authentication Failed, Please Check your Connection and try
+    //
+    public function submit_marked_student_assignments($data)
+    {
+    $stdRegNo = $this->config->Clean($data['admNo']);
+    $aId = $this->config->Clean($data['assIdd']);
+    $tId = $this->config->Clean($data['teacher']);
+    $subject = $this->config->Clean($data['subject']);
+    $mark = $this->config->Clean($data['mark_obtained']);
+    $remark = $this->config->Clean($data['rnote']);
+    $studclass = $this->config->Clean($data['studclass']);
+    $bypass = $this->config->Clean($data['bypass']);
+    //check for null values
+    if ($this->config->isEmptyStr($bypass) || $bypass !== md5("oiza1")) {
+    $this->response = $this->alert->alert_toastr("error", "Authentication Failed, Please Check your Connection and try
     again!", __OSO_APP_NAME__ . " Says");
-		} elseif (
-			$this->config->isEmptyStr($mark) || $this->config->isEmptyStr($aId) ||
-			$this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($remark)
-		) {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"Score and Remark is Required, Please Check and try again!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		} else {
-			//check if this assignment has been submitted once
-			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE aId=? AND tId=? AND
+    } elseif (
+    $this->config->isEmptyStr($mark) || $this->config->isEmptyStr($aId) ||
+    $this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($remark)
+    ) {
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "Score and Remark is Required, Please Check and try again!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    } else {
+    //check if this assignment has been submitted once
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE aId=? AND tId=? AND
     status=1 AND score!=0 AND stdRegno=? AND subject=? AND stdGrade=?");
-			$this->stmt->execute(array($aId, $tId, $stdRegNo, $subject, $studclass));
-			if ($this->stmt->rowCount() == 1) {
-				$this->response = $this->alert->alert_toastr(
-					"error",
-					"This Score and Remark is already submitted!",
-					__OSO_APP_NAME__ . " Says"
-				);
-			} else {
-				try {
-					$this->dbh->beginTransaction();
-					$this->stmt = $this->dbh->prepare("UPDATE `visap_submitted_class_assignment_tbl` SET score=?,
+    $this->stmt->execute(array($aId, $tId, $stdRegNo, $subject, $studclass));
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "This Score and Remark is already submitted!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    } else {
+    try {
+    $this->dbh->beginTransaction();
+    $this->stmt = $this->dbh->prepare("UPDATE `visap_submitted_class_assignment_tbl` SET score=?,
     status=?,note_to_student=? WHERE aId=? AND tId=? AND stdRegno=? AND subject=? LIMIT 1");
-					$status = 1;
-					if ($this->stmt->execute(array($mark, $status, $remark, $aId, $tId, $stdRegNo, $subject))) {
-						$this->dbh->commit();
-						$this->response = $this->alert->alert_toastr(
-							"success",
-							"Score Uploaded Successfully, reloading...",
-							__OSO_APP_NAME__ . " Says"
-						) . "<script>
+    $status = 1;
+    if ($this->stmt->execute(array($mark, $status, $remark, $aId, $tId, $stdRegNo, $subject))) {
+    $this->dbh->commit();
+    $this->response = $this->alert->alert_toastr(
+    "success",
+    "Score Uploaded Successfully, reloading...",
+    __OSO_APP_NAME__ . " Says"
+    ) . "<script>
     setTimeout(() => {
       window.location.reload();
     }, 500);
     </script>";
-					} else {
-						$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
-							" Says");
-					}
-				} catch (PDOException $e) {
-					$this->dbh->rollback();
-					$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
+    } else {
+    $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+    " Says");
+    }
+    } catch (PDOException $e) {
+    $this->dbh->rollback();
+    $this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
     Says");
-				}
-			}
-		}
-		return $this->response;
-		$this->dbh = null;
-	}
+    }
+    }
+    }
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	//remove assignment
-	public function remove_student_assignment_file_now($assId)
-	{
-		if (!$this->config->isEmptyStr($assId)) {
-			$data_file = self::get_assignmentById($assId);
-			$filePath = "../assignments/" . $data_file->ass_content;
-			try {
-				$this->dbh->beginTransaction();
-				//Delete the selected Subject
-				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_assignment_tbl` WHERE assId=? LIMIT 1");
-				if ($this->stmt->execute([$assId])) {
-					if (file_exists($filePath)) {
-						unlink($filePath);
-					}
-					$this->dbh->commit();
-					$this->response = $this->alert->alert_toastr("success", "Assignment Deleted Successfully", __OSO_APP_NAME__ . "
+    //remove assignment
+    public function remove_student_assignment_file_now($assId)
+    {
+    if (!$this->config->isEmptyStr($assId)) {
+    $data_file = self::get_assignmentById($assId);
+    $filePath = "../assignments/" . $data_file->ass_content;
+    try {
+    $this->dbh->beginTransaction();
+    //Delete the selected Subject
+    $this->stmt = $this->dbh->prepare("DELETE FROM `visap_assignment_tbl` WHERE assId=? LIMIT 1");
+    if ($this->stmt->execute([$assId])) {
+    if (file_exists($filePath)) {
+    unlink($filePath);
+    }
+    $this->dbh->commit();
+    $this->response = $this->alert->alert_toastr("success", "Assignment Deleted Successfully", __OSO_APP_NAME__ . "
     Says") . "<script>
     setTimeout(() => {
       window.location.reload();
     }, 500);
     </script>";
-				}
-			} catch (PDOException $e) {
-				$this->dbh->rollback();
-				$this->response = $this->alert->alert_toastr("error", "Failed to Delete Assignment: Error Occurred: " .
-					$e->getMessage(), __OSO_APP_NAME__ . " Says");
-			}
-		}
-		return $this->response;
-		$this->dbh = null;
-	}
+    }
+    } catch (PDOException $e) {
+    $this->dbh->rollback();
+    $this->response = $this->alert->alert_toastr("error", "Failed to Delete Assignment: Error Occurred: " .
+    $e->getMessage(), __OSO_APP_NAME__ . " Says");
+    }
+    }
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	public function student_bulk_promotions($data)
-	{
-		$promoted_to = $this->config->Clean($data['promoted_to']);
-		$auth_pass = $this->config->Clean($data['Auth']);
-		if (isset($data['marked'])) {
-			foreach ($data['marked'] as $keyId) {
-				if ($this->config->isEmptyStr($promoted_to)) {
-					$this->response = $this->alert->alert_toastr("error", "Please Choose a promotion class!", __OSO_APP_NAME__ . "
+    public function student_bulk_promotions($data)
+    {
+    $promoted_to = $this->config->Clean($data['promoted_to']);
+    $auth_pass = $this->config->Clean($data['Auth']);
+    if (isset($data['marked'])) {
+    foreach ($data['marked'] as $keyId) {
+    if ($this->config->isEmptyStr($promoted_to)) {
+    $this->response = $this->alert->alert_toastr("error", "Please Choose a promotion class!", __OSO_APP_NAME__ . "
     Says");
-				} elseif ($this->config->isEmptyStr($auth_pass)) {
-					$this->response = $this->alert->alert_toastr("error", "Authentication Code is Required!", __OSO_APP_NAME__ . "
+    } elseif ($this->config->isEmptyStr($auth_pass)) {
+    $this->response = $this->alert->alert_toastr("error", "Authentication Code is Required!", __OSO_APP_NAME__ . "
     Says");
-				} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
-					$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
-				} else {
-					//update the student class
-					try {
+    } elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+    $this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+    } else {
+    //update the student class
+    try {
 
-						$this->dbh->beginTransaction();
-						$this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=? WHERE stdId=?");
-						if ($this->stmt->execute(array($promoted_to, $keyId))) {
-							$this->dbh->commit();
-							$this->response = $this->alert->alert_toastr("success", "Promoted Successfully...", __OSO_APP_NAME__ . " Says") . "
+    $this->dbh->beginTransaction();
+    $this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=? WHERE stdId=?");
+    if ($this->stmt->execute(array($promoted_to, $keyId))) {
+    $this->dbh->commit();
+    $this->response = $this->alert->alert_toastr("success", "Promoted Successfully...", __OSO_APP_NAME__ . " Says") . "
     <script>
     setTimeout(() => {
       window.location.reload();
     }, 500);
     </script>";
-						} else {
-							$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
-								" Says");
-						}
-					} catch (PDOException $e) {
-						$this->dbh->rollback();
-						$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
+    } else {
+    $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+    " Says");
+    }
+    } catch (PDOException $e) {
+    $this->dbh->rollback();
+    $this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
     Says");
-					}
-				}
-			}
-		} else {
-			$this->response = $this->alert->alert_toastr(
-				"error",
-				"Please select atleast one student to promote!",
-				__OSO_APP_NAME__ . " Says"
-			);
-		}
-		return $this->response;
-		$this->dbh = null;
-	}
+    }
+    }
+    }
+    } else {
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "Please select atleast one student to promote!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    }
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	public function get_student_details_byRegNo($stdRegNo)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
+    public function get_student_details_byRegNo($stdRegNo)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
     full_name FROM $this->table_name WHERE stdRegNo=? LIMIT 1");
-		$this->stmt->execute(array($stdRegNo));
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    $this->stmt->execute(array($stdRegNo));
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
 
-	//get student psychomotor
-	public function getStudentPsychomotorDetails($stdReg, $stdGrade, $term, $session)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_psycho_tbl` WHERE reg_number=? AND student_class=? AND
+    //get student psychomotor
+    public function getStudentPsychomotorDetails($stdReg, $stdGrade, $term, $session)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_psycho_tbl` WHERE reg_number=? AND student_class=? AND
     term=? AND session=? LIMIT 1");
-		$this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    $this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	public function getStudentAffectiveDomainDetails($stdReg, $stdGrade, $term, $session)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND
+    public function getStudentAffectiveDomainDetails($stdReg, $stdGrade, $term, $session)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND
     term=? AND session=? LIMIT 1");
-		$this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    $this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
 
-	public function checkStudentTokenExists($name, $email, $token)
-	{
-		if (isset($name, $email, $token)) {
-			$this->stmt = $this->dbh->prepare("SELECT token FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT
+    public function checkStudentTokenExists($name, $email, $token)
+    {
+    if (isset($name, $email, $token)) {
+    $this->stmt = $this->dbh->prepare("SELECT token FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT
     1");
-			$this->stmt->execute(array($name, $email));
-			if ($this->stmt->rowCount() == 1) {
-				//collect the current token from db
-				$tokenRow = $this->stmt->fetch();
-				$currentToken = $tokenRow->token;
-				//compare the two tokens
-				if ($token !== $currentToken) {
-					//return false
-					$this->response = false;
-				}
-			}
-		}
-		return $this->response;
-		$this->dbh = null;
-	}
+    $this->stmt->execute(array($name, $email));
+    if ($this->stmt->rowCount() == 1) {
+    //collect the current token from db
+    $tokenRow = $this->stmt->fetch();
+    $currentToken = $tokenRow->token;
+    //compare the two tokens
+    if ($token !== $currentToken) {
+    //return false
+    $this->response = false;
+    }
+    }
+    }
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	//delete toke upon logged out
-	public function deleteStudentSessionToken($name, $email, $token)
-	{
-		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT 1");
-		if ($this->stmt->execute(array($name, $email))) {
-			$this->response = true;
-		}
-		return $this->response;
-		$this->dbh = null;
-	}
+    //delete toke upon logged out
+    public function deleteStudentSessionToken($name, $email, $token)
+    {
+    $this->stmt = $this->dbh->prepare("DELETE FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT 1");
+    if ($this->stmt->execute(array($name, $email))) {
+    $this->response = true;
+    }
+    return $this->response;
+    $this->dbh = null;
+    }
 
-	public function searchStudentByRegEmailPhone($q)
-	{
-		if (!$this->config->isEmptyStr($q)) {
-			$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
+    public function searchStudentByRegEmailPhone($q)
+    {
+    if (!$this->config->isEmptyStr($q)) {
+    $this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
     full_name FROM `{$this->table_name}` WHERE `stdRegNo`=? OR `stdEmail`=? OR `stdPhone`=? LIMIT 1");
-			$this->stmt->execute(array($q, $q, $q));
-			if ($this->stmt->rowCount() == '1') {
-				$this->response = $this->stmt->fetch();
-				return $this->response;
-				$this->dbh = null;
-			}
-		}
-	}
+    $this->stmt->execute(array($q, $q, $q));
+    if ($this->stmt->rowCount() == '1') {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
+    }
 
-	public function get_student_infoId($studentId)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_info_tbl` WHERE studentId=? LIMIT 1");
-		$this->stmt->execute([$studentId]);
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    public function get_student_infoId($studentId)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_info_tbl` WHERE studentId=? LIMIT 1");
+    $this->stmt->execute([$studentId]);
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	public function get_student_medical_infoId($studentId)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdmedical_tbl` WHERE studId=? LIMIT 1");
-		$this->stmt->execute([$studentId]);
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    public function get_student_medical_infoId($studentId)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdmedical_tbl` WHERE studId=? LIMIT 1");
+    $this->stmt->execute([$studentId]);
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	public function getAdmissionCardUser($stdRegNo)
-	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE usedBy=? AND pin_status=1 LIMIT 1");
-		$this->stmt->execute(array($stdRegNo));
-		if ($this->stmt->rowCount() == 1) {
-			$this->response = $this->stmt->fetch();
-			return $this->response;
-			$this->dbh = null;
-		}
-	}
+    public function getAdmissionCardUser($stdRegNo)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE usedBy=? AND pin_status=1 LIMIT 1");
+    $this->stmt->execute(array($stdRegNo));
+    if ($this->stmt->rowCount() == 1) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
 
-	public function registerBulkStudentUsingCSVFile($data, $csv_file)
-	{
-		$auth_pass = $this->config->Clean($data['auth_code']);
-		$studentClass = $this->config->Clean($data['student_class']);
-		$File_tmp = $csv_file['studentCsvFile']['tmp_name'];
-		$FileName = $csv_file['studentCsvFile']['name'];
-		$allowed = array("csv");
-		$name_div = explode(".", $FileName);
-		$image_ext = strtolower(end($name_div));
-		if (
-			$this->config->isEmptyStr($auth_pass) || $this->config->isEmptyStr($studentClass) ||
-			$this->config->isEmptyStr($FileName)
-		) {
-			$this->response = $this->alert->alert_toastr("warning", "Invalid form Submission, Pls try again!", __OSO_APP_NAME__
-				. " Says");
-		} elseif (!in_array($image_ext, $allowed)) {
-			$this->response = $this->alert->alert_toastr("error", "Only CSV format is allowed!", __OSO_APP_NAME__ . " Says");
-		} else {
-			$file_open = fopen($File_tmp, "r");
-			while (($csv_data = fgetcsv($file_open, 1000, ",")) !== false) {
-				//name the columns ndeeded
-				//surname,firstname,lastname,date_of_birth,gender,address,Phone,Admission_date,Type
-				$stdSurName = $this->config->Clean($csv_data[0]);
-				$stdUserName = $stdSurName;
-				$stdFirstName = $this->config->Clean($csv_data[1]);
-				$stdMiddleName = $this->config->Clean($csv_data[2]);
-				$stdDob = $this->config->Clean($csv_data[3]);
-				$stdGender = $this->config->Clean($csv_data[4]);
-				$stdAddress = $this->config->Clean($csv_data[5]);
-				$stdPhone = $this->config->Clean($csv_data[6]);
-				$stdApplyDate = $this->config->Clean(date("Y-m-d", strtotime($csv_data[7])));
-				$stdEmail = $this->config->Clean($csv_data[8]);
-				$stdApplyType = $this->config->Clean($csv_data[9]);
-				$default_pass = "student";
-				$stdPassword = $this->config->encrypt_user_password($default_pass);
-				$stdAdmStatus = "Active";
-				$stdRegNo = self::generate_admission_number(date("Y", strtotime($stdApplyDate)));
-				$stdConfToken = substr(md5(uniqid(mt_rand(), true)), 0, 14);
-				if ($this->config->check_single_data('visap_staff_tbl', 'staffEmail', $stdEmail)) {
+    public function registerBulkStudentUsingCSVFile($data, $csv_file)
+    {
+    $counter = 0;
+    $auth_pass = $this->config->Clean($data['auth_code']);
+    $studentClass = $this->config->Clean($data['student_class']);
+    $admission_year = $this->config->Clean($data['admission_year']);
+    $File_tmp = $csv_file['studentCsvFile']['tmp_name'];
+    $FileName = $csv_file['studentCsvFile']['name'];
+    $allowed = array("csv", "xlsx");
+    $name_div = explode(".", $FileName);
+    $image_ext = strtolower(end($name_div));
+    if (
+    $this->config->isEmptyStr($auth_pass) || $this->config->isEmptyStr($studentClass) ||
+    $this->config->isEmptyStr($FileName)
+    ) {
+    $this->response = $this->alert->alert_toastr("error", "Invalid Submission, Pls try again!", __OSO_APP_NAME__
+    . " Says");
+    } elseif (!in_array($image_ext, $allowed)) {
+    $this->response = $this->alert->alert_toastr("error", "Only CSV format is allowed!", __OSO_APP_NAME__ . " Says");
+    } else {
+    $file_open = fopen($File_tmp, "r");
+    // Skip the first line
+    fgetcsv($file_open);
+    while (($csv_data = fgetcsv($file_open, 1000, ",")) !== false) {
+    //name the columns ndeeded
+    //Surname,Firstname,Lastname,Date_of_birth,Gender,Address,Phone,Email,Admission_date,Student_Type, Admission_number
+    $stdSurName = $this->config->Clean($csv_data[0]);
+    $stdUserName = $stdSurName;
+    $stdFirstName = $this->config->Clean($csv_data[1]);
+    $stdMiddleName = $this->config->Clean($csv_data[2]);
+    $stdDob = $this->config->Clean(date("Y-m-d", strtotime($csv_data[3])));
+    $stdGender = $this->config->Clean($csv_data[4]);
+    $stdAddress = $this->config->Clean($csv_data[5]);
+    $stdPhone = $this->config->Clean($csv_data[6]);
+    $stdEmail = $this->config->Clean($csv_data[7]);
+    $stdApplyDate = $this->config->Clean(date("Y-m-d", strtotime($csv_data[8])));
+    $stdApplyType = $this->config->Clean($csv_data[9]);
+    $stdRegNo = $this->config->Clean($csv_data[10]);
+    $default_pass = "student";
+    $stdPassword = $this->config->encrypt_user_password($default_pass);
+    $stdAdmStatus = "Active";
+    //$stdRegNo = self::generate_admission_number($admission_year);
+    $stdConfToken = substr(md5(uniqid(mt_rand(), true)), 0, 14);
+    if ($this->config->check_single_data('visap_staff_tbl', 'staffEmail', $stdEmail)) {
 
-					$this->response = $this->alert->alert_toastr("error", "$stdEmail is already taken, Please try another email
+    $this->response = $this->alert->alert_toastr("error", "$stdEmail is already taken, Please try another email
     address!", __OSO_APP_NAME__ . " Says");
-				} elseif ($this->config->check_single_data('visap_student_tbl', 'stdEmail', $stdEmail)) {
+    } elseif ($this->config->check_single_data('visap_student_tbl', 'stdEmail', $stdEmail)) {
 
-					$this->response = $this->alert->alert_toastr("error", "$stdEmail is already taken on this Portal, Please try another
+    $this->response = $this->alert->alert_toastr("error", "$stdEmail is already taken on this Portal, Please try another
     Email address!", __OSO_APP_NAME__ . " Says");
-				} else {
-					try {
-						$this->dbh->beginTransaction();
-						$this->stmt = $this->dbh->prepare("INSERT INTO `{$this->table_name}`
+    } elseif ($this->config->check_single_data('visap_student_tbl', 'stdRegNo', $stdRegNo)) {
+
+    $this->response = $this->alert->alert_toastr(
+    "error",
+    "This admission Number $stdRegNo already exists!",
+    __OSO_APP_NAME__ . " Says"
+    );
+    } else {
+    try {
+    $this->dbh->beginTransaction();
+    $this->stmt = $this->dbh->prepare("INSERT INTO `{$this->table_name}`
     (stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdSurName,stdFirstName,stdMiddleName,stdDob,stdGender,stdAddress,stdPhone,stdAdmStatus,stdApplyDate,stdApplyType,stdConfToken)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-						if ($this->stmt->execute(array(
-							$stdRegNo, $stdEmail, $stdUserName, $stdPassword, $studentClass, $stdSurName,
-							$stdFirstName, $stdMiddleName, $stdDob, $stdGender, $stdAddress, $stdPhone, $stdAdmStatus, $stdApplyDate,
-							$stdApplyType, $stdConfToken
-						))) {
-							$this->dbh->commit();
-							$counter = $this->stmt->rowCount();
-							$this->dbh = null;
-							$this->response = $this->alert->alert_toastr(
-								"success",
-								"$counter of Student Uploaded Successfully...",
-								__OSO_APP_NAME__ . " Says"
-							) . "<script>
+    if ($this->stmt->execute(array(
+    $stdRegNo, $stdEmail, $stdUserName, $stdPassword, $studentClass, $stdSurName,
+    $stdFirstName, $stdMiddleName, $stdDob, $stdGender, $stdAddress, $stdPhone, $stdAdmStatus, $stdApplyDate,
+    $stdApplyType, $stdConfToken
+    ))) {
+    $this->dbh->commit();
+
+    $this->response = $this->alert->alert_toastr(
+    "success",
+    "Students Uploaded &amp; Registered Successfully...",
+    __OSO_APP_NAME__ . " Says"
+    ) . "<script>
     setTimeout(() => {
       window.location.reload();
     }, 1500);
     </script>";
-						} else {
-							$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
-								" Says");
-						}
-					} catch (PDOException $e) {
-						$this->dbh->rollback();
-						$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
+    } else {
+    $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+    " Says");
+    }
+    } catch (PDOException $e) {
+    $this->dbh->rollback();
+    $this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . "
     Says");
-					}
-				}
-			}
+    }
+    }
+    }
 
-			fclose($file_open);
-		}
+    fclose($file_open);
+    }
 
-		return $this->response;
-	}
-}
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
