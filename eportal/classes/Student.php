@@ -5,6 +5,7 @@
 /**
  *
  */
+
 require_once "Database.php";
 require_once "Session.php";
 require_once "Configuration.php";
@@ -1814,5 +1815,18 @@ class Student
 
     return $this->response;
     $this->dbh = null;
+    }
+
+
+    public function getAllStudents($student_class)
+    {
+    if (!$this->config->isEmptyStr($student_class)) {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE studentClass=?");
+    $this->stmt->execute([$student_class]);
+    if ($this->stmt->rowCount() > 0) {
+    $this->response = $this->stmt->fetchAll();
+    return $this->response;
+    }
+    }
     }
     }

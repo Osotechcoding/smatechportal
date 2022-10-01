@@ -9,8 +9,6 @@
 	spl_autoload_register(function ($filename) {
 		require_once "../classes/" . ucfirst($filename) . ".php";
 	});
-	?>
- <?php
 	//$ses_token = Session::set_xss_token();
 	$Configuration 	= new Configuration();
 	$Admin = new Admin();
@@ -574,12 +572,9 @@
 				}
 			}
 			//upload new student in csv file
-			if ($_POST['action'] === "upload_student_bulk_csv_data") {
-				$result = $Student->registerBulkStudentUsingCSVFile($_POST, $_FILES);
-				if ($result) {
-					echo $result;
-				}
-			}
+			//importMassStudentViaCSVFile
+			//registerBulkStudentUsingCSVFile
+
 			//staff salary payment action
 			//pay_staff_salary_now
 			if ($_POST['action'] === "pay_staff_salary_now") {

@@ -57,39 +57,43 @@ require_once "helpers/helper.php";
 
           </div>
         </div>
-        <div class="col-lg-10 col-md-10 col-sm-12">
-          <div class="card">
-            <div class="text-center mt-3">
-              <h3 class="text-center text-info"> Bulk
-                Student Registration Via CSV</h3>
-              <p><a href="../csv/student_csv.csv" target="_blank"
-                  style="text-decoration:none;color:red; font-weight:700;">Click
-                  Here</a> to
-                Download Sample File</p>
-            </div>
-            <div class="card-body">
-              <form class="form" id="bulkStudentresgistration_form">
-                <div class="form-body">
-                  <div class="row">
-                    <div class="col-6">
-                      <input type="hidden" name="action" value="upload_student_bulk_csv_data">
-                      <div class="form-group">
-                        <label for="studentCsvFile"> SELECT (csv File Only)</label>
-                        <input type="file" autocomplete="off" id="admission-no" class="form-control"
-                          placeholder="***********" name="studentCsvFile" id="studentCsvFile" accept=".csv">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card">
+              <div class="text-center mt-3">
+                <h3 class="text-center text-info"> Bulk
+                  Student Registration Via CSV</h3>
+                <p><a href="../csv/student_csv.xlsx" target="_blank"
+                    style="text-decoration:none;color:red; font-weight:700;">Click
+                    Here</a> to
+                  Download Sample File</p>
+                <p>Open the downloaded file with Microsoft Office Excel <br>Enter Your Student Details follwing the
+                  Partern on the Spreadsheet</p>
+              </div>
+              <div class="card-body">
+                <form class="form" id="bulkStudentresgistration_form">
+                  <div class="form-body">
+                    <div class="row">
+                      <div class="col-6">
+                        <input type="hidden" name="action" value="upload_student_bulk_csv_data">
+                        <div class="form-group">
+                          <label for="studentCsvFile"> SELECT (csv,xls or xlsx File Only)</label>
+                          <input type="file" autocomplete="off" id="admission-no" class="form-control"
+                            placeholder="***********" name="studentCsvFile" id="studentCsvFile"
+                            accept=".csv,.xls,.xlsx">
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="form-group">
-                        <label for="student_class"> Class/Grade</label>
-                        <select name="student_class" id="student_class" class="form-control custom-select">
-                          <option value="" selected>Choose...</option>
-                          <?php echo $Administration->get_classroom_InDropDown_list(); ?>
-                        </select>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="student_class"> Class/Grade</label>
+                          <select name="student_class" id="student_class" class="form-control custom-select">
+                            <option value="" selected>Choose...</option>
+                            <?php echo $Administration->get_classroom_InDropDown_list(); ?>
+                          </select>
+                        </div>
                       </div>
-                    </div>
 
-                    <!-- <div class="col-lg-6 col-md-6 col-sm-6">
+                      <!-- <div class="col-lg-6 col-md-6 col-sm-6">
                       <div class="form-group">
                         <label for="admission_year"> Admission Year</label>
                         <input type="text" onpaste="return false;" autocomplete="off" id="admission_year"
@@ -97,23 +101,80 @@ require_once "helpers/helper.php";
 
                       </div>
                     </div> -->
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <div class="form-group">
-                        <label for="auth_code">Pass Code</label>
-                        <input type="password" onpaste="return false;" autocomplete="off" id="auth_code"
-                          class="form-control" placeholder="*******" name="auth_code">
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="auth_code">Pass Code</label>
+                          <input type="password" onpaste="return false;" autocomplete="off" id="auth_code"
+                            class="form-control" placeholder="*******" name="auth_code">
 
+                        </div>
+                      </div>
+                      <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-dark mr-1 __loadingBtn__">Upload</button>
                       </div>
                     </div>
-                    <div class="col-12 d-flex justify-content-end">
-                      <button type="submit" class="btn btn-dark mr-1 __loadingBtn__">Upload</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- Export Form -->
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card">
+              <div class="text-center mt-3">
+                <h3 class="text-center text-info">Export Your student Details By Class</h3>
+              </div>
+              <div class="card-body">
+                <form class="form" action="./exportstudent" method="POST">
+                  <h6 class="text-center m-3"> <?php if (isset($_SESSION['alert_msg'])) {
+                                                  echo $_SESSION['alert_msg'];
+                                                  unset($_SESSION['alert_msg']);
+                                                } ?></h6>
+                  <div class="form-body">
+                    <div class="row">
+                      <div class="col-6">
+                        <input type="hidden" name="action" value="export_student_by_class">
+                        <div class="form-group">
+                          <label for="exp_type">Export Type</label>
+                          <select name="exp_type" id="exp_type" class="form-control custom-select">
+                            <option value="" selected>Choose...</option>
+                            <option value="xlsx">Xlsx</option>
+                            <option value="xls">Xls</option>
+                            <option value="csv">Csv</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="student_class"> Class/Grade</label>
+                          <select name="student_class" id="student_class" class="form-control custom-select">
+                            <option value="" selected>Choose...</option>
+                            <?php echo $Administration->get_classroom_InDropDown_list(); ?>
+                          </select>
+                        </div>
+                      </div>
+
+
+                      <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label for="auth_code">Pass Code</label>
+                          <input type="password" onpaste="return false;" autocomplete="off" id="auth_code"
+                            class="form-control" placeholder="*******" name="auth_code">
+
+                        </div>
+                      </div>
+                      <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" name="export_student_data_btn"
+                          class="btn btn-dark mr-1 __rollingloading__">Export Students</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
         <!-- content goes here -->
       </div>
     </div>
@@ -136,7 +197,7 @@ require_once "helpers/helper.php";
     $("#bulkStudentresgistration_form").on("submit", function(event) {
       event.preventDefault();
       $.ajax({
-        url: "../actions/actions",
+        url: "importstudentcsv",
         type: "POST",
         data: new FormData(this),
         contentType: false,
@@ -161,8 +222,6 @@ require_once "helpers/helper.php";
 
   })
   </script>
-  <!-- BEGIN: Page JS-->
 </body>
-<!-- END: Body-->
 
 </html>
