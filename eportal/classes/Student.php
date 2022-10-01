@@ -5,7 +5,6 @@
 /**
  *
  */
-//https://app.getpostman.com/join-team?invite_code=f93660972b690c6efbaaa623a70546ed
 require_once "Database.php";
 require_once "Session.php";
 require_once "Configuration.php";
@@ -22,9 +21,7 @@ class Student
 
 	public function __construct()
 	{
-		$this->dbh = null;
-		$conn = new Database;
-		$this->dbh = $conn->osotech_connect();
+		$this->dbh = osotech_connect();
 		$this->alert = new Alert;
 		$this->config = new Configuration;
 	}

@@ -30,4 +30,3 @@ public function osotech_connect(){
 }
 
 $Database = new Database();
- ?>
