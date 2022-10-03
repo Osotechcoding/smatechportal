@@ -1,7 +1,6 @@
-
-<?php 
+<?php
 date_default_timezone_set("Africa/Lagos");
-require_once 'Database.php';
+//require_once 'Database.php';
 require_once 'Osotech.php';
 //require_once 'OsotechMailer.php';
 
@@ -12,32 +11,28 @@ if ($request_method === "POST") {
 
 		if ($_POST['action'] === "send_feed_back_msg") {
 
-	$result = $Osotech->sendFeedBackMessage($_POST);
+			$result = $Osotech->sendFeedBackMessage($_POST);
 
-	if ($result) {
+			if ($result) {
 
-		echo $result;
-	}
-
+				echo $result;
+			}
 		}
 
 
-	if ($_POST['action'] === "submit_start_career_form") {
-	$result = $Osotech->submitStaffResumeApplicationForm($_POST,$_FILES);
-	if ($result) {
-		echo $result;
-	}
+		if ($_POST['action'] === "submit_start_career_form") {
+			$result = $Osotech->submitStaffResumeApplicationForm($_POST, $_FILES);
+			if ($result) {
+				echo $result;
+			}
 		}
 
 		//submit_blog_comment_
 		if ($_POST['action'] === "submit_blog_comment_") {
-	$result = $Osotech->submitClientBlogComment($_POST);
-	if ($result) {
-		echo $result;
-	}
+			$result = $Osotech->submitClientBlogComment($_POST);
+			if ($result) {
+				echo $result;
+			}
 		}
-
-
 	}
-
 }

@@ -1788,7 +1788,6 @@ class Student
     $stdApplyType, $stdConfToken
     ))) {
     $this->dbh->commit();
-
     $this->response = $this->alert->alert_toastr(
     "success",
     "Students Uploaded &amp; Registered Successfully...",

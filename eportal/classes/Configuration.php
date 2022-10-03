@@ -249,8 +249,6 @@ $ denotes the end
     }
   }
 
-
-
   public function get_schoolLogoImage()
   {
     $schoolDatas = self::getConfigData();

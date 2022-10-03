@@ -1,69 +1,106 @@
-<h3 class="text-center">Scratch Card Information</h3>
-<form id="newStudentAdmissionform">
-<div class="row">
-  <input type="hidden" name="action" value="submit_first_step_admission">
-  <input type="hidden" name="osotech_csrf" value="<?php echo md5('iremideoizasamsonosotech');?>">
-  <div class="col-md-6 mb-2">
-    <div class="form-group">
-      <label for="card_pin" class="form-label">Scratch Card Pin</label>
-      <input type="password" name="card_pin" class="form-control form-control-lg" placeholder="**********" id="card_pin">
-      <div id="cardHelp" class="form-text text-danger">Enter the Card Pin and Serial in the space provided</div>
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-    <div class="form-group">
-      <label for="card_serial" class="form-label">Card Serial</label>
-      <input type="text" autocomplete="off" name="card_serial" id="card_serial" class="form-control form-control-lg" placeholder="**********">
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-     <span id="email-error"></span>
-    <div class="form-group">
-      <label for="student_email" class="form-label">Email address</label>
-      <input type="text" autocomplete="off" name="student_email" class="form-control form-control-lg" placeholder="student@smatechportal.edu.com">
-        <div id="emailHelp" class="form-text text-danger">I don't have an e-mail <a href="https://accounts.google.com/SignUp" target="_blank"> Create Email Account</a></div>
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-    <div class="form-group">
-      <label for="username" class="form-label">Father's Name (Username)</label>
-      <input type="text" autocomplete="off" id="username" name="username" class="form-control form-control-lg" placeholder="@osotech">
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-     <span id="phone-error"></span>
-    <div class="form-group">
-      <label for="student_phone" class="form-label">Phone</label>
-      <input type="text" autocomplete="off" name="student_phone" class="form-control form-control-lg" placeholder="080-0000-0000" id="student_phone">
-      <div id="phoneHelp" class="form-text text-danger">Allowed phone format 080-2311-3432 </div>
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-    <div class="form-group">
-        <label for="student_class" class="form-label"> Class Level</label>
-      <select class="custom-select form-control form-control-lg" id="student_class" name="student_class">
-        <option value="pry" selected>Primary</option>
-        <option value="jnr">Junior </option>
-        <option value="snr">Senior</option>
-      </select>
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-     <span id="phone-error"></span>
-    <div class="form-group">
-      <input type="datetime" autocomplete="off" name="regDateTime" class="form-control form-control-lg" value="<?php echo date("Y-m-d h:i:s") ?>" readonly>
-    </div>
-  </div>
-  <div class="col-md-6 mb-2">
-    <div class="form-group">
-      <div class="" id="captcha_load">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="mb-3 form-check">
-  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-  <label class="form-check-label" for="exampleCheck1">Agree to Terms &amp; Conditions</label>
-</div>
-<button type="submit" class="btn btn-dark btn-lg btn-round mb-5 __loadingBtn__" style="float:right">Continue Registration</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <form method="post" action="">
+    <br>
+    Input the Youtube video url into the box<br><br>
+    <input type="text" name="video_url">
+
+    <br><br>
+    <input type="submit" value="save" name="submit">
+  </form>
+</body>
+<?php
+$host = "localhost";           // database  server name 
+$username = "root";            // database username
+$password = "";                  //  database password
+$db = "test";                       // database name
+ 
+ 
+$con = new mysqli($host, $username, $password, $db);
+// Check connection
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
+	if(isset($_POST['submit']))
+{
+	$url = $_POST['video_url'];
+$utube = preg_match('/[\\?\\&]v=([^\\?\\&]+)/',$url,$url_match); // code to convert video url into embed code
+	$embed_url = 'https://www.youtube.com/embed/'.$url_match[1];
+	$sql="SELECT * FROM utube_video";
+	$result = $con->query($sql);
+	while($row = $result->fetch_assoc()) 
+	$video_url = $row['video_url'];
+}
+if(empty($video_url))
+{
+$sql = "INSERT INTO utube_video (video_url)VALUES ('$embed_url')";
+				if ($con->query($sql) === TRUE) 
+				{
+					echo "new record added successfully";
+				} 
+				else 
+				{
+				echo "Error: " . $sql . "<br>" . $con->error;
+                }
+}
+else
+{
+	$sql = "UPDATE  utube_video set video_url = '$embed_url'";
+ 
+				if ($con->query($sql) === TRUE) 
+				{
+					echo "record updated successfully";
+				} 
+				else 
+				{
+				echo "Error: " . $sql . "<br>" . $con->error;
+                }
+}
+}
+else
+{
+	exit;
+}
+ 
+// code to get table data
+$sql = "SELECT video_url FROM utube_video";
+$result = $con->query($sql);
+if ($result->num_rows > 0) 
+{
+while($row = $result->fetch_assoc()) 
+{
+	$video = $row["video_url"];
+}
+} 
+				
+$con->close();
+ 
+?>
+<?php
+	if(isset($video))
+	{
+	?>
+<br>
+<iframe class="youtube-video" src="<?php echo $video ;?>" allowfullscreen></iframe>
+<?php
+}
+?>
+
+</body>
+<!-- 000webhostapp cp pass CPJOK6Cje8$f@aPLsFv8 -->
+<!--000webhostapp  -->
+<!-- db pass  yN/V)_f<lTUi]o15 -->
+<!-- db user smatech_admin -->
+<!-- dbname smatech_portal -->
+
+</html>
