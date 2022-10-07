@@ -1,7 +1,7 @@
 <?php if (!file_exists("Helper.php")) {
-    die("Access is Denied!");
+  die("Access is Denied!");
 } else {
-    require 'Helper.php';
+  require 'Helper.php';
 } ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +84,7 @@
   <!-- end main header -->
   <!-- start side menu -->
   <?php if (file_exists("Templates/SideBar.php")) :
-        include_once 'Templates/SideBar.php'; ?>
+    include_once 'Templates/SideBar.php'; ?>
   <?php endif; ?>
   <!-- end side menu -->
   <!-- start slider -->
@@ -148,7 +148,7 @@
 
   <!-- start Chairman welcome message -->
   <?php //include_once("./Partials/ChairmanMessage.php"); 
-    ?>
+  ?>
   <!-- Ends Chairman welcome message -->
   <!-- start target -->
   <section class="target">
@@ -199,7 +199,7 @@
   <!-- end target -->
   <!-- start team -->
   <?php //include_once("./Partials/theSchoolTeam.php");
-    ?>
+  ?>
 
 
   <!-- end team -->
@@ -209,7 +209,7 @@
   <!-- end principal welcome message -->
   <!-- start search course -->
   <?php //include_once ("Partials/searchCourse.php"); 
-    ?>
+  ?>
   <!-- end search course -->
   <!-- start event listing -->
   <?php include_once("Partials/EventListing.php"); ?>
@@ -222,7 +222,7 @@
   <!-- end event gallery -->
   <!-- start contact us -->
   <?php //include_once("Partials/studentReview.php") 
-    ?>
+  ?>
   <!-- end join us -->
   <!-- start blog -->
   <?php include_once("Partials/LatestBlogs.php") ?>
@@ -230,8 +230,8 @@
   <!-- end blog -->
   <!-- start footer -->
   <?php if (file_exists("Templates/Footer.php")) {
-        include_once 'Templates/Footer.php';
-    } ?>
+    include_once 'Templates/Footer.php';
+  } ?>
   <!-- end footer -->
   <a href="#" id="scroll"><span></span></a>
 </div>
@@ -262,6 +262,7 @@ const swiper = new Swiper('.swiper', {
 
 });
 </script>
+<script src="//code.tidio.co/n25pgpm02fjjlgyk3fejjkonumz2qzra.js" async></script>
 </body>
 
 </html>

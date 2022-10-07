@@ -13,9 +13,3 @@ function osotech_connect()
 	}
 	return $dbh;
 }
-
-/* public function getConnection()
-	{
-		$this->response = osotech_connect();
-		return $this->response;
-	} */

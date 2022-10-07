@@ -1,6 +1,12 @@
 <?php
 require_once "helpers/helper.php";
 ?>
+<?php
+if (!$Admin->isSuperAdmin($admin_data->adminId)) {
+  header("Location: ./");
+  exit();
+}
+?>
 <!DOCTYPE html>
 
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -74,7 +80,7 @@ require_once "helpers/helper.php";
                 <form class="form" id="bulkStudentresgistration_form">
                   <div class="form-body">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-md-12">
                         <input type="hidden" name="action" value="upload_student_bulk_csv_data">
                         <div class="form-group">
                           <label for="studentCsvFile"> SELECT (csv,xls or xlsx File Only)</label>
@@ -83,7 +89,7 @@ require_once "helpers/helper.php";
                             accept=".csv,.xls,.xlsx">
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-md-12">
                         <div class="form-group">
                           <label for="student_class"> Class/Grade</label>
                           <select name="student_class" id="student_class" class="form-control custom-select">
@@ -122,7 +128,7 @@ require_once "helpers/helper.php";
           <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="card">
               <div class="text-center mt-3">
-                <h3 class="text-center text-info">Export Your student Details By Class</h3>
+                <h3 class="text-center text-info">Export Your student Details</h3>
               </div>
               <div class="card-body">
                 <form class="form" action="./exportstudent" method="POST">
@@ -132,7 +138,7 @@ require_once "helpers/helper.php";
                                                 } ?></h6>
                   <div class="form-body">
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-md-12">
                         <input type="hidden" name="action" value="export_student_by_class">
                         <div class="form-group">
                           <label for="exp_type">Export Type</label>
@@ -144,7 +150,7 @@ require_once "helpers/helper.php";
                           </select>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-md-12">
                         <div class="form-group">
                           <label for="student_class"> Class/Grade</label>
                           <select name="student_class" id="student_class" class="form-control custom-select">

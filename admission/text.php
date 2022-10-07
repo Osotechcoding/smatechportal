@@ -22,7 +22,7 @@
 <?php
 $host = "localhost";           // database  server name 
 $username = "root";            // database username
-$password = "";                  //  database password
+$password = "osotech";                  //  database password
 $db = "test";                       // database name
  
  

@@ -55,17 +55,6 @@ class Admin
 				$db_password = $result->adminPass;
 				//check if password entered match with db pwd
 				if ($this->config->check_two_passwords_hash($password, $db_password)) {
-					if (isset($data['rememberme']) && $data['rememberme'] === 'on') {
-						// save details to cookie
-						setcookie("login_email", $email, time() + (24 * 60 * 60 * 7), '/');
-						setcookie("login_pass", $password, time() + (24 * 60 * 60 * 7), '/');
-						setcookie("login_user", $result->adminUser, time() + (24 * 60 * 60 * 7), '/');
-					} else {
-						setcookie("login_email", "", time() - 100, '/');
-						setcookie("login_user", "", time() - 100, '/');
-						setcookie("login_pass", "", time() - 100, '/');
-					}
-					session_regenerate_id();
 					$session_token = Session::set_xss_token();
 					$_COOKIE['login_email'] = $email;
 					$_COOKIE['login_pass'] = $password;

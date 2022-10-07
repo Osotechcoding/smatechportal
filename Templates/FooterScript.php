@@ -12,13 +12,16 @@
 <script src="assets/js/page/home/home.js"></script>
 <script src="assets/js/script.js"></script>
 <script>
-	//disable right click on mouse
-    $(document).on("contextmenu", function(e) { return !1 });
-     document.onkeydown = function(e) {
-    if (e.ctrlKey &&
-        (e.keyCode === 85 )) {
+//disable right click on mouse
+$(document).on("contextmenu", function(e) {
+  return !1
+});
+document.onkeydown = function(e) {
+  if (e.ctrlKey &&
+    (e.keyCode === 85)) {
     alert("Not allowed!");
     return false;
-    }
+  }
 };
 </script>
+<script src="//code.tidio.co/n25pgpm02fjjlgyk3fejjkonumz2qzra.js" async></script>

@@ -571,10 +571,6 @@
 					echo $result;
 				}
 			}
-			//upload new student in csv file
-			//importMassStudentViaCSVFile
-			//registerBulkStudentUsingCSVFile
-
 			//staff salary payment action
 			//pay_staff_salary_now
 			if ($_POST['action'] === "pay_staff_salary_now") {

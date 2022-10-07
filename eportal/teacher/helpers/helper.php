@@ -2,12 +2,13 @@
 @ob_start();
 @session_start();
 require_once "../languages/config.php";
+require_once "../classes/Database.php";
 date_default_timezone_set("Africa/Lagos");
 //create an autoload function
 spl_autoload_register(function ($filename) {
   require_once "../classes/" . ucwords($filename) . ".php";
 });
-$Database = new Database();
+//$Database = new Database();
 $Visitor        = new Visitors();
 $Student        = new Student();
 $Result         = new Result();
