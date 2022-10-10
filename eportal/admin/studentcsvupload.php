@@ -57,8 +57,9 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
       <div class="content-body">
         <div class="row">
           <div class="col-12">
-            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-line-chart fa-1x"></span> Register Bulk
-              Student Via CSV
+            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-graduation-cap fa-1x"></span> Student Bulk
+              Registration
+
             </h3>
 
           </div>
@@ -67,8 +68,7 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
           <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="card">
               <div class="text-center mt-3">
-                <h3 class="text-center text-info"> Bulk
-                  Student Registration Via CSV</h3>
+                <h3 class="text-center text-info"> Import Multiple Student via File</h3>
                 <p><a href="../csv/student_csv.xlsx" target="_blank"
                     style="text-decoration:none;color:red; font-weight:700;">Click
                     Here</a> to
@@ -116,7 +116,7 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
                         </div>
                       </div>
                       <div class="col-12 d-flex justify-content-end">
-                        <button type="submit" class="btn btn-dark mr-1 __loadingBtn__">Upload</button>
+                        <button type="submit" class="btn btn-dark mr-1 __loadingBtn__">Import Students</button>
                       </div>
                     </div>
                   </div>
@@ -171,7 +171,7 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
                       </div>
                       <div class="col-12 d-flex justify-content-end">
                         <button type="submit" name="export_student_data_btn"
-                          class="btn btn-dark mr-1 __rollingloading__">Export Students</button>
+                          class="btn btn-success mr-1 __rollingloading__">Export Students</button>
                       </div>
                     </div>
                   </div>

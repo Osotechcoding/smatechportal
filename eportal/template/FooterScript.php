@@ -49,7 +49,7 @@
  <div id="server-response"></div>
  <script>
 //disable right click on mouse
-$(document).on("contextmenu", function(e) {
-  return !1
-});
+// $(document).on("contextmenu", function(e) {
+//   return !1
+// });
  </script>

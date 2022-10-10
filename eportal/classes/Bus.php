@@ -330,7 +330,7 @@ class Bus
 		} else {
 			//do the update
 			try {
-				$created_at = date("Y-m-d");
+				//$created_at = date("Y-m-d");
 				$this->dbh->beginTransaction();
 				$this->stmt = $this->dbh->prepare("UPDATE `{$this->driver_table}` SET driver_name=?,driver_phone=?, driver_address=? WHERE dId=? LIMIT 1");
 				if ($this->stmt->execute([$driver_name, $phone, $address, $driverId])) {
@@ -458,6 +458,88 @@ class Bus
 	}
 	public function delete_bus_route($data)
 	{
+	}
+
+	public function addBusMaintainance($data)
+	{
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		$type = $this->config->Clean($data['cost_type']);
+		$cost = $this->config->Clean((int)$data['cost']);
+		$date = $this->config->Clean($data['date']);
+		$driver_id = $this->config->Clean($data['driver_id']);
+		$vehicle_id = $this->config->Clean($data['vehicle_id']);
+		if ($this->config->isEmptyStr($auth_pass) || $this->config->isEmptyStr($type) || $this->config->isEmptyStr($cost) || $this->config->isEmptyStr($date) || $this->config->isEmptyStr($driver_id) || $this->config->isEmptyStr($vehicle_id)) {
+
+			$this->response = $this->alert->alert_toastr("error", "Invalid Submission, Pls try again!", __OSO_APP_NAME__ . " Says");
+		} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		} else {
+			//check for duplicate value
+			$created_on = date("Y-m-d", strtotime($date));
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_bus_expense_tbl` WHERE driverId=? AND busId=? AND created_on=? LIMIT 1");
+			$this->stmt->execute(array($driver_id, $vehicle_id, $created_on));
+			if ($this->stmt->rowCount() == 1) {
+				$this->response = $this->alert->alert_toastr("error", "This Expense Details already Exists!", __OSO_APP_NAME__ . " Says");
+			} else {
+				try {
+					$this->dbh->beginTransaction();
+					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_bus_expense_tbl`(driverId,busId,cost_price, repair_type,created_on) VALUES (?,?,?,?,?);");
+					if ($this->stmt->execute([$driver_id, $vehicle_id, $cost, $type, $date])) {
+						$this->dbh->commit();
+						$this->dbh = null;
+						$this->response = $this->alert->alert_toastr("success", "Submitted Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{window.location.reload();
+						},1000);</script>";
+					} else {
+						$this->response = $this->alert->alert_toastr("error", "Unknown Error Occured!", __OSO_APP_NAME__ . " Says");
+					}
+				} catch (PDOException $e) {
+					$this->dbh->rollback();
+					$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+				}
+			}
+		}
+
+		return $this->response;
+	}
+
+	public function getAllBusMaintainanceInfo()
+	{
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_bus_expense_tbl` ");
+		$this->stmt->execute();
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetchAll();
+			return ($this->response);
+			$this->dbh = null;
+		}
+	}
+
+
+	public function
+	deleteBusMaintainanceRecordById($record_id)
+	{
+		if (!$this->config->isEmptyStr($record_id)) {
+			try {
+				$this->dbh->beginTransaction();
+				//Delete the selected Subject
+				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_bus_expense_tbl` WHERE id=? LIMIT 1");
+				if ($this->stmt->execute([$record_id])) {
+					// code...
+					$this->dbh->commit();
+					$this->dbh = null;
+					$this->response = $this->alert->alert_toastr("success", "Record was removed Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+			window.location.reload();
+			},500);</script>";
+				}
+			} catch (PDOException $e) {
+				$this->dbh->rollback();
+				$this->response  = $this->alert->alert_toastr("error", "Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+			}
+			// code...
+		} else {
+			$this->response = false;
+		}
+		return $this->response;
 	}
 	//School Bus management methods end
 

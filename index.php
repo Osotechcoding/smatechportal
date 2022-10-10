@@ -262,7 +262,7 @@ const swiper = new Swiper('.swiper', {
 
 });
 </script>
-<script src="//code.tidio.co/n25pgpm02fjjlgyk3fejjkonumz2qzra.js" async></script>
+
 </body>
 
 </html>

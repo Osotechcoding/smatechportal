@@ -1,4 +1,5 @@
  <?php
+	error_reporting(1);
 	@ob_start();
 	@session_start();
 	include_once "../languages/config.php";
@@ -575,6 +576,14 @@
 			//pay_staff_salary_now
 			if ($_POST['action'] === "pay_staff_salary_now") {
 				$result = $Payroll->saveStaffSalaryPayment($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
+
+			//_addBusMaintainance_
+			if ($_POST['action'] === "_addBusMaintainance_") {
+				$result = $Bus->addBusMaintainance($_POST);
 				if ($result) {
 					echo $result;
 				}

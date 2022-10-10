@@ -55,19 +55,19 @@ background-repeat: no-repeat;">
                   <input type="text" autocomplete="off" class="form-control" name="student_email"
                     id="exampleInputEmail1" placeholder="Enter your e-mail"
                     value="<?php if (isset($_COOKIE['login_student_email'])) {
-                                                                                                                                                                                        echo $_COOKIE['login_student_email'];
-                                                                                                                                                                                    } else {
-                                                                                                                                                                                        echo '';
-                                                                                                                                                                                    } ?>">
+                                                                                                                                                                    echo $_COOKIE['login_student_email'];
+                                                                                                                                                                  } else {
+                                                                                                                                                                    echo '';
+                                                                                                                                                                  } ?>">
                 </div>
                 <div class="form-group">
                   <!--  <label for="">Password</label> -->
-                  <input type="password" autocomplete="off" class="form-control" name="student_password"
-                    value="<?php if (isset($_COOKIE['login_student_pass'])) {
-                                                                                                                                        echo $_COOKIE['login_student_pass'];
-                                                                                                                                    } else {
-                                                                                                                                        echo '';
-                                                                                                                                    } ?>" id="exampleInputPassword1" placeholder="Enter your password">
+                  <input type="password" autocomplete="off" class="form-control" name="student_password" value="<?php if (isset($_COOKIE['login_student_pass'])) {
+                                                                                                                  echo $_COOKIE['login_student_pass'];
+                                                                                                                } else {
+                                                                                                                  echo '';
+                                                                                                                } ?>"
+                    id="exampleInputPassword1" placeholder="Enter your password">
                 </div>
                 <div class="checkbox form-group form-box clearfix">
                   <a href="forgot-password" style="float: right;color: red;">Forgot Password</a>
@@ -102,16 +102,16 @@ background-repeat: no-repeat;">
   <div id="server-response"></div>
   <script>
   //disable right click on mouse
-  $(document).on("contextmenu", function(e) {
-    return !1
-  });
-  document.onkeydown = function(e) {
-    if (e.ctrlKey &&
-      (e.keyCode === 85)) {
-      alert("Not allowed!");
-      return false;
-    }
-  };
+  // $(document).on("contextmenu", function(e) {
+  //   return !1
+  // });
+  // document.onkeydown = function(e) {
+  //   if (e.ctrlKey &&
+  //     (e.keyCode === 85)) {
+  //     alert("Not allowed!");
+  //     return false;
+  //   }
+  // };
   $(document).ready(function() {
     //when a login btn is clicked
     const login_form = $("#student-login-form");

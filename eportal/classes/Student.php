@@ -245,10 +245,10 @@ class Student
 		return $this->response;
 	}
 	//fliter student payment by regno and class
-	public function filter_students_by_payments($stdClass, $stdRegNo)
+	public function filter_students_by_payments($stdRegNo)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT *,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND studentClass=? AND stdAdmStatus='Active' LIMIT 1");
-		$this->stmt->execute(array($stdRegNo, $stdClass));
+		$this->stmt = $this->dbh->prepare("SELECT *,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND stdAdmStatus='Active' LIMIT 1");
+		$this->stmt->execute(array($stdRegNo));
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;

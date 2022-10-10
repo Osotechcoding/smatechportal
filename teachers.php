@@ -1,4 +1,5 @@
-<?php if (!file_exists("Helper.php")) {
+<?php
+ if (!file_exists("Helper.php")) {
   die("Access is Denied!");
 } else {
   require 'Helper.php';
