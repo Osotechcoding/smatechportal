@@ -231,5 +231,14 @@
           echo $result;
         }
       }
+
+      //remove_school_expense_details
+      if ($_POST['action'] === "remove_school_expense_details") {
+        $expId = $Configuration->Clean($_POST['expId']);
+        $result = $Administration->deleteSchoolExpenseRecordById($expId);
+        if ($result) {
+          echo $result;
+        }
+      }
     }
   }

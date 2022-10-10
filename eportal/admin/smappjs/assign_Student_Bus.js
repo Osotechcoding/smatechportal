@@ -26,12 +26,12 @@
         success:function (result){
            if (result) {
           $("#busStopsCovered").val(result.bus_stops);
-          $("#routeChargePerTerm").val(result.route_price);
+          //$("#routeChargePerTerm").val(result.route_price);
           $("#routeDriverName").val(result.driver_name);
           $("#routeVehicleCapacity").val(result.vehicle_desc);
         }else{
             $("#busStopsCovered").val('');
-            $("#routeChargePerTerm").val('');
+            //$("#routeChargePerTerm").val('');
             $("#routeDriverName").val('');
             $("#routeVehicleCapacity").val('');
         }
@@ -39,7 +39,7 @@
        });
      }else{
         $("#busStopsCovered").val('');
-        $("#routeChargePerTerm").val('');
+        //$("#routeChargePerTerm").val('');
         $("#routeDriverName").val('');
         $("#routeVehicleCapacity").val('');
      }

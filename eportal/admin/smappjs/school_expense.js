@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(()=>{
     //when a del btn is clicked
     const delete_btn = $(".delete_btn");
     delete_btn.on("click",runMi);
@@ -9,22 +9,30 @@ $(document).ready(function(){
   event.preventDefault();
    $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
    //send request
-   $.post("../actions/actions",createNew_expense_form.serialize(),function(data){
+   $.post("../actions/actions",createNew_expense_form.serialize(),(data)=>{
+    console.log(data);
     setTimeout(()=>{
-      $("#server-result").html(data);
+      $("#server-response").html(data);
       $(".__loadingBtn__").html('<span class="fa fa-paper-plane"></span> Submit').attr("disabled",false);
-    },2000);
+    },1000);
    })
   })
 
 
      })
      function runMi(){
-      let is_true = confirm("Are you sure you want to delete this permanently!");
-      if (is_true) {
-alert("Yes Expense has been deleted");
-window.location.reload();
-      }else{
-        return false;
-      }
+        isTrue = confirm("Are you sure, You want to delete this record Permananetly?");
+    if(isTrue){
+let action = $(this).data("action");
+let actionId = $(this).data("id");
+$(".loadingBtn___"+actionId).html('<img src="../assets/loaders/rolling_loader.svg" width="20">').attr("disabled",true);
+//send delete request
+$.post("../actions/delete_actions",{action:action,expId:actionId},(res)=>{
+setTimeout(() => {
+  $("#server-response").html(res);
+}, 500);
+})
+    }else{
+      return;
+    }
      }

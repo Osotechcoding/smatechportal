@@ -198,14 +198,14 @@ require_once "helpers/helper.php";
                   </div>
                 </div>
 
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="form-group">
                     <label for="price">Price Per Term (&#8358;)</label>
                     <input type="number" autocomplete="off" class="form-control form-control-lg" name="price"
                       placeholder="e.g 20,000.00">
                   </div>
-                </div>
-                <div class="col-md-6">
+                </div> -->
+                <div class="col-md-12">
                   <div class="form-group">
                     <label for="auth_code">Authentication Code</label>
                     <input type="password" autocomplete="off" class="form-control form-control-lg" name="auth_code"

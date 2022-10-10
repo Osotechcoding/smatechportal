@@ -1458,40 +1458,42 @@ class Administration
 		$csession = $this->config->Clean($data['csession']);
 		$expense = $this->config->Clean($data['expense_desc']);
 		$cost_ = $this->config->Clean($data['expense_cost']);
-		$date = $this->config->Clean(date("Y-m-d", strtotime($data['expense_date'])));
+		$date = $this->config->Clean($data['expense_date']);
 		$receiver = $this->config->Clean($data['reciever']);
 		$bypass = $this->config->Clean($data['bypass']);
 		//check for auth
 		if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
-			$this->response = $this->alert->alert_msg("Authentication Failed, Please Check your Connection and Try again!", "danger");
+			$this->response = $this->alert->alert_toastr("error", "Authentication Failed, Please Check your Connection and Try again!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($expense) || $this->config->isEmptyStr($cost_) || $this->config->isEmptyStr($receiver) || $this->config->isEmptyStr($date)) {
-			$this->response = $this->alert->alert_msg("Please enter the required fields to proceed!", "warning");
+
+			$this->response = $this->alert->alert_toastr("error", "Please enter the required fields to proceed!", __OSO_APP_NAME__ . " Says");
 		} else {
 			//lets check if this details is already saved
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_expense_tbl` WHERE expense_desc=? AND cost=? AND receiver=? AND cterm=? AND csession=? AND created_on=? LIMIT 1 ");
 			$this->stmt->execute(array($expense, $cost_, $receiver, $cterm, $csession, $date));
 			if ($this->stmt->rowCount() == 1) {
 				// show error...
-				$this->response = $this->alert->alert_msg($expense . " already entered today!", "warning");
+				$this->response = $this->alert->alert_toastr("error", "$expense already saved today!", __OSO_APP_NAME__ . " Says");
 			} else {
 				//lets create a fresh expense
 				try {
+					$date = date("Y-m-d", strtotime($date));
 					$this->dbh->beginTransaction();
 					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_school_expense_tbl` (expense_desc,cost,receiver,cterm,csession,created_on) VALUES (?,?,?,?,?,?);");
 					if ($this->stmt->execute(array($expense, $cost_, $receiver, $cterm, $csession, $date))) {
 						$this->dbh->commit();
-						$this->response = $this->alert->alert_msg("Expense Submitted Successfully ", "success") . "<script>setTimeout(()=>{
+						$this->dbh = null;
+						$this->response = $this->alert->alert_toastr("success", "Expense Submitted Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
 					}
 				} catch (PDOException $e) {
 					$this->dbh->rollback();
-					$this->response  = $this->alert->alert_msg("Failed to submit Expense: Error Occurred: " . $e->getMessage(), "danger");
+					$this->response = $this->alert->alert_toastr("error", "Failed to submit Expense: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 				}
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_school_expenses()
@@ -3228,5 +3230,32 @@ class Administration
 			return $this->response;
 			$this->dbh = null;
 		}
+	}
+
+	public function
+	deleteSchoolExpenseRecordById($record_id)
+	{
+		if (!$this->config->isEmptyStr($record_id)) {
+			try {
+				$this->dbh->beginTransaction();
+				//Delete the selected Subject
+				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_school_expense_tbl` WHERE expense_id=? LIMIT 1");
+				if ($this->stmt->execute([$record_id])) {
+					// code...
+					$this->dbh->commit();
+					$this->dbh = null;
+					$this->response = $this->alert->alert_toastr("success", "Record was removed Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+			window.location.reload();
+			},500);</script>";
+				}
+			} catch (PDOException $e) {
+				$this->dbh->rollback();
+				$this->response  = $this->alert->alert_toastr("error", "Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+			}
+			// code...
+		} else {
+			$this->response = false;
+		}
+		return $this->response;
 	}
 }

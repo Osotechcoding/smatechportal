@@ -24,10 +24,10 @@ class Bus
 		$driver_id = $this->config->Clean($data['driver_id']);
 		$route_desc = $this->config->Clean($data['route_name']);
 		$busstops = $this->config->Clean($data['busstops']);
-		$price = $this->config->Clean($data['price']);
+		// $price = $this->config->Clean($data['price']);
 		$auth_pass = $this->config->Clean($data['auth_code']);
 
-		if ($this->config->isEmptyStr($route_desc) || $this->config->isEmptyStr($busstops) || $this->config->isEmptyStr($vehicle_id) || $this->config->isEmptyStr($driver_id) || $this->config->isEmptyStr($price)) {
+		if ($this->config->isEmptyStr($route_desc) || $this->config->isEmptyStr($busstops) || $this->config->isEmptyStr($vehicle_id) || $this->config->isEmptyStr($driver_id)) {
 
 			$this->response = $this->alert->alert_toastr("error", "All fields are Required!, Please try again!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($auth_pass)) {
@@ -44,8 +44,8 @@ class Bus
 			try {
 				$created_at = date("Y-m-d");
 				$this->dbh->beginTransaction();
-				$this->stmt = $this->dbh->prepare("INSERT INTO `{$this->route_table}` (`route_desc`,`bus_stops`,`route_price`, `driverId`,`vehicleId`,`created_at`) VALUES (?,?,?,?,?,?);");
-				if ($this->stmt->execute([$route_desc, $busstops, $price, $driver_id, $vehicle_id, $created_at])) {
+				$this->stmt = $this->dbh->prepare("INSERT INTO `{$this->route_table}` (`route_desc`,`bus_stops`, `driverId`,`vehicleId`,`created_at`) VALUES (?,?,?,?,?);");
+				if ($this->stmt->execute([$route_desc, $busstops, $driver_id, $vehicle_id, $created_at])) {
 					$this->dbh->commit();
 					$this->dbh = null;
 					$this->response = $this->alert->alert_toastr("success", "$route_desc Created Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{

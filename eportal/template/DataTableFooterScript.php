@@ -43,7 +43,3 @@
 <script src="../app-assets/js/scripts/extensions/ext-component-media-player.min.js"></script>
 <script src="../app-assets/js/scripts/pages/app-file-manager.min.js"></script>
 <div id="server-response"></div>
-<script>
-//disable right click on mouse
-//  $(document).on("contextmenu", function(e) { return !1 });
-</script>
