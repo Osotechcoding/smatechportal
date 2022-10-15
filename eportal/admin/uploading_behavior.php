@@ -68,9 +68,11 @@ require_once "helpers/helper.php";
               <div class="row match-height">
                 <div class="col-md-12 col-12">
                   <div class="card">
-                    <!--<div class="card-header">-->
-                    <!-- <button type="button" class="btn btn-danger btn-md badge-pill" data-toggle="modal" data-target="#csv_Modal"><span class="fa fa-file fa-1x"></span> UPLOAD BY CSV</button>-->
-                    <!--</div>-->
+                    <div class="card-header">
+                      <button type="button" class="btn btn-dark btn-md badge-pill" data-toggle="modal"
+                        data-target="#csv_AffectiveDomainModal"><span class="fa fa-file fa-1x"></span> Import Affective
+                        Score</button>
+                    </div>
                     <div class="card-body">
                       <form class="form form-vertical" action="" method="POST">
                         <div class="form-body">
@@ -274,67 +276,89 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Footer-->
   <!--  -->
   <!-- BUS MODAL Start -->
-  <div class="modal fade" id="csv_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-    aria-hidden="true">
+  <div class="modal fade" id="csv_AffectiveDomainModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i
-              class="fa fa-file fa-2x"></i> Upload Cognitive In CSV</h2>
+          <h3 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i
+              class="fa fa-upload fa-1x"></i> Import Student Affective Score</h3>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="bx bx-x"></i>
           </button>
         </div>
-        <div class="modal-body">
-          <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="csv_session">Session</label>
-                  <select name="csv_session" id="csv_session" class="select2 form-control form-control-lg">
-                    <option value="">--Select--</option>
-                    <option value="2021-2022">2021-2022</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="csv_term"> Term</label>
-                  <select name="csv_term" id="csv_term" class="select2 form-control form-control-lg">
-                    <option value="">--Select--</option>
-                    <option value="1">1st Term</option>
-                  </select>
-                </div>
-              </div>
+        <form id="bulkStudentAffectiveDomainImportForm">
+          <div class="modal-body">
+            <div class="text-center">
+              <p><a href="../csv/student_csv.xlsx" target="_blank"
+                  style="text-decoration:none;color:red; font-weight:700;">Click
+                  Here</a> to
+                Download Sample Import File</p>
+              <p>Open the downloaded file with Microsoft Excel.</p>
+              <p> Enter the Student Affective Details following the
+                Partern on the Spreadsheet</p>
+            </div>
+            <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
+              <div class="row">
 
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="csv_class"> Class</label>
-                  <select name="csv_class" id="csv_class" class="select2 form-control">
-                    <option value="">--Select--</option>
-                    <option value="jss1">JSS1</option>
-                  </select>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="csv_student_class">Affective Class</label>
+                    <select name="csv_student_class" id="csv_student_class" class="custom-select form-control">
+                      <option value="" selected>Choose...</option>
+                      <?php echo $Administration->get_classroom_InDropDown_list(); ?>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <input type="hidden" name="action" value="upload_beh_csv">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="route_name">Choose CSV File </label>
-                  <input type="file" name="csv_file" id="csv_file" accept=".csv"
-                    class="file-input form-control form-control-file">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="class_teacher">Class Teacher</label>
+                    <select name="class_teacher" id="class_teacher" class="custom-select form-control">
+                      <option value="" selected>Choose...</option>
+                      <?php echo $Staff->show_staff_name_indropdown(); ?>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="csv_term_"> Term</label>
+                    <select name="csv_term_" id="csv_term_" class="custom-select form-control form-control-lg">
+                      <option value="" selected>Choose...</option>
+                      <option value="1st Term">1st Term</option>
+                      <option value="2nd Term">2nd Term</option>
+                      <option value="3rd Term">3rd Term</option>
+                    </select>
+                  </div>
+                </div>
+                <input type="hidden" name="csv_affecive_schol_ses"
+                  value="<?php echo $activeSess->session_desc_name; ?>">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="affective_file">Choose CSV,Excel File </label>
+                    <input type="file" name="affective_file" id="affective_file" accept=".csv,.xlsx,.xls"
+                      class="file-input form-control form-control-file">
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="form-group">
+                    <label for="auth_code">Authentication Code</label>
+                    <input type="password" onpaste="return false;" autocomplete="off" id="auth_code"
+                      class="form-control" placeholder="*******" name="auth_code">
+
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-success ml-1">
-            <span class="fa fa-cloud-upload"></span> Upload Now</button>
-          <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
-            <i class="bx bx-power-off"></i>
-            Cancel
-          </button>
-        </div>
+          <div class="modal-footer">
+            <input type="hidden" name="action" value="import_student_bulk_affective_domain_score_">
+            <button type="submit" class="btn btn-dark btn-md ml-1 __loadingBtn12__">
+              <span class="fa fa-cloud-upload"></span> Import Now</button>
+            <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
+              <i class="bx bx-power-off"></i>
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -362,6 +386,33 @@ require_once "helpers/helper.php";
         }, 2000);
       })
     });
+
+    //
+    $("#bulkStudentAffectiveDomainImportForm").on("submit", function(event) {
+      event.preventDefault();
+      $.ajax({
+        url: "importstudentcsv",
+        type: "POST",
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend() {
+          $(".__loadingBtn12__").html(
+            '<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",
+            true);
+        },
+        success: function(data) {
+          setTimeout(() => {
+            $(".__loadingBtn12__").html('Upload').attr("disabled", false);
+            // $("#video_form")[0].reset();
+            $("#server-response").html(data);
+            //alert(data);
+          }, 1500);
+        }
+
+      });
+    })
   })
   </script>
 

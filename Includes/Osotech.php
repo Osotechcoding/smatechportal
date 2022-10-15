@@ -70,7 +70,7 @@ class Osotech
             while ($row = $this->stmt->fetch()) {
                 $this->response .= '<option value="' . $row->session_desc . '">' . $row->session_desc . '</option>';
                 return $this->response;
-                unset($this->dbh);
+                $this->dbh = null;
             }
         }
     }
@@ -82,7 +82,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = true;
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -108,7 +108,7 @@ class Osotech
         if ($this->stmt->rowCount()>0) {
         $this->response = $this->stmt->fetchAll();
         return $this->response;
-        unset($this->dbh);
+         $this->dbh = null;
         }
         }*/
 
@@ -131,7 +131,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -143,7 +143,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
     //Validate a date input
@@ -161,19 +161,18 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = true;
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
     public function check_portal_status()
     {
-        $status = '1';
         $this->stmt = $this->dbh->prepare("SELECT * FROM `api_module_config` WHERE module='maintenance_mode' AND status='2' LIMIT 1");
         $this->stmt->execute();
         if ($this->stmt->rowCount() == 1) {
             $this->response = true;
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -182,22 +181,22 @@ class Osotech
     {
         if (!empty($string)) {
             $string = trim($string);
-            // $string = htmlspecialchars($string);
+            $string = htmlspecialchars($string);
             $string = stripcslashes($string);
-            $string = filter_var($string, FILTER_SANITIZE_STRING);
+
             return $string;
         }
     }
 
     public function get_all_active_blogs_post()
     {
-        $blogStatus = "2";
-        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_tbl` WHERE blog_status=? ORDER BY created_at DESC");
-        $this->stmt->execute(array($blogStatus));
+        // $blogStatus = "2";
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_tbl` WHERE blog_status=2 ORDER BY created_at DESC");
+        $this->stmt->execute();
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -209,7 +208,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -220,7 +219,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -245,7 +244,7 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->cnt;
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -257,7 +256,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -302,7 +301,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -313,7 +312,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -324,7 +323,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -335,19 +334,18 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
-
+    //AND DATE(`created_at`) >= DATE(CURRENT_DATE())
     public function get_all_active_events()
     {
-        $status = "2";
-        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_upcoming_event_tbl` WHERE status=? AND DATE(`created_at`) >= DATE(CURRENT_DATE()) ORDER BY created_at DESC");
-        $this->stmt->execute(array($status));
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_upcoming_event_tbl` WHERE `status`=2  ORDER BY eventId DESC LIMIT 3");
+        $this->stmt->execute();
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 
@@ -358,7 +356,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            unset($this->dbh);
+            $this->dbh = null;
         }
     }
 

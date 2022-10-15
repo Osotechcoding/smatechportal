@@ -15,6 +15,7 @@
   $Configuration   = new Configuration();
   $Admin = new Admin();
   $Student = new Student();
+  $Staff = new Staff();
   $Pin_serial = new Pins();
   $Visitor = new Visitors();
   $Administration = new Administration();
@@ -236,6 +237,15 @@
       if ($_POST['action'] === "remove_school_expense_details") {
         $expId = $Configuration->Clean($_POST['expId']);
         $result = $Administration->deleteSchoolExpenseRecordById($expId);
+        if ($result) {
+          echo $result;
+        }
+      }
+
+      //remove_staff_permanently
+      if ($_POST['action'] === "remove_staff_permanently") {
+        $staff_Id = $Configuration->Clean($_POST['staff_Id']);
+        $result = $Staff->deleteStaffById($staff_Id);
         if ($result) {
           echo $result;
         }

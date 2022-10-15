@@ -84,15 +84,18 @@ function osotechLoanCalculator(){
 
     if(principal < 0)
     {
-      $("#error-alert").html('<?php echo $Alert->alert_msg("Please Enter Positive Amount for Principal") ?>');
+      let msg_alert = `<span class="text-danger">Please Enter Positive Amount for Principal</span>`;
+      $("#error-alert").html(msg_alert);
     }
     else if(calculatedInterest < 0)
     {
-      $("#error-alert").html('<?php echo $Alert->alert_msg("Please Enter Positive Interest Rate") ?>');
+      msg_alert =`<span class="text-danger">Please Enter Positive Interest Rate</span>`;
+      $("#error-alert").html(msg_alert);
     }
     else if(calculatedPayments  < 0)
     {
-      $("#error-alert").html('<?php echo $Alert->alert_msg("Please Enter Positive Value") ?>');
+      msg_alert =`<span class="text-danger">Please Enter Positive Value</span>`;
+      $("#error-alert").html(msg_alert);
     }
     else if(isFinite(monthly)){
         UImonthlyPayment.val(monthly.toFixed(2));
@@ -100,8 +103,7 @@ function osotechLoanCalculator(){
         UItotalInterest.val(((monthly * calculatedPayments)-principal).toFixed(2));
 
     }else{
-
-       $("#error-alert").html('<?php echo $Alert->alert_msg("Please check your number") ?>');
-
+  msg_alert ='<span class="text-danger">Please check your number</span>';
+      $("#error-alert").html(msg_alert);
     }
 }

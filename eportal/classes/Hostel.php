@@ -461,8 +461,8 @@ class Hostel
 		try {
 			$this->dbh->beginTransaction();
 			$created_at = date("Y-m-d");
-			$this->stmt = $this->dbh->prepare("UPDATE `visap_bed_space_tbl` SET is_available=1, occupant =NULL,book_duration=NULL,booked_today=NULL,amount_paid=NULL,payment_status=0,school_session=NULL,payment_expire=NULL WHERE bedId=? AND occupant=? LIMIT 1");
-			if ($this->stmt->execute([$studentId, $bonkId])) {
+			$this->stmt = $this->dbh->prepare("UPDATE `visap_bed_space_tbl` SET is_available=1, occupant=NULL, book_duration=NULL, booked_today=NULL,amount_paid=NULL, payment_status=0, school_session=NULL,payment_expire=NULL WHERE bedId=? LIMIT 1");
+			if ($this->stmt->execute([$bonkId])) {
 				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_bed_payment_history_tbl` WHERE student_id=? AND bed_id=?");
 				if ($this->stmt->execute([$studentId, $bonkId])) {
 					$this->dbh->commit();

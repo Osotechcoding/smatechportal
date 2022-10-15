@@ -1,7 +1,7 @@
 <?php if (!file_exists("Helper.php")) {
-    die("Access is Denied!");
+  die("Access is Denied!");
 } else {
-    require 'Helper.php';
+  require 'Helper.php';
 } ?>
 
 <!DOCTYPE html>
@@ -20,7 +20,6 @@
 </head>
 
 <body>
-
   <!--start preloader-->
   <div class="preloader">
     <div class="spinner">
@@ -45,7 +44,7 @@
     <!-- end main header -->
     <!-- start side menu -->
     <?php if (file_exists("Templates/SideBar.php")) :
-            include_once 'Templates/SideBar.php'; ?>
+      include_once 'Templates/SideBar.php'; ?>
     <?php endif; ?>
     <!-- end side menu -->
     <!-- start inner banner -->
@@ -73,8 +72,8 @@
               </div>
               <div class="img_2 d-flex" data-aos="zoom-in" data-aos-duration="1000">
                 <h5 class="mb-0 text-white">Our Story</h5>
-                <a href="https://www.youtube.com/watch?v=_sI_Ps7JSEk" data-fancybox="gallery"
-                  class="video-btn text-white">
+                <!-- https://www.youtube.com/watch?v=_sI_Ps7JSEk -->
+                <a href="#" data-fancybox="gallery" class="video-btn text-white">
                   <i class="fa fa-play-circle fa-3x"></i>
                 </a>
               </div>
@@ -202,19 +201,19 @@
     <!-- end counter -->
     <!-- start timeline -->
     <?php //include_once ("Partials/schoolHistory.php") 
-        ?>
+    ?>
 
     <!-- end timeline -->
     <!-- start events -->
     <?php if (file_exists("Partials/Testimonials.php")) {
-            include_once 'Partials/Testimonials.php';
-        } ?>
+      include_once 'Partials/Testimonials.php';
+    } ?>
 
     <!-- end events -->
     <!-- start footer -->
     <?php if (file_exists("Templates/Footer.php")) {
-            include_once 'Templates/Footer.php';
-        } ?>
+      include_once 'Templates/Footer.php';
+    } ?>
     <!-- end footer -->
     <a href="#" id="scroll"><span></span></a>
   </div>

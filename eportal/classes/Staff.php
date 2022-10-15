@@ -59,7 +59,7 @@ class Staff
 						setcookie("login_pass", "", time() - 100, '/');
 						setcookie("login_role", "", time() - 100, '/');
 					}
-					session_regenerate_id();
+					//session_regenerate_id();
 					//$session_token = Session::set_xss_token();
 					$_COOKIE['login_email'] = $email;
 					$_COOKIE['login_pass'] = $password;
@@ -852,5 +852,32 @@ class Staff
 		}
 		return $this->response;
 		$this->dbh = null;
+	}
+
+	public function deleteStaffById($staff_id)
+	{
+		$staff_data = self::get_staff_ById($staff_id);
+		$staffImage = "../schoolImages/staff/" . $staff_data->staffPassport;
+
+		try {
+			$this->dbh->beginTransaction();
+			$this->stmt = $this->dbh->prepare("UPDATE visap_class_grade_tbl SET grade_teacher=NULL WHERE grade_teacher=? LIMIT 1");
+			if ($this->stmt->execute([$staff_id])) {
+				$this->stmt = $this->dbh->prepare("DELETE FROM {$this->table} WHERE staffId=? LIMIT 1");
+				if ($this->stmt->execute([$staff_id])) {
+					if (file_exists($staffImage)) {
+						unlink($staffImage);
+					}
+					$this->dbh->commit();
+					$this->dbh = null;
+					$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+							window.location.reload();
+						},500);</script>";
+				}
+			}
+		} catch (PDOException $e) {
+			$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+		}
+		return $this->response;
 	}
 }

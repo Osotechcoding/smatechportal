@@ -42,7 +42,6 @@ $ab = 'Absent';
 $timePresent = $StudentResult->get_student_attendance_details($student_reg_number, $student_class, $pre, $term, $rsession);
 $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number, $student_class, $ab, $term, $rsession);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
