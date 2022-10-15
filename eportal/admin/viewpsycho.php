@@ -157,7 +157,7 @@ require_once "helpers/helper.php";
                 </thead>
                 <tbody class="text-center">
                   <?php foreach ($all_psychomotor_domains as $value) : ?>
-                  <?php $student_data = $Student->get_student_data_byId($value->student_id) ?>
+                  <?php $student_data = $Student->get_student_details_byRegNo($value->reg_number) ?>
                   <tr>
                     <td><span><?php echo strtoupper($student_data->full_name); ?></span></td>
                     <td><span><?php echo strtoupper($student_data->stdRegNo); ?></span></td>
