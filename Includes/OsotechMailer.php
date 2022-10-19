@@ -43,7 +43,7 @@ class OsotechMailer
       $mail->setFrom($email, $name);
       $mail->addAddress($this->SIB_ACC_USER, 'Smatech Admin');     //Add a recipient
       $mail->isHTML(true);                                  //Set email 
-      $mail->Subject = 'Feedback From Client';
+      $mail->Subject = 'New Feedback From ' . $name;
       $mail->Body    = $message;
       $mail->AltBody = $message;
       $mail->send();
