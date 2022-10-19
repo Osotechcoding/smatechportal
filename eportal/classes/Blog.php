@@ -167,6 +167,34 @@ class Blog
 		}
 	}
 
+	public function delete_Blog_PostById($Id)
+	{
+		if (!$this->config->isEmptyStr($Id)) {
+			$blog_details = self::get_blog_ById($Id);
+			$filePath = "../news-images/" . $blog_details->blog_image;
+			try {
+				$this->dbh->beginTransaction();
+				//Delete the selected Subject
+				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_blog_post_tbl` WHERE blog_id=? LIMIT 1");
+				if ($this->stmt->execute([$Id])) {
+					if (file_exists($filePath)) {
+						if (unlink($filePath)) {
+							$this->dbh->commit();
+							$this->response = $this->alert->alert_toastr("success", "Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+			window.location.reload();
+			},500);</script>";
+						}
+					}
+				}
+			} catch (PDOException $e) {
+				$this->dbh->rollback();
+				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+			}
+			return $this->response;
+			$this->dbh = null;
+		}
+	}
+
 	public function get_all_blog_comments($blogId)
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_comments` WHERE  blogId=? ORDER BY comment_date DESC");

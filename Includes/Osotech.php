@@ -1,5 +1,4 @@
 <?php
-//@ob_start();
 require_once 'Database.php';
 class Osotech
 {
@@ -7,6 +6,15 @@ class Osotech
     private $dbh;
     protected $alert;
     protected $stmt;
+    //for smtp details
+    public $_Host;
+    public $_User;
+    public $_Password;
+    public $_Port;
+    public $SIB_API_SEC_KEY = SIB_API_SECRET_KEY;
+    public $SIB_ACC_PASS = SIB_ACC_PASS;
+    public $SIB_ACC_USER = SIB_ACC_USER;
+    public $SIB_EMAIL_SERVER = SIB_EMAIL_SERVER;
     public function __construct()
     {
         if (substr($_SERVER['REQUEST_URI'], -4) == ".php" or (stripos($_SERVER['REQUEST_URI'], ".php") == true)) {
@@ -420,9 +428,11 @@ class Osotech
                 $date = date("Y-m-d");
                 $this->stmt = $this->dbh->prepare("INSERT INTO `visap_feedback_tbl` (client_name,client_email,client_phone,message,client_ip_address,created_at) VALUES (?,?,?,?,?,?);");
                 if ($this->stmt->execute(array($name, $email, $phone, $message, $ip, $date))) {
-                    $this->dbh->commit();
-
-                    $this->response = self::alert_msg("success", "SUCCESS", "Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>" . self::getConfigData()->school_name . "!</strong>") . '<script>setTimeout(()=>{location.reload();},4000); </script>';
+                    $OsotechMailer = new OsotechMailer();
+                    if ($OsotechMailer->SendClientFeedBackEmail($email, $name, $message)) {
+                        $this->dbh->commit();
+                        $this->response = self::alert_msg("success", "SUCCESS", "Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>" . self::getConfigData()->school_name . "!</strong>") . '<script>setTimeout(()=>{location.reload();},4000); </script>';
+                    }
                 }
             } catch (PDOException $e) {
                 $this->dbh->rollback();

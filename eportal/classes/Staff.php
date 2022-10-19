@@ -867,12 +867,18 @@ class Staff
 				if ($this->stmt->execute([$staff_id])) {
 					if (file_exists($staffImage)) {
 						unlink($staffImage);
-					}
-					$this->dbh->commit();
-					$this->dbh = null;
-					$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+						$this->dbh->commit();
+						$this->dbh = null;
+						$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 							window.location.reload();
 						},500);</script>";
+					} else {
+						$this->dbh->commit();
+						$this->dbh = null;
+						$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+							window.location.reload();
+						},500);</script>";
+					}
 				}
 			}
 		} catch (PDOException $e) {

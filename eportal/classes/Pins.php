@@ -30,11 +30,11 @@ class Pins
 	}
 	public function generate_scratch_pins($data)
 	{
-		$q = trim($data['q']);
-		$p = trim($data['p']);
-		$t = trim($data['cardtype']);
+		$q = $this->config->Clean($data['q']);
+		$p = $this->config->Clean($data['p']);
+		$t = $this->config->Clean($data['cardtype']);
 		//check for empty form values 
-		if (empty($q) || empty($p) || empty($t)) {
+		if ($this->config->isEmptyStr($q) || $this->config->isEmptyStr($p) || $this->config->isEmptyStr($t)) {
 			// show error
 			$this->response = $this->alert->alert_toastr("error", "Invalid submission, Please try again!", __OSO_APP_NAME__ . " Says");
 		} elseif ($q > 200) {
@@ -270,7 +270,7 @@ class Pins
 
 	public function get_admission_pin_card_user($code, $serial)
 	{
-		if (!empty($code) && !empty($serial)) {
+		if (!$this->config->isEmptyStr($code) && !$this->config->isEmptyStr($serial)) {
 			$this->query = "SELECT * FROM `reg_pin_history_tbl` WHERE pin_code=? AND pin_serial=? LIMIT 1";
 			$this->stmt = $this->dbh->prepare($this->query);
 			$this->stmt->execute(array($code, $serial));
@@ -285,7 +285,7 @@ class Pins
 	//get pin by Id
 	public function getPinsByCodeSerial($table, $pinId)
 	{
-		if (!empty($pinId)) {
+		if (!$this->config->isEmptyStr($pinId)) {
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `$table` WHERE pin_id=? LIMIT 1");
 			$this->stmt->execute([$pinId]);
 			if ($this->stmt->rowCount() == 1) {

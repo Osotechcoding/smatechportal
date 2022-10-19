@@ -55,7 +55,7 @@ class Admin
 				$db_password = $result->adminPass;
 				//check if password entered match with db pwd
 				if ($this->config->check_two_passwords_hash($password, $db_password)) {
-					$session_token = Session::set_xss_token();
+					// $session_token = Session::set_xss_token();
 					$_COOKIE['login_email'] = $email;
 					$_COOKIE['login_pass'] = $password;
 					$_COOKIE['login_user'] = $result->adminUser;

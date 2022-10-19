@@ -12,15 +12,15 @@
       <div class="col-lg-7">
         <div class="sec-title" data-aos="fade-up" data-aos-duration="550">
           <span class="title">Events</span>
-          <h2>Upcoming Events</h2>
+          <h2>Our Recent Events</h2>
           <div class="divider">
             <span class="fa fa-mortar-board"></span>
           </div>
           <?php $allEvents = $Osotech->get_all_active_events();
-                    if ($allEvents) {
-                        $ccnt = 0;
-                        foreach ($allEvents as $event) {
-                            $ccnt++; ?>
+          if ($allEvents) {
+            $ccnt = 0;
+            foreach ($allEvents as $event) {
+              $ccnt++; ?>
           <div class="event-block d-flex my-3" data-aos="fade-up" data-aos-duration="550">
             <h2 class="font-weight-bold color-orange mr-3"><?php echo $ccnt; ?>.</h2>
             <div class="event-info">
@@ -32,7 +32,7 @@
               <p class="color-orange"><?php echo ucwords($event->event_detail); ?></p>
               <ul class="pl-0">
                 <li class="pr-3">
-                  <i class="ti-calendar pr-2"></i>
+                  <i class="fa fa-calendar pr-2"></i>
                   <span><?php echo date("D jS M, Y", strtotime($event->edate)) ?></span>
                 </li>
                 <li class="pr-3">
@@ -47,10 +47,10 @@
             </div>
           </div>
           <?php
-                        }
-                    } else {
-                        echo '<div class="alert alert-danger text-center"> <p style="font-size:20px; margin:10px 5px"> Sorry :) No upcoming event at the moment!</p></div>';
-                    } ?>
+            }
+          } else {
+            echo '<div class="alert alert-danger text-center"> <p style="font-size:20px; margin:10px 5px"> Sorry :) No upcoming event at the moment!</p></div>';
+          } ?>
 
 
         </div>

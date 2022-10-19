@@ -3215,13 +3215,12 @@ class Administration
 				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_career_portal_tbl` WHERE job_portal_id=? LIMIT 1");
 				if ($this->stmt->execute([$job_portal_id])) {
 					if (file_exists($filePath)) {
-						if (unlink($filePath)) {
-							$this->dbh->commit();
-							$this->response = $this->alert->alert_toastr("success", "Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+						unlink($filePath);
+					}
+					$this->dbh->commit();
+					$this->response = $this->alert->alert_toastr("success", "Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},1000);</script>";
-						}
-					}
 				}
 			} catch (PDOException $e) {
 				$this->dbh->rollback();

@@ -1,6 +1,6 @@
  <?php
-  @ob_start();
   @session_start();
+  @ob_start();
   include_once "../languages/config.php";
   // require_once "../classes/Configuration.php";
   require_once '../classes/Session.php';
@@ -9,8 +9,7 @@
   spl_autoload_register(function ($filename) {
     require_once "../classes/" . ucfirst($filename) . ".php";
   });
-  ?>
- <?php
+
   $ses_token = Session::set_xss_token();
   $Configuration   = new Configuration();
   $Admin = new Admin();
@@ -121,6 +120,15 @@
       if ($_POST['action'] === "delete_gallery") {
         $tId = $Configuration->Clean($_POST['tId']);
         $result = $Blog->delete_galleryById($tId);
+        if ($result) {
+          echo $result;
+        }
+      }
+
+      //delete_blog_by_id
+      if ($_POST['action'] === "delete_blog_by_id") {
+        $bId = $Configuration->Clean($_POST['bId']);
+        $result = $Blog->delete_Blog_PostById($bId);
         if ($result) {
           echo $result;
         }

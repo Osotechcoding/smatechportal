@@ -446,14 +446,14 @@ class Osotech
           $_SESSION['AUTH_SMATECH_APPLICANT_ID'] = $applicant_id;
           if (move_uploaded_file($passport_temp, $destination)) {
             //send registrationmessage to the new student
-            /*  $OsotechMailer = new OsotechMailer();
-              if (self::SendStudentConfirmationEmail($studentEmail,$studentSurname,$confirmation_code,$userType)) {*/
-            // Generate the student registration photo card...
-            $this->dbh->commit();
-            $this->response = self::alert_msg("success", "SUCCESS", "Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card") . "<script>setTimeout(()=>{
+            $OsotechMailer = new OsotechMailer();
+            if ($OsotechMailer->SendStudentConfirmationEmail($studentEmail, $studentSurname, $confirmation_code, $userType)) {
+              // Generate the student registration photo card...
+              $this->dbh->commit();
+              $this->response = self::alert_msg("success", "SUCCESS", "Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card") . "<script>setTimeout(()=>{
               window.location.href='" . ADMISSION_PORTAL_ROOT . "registrationphotocard?applicant=" . self::saltifyString($admission_no) . "&page=photocard';
             },3500);</script>";
-            /*}*/
+            }
           }
         }
       } catch (PDOException $e) {

@@ -344,7 +344,7 @@ class Result
 								$student_result_page = "./thirdtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 								break;
 						}
-						$this->response = $this->alert->alert_toastr("success", "Generating student Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
+						$this->response = $this->alert->alert_toastr("success", "Generating Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
 			window.open("' . $student_result_page . '","_blank", "top=100, left=100, width=700, height=850");$("#SingleStudentResult_form")[0].reset();
 		},3000)</script>';
 					} elseif ($result_opened == '3') {
@@ -354,7 +354,7 @@ class Result
 					}
 				}
 			} else {
-				$this->response = $this->alert->alert_toastr("error", "Sorry No result found!", __OSO_APP_NAME__ . " Says");
+				$this->response = $this->alert->alert_toastr("error", "Sorry no result found!", __OSO_APP_NAME__ . " Says");
 			}
 		}
 		return $this->response;
@@ -465,8 +465,8 @@ class Result
 				//$arr_stdId = $stdId[$i];
 				$arr_student_regNo = $student_regNo[$i];
 				$arr_result_class = $result_class[$i];
-				$arr_result_term = $result_term[$i];
-				$arr_result_session = $result_session[$i];
+				// $arr_result_term = $result_term[$i];
+				// $arr_result_session = $result_session[$i];
 				$arr_cass = $cass[$i];
 				$arr_exam = $exam[$i];
 				$arr_subject = $subject[$i];
@@ -685,7 +685,7 @@ class Result
 				}
 			} catch (PDOException $e) {
 				$this->dbh->rollback();
-				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete Component: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+				$this->response  = $this->alert->alert_toastr("error", "Failed : Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			// code...
 		} else {
@@ -712,7 +712,7 @@ class Result
 			$this->response = $this->alert->alert_toastr("warning", "Student Admission No is Required!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($stdGrade)) {
 
-			$this->response = $this->alert->alert_toastr("error", "Student Class is Required!", __OSO_APP_NAME__ . " Says");
+			$this->response = $this->alert->alert_toastr("error", "Result Class is Required!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($stdSession)) {
 
 			$this->response = $this->alert->alert_toastr("error", "Result Session is Required!", __OSO_APP_NAME__ . " Says");
@@ -745,8 +745,8 @@ class Result
 					$PinId = $pin_data->pin_id;
 					//unset($this->dbh);
 					if ($status == '1') {
-						// pin has ben used let'a get the user details from pin history
-						$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history`WHERE pin_code=? AND pin_serial=? AND used_term=? AND used_session=? LIMIT 1");
+						// pin has been used let's get the user details from pin history
+						$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE pin_code=? AND pin_serial=? AND used_term=? AND used_session=? LIMIT 1");
 						$this->stmt->execute(array($cardPin, $cardSerial, $stdTerm, $stdSession));
 						if ($this->stmt->rowCount() == 1) {
 							//grab the regNo of the Checker and Compare
@@ -759,6 +759,7 @@ class Result
 							} elseif ($usedCounter >= '3') {
 								$this->response = $this->alert->alert_toastr("error", "You Have Exhausted Your Time Usage Validity of this Pin!", __OSO_APP_NAME__ . " Says");
 							} elseif (!self::checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+
 								$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
 							} elseif (!self::checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 								$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
@@ -800,13 +801,13 @@ class Result
 												$_SESSION['result_session'] = $stdSession;
 												switch ($_SESSION['result_term']) {
 													case '1st Term':
-														$student_result_page = "reportcard?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
+														$student_result_page = "./reportcard?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 														break;
 													case '2nd Term':
-														$student_result_page = "secondtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
+														$student_result_page = "./secondtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 														break;
 													case '3rd Term':
-														$student_result_page = "thirdtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
+														$student_result_page = "./thirdtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 														break;
 												}
 												$this->response = $this->alert->alert_toastr("success", "Processing your Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
@@ -880,13 +881,13 @@ class Result
 														$_SESSION['result_session'] = $stdSession;
 														switch ($_SESSION['result_term']) {
 															case '1st Term':
-																$student_result_page = "reportcard?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
+																$student_result_page = "./reportcard?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 																break;
 															case '2nd Term':
-																$student_result_page = "secondtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
+																$student_result_page = "./secondtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 																break;
 															case '3rd Term':
-																$student_result_page = "thirdtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
+																$student_result_page = "./thirdtermresult?academic-session=" . $stdSession . "&student-reg=" . $stdRegNo . "&Term=" . $stdTerm;
 																break;
 														}
 														$this->response = $this->alert->alert_toastr("success", "Processing your Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{

@@ -287,7 +287,7 @@ require_once "helpers/helper.php";
             <i class="bx bx-x"></i>
           </button>
         </div>
-        <form id="bulkStudentAffectiveDomainImportForm">
+        <form id="bulkStudentAffectiveDomainImportForm" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="text-center">
               <p><a href="../csv/student_csv.xlsx" target="_blank"

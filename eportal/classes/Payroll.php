@@ -47,7 +47,7 @@ class Payroll
 
 	public function getStaffPaidSalaryById($salaId)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_paid_salary_tbl`WHERE salaryId = ? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_paid_salary_tbl` WHERE salaryId = ? LIMIT 1");
 		$this->stmt->execute([$salaId]);
 		if ($this->stmt->rowCount() == '1') {
 			$this->response = $this->stmt->fetch();

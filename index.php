@@ -1,21 +1,21 @@
-<?php if (!file_exists("Helper.php")) {
+<?php if (!file_exists("./Helper.php")) {
   die("Access is Denied!");
 } else {
-  require 'Helper.php';
+  require './Helper.php';
 } ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <!-- ========== Meta Tags ========== -->
-  <?php include_once 'Templates/MetaTags.php'; ?>
+  <?php include_once './Templates/MetaTags.php'; ?>
   <!-- ========== Page Title ========== -->
   <title> Homepage :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
 
-  <?php if (!file_exists("Templates/HeaderScript.php")) : ?>
+  <?php if (!file_exists("./Templates/HeaderScript.php")) : ?>
   <?php die("Access not Aallowed"); ?>
   <?php else : ?>
-  <?php include_once 'Templates/HeaderScript.php'; ?>
+  <?php include_once './Templates/HeaderScript.php'; ?>
   <?php endif; ?>
   <style>
   .swiper-container {
@@ -71,24 +71,24 @@
 <div class="page-wrapper" id="page-wrapper">
   <!-- start top header -->
   <header class="top-header py-2">
-    <?php include_once("Templates/TopNavBar.php"); ?>
+    <?php include_once("./Templates/TopNavBar.php"); ?>
   </header>
   <!-- end top header -->
   <!-- start main header -->
-  <?php if (!file_exists("Templates/NavBar.php")) : ?>
+  <?php if (!file_exists("./Templates/NavBar.php")) : ?>
   <?php die("Access not Aallowed"); ?>
   <?php else : ?>
-  <?php include_once 'Templates/NavBar.php'; ?>
+  <?php include_once './Templates/NavBar.php'; ?>
   <?php endif; ?>
 
   <!-- end main header -->
   <!-- start side menu -->
-  <?php if (file_exists("Templates/SideBar.php")) :
-    include_once 'Templates/SideBar.php'; ?>
+  <?php if (file_exists("./Templates/SideBar.php")) :
+    include_once './Templates/SideBar.php'; ?>
   <?php endif; ?>
   <!-- end side menu -->
   <!-- start slider -->
-  <?php include_once("Templates/HomeSwiperSlider.php"); ?>
+  <?php include_once("./Templates/HomeSwiperSlider.php"); ?>
   <!-- end slider -->
   <!-- start counter -->
   <section class="counter-section">
@@ -99,7 +99,7 @@
             <div class="counter" data-aos="fade-up" data-aos-duration="550">
               <div class="border-line"></div>
               <div class="counter-img">
-                <img src="assets/images/icons/teacher.png" class="img-fluid" alt=teacher>
+                <img src="./assets/images/icons/teacher.png" class="img-fluid" alt=teacher>
               </div>
               <h5 class="count-text mt-2">Teachers</h5>
               <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalStaff(); ?>"
@@ -110,7 +110,7 @@
             <div class="counter mt-xl-0 mt-lg-0 mt-md-0 mt-sm-0 mt-3" data-aos="fade-up" data-aos-duration="550">
               <div class="border-line"></div>
               <div class="counter-img">
-                <img src="assets/images/icons/classroom.png" class="img-fluid" alt="classroom">
+                <img src="./assets/images/icons/classroom.png" class="img-fluid" alt="classroom">
               </div>
               <h5 class="count-text mt-2">Classroom</h5>
               <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalClassroom(); ?>"
@@ -121,7 +121,7 @@
             <div class="counter mt-xl-0 mt-lg-0 mt-md-4 mt-sm-3 mt-3" data-aos="fade-up" data-aos-duration="550">
               <div class="border-line"></div>
               <div class="counter-img">
-                <img src="assets/images/icons/career.png" class="img-fluid" alt="career">
+                <img src="./assets/images/icons/career.png" class="img-fluid" alt="career">
               </div>
               <h5 class="count-text mt-2">Student</h5>
               <h2 class="timer count-title count-number"
@@ -132,7 +132,7 @@
             <div class="counter mt-xl-0 mt-lg-0 mt-md-4 mt-sm-3 mt-3" data-aos="fade-up" data-aos-duration="550">
               <div class="border-line"></div>
               <div class="counter-img">
-                <img src="assets/images/icons/activity.png" class="img-fluid" alt="activity">
+                <img src="./assets/images/icons/activity.png" class="img-fluid" alt="activity">
               </div>
               <h5 class="count-text mt-2">Subjects</h5>
               <h2 class="timer count-title count-number" data-to="<?php echo $Osotech->getTotalSubjects(); ?>"
@@ -187,7 +187,7 @@
           <div class="target-block text-white p-5" data-aos="fade-up" data-aos-duration="550">
             <div class="border-line"></div>
             <i class="fa fa-book fa-3x color-orange mb-3 target-icon"></i>
-            <h4 class="font-weight-bold">Book Library & Lab</h4>
+            <h4 class="font-weight-bold">Book Library & Labs</h4>
             <p></p>
 
           </div>
@@ -212,35 +212,35 @@
   ?>
   <!-- end search course -->
   <!-- start event listing -->
-  <?php include_once("Partials/EventListing.php"); ?>
+  <?php include_once("./Partials/EventListing.php"); ?>
   <!-- end event listing -->
   <!-- start video & FAQ -->
-  <?php include_once("Partials/HomePageFaqs.php"); ?>
+  <?php include_once("./Partials/HomePageFaqs.php"); ?>
   <!-- end video & FAQ -->
   <!-- start event gallery -->
-  <?php include_once("Partials/HomePageGallery.php"); ?>
+  <?php include_once("./Partials/HomePageGallery.php"); ?>
   <!-- end event gallery -->
   <!-- start contact us -->
   <?php //include_once("Partials/studentReview.php") 
   ?>
   <!-- end join us -->
   <!-- start blog -->
-  <?php include_once("Partials/LatestBlogs.php") ?>
+  <?php include_once("./Partials/LatestBlogs.php") ?>
 
   <!-- end blog -->
   <!-- start footer -->
-  <?php if (file_exists("Templates/Footer.php")) {
-    include_once 'Templates/Footer.php';
+  <?php if (file_exists("./Templates/Footer.php")) {
+    include_once './Templates/Footer.php';
   } ?>
   <!-- end footer -->
   <a href="#" id="scroll"><span></span></a>
 </div>
 <!-- ===============jQuery Frameworks============= -->
 <!-- footerscript here -->
-<?php if (!file_exists("Templates/FooterScript.php")) : ?>
+<?php if (!file_exists("./Templates/FooterScript.php")) : ?>
 <?php die("Access not Aallowed"); ?>
 <?php else : ?>
-<?php include_once 'Templates/FooterScript.php'; ?>
+<?php include_once './Templates/FooterScript.php'; ?>
 <?php endif; ?>
 <script>
 const swiper = new Swiper('.swiper', {
