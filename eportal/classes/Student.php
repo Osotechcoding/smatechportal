@@ -361,8 +361,8 @@ class Student
 		$schoolCode = $schoolDatas->govt_approve_number; //school Code
 		$this->stmt = $this->dbh->prepare("SELECT stdRegNo FROM $this->table_name ORDER BY stdRegNo DESC LIMIT 1");
 		$this->stmt->execute();
-		if ($this->stmt->rowCount() > 0) {
-			if ($row = $this->stmt->fetch());
+		if ($this->stmt->rowCount() == '1') {
+			$row = $this->stmt->fetch();
 			$value2 = $row->stdRegNo;
 			//separating numeric part
 			$value2 = substr($value2, 10, 14);

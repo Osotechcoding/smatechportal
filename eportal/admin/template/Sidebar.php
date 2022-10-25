@@ -119,11 +119,9 @@
            <li class="nav-item"><a href="add_student"><i class="fa fa-graduation-cap fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Single Registration">Single Registration</span></a>
            </li>
-           <?php if ($Admin->isSuperAdmin($admin_data->adminId)) : ?>
            <li class="nav-item"><a href="studentcsvupload"><i class="fa fa-graduation-cap fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Bulk Registration">Bulk Registration</span></a>
            </li>
-           <?php endif; ?>
 
            <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Students">View Students</span></a>

@@ -32,21 +32,8 @@ if ($rowsCount > 0) {
 		//push to data
 		array_push($student_arr['registration']['student'], $student_item);
 	}
-	//turn it to http variable
-	//$query_string = http_build_query($student_arr);
-	//echo "<pre>";
+
 	echo json_encode($student_arr);
-	/*$endpoint_url = "";
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $query_string);
-curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-$response = curl_exec($ch);
-curl_close($ch);
-if ($response) {
-	echo "<pre>";
-	print_r($response);
-}*/
 } else {
 	echo json_encode([]);
 }

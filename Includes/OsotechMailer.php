@@ -25,7 +25,7 @@ class OsotechMailer
     // code...
   }
 
-  public function SendClientFeedBackEmail($email, $name, $message)
+  public function SendClientFeedBackEmail($email, $message)
   {
 
     $mail = new PHPMailer(true);
@@ -40,18 +40,18 @@ class OsotechMailer
       $mail->Password   = $this->SIB_ACC_PASS;                               //SMTP password
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //ENCRYPTION_SMTPS; //Enable implicit TLS encryption
       $mail->Port       = 587;
-      $mail->setFrom($email, $name);
-      $mail->addAddress($this->SIB_ACC_USER, 'Smatech Admin');     //Add a recipient
+      $mail->setFrom($this->SIB_ACC_USER, "Admin");
+      $mail->addAddress("info.ftchelpdesk@gmail.com");     //Add a recipient
       $mail->isHTML(true);                                  //Set email 
-      $mail->Subject = 'New Feedback From ' . $name;
+      $mail->Subject = 'Feedback From ' . $email;
       $mail->Body    = $message;
       $mail->AltBody = $message;
       $mail->send();
-      return 'Message has been sent';
+      return true; //'Message has been sent';
     } catch (Exception $e) {
       return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
   }
 }
 
-$OsotechMailer = new OsotechMailer();
+//$OsotechMailer = new OsotechMailer();

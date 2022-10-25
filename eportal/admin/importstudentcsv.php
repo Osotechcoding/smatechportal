@@ -13,6 +13,7 @@ spl_autoload_register(function ($filename) {
 require_once "../classes/Database.php";
 //$dbh = osotech_connect();
 $Student = new Student();
+$Staff = new Staff();
 $Alert = new Alert;
 $config = new Configuration();
 
@@ -25,6 +26,13 @@ if ($request_method === "POST") {
 
     if ($_POST['action'] === "upload_student_bulk_csv_data") {
       $result = importMassStudentViaCSVFile($_POST, $_FILES);
+      if ($result) {
+        echo $result;
+      }
+    }
+
+    if ($_POST['action'] === "import_staff_bulk_csv_data") {
+      $result = importMassTeacherViaCSVExcelFile($_POST, $_FILES);
       if ($result) {
         echo $result;
       }
@@ -51,6 +59,113 @@ if ($request_method === "POST") {
       }
     }
   }
+}
+
+function importMassTeacherViaCSVExcelFile($csv_data, $csv_file)
+{
+  $response = "";
+  $dbh = osotech_connect();
+  global $Staff;
+  global $Alert;
+  global $config;
+  $File_tmp = $csv_file['staff_csv_file']['tmp_name'];
+  $FileName = $csv_file['staff_csv_file']['name'];
+  $auth_pass = $csv_data['auth_code'];
+  $allowedExt = array('xls', 'csv', 'xlsx');
+
+  $file_ext = pathinfo($FileName, PATHINFO_EXTENSION);
+
+  if ($config->isEmptyStr($auth_pass) || $config->isEmptyStr($FileName)) {
+
+    $response = $Alert->alert_toastr("error", "Invalid Submission, Pls try again!", __OSO_APP_NAME__ . " Says");
+  } elseif (!in_array($file_ext, $allowedExt)) {
+
+    $response = $Alert->alert_toastr("error", "Only CSV, XLS or XLSX Extension is allowed!", __OSO_APP_NAME__ . " Says");
+  } else if ($auth_pass !== __OSO__CONTROL__KEY__) {
+
+    $response = $Alert->alert_toastr("error", "Invalid Authentication Code, Pls try again!", __OSO_APP_NAME__ . " Says");
+  } else {
+    /** Load $inputFileName to a Spreadsheet object **/
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($File_tmp);
+    $sheet_data = $spreadsheet->getActiveSheet()->ToArray();
+    $count = "0";
+    //Omitting the first line such Heading Title
+    foreach ($sheet_data as $row) {
+      if ($count > 0) {
+        $surname = $config->Clean($row[0]);
+        $firstName = $config->Clean($row[1]);
+        $staffUser = $firstName;
+        $lastName = $config->Clean($row[2]);
+        $staffEmail = $config->Clean($row[3]);
+        $staffPhone = $config->Clean($row[4]);
+        $staffAddress = $config->Clean($row[5]);
+        $staffGender = $config->Clean($row[6]);
+        $staffEducation = $config->Clean($row[7]);
+        $staffDob = $config->Clean(date("Y-m-d", strtotime($row[8])));
+        $appliedDate = $config->Clean(date("Y-m-d", strtotime($row[9])));
+        $staffType = $config->Clean($row[10]);
+        $mpassword = "staff123";
+        $hashed_password = $config->encrypt_user_password($mpassword);
+        $staffRegNo = $Staff->generate_staff_registration_number();
+        $confirmation_code = substr(md5(uniqid(mt_rand(11111, 9999), true)), 0, 15);
+        //$reg_date = date("Y-m-d");
+        $div_email = explode("@", $staffEmail);
+        $portal_email = $div_email[0] . "@" . __OSO_APP_NAME__ . ".portal";
+        $fullName = $firstName . " " . $lastName;
+        $staff_status = 1;
+        if ($config->check_single_data('visap_staff_tbl', 'staffEmail', $staffEmail)) {
+
+          $response = $Alert->alert_toastr("error", "$staffEmail is already taken!", __OSO_APP_NAME__ . " Says");
+        } elseif ($config->check_single_data('visap_student_tbl', 'stdEmail', $staffEmail)) {
+
+          $response = $Alert->alert_toastr("error", "$staffEmail is already taken on this Portal!", __OSO_APP_NAME__
+            . " Says");
+        } else {
+          if ($staffGender == "f" || $staffGender == "F") {
+            $staffGender = "Female";
+          } else if ($staffGender == "m" || $staffGender == "M") {
+            $staffGender = "Male";
+          } else {
+            $staffGender = "Other";
+          }
+          $staffPhone = "0" . $staffPhone;
+          try {
+            $dbh->beginTransaction();
+            $stmt = $dbh->prepare("INSERT INTO `visap_staff_tbl`
+    (staffRegNo,firstName,lastName,staffEmail,staffPass,staffUser,staffDob,staffEducation,staffPhone,staffAddress, confirmation_code,staffGender,portalEmail,jobStatus,staffType,appliedDate)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+            if ($stmt->execute(array($staffRegNo, $fullName, $surname, $staffEmail, $hashed_password, $staffUser, $staffDob, $staffEducation, $staffPhone, $staffAddress, $confirmation_code, $staffGender, $portal_email, $staff_status, $staffType, $appliedDate))) {
+              $dbh->commit();
+              $response = $Alert->alert_toastr(
+                "success",
+                "Staff Uploaded &amp; Registered Successfully...",
+                __OSO_APP_NAME__ . " Says"
+              ) . "<script>
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
+    </script>";
+            } else {
+              $response = $Alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+                " Says");
+            }
+          } catch (PDOException $e) {
+            $dbh->rollback();
+            $response = $Alert->alert_toastr(
+              "error",
+              "Error Occurred: " . $e->getMessage(),
+              __OSO_APP_NAME__ . "
+    Says"
+            );
+          }
+        }
+      } else {
+        $count = "1";
+      }
+      # code...
+    }
+  }
+  return $response;
 }
 
 function importStudentPsychomotorDomainScoreSheetViaCSVFile($data, $csv_file)
@@ -371,8 +486,8 @@ function importMassStudentViaCSVFile($data, $csv_file)
   global $Student;
   global $Alert;
   global $config;
-  $File_tmp = $csv_file['result_file']['tmp_name'];
-  $FileName = $csv_file['result_file']['name'];
+  $File_tmp = $csv_file['studentCsvFile']['tmp_name'];
+  $FileName = $csv_file['studentCsvFile']['name'];
   $studentClass = $data['student_class'];
   $auth_pass = $data['auth_code'];
   $allowedExt = array('xls', 'csv', 'xlsx');
@@ -438,7 +553,6 @@ function importMassStudentViaCSVFile($data, $csv_file)
               $stdApplyType, $stdConfToken
             ))) {
               $dbh->commit();
-
               $response = $Alert->alert_toastr(
                 "success",
                 "Students Uploaded &amp; Registered Successfully...",

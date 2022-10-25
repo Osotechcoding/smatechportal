@@ -269,7 +269,7 @@ require_once "helpers/helper.php";
         </div>
         <form id="bulkStudentResultImportForm">
           <div class="modal-body">
-            <p><a href="../csv/student_csv.xlsx" target="_blank"
+            <p><a href="../csv/agric_KG1_result.xlsx" target="_blank"
                 style="text-decoration:none;color:red; font-weight:700;">Click
                 Here</a> to
               Download Sample Import File</p>

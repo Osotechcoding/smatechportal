@@ -6,7 +6,7 @@
     $(".__loadingBtn__").html('<img src="./rolling_loader.svg" width="30"> Sending...');
     $.post("Includes/actions",feedBAckMesageForm.serialize(),function($data){
         setTimeout(()=>{
-        	$(".__loadingBtn__").html('Send Message');
+        	$(".__loadingBtn__").html('Send');
            $("#server-response").html($data)
         },1500)
     })

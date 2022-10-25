@@ -286,7 +286,7 @@ require_once "helpers/helper.php";
         <form id="bulkStudentPsychomotorDomainImportForm" enctype="multipart/form-data">
           <div class="modal-body">
             <div class="text-center">
-              <p><a href="../csv/student_csv.xlsx" target="_blank"
+              <p><a href="../csv/student_psychomotor.xlsx" target="_blank"
                   style="text-decoration:none;color:red; font-weight:700;">Click
                   Here</a> to
                 Download Sample Import File</p>

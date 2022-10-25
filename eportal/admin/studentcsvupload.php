@@ -24,14 +24,10 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
   data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
   <!-- BEGIN: Header-->
   <?php include "template/HeaderNav.php"; ?>
-  <!-- include headernav.php -->
   <!-- END: Header-->
   <!-- BEGIN: Main Menu-->
   <?php include "template/Sidebar.php"; ?>
   <!-- include Sidebar.php -->
-  <!-- END: Main Menu-->
-
-  <!-- BEGIN: Content-->
   <!-- BEGIN: Content-->
   <div class="app-content content">
     <div class="content-overlay"></div>
@@ -84,9 +80,8 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
                         <input type="hidden" name="action" value="upload_student_bulk_csv_data">
                         <div class="form-group">
                           <label for="studentCsvFile"> SELECT (csv,xls or xlsx File Only)</label>
-                          <input type="file" autocomplete="off" id="admission-no" class="form-control"
-                            placeholder="***********" name="studentCsvFile" id="studentCsvFile"
-                            accept=".csv,.xls,.xlsx">
+                          <input type="file" autocomplete="off" class="form-control" placeholder="***********"
+                            name="studentCsvFile" id="studentCsvFile" accept=".csv,.xls,.xlsx">
                         </div>
                       </div>
                       <div class="col-md-12">
@@ -99,14 +94,6 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
                         </div>
                       </div>
 
-                      <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-                      <div class="form-group">
-                        <label for="admission_year"> Admission Year</label>
-                        <input type="text" onpaste="return false;" autocomplete="off" id="admission_year"
-                          class="form-control" placeholder="e.g 2022" name="admission_year">
-
-                      </div>
-                    </div> -->
                       <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="form-group">
                           <label for="auth_code">Pass Code</label>

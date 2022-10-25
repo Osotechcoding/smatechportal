@@ -249,8 +249,8 @@ class Staff
 			$this->response = $this->alert->alert_toastr("error", "Enter your new Password to Continue!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($confirm_new_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Confirm your new Password to Continue!", __OSO_APP_NAME__ . " Says");
-		} elseif ((strlen($new_password) < 8) || (strlen($new_password) > 15)) {
-			$this->response = $this->alert->alert_toastr("error", "Password lenght must be between Eight (8) and twelve (12) characters", __OSO_APP_NAME__ . " Says");
+		} elseif ((strlen($new_password) <= 7) || (strlen($new_password) >= 30)) {
+			$this->response = $this->alert->alert_toastr("error", "Password lenght must be between Eight (8) and thirty (30) characters", __OSO_APP_NAME__ . " Says");
 		} elseif ($new_password !== $confirm_new_pass) {
 			$this->response = $this->alert->alert_toastr("error", "New Password and Confirm Password is not Match!", __OSO_APP_NAME__ . " Says");
 		} else {
