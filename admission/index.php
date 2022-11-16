@@ -11,8 +11,8 @@ require_once("Includes/Osotech.php");
 $Osotech = new Osotech();
 @$Osotech->osotech_session_kick();
 
-date_default_timezone_set("Africa/Lagos"); ?>
-<?php if ($Osotech->checkAdmissionPortalStatus() !== true) : ?>
+date_default_timezone_set("Africa/Lagos");
+if ($Osotech->checkAdmissionPortalStatus() !== true) : ?>
 <?php header("Location:" . APP_ROOT);
   exit(); ?>
 <?php endif ?>

@@ -218,9 +218,9 @@ class Osotech
 
   public function get_school_session_info()
   {
-    $this->stmt = $this->dbh->prepare("SELECT * FROM `current_session_tbl` LIMIT 1");
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `current_session_tbl` WHERE id=1 LIMIT 1");
     $this->stmt->execute();
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
       $this->response = $this->stmt->fetch();
       return $this->response;
       unset($this->dbh);

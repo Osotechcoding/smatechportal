@@ -204,7 +204,7 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
         success: function(data) {
           setTimeout(() => {
             $(".__loadingBtn__").html('Upload').attr("disabled", false);
-            // $("#video_form")[0].reset();
+            console.log(data)
             $("#server-response").html(data);
             //alert(data);
           }, 2500);

@@ -1,0 +1,122 @@
+
+html {
+  font-family:arial;
+  font-size: 9px;
+}
+
+body {
+        /* background-color: #726E6D; */
+        height: 842px;
+        width: 595px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .desc {
+  margin-top:3px;
+  background-color: black;
+  color: aliceblue;
+    }
+td {
+  border: 1px solid black;
+  /* padding: 2px; */
+}
+
+thead{
+  font-weight:bold;
+  text-align:center;
+  background: #625D5D;
+  color:white;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.footer {
+  text-align:right;
+  font-weight:bold;
+}
+
+tbody >tr:nth-child(odd) {
+  background: #d1d0ce3a;
+}
+.schname{
+    display: block;
+    /* margin-left: auto; */
+    margin-right: auto;
+    width: 80%;
+}
+.container-ca{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.cog-domain{
+    width: 400px;
+    margin-right: 10px;
+    background-color: rgba(173, 216, 230, 0.062);
+
+}
+.attendance{
+    width: 185px;
+    background-color: rgba(255, 255, 224, 0.137);
+}
+
+.footer-area{
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.teacher{
+  width: 180px;
+  border: 2px solid grey;
+  border-top-right-radius: 30px;
+  margin-right: 10px;
+  padding: 5px;
+}
+.principal{
+  width: 180px;
+  border: 2px solid grey;
+  border-bottom-left-radius: 30px;
+  margin-right: 10px;
+  padding: 5px;
+}
+.signarea{
+  width: 195px;
+  background-image: url(../stamp.png);
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.upperSection{
+  display: flex;
+  margin-top: 5px;
+}
+.textArea {
+  text-align: center;
+}
+.schLogo{
+  width: 100px;
+  height: auto;
+    margin-top: 5px;
+}
+.schScope{
+  line-height: 3px;
+}
+.schName{
+  font-size: 20px;
+  line-height: 2px;
+}
+.textArea p:first-of-type{
+  margin-top: -10px;
+  /* background-color: red; */
+  color: white;
+  line-height: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+}

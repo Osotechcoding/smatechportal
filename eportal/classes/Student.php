@@ -1,6 +1,5 @@
 <?php
-//my postman API KEY
-//PMAK-62bb589e27cc4b7125fbe0c4-44f50f392e15b0a2f950adb9c2faa0f36c
+
 @session_start();
 /**
  *

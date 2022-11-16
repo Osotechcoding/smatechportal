@@ -154,7 +154,7 @@ require_once "helpers/helper.php";
             <i class="bx bx-x"></i>
           </button>
         </div>
-        <form id="addNewDriverModalForm">
+        <form id="addNewDriverModalForm" enctype="multipart/form-data">
           <input type="hidden" name="action" value="resgister_new_vehicle_driver">
           <div class="modal-body">
             <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">

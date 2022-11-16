@@ -1,13 +1,15 @@
 <?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 include_once("initialize.php");
-//Load Composer's autoloader
-require_once('../vendor/autoload.php');
+
+require_once 'src/Exception.php';
+require_once 'src/PHPMailer.php';
+require_once 'src/SMTP.php';
+
 class OsotechMailer
 {
   //for smtp details
@@ -25,7 +27,7 @@ class OsotechMailer
     // code...
   }
 
-  public function SendClientFeedBackEmail($email, $message)
+  public function SendClientFeedBackEmail($email, $message): bool
   {
 
     $mail = new PHPMailer(true);
@@ -40,16 +42,21 @@ class OsotechMailer
       $mail->Password   = $this->SIB_ACC_PASS;                               //SMTP password
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //ENCRYPTION_SMTPS; //Enable implicit TLS encryption
       $mail->Port       = 587;
-      $mail->setFrom($this->SIB_ACC_USER, "Admin");
+      $mail->setFrom("osotechcoding@gmail.com", "Admin");
       $mail->addAddress("info.ftchelpdesk@gmail.com");     //Add a recipient
       $mail->isHTML(true);                                  //Set email 
       $mail->Subject = 'Feedback From ' . $email;
       $mail->Body    = $message;
       $mail->AltBody = $message;
       $mail->send();
-      return true; //'Message has been sent';
+      if ($mail->send()) {
+        return true;
+      } else {
+        return false;
+      }
+      //'Message has been sent';
     } catch (Exception $e) {
-      return "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+      return false; //"Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
   }
 }

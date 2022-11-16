@@ -50,120 +50,45 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> <?php echo ucwords($Osotech->getConfigData()->school_name); ?> ::
-    <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $schl_session_data->active_session; ?>
+    <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $rsession; ?>
     <?php echo $term; ?> </title>
-  <style>
-  html {
-    font-family: arial;
-    font-size: 9px;
-  }
-
-  body {
-    /* background-color: #726E6D; */
-    height: 842px;
-    width: 595px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  }
-
-  td {
-    border: 1px solid black;
-    /* padding: 2px; */
-  }
-
-  thead {
-    font-weight: bold;
-    text-align: center;
-    background: #625D5D;
-    color: white;
-  }
-
-  table {
-    border-collapse: collapse;
-  }
-
-  .footer {
-    text-align: right;
-    font-weight: bold;
-  }
-
-  tbody>tr:nth-child(odd) {
-    background: #d1d0ce3a;
-  }
-
-  .schname {
-    display: block;
-    /*margin-left: auto;*/
-    margin-right: auto;
-    width: 80%;
-  }
-
-  .container-ca {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .cog-domain {
-    width: 400px;
-    margin-right: 10px;
-    background-color: rgba(173, 216, 230, 0.062);
-
-  }
-
-  .attendance {
-    width: 185px;
-    background-color: rgba(255, 255, 224, 0.137);
-  }
-
-  .footer-area {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .teacher {
-    width: 180px;
-    border: 2px solid grey;
-    border-top-right-radius: 30px;
-    margin-right: 10px;
-    padding: 5px;
-  }
-
-  .principal {
-    width: 180px;
-    border: 2px solid grey;
-    border-bottom-left-radius: 30px;
-    margin-right: 10px;
-    padding: 5px;
-  }
-
-  .signarea {
-    width: 195px;
-    background-image: url('stamp.png');
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  </style>
+  <link rel="stylesheet" href="Templates/result.css">
 </head>
 
 <body>
   <section id="result">
-    <!-- <img src="../assets/images/resulttop.jpg" alt="" class="schname"> -->
-    <!-- <hr> -->
-    <img src="schoolbanner.jpg" alt="" class="schname">
+    <!--  -->
+    <div class="upperSection">
+      <img src="<?php echo $Osotech->get_schoolLogoImage(); ?>"
+        alt="<?php echo ucwords($Osotech->getConfigData()->school_address); ?>-logo" class="schLogo">
+      <div class="textArea">
+        <h3 class="schName"><?php echo strtoupper($Osotech->getConfigData()->school_name); ?></h3>
+        <p class="schScope desc">CRECHE, NURSERY, PRIMARY & SECONDARY</p>
+        <p class="schScope"><?php echo ucwords($Osotech->getConfigData()->school_address); ?>,
+          <?php echo ucwords($Osotech->getConfigData()->school_city); ?>,
+          <?php echo ucwords($Osotech->getConfigData()->school_state); ?></p>
+        <p class="schScope"><i>Tel:</i> <b><?php echo ucwords($Osotech->getConfigData()->director_mobile); ?>,
+            <?php echo ($Osotech->getConfigData()->principal_mobile); ?></b></p>
+      </div>
+    </div>
+
+    <!--  -->
+    <h2 style="text-align:center; text-decoration: underline;">STUDENT'S PERFORMANCE REPORT</h2>
     <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name); ?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender) ?></b>&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_class); ?></b>
-      &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
+        &nbsp; </b> GENDER:&nbsp;&nbsp;
+      <b><?php echo ucfirst($student_data->stdGender) ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS:
+      <b><?php echo strtoupper($student_class); ?>&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b>
+    </p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp;
       <b><?php echo strtoupper($student_data->stdRegNo); ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp;
-      <b><?php echo date("F jS, Y", strtotime($student_data->stdDob)); ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-      AGE:&nbsp;&nbsp; <b><?php echo $StudentResult->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;
+      <b><?php echo date("F jS, Y", strtotime($student_data->stdDob)); ?></b>&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp;
+      <b><?php echo $StudentResult->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
+    <img src="images/passportSample.jpg" alt="passport"
+      style="float: right; width: 100px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
+    <!--  -->
     <?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
     <?php if ($student_data->stdGender == "Male") : ?>
     <img src="../eportal/schoolImages/students/male.png" alt="passport"
@@ -709,7 +634,7 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
       <div class="signarea">
         <h4
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
-          Next Term Begins: <?php echo date("l jS F, Y", strtotime($schl_session_data->new_term_begins)); ?>.</h4>
+          Next Term Begins: <?php echo date("l jS F, Y", strtotime($schoolSesDetail->new_term_begins)); ?>.</h4>
         <br>
         <img src="sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
       </div>
