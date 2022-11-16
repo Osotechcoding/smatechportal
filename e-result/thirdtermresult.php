@@ -51,7 +51,7 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
   <title> <?php echo ucwords($Osotech->getConfigData()->school_name); ?> ::
     <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $rsession; ?>
     <?php echo $term; ?> </title>
-  <link rel="stylesheet" href="Templates/result.css">
+  <link rel="stylesheet" href="./result.css">
 </head>
 
 <body>
@@ -684,7 +684,7 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
           Next Term Begins: <?php echo date("l jS F, Y", strtotime($schl_session_data->new_term_begins)); ?>.</h4>
         <br>
-        <img src="stamp.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+        <img src="sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
 
       </div>
       <!-- <p style="font-size: 15px;">Promoted</p> -->

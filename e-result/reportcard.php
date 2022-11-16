@@ -1,5 +1,5 @@
 <?php
-@session_start();
+// session_start();
 require_once "src/Osotech.php";
 require_once "src/StudentResult.php";
 
@@ -52,7 +52,7 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
   <title> <?php echo ucwords($Osotech->getConfigData()->school_name); ?> ::
     <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $rsession; ?>
     <?php echo $term; ?> </title>
-  <link rel="stylesheet" href="Templates/result.css">
+  <link rel="stylesheet" href="./result.css">
 </head>
 
 <body>
@@ -62,11 +62,11 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
       <img src="<?php echo $Osotech->get_schoolLogoImage(); ?>"
         alt="<?php echo ucwords($Osotech->getConfigData()->school_address); ?>-logo" class="schLogo">
       <div class="textArea">
-        <h3 class="schName"><?php echo strtoupper($Osotech->getConfigData()->school_name); ?></h3>
+        <h3 class="schName osotech-style"><?php echo strtoupper($Osotech->getConfigData()->school_name); ?></h3>
         <p class="schScope desc">CRECHE, NURSERY, PRIMARY & SECONDARY</p>
-        <p class="schScope"><?php echo ucwords($Osotech->getConfigData()->school_address); ?>,
-          <?php echo ucwords($Osotech->getConfigData()->school_city); ?>,
-          <?php echo ucwords($Osotech->getConfigData()->school_state); ?></p>
+        <p class="schScope"><b><?php echo ucwords($Osotech->getConfigData()->school_address); ?>,
+            <?php echo ucwords($Osotech->getConfigData()->school_city); ?>,
+            <?php echo ucwords($Osotech->getConfigData()->school_state); ?></b></p>
         <p class="schScope"><i>Tel:</i> <b><?php echo ucwords($Osotech->getConfigData()->director_mobile); ?>,
             <?php echo ($Osotech->getConfigData()->principal_mobile); ?></b></p>
       </div>
@@ -86,8 +86,6 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
       <b><?php echo $StudentResult->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
-    <img src="images/passportSample.jpg" alt="passport"
-      style="float: right; width: 100px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
     <!--  -->
     <?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
     <?php if ($student_data->stdGender == "Male") : ?>
@@ -101,7 +99,6 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
     <img src="../eportal/schoolImages/students/<?php echo $student_data->stdPassport; ?>" alt="passport"
       style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
     <?php endif ?>
-
     <div class="container-ca">
       <div class="cog-domain">
         <table style="table-layout: auto; width:100%;" id="congnitiveDomain">
@@ -110,7 +107,6 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
               <td colspan="8"><b style="font-size: 17px;">COGNITIVE DOMAIN</b> </td>
             </tr>
           </thead>
-
           <thead>
             <tr style="height: 90px;">
               <td style="width: 280px;"> SUBJECT</td>
@@ -645,7 +641,6 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
         style="float: right;"> Powered by: <?php echo __OSO_DEV_COMPANY__ ?></span></h4>
     <button onclick="javascript:window.print();" type="button"
       style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
-
     <!-- End of result -->
   </section>
 
