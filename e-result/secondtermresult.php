@@ -1,5 +1,5 @@
 <?php
-@session_start();
+
 require_once "src/Osotech.php";
 require_once "src/StudentResult.php";
 
@@ -10,12 +10,12 @@ $StudentResult = new StudentResult();
 $dbh = osotech_connect();
 $schoolSesDetail = $Osotech->get_session_details();
 
-date_default_timezone_set("Africa/Lagos"); ?>
-<?php if ($StudentResult->checkResultPortalStatus() === true) : ?>
-<?php header("Location: ../");
-  exit(); ?>
-<?php endif ?>
-<?php
+date_default_timezone_set("Africa/Lagos");
+if ($StudentResult->checkResultPortalStatus() == true) {
+  header("Location: ../");
+  exit();
+}
+
 $StudentResult->check_resultmi_session();
 //
 $pin = $_SESSION['pin'];

@@ -681,10 +681,10 @@ class Osotech
     $status = '1';
     $this->stmt = $this->dbh->prepare("SELECT * FROM `api_module_config` WHERE module=? AND status=? LIMIT 1");
     $this->stmt->execute(array($module, $status));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
       $this->response = true;
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
   public function get_school_session_info()
@@ -695,6 +695,17 @@ class Osotech
       $this->response = $this->stmt->fetch();
       return $this->response;
       unset($this->dbh);
+    }
+  }
+
+  public function get_student_previous_school_info($studentId)
+  {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdpreschlinfo` WHERE student_id=? LIMIT 1");
+    $this->stmt->execute([$studentId]);
+    if ($this->stmt->rowCount() > 0) {
+      $this->response = $this->stmt->fetch();
+      return $this->response;
+      $this->dbh = null;
     }
   }
 }

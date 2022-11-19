@@ -33,7 +33,10 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
   <?php include_once("Head.php"); ?>
 </head>
 
-<body>
+<body style="background:rgba(0, 0, 0, 0.4) url('schoolbg.jpg');
+background-position:center;
+background-size: cover;
+background-repeat: no-repeat;">
   <div class="container mt-2">
     <?php include_once 'HeadNavBar.php'; ?>
     <br>

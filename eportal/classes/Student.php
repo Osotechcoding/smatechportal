@@ -1827,4 +1827,15 @@ class Student
     }
     }
     }
+
+    public function get_student_previous_school_info($studentId)
+    {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdpreschlinfo` WHERE student_id=? LIMIT 1");
+    $this->stmt->execute([$studentId]);
+    if ($this->stmt->rowCount() > 0) {
+    $this->response = $this->stmt->fetch();
+    return $this->response;
+    $this->dbh = null;
+    }
+    }
     }

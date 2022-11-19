@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2022 at 03:05 AM
+-- Generation Time: Nov 19, 2022 at 11:16 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -1118,19 +1118,7 @@ CREATE TABLE IF NOT EXISTS `tbl_reg_pins` (
   `created_at` date DEFAULT NULL,
   `usedBy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_reg_pins`
---
-
-INSERT INTO `tbl_reg_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `price`, `pin_status`, `created_at`, `usedBy`) VALUES
-(1, '4750213198326', 'SMA84E1D3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(2, '0733922156814', 'SMA114BF0', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(3, '0732386119452', 'SMA8A37B3', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(4, '6112932784530', 'SMA034A14', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(5, '3908622451137', 'SMA312057', 'Registration Pins', 5000, 0, '2022-08-05', NULL),
-(6, '6214620135573', 'SMA378AB3', 'Registration Pins', 5000, 0, '2022-08-05', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1147,21 +1135,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_result_pins`
---
-
-INSERT INTO `tbl_result_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `price`, `pin_status`, `created_at`) VALUES
-(2, '612353419027', 'SMR387BA', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(3, '512420657163', 'SMR1401F', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(4, '127616350542', 'SMRC96FA', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(5, '253051421766', 'SMRF5B13', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(6, '106532527641', 'SMR11B3F', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(7, '322851340679', 'SMRE83D3', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(8, '261251043753', 'SMRF011B', 'Result Checker Pins', 200, 0, '2022-08-05'),
-(9, '143659017322', 'SMR41704', 'Result Checker Pins', 200, 0, '2022-08-05');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1179,7 +1153,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins_history` (
   `used_term` varchar(20) DEFAULT NULL,
   `used_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pinId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1304,14 +1278,7 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_admin_login_token`
---
-
-INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
-(81, 'Director', 'user@smatech.com', 'jGuSfIVfcWb6ECIztyjMmP6SLs3v3yFkyeFg06yN');
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1359,7 +1326,8 @@ CREATE TABLE IF NOT EXISTS `visap_assignment_tbl` (
   `download_counter` int(11) DEFAULT NULL,
   `term` varchar(50) DEFAULT NULL,
   `schl_session` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`assId`)
+  PRIMARY KEY (`assId`),
+  KEY `teacherId` (`teacherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1379,7 +1347,7 @@ CREATE TABLE IF NOT EXISTS `visap_bed_payment_history_tbl` (
   `payment_date` date DEFAULT NULL,
   `receiptNo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1447,18 +1415,7 @@ CREATE TABLE IF NOT EXISTS `visap_blog_post_comments` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `comment_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_blog_post_comments`
---
-
-INSERT INTO `visap_blog_post_comments` (`commentId`, `blogId`, `guestName`, `user_email`, `website`, `comment`, `status`, `comment_date`) VALUES
-(2, 1, 'Mrs Blessing Oiza', 'oiza@gmail.com', NULL, 'another comment posted by me', 1, '2022-09-09 20:55:13'),
-(3, 1, 'Mr Agberayi Samson', 'osotech@gmail.com', NULL, 'In fact I really love this post', 1, '2022-09-09 20:58:34'),
-(4, 2, 'Adeola Samuel', 'adeola@gmail.com', NULL, 'Wow! this is superb, I really loved it so much', 1, '2022-09-09 22:27:47'),
-(5, 2, 'Elijah BIIT', 'osotechcoding@gmail.com', NULL, 'This is coming from Biit solution', 1, '2022-09-10 13:40:25'),
-(6, 3, 'Adedayo Ifeoluwa', 'alamin2012@smatech.com', NULL, 'In fact i love this song', 1, '2022-09-10 15:46:08');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1480,17 +1437,24 @@ CREATE TABLE IF NOT EXISTS `visap_blog_post_tbl` (
   `blog_time` time DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`blog_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `visap_blog_post_tbl`
+-- Table structure for table `visap_bus_expense_tbl`
 --
 
-INSERT INTO `visap_blog_post_tbl` (`blog_id`, `category_id`, `author`, `blog_title`, `blog_content`, `blog_image`, `blog_status`, `created_at`, `total_view`, `total_comment`, `blog_time`, `tags`) VALUES
-(1, 'Motivational', '2', 'Why Nigerian Student Fails WAEC 2022?', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim voluptatem odit nobis voluptatum mollitia repellat quisquam eos maxime quaerat in, necessitatibus quidem optio magnam nesciunt laudantium nemo, ipsam consequuntur suscipit architecto, a incidunt hic error minus, et! Asperiores eaque, ab nemo quasi molestias ducimus dolor sequi error tempore a delectus voluptatem earum, neque rerum, blanditiis provident nihil exercitationem odit, repellendus officia. Veniam, vero dolorem accusamus soluta perferendis nesciunt porro eos itaque a tenetur cumque explicabo eligendi, excepturi placeat consequuntur non omnis quis tempora delectus repellat natus architecto nam, unde eveniet. Accusamus eos ratione nam officia, placeat magnam blanditiis accusantium? Corporis reiciendis veritatis eligendi assumenda, magnam ipsum minus aperiam, aliquid labore maxime repellendus tenetur aut tempora. Ea, facere quos, sit illum deleniti esse voluptas ut repellendus totam itaque eius nostrum assumenda non aliquam tempore asperiores sint accusamus eum laboriosam nisi nihil excepturi! Commodi eius ad sint expedita repellat labore eveniet praesentium rem pariatur reprehenderit mollitia est iure doloremque ullam modi doloribus asperiores aliquid ipsa, non, magnam, totam aliquam. Odio aliquam tempore esse suscipit, itaque ipsa. Veniam ut accusantium totam accusamus tempore eos fugit quos voluptas vero eligendi illum et ducimus, aliquam nam molestias exercitationem? Corporis inventore odit numquam suscipit odio modi ab nemo nostrum. Explicabo vitae provident minima ea itaque, recusandae quia doloribus at aspernatur fugit. Repellendus quam modi aspernatur, enim, fuga sapiente voluptate obcaecati voluptatibus officiis aperiam consequuntur explicabo iste quas quidem fugiat optio perferendis. Numquam, rem? Reprehenderit magnam at praesentium impedit porro dicta iure quod totam recusandae, placeat tenetur minima vel esse odit exercitationem earum vitae dolorem eum aspernatur molestias, quis consequuntur dolores quas repellat? Autem deserunt incidunt qui tenetur, possimus quas optio culpa quis numquam voluptas harum, minus minima adipisci nisi exercitationem enim, ex excepturi fugiat, doloribus. Ipsum praesentium sequi quia ipsam numquam a velit est molestiae at!\r\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Enim voluptatem odit nobis voluptatum mollitia repellat quisquam eos maxime quaerat in, necessitatibus quidem optio magnam nesciunt laudantium nemo, ipsam consequuntur suscipit architecto, a incidunt hic error minus, et! Asperiores eaque, ab nemo quasi molestias ducimus dolor sequi error tempore a delectus voluptatem earum, neque rerum, blanditiis provident nihil exercitationem odit, repellendus officia. Veniam, vero dolorem accusamus soluta perferendis nesciunt porro eos itaque a tenetur cumque explicabo eligendi, excepturi placeat consequuntur non omnis quis tempora delectus repellat natus architecto nam, unde eveniet. Accusamus eos ratione nam officia, placeat magnam blanditiis accusantium? Corporis reiciendis veritatis eligendi assumenda, magnam ipsum minus aperiam, aliquid labore maxime repellendus tenetur aut tempora. Ea, facere quos, sit illum deleniti esse voluptas ut repellendus totam itaque eius nostrum assumenda non aliquam tempore asperiores sint accusamus eum laboriosam nisi nihil excepturi! Commodi eius ad sint expedita repellat labore eveniet praesentium rem pariatur reprehenderit mollitia est iure doloremque ullam modi doloribus asperiores aliquid ipsa, non, magnam, totam aliquam. Odio aliquam tempore esse suscipit, itaque ipsa. Veniam ut accusantium totam accusamus tempore eos fugit quos voluptas vero eligendi illum et ducimus, aliquam nam molestias exercitationem? Corporis inventore odit numquam suscipit odio modi ab nemo nostrum. Explicabo vitae provident minima ea itaque, recusandae quia doloribus at aspernatur fugit. Repellendus quam modi aspernatur, enim, fuga sapiente voluptate obcaecati voluptatibus officiis aperiam consequuntur explicabo iste quas quidem fugiat optio perferendis. Numquam, rem? Reprehenderit magnam at praesentium impedit porro dicta iure quod totam recusandae, placeat tenetur minima vel esse odit exercitationem earum vitae dolorem eum aspernatur molestias, quis consequuntur dolores quas repellat? Autem deserunt incidunt qui tenetur, possimus quas optio culpa quis numquam voluptas harum, minus minima adipisci nisi exercitationem enim, ex excepturi fugiat, doloribus. Ipsum praesentium sequi quia ipsam numquam a velit est molestiae at!\r\n\r\nLorem ipsum, dolor sit amet consectetur adipisicing elit. Enim voluptatem odit nobis voluptatum mollitia repellat quisquam eos maxime quaerat in, necessitatibus quidem optio magnam nesciunt laudantium nemo, ipsam consequuntur suscipit architecto, a incidunt hic error minus, et! Asperiores eaque, ab nemo quasi molestias ducimus dolor sequi error tempore a delectus voluptatem earum, neque rerum, blanditiis provident nihil exercitationem odit, repellendus officia. Veniam, vero dolorem accusamus soluta perferendis nesciunt porro eos itaque a tenetur cumque explicabo eligendi, excepturi placeat consequuntur non omnis quis tempora delectus repellat natus architecto nam, unde eveniet. Accusamus eos ratione nam officia, placeat magnam blanditiis accusantium? Corporis reiciendis veritatis eligendi assumenda, magnam ipsum minus aperiam, aliquid labore maxime repellendus tenetur aut tempora. Ea, facere quos, sit illum deleniti esse voluptas ut repellendus totam itaque eius nostrum assumenda non aliquam tempore asperiores sint accusamus eum laboriosam nisi nihil excepturi! Commodi eius ad sint expedita repellat labore eveniet praesentium rem pariatur reprehenderit mollitia est iure doloremque ullam modi doloribus asperiores aliquid ipsa, non, magnam, totam aliquam. Odio aliquam tempore esse suscipit, itaque ipsa. Veniam ut accusantium totam accusamus tempore eos fugit quos voluptas vero eligendi illum et ducimus, aliquam nam molestias exercitationem? Corporis inventore odit numquam suscipit odio modi ab nemo nostrum. Explicabo vitae provident minima ea itaque, recusandae quia doloribus at aspernatur fugit. Repellendus quam modi aspernatur, enim, fuga sapiente voluptate obcaecati voluptatibus officiis aperiam consequuntur explicabo iste quas quidem fugiat optio perferendis. Numquam, rem? Reprehenderit magnam at praesentium impedit porro dicta iure quod totam recusandae, placeat tenetur minima vel esse odit exercitationem earum vitae dolorem eum aspernatur molestias, quis consequuntur dolores quas repellat? Autem deserunt incidunt qui tenetur, possimus quas optio culpa quis numquam voluptas harum, minus minima adipisci nisi exercitationem enim, ex excepturi fugiat, doloribus. Ipsum praesentium sequi quia ipsam numquam a velit est molestiae at!', '16627414511084190918.png', 2, '2022-09-09', NULL, NULL, '05:37:31', 'Education'),
-(2, 'Educational', '2', '10 Ways to Improve Your Spoken English', 'Lorem ipsum dolor sit amet consectetur adipisicing, elit. Praesentium, ut in atque odit nihil, odio sapiente quibusdam et vero minima totam, facilis ratione, optio? Vitae minus dolorem nemo, amet dolor. Nisi deserunt fugit eligendi neque consectetur fuga explicabo voluptate! Soluta expedita maxime esse dolorum odit nisi magnam, laborum suscipit eaque itaque iusto, quae, unde aliquam earum sunt adipisci sapiente sint obcaecati amet assumenda ipsum odio, ex! Consequuntur id \r\n\r\nquos, mollitia nam, officiis vitae sunt vero nostrum, reiciendis repellat ipsum minima ad expedita ullam doloribus cumque quas vel debitis. Quos delectus sit illo sint dicta assumenda ea nesciunt,\r\n quo minus, est suscipit, qui! Cupiditate temporibus, debitis architecto sapiente molestiae adipisci harum necessitatibus eum recusandae voluptatem ipsa, cumque tempore et vero? Consectetur quidem illum, nisi saepe eos. Quos quia, placeat doloribus nostrum quisquam, voluptate ex tempore quae eaque maiores quam similique cupiditate debitis nihil non ducimus, ipsa distinctio, possimus officia quo. Sit autem, quod suscipit eum iure! Qui incidunt magnam officiis molestiae consequuntur, assumenda nihil distinctio animi, officia voluptate similique ea labore doloremque totam tenetur. Vero esse molestias, animi voluptate nihil sequi asperiores inventore quibusdam \r\ndebitis magni temporibus? Ullam rerum cumque commodi voluptates corporis obcaecati quos \r\ntenetur non impedit quis ratione quam autem unde incidunt veniam temporibus enim dicta minus reprehenderit voluptatum, minima? Nostrum deserunt, expedita at, accusamus libero veritatis provident veniam vel eaque repudiandae dignissimos autem. Pariatur inventore sit quasi esse ea temporibus eaque quibusdam consequatur iure sint rerum incidunt corrupti, illum maxime aperiam error alias vitae non ut facilis debitis atque perferendis cumque? Fugit, laudantium debitis modi libero excepturi fuga quas deserunt iusto numquam cupiditate doloribus sed tempore perspiciatis nihil soluta vero eos sit ab omnis voluptatem distinctio error quis exercitationem doloremque! \r\nEveniet, reiciendis facere quis, culpa officiis excepturi unde, consectetur tempore praesentium quo rem enim atque dolor ipsum facilis ut id tenetur optio nemo, et eum. Nesciunt, ex, nobis nemo, \r\nquis labore sed sapiente obcaecati illum repudiandae aspernatur aliquam adipisci alias. A tenetur reiciendis provident hic at temporibus architecto quas, aliquid, itaque fuga quaerat incidunt et vel. Ea in, quod quibusdam repellendus magni soluta recusandae ipsa, dicta vel placeat blanditiis, \r\n\r\nvoluptate. Repudiandae voluptate omnis natus laboriosam veritatis, eligendi quod at, blanditiis, autem modi cum dolorum necessitatibus quo illum! Architecto porro dolore possimus inventore officiis, sunt praesentium perspiciatis aut consequatur hic dicta voluptatibus. Ducimus deleniti \r\nmaxime recusandae soluta nihil. Sint sit nam quis, eligendi illo. Quasi ea deleniti est sunt obcaecati minus aliquam aut unde et numquam quibusdam tempore quam quia voluptas earum enim impedit reiciendis, beatae aspernatur recusandae aliquid officiis. Dolorum magni accusamus natus corporis repudiandae, dicta ipsum sit culpa optio cupiditate repellat debitis et consequuntur illo at ea eaque totam molestiae? Eaque perspiciatis laborum, a ut porro quod veritatis amet eveniet ex cum eum sint molestias autem eligendi et nobis harum aut non maxime nulla provident quas modi praesentium voluptas facilis! Ipsam, modi magni ducimus rem quis dignissimos \r\nquisquam vero illo labore dolorem a, eveniet accusamus iure expedita doloremque. Quod, nam, dignissimos ullam hic quasi voluptas velit corrupti!', '16627422892025712108.png', 2, '2022-09-09', NULL, NULL, '05:51:29', 'Education'),
-(3, 'Inspirational', '2', 'Jesus is My Lord', 'djfjdjfjdffdkfkfjdlfjdl dlfjdfodfdififdf dfdjfodjf\r\nfdfjdkkfdknkfd\r\ndfdjfdfdhfdhfidfdf\r\ndfljfkdjfkjfk', '1662821056859899543.png', 2, '2022-09-10', NULL, NULL, '03:44:16', 'Marriage,Education'),
-(4, 'Inspirational', '2', 'To The One and Only', '“Wishing you a day filled with happiness and a year filled with joy. Happy birthday!” “Sending you smiles for every moment of your special day…Have a wonderful time and a very happy birthday!” “Hope your special day brings you all that your heart desires! Here&#39;s wishing you a day full of pleasant surprises!', '1662825875866340653.png', 2, '2022-09-10', NULL, NULL, '05:04:35', 'Marriage');
+CREATE TABLE IF NOT EXISTS `visap_bus_expense_tbl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `driverId` int(11) DEFAULT NULL,
+  `busId` int(11) DEFAULT NULL,
+  `cost_price` int(11) DEFAULT NULL,
+  `repair_type` text DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_on` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1507,14 +1471,7 @@ CREATE TABLE IF NOT EXISTS `visap_bus_tbl` (
   `vehicle_status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`busId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_bus_tbl`
---
-
-INSERT INTO `visap_bus_tbl` (`busId`, `vehicle_desc`, `vehicle_plate_no`, `vehicle_capacity`, `vehicle_image`, `vehicle_status`, `created_at`) VALUES
-(1, 'BMW 2019 Model', 'KJA-123-XB', 25, '63065802b5c2b1.28757487.jpg', 0, '2022-08-24');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1533,15 +1490,7 @@ CREATE TABLE IF NOT EXISTS `visap_career_portal_tbl` (
   `application_date` date DEFAULT NULL,
   `application_time` time DEFAULT NULL,
   PRIMARY KEY (`job_portal_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_career_portal_tbl`
---
-
-INSERT INTO `visap_career_portal_tbl` (`job_portal_id`, `applicant_name`, `applicant_email`, `phone_number`, `cover_letter`, `jobType`, `uploaded_cv`, `application_date`, `application_time`) VALUES
-(4, 'Omo-Oluwa Idowu', 'omooluwajec@gmail.com', '08131374443', 'Sample of my Cover Letter is this', 'Teaching', 'omooluwajec@gmail.com_resume_6318f5644ce25.pdf', '2022-09-07', '01:00:00'),
-(5, 'ademola Adeola Adewumi', 'ademolaade@gmail.com', '08121232123', 'Just sample testing', 'Teaching', 'ademolaade@gmail.com_resume_6319aa27cb5dc.pdf', '2022-09-08', '01:00:00');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1562,7 +1511,8 @@ CREATE TABLE IF NOT EXISTS `visap_classnote_tbl` (
   `term` varchar(50) DEFAULT NULL,
   `session` varchar(50) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
-  PRIMARY KEY (`noteId`)
+  PRIMARY KEY (`noteId`),
+  KEY `teacher_id` (`teacher_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1611,7 +1561,7 @@ INSERT INTO `visap_class_grade_tbl` (`gradeId`, `gradeDesc`, `grade_teacher`, `g
 (6, 'Basic 1', NULL, 'active', '2022-06-14'),
 (7, 'Basic 2', NULL, 'active', '2022-06-14'),
 (8, 'Basic 3', NULL, 'active', '2022-06-14'),
-(9, 'Basic 4', 1, 'active', '2022-06-14'),
+(9, 'Basic 4', NULL, 'active', '2022-06-14'),
 (10, 'Basic 5', NULL, 'active', '2022-06-14'),
 (11, 'JSS 1', NULL, 'active', '2022-06-14'),
 (12, 'JSS 2', NULL, 'active', '2022-06-14'),
@@ -1639,14 +1589,7 @@ CREATE TABLE IF NOT EXISTS `visap_driver_tbl` (
   PRIMARY KEY (`dId`),
   UNIQUE KEY `driver_email` (`driver_email`),
   KEY `driver_name` (`driver_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_driver_tbl`
---
-
-INSERT INTO `visap_driver_tbl` (`dId`, `driver_name`, `driver_phone`, `driver_email`, `driver_address`, `driver_license_no`, `driver_image`, `status`, `created_at`) VALUES
-(3, 'Adekola Idowu Samson', '08121343267', 'driver@expert.com', 'example address street xyz Abc Countries', 'ADK0908920221', 'ADK09089202216308968ff0d84.png', 1, '2022-08-26');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1664,7 +1607,8 @@ CREATE TABLE IF NOT EXISTS `visap_exam_subject_tbl` (
   `created_at` date DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `schl_session` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`examId`)
+  PRIMARY KEY (`examId`),
+  KEY `teacherId` (`teacherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1682,15 +1626,7 @@ CREATE TABLE IF NOT EXISTS `visap_feedback_tbl` (
   `client_ip_address` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_feedback_tbl`
---
-
-INSERT INTO `visap_feedback_tbl` (`id`, `client_name`, `client_email`, `client_phone`, `message`, `client_ip_address`, `created_at`) VALUES
-(4, 'Mr Samson Idowu', 'samson@gmail.com', '098765454323', 'This is just a demo testing for the Contact page if working', '::1', '2022-09-08'),
-(5, 'Elijah BIIT', 'osotechcoding@gmail.com', NULL, 'Just testing', '::1', '2022-09-10');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1704,14 +1640,7 @@ CREATE TABLE IF NOT EXISTS `visap_fee_component_tbl` (
   `fee_status` enum('Pending','Active') DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`compId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_fee_component_tbl`
---
-
-INSERT INTO `visap_fee_component_tbl` (`compId`, `feeType`, `fee_status`, `date`) VALUES
-(1, 'Tuition', 'Active', '2022-09-05');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1727,17 +1656,7 @@ CREATE TABLE IF NOT EXISTS `visap_gallery_tbl` (
   `type` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_gallery_tbl`
---
-
-INSERT INTO `visap_gallery_tbl` (`id`, `author`, `title`, `image`, `type`, `created_at`) VALUES
-(1, 'SMATech', 'Learning React-Dom', 'SMAPPgallery62fe472924d15.jpg', 'gallery', '2022-08-18'),
-(3, 'SMATech', 'Coding', 'SMAPPyearbook62fe4b064784a.jpg', 'yearbook', '2022-08-18'),
-(7, 'Director', 'sample', 'SMAPPanniversary6319e5d1f3055.png', 'anniversary', '2022-09-08'),
-(8, 'Director', 'Our Name on Sovenier', 'SMAPPyearbook6319e619c80cd.png', 'yearbook', '2022-09-08');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1787,14 +1706,7 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`hostel_id`),
   UNIQUE KEY `hostel_desc` (`hostel_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_hostel_tbl`
---
-
-INSERT INTO `visap_hostel_tbl` (`hostel_id`, `hostel_desc`, `hostel_type`, `status`, `hostel_master`, `created_at`) VALUES
-(1, 'Obasanjo Hostel', 'boys', 1, 'Mr Idowu John', '2022-08-28');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1866,17 +1778,7 @@ CREATE TABLE IF NOT EXISTS `visap_people_say_tbl` (
   `job` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_people_say_tbl`
---
-
-INSERT INTO `visap_people_say_tbl` (`id`, `fullname`, `message`, `image`, `job`, `created_at`) VALUES
-(1, 'Samson Jerry', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable', 'SMAPP_testi_62fe3148c4ec2.jpg', 'Developer', '2022-08-18'),
-(2, 'Alade Samuel', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form', 'SMAPP_testi_62fe3401e9744.png', 'Parent', '2022-08-18'),
-(3, 'Ifeoluwa Idowu', 'Am just Testing this Message', 'SMAPP_testi_6301aec816e01.jpg', 'Programmer', '2022-08-21'),
-(4, 'Elijah BIIT', 'This is superb', 'SMAPP_testi_631ca0fb9db2c.png', 'Doctor', '2022-09-10');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1890,16 +1792,7 @@ CREATE TABLE IF NOT EXISTS `visap_prefect_title_tbl` (
   `status` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_prefect_title_tbl`
---
-
-INSERT INTO `visap_prefect_title_tbl` (`id`, `title`, `status`, `created_at`) VALUES
-(1, 'Head Girl', 'Active', '2022-08-21'),
-(2, 'TimeKeeper', 'Active', '2022-08-21'),
-(3, 'Head Boy', 'Active', '2022-08-28');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1938,17 +1831,7 @@ CREATE TABLE IF NOT EXISTS `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_registered_subject_tbl`
---
-
-INSERT INTO `visap_registered_subject_tbl` (`id`, `subject_class`, `subject_name`, `createdBy`, `created_at`) VALUES
-(1, 'Basic 4', 'Agricultural Science', 'Director', '2022-09-06'),
-(2, 'Basic 4', 'Basic Science', 'Director', '2022-09-06'),
-(3, 'Basic 4', 'Business Studies', 'Director', '2022-09-06'),
-(4, 'Basic 4', 'CCA', 'Director', '2022-09-06');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2027,14 +1910,7 @@ CREATE TABLE IF NOT EXISTS `visap_routes_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `route_desc` (`route_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_routes_tbl`
---
-
-INSERT INTO `visap_routes_tbl` (`id`, `route_desc`, `bus_stops`, `route_price`, `driverId`, `vehicleId`, `created_at`) VALUES
-(2, 'Ogba-Iyo Route', 'Oando plc, Sinai Junction, NNPC Ijoko, First Monac, Bamfort Hotel, Vulcanizer B/Stop', 15000, 3, 1, '2022-08-25');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2051,7 +1927,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_expense_tbl` (
   `csession` varchar(20) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`expense_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2067,16 +1943,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_fee_allocation_tbl` (
   `created_on` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`faId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_school_fee_allocation_tbl`
---
-
-INSERT INTO `visap_school_fee_allocation_tbl` (`faId`, `component_id`, `gradeDesc`, `amount`, `created_on`, `updated_at`) VALUES
-(1, 'Tuition', 'Creche', 30000, '2022-09-05', NULL),
-(2, 'Tuition', 'Basic 4', 40000, '2022-09-05', NULL),
-(3, 'Tuition', 'JSS 1', 50000, '2022-09-06', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2147,7 +2014,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
 --
 
 INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
-(1, 'School management Application', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Samson Peter P', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16624732726694968.png', NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
+(1, 'Iremide Community Grammar School', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', NULL, NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2277,7 +2144,8 @@ CREATE TABLE IF NOT EXISTS `visap_staff_bank_details_tbl` (
   `account_type` varchar(50) DEFAULT NULL,
   `account_number` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `staff_id` (`staff_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -2311,7 +2179,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2332,15 +2200,9 @@ CREATE TABLE IF NOT EXISTS `visap_staff_paid_salary_tbl` (
   `csession` varchar(20) DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`salaryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_staff_paid_salary_tbl`
---
-
-INSERT INTO `visap_staff_paid_salary_tbl` (`salaryId`, `staff_id`, `amount`, `forMonth`, `paymentMethod`, `paymentDate`, `bank`, `ref_no`, `status`, `csession`, `term`, `created_at`) VALUES
-(1, 1, 69500, 'January', 'Cash', '2022-09-05', NULL, NULL, 'Paid', '2022/2023', '1st Term', '2022-09-05');
+  PRIMARY KEY (`salaryId`),
+  KEY `staff_id` (`staff_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2359,16 +2221,9 @@ CREATE TABLE IF NOT EXISTS `visap_staff_payroll_tbl` (
   `tds` float DEFAULT NULL,
   `net_salary` float DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`payrollId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_staff_payroll_tbl`
---
-
-INSERT INTO `visap_staff_payroll_tbl` (`payrollId`, `staff_id`, `salary`, `rent_alawi`, `transport_alawi`, `cloth_alawi`, `med_alawi`, `tds`, `net_salary`, `created_at`) VALUES
-(1, 1, 60000, 2000, 1000, 5000, 2000, 500, 69500, '2022-09-05'),
-(2, 2, 100000, 20000, 10000, 30000, 15000, 7500, 167500, '2022-09-06');
+  PRIMARY KEY (`payrollId`),
+  KEY `staff_id` (`staff_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2383,16 +2238,9 @@ CREATE TABLE IF NOT EXISTS `visap_staff_post_tbl` (
   `office` varchar(100) DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `schlSes` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_staff_post_tbl`
---
-
-INSERT INTO `visap_staff_post_tbl` (`id`, `staff_id`, `duty`, `office`, `term`, `schlSes`) VALUES
-(1, 1, NULL, 'Class Teacher', NULL, NULL),
-(2, 2, NULL, 'Principal', NULL, NULL);
+  PRIMARY KEY (`id`),
+  KEY `staff_id` (`staff_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2428,16 +2276,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_tbl` (
   `appliedDate` date DEFAULT NULL,
   `staffAssignedClass` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`staffId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_staff_tbl`
---
-
-INSERT INTO `visap_staff_tbl` (`staffId`, `staffRegNo`, `staffGrade`, `staffRole`, `firstName`, `lastName`, `staffEmail`, `staffPass`, `staffUser`, `staffDob`, `staffEducation`, `staffPhone`, `staffCourse`, `staffAddress`, `confirmation_code`, `staffToken`, `tokenExpire`, `staffPassport`, `staffGender`, `maritalStatus`, `portalEmail`, `jobStatus`, `online`, `staffType`, `appliedDate`, `staffAssignedClass`) VALUES
-(1, 'SMP22001', 'Basic 4', 'Class Teacher', 'Ademola Adeola', 'Ade', 'ademola@gmail.com', '$2y$10$skbk3cf44seMPfke6jiZPuDe/6lljb4YRpZ8JE6i3T0dAxDCIi3ke', 'Adeola', '1990-09-11', 'BSc', '09098765432', NULL, 'Ijoko road, Sango Ota', '9e29f6bec4c1820', NULL, NULL, 'SMP220017530549.jpg', 'Male', NULL, 'ademola@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
-(2, 'SMP22002', NULL, 'Principal', 'John Doe', 'Smith', 'doe@gmail.com', '$2y$10$T0ypu6cTUOMiG.yq9W6.UO9VWUnUVkEhHVZwHSeROSq2CapZT3MB2', 'Doe', NULL, 'Phd', '09087654323', NULL, NULL, '33ef8cfa5f157df', NULL, NULL, 'SMP220022481084.jpg', 'Male', NULL, 'doe@SMAPP.portal', 1, 0, 'Teaching', '2022-08-19', NULL),
-(3, 'SMP22003', NULL, NULL, 'Gbenga Festus', 'Agberayi', 'festus@gmail.com', '$2y$10$sE4LfzbVe9P8UyDk/VWoA.PUwPxOr7jzshleaLHxINpyJf3MMGm0.', 'Gbenga', NULL, 'HND', '08140122566', NULL, NULL, '9ff06b06a638b0f', NULL, NULL, 'SMP220035091724.jpg', 'Male', NULL, 'festus@SMAPP.portal', 1, 0, 'Teaching', '2022-08-28', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2516,7 +2355,8 @@ CREATE TABLE IF NOT EXISTS `visap_stdmedical_tbl` (
   `stdSurgical` varchar(100) DEFAULT NULL COMMENT '0=No, 1=Yes',
   `stdLastScanedReport` varchar(255) DEFAULT NULL,
   `stdBcertificate` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`medicalId`)
+  PRIMARY KEY (`medicalId`),
+  KEY `studId` (`studId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -2538,7 +2378,8 @@ CREATE TABLE IF NOT EXISTS `visap_stdpreschlinfo` (
   `stdPresentClass` varchar(50) DEFAULT NULL,
   `stdReasonInPreClass` text DEFAULT NULL,
   `stdLastReportSheet` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`preId`)
+  PRIMARY KEY (`preId`),
+  KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -2572,7 +2413,8 @@ CREATE TABLE IF NOT EXISTS `visap_student_info_tbl` (
   `stdFGEmail` varchar(100) DEFAULT NULL,
   `stdFGOccupation` varchar(255) DEFAULT NULL,
   `stdFGAddress` text DEFAULT NULL,
-  PRIMARY KEY (`stdInfoId`)
+  PRIMARY KEY (`stdInfoId`),
+  KEY `studentId` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -2588,7 +2430,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2659,7 +2501,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
   `studentClass` varchar(50) DEFAULT NULL,
   `stdSurName` varchar(100) DEFAULT NULL,
   `stdFirstName` varchar(50) DEFAULT NULL,
-  `stdMiddleName` varchar(50) NOT NULL,
+  `stdMiddleName` varchar(50) DEFAULT NULL,
   `stdDob` date DEFAULT NULL,
   `stdGender` varchar(20) DEFAULT NULL,
   `stdAddress` text DEFAULT NULL,
@@ -2743,15 +2585,7 @@ CREATE TABLE IF NOT EXISTS `visap_upcoming_event_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`eventId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `visap_upcoming_event_tbl`
---
-
-INSERT INTO `visap_upcoming_event_tbl` (`eventId`, `author`, `event_title`, `event_detail`, `event_image`, `eorganizer`, `edate`, `etime`, `evenue`, `status`, `created_at`) VALUES
-(1, 1, 'A Day Workshop on Soap Making', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'SMAPP_event62ff0739bfeb90.14629632.jpg', 'Student Union', '2022-08-27', '10:30:00', 'School Main Hall', 2, '2022-08-19'),
-(2, 1, 'Just Testing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum', 'SMAPP_event62ff0ca57d41b9.79025403.jpg', 'Student Union', '2022-08-24', '07:00:00', 'Ademola Hall', 2, '2022-08-19');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -2771,7 +2605,8 @@ CREATE TABLE IF NOT EXISTS `visap_virtual_lesson_tbl` (
   `date_to` date DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   `counter` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`lectureId`)
+  PRIMARY KEY (`lectureId`),
+  KEY `teacher` (`teacher`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -2796,6 +2631,76 @@ CREATE TABLE IF NOT EXISTS `visitor_book` (
   `cses` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`visitor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `visap_assignment_tbl`
+--
+ALTER TABLE `visap_assignment_tbl`
+  ADD CONSTRAINT `visap_assignment_tbl_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_classnote_tbl`
+--
+ALTER TABLE `visap_classnote_tbl`
+  ADD CONSTRAINT `visap_classnote_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_exam_subject_tbl`
+--
+ALTER TABLE `visap_exam_subject_tbl`
+  ADD CONSTRAINT `visap_exam_subject_tbl_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_staff_bank_details_tbl`
+--
+ALTER TABLE `visap_staff_bank_details_tbl`
+  ADD CONSTRAINT `visap_staff_bank_details_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_staff_paid_salary_tbl`
+--
+ALTER TABLE `visap_staff_paid_salary_tbl`
+  ADD CONSTRAINT `visap_staff_paid_salary_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_staff_payroll_tbl`
+--
+ALTER TABLE `visap_staff_payroll_tbl`
+  ADD CONSTRAINT `visap_staff_payroll_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_staff_post_tbl`
+--
+ALTER TABLE `visap_staff_post_tbl`
+  ADD CONSTRAINT `visap_staff_post_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_stdmedical_tbl`
+--
+ALTER TABLE `visap_stdmedical_tbl`
+  ADD CONSTRAINT `visap_stdmedical_tbl_ibfk_1` FOREIGN KEY (`studId`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_stdpreschlinfo`
+--
+ALTER TABLE `visap_stdpreschlinfo`
+  ADD CONSTRAINT `visap_stdpreschlinfo_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_student_info_tbl`
+--
+ALTER TABLE `visap_student_info_tbl`
+  ADD CONSTRAINT `visap_student_info_tbl_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `visap_virtual_lesson_tbl`
+--
+ALTER TABLE `visap_virtual_lesson_tbl`
+  ADD CONSTRAINT `visap_virtual_lesson_tbl_ibfk_1` FOREIGN KEY (`teacher`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
