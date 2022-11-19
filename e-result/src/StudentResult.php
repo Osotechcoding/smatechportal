@@ -250,7 +250,7 @@ class StudentResult
             //lets start afresh for this pin
             $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE studentRegNo=? AND student_class=? AND pin_code=? AND pin_serial=? AND used_term=? AND used_session=? LIMIT 1");
             $this->stmt->execute(array($stdRegNo, $stdGrade, $cardPin, $cardSerial, $stdTerm, $stdSession));
-            if ($this->stmt->rowCount() == '0') {
+            if ($this->stmt->rowCount() == 0) {
 
               if (!self::checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
                 $this->response = self::alert_msg("danger", "WARNING", "This Result is not yet Ready!");

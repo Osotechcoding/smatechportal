@@ -1,19 +1,16 @@
 <?php
 @session_start();
-@ob_start();
 require_once "visap_helper.php";
-?>
-<?php if (!isset($_SESSION['resultmi']) || $_SESSION['resultmi'] == "") : ?>
-<?php header("Location: ./checkMyResult");
-  exit(); ?>
-<?php endif ?>
-<?php
+
+if (!isset($_SESSION['resultmi']) || $_SESSION['resultmi'] == "") {
+  header("Location: ./checkMyResult");
+  exit();
+}
+
 $dbh = osotech_connect();
-//
+
 $pin = $_SESSION['pin'];
 $serial = $_SESSION['serial'];
-//   $stdSession=  $_SESSION['result_session'];
-// $resultmi = $_SESSION['resultmi'];
 $result_regNo = $_SESSION['result_regNo'];
 if (isset($_SESSION['resultmi'])) {
   $stmt = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
@@ -62,118 +59,39 @@ if ($absentQuery->rowCount() > 0) {
   <title> <?php echo ucwords($Configuration->getConfigData()->school_name); ?> ::
     <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $schl_session_data->active_session; ?>
   </title>
-  <style>
-  html {
-    font-family: arial;
-    font-size: 9px;
-  }
-
-  body {
-    /* background-color: #726E6D; */
-    height: 842px;
-    width: 595px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  }
-
-  td {
-    border: 1px solid black;
-    /* padding: 2px; */
-  }
-
-  thead {
-    font-weight: bold;
-    text-align: center;
-    background: #625D5D;
-    color: white;
-  }
-
-  table {
-    border-collapse: collapse;
-  }
-
-  .footer {
-    text-align: right;
-    font-weight: bold;
-  }
-
-  tbody>tr:nth-child(odd) {
-    background: #d1d0ce3a;
-  }
-
-  .schname {
-    display: block;
-    /*margin-left: auto;*/
-    margin-right: auto;
-    width: 80%;
-  }
-
-  .container-ca {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .cog-domain {
-    width: 400px;
-    margin-right: 10px;
-    background-color: rgba(173, 216, 230, 0.062);
-
-  }
-
-  .attendance {
-    width: 185px;
-    background-color: rgba(255, 255, 224, 0.137);
-  }
-
-  .footer-area {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-  }
-
-  .teacher {
-    width: 180px;
-    border: 2px solid grey;
-    border-top-right-radius: 30px;
-    margin-right: 10px;
-    padding: 5px;
-  }
-
-  .principal {
-    width: 180px;
-    border: 2px solid grey;
-    border-bottom-left-radius: 30px;
-    margin-right: 10px;
-    padding: 5px;
-  }
-
-  .signarea {
-    width: 195px;
-    background-image: url(../sign.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  </style>
+  <link rel="stylesheet" href="result.css" />
 </head>
 
 <body>
   <section id="result">
-    <!-- <img src="../assets/images/resulttop.jpg" alt="" class="schname"> -->
-
-    <!-- <hr> -->
-    <img src="../schoolbanner.jpg" alt="" class="schname">
+    <div class="upperSection">
+      <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>"
+        alt="<?php echo ucwords($Configuration->getConfigData()->school_name); ?>-logo" class="schLogo">
+      <div class="textArea">
+        <h3 class="schName"><?php echo strtoupper($Configuration->getConfigData()->school_name); ?></h3>
+        <p class="schScope desc">CRECHE, NURSERY, PRIMARY & SECONDARY</p>
+        <p class="schScope"><?php echo ucwords($Configuration->getConfigData()->school_address); ?>,
+          <?php echo ucwords($Configuration->getConfigData()->school_city); ?>,
+          <?php echo ucwords($Configuration->getConfigData()->school_state); ?></p>
+        <p class="schScope"><i>Tel:</i> <b><?php echo ucwords($Configuration->getConfigData()->director_mobile); ?>,
+            <?php echo ($Configuration->getConfigData()->principal_mobile); ?></b></p>
+      </div>
+    </div>
+    <!--  -->
+    <h2 style="text-align:center; text-decoration: underline;">STUDENT'S PERFORMANCE REPORT</h2>
     <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name); ?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
-        &nbsp; </b> GENDER:&nbsp;&nbsp; <b><?php echo ucfirst($student_data->stdGender) ?></b>&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS: <b><?php echo strtoupper($student_class); ?></b>
-      &nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b></p>
+        &nbsp; </b> GENDER:&nbsp;&nbsp;
+      <b><?php echo ucfirst($student_data->stdGender) ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; CLASS:
+      <b><?php echo strtoupper($student_class); ?>&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;Term: <b><?php echo $term ?></b>
+    </p>
     <P>SESSION:&nbsp;&nbsp; <b><?php echo $rsession; ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ADMISSION NO:&nbsp;&nbsp;
       <b><?php echo strtoupper($student_data->stdRegNo); ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; D.O.B:&nbsp;&nbsp;
-      <b><?php echo date("F jS, Y", strtotime($student_data->stdDob)); ?></b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-      AGE:&nbsp;&nbsp; <b><?php echo $Osotech->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;</P>
+      <b><?php echo date("F jS, Y", strtotime($student_data->stdDob)); ?></b>&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp; AGE:&nbsp;&nbsp;
+      <b><?php echo $Administration->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+    </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
+    <!--  -->
     <?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
     <?php if ($student_data->stdGender == "Male") : ?>
     <img src="../schoolImages/students/male.png" alt="passport"
@@ -362,7 +280,7 @@ if ($absentQuery->rowCount() > 0) {
           </tr>
           <tr>
             <td style="background-color: rgba(21, 10, 10, .3);color: black;">Scratch Usage Info</td>
-            <td><?php echo $Osotech->get_scratch_card_usage($pin, $serial, $result_regNo); ?> of 3</td>
+            <td><?php echo $Pin_serial->get_scratch_card_usage($pin, $serial, $result_regNo); ?> of 3</td>
           </tr>
         </table>
         <br>
@@ -684,12 +602,12 @@ if ($absentQuery->rowCount() > 0) {
             <?php $staff_data_details = $Administration->get_class_teacher_class_name($student_class) ?>
             <?php if ($staff_data_details) : ?>
             <?php $staff_Gender = $staff_data_details->staffGender;
-                                                                                                                                        if ($staff_Gender == "Male") {
-                                                                                                                                          $tTitle = "Mr. ";
-                                                                                                                                        } else {
-                                                                                                                                          $tTitle = "Mrs. ";
-                                                                                                                                        }
-                                                                                                                                        echo $tTitle . $staff_data_details->firstName . " " . $staff_data_details->lastName;
+              if ($staff_Gender == "Male") {
+                $tTitle = "Mr. ";
+              } else {
+                $tTitle = "Mrs. ";
+              }
+              echo $tTitle . $staff_data_details->firstName . " " . $staff_data_details->lastName;
               ?>
             <?php endif ?></b></p>
       </div>
@@ -706,12 +624,12 @@ if ($absentQuery->rowCount() > 0) {
         <p style="text-align: right;"><b> <?php $principal_details = $Administration->get_principal_info(); ?>
             <?php if ($principal_details) : ?>
             <?php $staff_Gender = $principal_details->staffGender;
-                                                                                                                if ($staff_Gender == "Male") {
-                                                                                                                  $tTitle = "Mr. ";
-                                                                                                                } else {
-                                                                                                                  $tTitle = "Mrs. ";
-                                                                                                                }
-                                                                                                                echo $tTitle . $principal_details->firstName . " " . $principal_details->lastName;
+              if ($staff_Gender == "Male") {
+                $tTitle = "Mr. ";
+              } else {
+                $tTitle = "Mrs. ";
+              }
+              echo $tTitle . $principal_details->firstName . " " . $principal_details->lastName;
               ?>
             <?php endif ?></b></p>
       </div>
@@ -720,7 +638,7 @@ if ($absentQuery->rowCount() > 0) {
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
           Next Term Begins: <?php echo date("l jS F, Y", strtotime($schl_session_data->new_term_begins)); ?>.</h4>
         <br>
-        <img src="../stamp.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+        <img src="../sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
       </div>
     </div>
     <br>

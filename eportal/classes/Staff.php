@@ -41,7 +41,7 @@ class Staff
 		} else {
 			$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? LIMIT 1");
 			$this->stmt->execute(array($email));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$result = $this->stmt->fetch();
 				$db_password = $result->staffPass;
 				$Role = $result->staffRole;

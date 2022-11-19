@@ -299,7 +299,7 @@ class Pins
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE pin_code=? AND pin_serial=? AND studentRegNo=? LIMIT 1");
 		$this->stmt->execute(array($pin, $serial, $stdRegNo));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$res = $this->stmt->fetch();
 			$this->response = $res->pin_counter;
 			return $this->response;
