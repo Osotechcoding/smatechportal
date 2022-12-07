@@ -127,7 +127,7 @@ class Administration
 		$teacher = $this->config->Clean($data['teacher']);
 		$status = $this->config->Clean($data['status']);
 		$auth_pass = $this->config->Clean($data['auth_code']);
-		if ($this->config->isEmptyStr($classroom_id) || $this->config->isEmptyStr($grade_name) || $this->config->isEmptyStr($status)) {
+		if ($this->config->isEmptyStr($classroom_id) || $this->config->isEmptyStr($grade_name) || $this->config->isEmptyStr($status) || $this->config->isEmptyStr($teacher)) {
 			$this->response = $this->alert->alert_toastr("error", "All fields are required!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($auth_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Authentication Code is required!", __OSO_APP_NAME__ . " Says");
@@ -140,6 +140,16 @@ class Administration
 				$this->dbh->beginTransaction();
 				//set the current staff grade to null
 				//Update the selected Subject
+				if (isset($teacher) && $teacher != "") {
+					$classroomDetail = $this->get_classroom_ById($classroom_id);
+					$old_teacher_id = $classroomDetail->grade_teacher;
+					$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_tbl` SET staffGrade=NULL WHERE staffId=? LIMIT 1");
+					if ($this->stmt->execute([$old_teacher_id])) {
+						$this->stmt = $this->dbh->prepare("UPDATE `visap_class_grade_tbl` SET grade_teacher=NULL WHERE gradeId=? LIMIT 1");
+						if ($this->stmt->execute([$classroom_id])) {
+						}
+					}
+				}
 				$this->stmt = $this->dbh->prepare("UPDATE `visap_class_grade_tbl` SET gradeDesc=?,grade_teacher=?,grade_status=? WHERE gradeId=? LIMIT 1");
 				if ($this->stmt->execute([$grade_name, $teacher, $status, $classroom_id])) {
 					$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_tbl` SET staffGrade=? WHERE staffId=? LIMIT 1");

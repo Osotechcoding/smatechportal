@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2022 at 11:16 PM
+-- Generation Time: Nov 29, 2022 at 03:34 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.23
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `smatech_portal`
 --
+CREATE DATABASE IF NOT EXISTS `smatech_portal` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `smatech_portal`;
 
 -- --------------------------------------------------------
 

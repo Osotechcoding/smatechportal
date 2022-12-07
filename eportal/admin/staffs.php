@@ -148,9 +148,9 @@ require_once "helpers/helper.php";
                         <th>PASSPORT</th>
                         <th>Reg Number</th>
                         <th>Full Name</th>
-                        <th>Phone</th>
-                        <th>E-mail</th>
-                        <th>Role</th>
+                        <th>Phone / E-mail</th>
+                        <th>Class Teacher</th>
+                        <th>Role/ Status</th>
                         <th>Edit</th>
                         <th>Remove</th>
                       </tr>
@@ -175,17 +175,24 @@ require_once "helpers/helper.php";
                         <td>
                           <?php echo strtoupper($value->full_name); ?>
                         </td>
-                        <td><?php echo strtoupper($value->staffPhone); ?></td>
-                        <td><?php echo strtolower($value->staffEmail); ?></td>
+                        <td><?php echo strtoupper($value->staffPhone); ?><br>
+                          <?php echo strtolower($value->staffEmail); ?></td>
+                        <td><?php if ($value->staffGrade == null) {
+                                  echo '<span class="badge badge-info">Not Class teacher</span>';
+                                } else {
+                                  echo strtoupper($value->staffGrade);
+                                }  ?></td>
                         <td><?php if ($value->staffRole == NULL || $value->staffRole == "") {
-                                  echo '<span class="badge badge-danger">Not Assigned</span>';
+                                  echo '<span class="badge badge-warning">Not Assigned</span>';
                                 } else {
                                   echo strtoupper($value->staffRole);
                                 } ?> <br>
-                          <?php if ($value->jobStatus == '1') : ?>
+                          <?php if ($value->jobStatus == 0) : ?>
+                          <span class="badge badge-warning m-1">Pending</span>
+                          <?php elseif ($value->jobStatus == 1) : ?>
                           <span class="badge badge-success m-1">Active</span>
                           <?php else : ?>
-                          <span class="badge badge-warning m-1">Pending</span>
+                          <span class="badge badge-danger m-1">Left</span>
                           <?php endif ?>
                         </td>
                         <td><a href="editstaffinfo?staffdata=<?php echo $value->staffId; ?>"><i

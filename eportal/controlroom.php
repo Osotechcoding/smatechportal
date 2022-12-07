@@ -47,20 +47,20 @@ background-repeat: no-repeat;">
                 <input type="hidden" name="txss_token" value="<?php echo $tses_token; ?>">
                 <div class="form-group">
                   <input type="text" autocomplete="off" class="form-control" name="ad_email"
-                    placeholder="admin@smatech.com"
+                    placeholder="admin@gmail.com"
                     value="<?php if (isset($_COOKIE['login_email'])) {
-                                                                                                                                                            echo $_COOKIE['login_email'];
-                                                                                                                                                        } else {
-                                                                                                                                                            echo '';
-                                                                                                                                                        } ?>">
+                                                                                                                                    echo $_COOKIE['login_email'];
+                                                                                                                                  } else {
+                                                                                                                                    echo '';
+                                                                                                                                  } ?>">
                 </div>
                 <div class="form-group">
-                  <input type="password" autocomplete="off" class="form-control" name="ad_pass"
-                    value="<?php if (isset($_COOKIE['login_pass'])) {
-                                                                                                                                echo $_COOKIE['login_pass'];
-                                                                                                                            } else {
-                                                                                                                                echo '';
-                                                                                                                            } ?>" placeholder="Enter your password">
+                  <input type="password" autocomplete="off" class="form-control" name="ad_pass" value="<?php if (isset($_COOKIE['login_pass'])) {
+                                                                                                          echo $_COOKIE['login_pass'];
+                                                                                                        } else {
+                                                                                                          echo '';
+                                                                                                        } ?>"
+                    placeholder="Enter your password">
                 </div>
                 <input type="hidden" name="login_as" value="1234509876">
                 <div class="checkbox form-group form-box clearfix">
@@ -74,9 +74,14 @@ background-repeat: no-repeat;">
                   <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Login</button>
                 </div>
               </form>
-              <p class="text-center text-info" style="font-size: 13px;"><a href="javascript:void(0);"
-                  style="text-decoration: none;color: darkblue;"> Powered by: <span
-                    class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__ ?></span></a></p>
+              <div class="text-center dont-have">Are you an ADMIN? <a class="link navigate_to_admin_login"
+                  style="cursor: pointer;"> Click Here</a>
+                <p class="text-center text-info mt-2 p-2" style="font-size: 13px;"><a
+                    href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: darkblue;"> Powered by:
+                    <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
+              </div>
+              <!-- <p class="text-center text-info" style="font-size: 13px;"><a href="javascript:void(0);" style="text-decoration: none;color: darkblue;"> Powered by: <span class="text-danger"><?php //echo __OSOTECH__DEV_COMPANY__ 
+                                                                                                                                                                                                  ?></span></a></p> -->
             </div>
           </div>
         </div>
@@ -129,7 +134,11 @@ background-repeat: no-repeat;">
         }
       })
     });
-
+    $(document).on("click", ".navigate_to_admin_login", function() {
+      setTimeout(() => {
+        window.location.assign("./adminlogin");
+      }, 500);
+    });
   })
   </script>
 </body>

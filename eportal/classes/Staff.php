@@ -150,9 +150,9 @@ class Staff
 			// code...
 			$this->response = $this->alert->alert_toastr("warning", "Please Enter Password to Unlock your Session", __OSO_APP_NAME__ . " Says");
 		} else {
-			$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? LIMIT 1");
+			$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? AND `jobStatus`=1 LIMIT 1");
 			$this->stmt->execute(array($email));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$result = $this->stmt->fetch();
 				$db_password = $result->staffPass;
 				$Role = $result->staffRole;
@@ -328,10 +328,11 @@ class Staff
 		}
 	}
 
+	//show only the staff that is active
 	public function show_staff_indropdown_list()
 	{
 		$this->response = "";
-		$this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM {$this->table} ORDER BY staffId");
+		$this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM {$this->table} WHERE `jobStatus`=1 ORDER BY staffId");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			while ($row = $this->stmt->fetch()) {
@@ -345,7 +346,7 @@ class Staff
 
 	public function count_staff_by_type($type)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as cnt FROM {$this->table} WHERE staffType=?");
+		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as cnt FROM {$this->table} WHERE staffType=? AND `jobStatus`=1");
 		$this->stmt->execute([$type]);
 		if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();
@@ -393,6 +394,7 @@ class Staff
 	public function update_staff_ById($data)
 	{
 		$staffId = $this->config->Clean($data['sttId']);
+		$status = $this->config->Clean($data['status']) ?? '0';
 		$surname = $this->config->Clean($data['surname']);
 		$fname = $this->config->Clean($data['fname']);
 		$education = $this->config->Clean($data['education']);
@@ -403,7 +405,7 @@ class Staff
 		$portal_username = $this->config->Clean($data['pusername']);
 		$approved = $this->config->Clean($data['approved']);
 		//check for values
-		if ($this->config->isEmptyStr($staffId) || $this->config->isEmptyStr($surname) || $this->config->isEmptyStr($fname) || $this->config->isEmptyStr($education) || $this->config->isEmptyStr($dob) || $this->config->isEmptyStr($gender) || $this->config->isEmptyStr($portal_username) || $this->config->isEmptyStr($approved)) {
+		if ($this->config->isEmptyStr($staffId) || $this->config->isEmptyStr($surname) || $this->config->isEmptyStr($fname) || $this->config->isEmptyStr($education) || $this->config->isEmptyStr($dob) || $this->config->isEmptyStr($gender) || $this->config->isEmptyStr($portal_username) || $this->config->isEmptyStr($approved) || $this->config->isEmptyStr($status)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid form Submission, Please check your inputs!", __OSO_APP_NAME__ . " Says");
 		} elseif ($approved !== __OSO__CONTROL__KEY__) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code, Try again!", __OSO_APP_NAME__ . " Says");
@@ -411,8 +413,17 @@ class Staff
 			try {
 				$presentClass = $this->config->Clean($data['presentClass']) ?? NULL;
 				$this->dbh->beginTransaction();
-				$this->stmt = $this->dbh->prepare("UPDATE $this->table SET staffGrade=?, firstName=?,lastName=?,staffUser=?,staffDob=?,staffEducation=?,staffPhone=?,staffAddress=?, staffGender=? WHERE staffId=? LIMIT 1");
-				if ($this->stmt->execute(array($presentClass, $fname, $surname, $portal_username, $dob, $education, $phone, $address, $gender, $staffId))) {
+				//update class teacher from visap_class_grade_tbl
+				if (isset($presentClass) && $presentClass != NULL) {
+					$this->stmt = $this->dbh->prepare("UPDATE `visap_class_grade_tbl` SET grade_teacher=NULL WHERE grade_teacher=? LIMIT 1");
+					if ($this->stmt->execute([$staffId])) {
+						$this->stmt = $this->dbh->prepare("UPDATE `visap_class_grade_tbl` SET grade_teacher=? WHERE gradeDesc=? LIMIT 1");
+						if ($this->stmt->execute([$staffId, $presentClass])) {
+						}
+					}
+				}
+				$this->stmt = $this->dbh->prepare("UPDATE $this->table SET staffGrade=?, firstName=?,lastName=?,staffUser=?,staffDob=?,staffEducation=?,staffPhone=?,staffAddress=?, staffGender=?,jobStatus=? WHERE staffId=? LIMIT 1");
+				if ($this->stmt->execute(array($presentClass, $fname, $surname, $portal_username, $dob, $education, $phone, $address, $gender, $status, $staffId))) {
 					$this->dbh->commit();
 					$this->response = $this->alert->alert_toastr("success", "Updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 							window.location.href='./staffs';
@@ -704,7 +715,7 @@ class Staff
 
 	public function count_staff_by_gender($gender)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as cnt FROM {$this->table} WHERE staffGender=?");
+		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as cnt FROM {$this->table} WHERE staffGender=? AND `jobStatus` =1");
 		$this->stmt->execute([$gender]);
 		if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();
@@ -718,7 +729,7 @@ class Staff
 	public function show_staff_name_indropdown()
 	{
 		$this->response = "";
-		$this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM {$this->table} ORDER BY staffId");
+		$this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM {$this->table}  WHERE `jobStatus`=1 ORDER BY staffId");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			while ($row = $this->stmt->fetch()) {
@@ -734,7 +745,7 @@ class Staff
 	public function count_staff_today_birthday()
 	{
 		$today = date("m-d");
-		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as cnt FROM {$this->table} WHERE staffDob LIKE ?");
+		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as cnt FROM {$this->table} WHERE staffDob LIKE ? AND `jobStatus` =1");
 		$this->stmt->execute(['%' . $today]);
 		if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();
@@ -756,7 +767,7 @@ class Staff
 	}
 	public function count_all_online_staff()
 	{
-		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as online FROM {$this->table} WHERE online='1'");
+		$this->stmt = $this->dbh->prepare("SELECT count(`staffId`) as `online` FROM {$this->table} WHERE `online`='1' AND `jobStatus` =1");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();

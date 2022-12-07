@@ -206,6 +206,23 @@ if (isset($_GET['staffdata']) && $_GET['staffdata'] != "") {
                             value="<?php echo $staff_data->staffUser; ?>">
                         </div>
                         <div class="col-md-4">
+                          <label>Status:</label>
+                        </div>
+                        <div class="col-md-8 form-group">
+                          <select name="status" class="form-control custom-select">
+                            <?php if ($staff_data->jobStatus == 0) {
+                              echo '<option value="0" selected>Pending</option>';
+                            } elseif ($staff_data->jobStatus == 1) {
+                              echo '<option value="1" selected>Active</option>';
+                            } else {
+                              echo '<option value="2" selected>Left</option>';
+                            } ?>
+                            <option value="0">Pending</option>
+                            <option value="1">Active</option>
+                            <option value="2">Left</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4">
                           <label>Authentication Code:</label>
                         </div>
                         <div class="col-md-8 form-group">
