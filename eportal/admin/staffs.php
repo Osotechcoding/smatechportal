@@ -195,7 +195,8 @@ require_once "helpers/helper.php";
                           <span class="badge badge-danger m-1">Left</span>
                           <?php endif ?>
                         </td>
-                        <td><a href="editstaffinfo?staffdata=<?php echo $value->staffId; ?>"><i
+                        <td><a
+                            href="editstaffinfo?record-id=<?php echo $Configuration->convert_String('code', $value->staffId); ?>&action=view-staff-record&viewer=<?php echo $Configuration->convert_String('code', 'admin'); ?>"><i
                               class="bx bx-edit-alt"></i></a>
                         </td>
                         <td>

@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
 
 <head>
   <?php include "../template/MetaTag.php"; ?>
-  <title><?php echo $SmappDetails->school_name; ?> :: Class Teacher's Comments </title>
+  <title><?php echo $SmappDetails->school_name; ?> :: Upload Student Attendance </title>
   <!-- include template/HeaderLink.php -->
   <?php include "../template/HeaderLink.php"; ?>
   <!-- END: Head-->
@@ -41,7 +41,7 @@ require_once "helpers/helper.php";
                 <li class="breadcrumb-item"><a
                     href="javascript:void(0);"><?php echo strtoupper($_SESSION['STAFF_ROLE']); ?></a>
                 </li>
-                <li class="breadcrumb-item active">Result Comment Module
+                <li class="breadcrumb-item active">Student Attendance
                 </li>
               </ol>
             </div>
@@ -51,7 +51,8 @@ require_once "helpers/helper.php";
       <div class="content-body">
         <div class="row">
           <div class="col-12">
-            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-comment fa-1x"></span> Result Comment Module
+            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-comment fa-1x"></span> Student Attendance
+              Module
             </h3>
           </div>
         </div>
@@ -63,17 +64,18 @@ require_once "helpers/helper.php";
               <div class="row match-height">
                 <div class="col-md-12 col-12">
                   <div class="card">
-                    <!--   <div class="card-header">
-         <button type="button" class="btn btn-danger btn-md badge-pill" data-toggle="modal" data-target="#csv_Modal"><span class="fa fa-file fa-1x"></span> UPLOAD BY CSV</button>
-        </div> -->
+                    <div class="card-header">
+                      <button type="button" class="btn btn-danger btn-md badge-pill" data-toggle="modal"
+                        data-target="#csv_Modal"><span class="fa fa-file fa-1x"></span> UPLOAD BY CSV</button>
+                    </div>
                     <div class="card-body">
                       <form class="form form-vertical" action="" method="POST">
                         <div class="form-body">
                           <div class="row">
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="comment_class"> Class</label>
-                                <select name="comment_class" id="comment_class" class="form-control">
+                                <label for="attendance_class"> Class</label>
+                                <select name="attendance_class" id="attendance_class" class="form-control">
                                   <option value="<?php echo $staff_assigned_class; ?>" selected>
                                     <?php echo $staff_assigned_class; ?></option>
                                 </select>
@@ -82,8 +84,8 @@ require_once "helpers/helper.php";
 
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="comment_term">Result Term</label>
-                                <select name="comment_term" class="form-control">
+                                <label for="attendance_term">Result Term</label>
+                                <select name="attendance_term" class="form-control">
                                   <option value="" selected>Choose...</option>
                                   <option value="1st Term">1st Term</option>
                                   <option value="2nd Term">2nd Term</option>
@@ -93,15 +95,15 @@ require_once "helpers/helper.php";
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
-                                <label for="comment_sess">Academic Session</label>
-                                <input type="text" id="comment_sess" class="form-control" name="comment_sess"
+                                <label for="attendance_sess">Academic Session</label>
+                                <input type="text" id="attendance_sess" class="form-control" name="attendance_sess"
                                   value="<?php echo $activeSess->session_desc_name; ?>" readonly>
                               </div>
                             </div>
 
                             <div class="col-12 d-flex justify-content-end">
-                              <button type="submit" name="show_comment_sheet_btn" class="btn btn-primary mr-1">Show
-                                Comment Sheet</button>
+                              <button type="submit" name="show_attendance_sheet_btn" class="btn btn-primary mr-1">Show
+                                Attendance Sheet</button>
 
                             </div>
                           </div>
@@ -117,17 +119,17 @@ require_once "helpers/helper.php";
           </div>
         </div>
 
-        <?php if (isset($_POST['show_comment_sheet_btn'])) : ?>
+        <?php if (isset($_POST['show_attendance_sheet_btn'])) : ?>
         <?php
-          if (!empty($_POST['comment_class']) && !empty($_POST['comment_term']) && !empty($_POST['comment_sess'])) {
-            $comment_class = $Configuration->Clean($_POST['comment_class']);
-            $comment_term = $Configuration->Clean($_POST['comment_term']);
-            $comment_sess = $Configuration->Clean($_POST['comment_sess']);
+          if (!empty($_POST['attendance_class']) && !empty($_POST['attendance_term']) && !empty($_POST['attendance_sess'])) {
+            $attendance_class = $Configuration->Clean($_POST['attendance_class']);
+            $attendance_term = $Configuration->Clean($_POST['attendance_term']);
+            $attendance_sess = $Configuration->Clean($_POST['attendance_sess']);
 
-            $get_all_uploaded_results_students = $Student->get_students_byClassDesc($comment_class);
+            $getstudetNames = $Student->get_students_byClassDesc($attendance_class);
           ?>
         <?php
-            switch ($comment_term) {
+            switch ($attendance_term) {
               case '3rd Term':
                 $resultTable = 'visap_termly_result_tbl';
                 break;
@@ -142,7 +144,7 @@ require_once "helpers/helper.php";
                 break;
             }
 
-            if ($get_all_uploaded_results_students) {
+            if ($getstudetNames) {
               $total_count = 0;
             ?>
         <!--starts  -->
@@ -151,13 +153,13 @@ require_once "helpers/helper.php";
           <div class="card-body">
             <h2 class="text-info text-center"><?php echo strtoupper($SmappDetails->school_name) ?> </h2>
             <h5 class="text-center text-warning"><?php echo ucwords($SmappDetails->school_address) ?> </h5>
-            <h4 class="text-center text-danger"><strong>STUDENTS RESULT COMMENT SHEET</strong></h4>
+            <h4 class="text-center text-danger"><strong>STUDENTS ATTENDANCE SHEET</strong></h4>
             <!-- ############################# -->
             <br />
             <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center offset-1">
-              <span class="btn btn-info btn-round text-center"><?php echo strtoupper($comment_class) ?> </span>
-              <span class="btn btn-dark btn-round text-center"><?php echo strtoupper($comment_term) ?> </span>
-              <span class="btn btn-danger btn-round text-center"><?php echo ($comment_sess) ?></span>
+              <span class="btn btn-info btn-round text-center"><?php echo strtoupper($attendance_class) ?> </span>
+              <span class="btn btn-dark btn-round text-center"><?php echo strtoupper($attendance_term) ?> </span>
+              <span class="btn btn-danger btn-round text-center"><?php echo ($attendance_sess) ?></span>
 
             </div>
             <br>
@@ -169,45 +171,44 @@ require_once "helpers/helper.php";
                   <thead class="text-center">
                     <tr>
                       <th width="5%">S/N</th>
-                      <th width="25%">Student</th>
-                      <th width="15%">Admission No</th>
-                      <th width="40%">Teacher's Comment</th>
+                      <th width="25%">Student Name</th>
+                      <th width="15%">School Opens</th>
+                      <th width="20%">Time Present</th>
+                      <th width="20%">Time Absent</th>
                     </tr>
                   </thead>
                   <tbody class="text-center">
 
-                    <?php foreach ($get_all_uploaded_results_students as $value) : ?>
-                    <?php $total_count++;
-                            //get_student_result_gradeByRegNo
-                            $student_result_data = $Result->get_student_result_gradeByRegNo($resultTable, $value->stdRegNo, $value->studentClass, $comment_term, $comment_sess); ?>
+                    <?php foreach ($getstudetNames as $student) : ?>
+                    <?php
+                            $total_count++;
+                            $student_result_data = $Result->get_student_result_gradeByRegNo($resultTable, $student->stdRegNo, $student->studentClass, $attendance_term, $attendance_sess); ?>
                     <?php if ($student_result_data) : ?>
                     <?php
-                              $exam_score = intval($student_result_data->exam);
-                              $average_score = intval($student_result_data->mark_average);
-                              $total_subject_offered = $Administration->get_number_of_subejct_offered_by_class($staff_assigned_class);
-                              $obtaineable_mark = $Administration->get_obtainable_score($value->stdRegNo, $value->studentClass, $comment_term, $comment_sess);
-                              $overall_score = round($student_result_data->overallMark * $total_subject_offered);
+                              $timeOpen = $Administration->get_session_details();
                               ?>
                     <tr>
-                      <input type="hidden" name="term" value="<?php echo $comment_term; ?>">
+                      <input type="hidden" name="term" value="<?php echo $attendance_term; ?>">
                       <input type="hidden" name="school_session" value="<?php echo $activeSess->session_desc_name; ?>">
-                      <input class="form-control" type="hidden" name="student_regNo[]"
-                        value="<?php echo $value->stdRegNo; ?>">
+                      <input type="hidden" name="student_regNo[]" value="<?php echo $student->stdRegNo; ?>">
+                      <input type="hidden" value="<?php echo $timeOpen->Days_open ?>">
                       <td><?php echo $total_count; ?></td>
-                      <td><?php echo ucwords($value->full_name); ?></td>
-                      <td><?php echo ucwords($value->stdRegNo); ?></td>
-                      <td><input type="text" name="comment[]" class="form-control"
-                          placeholder="write comment here..."><input type="hidden" name="total_count"
-                          value="<?php echo $total_count; ?>"></td>
+                      <td><?php echo ucwords($student->full_name); ?></td>
+                      <td><input type="text" class="form-control" readonly
+                          value="<?php echo $timeOpen->Days_open ?> Days"></td>
+                      <td><input type="number" name="present[]" class="form-control" placeholder="No of Time Present">
+                      <td><input type="number" name="absent[]" class="form-control" placeholder="No of Time Absent">
+                        <input type="hidden" name="total_count" value="<?php echo $total_count; ?>">
+                      </td>
                     </tr>
                     <?php endif ?>
                     <?php endforeach ?>
                   </tbody>
                 </table>
               </div>
-              <input type="hidden" name="action" value="upload_classteacher_comment">
+              <input type="hidden" name="action" value="upload_classteacher_attendance">
 
-              <input type="hidden" name="result_comment_class" value="<?php echo $comment_class; ?>">
+              <input type="hidden" name="result_attendance_class" value="<?php echo $attendance_class; ?>">
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Authentication Code</label>
@@ -215,7 +216,7 @@ require_once "helpers/helper.php";
                 </div>
               </div>
               <button class="btn btn-dark submit-btn btn-md mr-2 float-right mt-1 __loadingBtn__" type="submit"
-                name="upload-btn"> UPLOAD COMMENT</button>
+                name="upload-btn"> UPLOAD ATTENDANCE</button>
               <div class="clearfix"></div>
             </form>
           </div>
@@ -231,7 +232,7 @@ require_once "helpers/helper.php";
           <?php
           } else {
             echo '<div class="card show-on-print">
-  <div class="card-body"><h3 class="text-center col-md-12">' . $Alert->alert_msg("Please Select academic term to comment on result", "danger") . '</h3></div></div>';
+  <div class="card-body"><h3 class="text-center col-md-12">' . $Alert->alert_msg("Please Select academic term to attendance details on result", "danger") . '</h3></div></div>';
           }
             ?>
           <?php endif ?>

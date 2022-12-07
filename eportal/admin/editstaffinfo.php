@@ -2,9 +2,9 @@
 require_once "helpers/helper.php";
 ?>
 <?php
-if (isset($_GET['staffdata']) && $_GET['staffdata'] != "") {
+if (isset($_GET['record-id']) && $_GET['record-id'] != "") {
 
-  $staffId = $Configuration->Clean($_GET['staffdata']);
+  $staffId = $Configuration->Clean($Configuration->convert_String('decode', $_GET['record-id']));
   $staff_data = $Staff->get_staff_ById($staffId);
   if ($staff_data) {
     // code...
@@ -162,7 +162,7 @@ if (isset($_GET['staffdata']) && $_GET['staffdata'] != "") {
                             value="<?php echo $staff_data->staffDob; ?>">
                         </div>
                         <div class="col-md-4">
-                          <label>Assigned To:</label>
+                          <label>Class Teacher:</label>
                         </div>
                         <div class="col-md-8 form-group">
                           <select name="presentClass" class="form-control custom-select">
