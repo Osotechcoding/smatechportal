@@ -1,0 +1,4 @@
+eportal/db/smatech_portal.sql
+*.sql
+classes/initialze.php
+eportal/controlroom.php
