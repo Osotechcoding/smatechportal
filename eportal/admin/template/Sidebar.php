@@ -127,10 +127,10 @@
                  class="menu-title text-truncate" data-i18n="View Students">View Students</span></a>
            </li>
            <!-- student_attendance -->
-           <li class="nav-item"><a href="student_attendance"><i class="fa fa-child fa-1x"></i><span
+           <li class="nav-item"><a href="upload-attendance"><i class="fa fa-child fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Mark Attendance">Mark Attendance</span></a>
            </li>
-           <li class="nav-item"><a href="view_student_attendance"><i class="fa fa-child fa-1x"></i><span
+           <li class="nav-item"><a href="view-attendance"><i class="fa fa-child fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="view Attendance">View Attendance</span></a>
            </li>
            <li class="nav-item"><a href="prefects"><i class="fa fa-user-secret fa-1x"></i><span

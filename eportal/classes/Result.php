@@ -363,17 +363,19 @@ class Result
 
 	public function update_school_result_grading($data)
 	{
-		$bypass = $this->config->Clean($data['bypass']);
+		$auth_code = $this->config->Clean($data['auth_code']);
 		$grading_id = ($data['grading_id']);
 		$result_class = $this->config->Clean($data['result_class']);
 		$score_from = isset($data['score_from']) ? $data['score_from'] : '0';
 		$score_to = $this->config->Clean($data['score_to']);
 		$mark_grade = $this->config->Clean($data['mark_grade']);
 		$score_remark = $this->config->Clean($data['score_remark']);
-		if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
-			$this->response = $this->alert->alert_msg("Authentication Failed, Please Check your Connection and Try again!", "danger");
-		} elseif ($this->config->isEmptyStr($score_to) || $this->config->isEmptyStr($score_remark) || $this->config->isEmptyStr($grading_id) || $this->config->isEmptyStr($mark_grade)) {
-			$this->response = $this->alert->alert_msg("Invalid Submission, Please check your inputs and Try again!", "danger");
+		if ($this->config->isEmptyStr($score_to) || $this->config->isEmptyStr($score_remark) || $this->config->isEmptyStr($grading_id) || $this->config->isEmptyStr($mark_grade)) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Submission, Please check your inputs and Try again!", __OSO_APP_NAME__ . " SAYS");
+		} elseif ($this->config->isEmptyStr($auth_code)) {
+			$this->response = $this->alert->alert_toastr("error", "Authentication code is required!", __OSO_APP_NAME__ . " SAYS");
+		} else if ($auth_code !== __OSO__CONTROL__KEY__) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication code!", __OSO_APP_NAME__ . " SAYS");
 		} else {
 			//let get the grading updated
 			try {
@@ -381,15 +383,15 @@ class Result
 				$this->stmt = $this->dbh->prepare("UPDATE `visap_result_grading_tbl` SET mark_grade=?,score_from=?,score_to=?,score_remark=? WHERE grading_id=? AND grade_class=?");
 				if ($this->stmt->execute(array($mark_grade, $score_from, $score_to, $score_remark, $grading_id, $result_class))) {
 					$this->dbh->commit();
-					$this->response = $this->alert->alert_msg("Grading System Updated Successfully", "success") . "<script>setTimeout(()=>{
+					$this->response = $this->alert->alert_toastr("success", "Result Grading Updated Successfully", __OSO_APP_NAME__ . " SAYS") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
 				} else {
-					$this->response = $this->alert->alert_msg("Unknown Error Occured, Please Try again!", "danger");
+					$this->response = $this->alert->alert_toastr("Unknown Error Occured, Please Try again!", __OSO_APP_NAME__ . " SAYS");
 				}
 			} catch (PDOException $e) {
 				$this->dbh->rollback();
-				$this->response  = $this->alert->alert_msg("Grading Update Failed: Error Occurred: " . $e->getMessage(), "danger");
+				$this->response  = $this->alert->alert_toastr("Grading Update Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " SAYS");
 			}
 		}
 		return $this->response;
@@ -919,5 +921,86 @@ class Result
 		}
 		return $this->response;
 		$this->dbh = null;
+	}
+
+	//uploadning result comment method
+	public function uploadTermyStudentAttendance($data)
+	{
+		$total_count 	= $data['total_count'];
+		$auth_pass 		= $data['auth_pass'];
+		$term 			= $data['term'];
+		$schl_open 			= $data['schl_open'];
+		$student_class 	= $data['_attendance_class'];
+		$school_session = $data['school_session'];
+		$teacher = $data['teacher_name'];
+		//check for empty values 
+		if ($this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("warning", "You need to Authenticate this Upload!", __OSO_APP_NAME__ . " Says");
+		} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		} elseif (!$this->config->check_user_activity_allowed("upload_attendance")) {
+			$this->response = $this->alert->alert_toastr("error", "Student attendance Uploading is not allowed at the moment!", __OSO_APP_NAME__ . " Says");
+		} else {
+			//loop through all the student involved
+			for ($i = 0; $i < (int)$total_count; $i++) {
+				$student_regNo = $data['stureg'][$i];
+				$present 	= 	$data['present_time'][$i];
+				$absent 	= 	$data['absent_time'][$i];
+				//check for empty comment
+				if ($this->config->isEmptyStr($present) || $this->config->isEmptyStr($absent)) {
+					$this->response = $this->alert->alert_toastr("error", "Invalid submission, Please check your inputs and try again!", __OSO_APP_NAME__ . " Says");
+				} else {
+					//check for duplicate comment upload
+					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_attendance_tbl` WHERE stdRegNo=? AND stdGrade=? AND term=? AND schl_session=?");
+					$this->stmt->execute(array($student_regNo, $student_class, $term, $school_session));
+					//check the row that was returned 
+					if ($this->stmt->rowCount() > 0) {
+						$this->response = $this->alert->alert_toastr("error", "This attendance already uploaded for student with Reg No: $student_regNo", __OSO_APP_NAME__ . " Says");
+					} else {
+						//let upload the comment now
+						try {
+							$date = date("Y-m-d h:i:s");
+							$this->dbh->beginTransaction();
+							$this->stmt = $this->dbh->prepare("INSERT INTO `visap_student_attendance_tbl` (stdRegNo,stdGrade,school_open,present,`absent`,term,schl_session,uploaded_by,uploaded_at) VALUES (?,?,?,?,?,?,?,?,?);");
+							if ($this->stmt->execute(array($student_regNo, $student_class, $schl_open, $present, $absent, $term, $school_session, $teacher, $date))) {
+								//update subjectRank will be here later
+								$this->dbh->commit();
+								$this->response = $this->alert->alert_toastr("success", "Attendance uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+			window.location.href='./';
+			},1000);</script>";
+							}
+						} catch (PDOException $e) {
+							$this->dbh->rollback();
+							$this->response  = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), "danger");
+						}
+					}
+				}
+			}
+		}
+
+		return $this->response;
+		$this->dbh = null;
+	}
+
+	public function showAttendanceRecord($grade, $term, $session)
+	{
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_attendance_tbl` WHERE stdGrade=? AND term=? AND schl_session=? ORDER BY stdGrade DESC");
+		$this->stmt->execute([$grade, $term, $session]);
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetchAll();
+			return $this->response;
+			$this->dbh = null;
+		}
+	}
+
+	public function getStudentAttendanceRecord($regNo, $grade, $term, $session)
+	{
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_attendance_tbl` WHERE stdRegNo=? AND stdGrade=? AND term=? AND schl_session=?");
+		$this->stmt->execute([$regNo, $grade, $term, $session]);
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetch();
+			return $this->response;
+			$this->dbh = null;
+		}
 	}
 }

@@ -39,7 +39,7 @@ require_once "helpers/helper.php";
                 <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item"><a
-                    href="javascript:void(0);"><?php echo strtoupper($_SESSION['STAFF_ROLE']); ?></a>
+                    href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']); ?></a>
                 </li>
                 <li class="breadcrumb-item active">Student Attendance
                 </li>
@@ -65,7 +65,8 @@ require_once "helpers/helper.php";
                 <div class="col-md-12 col-12">
                   <div class="card">
                     <div class="card-header">
-                      <a href="./attendance" class="btn btn-primary btn-pill btn-md float-right">Upload attendance</a>
+                      <a href="./upload-attendance" class="btn btn-primary btn-pill btn-md float-right">Upload
+                        attendance</a>
                     </div>
                     <div class="card-body">
                       <form class="form form-vertical" action="" method="POST">
@@ -74,8 +75,10 @@ require_once "helpers/helper.php";
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="class"> Student Class </label>
-                                <input type="text" name="class" id="class" class="form-control" readonly
-                                  value="<?php echo $staff_assigned_class; ?>">
+                                <select name="class" id="class" class="form-control">
+                                  <option value="" selected>Choose...</option>
+                                  <?php echo $Administration->get_classroom_InDropDown_list(); ?>
+                                </select>
                               </div>
                             </div>
 
@@ -148,45 +151,44 @@ require_once "helpers/helper.php";
             <br>
           </div>
           <div class="card-body">
+            <form id="result_comment_form">
+              <div class="table-responsive">
+                <table class=" table-bordered table table-stripped table-hover">
+                  <thead class="text-center">
+                    <tr>
+                      <th width="5%">S/N</th>
+                      <th width="25%">Student Name</th>
+                      <th width="15%">School Opens</th>
+                      <th width="20%">Time Present</th>
+                      <th width="20%">Time Absent</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-center">
 
-            <div class="table-responsive">
-              <table class=" table-bordered table table-stripped table-hover">
-                <thead class="text-center">
-                  <tr>
-                    <th width="3%">S/N</th>
-                    <th width="25%">Student Name</th>
-                    <th width="15%">School Opens</th>
-                    <th width="20%">Time Present</th>
-                    <th width="19%">Time Absent</th>
-                    <th width="3%">Action</th>
-                  </tr>
-                </thead>
-                <tbody class="text-center">
+                    <?php foreach ($student_attnd_data as $attend) : ?>
+                    <?php
+                            $total_count++;
+                            $student_data = $Student->get_student_data_ByRegNo($attend->stdRegNo,);
+                            $timeOpen = $Administration->get_session_details(); ?>
 
-                  <?php foreach ($student_attnd_data as $attend) : ?>
-                  <?php
-                          $total_count++;
-                          $student_data = $Student->get_student_data_ByRegNo($attend->stdRegNo,);
-                          $timeOpen = $Administration->get_session_details(); ?>
+                    <tr>
+                      <input type="hidden" name="term" value="<?php echo $term; ?>">
+                      <input type="hidden" name="school_session" value="<?php echo $activeSess->session_desc_name; ?>">
+                      <td><?php echo $total_count; ?></td>
+                      <td><?php echo ucwords($student_data->full_name); ?></td>
+                      <td><input type="text" class="form-control" readonly
+                          value="<?php echo $timeOpen->Days_open ?> Days"></td>
+                      <td><input type="text" class="form-control" readonly value="<?php echo $attend->present; ?> days">
+                      <td><input type="text" readonly class="form-control" value="<?php echo $attend->absent; ?> days">
 
-                  <tr>
-
-                    <td><?php echo $total_count; ?></td>
-                    <td><?php echo ucwords($student_data->full_name); ?></td>
-                    <td><input type="text" class="form-control" readonly
-                        value="<?php echo $timeOpen->Days_open ?> Days"></td>
-                    <td><input type="text" class="form-control" readonly value="<?php echo $attend->present; ?> days">
-                    <td><input type="text" readonly class="form-control" value="<?php echo $attend->absent; ?> days">
-
-                    </td>
-                    <td><button class="btn btn-danger btn-sm" type="button">Delete</button></td>
-                  </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div>
-            <div class="clearfix"></div>
-
+                      </td>
+                    </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+              <div class="clearfix"></div>
+            </form>
           </div>
           <!-- ends -->
           <?php
@@ -198,7 +200,7 @@ require_once "helpers/helper.php";
           <?php
           } else {
             echo '<div class="card show-on-print">
-  <div class="card-body"><h3 class="text-center col-md-12">' . $Alert->alert_msg("Please Select academic term to view student attendance details", "danger") . '</h3></div></div>';
+  <div class="card-body"><h3 class="text-center col-md-12">' . $Alert->alert_msg("Please Select academic term to attendance details on result", "danger") . '</h3></div></div>';
           }
             ?>
           <?php endif ?>

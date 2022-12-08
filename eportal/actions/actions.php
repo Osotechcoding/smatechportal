@@ -1,6 +1,5 @@
  <?php
-	error_reporting(1);
-	@ob_start();
+
 	@session_start();
 	include_once "../languages/config.php";
 	// require_once "../classes/Configuration.php";
@@ -10,7 +9,7 @@
 	spl_autoload_register(function ($filename) {
 		require_once "../classes/" . ucfirst($filename) . ".php";
 	});
-	//$ses_token = Session::set_xss_token();
+
 	$Configuration 	= new Configuration();
 	$Admin = new Admin();
 	$Pin_serial = new Pins();
@@ -584,6 +583,13 @@
 			//_addBusMaintainance_
 			if ($_POST['action'] === "_addBusMaintainance_") {
 				$result = $Bus->addBusMaintainance($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
+			//upload_class_attendance_now_
+			if ($_POST['action'] === "upload_class_attendance_now_") {
+				$result = $Result->uploadTermyStudentAttendance($_POST);
 				if ($result) {
 					echo $result;
 				}

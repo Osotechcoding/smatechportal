@@ -47,7 +47,7 @@ $(".update_grade_btn").on("click",function(){
    //send request
    $.post("../actions/update_actions",update_grading_form.serialize(),function(data){
     setTimeout(()=>{
-      $("#server-result").html(data);
+      $("#server-response").html(data);
       $(".__loadingBtn__").html('Update Grading').attr("disabled",false);
     },2000);
    })

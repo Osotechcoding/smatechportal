@@ -39,7 +39,7 @@ require_once "helpers/helper.php";
                 <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
                 </li>
                 <li class="breadcrumb-item"><a
-                    href="javascript:void(0);"><?php echo strtoupper($_SESSION['STAFF_ROLE']); ?></a>
+                    href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']); ?></a>
                 </li>
                 <li class="breadcrumb-item active">Student Attendance
                 </li>
@@ -51,8 +51,8 @@ require_once "helpers/helper.php";
       <div class="content-body">
         <div class="row">
           <div class="col-12">
-            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-upload fa-1x"></span>Upload Student Attendance
-
+            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-comment fa-1x"></span> Student Attendance
+              Module
             </h3>
           </div>
         </div>
@@ -67,6 +67,7 @@ require_once "helpers/helper.php";
                     <div class="card-header">
                       <!-- <button type="button" class="btn btn-danger btn-md badge-pill" data-toggle="modal"
                         data-target="#csv_Modal"><span class="fa fa-file fa-1x"></span> UPLOAD BY CSV</button> -->
+                      <a href="./view-attendance" class="btn btn-primary btn-md btn-pill">View attendance</a>
                     </div>
                     <div class="card-body">
                       <form class="form form-vertical" action="" method="POST">
@@ -75,8 +76,11 @@ require_once "helpers/helper.php";
                             <div class="col-md-4">
                               <div class="form-group">
                                 <label for="attendance_class"> Class</label>
-                                <input type="text" name="attendance_class" id="attendance_class" class="form-control"
-                                  readonly value="<?php echo $staff_assigned_class; ?>">
+                                <select name="attendance_class" id="attendance_class" class="form-control">
+                                  <option value="" selected>
+                                    Choose...</option>
+                                  <?php echo $Administration->get_classroom_InDropDown_list(); ?>
+                                </select>
                               </div>
                             </div>
 
@@ -212,8 +216,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Class Teacher</label>
-                    <input type="text" class="form-control" value="<?php echo ucwords($staff_data->full_name); ?>"
-                      name="teacher_name" readonly>
+                    <input type="text" class="form-control" name="teacher_name" placeholder="Enter class teacher name">
                   </div>
                 </div>
                 <div class="col-md-6">
