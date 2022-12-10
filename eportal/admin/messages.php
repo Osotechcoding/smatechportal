@@ -207,8 +207,7 @@ require_once "helpers/helper.php";
                         <li class="list-inline-item mail-delete">
                           <button type="button" class="btn btn-icon action-icon">
                             <span class="fonticon-wrap">
-                              <i class="livicon-evo"
-                                data-options="name: trash.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                              <i class="fa fa-trash">
                               </i>
                             </span>
                           </button>
@@ -216,8 +215,7 @@ require_once "helpers/helper.php";
                         <li class="list-inline-item mail-unread">
                           <button type="button" class="btn btn-icon action-icon">
                             <span class="fonticon-wrap d-inline mr-25">
-                              <i class="livicon-evo"
-                                data-options="name: envelope-put.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                              <i class="fa fa-envelope">
                               </i>
                             </span>
                           </button>
@@ -227,8 +225,7 @@ require_once "helpers/helper.php";
                             <button type="button" class="dropdown-toggle btn btn-icon action-icon" id="folder"
                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="fonticon-wrap">
-                                <i class="livicon-evo"
-                                  data-options="name: morph-folder.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                                <i class="fa fa-folder">
                                 </i>
                               </span>
                             </button>
@@ -245,8 +242,7 @@ require_once "helpers/helper.php";
                             <button type="button" class="btn btn-icon dropdown-toggle action-icon" id="tag"
                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               <span class="fonticon-wrap">
-                                <i class="livicon-evo"
-                                  data-options="name: tag.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                                <i class="fa fa-th">
                                 </i>
                               </span>
                             </button>
@@ -370,8 +366,7 @@ require_once "helpers/helper.php";
                   <div class="email-header-left d-flex align-items-center mb-1">
                     <span class="go-back mr-50">
                       <span class="fonticon-wrap d-inline">
-                        <i class="livicon-evo"
-                          data-options="name: chevron-left.svg; size: 32px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                        <i class="fa fa-chevron-left">
                         </i>
                       </span>
                     </span>
@@ -382,72 +377,68 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="email-header-right mb-1 ml-2 pl-1">
                     <ul class="list-inline m-0">
-                      <li class="list-inline-item">
-                        <button class="btn btn-icon action-icon">
+                      <li class="list-inline-item mail-delete">
+                        <button type="button" class="btn btn-icon action-icon">
                           <span class="fonticon-wrap">
-                            <i class="livicon-evo"
-                              data-options="name: trash.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                            <i class="fa fa-trash">
                             </i>
                           </span>
                         </button>
                       </li>
-                      <li class="list-inline-item">
-                        <button class="btn btn-icon action-icon">
-                          <span class="fonticon-wrap">
-                            <i class="livicon-evo"
-                              data-options="name: envelope-put.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                      <li class="list-inline-item mail-unread">
+                        <button type="button" class="btn btn-icon action-icon">
+                          <span class="fonticon-wrap d-inline mr-25">
+                            <i class="fa fa-envelope">
                             </i>
                           </span>
                         </button>
                       </li>
                       <li class="list-inline-item">
                         <div class="dropdown">
-                          <button class="btn btn-icon dropdown-toggle action-icon" id="open-mail-menu"
+                          <button type="button" class="dropdown-toggle btn btn-icon action-icon" id="folder"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="fonticon-wrap">
-                              <i class="livicon-evo"
-                                data-options="name: morph-folder.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                              <i class="fa fa-folder">
                               </i>
                             </span>
                           </button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="open-mail-menu">
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="folder">
                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit"></i> Draft</a>
-                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-info-circle"></i>
-                              Spam</a>
-                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash"></i> Trash</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i
+                                class="bx bx-info-circle"></i>Spam</a>
+                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash"></i>Trash</a>
                           </div>
                         </div>
                       </li>
                       <li class="list-inline-item">
                         <div class="dropdown">
-                          <button class="btn btn-icon dropdown-toggle action-icon" id="open-mail-tag"
+                          <button type="button" class="btn btn-icon dropdown-toggle action-icon" id="tag"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="fonticon-wrap">
-                              <i class="livicon-evo"
-                                data-options="name: tag.svg; size: 24px; style: lines; strokeColor:#475f7b; eventOn:grandparent; duration:0.85;">
+                              <i class="fa fa-th">
                               </i>
                             </span>
                           </button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="open-mail-tag">
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tag">
                             <a href="javascript:void(0);" class="dropdown-item align-items-center">
                               <span class="bullet bullet-success bullet-sm"></span>
-                              Product
+                              <span>Product</span>
                             </a>
                             <a href="javascript:void(0);" class="dropdown-item align-items-center">
                               <span class="bullet bullet-primary bullet-sm"></span>
-                              Work
+                              <span>Work</span>
                             </a>
                             <a href="javascript:void(0);" class="dropdown-item align-items-center">
                               <span class="bullet bullet-warning bullet-sm"></span>
-                              Misc
+                              <span>Misc</span>
                             </a>
                             <a href="javascript:void(0);" class="dropdown-item align-items-center">
                               <span class="bullet bullet-danger bullet-sm"></span>
-                              Family
+                              <span>Family</span>
                             </a>
                             <a href="javascript:void(0);" class="dropdown-item align-items-center">
                               <span class="bullet bullet-info bullet-sm"></span>
-                              Design
+                              <span> Design</span>
                             </a>
                           </div>
                         </div>
@@ -481,8 +472,7 @@ require_once "helpers/helper.php";
                             <div class="collapse-title media">
                               <div class="pr-1">
                                 <div class="avatar mr-75">
-                                  <img src="../app-assets/images/portrait/small/avatar-s-18.jpg" alt="avatar img holder"
-                                    width="30" height="30">
+                                  <img src="../author.jpg" alt="avatar img holder" width="30" height="30">
                                 </div>
                               </div>
                               <div class="media-body mt-25">
@@ -540,11 +530,11 @@ require_once "helpers/helper.php";
                               <label class="sidebar-label">Attached Files</label>
                               <ul class="list-unstyled mb-0">
                                 <li class="cursor-pointer pb-25">
-                                  <img src="../app-assets/images/icon/psd.png" height="30" alt="psd.png">
+                                  <img src="../author.jpg" height="30" alt="psd.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.psd</small>
                                 </li>
                                 <li class="cursor-pointer">
-                                  <img src="../app-assets/images/icon/sketch.png" height="30" alt="sketch.png">
+                                  <img src="../author.jpg" height="30" alt="sketch.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.sketch</small>
                                 </li>
                               </ul>
@@ -558,8 +548,7 @@ require_once "helpers/helper.php";
                             <div class="collapse-title media">
                               <div class="pr-1">
                                 <div class="avatar mr-75">
-                                  <img src="../app-assets/images/portrait/small/avatar-s-19.jpg" alt="avatar img holder"
-                                    width="30" height="30">
+                                  <img src="../author.jpg" alt="avatar img holder" width="30" height="30">
                                 </div>
                               </div>
                               <div class="media-body mt-25">
@@ -623,11 +612,11 @@ require_once "helpers/helper.php";
                               <label class="sidebar-label">Attached Files</label>
                               <ul class="list-unstyled mb-0">
                                 <li class="cursor-pointer pb-25">
-                                  <img src="../app-assets/images/icon/psd.png" height="30" alt="psd.png">
+                                  <img src="../author.jpg" height="30" alt="psd.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.psd</small>
                                 </li>
                                 <li class="cursor-pointer">
-                                  <img src="../app-assets/images/icon/sketch.png" height="30" alt="sketch.png">
+                                  <img src="../author.jpg" height="30" alt="sketch.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.sketch</small>
                                 </li>
                               </ul>
@@ -641,8 +630,7 @@ require_once "helpers/helper.php";
                             <div class="collapse-title media">
                               <div class="pr-1">
                                 <div class="avatar mr-75">
-                                  <img src="../app-assets/images/portrait/small/avatar-s-18.jpg" alt="avatar img holder"
-                                    width="30" height="30">
+                                  <img src="../author.jpg" alt="avatar img holder" width="30" height="30">
                                 </div>
                               </div>
                               <div class="media-body mt-25">
@@ -704,11 +692,11 @@ require_once "helpers/helper.php";
                               <label class="sidebar-label">Attached Files</label>
                               <ul class="list-unstyled mb-0">
                                 <li class="cursor-pointer pb-25">
-                                  <img src="../app-assets/images/icon/psd.png" height="30" alt="psd.png">
+                                  <img src="../author.jpg" height="30" alt="psd.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.psd</small>
                                 </li>
                                 <li class="cursor-pointer">
-                                  <img src="../app-assets/images/icon/sketch.png" height="30" alt="sketch.png">
+                                  <img src="../author.jpg" height="30" alt="sketch.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.sketch</small>
                                 </li>
                               </ul>
