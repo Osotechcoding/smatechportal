@@ -706,7 +706,7 @@ class Staff
 				}
 			} catch (PDOException $e) {
 				$this->dbh->rollback();
-				$this->response = $this->alert->alert_msg("Error Occurred: " . $e->getMessage(), "danger");
+				$this->alert->alert_toastr("error", "Something went wrong, Please try again ...", __OSO_APP_NAME__ . " Says");
 			}
 		}
 		return $this->response;
@@ -878,18 +878,12 @@ class Staff
 				if ($this->stmt->execute([$staff_id])) {
 					if (file_exists($staffImage)) {
 						unlink($staffImage);
-						$this->dbh->commit();
-						$this->dbh = null;
-						$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-							window.location.reload();
-						},500);</script>";
-					} else {
-						$this->dbh->commit();
-						$this->dbh = null;
-						$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-							window.location.reload();
-						},500);</script>";
 					}
+					$this->dbh->commit();
+					$this->dbh = null;
+					$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+							window.location.reload();
+						},500);</script>";
 				}
 			}
 		} catch (PDOException $e) {

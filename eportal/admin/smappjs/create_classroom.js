@@ -10,7 +10,7 @@
        if (is_true) {
          $.post("../actions/delete_actions",{action:delete_action,grade:delete_id},function(response){
           setTimeout(()=>{
-            $("#delete_response").html(response);
+            $("#server-response").html(response);
           },1000);
         })
        }else{

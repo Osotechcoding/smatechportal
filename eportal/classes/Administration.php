@@ -207,13 +207,13 @@ class Administration
 				if ($this->stmt->execute([$grade])) {
 					// code...
 					$this->dbh->commit();
-					$this->response = $this->alert->alert_msg("Deleted Successfully", "success") . "<script>setTimeout(()=>{
+					$this->response = $this->alert->alert_toastr("success", "Deleted Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
 				}
 			} catch (PDOException $e) {
 				$this->dbh->rollback();
-				$this->response  = $this->alert->alert_msg("Failed to Delete Classroom: Error Occurred: " . $e->getMessage(), "danger");
+				$this->response = $this->alert->alert_toastr("error", "Failed to Delete Classroom!, Error Occurred", __OSO_APP_NAME__ . " Says");
 			}
 			// code...
 		} else {

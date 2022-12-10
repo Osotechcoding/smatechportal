@@ -142,7 +142,7 @@ require_once "helpers/helper.php";
               <div class="card-body">
                 <!-- datatable start -->
                 <div class="table-responsive">
-                  <table id="users-list-datatable" class="table text-center">
+                  <table class="table table-bordered table-striped text-center">
                     <thead>
                       <tr>
                         <th>PASSPORT</th>
