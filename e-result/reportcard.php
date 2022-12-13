@@ -584,22 +584,17 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
         <h4>Class Teacher's Remark:</h4>
         <hr>
         <?php if ($teacher_res_comment = $StudentResult->get_student_result_comment_details($student_reg_number, $student_class, $term, $rsession)) { ?>
-        <p><b><?php echo ucwords($student_data->full_name); ?></b> <?php echo $teacher_res_comment->teacher_comment; ?>
+        <p> <?php echo $teacher_res_comment->teacher_comment; ?>
         </p>
         <?php
           // code...
         } ?>
 
         <p style="text-align: right;"><b>
-            <?php $staff_data_details = $StudentResult->get_class_teacher_class_name($student_class) ?>
+            <?php $staff_data_details = $StudentResult->get_class_teacher_class_name($student_reg_number, $student_class, $term, $rsession) ?>
             <?php if ($staff_data_details) : ?>
-            <?php $staff_Gender = $staff_data_details->staffGender;
-              if ($staff_Gender == "Male") {
-                $tTitle = "Mr. ";
-              } else {
-                $tTitle = "Mrs. ";
-              }
-              echo $tTitle . $staff_data_details->firstName . " " . $staff_data_details->lastName;
+            <?php
+              echo  $staff_data_details->class_teacher;
               ?>
             <?php endif ?></b></p>
       </div>
@@ -607,7 +602,7 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
         <h4>Head of school's Remark:</h4>
         <hr>
         <?php if ($principal_res_comment = $StudentResult->get_student_result_comment_details($student_reg_number, $student_class, $term, $rsession)) { ?>
-        <p><b><?php echo ucwords($student_data->full_name); ?></b>
+        <p>
           <?php echo $principal_res_comment->principal_coment; ?></p>
         <?php
           // code...

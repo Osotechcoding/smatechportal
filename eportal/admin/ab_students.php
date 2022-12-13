@@ -178,7 +178,8 @@ require_once "helpers/helper.php";
                     <th>FULLNAME</th>
                     <th>ADMISSION NO</th>
                     <th>CLASS</th>
-                    <th>VERIFICATION</th>
+                    <th>Gender</th>
+                    <!-- <th>VERIFICATION</th> -->
                     <th>STATUS</th>
                     <th>ACTION</th>
                   </tr>
@@ -193,6 +194,10 @@ require_once "helpers/helper.php";
                     <td><?php echo $count; ?></td>
                     <td>
                       <?php if ($filtered->stdPassport == "" || $filtered->stdPassport == NULL) : ?>
+
+                      <img class="mt-1"
+                        src="../schoolImages/students/<?php echo $filtered->stdGender == 'Male' ? 'male.png' : 'female.png'; ?>"
+                        width="50" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
                       <a
                         href="./uploadstudentpassport?stdRegistrationId=<?php echo $filtered->stdRegNo; ?>&actionId=<?php echo $filtered->stdId; ?>"><button
                           type="button" class="badge badge-dark">
@@ -215,13 +220,8 @@ require_once "helpers/helper.php";
                     </td>
                     <td><?php echo strtoupper($filtered->stdRegNo) ?></td>
                     <td><?php echo strtoupper($filtered->studentClass) ?></td>
-                    <td><?php if ($filtered->stdConfToken != NULL || $filtered->stdConfToken != "") : ?>
-                      <span class="badge badge-dark badge-pill mb-1"><?php echo $filtered->stdConfToken ?></span>
-                      <span class="badge badge-warning badge-pill">Not Verified</span>
-                      <?php else : ?>
-                      <span class="badge badge-success badge-pill">Verified</span>
-                      <?php endif ?>
-                    </td>
+                    <td><?php echo ucfirst($filtered->stdGender); ?></td>
+
                     <td><span class="badge badge-success badge-pill">Admitted</span></td>
                     <td>
                       <div class="btn-group mb-1">

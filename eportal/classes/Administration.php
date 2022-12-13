@@ -2329,15 +2329,13 @@ class Administration
 	//JUST DONE TODAY 18 may 2022
 	public function upload_affective_domain($data)
 	{
-		$uploadedBy = $this->config->Clean($data['class_teacher']);
-		$auth_pass = $this->config->Clean($data['auth_pass']);
+		$classTeacher = $this->config->Clean($data['class_teacher']);
+		//$auth_pass = $this->config->Clean($data['auth_pass']);
 		$term = $this->config->Clean($data['term']);
 		$session = $this->config->Clean($data['school_session']);
 		$total_count = $this->config->Clean($data['total_count']);
-		if ($this->config->isEmptyStr($uploadedBy) || $this->config->isEmptyStr($auth_pass)) {
+		if ($this->config->isEmptyStr($classTeacher)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid form Submission! ", __OSO_APP_NAME__ . " Says");
-		} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
-			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code! ", __OSO_APP_NAME__ . " Says");
 		} else {
 			for ($i = 0; $i < (int)$total_count; $i++) {
 				$reg_number = $data['std_reg_number'][$i];
@@ -2359,7 +2357,7 @@ class Administration
 					try {
 						$this->dbh->beginTransaction();
 						$this->stmt = $this->dbh->prepare("INSERT INTO `visap_behavioral_tbl`(student_id,reg_number,student_class,term,session,punctuality,neatness,honesty,self_control,attentiveness,leadership,class_teacher,uploaded_date) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);");
-						if ($this->stmt->execute(array($student_id, $reg_number, $std_class, $term, $session, $punctuality, $neatness, $honesty, $selfcontrol, $attentiveness, $leadership, $uploadedBy, $uploaded_date))) {
+						if ($this->stmt->execute(array($student_id, $reg_number, $std_class, $term, $session, $punctuality, $neatness, $honesty, $selfcontrol, $attentiveness, $leadership, $classTeacher, $uploaded_date))) {
 							$this->dbh->commit();
 							$this->response = $this->alert->alert_toastr("success", "Affective Domain Uploaded Successfully, Please wait... ", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 				window.location.replace('uploading_behavior');
@@ -2393,14 +2391,12 @@ class Administration
 	public function upload_psychomotor_domain($data)
 	{
 		$uploadedBy = $this->config->Clean($data['class_teacher']);
-		$auth_pass = $this->config->Clean($data['auth_pass']);
+		//$auth_pass = $this->config->Clean($data['auth_pass']);
 		$term = $this->config->Clean($data['term']);
 		$session = $this->config->Clean($data['school_session']);
 		$total_count = $this->config->Clean($data['total_count']);
-		if ($this->config->isEmptyStr($uploadedBy) || $this->config->isEmptyStr($auth_pass)) {
+		if ($this->config->isEmptyStr($uploadedBy)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid form Submission! ", __OSO_APP_NAME__ . " Says");
-		} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
-			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code! ", __OSO_APP_NAME__ . " Says");
 		} else {
 			for ($i = 0; $i < (int)$total_count; $i++) {
 				$reg_number = $data['std_reg_number'][$i];
@@ -2658,11 +2654,11 @@ class Administration
 			$this->dbh = null;
 		}
 	}
-	public function get_class_teacher_class_name($stdGrade)
+	public function get_class_teacher_class_name($stdRegNo, $stdGrade, $term, $session)
 	{
-		$staffRole = "Class Teacher";
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_tbl` WHERE staffGrade=? AND staffRole=? LIMIT 1");
-		$this->stmt->execute(array($stdGrade, $staffRole));
+
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND term=? AND `session`=? LIMIT 1");
+		$this->stmt->execute(array($stdRegNo, $stdGrade, $term, $session));
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;

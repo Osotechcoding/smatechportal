@@ -632,15 +632,10 @@ if ($absentQuery->rowCount() > 0) {
           // code...
         } ?>
         <p style="text-align: right;"><b>
-            <?php $staff_data_details = $Administration->get_class_teacher_class_name($student_class) ?>
+            <?php $staff_data_details = $Administration->get_class_teacher_class_name($student_reg_number, $student_class, $term, $rsession) ?>
             <?php if ($staff_data_details) : ?>
-            <?php $staff_Gender = $staff_data_details->staffGender;
-              if ($staff_Gender == "Male") {
-                $tTitle = "Mr. ";
-              } else {
-                $tTitle = "Mrs. ";
-              }
-              echo $tTitle . $staff_data_details->firstName . " " . $staff_data_details->lastName;
+            <?php
+              echo  $staff_data_details->class_teacher;
               ?>
             <?php endif ?></b></p>
       </div>

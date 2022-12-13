@@ -39,13 +39,13 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = true;
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
   public function checkResultReadyModule($querytable, $stdReg, $stdGrade, $term, $session): bool
   {
-    $this->stmt = $this->dbh->prepare("SELECT * FROM {$querytable} WHERE reg_number=? AND student_class=? AND term=? AND session=? LIMIT 1");
+    $this->stmt = $this->dbh->prepare("SELECT * FROM {$querytable} WHERE reg_number=? AND student_class=? AND term=? AND `session`=? LIMIT 1");
     $this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
     if ($this->stmt->rowCount() == 1) {
       $this->response = true;
@@ -53,7 +53,7 @@ class StudentResult
       $this->response = false;
     }
     return $this->response;
-    unset($this->dbh);
+    $this->dbh = null;
   }
 
   public function checkResultPortalStatus()
@@ -64,7 +64,7 @@ class StudentResult
       //result checking is not allowed at the momemnt
       $this->response = true;
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -73,7 +73,7 @@ class StudentResult
     if (!self::isEmptyStr($data)) {
       $string = trim($data);
       $string = stripslashes($string);
-      $string = filter_var($string, FILTER_SANITIZE_STRING);
+      //$string = filter_var($string, FILTER_SANITIZE_STRING);
       $string = htmlspecialchars($string);
       return $string;
     }
@@ -104,7 +104,7 @@ class StudentResult
       //not allowed
       $this->response = true;
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -115,7 +115,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
   //code to check the student results
@@ -338,7 +338,7 @@ class StudentResult
       }
     }
     return $this->response;
-    unset($this->dbh);
+    $this->dbh = null;
   }
 
   //get student psychomotor
@@ -349,7 +349,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -360,22 +360,21 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
-  public function get_class_teacher_class_name($stdGrade)
+  public function get_class_teacher_class_name($stdRegNo, $stdGrade, $term, $session)
   {
-    $staffRole = "Class Teacher";
-    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_tbl` WHERE staffGrade=? AND staffRole=? LIMIT 1");
-    $this->stmt->execute(array($stdGrade, $staffRole));
+
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND term=? AND `session`=? LIMIT 1");
+    $this->stmt->execute(array($stdRegNo, $stdGrade, $term, $session));
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
-
 
   public function get_principal_info()
   {
@@ -385,7 +384,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -396,7 +395,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -408,7 +407,7 @@ class StudentResult
       $rollCall = $this->stmt->fetch();
       $this->response = $rollCall->cnt;
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 
@@ -427,7 +426,7 @@ class StudentResult
       $res = $this->stmt->fetch();
       $this->response = $res->pin_counter;
       return $this->response;
-      unset($this->dbh);
+      $this->dbh = null;
     }
   }
 }

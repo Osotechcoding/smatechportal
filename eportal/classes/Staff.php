@@ -67,6 +67,8 @@ class Staff
 					$_COOKIE['login_user'] = $result->staffUser;
 					$_SESSION['STAFF_SES_ID'] = $result->staffId;
 					$_SESSION['STAFF_ROLE'] = $result->staffRole;
+					$_SESSION['STAFF_GENDER'] = $result->staffGender;
+					$_SESSION['STAFF_FULL_NAME'] = $result->lastName . " " . $result->firstName;
 					$_SESSION['STAFF_USERNAME'] = $result->staffUser;
 					$_SESSION['STAFF_EMAIL'] = $result->staffEmail;
 
