@@ -143,7 +143,8 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="col-12 col-md-4 col-sm-6 col-lg-4 d-flex align-items-center">
                     <button type="submit" name="filter-btn" value="show_list_of_students"
-                      class="btn btn-primary btn-block glow users-list-clear mb-0">Filter Students</button>
+                      class="btn btn-primary glow users-list-clear mb-0"><span class="fa fa-search fa-1x"></span> Show
+                      Students</button>
                   </div>
                 </div>
               </form>
@@ -176,7 +177,7 @@ require_once "helpers/helper.php";
                     <th>S/N</th>
                     <th>PASSPORT</th>
                     <th>FULLNAME</th>
-                    <th>ADMISSION NO</th>
+                    <th>STUDENT TYPE</th>
                     <th>CLASS</th>
                     <th>Gender</th>
                     <!-- <th>VERIFICATION</th> -->
@@ -204,25 +205,49 @@ require_once "helpers/helper.php";
                           <span class="fa fa-camera"></span> Upload</button></a>
                       <?php else : ?>
                       <img src="../schoolImages/students/<?php echo $filtered->stdPassport; ?>" width="80"
-                        style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
+                        style="border-radius: 10px;border: 3px solid darkblue;" alt="student-passport">
                       <br>
-                      <?php if ($filtered->stdApplyType == 'Day') : ?>
-                      <span class="badge badge-pill badge-dark"><?php echo $filtered->stdApplyType ?></span>
-                      <?php else : ?>
-                      <span class="badge badge-pill badge-success"><?php echo $filtered->stdApplyType ?></span>
-                      <?php endif ?>
-
+                      <b style="margin-top: 3px;"><?php echo strtoupper($filtered->stdRegNo) ?></b>
                       <?php endif ?>
 
                     </td>
                     <td>
                       <?php echo ucwords($filtered->stdSurName . " " . $filtered->stdFirstName . " " . $filtered->stdMiddleName) ?>
                     </td>
-                    <td><?php echo strtoupper($filtered->stdRegNo) ?></td>
+                    <td> <?php if ($filtered->stdApplyType == 'Day') : ?>
+                      <span class="badge badge-pill badge-dark m-1"><?php echo $filtered->stdApplyType ?></span>
+                      <?php else : ?>
+                      <span class="badge badge-pill badge-success mt-1"><?php echo $filtered->stdApplyType ?></span>
+                      <?php endif ?>
+                    </td>
                     <td><?php echo strtoupper($filtered->studentClass) ?></td>
                     <td><?php echo ucfirst($filtered->stdGender); ?></td>
 
-                    <td><span class="badge badge-success badge-pill">Admitted</span></td>
+                    <td> <?php switch ($filtered->stdAdmStatus) {
+                                    case 'Active':
+                                      echo '<span class="badge badge-success badge-pill">Active</span>';
+                                      break;
+
+                                    case 'Left':
+                                      echo '<span class="badge badge-dark badge-pill">Left</span>';
+                                      break;
+
+                                    case 'Expelled':
+                                      echo '<span class="badge badge-danger badge-pill">Expelled</span>';
+                                      break;
+
+                                    case 'Graduated':
+                                      echo '<span class="badge badge-success badge-pill">Graduated</span>';
+                                      break;
+
+                                    case 'Suspended':
+                                      echo '<span class="badge badge-warning badge-pill">Suspended</span>';
+                                      break;
+
+                                    default:
+                                      echo '<span class="badge badge-primary badge-pill">Pending</span>';
+                                      break;
+                                  } ?> </td>
                     <td>
                       <div class="btn-group mb-1">
                         <a class="text-info" href="editstudentinfo?student-data=<?php echo ($filtered->stdId); ?>">
