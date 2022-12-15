@@ -307,5 +307,18 @@ $ denotes the end
   {
     return base64_decode(urldecode($string));
   }
+
+  public function get_single_data($table, $field, $val)
+  {
+    $this->query = "SELECT * FROM `{$table}` WHERE `{$field}`=?";
+    $this->stmt = $this->dbh->prepare($this->query);
+    $this->stmt->execute(array($val));
+    if ($this->stmt->rowCount() > 0) {
+      $this->response = $this->stmt->fetch();
+    } else {
+      $this->response = false;
+    }
+    return $this->response;
+  }
 }
 //$Configuration = new Configuration();

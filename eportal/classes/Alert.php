@@ -2,12 +2,12 @@
 
 class Alert
 {
-	protected $alert;
+	protected $response;
 
 	public function alert_msg($msg = "", $type = "warning")
 	{
-		$this->alert = '<div class="alert alert-' . $type . ' alert-dismissible" role="alert"><strong>' . $msg . '</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-		return $this->alert;
+		$this->response = '<div class="alert alert-' . $type . ' alert-dismissible text-center" role="alert"><strong>' . $msg . '</strong></div>';
+		return $this->response;
 	}
 
 	public function alert_toastr($type = "warning", $msg = "", $title = "")

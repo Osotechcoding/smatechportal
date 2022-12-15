@@ -1,6 +1,4 @@
 <?php
-@ob_start();
-@session_start();
 require_once "helpers/helper.php";
 require_once "classes/Session.php";
 $xss_token = Session::set_xss_token();
@@ -77,7 +75,7 @@ background-repeat: no-repeat;">
                   </div>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Login</button>
+                  <button class="btn btn-dark btn-block __loadingBtn__" type="submit">LOGIN</button>
                 </div>
               </form>
               <div class="text-center dont-have">Are you a Staff? <a class="link navigate_to_staff_login"
@@ -118,12 +116,12 @@ background-repeat: no-repeat;">
     login_form.on("submit", function(event) {
       event.preventDefault();
       //alert("form Submitted");
-      $(".__loadingBtn__").html('<img src="assets/loaders/rolling_loader.svg" width="30"> Processing...').attr(
+      $(".__loadingBtn__").html('<img src="assets/loaders/rolling.svg" width="30"> Processing...').attr(
         "disabled", true);
       $.post("actions/actions", login_form.serialize(), function(result) {
         setTimeout(() => {
           $(".__loadingBtn__").html('LOGIN').attr("disabled", false);
-          //alert(result);
+          console.log(result)
           $("#server-response").html(result);
         }, 500);
       })

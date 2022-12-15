@@ -8,6 +8,7 @@
 require_once "Database.php";
 require_once "Session.php";
 require_once "Configuration.php";
+require_once "OsotechMailer.php";
 class Staff
 {
 	private $dbh; //database connection
@@ -890,6 +891,40 @@ class Staff
 			}
 		} catch (PDOException $e) {
 			$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+		}
+		return $this->response;
+	}
+
+	public function sendPasswordResetLink($data)
+	{
+		$OsotechMailer = new OsotechMailer();
+		$email = $this->config->Clean($data['reset_email']);
+		$userType = $this->config->Clean($data['accountType']);
+		if ($this->config->isEmptyStr($email) || $this->config->isEmptyStr($userType)) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid submission", __OSO_APP_NAME__ . "
+    Says");
+		} else {
+			//chect the submitted email if exists
+			$staff_data = $this->config->get_single_data($this->table, "staffEmail", $email);
+			if (!$staff_data) {
+				$this->response = $this->alert->alert_toastr(
+					"warning",
+					$email . " doesn't match any account on this Portal!",
+					__OSO_APP_NAME__ . " Says"
+				);
+			} else {
+				$fullname = $staff_data->firstName . " " . $staff_data->lastName;
+				$urlLink = APP_ROOT . "reset-password?email=$email&token=123456789009876543243";
+				if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink) == true) {
+					$this->response = $this->alert->alert_toastr("success", "Reset link has been sent to $email, Click on the Link to
+    reset your password!", __OSO_APP_NAME__ . "
+    Says");
+				} else {
+					$this->response = $this->alert->alert_toastr("error", "Oops!, Something went wrong, Reset link sent failed, Please
+    try again!", __OSO_APP_NAME__ . "
+    Says");
+				}
+			}
 		}
 		return $this->response;
 	}

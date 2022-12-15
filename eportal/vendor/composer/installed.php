@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '11365d12177e37d18b9fa8ab4e5193fef22a55d5',
+        'reference' => 'a0ec11aa83187acc0c61ab84aff1515c1c933945',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '11365d12177e37d18b9fa8ab4e5193fef22a55d5',
+            'reference' => 'a0ec11aa83187acc0c61ab84aff1515c1c933945',
             'dev_requirement' => false,
         ),
         'ezyang/htmlpurifier' => array(
@@ -62,6 +62,15 @@
             'install_path' => __DIR__ . '/../myclabs/php-enum',
             'aliases' => array(),
             'reference' => 'a867478eae49c9f59ece437ae7f9506bfaa27483',
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.7.1',
+            'version' => '6.7.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'reference' => '49cd7ea3d2563f028d7811f06864a53b1f15ff55',
             'dev_requirement' => false,
         ),
         'phpoffice/phpspreadsheet' => array(

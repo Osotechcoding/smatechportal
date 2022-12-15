@@ -53,19 +53,18 @@ background-repeat: no-repeat;">
                   <input type="text" autocomplete="off" class="form-control" name="login_email" id="exampleInputEmail1"
                     placeholder="<?php echo $lang['email']; ?>"
                     value="<?php if (isset($_COOKIE['login_email'])) {
-                                                                                                                                                                                                echo $_COOKIE['login_email'];
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                echo '';
-                                                                                                                                                                                            } ?>">
+                                                                                                                                                                              echo $_COOKIE['login_email'];
+                                                                                                                                                                            } else {
+                                                                                                                                                                              echo '';
+                                                                                                                                                                            } ?>">
                 </div>
                 <div class="form-group">
-                  <input type="password" autocomplete="off" class="form-control" name="login_password"
-                    value="<?php if (isset($_COOKIE['login_pass'])) {
-                                                                                                                                    echo $_COOKIE['login_pass'];
-                                                                                                                                } else {
-                                                                                                                                    echo '';
-                                                                                                                                } ?>" id="exampleInputPassword1"
-                    placeholder="<?php echo $lang['password']; ?>">
+                  <input type="password" autocomplete="off" class="form-control" name="login_password" value="<?php if (isset($_COOKIE['login_pass'])) {
+                                                                                                                echo $_COOKIE['login_pass'];
+                                                                                                              } else {
+                                                                                                                echo '';
+                                                                                                              } ?>"
+                    id="exampleInputPassword1" placeholder="<?php echo $lang['password']; ?>">
                 </div>
                 <!-- <div class="form-group">
     <select name="login_as" id="" class="select2 form-control">
@@ -82,7 +81,7 @@ background-repeat: no-repeat;">
                   </div>
                 </div>
                 <div class="form-group">
-                  <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Login</button>
+                  <button class="btn btn-dark btn-block __loadingBtn__" type="submit">LOGIN</button>
                 </div>
               </form>
               <div class="text-center dont-have">Are you a Student? <a class="link navigate_to_student_login"
@@ -135,7 +134,7 @@ background-repeat: no-repeat;">
         data: StaffFormData,
         beforeSend: function() {
           $(".__loadingBtn__").html(
-            '<img src="assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",
+            '<img src="assets/loaders/rolling.svg" width="30"> Please wait...').attr("disabled",
             true);
         },
         success: function(res) {
