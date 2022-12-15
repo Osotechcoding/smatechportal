@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../vendor/autoload.php';
 class OsotechMailer
 {
-  public function generatePasswordResetLink($fullname, $email, $link): bool
+  public function generatePasswordResetLink($fullname, $email, $link, $tokenExpire): bool
   {
     $phpmailer = new PHPMailer(true);
     $phpmailer->SMTPDebug = 0;
@@ -25,13 +25,16 @@ class OsotechMailer
       "<b>Hi, $fullname</b>,\r\n  <br> 
     \r\n <p>We received a request to reset the password for your account.</p><br> \r\n
     <p>To reset your password, click the Link below</p> \r\n <a href='" . $link . "'> Reset my Password</a> \r\n <p>Or copy and paste the URL into your broswer:</p>
-    \r\n <a>$link</a>
+    \r\n <a>$link</a> <br> \r\n
+    <p>This Link will Expire on: " . date("l jS F Y @ h:i:s", strtotime($tokenExpire)) . " GMT</p>
     ";
     $phpmailer->AltBody =
       "<b>Hi, $fullname</b>,\r\n  <br> 
     \r\n <p> We received a request to reset the password for your account.</p><br> \r\n
     <p>To reset your password, click the Link below</p> \r\n <a href='" . $link . "'> Reset my Password</a> \r\n <p>Or copy and paste the URL into your broswer:</p>
-    \r\n <a>$link</a>";
+    \r\n <a>$link</a> <br> \r\n
+    <p>This Link will Expire on: " . date("l jS F Y @ h:i:s", strtotime($tokenExpire)) . " GMT</p>
+    ";
     if ($phpmailer->send()) {
       return true;
     } else {

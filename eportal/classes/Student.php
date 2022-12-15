@@ -1858,9 +1858,16 @@ class Student
     __OSO_APP_NAME__ . " Says"
     );
     } else {
-    $fullname = "Agberayi Samson";
-    $urlLink = APP_ROOT . "student-update-password?email=$email&token=12345678900987654321";
-    if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink) == true) {
+    //create a new staffToken
+    $token = $this->config->generateRandomUserToken(51);
+    $tokenExpire = date("Y-m-d h:i:s", strtotime("+ 20 minute"));
+    //insert the new token to db
+    $this->stmt = $this->dbh->prepare("UPDATE `{$this->table_name}` SET token=?, stdTokenExp=? WHERE stdEmail=?
+    AND stdId=? LIMIT 1");
+    if ($this->stmt->execute([$token, $tokenExpire, $email, $student_data->stdId])) {
+    $fullname = $student_data->stdSurName . " " . $student_data->stdFirstName . " " . $student_data->stdMiddleName;
+    $urlLink = APP_ROOT . "update-password?email=$email&token=$token";
+    if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink, $tokenExpire) == true) {
     $this->response = $this->alert->alert_toastr("success", "Reset link has been sent to $email, Click on the Link to
     reset your password!", __OSO_APP_NAME__ . "
     Says");
@@ -1868,6 +1875,7 @@ class Student
     $this->response = $this->alert->alert_toastr("error", "Oops!, Something went wrong, Reset link sent failed, Please
     try again!", __OSO_APP_NAME__ . "
     Says");
+    }
     }
     }
     }

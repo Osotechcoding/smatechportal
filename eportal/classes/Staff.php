@@ -913,16 +913,23 @@ class Staff
 					__OSO_APP_NAME__ . " Says"
 				);
 			} else {
-				$fullname = $staff_data->firstName . " " . $staff_data->lastName;
-				$urlLink = APP_ROOT . "reset-password?email=$email&token=123456789009876543243";
-				if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink) == true) {
-					$this->response = $this->alert->alert_toastr("success", "Reset link has been sent to $email, Click on the Link to
+				//create a new staffToken 
+				$token = $this->config->generateRandomUserToken(51);
+				$tokenExpire = date("Y-m-d h:i:s", strtotime("+ 20 minute"));
+				//insert the new token to db
+				$this->stmt = $this->dbh->prepare("UPDATE `{$this->table}` SET staffToken=?, tokenExpire=? WHERE staffEmail=? AND staffId=? LIMIT 1");
+				if ($this->stmt->execute([$token, $tokenExpire, $email, $staff_data->staffId])) {
+					$fullname = $staff_data->firstName . " " . $staff_data->lastName;
+					$urlLink = APP_ROOT . "reset-password?email=$email&token=$token";
+					if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink, $tokenExpire) == true) {
+						$this->response = $this->alert->alert_toastr("success", "Reset link has been sent to $email, Click on the Link to
     reset your password!", __OSO_APP_NAME__ . "
     Says");
-				} else {
-					$this->response = $this->alert->alert_toastr("error", "Oops!, Something went wrong, Reset link sent failed, Please
+					} else {
+						$this->response = $this->alert->alert_toastr("error", "Oops!, Something went wrong, Reset link sent failed, Please
     try again!", __OSO_APP_NAME__ . "
     Says");
+					}
 				}
 			}
 		}
