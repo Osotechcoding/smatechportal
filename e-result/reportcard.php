@@ -1,5 +1,4 @@
 <?php
-
 require_once "src/Osotech.php";
 require_once "src/StudentResult.php";
 $Osotech = new Osotech();

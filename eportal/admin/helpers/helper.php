@@ -1,6 +1,6 @@
 <?php
-@ob_start();
-@session_start();
+
+// @session_start();
 require_once "../languages/config.php";
 date_default_timezone_set("Africa/Lagos");
 //create an autoload function
@@ -22,7 +22,7 @@ $Hostel        = new Hostel();
 $Bus = new Bus();
 $Payroll    = new Payroll();
 
-@$Configuration->osotech_session_kick();
+$Configuration->osotech_session_kick();
 $Admin->check_Auth_data();
 $adminId = $_SESSION['ADMIN_TOKEN_ID'];
 

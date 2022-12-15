@@ -1,8 +1,6 @@
  <?php
-  @session_start();
-  @ob_start();
+
   include_once "../languages/config.php";
-  // require_once "../classes/Configuration.php";
   require_once '../classes/Session.php';
   date_default_timezone_set("Africa/Lagos");
   //create an autoload function

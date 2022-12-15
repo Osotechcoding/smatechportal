@@ -1,5 +1,5 @@
 <?php
-@session_start();
+
 /**
  *
  */
@@ -22,7 +22,7 @@ class Osotech
 
   public function osotech_session_kick()
   {
-    return @session_start();
+    return session_start();
   }
 
   public function redirect_root($flink)

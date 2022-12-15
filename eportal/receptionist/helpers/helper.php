@@ -1,6 +1,4 @@
 <?php
-@ob_start();
-@session_start();
 require_once "../languages/config.php";
 date_default_timezone_set("Africa/Lagos");
 //create an autoload function
@@ -19,7 +17,7 @@ $Pin_serial     = new Pins();
 $Alert          = new Alert();
 $Blog = new Blog();
 
-@$Configuration->osotech_session_kick();
+$Configuration->osotech_session_kick();
 $Configuration->check_session_data();
 $staffId = $_SESSION['STAFF_SES_ID'];
 
@@ -39,4 +37,3 @@ $activeSess =$Administration->get_active_session_details();
 if ($Staff->checkStaffTokenExists($_SESSION['STAFF_USERNAME'],$_SESSION['STAFF_EMAIL'],$_SESSION['staff_token']) === false) {
   $Configuration->destroy();
 }
- ?>

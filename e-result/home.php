@@ -1,11 +1,9 @@
 <?php
-ob_start();
 if (!file_exists("src/Osotech.php")) {
-    die("Access to this Page is Denied! <p>Please Contact Your Administrator for assistance</p>");
+  die("Access to this Page is Denied! <p>Please Contact Your Administrator for assistance</p>");
 }
 require_once("src/Osotech.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,7 +65,7 @@ background-repeat: no-repeat;">
       <header id="rs-header" class="rs-header">
         <!-- Menu Start -->
         <?php //include_once ("Templates/Header.php");
-                ?>
+        ?>
         <!-- Canvas Menu end -->
       </header>
       <!--Header End-->

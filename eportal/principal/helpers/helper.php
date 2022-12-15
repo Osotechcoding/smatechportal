@@ -1,8 +1,5 @@
 <?php
-@session_start();
-// require_once '../classes/Database.php';
 require_once "../languages/config.php";
-// require_once "../classes/Configuration.php";
 date_default_timezone_set("Africa/Lagos");
 //create an autoload function
 spl_autoload_register(function ($filename) {
@@ -21,7 +18,7 @@ $Alert          = new Alert();
 $Blog           = new Blog();
 $Bus            = new Bus();
 
-@$Configuration->osotech_session_kick();
+$Configuration->osotech_session_kick();
 //$Configuration->check_session_data();
 $staffId = $_SESSION['STAFF_SES_ID'];
 /* School Details*/

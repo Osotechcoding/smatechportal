@@ -1,7 +1,6 @@
  <?php
-  @session_start();
+  // @session_start();
   include_once "../languages/config.php";
-  require_once "../classes/Database.php";
   include_once '../classes/Session.php';
   date_default_timezone_set("Africa/Lagos");
   //create an autoload function
@@ -15,7 +14,7 @@
   $Alert = new Alert();
   $Staff = new Staff();
   $Pin_serial = new Pins();
-  @$Configuration->osotech_session_kick();
+  $Configuration->osotech_session_kick();
   $Configuration->check_student_session_data();
   $ses_token = Session::set_xss_token();
 

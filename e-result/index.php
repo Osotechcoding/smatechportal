@@ -1,20 +1,18 @@
 <?php
-@ob_start();
 if (!file_exists("src/Osotech.php")) {
   die("Access to this Page is Denied! <p>Please Contact Your Administrator for assistance</p>");
 }
 require_once("src/Osotech.php");
-//require_once ("src/Database.php");
 require_once("src/StudentResult.php");
 $Osotech = new Osotech();
 $Osotech->osotech_session_kick();
 $schoolSesDetail = $Osotech->get_school_session_info();
 $StudentResult = new StudentResult();
-date_default_timezone_set("Africa/Lagos"); ?>
-<?php if ($StudentResult->checkResultPortalStatus() === true) : ?>
-<?php header("Location: ../");
-  exit(); ?>
-<?php endif ?>
+date_default_timezone_set("Africa/Lagos");
+if ($StudentResult->checkResultPortalStatus() === true) {
+  header("Location: ../");
+  exit();
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 

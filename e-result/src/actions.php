@@ -1,10 +1,9 @@
 <?php
-@ob_start();
 date_default_timezone_set("Africa/Lagos");
 //require_once 'Database.php';
 require_once 'Osotech.php';
 require_once 'StudentResult.php';
-@$Osotech->osotech_session_kick();
+$Osotech->osotech_session_kick();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 
