@@ -26,19 +26,21 @@ class OsotechMailer
     \r\n <p>We received a request to reset the password for your account.</p><br> \r\n
     <p>To reset your password, click the Link below</p> \r\n <a href='" . $link . "'> Reset my Password</a> \r\n <p>Or copy and paste the URL into your broswer:</p>
     \r\n <a>$link</a> <br> \r\n
-    <p>This Link will Expire on: " . date("l jS F Y @ h:i:s", strtotime($tokenExpire)) . " GMT</p>
+    <p>This Link will Expire on: " . date("l jS F Y @ h:i:s A", strtotime($tokenExpire)) . " GMT</p>
     ";
     $phpmailer->AltBody =
       "<b>Hi, $fullname</b>,\r\n  <br> 
     \r\n <p> We received a request to reset the password for your account.</p><br> \r\n
-    <p>To reset your password, click the Link below</p> \r\n <a href='" . $link . "'> Reset my Password</a> \r\n <p>Or copy and paste the URL into your broswer:</p>
+    <p>To reset your password, click the Link below</p> \r\n <a href='" . $link . "'> Reset my Password</a> \r\n <p> Or copy and paste the URL into your broswer:</p>
     \r\n <a>$link</a> <br> \r\n
-    <p>This Link will Expire on: " . date("l jS F Y @ h:i:s", strtotime($tokenExpire)) . " GMT</p>
+    <p>This Link will Expire on: " . date("l jS F Y @ h:i:s A", strtotime($tokenExpire)) . " GMT</p>
     ";
     if ($phpmailer->send()) {
-      return true;
+      $response = true;
     } else {
-      return false;
+      $response = false;
     }
+
+    return  $response;
   }
 }

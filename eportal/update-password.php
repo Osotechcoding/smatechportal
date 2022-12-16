@@ -52,10 +52,15 @@ background-repeat: no-repeat;">
               <h1>Password Reset Page</h1>
 
               <form class="mb-2" id="reset_new_pass_form">
+                <div class="forom-group mb-2">
+                  <input type="email" readonly name="userEmail" class="form-control" value="<?php if (isset($_GET['email']) && !empty($_GET['email'])) {
+                                                                                              echo $_GET['email'];
+                                                                                            } ?>">
+                </div>
                 <div class="form-group">
                   <input type="hidden" name="action" value="reset_new_pass_now">
                   <input type="hidden" name="userType" value="student">
-                  <input type="hidden" name="userEmail" value="email">
+
                   <input type="password" class="form-control form-control-lg" placeholder="Enter a new password">
                 </div>
                 <div class="form-group mb-2">

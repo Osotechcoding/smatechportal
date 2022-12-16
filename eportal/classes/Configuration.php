@@ -138,7 +138,7 @@ class Configuration
   {
     if (!empty($string)) {
       $string = trim($string);
-      $string = htmlspecialchars($string);
+      //$string = htmlspecialchars($string);
       $string = stripcslashes($string);
       //$string = filter_var($string, FILTER_SANITIZE_STRING);
       return $string;

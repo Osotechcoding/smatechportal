@@ -594,18 +594,17 @@
 				}
 			}
 			//send_reset_pass_link_
-			if ($_POST['action'] === "send_reset_pass_link_") {
-				if (isset($_POST['accountType']) && !$Configuration->isEmptyStr($_POST['accountType'])) {
-					if ($_POST['accountType'] === 'staff') {
-						$result = $Staff->sendPasswordResetLink($_POST);
-					} else if ($_POST['accountType'] === 'student') {
-						$result = $Student->sendPasswordResetLink($_POST);
-					}
-					if ($result) {
-						echo $result;
-					}
-				} else {
-					echo $Alert->alert_toastr("error", "Opps, Please check your inputs!", __OSO_APP_NAME__ . " Says");
+			if ($_POST['action'] === "send_reset_pass_link_staff") {
+				$result = $Staff->sendPasswordResetLink($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
+			//send_reset_pass_link_
+			if ($_POST['action'] === "send_reset_pass_link_student") {
+				$result = $Student->sendPasswordResetLink($_POST);
+				if ($result) {
+					echo $result;
 				}
 			}
 		}

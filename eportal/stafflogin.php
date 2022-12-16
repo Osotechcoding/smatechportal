@@ -66,15 +66,9 @@ background-repeat: no-repeat;">
                                                                                                               } ?>"
                     id="exampleInputPassword1" placeholder="<?php echo $lang['password']; ?>">
                 </div>
-                <!-- <div class="form-group">
-    <select name="login_as" id="" class="select2 form-control">
-        <option value="">Choose Account Type...</option>
-        <?php //echo $Administration->get_role_InDropDown_list();
-        ?>
-    </select>
-</div> -->
+
                 <div class="checkbox form-group form-box clearfix">
-                  <a href="javascript:void(0);" style="float: right;color: red;">Forgot Password</a>
+                  <a href="javascript:void(0);" class="forgtpwd" style="float: right;color: red;">Forgot Password</a>
                   <div class="form-check checkbox-theme">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1" name="rememberme">
                     <label class="form-check-label" for="rememberMe">Remember me</label>
@@ -152,6 +146,11 @@ background-repeat: no-repeat;">
     $(document).on("click", ".navigate_to_student_login", function() {
       setTimeout(() => {
         window.location.assign("./");
+      }, 500);
+    });
+    $(document).on("click", ".forgtpwd", function() {
+      setTimeout(() => {
+        window.location.assign("./forgot-pwd");
       }, 500);
     });
 

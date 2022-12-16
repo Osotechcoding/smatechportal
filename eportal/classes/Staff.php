@@ -898,37 +898,35 @@ class Staff
 	public function sendPasswordResetLink($data)
 	{
 		$OsotechMailer = new OsotechMailer();
-		$email = $this->config->Clean($data['reset_email']);
+		$email = $this->config->Clean($data['staff_email']);
 		$userType = $this->config->Clean($data['accountType']);
 		if ($this->config->isEmptyStr($email) || $this->config->isEmptyStr($userType)) {
-			$this->response = $this->alert->alert_toastr("error", "Invalid submission", __OSO_APP_NAME__ . "
-    Says");
+			$this->response = $this->alert->alert_msg("Enter your e-mail address to continue!", "danger");
+		} elseif (!$this->config->is_Valid_Email($email)) {
+			$this->response = $this->alert->alert_msg("Please enter a vaild e-mail address!", "danger");
 		} else {
 			//chect the submitted email if exists
 			$staff_data = $this->config->get_single_data($this->table, "staffEmail", $email);
 			if (!$staff_data) {
-				$this->response = $this->alert->alert_toastr(
-					"warning",
+				$this->response = $this->alert->alert_msg(
 					$email . " doesn't match any account on this Portal!",
-					__OSO_APP_NAME__ . " Says"
+					"danger"
 				);
 			} else {
 				//create a new staffToken 
 				$token = $this->config->generateRandomUserToken(51);
-				$tokenExpire = date("Y-m-d h:i:s", strtotime("+ 20 minute"));
+				$tokenExpire = date("Y-m-d h:i:s", strtotime("+ 2 hours"));
 				//insert the new token to db
 				$this->stmt = $this->dbh->prepare("UPDATE `{$this->table}` SET staffToken=?, tokenExpire=? WHERE staffEmail=? AND staffId=? LIMIT 1");
 				if ($this->stmt->execute([$token, $tokenExpire, $email, $staff_data->staffId])) {
 					$fullname = $staff_data->firstName . " " . $staff_data->lastName;
 					$urlLink = APP_ROOT . "reset-password?email=$email&token=$token";
-					if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink, $tokenExpire) == true) {
-						$this->response = $this->alert->alert_toastr("success", "Reset link has been sent to $email, Click on the Link to
-    reset your password!", __OSO_APP_NAME__ . "
-    Says");
+					if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink, $tokenExpire)) {
+						$this->response = $this->alert->alert_msg("Reset link has been sent to $email, Click on the Link to
+    reset your password!",  "success");
 					} else {
-						$this->response = $this->alert->alert_toastr("error", "Oops!, Something went wrong, Reset link sent failed, Please
-    try again!", __OSO_APP_NAME__ . "
-    Says");
+						$this->response = $this->alert->alert_toastr("Oops!, Something went wrong, Reset link sent failed, Please
+    try again!", "danger");
 					}
 				}
 			}

@@ -13,7 +13,7 @@ class Alert
 	public function alert_toastr($type = "warning", $msg = "", $title = "")
 	{
 		$this->response = '<script>
-      toastr.' . $type . '("' . $msg . '","' . $title . '",{closeButton:!0,extendedTimeOut:5000,tapToDismiss:!1,progressBar:!0,showMethod:"slideDown",hideMethod:"fadeOut",showDuration:500,timeOut:5000,hideDuration:500})
+      toastr.' . $type . '("' . $msg . '","' . $title . '",{closeButton:!0,extendedTimeOut:5000,tapToDismiss:!1,progressBar:!0,showMethod:"slideDown",hideMethod:"fadeOut",showDuration:500,timeOut:5000,hideDuration:500});
       </script>';
 		return $this->response;
 	}
