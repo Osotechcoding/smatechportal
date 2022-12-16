@@ -9,7 +9,8 @@ $xss_token = Session::set_xss_token();
 <head>
   <?php include_once("template/MetaTag.php"); ?>
   <title><?php echo ucwords($SmappDetails->school_name); ?> :: Forgot Password</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&amp;display=swap">
 
   <link rel="stylesheet" href="bapps/plugins/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/extensions/toastr.css">
@@ -31,13 +32,17 @@ background-repeat: no-repeat;">
       <div class="container">
         <div class="loginbox">
           <div class="login-left">
-            <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="150" class="img-fluid" alt="logo" style="border: 2px solid deepskyblue;border-radius:10px;background: #ffffff;">
+            <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="150" class="img-fluid" alt="logo"
+              style="border: 2px solid deepskyblue;border-radius:10px;background: #ffffff;">
             <h3 class="text-center text-warning"><?php echo ucwords($SmappDetails->school_name); ?></h3>
-            <p class="text-center" style="font-size: 13px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>" style="text-decoration: none;color: whitesmoke;"> Powered by: <span class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
+            <p class="text-center" style="font-size: 13px;"><a href="<?php echo WEBSITE_HOME_PAGE; ?>"
+                style="text-decoration: none;color: whitesmoke;"> Powered by: <span
+                  class="text-danger"><?php echo __OSOTECH__DEV_COMPANY__; ?></span></a></p>
           </div>
           <div class="login-right">
             <div class="login-right-wrap">
-              <div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="80" class="img-fluid" alt="logo"></div>
+              <div class="text-center"><img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="80"
+                  class="img-fluid" alt="logo"></div>
               <h1>Forgot Password</h1>
               <div class="text-info text-center mb-2"><small>Enter your email to recieve a reset link</small></div>
               <div id="server-response"></div>
@@ -45,7 +50,8 @@ background-repeat: no-repeat;">
                 <input type="hidden" name="txss_token" value="<?php echo $xss_token; ?>">
                 <input type="hidden" name="action" value="send_reset_pass_link_student">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="reset_email" id="exampleInputEmail1" placeholder="Enter your e-mail address">
+                  <input type="text" class="form-control" name="reset_email" id="exampleInputEmail1"
+                    placeholder="Enter your e-mail address">
                 </div>
                 <input type="hidden" name="accountType" value="student">
                 <div class="checkbox form-group form-box clearfix navigate-away">
@@ -69,28 +75,28 @@ background-repeat: no-repeat;">
   <script src="app-assets/js/scripts/extensions/toastr.min.js"></script>
   <div id="server-response"></div>
   <script>
-    $(document).ready(function() {
-      //when a login btn is clicked
-      $("#sendStudentPasswordResetForm").on("submit", function(e) {
-        e.preventDefault();
-        const sendStudentPasswordResetForm = $(this).serialize();
-        $(".__loadingBtn__").html('<img src="assets/loaders/rolling.svg" width="30"> Processing...').attr(
-          "disabled", true);
-        $.post("actions/actions", sendStudentPasswordResetForm, (data) => {
-          setTimeout(() => {
-            $(".__loadingBtn__").html('Send Reset Link').attr(
-              "disabled", false);
-            //console.log(data);
-            $("#server-response").html(data);
-          }, 2000)
-        });
-      });
-      $(document).on("click", ".navigate-away", function() {
+  $(document).ready(function() {
+    //when a login btn is clicked
+    $("#sendStudentPasswordResetForm").on("submit", function(e) {
+      e.preventDefault();
+      const sendStudentPasswordResetForm = $(this).serialize();
+      $(".__loadingBtn__").html('<img src="assets/loaders/rolling.svg" width="30"> Processing...').attr(
+        "disabled", true);
+      $.post("actions/actions", sendStudentPasswordResetForm, (data) => {
         setTimeout(() => {
-          window.location.assign('./');
-        }, 500);
+          $(".__loadingBtn__").html('Send Reset Link').attr(
+            "disabled", false);
+          //console.log(data);
+          $("#server-response").html(data);
+        }, 2000)
       });
-    })
+    });
+    $(document).on("click", ".navigate-away", function() {
+      setTimeout(() => {
+        window.location.assign('./');
+      }, 500);
+    });
+  })
   </script>
 </body>
 
