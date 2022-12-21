@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Africa/Lagos");
 require_once "src/Osotech.php";
 require_once "src/StudentResult.php";
 $Osotech = new Osotech();
@@ -6,15 +7,11 @@ $Osotech->osotech_session_kick();
 $StudentResult = new StudentResult();
 $dbh = osotech_connect();
 $schoolSesDetail = $Osotech->get_session_details();
-
-date_default_timezone_set("Africa/Lagos");
 if ($StudentResult->checkResultPortalStatus() == true) {
   header("Location: ../");
   exit();
 }
-
 $StudentResult->check_resultmi_session();
-
 $pin = $_SESSION['pin'];
 $serial = $_SESSION['serial'];
 $result_regNo = $_SESSION['result_regNo'];
@@ -30,14 +27,10 @@ if (isset($_SESSION['resultmi'])) {
     }
   }
 }
-
 $student_data = $StudentResult->get_student_details_byRegNo($student_reg_number);
 $schl_session_data = $Osotech->get_school_session_info();
-//get time present and absent
-$pre = 'Present';
-$ab = 'Absent';
-$timePresent = $StudentResult->get_student_attendance_details($student_reg_number, $student_class, $pre, $term, $rsession);
-$timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number, $student_class, $ab, $term, $rsession);
+//get attendance records
+$attendance_records = $StudentResult->getStudentAttendanceRecord($student_reg_number, $student_class, $term, $rsession);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,9 +40,9 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title> <?php echo ucwords($Osotech->getConfigData()->school_name); ?> ::
-    <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $rsession; ?>
-    <?php echo $term; ?> </title>
-  <link rel="stylesheet" href="./result.css">
+    <?php echo ucwords($student_data->full_name); ?> Report Card for <?php echo $rsession; ?> <?php echo $term; ?>
+  </title>
+  <?php include_once "./result.php" ?>
 </head>
 
 <body>
@@ -68,7 +61,6 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
             <?php echo ($Osotech->getConfigData()->principal_mobile); ?></b></p>
       </div>
     </div>
-
     <!--  -->
     <h2 style="text-align:center; text-decoration: underline;">STUDENT'S PERFORMANCE REPORT</h2>
     <p>NAME: &nbsp; &nbsp;<b><?php echo strtoupper($student_data->full_name); ?> &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
@@ -128,16 +120,13 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
                 case 'SSS':
                   $amInClass = "Senior";
                   break;
-
                 case 'JSS':
                   $amInClass = "Junior";
                   break;
-
                 default:
                   $amInClass = "Pry";
                   break;
               }
-
               $stmt2 = $dbh->prepare("SELECT * FROM `visap_result_grading_tbl` WHERE grade_class='$amInClass' AND $myTotalMark >= score_from AND $myTotalMark <= score_to");
               $stmt2->execute();
               if ($stmt2->rowCount() > 0) {
@@ -154,7 +143,6 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
                 }
               }
               ?>
-
           <?php }
           }
           ?>
@@ -192,12 +180,10 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
           } else {
             $subjectOffered = 0;
           }
-
           //$no_of_subject_offered = 14;
           $mx = intval($subjectOffered * 100);
           $markOb = intval($total);
           $percentage_mark = number_format(($markOb / $mx) * (100), 2);
-
           ?>
           <tr>
             <td><?php echo $mx; ?></td>
@@ -259,15 +245,15 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
           </thead>
           <tr>
             <td>No of Times School Opened </td>
-            <td><?php echo $schoolSesDetail->Days_open; ?> </td>
+            <td><?php echo $attendance_records->school_open; ?> </td>
           </tr>
           <tr>
             <td>No of Times Present </td>
-            <td><?php echo $timePresent; ?> </td>
+            <td><?php echo $attendance_records->present; ?> </td>
           </tr>
           <tr>
             <td>No of Times Absent </td>
-            <td><?php echo $timeAbsent ?> </td>
+            <td><?php echo $attendance_records->absent ?> </td>
           </tr>
           <tr>
             <td style="background-color: rgba(21, 10, 10, .3);color: black;">Scratch Usage Info</td>
@@ -544,32 +530,9 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
         <table style="table-layout: auto; width: 100%;" id="gradeAnalysis">
           <thead>
             <tr>
-              <td colspan="7"><b style="font-size: 9px;">GRADE ANALYSIS</b> </td>
-              <!-- <td><b style="font-size: 9px;">&nbsp;5&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;4&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;3&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;2&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;1&nbsp;</b> </td> -->
+              <td colspan="7"><b style="font-size: 9px;">SUBJECTS ANALYSIS</b> </td>
             </tr>
           </thead>
-          <tr style="text-align:center;">
-            <td style="font-size: 8px;">GRADE</td>
-            <td>&nbsp;A&nbsp;</td>
-            <td>&nbsp;B&nbsp;</td>
-            <td>&nbsp;C&nbsp;</td>
-            <td>&nbsp;D&nbsp;</td>
-            <td>&nbsp;E&nbsp;</td>
-            <td>&nbsp;F&nbsp;</td>
-          </tr>
-          <tr style="text-align:center;">
-            <td style="font-size: 8px;">NO</td>
-            <td>11</td>
-            <td>2</td>
-            <td>-</td>
-            <td>1</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
           <tr>
             <td colspan="4">TOTAL SUBJECTS OFFERED</td>
             <td colspan="3" style="text-align:center;"><?php echo intval($subjectOffered) ?></td>
@@ -624,7 +587,8 @@ $timeAbsent = $StudentResult->get_student_attendance_details($student_reg_number
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
           Next Term Begins: <?php echo date("l jS F, Y", strtotime($schoolSesDetail->new_term_begins)); ?>.</h4>
         <br>
-        <img src="sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+        <img src="<?php echo $Osotech->getSchoolSignature();
+                  ?>" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
       </div>
     </div>
     <br>

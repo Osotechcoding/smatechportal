@@ -320,5 +320,79 @@ $ denotes the end
     }
     return $this->response;
   }
+
+  public function CheckPasswordValidity($password): bool
+  {
+    // Validate password strength
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public function redirect($path)
+  {
+    return '<script>
+      window.location.href="' . $path . '";
+    </script>';
+  }
+  public function reloadWithTime($time = 2000)
+  {
+    return '<script>
+     setTimeout(()=>{
+       window.location.reload();
+     },' . $time . ');
+    </script>';
+  }
+  public function redirectWithTime($path, $time = 500)
+  {
+    return '<script>
+     setTimeout(()=>{
+       window.location.href="' . $path . '";
+     },' . $time . ');
+    </script>';
+  }
+
+  public function convertToMbKbFormat($size)
+  {
+    if (1024 > $size) {
+      return $size . ' B';
+    } else if (1048576 > $size) {
+      return round(($size / 1024), 2) . ' KB';
+    } else if (1073741824 > $size) {
+      return round((($size / 1024) / 1024), 2) . ' MB';
+    } else if (1099511627776 > $size) {
+      return round(((($size / 1024) / 1024) / 1024), 2) . ' GB';
+    }
+  }
+
+  public function getSchoolSignature()
+  {
+    $schoolDatas = self::getConfigData();
+    //school real logo
+    $signature = $schoolDatas->signature;
+    if ($signature == NULL || $signature == "") {
+      $ourSignature = APP_ROOT . "schoolImages/Logo/sign.png";
+    } else {
+      $ourSignature = APP_ROOT . "schoolImages/Logo/" . $signature;
+    }
+    return $ourSignature;
+  }
+  public function getSchoolStamp()
+  {
+    $schoolDatas = self::getConfigData();
+    //school real logo
+    $stamp = $schoolDatas->stamp;
+    if ($stamp == NULL || $stamp == "") {
+      $ourStamp = APP_ROOT . "schoolImages/Logo/stamp.png";
+    } else {
+      $ourStamp = APP_ROOT . "schoolImages/Logo/" . $stamp;
+    }
+    return $ourStamp;
+  }
 }
-//$Configuration = new Configuration();

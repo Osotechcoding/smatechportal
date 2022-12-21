@@ -16,6 +16,7 @@ class Staff
 	protected $table = "visap_staff_tbl";
 	protected $response; //database result
 	protected $config; //default config
+	protected $alert; //default config
 
 	public function __construct()
 	{
@@ -915,7 +916,7 @@ class Staff
 			} else {
 				//create a new staffToken 
 				$token = $this->config->generateRandomUserToken(51);
-				$tokenExpire = date("Y-m-d h:i:s", strtotime("+ 2 hours"));
+				$tokenExpire = date("Y-m-d H:i:s", strtotime("+60 minutes"));
 				//insert the new token to db
 				$this->stmt = $this->dbh->prepare("UPDATE `{$this->table}` SET staffToken=?, tokenExpire=? WHERE staffEmail=? AND staffId=? LIMIT 1");
 				if ($this->stmt->execute([$token, $tokenExpire, $email, $staff_data->staffId])) {
@@ -932,5 +933,70 @@ class Staff
 			}
 		}
 		return $this->response;
+	}
+
+	public function updateNewPassword($data)
+	{
+		$email = $this->config->Clean($data['staff_email']);
+		$userType = $this->config->Clean($data['user_type']);
+		$pwd = $this->config->Clean($data['pwd']);
+		$cpwd = $this->config->Clean($data['cpwd']);
+		if (
+			$this->config->isEmptyStr($email) || $this->config->isEmptyStr($userType) || $this->config->isEmptyStr($pwd) ||
+			$this->config->isEmptyStr($cpwd)
+		) {
+			$this->response = $this->alert->alert_msg(
+				"Invalid Submission, Please try again!",
+				"danger"
+			);
+		} else if (!$this->config->CheckPasswordValidity($pwd)) {
+			$this->response = $this->alert->alert_msg(
+				"Password should correspond with the given hint!",
+				"danger"
+			);
+		} else if ($pwd <> $cpwd) {
+			$this->response = $this->alert->alert_msg(
+				"Password and Confirm Password do not match!",
+				"danger"
+			);
+		} else {
+			$staff_data = $this->config->get_single_data($this->table, "staffEmail", $email);
+			$updated_password = $this->config->encrypt_user_password($pwd);
+			try {
+				$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("UPDATE `{$this->table}` SET staffPass=?, staffToken=null, tokenExpire=null WHERE staffEmail=? AND staffId=? LIMIT 1");
+				if ($this->stmt->execute([$updated_password, $email, $staff_data->staffId])) {
+					$this->dbh->commit();
+					$this->response = $this->alert->alert_msg(
+
+						"Password updated successfully!, Redirecting...",
+						"success"
+					) . $this->config->redirectWithTime("./stafflogin", 3000);
+				}
+			} catch (PDOException $e) {
+				$this->dbh->rollBack();
+				$this->response = $this->alert->alert_msg(
+
+					"Something went wrong, Pls try again!",
+					"danger"
+				);
+			}
+		}
+
+		return $this->response;
+		$this->dbh = null;
+	}
+
+	public function checkPasswordResetRedirectAuth($email, $token): bool
+	{
+		if (!$this->config->isEmptyStr($email) && !$this->config->isEmptyStr($token)) {
+			//check for these two values in db
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `{$this->table}` WHERE  staffToken=? AND tokenExpire > NOW() AND staffEmail=?");
+			$this->stmt->execute([$token, $email]);
+			//if rowcount is > 0 return true
+			if ($this->stmt->rowCount() > 0) {
+				return true;
+			}
+		}
 	}
 }

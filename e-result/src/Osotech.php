@@ -240,5 +240,30 @@ class Osotech
     return $this->response;
     unset($this->dbh);
   }
+
+  public function getSchoolSignature()
+  {
+    $schoolDatas = self::getConfigData();
+    //school real logo
+    $signature = $schoolDatas->signature;
+    if ($signature == NULL || $signature == "") {
+      $ourSignature = APP_ROOT . "eportal/schoolImages/Logo/sign.png";
+    } else {
+      $ourSignature = APP_ROOT . "eportal/schoolImages/Logo/" . $signature;
+    }
+    return $ourSignature;
+  }
+  public function getSchoolStamp()
+  {
+    $schoolDatas = self::getConfigData();
+    //school real logo
+    $stamp = $schoolDatas->stamp;
+    if ($stamp == NULL || $stamp == "") {
+      $ourStamp = APP_ROOT . "eportal/schoolImages/Logo/stamp.png";
+    } else {
+      $ourStamp = APP_ROOT . "eportal/schoolImages/Logo/" . $stamp;
+    }
+    return $ourStamp;
+  }
 }
-$Osotech = new Osotech();
+//$Osotech = new Osotech();

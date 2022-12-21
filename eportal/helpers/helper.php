@@ -9,6 +9,7 @@ spl_autoload_register(function ($filename) {
 $Visitor = new Visitors();
 $Student = new Student();
 $Result = new Result();
+$Staff = new Staff();
 $Configuration = new Configuration();
 $Administration = new Administration();
 $Admin          = new Admin();

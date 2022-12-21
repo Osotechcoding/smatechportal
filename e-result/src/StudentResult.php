@@ -429,5 +429,16 @@ class StudentResult
       $this->dbh = null;
     }
   }
+
+  public function getStudentAttendanceRecord($regNo, $grade, $term, $session)
+  {
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_attendance_tbl` WHERE stdRegNo=? AND stdGrade=? AND term=? AND schl_session=?");
+    $this->stmt->execute([$regNo, $grade, $term, $session]);
+    if ($this->stmt->rowCount() > 0) {
+      $this->response = $this->stmt->fetch();
+      return $this->response;
+      $this->dbh = null;
+    }
+  }
 }
-$StudentResult = new StudentResult();
+//$StudentResult = new StudentResult();

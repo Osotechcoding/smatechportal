@@ -46,7 +46,7 @@ background-repeat: no-repeat;">
               <h1>Forgot Password</h1>
               <div class="text-info text-center mb-2"><small>Enter your email to recieve a reset link</small></div>
               <div id="server-response"></div>
-              <form id="sendStudentPasswordResetForm">
+              <form id="sendStudentPasswordResetForm" autocomplete="off">
                 <input type="hidden" name="txss_token" value="<?php echo $xss_token; ?>">
                 <input type="hidden" name="action" value="send_reset_pass_link_student">
                 <div class="form-group">
@@ -54,8 +54,9 @@ background-repeat: no-repeat;">
                     placeholder="Enter your e-mail address">
                 </div>
                 <input type="hidden" name="accountType" value="student">
-                <div class="checkbox form-group form-box clearfix navigate-away">
-                  <a href="javascript:void(0);" style="float: right;color: darkseagreen;">Remember Password?</a>
+                <div class="checkbox form-group form-box clearfix">
+                  <a href="javascript:void(0);" class="navigate-away" style="float: right;color: darkseagreen;">Remember
+                    Password?</a>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Send Reset Link</button>
@@ -99,5 +100,8 @@ background-repeat: no-repeat;">
   })
   </script>
 </body>
+<!-- 2J6Ymc2kas2dmWq3
+
+MyH55QhYpkETJBx5 -->
 
 </html>

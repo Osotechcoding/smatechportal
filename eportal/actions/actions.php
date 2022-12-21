@@ -607,5 +607,19 @@
 					echo $result;
 				}
 			}
+			//save_new_student_pass_
+			if ($_POST['action'] === "save_new_student_pass_") {
+				$result = $Student->updateNewPassword($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
+			//save_new_student_pass_
+			if ($_POST['action'] === "save_new_staff_pass_") {
+				$result = $Staff->updateNewPassword($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
 		}
 	}

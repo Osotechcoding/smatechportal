@@ -273,7 +273,6 @@
            </li>
          </ul>
        </li>
-
        <!--  <li class=" navigation-header text-truncate"><span data-i18n="EVENT & BLOG">EVENT & BLOG</span>
           </li>  -->
        <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-calendar fa-1x" data-icon="retweet"></i><span
@@ -316,25 +315,21 @@
          </ul>
        </li>
        <!-- MSG -->
-       <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-envelope fa-1x" data-icon="retweet"></i><span
-             class="menu-title text-truncate" data-i18n="Messages">MESSAGES</span></a>
-         <ul class="menu-content">
-           <li><a class="d-flex align-items-center" href="messages"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Inbox">Inbox </span></a> </li>
-         </ul>
-       </li>
+       <!-- messaging was removed -->
        <!-- MSG -->
-       <!--  <li class=" navigation-header text-truncate"><span data-i18n="SETTINGS">SETTINGS</span>
-          </li> -->
+
        <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-cogs fa-1x" data-icon="retweet"></i><span
              class="menu-title text-truncate" data-i18n="SETTINGS">SETTINGS</span></a>
          <ul class="menu-content">
-           <li class=" nav-item"><a href="app_settings"><i class="fa fa-cogs fa-1x" data-icon="morph-folder"></i><span
+           <li class="nav-item"><a href="app_settings"><i class="fa fa-cogs fa-1x" data-icon="morph-folder"></i><span
                  class="menu-title text-truncate" data-i18n="School Profile"> School Profile</span></a>
            </li>
            <li class=" nav-item"><a href="account-settings"><i class="fa fa-edit fa-1x"
                  data-icon="morph-folder"></i><span class="menu-title text-truncate"
                  data-i18n="Personal Profile">Personal Profile</span></a>
+           </li>
+           <li class=" nav-item"><a href="upload-stamp"><i class="fa fa-edit fa-1x" data-icon="morph-folder"></i><span
+                 class="menu-title text-truncate" data-i18n="Role &amp; Permission">Stamp &amp; Signature</span></a>
            </li>
            <li class=" nav-item"><a href="controlRoom"><i class="fa fa-cog fa-1x" data-icon="morph-folder"></i><span
                  class="menu-title text-truncate" data-i18n="Role &amp; Permission">Role &amp; Permission</span></a>
@@ -344,13 +339,11 @@
            </li>
          </ul>
        </li>
-
-
        <li>
          <a onclick="return confirm('Are you sure to open a new tab for the Homepage?');"
            class="d-flex align-items-center" href="<?php echo WEBSITE_HOME_PAGE; ?>" target="_blank"><i
              class="fa fa-globe"></i>
-           <span class="menu-item text-truncate"> <?php echo 'Visit Homepage' ?></span></a>
+           <span class="menu-item text-truncate"> <?php echo 'Go to Website' ?></span></a>
        </li>
        <li>
          <a class="d-flex align-items-center" onclick=" return confirm('<?php echo $lang["logout-sure?"]; ?>');"

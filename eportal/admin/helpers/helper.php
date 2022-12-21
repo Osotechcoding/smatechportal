@@ -21,6 +21,7 @@ $Blog          = new Blog();
 $Hostel        = new Hostel();
 $Bus = new Bus();
 $Payroll    = new Payroll();
+$TimeAgo  = new TimeAgo();
 
 $Configuration->osotech_session_kick();
 $Admin->check_Auth_data();

@@ -19,6 +19,7 @@ class Student
 	protected $table_name = "visap_student_tbl";
 	protected $response; //database result
 	protected $config; //default config
+	protected $alert; //default config
 
 	public function __construct()
 	{
@@ -1846,7 +1847,7 @@ class Student
     $email = $this->config->Clean($data['reset_email']);
     $userType = $this->config->Clean($data['accountType']);
     if ($this->config->isEmptyStr($email) || $this->config->isEmptyStr($userType)) {
-    $this->response = $this->alert->alert_msg("Enter your e-mail address to continue!", "danger");
+    $this->response = $this->alert->alert_msg("Enter e-mail address to continue!", "danger");
     } elseif (!$this->config->is_Valid_Email($email)) {
     $this->response = $this->alert->alert_msg("Please enter a vaild e-mail address!", "danger");
     } else {
@@ -1860,11 +1861,10 @@ class Student
     } else {
     //create a new student Token
     $token = $this->config->generateRandomUserToken(51);
-    $tokenExpire = date("Y-m-d h:i:s", strtotime("+ 2 hours"));
+    $tokenExpire = date("Y-m-d H:i:s", strtotime("+60 minutes"));
     //insert the new token to db
-    $this->stmt = $this->dbh->prepare("UPDATE `{$this->table_name}` SET token=?, stdtokenExp=? WHERE stdEmail=? AND
-    stdId=?
-    LIMIT 1");
+    $this->stmt = $this->dbh->prepare("UPDATE `{$this->table_name}` SET token=?, stdTokenExp=? WHERE stdEmail=? AND
+    stdId=?");
     if ($this->stmt->execute([$token, $tokenExpire, $email, $student_data->stdId])) {
     $fullname = $student_data->stdSurName . " " . $student_data->stdFirstName;
     //redirect link
@@ -1874,7 +1874,7 @@ class Student
     $this->response = $this->alert->alert_msg("Reset link has been sent to $email, Click on the Link to
     reset your password!", "success");
     } else {
-    $this->response = $this->alert->alert_toastr("Oops!, Something went wrong, Reset link sent failed, Please try
+    $this->response = $this->alert->alert_msg("Oops!, Something went wrong, Reset link sent failed, Please try
     again!", "danger");
     }
     }
@@ -1882,4 +1882,174 @@ class Student
     }
     return $this->response;
     }
-    }
+
+    public function updateNewPassword($data)
+    {
+    $email = $this->config->Clean($data['userEmail']);
+    $userType = $this->config->Clean($data['userType']);
+    $pwd = $this->config->Clean($data['pwd']);
+    $cpwd = $this->config->Clean($data['cpwd']);
+    if (
+    $this->config->isEmptyStr($email) || $this->config->isEmptyStr($userType) || $this->config->isEmptyStr($pwd) ||
+    $this->config->isEmptyStr($cpwd)
+    ) {
+    $this->response = $this->alert->alert_msg(
+    "Invalid Submission, Please try again!",
+    "danger"
+    );
+    } else if (!$this->config->CheckPasswordValidity($pwd)) {
+    $this->response = $this->alert->alert_msg(
+    "Password should correspond with the given hint!",
+    "danger"
+    );
+    } else if ($pwd <> $cpwd) {
+      $this->response = $this->alert->alert_msg(
+      "Password and Confirm Password do not match!",
+      "danger"
+      );
+      } else {
+      $student_data = $this->config->get_single_data($this->table_name, "stdEmail", $email);
+      $updated_password = $this->config->encrypt_user_password($pwd);
+      try {
+      $this->dbh->beginTransaction();
+      $this->stmt = $this->dbh->prepare("UPDATE `{$this->table_name}` SET `stdPassword`=?, token=null, stdTokenExp=null
+      WHERE stdEmail=? AND
+      stdId=?");
+      if ($this->stmt->execute([$updated_password, $email, $student_data->stdId])) {
+      $this->dbh->commit();
+      $this->response = $this->alert->alert_msg(
+      "Password updated successfully!, Redirecting...",
+      "success"
+      ) . $this->config->redirectWithTime("./", 3000);
+      }
+      } catch (PDOException $e) {
+      $this->dbh->rollBack();
+      $this->response = $this->alert->alert_msg(
+      "Something went wrong, Pls try again!",
+      "danger"
+      );
+      }
+      }
+      return $this->response;
+      $this->dbh = null;
+      }
+      public function checkPasswordResetRedirectAuth($email, $token): bool
+      {
+      if (!$this->config->isEmptyStr($email) && !$this->config->isEmptyStr($token)) {
+      //check for these two values in db
+      $this->stmt = $this->dbh->prepare("SELECT * FROM `{$this->table_name}` WHERE token=? AND `stdTokenExp` > NOW() AND
+      stdEmail=?");
+      $this->stmt->execute([$token, $email]);
+      //if rowcount is > 0 return true
+      if ($this->stmt->rowCount() > 0) {
+      $this->response = true;
+      } else {
+      $this->response = false;
+      }
+      }
+      return $this->response;
+      $this->dbh = null;
+      }
+      public function sendInternalAndExternalMessage(array $data, array $file)
+      {
+      $OsotechMailer = new OsotechMailer();
+      $senderEmail = $this->config->Clean($data['sender_email']);
+      $subject = $this->config->Clean($data['subject']);
+      $ccEmail = $this->config->Clean($data['cc_email']) ?? "";
+      $bccEmail = $this->config->Clean($data['bcc_email']) ?? "";
+      $messageBody = $this->config->Clean($data['message']);
+      $user_type = $this->config->Clean($data['account_user_type']);
+      if (
+      $this->config->isEmptyStr($senderEmail) ||
+      $this->config->isEmptyStr($user_type) || $this->config->isEmptyStr($subject) ||
+      $this->config->isEmptyStr($messageBody)
+      ) {
+      $this->response = $this->alert->alert_toastr(
+      "error",
+      "Invalid Submission, Please check and try again!",
+      __OSO_APP_NAME__ . " Says"
+      );
+      } else {
+      if (isset($file['attachment']['tmp_name']) && $file['attachment']['tmp_name'] != "") {
+      $ext = pathinfo($file['attachment']['name'], PATHINFO_EXTENSION);
+      $new_file_name = time() . "_." . $ext;
+      $file_tmp_name = $file['attachment']['tmp_name'];
+      $file_size = $file['attachment']['size'] / 1024;
+      if ($file_size > 2000) {
+      $this->response = $this->alert->alert_toastr(
+      "error",
+      "Your attachment has exceeded 2MB!, Try again",
+      __OSO_APP_NAME__ . " Says"
+      );
+      } else {
+      $file_size = $this->config->convertToMbKbFormat($file['attachment']['size']);
+      $destination = "../schoolImages/mail-attachment/" . $new_file_name;
+      move_uploaded_file($file["attachment"]["tmp_name"], $destination);
+      }
+      } else {
+      $new_file_name = "";
+      $file_size = "";
+      $ext = "";
+      $file_tmp_name = "";
+      }
+      if (isset($data['receiver_email'])) {
+      foreach ($data['receiver_email'] as $receiver_email) {
+      $email = $receiver_email;
+      if ($this->config->isEmptyStr($email)) {
+      $this->response = $this->alert->alert_toastr(
+      "error",
+      "Invalid, Please enter at least one recipient email!",
+      __OSO_APP_NAME__ . " Says"
+      );
+      } else {
+      $sender_data = $this->config->get_single_data("visap_messages_user_tbl", "email", $senderEmail);
+      //get the receiver_email info from database
+      $receiver_data = $this->config->get_single_data("visap_messages_user_tbl", "email", $email);
+      if ($receiver_data) {
+      $this->stmt = $this->dbh->prepare("INSERT INTO `visap_messages_tbl`
+      (sender_email,recipient_email,`subject`,msg,receiver_email,cc_email,bcc_email,attachment,file_size,file_type)
+      VALUES
+      (?,?,?,?,?,?,?,?,?,?);");
+      if ($this->stmt->execute([
+      $senderEmail, $receiver_data->email, $subject, $messageBody, $receiver_data->email, $ccEmail, $bccEmail,
+      $new_file_name, $file_size, $ext
+      ])) {
+      $this->stmt = $this->dbh->prepare("INSERT INTO `visap_student_sent_messages_tbl`
+      (sender_id,recipient_id,`subject`,msg,receiver_email,cc_email,bcc_email,attachment,file_size,file_type) VALUES
+      (?,?,?,?,?,?,?,?,?,?);");
+      if ($this->stmt->execute([
+      $senderEmail, $receiver_data->email, $subject, $messageBody, $receiver_data->email, $ccEmail, $bccEmail,
+      $new_file_name, $file_size, $ext
+      ])) {
+      if ($OsotechMailer->sendExternalMessageToUsers(
+      $senderEmail,
+      $sender_data->fullName,
+      $subject,
+      $ccEmail,
+      $bccEmail,
+      $messageBody,
+      $email,
+      $receiver_data->fullName,
+      $file_tmp_name
+      )) {
+      $this->response = $this->alert->alert_toastr("success", "Success, Message sent Successfully!", __OSO_APP_NAME__ .
+      " Says") . $this->config->reloadWithTime();
+      }
+      }
+      } else {
+      $this->response = $this->alert->alert_toastr("error", "Error, Message sent Failed, Try again!", __OSO_APP_NAME__ .
+      " Says");
+      }
+      } else {
+      }
+      }
+      }
+      } else {
+      $this->response = $this->alert->alert_toastr("error", "Invalid, Please enter at least one recipient email
+      and try again!", __OSO_APP_NAME__ . " Says");
+      }
+      }
+      return $this->response;
+      $this->dbh = null;
+      }
+      }

@@ -54,8 +54,9 @@ background-repeat: no-repeat;">
                     placeholder="Enter your e-mail address">
                 </div>
                 <input type="hidden" name="accountType" value="staff">
-                <div class="checkbox form-group form-box clearfix navigate-away">
-                  <a href="javascript:void(0);" style="float: right;color: darkseagreen;">Remember Password?</a>
+                <div class="checkbox form-group form-box clearfix">
+                  <a href="javascript:void(0);" class="navigate-away" style="float: right;color: darkseagreen;">Remember
+                    Password?</a>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-dark btn-block __loadingBtn__" type="submit">Send Reset Link</button>
@@ -93,7 +94,7 @@ background-repeat: no-repeat;">
     });
     $(document).on("click", ".navigate-away", function() {
       setTimeout(() => {
-        window.location.assign('./');
+        window.location.assign('./stafflogin');
       }, 500);
     });
   })

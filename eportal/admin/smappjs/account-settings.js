@@ -78,5 +78,9 @@ const MY_PROFILE_UPDATE_FORM = $("#admin_profile_update_form");
         },500);
       })
     })
-
+//when add message user submit btn is clicked
+$("#internalMessagingForm").on("submit", function(e){
+  e.preventDefault();
+  alert("Yes Form submitted")
+});
   })

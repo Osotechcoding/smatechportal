@@ -2665,6 +2665,17 @@ class Administration
 			$this->dbh = null;
 		}
 	}
+	public function get_class_teacher($stdGrade)
+	{
+
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_tbl` WHERE staffGrade=?");
+		$this->stmt->execute(array($stdGrade));
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetch();
+			return $this->response;
+			$this->dbh = null;
+		}
+	}
 	public function get_principal_info()
 	{
 		$staffRole = "Principal";
@@ -3262,5 +3273,128 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
+	}
+
+	public function sendInternalAndExternalMessage(array $data, array $file)
+	{
+		$OsotechMailer = new OsotechMailer();
+		$senderEmail = $this->config->Clean($data['sender_email']);
+		$subject = $this->config->Clean($data['subject']);
+		$ccEmail = $this->config->Clean($data['cc_email']) ?? "";
+		$bccEmail = $this->config->Clean($data['bcc_email']) ?? "";
+		$messageBody = $this->config->Clean($data['message']);
+		$user_type = $this->config->Clean($data['account_user_type']);
+		if (
+			$this->config->isEmptyStr($senderEmail) ||
+			$this->config->isEmptyStr($user_type) || $this->config->isEmptyStr($subject) ||
+			$this->config->isEmptyStr($messageBody)
+		) {
+			$this->response = $this->alert->alert_toastr(
+				"error",
+				"Invalid Submission, Please check and try again!",
+				__OSO_APP_NAME__ . " Says"
+			);
+		} else {
+			if (isset($file['attachment']['tmp_name']) && $file['attachment']['tmp_name'] != "") {
+				$ext = pathinfo($file['attachment']['name'], PATHINFO_EXTENSION);
+				$new_file_name = time() . "_." . $ext;
+				$file_tmp_name = $file['attachment']['tmp_name'];
+				$file_size = $file['attachment']['size'] / 1024;
+				if ($file_size > 2000) {
+					$this->response = $this->alert->alert_toastr(
+						"error",
+						"Your attachment has exceeded 2MB!, Try again",
+						__OSO_APP_NAME__ . " Says"
+					);
+				} else {
+					$file_size = $this->config->convertToMbKbFormat($file['attachment']['size']);
+					$destination = "../schoolImages/mail-attachment/" . $new_file_name;
+					move_uploaded_file($file["attachment"]["tmp_name"], $destination);
+				}
+			} else {
+				$new_file_name = "";
+				$file_size = "";
+				$ext = "";
+				$file_tmp_name = "";
+			}
+			if (isset($data['receiver_email'])) {
+				foreach ($data['receiver_email'] as $receiver_email) {
+					$email = $receiver_email;
+					if ($this->config->isEmptyStr($email)) {
+						$this->response = $this->alert->alert_toastr(
+							"error",
+							"Invalid, Please enter at least one recipient email!",
+							__OSO_APP_NAME__ . " Says"
+						);
+					} else {
+						$sender_data = $this->config->get_single_data("visap_messages_user_tbl", "email", $senderEmail);
+						//get the receiver_email info from database
+						$receiver_data = $this->config->get_single_data("visap_messages_user_tbl", "email", $email);
+						if ($receiver_data) {
+							$this->stmt = $this->dbh->prepare("INSERT INTO `visap_messages_tbl`
+      (sender_email,recipient_email,`subject`,msg,cc_email,bcc_email,attachment,file_size,file_type,userType)
+      VALUES
+      (?,?,?,?,?,?,?,?,?,?);");
+							if ($this->stmt->execute([
+								$senderEmail, $receiver_data->email, $subject, $messageBody, $ccEmail, $bccEmail,
+								$new_file_name, $file_size, $ext, $user_type
+							])) {
+								$this->stmt = $this->dbh->prepare("INSERT INTO `visap_sent_messages_tbl`
+      (sender_email,recipient_email,`subject`,msg,cc_email,bcc_email,attachment,file_size,file_type,userType) VALUES
+      (?,?,?,?,?,?,?,?,?,?);");
+								if ($this->stmt->execute([
+									$senderEmail, $receiver_data->email, $subject, $messageBody, $ccEmail, $bccEmail,
+									$new_file_name, $file_size, $ext, $user_type
+								])) {
+									if ($OsotechMailer->sendExternalMessageToUsers(
+										$senderEmail,
+										$sender_data->fullName,
+										$subject,
+										$ccEmail,
+										$bccEmail,
+										$messageBody,
+										$email,
+										$receiver_data->fullName,
+										$file_tmp_name
+									)) {
+										$this->response = $this->alert->alert_toastr("success", "Success, Message sent Successfully!", __OSO_APP_NAME__ .
+											" Says") . $this->config->reloadWithTime();
+									}
+								}
+							} else {
+								$this->response = $this->alert->alert_toastr("error", "Error, Message sent Failed, Try again!", __OSO_APP_NAME__ .
+									" Says");
+							}
+						} else {
+							$this->response = $this->alert->alert_toastr("error", "Error, Message sent Failed, Try again!", __OSO_APP_NAME__ .
+								" Says");
+						}
+					}
+				}
+			} else {
+				$this->response = $this->alert->alert_toastr("error", "Invalid, Please enter at least one recipient email
+      and try again!", __OSO_APP_NAME__ . " Says");
+			}
+		}
+		return $this->response;
+		$this->dbh = null;
+	}
+
+	//message type  admin, staff, student
+	public function getAllInboxMessages($table, $email)
+	{
+		$sql = "SELECT * FROM `{$table}` 
+		WHERE `recipient_email`=? ORDER BY msg_datetime DESC";
+		$this->stmt = $this->dbh->prepare($sql);
+		$this->stmt->execute([$email]);
+		if ($this->stmt->rowCount() > 0) {
+			//return all messages associated with this users
+			$this->response = $this->stmt->fetchAll();
+		} else {
+			return
+				$this->response = false;
+		}
+		return $this->response;
+		$this->dbh = null;
 	}
 }

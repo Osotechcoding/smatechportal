@@ -53,7 +53,7 @@ require_once "helpers/helper.php";
                   <a href="javascript:void(0);" class="list-group-item pt-0 active" id="inbox-menu">
 
                     Inbox
-                    <span class="badge badge-light-primary badge-pill badge-round float-right mt-50">5</span>
+                    <span class="badge badge-warning badge-pill badge-round float-right mt-50">5</span>
                   </a>
                   <a href="javascript:void(0);" class="list-group-item">
 
@@ -62,10 +62,7 @@ require_once "helpers/helper.php";
                   <a href="javascript:void(0);" class="list-group-item">
                     Draft
                   </a>
-                  <a href="javascript:void(0);" class="list-group-item">
 
-                    Starred
-                  </a>
                   <a href="javascript:void(0);" class="list-group-item">
 
                     Spam
@@ -78,36 +75,7 @@ require_once "helpers/helper.php";
                 </div>
                 <!-- sidebar menu  end-->
 
-                <!-- sidebar label start -->
-                <label class="sidebar-label">Labels</label>
-                <div class="list-group list-group-labels ">
-                  <a href="javascript:void(0);"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    Product
-                    <span class="bullet bullet-success bullet-sm"></span>
-                  </a>
-                  <a href="javascript:void(0);"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    Work
-                    <span class="bullet bullet-primary bullet-sm"></span>
-                  </a>
-                  <a href="javascript:void(0);"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    Misc
-                    <span class="bullet bullet-warning bullet-sm"></span>
-                  </a>
-                  <a href="javascript:void(0);"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    Family
-                    <span class="bullet bullet-danger bullet-sm"></span>
-                  </a>
-                  <a href="javascript:void(0);"
-                    class="list-group-item d-flex justify-content-between align-items-center">
-                    Design
-                    <span class="bullet bullet-info bullet-sm"></span>
-                  </a>
-                </div>
-                <!-- sidebar label end -->
+
               </div>
             </div>
           </div>
@@ -125,14 +93,17 @@ require_once "helpers/helper.php";
                 <div class="card-body pt-0">
                   <div class="form-group pb-50">
                     <label for="emailfrom">from</label>
-                    <input type="text" id="emailfrom" class="form-control" placeholder="user@example.com" disabled>
+                    <input type="hidden" name="sender_email" value="<?php echo $admin_data->adminEmail ?>">
+                    <input type="email" id="emailfrom" class="form-control"
+                      value="<?php echo $admin_data->adminEmail ?>" disabled>
                   </div>
                   <div class="form-label-group">
-                    <input type="email" id="emailTo" class="form-control" placeholder="To" required>
+                    <input type="text" name="emailTo[]" multiple id="emailTo" class="form-control" placeholder="To"
+                      required>
                     <label for="emailTo">To</label>
                   </div>
                   <div class="form-label-group">
-                    <input type="text" id="emailSubject" class="form-control" placeholder="Subject">
+                    <input type="text" id="emailSubject" class="form-control" placeholder="Subject" required>
                     <label for="emailSubject">Subject</label>
                   </div>
                   <div class="form-label-group">
@@ -160,7 +131,7 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="form-group mt-2">
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="emailAttach">
+                      <input type="file" name="attachment[]" multiple class="custom-file-input" id="emailAttach">
                       <label class="custom-file-label" for="emailAttach">Attach file</label>
                     </div>
                   </div>
@@ -231,45 +202,18 @@ require_once "helpers/helper.php";
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="folder">
                               <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit"></i> Draft</a>
+
+                              <a class="dropdown-item" href="javascript:void(0);">
+                                <i class="bx bx-envelope"></i>Sent</a>
+
                               <a class="dropdown-item" href="javascript:void(0);"><i
                                   class="bx bx-info-circle"></i>Spam</a>
+
                               <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash"></i>Trash</a>
                             </div>
                           </div>
                         </li>
-                        <li class="list-inline-item">
-                          <div class="dropdown">
-                            <button type="button" class="btn btn-icon dropdown-toggle action-icon" id="tag"
-                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <span class="fonticon-wrap">
-                                <i class="fa fa-th">
-                                </i>
-                              </span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tag">
-                              <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                                <span class="bullet bullet-success bullet-sm"></span>
-                                <span>Product</span>
-                              </a>
-                              <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                                <span class="bullet bullet-primary bullet-sm"></span>
-                                <span>Work</span>
-                              </a>
-                              <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                                <span class="bullet bullet-warning bullet-sm"></span>
-                                <span>Misc</span>
-                              </a>
-                              <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                                <span class="bullet bullet-danger bullet-sm"></span>
-                                <span>Family</span>
-                              </a>
-                              <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                                <span class="bullet bullet-info bullet-sm"></span>
-                                <span> Design</span>
-                              </a>
-                            </div>
-                          </div>
-                        </li>
+
                       </ul>
                     </div>
                     <!-- action left end here -->
@@ -303,6 +247,15 @@ require_once "helpers/helper.php";
                   <!-- email user list start -->
                   <div class="email-user-list list-group">
                     <ul class="users-list-wrapper media-list">
+                      <?php
+                      $allInboxMessages = $Administration->getAllInboxMessages("visap_messages_tbl", $admin_data->adminEmail);
+                      if ($allInboxMessages) {
+                        foreach ($allInboxMessages as $inbox) {
+                          //get sender details
+                          $sender_data = $Configuration->get_single_data("visap_messages_user_tbl", "email", $inbox->sender_email);
+                          if ($sender_data) {
+                            //! TODO: to generate user Name as image if image is null
+                      ?>
                       <li class="media mail-read">
                         <div class="user-action">
                           <div class="checkbox-con mr-25">
@@ -322,20 +275,20 @@ require_once "helpers/helper.php";
                         </div>
                         <div class="media-body">
                           <div class="user-details">
-                            <div class="mail-items">
-                              <span class="list-group-item-text text-truncate">Open source project public release
+                            <div class="mail-items" data-id="<?php echo $inbox->id; ?>">
+                              <span class="list-group-item-text text-truncate"><?php echo $inbox->subject; ?>
                                 👍</span>
                             </div>
                             <div class="mail-meta-item">
                               <span class="float-right">
-                                <span class="mail-date">4:14 AM</span>
+                                <span class="mail-date"><?php echo $TimeAgo->osotech_time_ago($inbox->msg_datetime) ?>
+                                </span>
                               </span>
                             </div>
                           </div>
                           <div class="mail-message">
                             <p class="list-group-item-text truncate mb-0">
-                              Hey John, bah kivu decrete epanorthotic unnotched
-                              Argyroneta nonius veratrine preimaginary
+                              <?php echo substr($inbox->msg, 0, 120) ?>
                             </p>
                             <div class="mail-meta-item">
                               <span class="float-right">
@@ -345,15 +298,22 @@ require_once "helpers/helper.php";
                           </div>
                         </div>
                       </li>
+                      <?php
+                          }
+                        }
+                      } else { ?>
+                      <!-- no result when nothing to show on list -->
+                      <div class="no-results">
+                        <i class="bx bx-error-circle font-large-2"></i>
+                        <h5>No Message Found in your Mailbox</h5>
+                      </div>
+                      <?php
 
+                      } ?>
                     </ul>
                     <!-- email user list end -->
 
-                    <!-- no result when nothing to show on list -->
-                    <div class="no-results">
-                      <i class="bx bx-error-circle font-large-2"></i>
-                      <h5>No Items Found</h5>
-                    </div>
+
                   </div>
                 </div>
               </div>
@@ -407,39 +367,6 @@ require_once "helpers/helper.php";
                             <a class="dropdown-item" href="javascript:void(0);"><i
                                 class="bx bx-info-circle"></i>Spam</a>
                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash"></i>Trash</a>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="list-inline-item">
-                        <div class="dropdown">
-                          <button type="button" class="btn btn-icon dropdown-toggle action-icon" id="tag"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="fonticon-wrap">
-                              <i class="fa fa-th">
-                              </i>
-                            </span>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tag">
-                            <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                              <span class="bullet bullet-success bullet-sm"></span>
-                              <span>Product</span>
-                            </a>
-                            <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                              <span class="bullet bullet-primary bullet-sm"></span>
-                              <span>Work</span>
-                            </a>
-                            <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                              <span class="bullet bullet-warning bullet-sm"></span>
-                              <span>Misc</span>
-                            </a>
-                            <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                              <span class="bullet bullet-danger bullet-sm"></span>
-                              <span>Family</span>
-                            </a>
-                            <a href="javascript:void(0);" class="dropdown-item align-items-center">
-                              <span class="bullet bullet-info bullet-sm"></span>
-                              <span> Design</span>
-                            </a>
                           </div>
                         </div>
                       </li>
@@ -678,13 +605,7 @@ require_once "helpers/helper.php";
                                 like
                                 readable English.
                               </p>
-                              <p>
-                                There are many variations of passages of Lorem Ipsum available, but the majority have
-                                suffered
-                                alteration in some form, by injected humour, or randomised words which don't look even
-                                slightly
-                                believable.
-                              </p>
+
                               <p class="mb-0">Sincerely yours,</p>
                               <p class="text-bold-500">Envato Design Team</p>
                             </div>
@@ -694,10 +615,6 @@ require_once "helpers/helper.php";
                                 <li class="cursor-pointer pb-25">
                                   <img src="../author.jpg" height="30" alt="psd.png">
                                   <small class="text-muted ml-1 attachment-text">uikit-design.psd</small>
-                                </li>
-                                <li class="cursor-pointer">
-                                  <img src="../author.jpg" height="30" alt="sketch.png">
-                                  <small class="text-muted ml-1 attachment-text">uikit-design.sketch</small>
                                 </li>
                               </ul>
                             </div>
@@ -755,6 +672,17 @@ require_once "helpers/helper.php";
 
   <!-- BEGIN: Vendor JS-->
   <?php include "../template/FooterScript.php"; ?>
+
+  <script>
+  $(document).ready(function() {
+    //when mail read btn is click
+    $(".mail-items").on("click", function() {
+      let mailId = $(this).data("id");
+      alert(mailId);
+      return false;
+    })
+  });
+  </script>
   <!-- END: Page JS-->
 
 </body>
