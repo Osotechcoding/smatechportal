@@ -196,7 +196,7 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         </div>
         <div class="id-back">
             <p>This ID Card remains a property of <b><?php echo strtoupper($SmappDetails->school_name); ?></b>
-             and identifies the bearer with passport photography overleaf as our <b>STUDENT</b>.
+             and identifies the bearer with passport photograph overleaf as our <b>STUDENT</b>.
               <br>It is not transferable </p>
             <br>
             <p>Kindly return to the school address or nearest Police Station, if found.</p>
