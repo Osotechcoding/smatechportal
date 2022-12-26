@@ -621,5 +621,12 @@
 					echo $result;
 				}
 			}
+			//generate_student_id_card_
+			if ($_POST['action'] === "generate_student_id_card_") {
+				$result = $Student->generateIdCard($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
 		}
 	}

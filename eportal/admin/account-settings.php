@@ -218,7 +218,7 @@ require_once "helpers/helper.php";
                                 </div>
                               </div>
                               <input type="hidden" name="action" value="update_admin_pwd_now">
-                              <input type="hidden" name="admin_id" value="<?php echo $adminId; ?>">
+                              <input type="hidden" name="admin_id" value="<?php echo $admin_data->adminId; ?>">
                               <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                                 <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1 __loadingBtn__">Save
                                   changes</button>

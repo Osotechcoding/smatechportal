@@ -55,25 +55,21 @@ require_once "helpers/helper.php";
           <h4 class="card-title">ASSIGN SCHOOL ADMINISTRTORS</h4>
         </div>
         <div class="card-body">
-         <!--<div class="mb-2">-->
-         <!--   <button type="button" class="btn btn-outline-primary block" data-toggle="modal" data-target="#default">-->
-         <!--  Add New Office-->
-         <!-- </button>-->
-         <!--</div>-->
+        
           <form class="form" id="assign_office_Form">
             <div class="form-body">
               <div class="row">
                 <input type="hidden" name="action" value="assign_staff_office_now">
                  <div class="col-md-4 col-12">
                    <label for="csession">Staff Name</label>
-                  <select name="staff_id" class="select2 form-control">
+                  <select name="staff_id" class="custom-select form-control">
                     <option value="">Choose...</option>
                     <?php echo $Staff->show_staff_indropdown_list();?>
                   </select>
                 </div>
                 <div class="col-md-4 col-12">
                      <label for="Office">Assign Office</label>
-                  <select name="Office" class="select2 form-control">
+                  <select name="Office" class="custom-select form-control">
                     <option value="">Choose...</option>
                     <?php echo $Administration->get_office_InDropDown_list();?>
                   </select>
@@ -88,7 +84,7 @@ require_once "helpers/helper.php";
                 <button type="submit" class="btn btn-primary btn-lg mr-1 __loadingBtn2__"><i class="bx bx-paper-plane"></i> Assign Now</button>
                 </div>
               </div>
-            </div>
+            
           </form>
         </div>
       </div>

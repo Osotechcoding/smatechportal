@@ -182,6 +182,7 @@ require_once "helpers/helper.php";
                     <th>Gender</th>
                     <!-- <th>VERIFICATION</th> -->
                     <th>STATUS</th>
+                  
                     <th>ACTION</th>
                   </tr>
                 </thead>
@@ -208,6 +209,7 @@ require_once "helpers/helper.php";
                         style="border-radius: 10px;border: 3px solid darkblue;" alt="student-passport">
                       <br>
                       <b style="margin-top: 3px;"><?php echo strtoupper($filtered->stdRegNo) ?></b>
+                      
                       <?php endif ?>
 
                     </td>

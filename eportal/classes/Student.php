@@ -18,8 +18,8 @@ class Student
 	protected $stmt; //database statement
 	protected $table_name = "visap_student_tbl";
 	protected $response; //database result
-	protected $config; //default config
-	protected $alert; //default config
+	private $config; //default config
+	private $alert; //default config
 
 	public function __construct()
 	{
@@ -99,7 +99,7 @@ class Student
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function count_students_by_gender($gender)
@@ -113,7 +113,7 @@ class Student
 			$this->response = "0";
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function countStudentByType($studentType)
@@ -127,7 +127,7 @@ class Student
 			$this->response = "0";
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function countStudentTypeByGender($studentType, $stdGender)
@@ -141,7 +141,7 @@ class Student
 			$this->response = "0";
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function count_recent_applicants()
@@ -199,12 +199,12 @@ class Student
 	//get_student_data_ByRegNo
 	public function get_student_data_ByRegNo($stdRegNo)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=?");
 		$this->stmt->execute(array($stdRegNo));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -216,7 +216,7 @@ class Student
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -231,7 +231,6 @@ class Student
 		}
 		return $this->response;
 	}
-	//
 	//get all admitted students
 
 	public function get_all_students_by_status(string $status)
@@ -378,7 +377,7 @@ class Student
 			$this->response = $value2;
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function register_exam_subject($data)
@@ -429,7 +428,7 @@ class Student
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 	//show all my registered exam subject
 	public function all_my_registered_exam_subejcts($stdGrade)
@@ -440,7 +439,7 @@ class Student
 			$this->response = $this->stmt->fetchAll();
 			//$this->dbh->close();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -464,7 +463,7 @@ class Student
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function submit_written_classnote($data)
@@ -529,7 +528,7 @@ class Student
 				}
 			}
 		return 	$this->response;
-		$this->dbh = null;
+		
 	}
 
 	//fetch all classnote by student id
@@ -545,7 +544,7 @@ class Student
 		}
 
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function get_all_my_assessments_by_filter($stdRegNo, $stdGrade, $term, $aca_session)
@@ -574,7 +573,7 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	//
@@ -589,7 +588,7 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function logout($id)
@@ -598,7 +597,7 @@ class Student
 		if ($this->stmt->execute([$id])) {
 			$this->response = true;
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -610,7 +609,7 @@ class Student
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -622,7 +621,7 @@ class Student
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -714,7 +713,7 @@ class Student
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 	/*REGISTER STUDENT MANUALLY*/
 
@@ -727,7 +726,7 @@ class Student
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -746,7 +745,7 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	//GET ALL BOARDING HOUSE STUDENT
@@ -763,7 +762,7 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 	//NEW UPDATES
 	public function assign_new_school_prefect($data)
@@ -818,7 +817,7 @@ class Student
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -851,7 +850,7 @@ class Student
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -993,7 +992,6 @@ class Student
 			$this->response = "0";
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function count_total_visap_students_class($stdGrade)
@@ -1007,7 +1005,6 @@ class Student
 			$this->response = "0";
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_students_by_status_by_class($stdGrade, $status)
@@ -1020,7 +1017,6 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	public function count_all_online_students()
 	{
@@ -1030,7 +1026,6 @@ class Student
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->online;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -1044,7 +1039,6 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getStudentListByType($stdGrade, $studentType)
@@ -1058,7 +1052,6 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//GET STUDENT ATTENDANCE INFO
@@ -1070,7 +1063,6 @@ class Student
 			$rollCall = $this->stmt->fetch();
 			$this->response = $rollCall->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -1086,7 +1078,6 @@ class Student
   $this->response = $value;
   }
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1100,7 +1091,6 @@ class Student
   $reSet = $this->stmt->fetch();
   $this->response = $reSet->total_sub;
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1112,7 +1102,6 @@ class Student
   if ($this->stmt->rowCount() > 0) {
   $this->response = $this->stmt->fetchAll();
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1124,7 +1113,6 @@ class Student
   if ($this->stmt->rowCount() > 0) {
   $this->response = $this->stmt->fetchAll();
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1220,7 +1208,6 @@ class Student
   }
 
   return $this->response;
-  $this->dbh = null;
   }
 
   public function get_all_students_assignments()
@@ -1230,7 +1217,6 @@ class Student
   if ($this->stmt->rowCount() > 0) {
   $this->response = $this->stmt->fetchAll();
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1241,7 +1227,6 @@ class Student
   if ($this->stmt->rowCount() > 0) {
   $this->response = $this->stmt->fetchAll();
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1256,7 +1241,6 @@ class Student
   if ($this->stmt->rowCount() > 0) {
   $this->response = $this->stmt->fetchAll();
   return $this->response;
-  $this->dbh = null;
   }
   }
 
@@ -1318,7 +1302,6 @@ class Student
     }
     }
     return $this->response;
-    $this->dbh = null;
     }
 
     public function get_assignmentById($assId)
@@ -1328,7 +1311,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1423,9 +1405,7 @@ class Student
     }
     }
     }
-
     return $this->response;
-    $this->dbh = null;
     }
 
     public function get_all_my_submitted_assignments($stdRegNo, $stdGrade)
@@ -1436,7 +1416,6 @@ class Student
     if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetchAll();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1448,7 +1427,6 @@ class Student
     if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetchAll();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1516,9 +1494,7 @@ class Student
     }
     }
     return $this->response;
-    $this->dbh = null;
     }
-
     //remove assignment
     public function remove_student_assignment_file_now($assId)
     {
@@ -1548,7 +1524,6 @@ class Student
     }
     }
     return $this->response;
-    $this->dbh = null;
     }
 
     public function student_bulk_promotions($data)
@@ -1598,7 +1573,6 @@ class Student
     );
     }
     return $this->response;
-    $this->dbh = null;
     }
 
     public function get_student_details_byRegNo($stdRegNo)
@@ -1609,7 +1583,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1623,7 +1596,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1635,7 +1607,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1658,7 +1629,6 @@ class Student
     }
     }
     return $this->response;
-    $this->dbh = null;
     }
 
     //delete toke upon logged out
@@ -1669,7 +1639,6 @@ class Student
     $this->response = true;
     }
     return $this->response;
-    $this->dbh = null;
     }
 
     public function searchStudentByRegEmailPhone($q)
@@ -1681,7 +1650,6 @@ class Student
     if ($this->stmt->rowCount() == '1') {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
     }
@@ -1693,7 +1661,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1704,7 +1671,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1715,7 +1681,6 @@ class Student
     if ($this->stmt->rowCount() == 1) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1814,7 +1779,6 @@ class Student
     }
 
     return $this->response;
-    $this->dbh = null;
     }
 
 
@@ -1837,7 +1801,6 @@ class Student
     if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
-    $this->dbh = null;
     }
     }
 
@@ -1931,7 +1894,6 @@ class Student
       }
       }
       return $this->response;
-      $this->dbh = null;
       }
       public function checkPasswordResetRedirectAuth($email, $token): bool
       {
@@ -1948,7 +1910,6 @@ class Student
       }
       }
       return $this->response;
-      $this->dbh = null;
       }
       public function sendInternalAndExternalMessage(array $data, array $file)
       {
@@ -2050,6 +2011,39 @@ class Student
       }
       }
       return $this->response;
-      $this->dbh = null;
       }
+	/**
+	 * Summary of generateStudentIdCard
+	 * @param array $data
+	 * @return string
+	 */
+	public function generateIdCard($data)
+	{
+		$stdRegNo = $this->config->Clean($data['admNo']);
+		$auth_code = $this->config->Clean($data['auth_code']);
+		//check for empty values
+		if($this->config->isEmptyStr($stdRegNo)){
+			$this->response = $this->alert->alert_toastr("error", "Student Admission No is Required", __OSO_APP_NAME__ ." Says");
+		}else if($this->config->isEmptyStr($auth_code)){
+			$this->response = $this->alert->alert_toastr("error", "Authentication Code is Required!", __OSO_APP_NAME__ ." Says");
+		}else if($auth_code !== __OSO__CONTROL__KEY__){
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+			//check if the student with the entered reg no exist
+		}else if(!$this->config->check_single_data($this->table_name,"stdRegNo", $stdRegNo)){
+			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
+		}else{
+
+			$student_data = $this->get_student_data_ByRegNo($stdRegNo);
+//check if the student has uploaded his / her passport
+if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
+	$this->response = $this->alert->alert_toastr("error", "Upload the student passport and try again!", __OSO_APP_NAME__ . " Says");
+}else{
+	//generate the student identity based on the student current details
+	$this->response = $this->alert->alert_toastr("success", "Generating ID CARD, Please wait...!", __OSO_APP_NAME__ . " Says").$this->config->redirectWithTime("./identitycard?student-idcard=".$this->config->convert_string("code",$student_data->stdId));
+}
+
+		}
+		return $this->response;
+	}
+
       }

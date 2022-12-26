@@ -25,7 +25,7 @@
                  class="menu-title text-truncate" data-i18n="academic year">Academic Year</span></a>
            </li>
            <li><a class="d-flex align-items-center" href="create_subject"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Subjects">Subjects</span></a>
+                 class="menu-item text-truncate" data-i18n="Subject Management">Subject Management</span></a>
            </li>
 
            <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span
@@ -126,6 +126,9 @@
            <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Students">View Students</span></a>
            </li>
+           <li class="nav-item"><a href="genIdCard"><i class="fa fa-credit-card fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Student ID Card">Student ID Card</span></a>
+           </li>
            <!-- student_attendance -->
            <li class="nav-item"><a href="upload-attendance"><i class="fa fa-child fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Mark Attendance">Mark Attendance</span></a>
@@ -136,7 +139,7 @@
            <li class="nav-item"><a href="prefects"><i class="fa fa-user-secret fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Manage Prefects">Manage Prefects</span></a>
            </li>
-           <li class="nav-item"><a href="student_office_list"><i class="fa fa-credit-card-alt fa-1x"></i><span
+           <li class="nav-item"><a href="student_office_list"><i class="fa fa-user-secret fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Student Prefects">Student Office</span></a>
            </li>
            <li class="nav-item"><a href="massPromotion"><i class="fa fa-line-chart fa-1x"></i><span

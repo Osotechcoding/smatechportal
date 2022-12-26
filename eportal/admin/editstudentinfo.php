@@ -16,7 +16,6 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
   header("Location: ab_students");
   exit();
 }
-
 ?>
 <!DOCTYPE html>
 

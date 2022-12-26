@@ -96,7 +96,6 @@ class Configuration
       // code...
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
     }
   }
 
