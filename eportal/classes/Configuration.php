@@ -37,10 +37,10 @@ class Configuration
   }
   public function check_single_data($table, $field, $field_val)
   {
-    $this->query = "SELECT * FROM `{$table}` WHERE `{$field}`=? LIMIT 1";
+    $this->query = "SELECT * FROM `{$table}` WHERE `{$field}`=?";
     $this->stmt = $this->dbh->prepare($this->query);
     $this->stmt->execute(array($field_val));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
       $this->response = true;
     } else {
       $this->response = false;
@@ -348,7 +348,7 @@ $ denotes the end
      },' . $time . ');
     </script>';
   }
-  public function redirectWithTime($path, $time = 500)
+  public function redirectWithTime(string $path, int $time = 500)
   {
     return '<script>
      setTimeout(()=>{

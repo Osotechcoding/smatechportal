@@ -2046,4 +2046,118 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		return $this->response;
 	}
 
+	public function testimonialDetailsByRegNo($stdRegNo)
+	{
+		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND stdAdmStatus='Graduated'");
+		$this->stmt->execute(array($stdRegNo));
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetch();
+			return $this->response;
+		}
+	}
+
+	public function getTestimonialByRegNo(string $regNo) {
+		$sql = "SELECT * FROM `visap_student_testimonial_tbl` WHERE `stdRegNo`= ?";
+	$this->stmt = $this->dbh->prepare($sql);
+	$this->stmt->execute([$regNo]);
+	if($this->stmt->rowCount() > 0){
+		return $this->stmt->fetch();
+	}
+	}
+
+	public function fetchStudentTestimonialInfo(array $data)
+	{
+		$regNo = $this->config->Clean($data['admNo']);
+		if(!$this->config->isEmptyStr($regNo)){
+			$this->response = $this->testimonialDetailsByRegNo($regNo);
+			if($this->response){
+			return $this->response;
+			}	
+		}
+	
+	}
+	/**
+	 * Summary of generateTestimonialSerialNo
+	 * @return string
+	 * @author FlatERP Tech
+	 */
+	public function generateTestimonialSerialNo():string 
+	{
+	$cert_no = mt_rand(1000000000,9999999999);
+	//check if the cert no already exists
+	$sql = "SELECT cert_no FROM `visap_student_testimonial_tbl` WHERE `cert_no`= ?";
+	$this->stmt = $this->dbh->prepare($sql);
+	$this->stmt->execute([$cert_no]);
+	if($this->stmt->rowCount()> 0){
+	$cert_no = mt_rand(1000000000,9999999999);
+	}
+	return $cert_no;
+	}
+
+	public function generateStudentCertificate(array $data):string
+	{
+		$stdRegNo = $this->config->clean($data['admissionNumber']);
+		$admittedDate = $this->config->clean($data['admittedDate']);
+		$admittedClass = $this->config->clean($data['admittedClass']);
+		$classCompleted = $this->config->clean($data['classCompleted']);
+		$dateCompleted = $this->config->clean($data['dateCompleted']);
+		$academic_ability = $this->config->clean($data['academic_ability']);
+		$sports_ability = $this->config->clean($data['sports_ability']);
+		$pass_code = $this->config->clean($data['auth_code']);
+		$character = $this->config->clean($data['character']);
+		$cert_no = $this->generateTestimonialSerialNo();
+
+		$club = $this->config->clean($data['club']);
+		$office = $this->config->clean($data['student_office_name']);
+		$remarks = $this->config->clean($data['remarks']);
+		$subject1 = $this->config->clean($data['subject_one']);
+		$subject2 = $this->config->clean($data['subject_two']);
+		$subject3 = $this->config->clean($data['subject_three']);
+		$subject4 = $this->config->clean($data['subject_four']);
+		$subject5 = $this->config->clean($data['subject_five']);
+		$subject6 = $this->config->clean($data['subject_six']);
+		$subject7 = $this->config->clean($data['subject_seven']);
+		$subject8 = $this->config->clean($data['subject_eight']);
+		$subject9 = $this->config->clean($data['subject_nine']);
+		$subject10 = $this->config->clean($data['subject_ten']);
+		$subject11 = $this->config->clean($data['subject_eleven']);
+		//check for compulsary values 
+		if($this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($admittedDate) || $this->config->isEmptyStr($admittedClass) || $this->config->isEmptyStr($classCompleted) || $this->config->isEmptyStr($dateCompleted) || $this->config->isEmptyStr($academic_ability) || $this->config->isEmptyStr($sports_ability)|| $this->config->isEmptyStr($subject1) || $this->config->isEmptyStr($subject2) || $this->config->isEmptyStr($subject3) || $this->config->isEmptyStr($subject4) || $this->config->isEmptyStr($subject5) || $this->config->isEmptyStr($subject6) || $this->config->isEmptyStr($subject7) || $this->config->isEmptyStr($subject8) || $this->config->isEmptyStr($character)){
+			$this->response = $this->alert->alert_toastr("error", "Select at least Eight(8) Subjects , to continue!", __OSO_APP_NAME__ . " Says");
+
+		}else if($this->config->isEmptyStr($pass_code)){
+
+			$this->response = $this->alert->alert_toastr("error", "Authentication code is required , to continue!", __OSO_APP_NAME__ . " Says");
+
+		}else if($pass_code !== __OSO__CONTROL__KEY__){
+
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication code!", __OSO_APP_NAME__ . " Says");
+		}else if(str_word_count($remarks) > 5){
+			$this->response = $this->alert->alert_toastr("error", " General Remarks cannot be more than five words!", __OSO_APP_NAME__ . " Says");
+
+		}
+		else if(!$this->config->check_single_data($this->table_name,"stdRegNo", $stdRegNo)){
+			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
+		}else{
+		$admittedDate = date("Y-m-d", strtotime($admittedDate));
+		$dateCompleted = date("Y-m-d", strtotime($dateCompleted));
+		try{
+			$this->dbh->beginTransaction();
+			$sql_query = "INSERT INTO `visap_student_testimonial_tbl` (stdRegNo,admitted_class,
+			admitted_date,class_completed,date_completed,academic_ability,sports_ability,office_held,school_club,general_remarks,student_character,subject1,subject2,subject3,subject4,subject5,subject6,subject7,subject8,subject9,subject10,subject11,cert_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+			$this->stmt = $this->dbh->prepare($sql_query);
+			if($this->stmt->execute([$stdRegNo,$admittedClass, $admittedDate,$classCompleted,
+			$dateCompleted,$academic_ability,$sports_ability,$office,$club,$remarks,$character,$subject1,$subject2,$subject3,$subject4,$subject5,$subject6,$subject7,$subject8,$subject9,$subject10,$subject11,$cert_no
+			])){
+				$this->dbh->commit();
+				$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says").$this->config->redirectWithTime("./student-testimonial?data=".$this->config->convert_string("code",$stdRegNo),6000);
+			}
+		}catch(PDOException $e){
+			$this->dbh->rollback();
+			$this->response = $this->alert->alert_toastr("error", "Internal Error Occurred! Try again", __OSO_APP_NAME__ . " Says");
+		}
+		}
+		return $this->response;
+	}
+
       }

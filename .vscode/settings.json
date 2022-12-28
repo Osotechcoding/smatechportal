@@ -1,2 +1,49 @@
 {
+    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+    "php.suggest.basic": false,
+    "php.validate.enable": false,
+    "emmet.excludeLanguages": [
+        "php",
+        "markdown"
+    ],
+    "prettier.insertPragma": true,
+    "editor.cursorStyle": "line",
+    "editor.tabCompletion": "on",
+    "editor.formatOnSave": false,
+    "editor.lineHeight": 22,
+    "window.zoomLevel": 2,
+    "explorer.autoReveal": false,
+    "editor.mouseWheelZoom": true,
+    "editor.cursorBlinking": "phase",
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "on",
+        "strings": "on"
+    },
+    "editor.minimap.scale": 1,
+    "editor.minimap.showSlider": "always",
+    "terminal.integrated.defaultProfile.windows":"Git Bash",
+    "editor.defaultFormatter":"esbenp.prettier-vscode",
+    "[php]":{
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "DEVSENSE.phptools-vscode",
+    },
+    "php.docblock.classSnippet": {
+        "@author": "${name:FlatERP Tech}",
+        "@copyright": "(c) $CURRENT_YEAR",
+        "@license":"MIT",
+        "@package":"FlatERP",
+        "@category": "FlatERP framework",
+        "@version" : "1.0.0"
+    },
+        "php.docblock.functionSnippet": {
+            "@author": "${name:FlatERP Tech}",
+            "@throws": false
+          },
+          "php.docblock.packageSnippet": {
+            "@author": "${name:FlatERP Tech}",
+            "@copyright": "(c) $CURRENT_YEAR"
+          },
+    
 }
