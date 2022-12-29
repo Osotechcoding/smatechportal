@@ -6,7 +6,7 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name ?> :: </title>
+    <title><?php echo $SmappDetails->school_name ?> :: Re-print Certificate </title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->
@@ -32,7 +32,7 @@ require_once "helpers/helper.php";
                   </li>
                   <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']) ?></a>
                   </li>
-                  <li class="breadcrumb-item active">STUDENT IDENTITY CARD
+                  <li class="breadcrumb-item active">RE-PRINT STUDENT CERTIFICATE 
                   </li>
                 </ol>
               </div>
@@ -42,13 +42,13 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-credit-card fa-1x"></span>  STUDENT IDENTITY CARD MODULE</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>  STUDENT CERTIFICATE MODULE</h3>
   </div>
     </div>
 
     <div class="card" style="border-radius: 10px;">
         <div class="card-header">
-          <h4 class="card-title">GENERATE IDENTITY CARD</h4>
+          <h4 class="card-title">RE-PRINT STUDENT CERTIFICATE</h4>
         </div>
         <div class="card-body">
         

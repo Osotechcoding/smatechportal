@@ -142,9 +142,10 @@ require_once "helpers/helper.php";
           <label for="promoted_to">PROMOTED TO</label>
           <select name="promoted_to" id="promoted_to" class="form-control custom-select">
             <option value="" selected> Choose...</option>
-            <?php echo $Administration->get_classroom_InDropDown_list();?>
-            <?php if( $student_class =="Basic 5" ||  $student_class=="JSS 3" ||  $student_class == " SSS 3"){
+            <?php if($student_class == "SSS 3"){
               echo '<option value="Graduated">Graduated</option>';
+            }else{
+              echo $Administration->get_classroom_InDropDown_list();
             } ?>
           </select>
         </div>

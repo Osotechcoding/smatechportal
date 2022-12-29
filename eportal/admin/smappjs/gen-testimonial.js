@@ -18,7 +18,6 @@ $(document).ready(function(){
             student_class:TestyClass
         },
             success:  function(response){
-                console.log(response);
                 setTimeout(() => {
                     if(response){
                         admittedClass.val(response.admitted_class);
@@ -30,11 +29,12 @@ $(document).ready(function(){
             },
           }); 
     }else{
-        alert("Enter Student Admission Number to Continue");
+        alert("Enter the Student Admission Number to Continue");
         admittedClass.val('');
         dateCompleted.val('');
         classCompleted.val('');
         admittedDate.val('');
+        TestyClass.val('');
         return false;
     }
 }

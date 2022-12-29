@@ -2055,7 +2055,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 
 	public function testimonialDetailsByRegNo($stdRegNo, $student_class)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND `studentClass`=? AND completed_date <> NULL OR completed_date <> ''");
+		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND `studentClass`=? AND (completed_date!= NULL || completed_date != '')");
 		$this->stmt->execute(array($stdRegNo,$student_class));
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
@@ -2144,9 +2144,9 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		else if(!$this->config->check_single_data($this->table_name,"stdRegNo", $stdRegNo)){
 			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
 		}else{
-			//check if this testimonial is already generated
-			if($this->config->check_single_data("visap_student_testimonial_tbl","stdRegNo", $stdRegNo)){
-				$this->response = $this->alert->alert_toastr("error", " Certificate is already generated for $stdRegNo!", __OSO_APP_NAME__ ." Says");
+			//check if this testimonial is already generated for the student in Basic 5, Jss3 or SSS 3
+			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$classCompleted)){
+				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
 			}else{
 				$admittedDate = date("Y-m-d", strtotime($admittedDate));
 				$dateCompleted = date("Y-m-d", strtotime($dateCompleted));
@@ -2160,9 +2160,9 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 					])){
 						$this->dbh->commit();
 						$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$stdRegNo);
-						$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
-							window.open("' . $testimonial_link . '","_blank","top=50, left=50, width=700, height=900");
-						},4000)</script>';
+						$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says"). '<script>setTimeout(()=>{
+							window.open("' . $testimonial_link . '","_blank","top=10, left=100, width=850, height=950");
+						},4000);</script>';
 					}
 				}catch(PDOException $e){
 					$this->dbh->rollback();
@@ -2192,9 +2192,9 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	$testimonial_data = $this->config->get_single_data("visap_student_testimonial_tbl","cert_no",$cert_no);
 	if($testimonial_data){
 		$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$testimonial_data->stdRegNo);
-		$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
+		$this->response = $this->alert->alert_toastr("success", "Re-printing Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
 			window.open("' . $testimonial_link . '","_blank", "top=10, left=100, width=850, height=950");
-		},4000)</script>';
+		},5000);</script>';
 	}else{
 		$this->response = $this->alert->alert_toastr("error", "No Record Found!", __OSO_APP_NAME__ ." Says");
 	}

@@ -48,6 +48,19 @@ class Configuration
     return $this->response;
   }
 
+  public function checkMultipleValues($table, $field1, $val1,$field2, $val2): bool
+  {
+    $this->query = "SELECT * FROM `{$table}` WHERE `{$field1}`=? AND `{$field2}`=?";
+    $this->stmt = $this->dbh->prepare($this->query);
+    $this->stmt->execute(array($val1,$val2));
+    if ($this->stmt->rowCount() > 0) {
+      $this->response = true;
+    } else {
+      $this->response = false;
+    }
+    return $this->response;
+  }
+
   //states in dropdown list
   public function get_data_in_dropdown($table, $field, $val)
   {

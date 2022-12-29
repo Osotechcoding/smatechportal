@@ -142,6 +142,11 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
         </section>
     </main>
     <!-- <button type="button" style="text-align: center;justify-content: center; justify-items: center; margin-top:20px;" onclick="window.print();">Print Now</button> -->
-    <script>window.onload= window.print();</script>
+    <script>
+       document.addEventListener('DOMContentLoaded', printPage, false);
+function printPage () {
+    window.print();
+}
+    </script>
 </body>
 </html>

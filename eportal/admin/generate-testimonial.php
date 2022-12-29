@@ -71,19 +71,19 @@ require_once "helpers/helper.php";
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="Auth">ADMITTED DATE</label>
+          <label for="admittedDate">ADMITTED DATE</label>
          <input type="date" class="form-control" readonly id="admittedDate" name="admittedDate">
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="Auth">ADMITTED CLASS</label>
+          <label for="admittedClass">ADMITTED CLASS</label>
          <input type="text" class="form-control" readonly id="admittedClass" name="admittedClass" >
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="Auth">CLASS COMPLETED </label>
+          <label for="classCompleted">CLASS COMPLETED </label>
          <input type="text" class="form-control" readonly id="classCompleted" name="classCompleted">
         </div>
       </div>
@@ -111,7 +111,7 @@ require_once "helpers/helper.php";
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="Auth"> ABILITY IN SPORTS</label>
+          <label for="sports_ability"> ABILITY IN SPORTS</label>
           <select name="sports_ability" id="sports_ability" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <option value="Distinction">Distinction</option>
@@ -126,14 +126,14 @@ require_once "helpers/helper.php";
       </div>
       <div class="col-md-4">
         <div class="form-group">
-          <label for="Auth">SCHOOL CLUB / SOCIETY MEMBERSHIP</label>
+          <label for="club">SCHOOL CLUB / SOCIETY MEMBERSHIP</label>
          <input type="text" class="form-control" name="club" placeholder="Literary & Debating, Jets" required>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <label for="Auth">SCHOOL OFFICE HELD</label>
-          <select name="student_office_name" class="custom-select form-control" required>
+          <label for="student_office_name">SCHOOL OFFICE HELD</label>
+          <select name="student_office_name" id="student_office_name" class="custom-select form-control" required>
         <option value="" selected>Choose...</option>
         <option value="Student">Student</option>
         <?php echo $Administration->get_student_office_title_inDropDown(); ?>
