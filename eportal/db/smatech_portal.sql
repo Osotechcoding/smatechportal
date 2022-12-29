@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2022 at 02:51 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.23
+-- Generation Time: Dec 29, 2022 at 03:22 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `api_module_config` (
   `api_def` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `module` (`module`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `api_module_config`
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `current_session_tbl` (
   `session_desc_name` varchar(20) DEFAULT NULL,
   `term_desc` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `current_session_tbl`
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `local_govt_tbl` (
   `state_id` int(11) DEFAULT NULL,
   `local_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`local_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=775 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=775 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `local_govt_tbl`
@@ -889,7 +889,7 @@ CREATE TABLE IF NOT EXISTS `register_exam_subject_tbl` (
   `schl_Sess` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`subId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -905,7 +905,7 @@ CREATE TABLE IF NOT EXISTS `reg_pin_history_tbl` (
   `dated` date DEFAULT NULL,
   `timed` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -922,7 +922,7 @@ CREATE TABLE IF NOT EXISTS `school_classes` (
   `class_teacher` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`class_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -938,7 +938,7 @@ CREATE TABLE IF NOT EXISTS `school_oauth_code_tbl` (
   `oauth_code` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `school_oauth_code_tbl`
@@ -959,7 +959,7 @@ CREATE TABLE IF NOT EXISTS `school_offices` (
   `status` varchar(20) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `school_offices`
@@ -992,7 +992,7 @@ CREATE TABLE IF NOT EXISTS `school_subjects` (
   `subject_code` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `school_subjects`
@@ -1061,7 +1061,7 @@ CREATE TABLE IF NOT EXISTS `tbl_admin` (
   `token` varchar(100) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`adminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_admin`
@@ -1086,7 +1086,7 @@ CREATE TABLE IF NOT EXISTS `tbl_ewallet_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1103,7 +1103,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1121,7 +1121,7 @@ CREATE TABLE IF NOT EXISTS `tbl_reg_pins` (
   `created_at` date DEFAULT NULL,
   `usedBy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_reg_pins`
@@ -1149,7 +1149,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_result_pins`
@@ -1178,7 +1178,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins_history` (
   `used_term` varchar(20) DEFAULT NULL,
   `used_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pinId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_result_pins_history`
@@ -1201,7 +1201,7 @@ CREATE TABLE IF NOT EXISTS `tbl_serial` (
   `user_name` varchar(255) DEFAULT NULL,
   `user_ip` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_serial`
@@ -1234,7 +1234,7 @@ CREATE TABLE IF NOT EXISTS `tbl_settings` (
   `town` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`config_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_settings`
@@ -1268,7 +1268,7 @@ CREATE TABLE IF NOT EXISTS `visap_1st_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_1st_term_result_tbl`
@@ -1304,7 +1304,7 @@ CREATE TABLE IF NOT EXISTS `visap_2nd_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1319,14 +1319,14 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_admin_login_token`
 --
 
 INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
-(132, 'Smatech', 'admin@smatech.com', '8iLIahgYQWzTtiMaApVSGbrf6vqT3x1xWql7a62r');
+(140, 'Smatech', 'admin@smatech.com', 'k1edEZoClQCrrMZXh75hgFqHn2sl61q219cJzSuB');
 
 -- --------------------------------------------------------
 
@@ -1346,7 +1346,7 @@ CREATE TABLE IF NOT EXISTS `visap_admission_open_tbl` (
   `note` text DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_admission_open_tbl`
@@ -1376,7 +1376,7 @@ CREATE TABLE IF NOT EXISTS `visap_assignment_tbl` (
   `schl_session` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`assId`),
   KEY `teacherId` (`teacherId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1395,7 +1395,7 @@ CREATE TABLE IF NOT EXISTS `visap_bed_payment_history_tbl` (
   `payment_date` date DEFAULT NULL,
   `receiptNo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1421,7 +1421,7 @@ CREATE TABLE IF NOT EXISTS `visap_bed_space_tbl` (
   `school_session` varchar(50) DEFAULT NULL,
   `payment_expire` date DEFAULT NULL,
   PRIMARY KEY (`bedId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_bed_space_tbl`
@@ -1457,7 +1457,7 @@ CREATE TABLE IF NOT EXISTS `visap_behavioral_tbl` (
   `class_teacher` varchar(200) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_behavioral_tbl`
@@ -1484,7 +1484,7 @@ CREATE TABLE IF NOT EXISTS `visap_blog_post_comments` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `comment_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1506,7 +1506,7 @@ CREATE TABLE IF NOT EXISTS `visap_blog_post_tbl` (
   `blog_time` time DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`blog_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1523,7 +1523,7 @@ CREATE TABLE IF NOT EXISTS `visap_bus_expense_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1540,7 +1540,7 @@ CREATE TABLE IF NOT EXISTS `visap_bus_tbl` (
   `vehicle_status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`busId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1559,7 +1559,7 @@ CREATE TABLE IF NOT EXISTS `visap_career_portal_tbl` (
   `application_date` date DEFAULT NULL,
   `application_time` time DEFAULT NULL,
   PRIMARY KEY (`job_portal_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1582,7 +1582,7 @@ CREATE TABLE IF NOT EXISTS `visap_classnote_tbl` (
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`noteId`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1600,7 +1600,7 @@ CREATE TABLE IF NOT EXISTS `visap_class_attendance_tbl` (
   `schl_session` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`attend_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1615,7 +1615,7 @@ CREATE TABLE IF NOT EXISTS `visap_class_grade_tbl` (
   `grade_status` enum('pending','active','closed') NOT NULL DEFAULT 'active',
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`gradeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_class_grade_tbl`
@@ -1658,7 +1658,7 @@ CREATE TABLE IF NOT EXISTS `visap_driver_tbl` (
   PRIMARY KEY (`dId`),
   UNIQUE KEY `driver_email` (`driver_email`),
   KEY `driver_name` (`driver_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1678,7 +1678,7 @@ CREATE TABLE IF NOT EXISTS `visap_exam_subject_tbl` (
   `schl_session` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`examId`),
   KEY `teacherId` (`teacherId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1695,7 +1695,7 @@ CREATE TABLE IF NOT EXISTS `visap_feedback_tbl` (
   `client_ip_address` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1709,7 +1709,7 @@ CREATE TABLE IF NOT EXISTS `visap_fee_component_tbl` (
   `fee_status` enum('Pending','Active') DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`compId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_fee_component_tbl`
@@ -1733,7 +1733,7 @@ CREATE TABLE IF NOT EXISTS `visap_gallery_tbl` (
   `type` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_gallery_tbl`
@@ -1758,7 +1758,7 @@ CREATE TABLE IF NOT EXISTS `visap_holiday_tbl` (
   `note_msg` text DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1774,7 +1774,7 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_rooms_tbl` (
   `amount` int(11) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`roomId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_hostel_rooms_tbl`
@@ -1798,7 +1798,7 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`hostel_id`),
   UNIQUE KEY `hostel_desc` (`hostel_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_hostel_tbl`
@@ -1829,7 +1829,7 @@ CREATE TABLE IF NOT EXISTS `visap_loan_tbl` (
   `returnedAmount` float DEFAULT NULL,
   `due` float DEFAULT NULL,
   PRIMARY KEY (`loanId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1854,7 +1854,7 @@ CREATE TABLE IF NOT EXISTS `visap_messages_tbl` (
   PRIMARY KEY (`id`),
   KEY `sender_id` (`sender_email`),
   KEY `recipient_id` (`recipient_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_messages_tbl`
@@ -1878,7 +1878,7 @@ CREATE TABLE IF NOT EXISTS `visap_messages_user_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0= suspend, 1=active',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_messages_user_tbl`
@@ -1905,7 +1905,7 @@ CREATE TABLE IF NOT EXISTS `visap_notice_board_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1919,7 +1919,7 @@ CREATE TABLE IF NOT EXISTS `visap_offered_subject_tbl` (
   `subject` varchar(100) DEFAULT NULL,
   `aca_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1935,7 +1935,7 @@ CREATE TABLE IF NOT EXISTS `visap_people_say_tbl` (
   `job` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1949,7 +1949,7 @@ CREATE TABLE IF NOT EXISTS `visap_prefect_title_tbl` (
   `status` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1973,7 +1973,7 @@ CREATE TABLE IF NOT EXISTS `visap_psycho_tbl` (
   `class_teacher` varchar(100) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_psycho_tbl`
@@ -1997,7 +1997,7 @@ CREATE TABLE IF NOT EXISTS `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_registered_subject_tbl`
@@ -2026,7 +2026,7 @@ CREATE TABLE IF NOT EXISTS `visap_result_comment_tbl` (
   `term` varchar(20) DEFAULT NULL,
   `schl_Sess` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_result_comment_tbl`
@@ -2052,7 +2052,7 @@ CREATE TABLE IF NOT EXISTS `visap_result_grading_tbl` (
   `score_remark` varchar(50) DEFAULT NULL,
   `school_ses` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`grading_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_result_grading_tbl`
@@ -2097,7 +2097,7 @@ CREATE TABLE IF NOT EXISTS `visap_routes_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `route_desc` (`route_desc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2114,7 +2114,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_expense_tbl` (
   `csession` varchar(20) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`expense_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2130,7 +2130,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_fee_allocation_tbl` (
   `created_on` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`faId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_school_fee_allocation_tbl`
@@ -2155,7 +2155,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_prefect_tbl` (
   `activeness` tinyint(1) NOT NULL DEFAULT 1,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`prefectId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2202,14 +2202,14 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
   `about_us` mediumtext DEFAULT NULL,
   `principal_welcome` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_school_profile`
 --
 
 INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
-(1, 'Smatech School Management Portal', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Making Your Work Easier', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', NULL, NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for \r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
+(1, 'Iremide Group of Schools', 'C26313', 'Plot 8, Block 5,  Smapp Estate', 'Making Your Work Easier', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16721763554875820.png', NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for \r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2227,7 +2227,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_session_history_tbl` (
   `new_term_begins` date NOT NULL,
   `updated_at` date NOT NULL,
   PRIMARY KEY (`sehisId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2244,7 +2244,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_session_tbl` (
   `term_ended` date NOT NULL,
   `new_term_begins` date NOT NULL,
   PRIMARY KEY (`seId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_school_session_tbl`
@@ -2263,7 +2263,7 @@ CREATE TABLE IF NOT EXISTS `visap_session_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `session_desc` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_session_list`
@@ -2286,7 +2286,7 @@ CREATE TABLE IF NOT EXISTS `visap_sliders_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_sliders_tbl`
@@ -2316,7 +2316,7 @@ CREATE TABLE IF NOT EXISTS `visap_social_link_tbl` (
   `linkedin` varchar(200) DEFAULT NULL,
   `WhatsApp` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_social_link_tbl`
@@ -2341,7 +2341,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_bank_details_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `staff_id` (`staff_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2359,7 +2359,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_duty_tbl` (
   `session` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`duty_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2374,7 +2374,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_staff_login_token`
@@ -2404,7 +2404,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_paid_salary_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`salaryId`),
   KEY `staff_id` (`staff_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2425,7 +2425,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_payroll_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`payrollId`),
   KEY `staff_id` (`staff_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2442,7 +2442,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_post_tbl` (
   `schlSes` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `staff_id` (`staff_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_staff_post_tbl`
@@ -2486,7 +2486,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_tbl` (
   `appliedDate` date DEFAULT NULL,
   `staffAssignedClass` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`staffId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_staff_tbl`
@@ -2506,7 +2506,7 @@ CREATE TABLE IF NOT EXISTS `visap_state_tbl` (
   `state_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_state_tbl`
@@ -2575,7 +2575,7 @@ CREATE TABLE IF NOT EXISTS `visap_stdmedical_tbl` (
   `stdBcertificate` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`medicalId`),
   KEY `studId` (`studId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2598,7 +2598,7 @@ CREATE TABLE IF NOT EXISTS `visap_stdpreschlinfo` (
   `stdLastReportSheet` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`preId`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2618,7 +2618,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_attendance_tbl` (
   `uploaded_by` varchar(200) DEFAULT NULL,
   `uploaded_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_student_attendance_tbl`
@@ -2661,7 +2661,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_info_tbl` (
   `stdFGAddress` text DEFAULT NULL,
   PRIMARY KEY (`stdInfoId`),
   KEY `studentId` (`studentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2676,7 +2676,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2703,7 +2703,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_payment_history_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`phId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_student_payment_history_tbl`
@@ -2737,7 +2737,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_payment_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`paymentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_student_payment_tbl`
@@ -2774,16 +2774,61 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
   `token` varchar(255) DEFAULT NULL,
   `stdTokenExp` datetime DEFAULT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0,
+  `admitted_class` varchar(50) DEFAULT NULL,
+  `completed_date` date DEFAULT NULL,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_student_tbl`
 --
 
-INSERT INTO `visap_student_tbl` (`stdId`, `stdRegNo`, `stdEmail`, `stdUserName`, `stdPassword`, `studentClass`, `stdSurName`, `stdFirstName`, `stdMiddleName`, `stdDob`, `stdGender`, `stdAddress`, `stdPhone`, `stdAdmStatus`, `stdApplyDate`, `stdApplyType`, `stdPassport`, `stdConfToken`, `token`, `stdTokenExp`, `is_online`) VALUES
-(1, '2021C263130001', 'osotech23@gmail.com', 'Oloruntoba', '$2y$10$tw8..VPDRHZmMuUfuiQj5eFTpZBicK1CORpzdb62Wugbu3e98XwYm', 'Basic 5', 'Oloruntoba', 'Elizabeth', 'Idowu', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131374443', 'Active', '2000-03-07', 'Day', '2021C263130001155283.png', '5d2f8bffa39c2b', NULL, NULL, 0),
-(2, '2021C263130002', 'adeyandipper@gmail.com', 'Adeyan', '$2y$10$fzrvAxLHKJsskHc6GVHEVu2IqqZeveFDaUOgEJgu4I/ZSPmzjCqg2', 'Basic 5', 'Adeyan', 'Adetayo', 'Dipper', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132323456', 'Active', '2001-08-08', 'Boarding', '2021C263130002998187.png', 'b0481066aafd36', NULL, NULL, 0);
+INSERT INTO `visap_student_tbl` (`stdId`, `stdRegNo`, `stdEmail`, `stdUserName`, `stdPassword`, `studentClass`, `stdSurName`, `stdFirstName`, `stdMiddleName`, `stdDob`, `stdGender`, `stdAddress`, `stdPhone`, `stdAdmStatus`, `stdApplyDate`, `stdApplyType`, `stdPassport`, `stdConfToken`, `token`, `stdTokenExp`, `is_online`, `admitted_class`, `completed_date`) VALUES
+(1, '2021C263130001', 'osotech23@gmail.com', 'Oloruntoba', '$2y$10$tw8..VPDRHZmMuUfuiQj5eFTpZBicK1CORpzdb62Wugbu3e98XwYm', 'JSS 3', 'Oloruntoba', 'Elizabeth', 'Idowu', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131374443', 'Active', '2022-12-29', 'Day', '2021C2631300011034484.jpeg', '5d2f8bffa39c2b', NULL, NULL, 0, 'JSS 1', '2022-12-13'),
+(2, '2021C263130002', 'adeyandipper@gmail.com', 'Adeyan', '$2y$10$fzrvAxLHKJsskHc6GVHEVu2IqqZeveFDaUOgEJgu4I/ZSPmzjCqg2', 'JSS 2', 'Adeyan', 'Adetayo', 'Dipper', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132323456', 'Active', '2022-12-28', 'Boarding', '2021C263130002998187.png', 'b0481066aafd36', NULL, NULL, 0, 'JSS 2', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `visap_student_testimonial_tbl`
+--
+
+CREATE TABLE IF NOT EXISTS `visap_student_testimonial_tbl` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `stdRegNo` varchar(50) DEFAULT NULL,
+  `admitted_class` varchar(50) DEFAULT NULL,
+  `admitted_date` date DEFAULT NULL,
+  `class_completed` varchar(50) DEFAULT NULL,
+  `date_completed` date DEFAULT NULL,
+  `academic_ability` varchar(100) DEFAULT NULL,
+  `sports_ability` varchar(100) DEFAULT NULL,
+  `office_held` varchar(50) DEFAULT NULL,
+  `school_club` varchar(100) DEFAULT NULL,
+  `general_remarks` text DEFAULT NULL,
+  `student_character` varchar(255) DEFAULT NULL,
+  `subject1` varchar(255) DEFAULT NULL,
+  `subject2` varchar(255) DEFAULT NULL,
+  `subject3` varchar(255) DEFAULT NULL,
+  `subject4` varchar(255) DEFAULT NULL,
+  `subject5` varchar(255) DEFAULT NULL,
+  `subject6` varchar(255) DEFAULT NULL,
+  `subject7` varchar(255) DEFAULT NULL,
+  `subject8` varchar(255) DEFAULT NULL,
+  `subject9` varchar(255) DEFAULT NULL,
+  `subject10` varchar(255) DEFAULT NULL,
+  `subject11` varchar(255) DEFAULT NULL,
+  `cert_no` varchar(50) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stdRegNo` (`stdRegNo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `visap_student_testimonial_tbl`
+--
+
+INSERT INTO `visap_student_testimonial_tbl` (`id`, `stdRegNo`, `admitted_class`, `admitted_date`, `class_completed`, `date_completed`, `academic_ability`, `sports_ability`, `office_held`, `school_club`, `general_remarks`, `student_character`, `subject1`, `subject2`, `subject3`, `subject4`, `subject5`, `subject6`, `subject7`, `subject8`, `subject9`, `subject10`, `subject11`, `cert_no`, `created_at`) VALUES
+(1, '2021C263130001', 'JSS 1', '2022-12-29', 'JSS 3', '2022-12-13', 'Distinction', 'Very Good', 'Student', 'Jet Club', 'Well Behaved Student', 'Satisfactory', 'General Mathematics', 'English Language', 'Agricultural Science', 'Biology', 'Chemistry', 'Civic Education', 'Economics', 'Physics', 'Yoruba Language', NULL, NULL, '2365736304', '2022-12-29 03:03:24');
 
 -- --------------------------------------------------------
 
@@ -2806,7 +2851,7 @@ CREATE TABLE IF NOT EXISTS `visap_submitted_class_assignment_tbl` (
   `Submitted_at` date DEFAULT NULL,
   `note_to_student` text DEFAULT NULL,
   PRIMARY KEY (`aId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2833,7 +2878,7 @@ CREATE TABLE IF NOT EXISTS `visap_termly_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2854,7 +2899,7 @@ CREATE TABLE IF NOT EXISTS `visap_upcoming_event_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`eventId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2876,7 +2921,7 @@ CREATE TABLE IF NOT EXISTS `visap_virtual_lesson_tbl` (
   `counter` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`lectureId`),
   KEY `teacher` (`teacher`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2899,7 +2944,7 @@ CREATE TABLE IF NOT EXISTS `visitor_book` (
   `cterm` varchar(50) DEFAULT NULL,
   `cses` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`visitor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Constraints for dumped tables

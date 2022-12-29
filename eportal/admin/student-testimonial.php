@@ -6,12 +6,12 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
   $student_reg = $Configuration->Clean($Configuration->convert_String("decode",$_GET['data']));
   $testimonial_data = $Student->getTestimonialByRegNo($student_reg);
   if (!$testimonial_data) {
-    $Configuration->redirect("./generate-testimonial");
+    $Configuration->redirect("generate-testimonial");
     exit();
   }
     $student_data = $Student->get_student_data_byRegNo($student_reg);
 } else {
-    $Configuration->redirect("./generate-testimonial");
+    $Configuration->redirect("generate-testimonial");
     exit();
 }
 ?>
@@ -21,7 +21,7 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSS 3 Testimonial</title>
+    <title><?php echo strtoupper ($SmappDetails->school_name); ?> - Certificate for - <?php echo $student_data->full_name;?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Gwendolyn:wght@700&family=Satisfy&family=Special+Elite&display=swap" rel="stylesheet">
     <style> @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Gwendolyn:wght@700&family=Satisfy&family=Special+Elite&display=swap'); </style>
 </head>
@@ -70,7 +70,7 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                     <p style="text-align:left;font-style: italic; font-size:20px;">Class Completed:___________________________ Date Completed:_______________</p>
                 </div>
                 <div class="fet-entrybg-values1">
-                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<?php echo strtoupper( date("M., Y",strtotime($testimonial_data->date_completed)));?></p>
+                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date("M., Y",strtotime($testimonial_data->date_completed)));?></p>
                 </div>
 
                 <div class="fet-subject-offered">
@@ -135,11 +135,13 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                 </div>
             </div>
             <!-- Repeated bg -->
-            <p id="fet-bg-repeat"><?php for($i=1; $i<800; $i++){
+            <p id="fet-bg-repeat"><?php for($i=1; $i<185; $i++){
                     echo  '<span>&nbsp; &nbsp;'.strtoupper ($SmappDetails->school_name).'&nbsp; &nbsp;</span> ';
             } ?> 
            </p>
         </section>
     </main>
+    <!-- <button type="button" style="text-align: center;justify-content: center; justify-items: center; margin-top:20px;" onclick="window.print();">Print Now</button> -->
+    <script>window.onload= window.print();</script>
 </body>
 </html>

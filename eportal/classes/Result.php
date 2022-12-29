@@ -17,6 +17,7 @@ class Result
 	protected $stmt; //database statement
 	protected $response; //database result
 	protected $config; //default config
+	protected $alert; //default alert
 
 	public function __construct()
 	{
@@ -78,7 +79,6 @@ class Result
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//upload head of school result comment
@@ -136,7 +136,6 @@ class Result
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//View uploaded result method
@@ -147,7 +146,6 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 	//published result method
@@ -230,7 +228,6 @@ class Result
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//View published result method
@@ -241,7 +238,6 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -264,7 +260,6 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -276,7 +271,6 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->rowCount();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 

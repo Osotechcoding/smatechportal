@@ -35,7 +35,7 @@ class Configuration
   {
     return date_default_timezone_set("Africa/Lagos");
   }
-  public function check_single_data($table, $field, $field_val)
+  public function check_single_data($table, $field, $field_val): bool
   {
     $this->query = "SELECT * FROM `{$table}` WHERE `{$field}`=?";
     $this->stmt = $this->dbh->prepare($this->query);

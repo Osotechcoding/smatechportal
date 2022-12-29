@@ -44,7 +44,7 @@ require_once "helpers/helper.php";
           <div class="row">
              <div class="col-12">
     <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>
-     STUDENT TESTIMONIAL MODULE</h3>
+     STUDENT TESTIMONIAL MODULE <span><a href="javascript:void(0);" onclick="window.location.href='./reprintcert'" class=" btn btn-light-info btn-sm btn-pill">Re-Print Certificate</a> </span> </h3>
   </div>
     </div>
 
@@ -52,40 +52,51 @@ require_once "helpers/helper.php";
       <div class="card-body">
         <form id="StudentTestimonialForm" autocomplete="off">
       <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
-          <label for="Auth">ADMISSION NO</label>
+          <label for="admissionNumber">ADMISSION NO</label>
          <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="XXXXC26313XXXX">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="getTestyClass">TESTIMONIAL CLASS</label>
+          <select name="getTestyClass" id="getTestyClass" class="custom-select form-control">
+            <option value="" selected>Choose...</option>
+        <option value="Basic 5">Basic 5</option>
+        <option value="JSS 3">JSS 3</option>
+        <option value="SSS 3">SSS 3</option>
+        </select>
+        </div>
+      </div>
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">ADMITTED DATE</label>
          <input type="date" class="form-control" readonly id="admittedDate" name="admittedDate">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">ADMITTED CLASS</label>
          <input type="text" class="form-control" readonly id="admittedClass" name="admittedClass" >
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">CLASS COMPLETED </label>
          <input type="text" class="form-control" readonly id="classCompleted" name="classCompleted">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">DATE COMPLETED </label>
          <input type="date" class="form-control" readonly id="dateCompleted" name="dateCompleted">
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">ACADEMIC ABILITY</label>
-          <select name="academic_ability" id="student_class" class="custom-select form-control">
+          <select name="academic_ability" id="student_class" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <option value="Distinction">Distinction</option>
             <option value="Excellent">Excellent</option>
@@ -98,10 +109,10 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth"> ABILITY IN SPORTS</label>
-          <select name="sports_ability" id="sports_ability" class="custom-select form-control">
+          <select name="sports_ability" id="sports_ability" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <option value="Distinction">Distinction</option>
             <option value="Excellent">Excellent</option>
@@ -113,107 +124,107 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">SCHOOL CLUB / SOCIETY MEMBERSHIP</label>
-         <input type="text" class="form-control" name="club" placeholder="Literary & Debating, Jets">
+         <input type="text" class="form-control" name="club" placeholder="Literary & Debating, Jets" required>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group">
           <label for="Auth">SCHOOL OFFICE HELD</label>
-          <select name="student_office_name" class="custom-select form-control">
+          <select name="student_office_name" class="custom-select form-control" required>
         <option value="" selected>Choose...</option>
         <option value="Student">Student</option>
         <?php echo $Administration->get_student_office_title_inDropDown(); ?>
         </select>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group">
           <label for="character">CONDUCT & CHARACTER</label>
-         <input type="text" class="form-control" name="character" placeholder="Satisfactory">
+         <input type="text" class="form-control" name="character" placeholder="Satisfactory" required>
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="remarks">GENERAL REMARKS (<span class="text-warning">Not more than Five (5) Words</span> )</label>
-         <textarea type="text" class="form-control" name="remarks" placeholder="General Remarks"></textarea>
+         <textarea type="text" required class="form-control" name="remarks" placeholder="General Remarks"></textarea>
         </div>
       </div>
       </div>
       <h4>List of Subjects Offered by the Student <span class="text-danger">Select at least 8 Subjects</span> </h4>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_one"> SUBJECT ONE </label>
           <input type="text" name="subject_one" id="subject_one"
            class="form-control" readonly value="General Mathematics">
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_two"> SUBJECT TWO </label>
           <input type="text" name="subject_two" id="subject_two"
            class="form-control" readonly value="English Language">
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_three"> SUBJECT THREE </label>
-          <select name="subject_three" id="subject_three" class="custom-select form-control">
+          <select name="subject_three" id="subject_three" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_all_subjects_InDropDown_list();?>
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           
           <label for="subject_four">SUBJECT FOUR </label>
-          <select name="subject_four" id="subject_four" class="custom-select form-control">
+          <select name="subject_four" id="subject_four" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_all_subjects_InDropDown_list();?>
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_five"> SUBJECT FIVE  </label>
-          <select name="subject_five" id="subject_five" class="custom-select form-control">
+          <select name="subject_five" id="subject_five" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_all_subjects_InDropDown_list();?>
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_six"> SUBJECT SIX </label>
-          <select name="subject_six" id="subject_six" class="custom-select form-control">
+          <select name="subject_six" id="subject_six" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_all_subjects_InDropDown_list();?>
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_seven"> SUBJECT SEVEN </label>
-          <select name="subject_seven" id="subject_seven" class="custom-select form-control">
+          <select name="subject_seven" id="subject_seven" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_all_subjects_InDropDown_list();?>
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_eight"> SUBJECT EIGHT </label>
-          <select name="subject_eight" id="subject_eight" class="custom-select form-control">
+          <select name="subject_eight" id="subject_eight" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_all_subjects_InDropDown_list();?>
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_nine">SUBJECT NINE </label>
           <select name="subject_nine" id="subject_nine" class="custom-select form-control">
@@ -222,7 +233,7 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
         <div class="form-group">
           <label for="subject_ten"> SUBJECT TEN </label>
           <select name="subject_ten" id="subject_ten" class="custom-select form-control">
@@ -231,22 +242,14 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-        <div class="col-md-6">
-        <div class="form-group">
-          <label for="subject_eleven"> SUBJECT ELEVEN </label>
-          <select name="subject_eleven" id="subject_eleven" class="custom-select form-control">
-            <option value="" selected> Choose...</option>
-            <?php echo $Administration->get_all_subjects_InDropDown_list();?>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-3">
+        
+      <div class="col-md-4">
         <div class="form-group">
           <label for="cert_no">CERTIFICATE NUMBER</label>
          <input type="text" readonly class="form-control" name="cert_no" value="<?php echo $Student->generateTestimonialSerialNo() ?>">
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="auth_code">AUTHENTICATION CODE</label>
          <input type="password" autocomplete="off" class="form-control" name="auth_code" placeholder="Enter Pass code">

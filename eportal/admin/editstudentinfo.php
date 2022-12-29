@@ -92,7 +92,7 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
                   <h4 class="text-uppercase text-center">STUDENT UPDATE FORM</h4>
                 </div>
                 <div class="card-body">
-                  <form class="form form-horizontal" id="student_update_form">
+                  <form class="form form-horizontal" id="student_update_form" autocomplete="off">
                     <div class="form-body">
                       <div class="row">
                         <input type="hidden" name="action" value="update_student_data">
@@ -112,7 +112,7 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
                             value="<?php echo $student_data->stdFirstName; ?>">
                         </div>
                         <div class="col-md-4">
-                          <label>LastName:</label>
+                          <label>Middle Name:</label>
                         </div>
                         <div class="col-md-8 form-group">
                           <input type="text" class="form-control" name="lname" placeholder="First Name"
@@ -154,16 +154,6 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
                             value="<?php echo $student_data->studentClass; ?>">
                         </div>
                         <div class="col-md-4">
-                          <label>Change Student Class To:</label>
-                        </div>
-                        <div class="col-md-8 form-group">
-                          <select name="presentClass" class="form-control custom-select">
-                            <option value="<?php echo $student_data->studentClass; ?>" selected>
-                              <?php echo $student_data->studentClass ?></option>
-                            <?php echo $Administration->get_classroom_InDropDown_list(); ?>
-                          </select>
-                        </div>
-                        <div class="col-md-4">
                           <label>Gender:</label>
                         </div>
                         <div class="col-md-8 form-group">
@@ -193,7 +183,7 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
                             <option value="Active">Active</option>
                             <option value="Suspended">Suspended</option>
                             <option value="Expelled">Expelled</option>
-                            <option value="Transfered">Transfered</option>
+                            <option value="Transfered">Transferred</option>
                             <option value="Graduated">Graduated</option>
                             <option value="Left">Left</option>
                           </select>
@@ -201,15 +191,14 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
                         <div class="col-12 col-md-8 offset-md-4 form-group">
                           <fieldset>
                             <div class="col-md-12">
-                              <input type="password" class="form-control" name="auth_pass" placeholder="**********">
+                              <input type="password" class="form-control" name="auth_pass" placeholder="Enter Pass Code">
                               <label>Authentication Code</label>
                             </div>
                           </fieldset>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-end">
                           <button type="submit" class="btn btn-dark btn-lg mr-1 __loadingBtn__">Save Changes</button>
-                          <a href="./ab_students"><button type="button" class="btn btn-danger btn-lg">Go
-                              Back</button></a>
+                          <button type="button" class="btn btn-danger" onclick="window.location.assign('./');">Back</button>
                         </div>
                       </div>
                     </div>

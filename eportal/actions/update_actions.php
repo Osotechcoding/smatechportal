@@ -592,5 +592,12 @@ if ($request_method === "POST") {
         echo $result;
       }
     }
+    //admit_new_student
+    if ($_POST['action'] === "admit_new_student") {
+      $result = $Student->offerAdmissionToStudent($_POST);
+      if ($result) {
+        echo $result;
+      }
+    }
   }
 }

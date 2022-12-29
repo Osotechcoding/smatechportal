@@ -107,6 +107,12 @@
            <li class=" nav-item"><a href="viewPublishedResult"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Published">View Published</span></a>
            </li>
+           <li class=" nav-item"><a href="generate-testimonial"><i class="fa fa-certificate fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Generate Certificate">Generate Certificate</span></a>
+           </li>
+           <li class=" nav-item"><a href="reprintcert"><i class="fa fa-print fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Re-Print Certificate">Re-Print Certificate</span></a>
+           </li>
 
          </ul>
        </li>

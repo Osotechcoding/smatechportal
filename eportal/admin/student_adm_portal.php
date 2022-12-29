@@ -63,7 +63,7 @@ require_once "helpers/helper.php";
         </div>
         <div class="card-body card-dashboard">
           <div class="table-responsive">
-            <table class="table table-striped osotechDatatable">
+            <table class="table table-striped table-bordered">
               <thead>
                 <tr>
                   <th>PASSPORT</th>
@@ -109,8 +109,8 @@ require_once "helpers/helper.php";
             <td><a href="studentphotocard?action=view&newstudentdata=<?php echo $Configuration->saltifyString($students->stdId);?>" target="_blank"><button class="btn btn-primary btn-sm round">View</button></a> </td>
          <td>
           <div class="btn-group mb-1">
-            <a class="text-info" href="editstudentinfo?student-data=<?php echo ($students->stdId);?>">
-              <button type="button" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></button></a> 
+            <a class="text-info" href="admit-student?action=admit&new-student=<?php echo $Configuration->convert_String("code",$students->stdId);?>">
+              <span class="badge badge-success badge-pill badge-sm"> Offer Admission</span></a> 
           </div>
           <!--  -->
         </td>

@@ -49,11 +49,8 @@ class Administration
 			while ($row = $this->stmt->fetch()) {
 				$this->response .= '<option value="' . $row->gradeDesc . '">' . $row->gradeDesc . '</option>';
 			}
-		} else {
-			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_classroom_InDropDown()

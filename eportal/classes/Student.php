@@ -898,19 +898,19 @@ class Student
 		$lname = $this->config->Clean($data['lname']);
 		$address = $this->config->Clean($data['address']);
 		$dob = $this->config->Clean(date("Y-m-d", strtotime($data['dateofbirth'])));
-		$presentClass = $this->config->Clean($data['presentClass']);
+		// $presentClass = $this->config->Clean($data['presentClass']);
 		$gender = $this->config->Clean($data['gender']);
 		$approved = $this->config->Clean($data['auth_pass']);
 		//check for values
-		if ($this->config->isEmptyStr($stdId) || $this->config->isEmptyStr($student_status) || $this->config->isEmptyStr($surname) || $this->config->isEmptyStr($fname) || $this->config->isEmptyStr($lname) || $this->config->isEmptyStr($dob) || $this->config->isEmptyStr($presentClass) || $this->config->isEmptyStr($gender) || $this->config->isEmptyStr($approved) || $this->config->isEmptyStr($address) || $this->config->isEmptyStr($stdRegNo)) {
+		if ($this->config->isEmptyStr($stdId) || $this->config->isEmptyStr($student_status) || $this->config->isEmptyStr($surname) || $this->config->isEmptyStr($fname) || $this->config->isEmptyStr($lname) || $this->config->isEmptyStr($dob) ||  $this->config->isEmptyStr($gender) || $this->config->isEmptyStr($approved) || $this->config->isEmptyStr($address) || $this->config->isEmptyStr($stdRegNo)) {
 			$this->response = $this->alert->alert_toastr("error", "There is an error in your Submission, Please check your inputs!", __OSO_APP_NAME__ . " Says");
 		} elseif ($approved !== __OSO__CONTROL__KEY__) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code, Try again!", __OSO_APP_NAME__ . " Says");
 		} else {
 			try {
 				$this->dbh->beginTransaction();
-				$this->stmt = $this->dbh->prepare("UPDATE $this->table_name SET stdRegNo=?, studentClass=?,stdSurName=?,stdFirstName=?,stdMiddleName=?,stdDob=?,stdGender=?,stdAdmStatus=?, stdAddress=? WHERE stdId=? LIMIT 1");
-				if ($this->stmt->execute(array($stdRegNo, $presentClass, $surname, $fname, $lname, $dob, $gender, $student_status, $address, $stdId))) {
+				$this->stmt = $this->dbh->prepare("UPDATE $this->table_name SET stdRegNo=?, stdSurName=?,stdFirstName=?,stdMiddleName=?,stdDob=?,stdGender=?,stdAdmStatus=?, stdAddress=? WHERE stdId=? LIMIT 1");
+				if ($this->stmt->execute(array($stdRegNo, $surname, $fname, $lname, $dob, $gender, $student_status, $address, $stdId))) {
 					$this->dbh->commit();
 					$this->dbh = null;
 					$this->response = $this->alert->alert_toastr("success", "Updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
@@ -1543,16 +1543,23 @@ class Student
     } else {
     //update the student class
     try {
-
     $this->dbh->beginTransaction();
-    $this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=? WHERE stdId=?");
-    if ($this->stmt->execute(array($promoted_to, $keyId))) {
+	// $student_data = $this->get_student_data_byId($keyId);
+	
+	if($promoted_to =="Basic 5" || $promoted_to =="JSS 3" || $promoted_to =="SSS 3"){
+		$completed_date = date("Y-m-d");
+		$this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=?,completed_date=? WHERE stdId=?");
+	}else{
+		$completed_date = NULL;
+		$this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=?,completed_date=? WHERE stdId=?");
+	}
+    if ($this->stmt->execute(array($promoted_to,$completed_date, $keyId))) {
     $this->dbh->commit();
     $this->response = $this->alert->alert_toastr("success", "Promoted Successfully...", __OSO_APP_NAME__ . " Says") . "
     <script>
     setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 800);
     </script>";
     } else {
     $this->response = $this->alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
@@ -2046,10 +2053,10 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		return $this->response;
 	}
 
-	public function testimonialDetailsByRegNo($stdRegNo)
+	public function testimonialDetailsByRegNo($stdRegNo, $student_class)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND stdAdmStatus='Graduated'");
-		$this->stmt->execute(array($stdRegNo));
+		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND `studentClass`=? AND completed_date <> NULL OR completed_date <> ''");
+		$this->stmt->execute(array($stdRegNo,$student_class));
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
@@ -2068,13 +2075,13 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	public function fetchStudentTestimonialInfo(array $data)
 	{
 		$regNo = $this->config->Clean($data['admNo']);
-		if(!$this->config->isEmptyStr($regNo)){
-			$this->response = $this->testimonialDetailsByRegNo($regNo);
+		$student_class = $this->config->Clean($data['student_class']);
+		if(!$this->config->isEmptyStr($regNo) && !$this->config->isEmptyStr($student_class)){
+			$this->response = $this->testimonialDetailsByRegNo($regNo,$student_class);
 			if($this->response){
 			return $this->response;
 			}	
 		}
-	
 	}
 	/**
 	 * Summary of generateTestimonialSerialNo
@@ -2120,7 +2127,6 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		$subject8 = $this->config->clean($data['subject_eight']);
 		$subject9 = $this->config->clean($data['subject_nine']);
 		$subject10 = $this->config->clean($data['subject_ten']);
-		$subject11 = $this->config->clean($data['subject_eleven']);
 		//check for compulsary values 
 		if($this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($admittedDate) || $this->config->isEmptyStr($admittedClass) || $this->config->isEmptyStr($classCompleted) || $this->config->isEmptyStr($dateCompleted) || $this->config->isEmptyStr($academic_ability) || $this->config->isEmptyStr($sports_ability)|| $this->config->isEmptyStr($subject1) || $this->config->isEmptyStr($subject2) || $this->config->isEmptyStr($subject3) || $this->config->isEmptyStr($subject4) || $this->config->isEmptyStr($subject5) || $this->config->isEmptyStr($subject6) || $this->config->isEmptyStr($subject7) || $this->config->isEmptyStr($subject8) || $this->config->isEmptyStr($character)){
 			$this->response = $this->alert->alert_toastr("error", "Select at least Eight(8) Subjects , to continue!", __OSO_APP_NAME__ . " Says");
@@ -2134,30 +2140,98 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication code!", __OSO_APP_NAME__ . " Says");
 		}else if(str_word_count($remarks) > 5){
 			$this->response = $this->alert->alert_toastr("error", " General Remarks cannot be more than five words!", __OSO_APP_NAME__ . " Says");
-
 		}
 		else if(!$this->config->check_single_data($this->table_name,"stdRegNo", $stdRegNo)){
 			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
 		}else{
-		$admittedDate = date("Y-m-d", strtotime($admittedDate));
-		$dateCompleted = date("Y-m-d", strtotime($dateCompleted));
-		try{
-			$this->dbh->beginTransaction();
-			$sql_query = "INSERT INTO `visap_student_testimonial_tbl` (stdRegNo,admitted_class,
-			admitted_date,class_completed,date_completed,academic_ability,sports_ability,office_held,school_club,general_remarks,student_character,subject1,subject2,subject3,subject4,subject5,subject6,subject7,subject8,subject9,subject10,subject11,cert_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-			$this->stmt = $this->dbh->prepare($sql_query);
-			if($this->stmt->execute([$stdRegNo,$admittedClass, $admittedDate,$classCompleted,
-			$dateCompleted,$academic_ability,$sports_ability,$office,$club,$remarks,$character,$subject1,$subject2,$subject3,$subject4,$subject5,$subject6,$subject7,$subject8,$subject9,$subject10,$subject11,$cert_no
-			])){
-				$this->dbh->commit();
-				$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says").$this->config->redirectWithTime("./student-testimonial?data=".$this->config->convert_string("code",$stdRegNo),6000);
+			//check if this testimonial is already generated
+			if($this->config->check_single_data("visap_student_testimonial_tbl","stdRegNo", $stdRegNo)){
+				$this->response = $this->alert->alert_toastr("error", " Certificate is already generated for $stdRegNo!", __OSO_APP_NAME__ ." Says");
+			}else{
+				$admittedDate = date("Y-m-d", strtotime($admittedDate));
+				$dateCompleted = date("Y-m-d", strtotime($dateCompleted));
+				try{
+					$this->dbh->beginTransaction();
+					$sql_query = "INSERT INTO `visap_student_testimonial_tbl` (stdRegNo,admitted_class,
+					admitted_date,class_completed,date_completed,academic_ability,sports_ability,office_held,school_club,general_remarks,student_character,subject1,subject2,subject3,subject4,subject5,subject6,subject7,subject8,subject9,subject10,cert_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+					$this->stmt = $this->dbh->prepare($sql_query);
+					if($this->stmt->execute([$stdRegNo,$admittedClass, $admittedDate,$classCompleted,
+					$dateCompleted,$academic_ability,$sports_ability,$office,$club,$remarks,$character,$subject1,$subject2,$subject3,$subject4,$subject5,$subject6,$subject7,$subject8,$subject9,$subject10,$cert_no
+					])){
+						$this->dbh->commit();
+						$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$stdRegNo);
+						$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
+							window.open("' . $testimonial_link . '","_blank","top=50, left=50, width=700, height=900");
+						},4000)</script>';
+					}
+				}catch(PDOException $e){
+					$this->dbh->rollback();
+					$this->response = $this->alert->alert_toastr("error", "Internal Error Occurred! Try again", __OSO_APP_NAME__ . " Says");
+				}
 			}
-		}catch(PDOException $e){
-			$this->dbh->rollback();
-			$this->response = $this->alert->alert_toastr("error", "Internal Error Occurred! Try again", __OSO_APP_NAME__ . " Says");
 		}
+		return $this->response;
+	}
+	public function rePrintTestimonial($data){
+		$cert_no = $this->config->Clean($data['cert_number']);
+		$auth_code = $this->config->Clean($data['auth_code']);
+		//check for empty values
+		if($this->config->isEmptyStr($cert_no)){
+			$this->response = $this->alert->alert_toastr("error", "Certificate Number is Required", __OSO_APP_NAME__ ." Says");
+		}else if(strlen($cert_no) <> 10){
+			$this->response = $this->alert->alert_toastr("error", "Invalid Certificate Number", __OSO_APP_NAME__ ." Says");
+		}
+		else if($this->config->isEmptyStr($auth_code)){
+			$this->response = $this->alert->alert_toastr("error", "Authentication Code is Required!", __OSO_APP_NAME__ ." Says");
+		}else if($auth_code !== __OSO__CONTROL__KEY__){
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+			//check if the student with the entered reg no exist
+		}else if(!$this->config->check_single_data("visap_student_testimonial_tbl","cert_no", $cert_no)){
+			$this->response = $this->alert->alert_toastr("error", "Do Not Play Smart: This Certificate Number is Invalid", __OSO_APP_NAME__ ." Says");
+		}else{
+	$testimonial_data = $this->config->get_single_data("visap_student_testimonial_tbl","cert_no",$cert_no);
+	if($testimonial_data){
+		$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$testimonial_data->stdRegNo);
+		$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
+			window.open("' . $testimonial_link . '","_blank", "top=10, left=100, width=850, height=950");
+		},4000)</script>';
+	}else{
+		$this->response = $this->alert->alert_toastr("error", "No Record Found!", __OSO_APP_NAME__ ." Says");
+	}
+	
 		}
 		return $this->response;
 	}
 
+	public function offerAdmissionToStudent(array $data)
+	{
+		$stdId = $this->config->Clean($data['student_id']);
+		$admitted_class = $this->config->Clean($data['admitted_class']);
+		$admitted_date = $this->config->Clean($data['admittedDate']);
+		$auth_code = $this->config->Clean($data['auth_code']);
+		if($this->config->isEmptyStr($stdId) || $this->config->isEmptyStr($admitted_class) || $this->config->isEmptyStr($admitted_date) ){
+		$this->response = $this->alert->alert_toastr("error", "Invalid Submission", __OSO_APP_NAME__ ." Says");
+		}else if($this->config->isEmptyStr($auth_code)){
+		$this->response = $this->alert->alert_toastr("error", "Authentication Code is Required!", __OSO_APP_NAME__ ." Says");
+		}else if($auth_code !== __OSO__CONTROL__KEY__){
+		$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		}else{
+			$admitted_date = date("Y-m-d", strtotime($admitted_date));
+			try{
+				$active = "Active";
+				$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("UPDATE `{$this->table_name}` SET `studentClass`=?, `admitted_class`=?, `stdAdmStatus`=?, `stdApplyDate`=?
+      WHERE stdId=?");
+      if ($this->stmt->execute([$admitted_class, $admitted_class, $active, $admitted_date,$stdId])) {
+      $this->dbh->commit();
+	  $this->response = $this->alert->alert_toastr("success", "Admission Offered successfully!", __OSO_APP_NAME__ . " Says").$this->config->redirectWithTime("student_adm_portal",4000);
+	  }
+			}catch(PDOException $e){
+				$this->dbh->rollback();
+				$this->response = $this->alert->alert_toastr("error", "Internal Error Occurred! Try again", __OSO_APP_NAME__ . " Says");
+			}
+		}
+		return $this->response;
+
+	}
       }

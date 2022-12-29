@@ -642,5 +642,12 @@
 					echo  $result;
 				}
 			}
+			//_reprint_testimonial_certificate_action_
+			if ($_POST['action'] === "_reprint_testimonial_certificate_action_") {
+				$result = $Student->rePrintTestimonial($_POST);
+				if ($result) {
+					echo  $result;
+				}
+			}
 		}
 	}

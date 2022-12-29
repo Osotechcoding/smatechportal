@@ -1,36 +1,44 @@
 $(document).ready(function(){
     let dateCompleted=$("#dateCompleted"),classCompleted=$("#classCompleted"),
-    admittedClass=$("#admittedClass"),admittedDate=$("#admittedDate");
-    $('#admissionNumber').on("change", function(){
-let regNo = $(this).val();
-if(regNo.length > 0 || regNo !=""){
-    //send request to get all the above info in db
-    $.ajax({
-        method:"POST",
-        dataType:"JSON",
-        url:"../actions/actions",
-        data:{action:'fetch-graduated-student-details',admNo:regNo},
-        success:  function(response){
-            console.log(response);
-            setTimeout(() => {
-                if(response){
-                    admittedClass.val(response.admitted_class);
-                    dateCompleted.val(response.completed_date);
-                    classCompleted.val(response.studentClass);
-                    admittedDate.val(response.stdApplyDate);
-                }
-            }, 300);
+    admittedClass = $("#admittedClass"),admittedDate=$("#admittedDate");
+
+    $("#getTestyClass").on("change", function(){
+    let TestyClass = $(this).val();
+    let  admissionNumber = $('#admissionNumber').val();
+    if(TestyClass !=""){
+    //2021C263130001
+    if(admissionNumber.trim() !="" && admissionNumber.trim().length > 0){
+        //send request to get all the above info in db
+        $.ajax({
+            method:"POST",
+            dataType:"JSON",
+            url:"../actions/actions",
+            data:{action:'fetch-graduated-student-details',
+            admNo:admissionNumber,
+            student_class:TestyClass
         },
-       
-      }); 
-}else{
-    admittedClass.val('');
-    dateCompleted.val('');
-    classCompleted.val('');
-    admittedDate.val('');
+            success:  function(response){
+                console.log(response);
+                setTimeout(() => {
+                    if(response){
+                        admittedClass.val(response.admitted_class);
+                        dateCompleted.val(response.completed_date);
+                        classCompleted.val(response.studentClass);
+                        admittedDate.val(response.stdApplyDate);
+                    }
+                }, 300);
+            },
+          }); 
+    }else{
+        alert("Enter Student Admission Number to Continue");
+        admittedClass.val('');
+        dateCompleted.val('');
+        classCompleted.val('');
+        admittedDate.val('');
+        return false;
+    }
 }
     });
-
     //when generate testimonial btn is clicked
     $("#StudentTestimonialForm").on("submit", function(e){
         e.preventDefault();

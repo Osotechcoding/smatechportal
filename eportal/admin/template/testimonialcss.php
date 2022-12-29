@@ -110,7 +110,6 @@ section > div{
     margin-top: -46px;
     font-family: 'Special Elite', cursive;
     font-size: smaller;
-    
 }
 .fet-entrybg-values1{
     margin-top: -75px;

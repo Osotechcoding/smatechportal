@@ -44,7 +44,7 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-graduation-cap fa-2x"></span> STUDENTS PROMOTIOM MODULE</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-graduation-cap fa-2x"></span> STUDENTS PROMOTION MODULE</h3>
   </div>
     </div>
     
@@ -62,7 +62,7 @@ require_once "helpers/helper.php";
                     <select name="student_class" class="form-control custom-select" id="users-list-verified">
                            <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list();?>
-                           <option value="Graduated">Graduated</option>
+                           <!-- <option value="Graduated">Graduated</option> -->
                         </select>
                    </fieldset>
                </div>
@@ -70,14 +70,7 @@ require_once "helpers/helper.php";
                   <label for="users-list-role"> Status</label>
                     <fieldset class="form-group">
                         <select name="student_status" class="form-control" id="users-list-role">
-                            <option value="">Choose...</option>
-                            <option value="Pending">Pending</option>
                             <option value="Active" selected>Active</option>
-                            <option value="Suspended">Suspended</option>
-                            <option value="Expelled">Expelled</option>
-                            <option value="Transfered">Transfered</option>
-                            <option value="Graduated">Graduated</option>
-                            <option value="Left">Left</option>
                         </select>
                     </fieldset>
                 </div>
@@ -93,7 +86,7 @@ require_once "helpers/helper.php";
        <?php if (isset($_POST['filter-btn']) && $_POST['filter-btn']!=""): ?>
          <?php if (empty($_POST['student_class'])) {
           echo '<div class="text-center col-12 col-md-12">
-          '.$Alert->alert_msg("Fliter Class is required!","danger").'
+          '.$Alert->alert_msg("Filter Class is required!","danger").'
           </div>';
          }elseif (empty($_POST['student_status'])) {
            echo '<div class="text-center col-12 col-md-12">
@@ -113,10 +106,9 @@ require_once "helpers/helper.php";
       <table class="table table-bordered">
         <thead class="text-center bg-default">
           <tr>
-            
             <th>S/N</th>
           <th>PASSPORT</th>
-          <th>FULLNAME</th>
+          <th>FULL NAME</th>
           <th>PRESENT CLASS</th>
           <th>STATUS</th>
           <th><input type="checkbox" id="checkAll" class="form-check-input"> </th>
@@ -151,7 +143,9 @@ require_once "helpers/helper.php";
           <select name="promoted_to" id="promoted_to" class="form-control custom-select">
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_classroom_InDropDown_list();?>
-            <option value="Graduated">Graduated</option>
+            <?php if( $student_class =="Basic 5" ||  $student_class=="JSS 3" ||  $student_class == " SSS 3"){
+              echo '<option value="Graduated">Graduated</option>';
+            } ?>
           </select>
         </div>
       </div>
@@ -163,7 +157,7 @@ require_once "helpers/helper.php";
       </div>
       </div>
       <input type="hidden" name="action" value="promote_bulk_students">
-      <button type="submit" class="btn btn-dark btn-lg btn-round float-right mb-3 __loadingBtn__">Submit</button>
+      <button type="submit" class="btn btn-dark btn-lg btn-round float-right mb-1 __loadingBtn__">Submit</button>
     </div>
     </form>
       </div>
