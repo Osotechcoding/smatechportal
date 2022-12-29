@@ -2104,10 +2104,6 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	public function generateStudentCertificate(array $data):string
 	{
 		$stdRegNo = $this->config->clean($data['admissionNumber']);
-		$admittedDate = $this->config->clean($data['admittedDate']);
-		$admittedClass = $this->config->clean($data['admittedClass']);
-		$classCompleted = $this->config->clean($data['classCompleted']);
-		$dateCompleted = $this->config->clean($data['dateCompleted']);
 		$academic_ability = $this->config->clean($data['academic_ability']);
 		$sports_ability = $this->config->clean($data['sports_ability']);
 		$pass_code = $this->config->clean($data['auth_code']);
@@ -2128,7 +2124,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		$subject9 = $this->config->clean($data['subject_nine']);
 		$subject10 = $this->config->clean($data['subject_ten']);
 		//check for compulsary values 
-		if($this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($admittedDate) || $this->config->isEmptyStr($admittedClass) || $this->config->isEmptyStr($classCompleted) || $this->config->isEmptyStr($dateCompleted) || $this->config->isEmptyStr($academic_ability) || $this->config->isEmptyStr($sports_ability)|| $this->config->isEmptyStr($subject1) || $this->config->isEmptyStr($subject2) || $this->config->isEmptyStr($subject3) || $this->config->isEmptyStr($subject4) || $this->config->isEmptyStr($subject5) || $this->config->isEmptyStr($subject6) || $this->config->isEmptyStr($subject7) || $this->config->isEmptyStr($subject8) || $this->config->isEmptyStr($character)){
+		if($this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($academic_ability) || $this->config->isEmptyStr($sports_ability)|| $this->config->isEmptyStr($subject1) || $this->config->isEmptyStr($subject2) || $this->config->isEmptyStr($subject3) || $this->config->isEmptyStr($subject4) || $this->config->isEmptyStr($subject5) || $this->config->isEmptyStr($subject6) || $this->config->isEmptyStr($subject7) || $this->config->isEmptyStr($subject8) || $this->config->isEmptyStr($character)){
 			$this->response = $this->alert->alert_toastr("error", "Select at least Eight(8) Subjects , to continue!", __OSO_APP_NAME__ . " Says");
 
 		}else if($this->config->isEmptyStr($pass_code)){
@@ -2145,17 +2141,20 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
 		}else{
 			//check if this testimonial is already generated for the student in Basic 5, Jss3 or SSS 3
+			$student_data = $this->get_student_data_ByRegNo($stdRegNo);
+				$admittedDate = $student_data->stdApplyDate;
+				$dateCompleted = $student_data->completed_date;
+				$admitted_class = $student_data->admitted_class;
+				$classCompleted = $student_data->studentClass;
 			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$classCompleted)){
 				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
 			}else{
-				$admittedDate = date("Y-m-d", strtotime($admittedDate));
-				$dateCompleted = date("Y-m-d", strtotime($dateCompleted));
 				try{
 					$this->dbh->beginTransaction();
 					$sql_query = "INSERT INTO `visap_student_testimonial_tbl` (stdRegNo,admitted_class,
 					admitted_date,class_completed,date_completed,academic_ability,sports_ability,office_held,school_club,general_remarks,student_character,subject1,subject2,subject3,subject4,subject5,subject6,subject7,subject8,subject9,subject10,cert_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 					$this->stmt = $this->dbh->prepare($sql_query);
-					if($this->stmt->execute([$stdRegNo,$admittedClass, $admittedDate,$classCompleted,
+					if($this->stmt->execute([$stdRegNo,$admitted_class, $admittedDate,$classCompleted,
 					$dateCompleted,$academic_ability,$sports_ability,$office,$club,$remarks,$character,$subject1,$subject2,$subject3,$subject4,$subject5,$subject6,$subject7,$subject8,$subject9,$subject10,$cert_no
 					])){
 						$this->dbh->commit();

@@ -49,48 +49,16 @@ require_once "helpers/helper.php";
     </div>
 
             <div class="card">
+              <div class="card-header">
+              <p class="text-danger text-uppercase"><i> NOTE: that Certificate is ONLY available for students in <b>(Basic 5, JSS 3 and SSS 3) Classes</b></i></p>
+              </div>
       <div class="card-body">
         <form id="StudentTestimonialForm" autocomplete="off">
       <div class="row">
       <div class="col-md-4">
         <div class="form-group">
           <label for="admissionNumber">ADMISSION NO</label>
-         <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="XXXXC26313XXXX">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="getTestyClass">TESTIMONIAL CLASS</label>
-          <select name="getTestyClass" id="getTestyClass" class="custom-select form-control">
-            <option value="" selected>Choose...</option>
-        <option value="Basic 5">Basic 5</option>
-        <option value="JSS 3">JSS 3</option>
-        <option value="SSS 3">SSS 3</option>
-        </select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="admittedDate">ADMITTED DATE</label>
-         <input type="date" class="form-control" readonly id="admittedDate" name="admittedDate">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="admittedClass">ADMITTED CLASS</label>
-         <input type="text" class="form-control" readonly id="admittedClass" name="admittedClass" >
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="classCompleted">CLASS COMPLETED </label>
-         <input type="text" class="form-control" readonly id="classCompleted" name="classCompleted">
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="Auth">DATE COMPLETED </label>
-         <input type="date" class="form-control" readonly id="dateCompleted" name="dateCompleted">
+         <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="XXXXC26313XXXX" required>
         </div>
       </div>
       <div class="col-md-4">
@@ -105,7 +73,6 @@ require_once "helpers/helper.php";
             <option value="Credit">Credit</option>
             <option value="Poor">Poor</option>
             <option value="Very Poor">Very Poor</option>
-            
           </select>
         </div>
       </div>
@@ -130,7 +97,7 @@ require_once "helpers/helper.php";
          <input type="text" class="form-control" name="club" placeholder="Literary & Debating, Jets" required>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="student_office_name">SCHOOL OFFICE HELD</label>
           <select name="student_office_name" id="student_office_name" class="custom-select form-control" required>
@@ -140,20 +107,20 @@ require_once "helpers/helper.php";
         </select>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class="form-group">
           <label for="character">CONDUCT & CHARACTER</label>
          <input type="text" class="form-control" name="character" placeholder="Satisfactory" required>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-12">
         <div class="form-group">
           <label for="remarks">GENERAL REMARKS (<span class="text-warning">Not more than Five (5) Words</span> )</label>
          <textarea type="text" required class="form-control" name="remarks" placeholder="General Remarks"></textarea>
         </div>
       </div>
       </div>
-      <h4>List of Subjects Offered by the Student <span class="text-danger">Select at least 8 Subjects</span> </h4>
+      <h4>List of Subjects Offered by the Student (<span class="text-danger"><small>Select at least 8 Subjects</small></span>) </h4>
       <div class="row">
         <div class="col-md-4">
         <div class="form-group">
@@ -258,9 +225,8 @@ require_once "helpers/helper.php";
       </div>
       <input type="hidden" name="action" value="_certificate_generate_action_">
       <button type="submit" class="btn btn-dark btn-lg btn-round float-right mb-3 __loadingBtn__">GENERATE TESTIMONIAL</button>
-   
     </form>
-    <p class="text-danger"><i> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere soluta Deserunt ullam autem in, nemo at non vero iure laborum. Quia,</i></p>
+
       </div>
     </div>
            

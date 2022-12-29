@@ -171,4 +171,21 @@ nav{
     padding: 10px;
     box-shadow: 0 0 10px rgb(138, 104, 104);
 }
+#fet-print-btn {
+    position:relative;
+    width:auto;
+    padding:5px;
+    margin:15px 50px 25px 0px;
+    border-radius:20px;
+    background-color: darkred;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+@media print {
+    #fet-print-btn{
+        display:none;
+    }
+}
 </style>

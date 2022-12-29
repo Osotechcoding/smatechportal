@@ -629,12 +629,12 @@
 				}
 			}
 			//generate_student_id_card_
-			if ($_POST['action'] === "fetch-graduated-student-details") {
-				$result = $Student->fetchStudentTestimonialInfo($_POST);
-				if ($result) {
-					echo json_encode( $result);
-				}
-			}
+			// if ($_POST['action'] === "fetch-graduated-student-details") {
+			// 	$result = $Student->fetchStudentTestimonialInfo($_POST);
+			// 	if ($result) {
+			// 		echo json_encode( $result);
+			// 	}
+			// }
 			//generate_student_id_card_
 			if ($_POST['action'] === "_certificate_generate_action_") {
 				$result = $Student->generateStudentCertificate($_POST);

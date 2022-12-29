@@ -58,7 +58,18 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                     <p class="fet-name-uline"></p>
                 </div>
                 <div>
-                    <p style="text-align:center; font-size:20px; margin-top: -2px;margin-bottom: -1px;">has successfully completed Senior Secondary School.</p>
+                    <p style="text-align:center; font-size:20px; margin-top: -2px;margin-bottom: -1px;">has successfully completed <?php switch ($testimonial_data->class_completed) {
+                        case 'JSS 3':
+                            echo 'Junior Secondary School.';
+                            break;
+                        case 'SSS 3':
+                            echo 'Senior Secondary School.';
+                            break;
+                        
+                        default:
+                          echo 'Primary School.';
+                            break;
+                    }?> </p>
                 </div>
                 <div class="fet-entrybg">
                     <p style="text-align:left; font-size:20px; font-style: italic;line-height: 18px;">Class on Admission:_________________________ Date Admitted:________________</p>
@@ -140,13 +151,15 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
             } ?> 
            </p>
         </section>
+       
     </main>
-    <!-- <button type="button" style="text-align: center;justify-content: center; justify-items: center; margin-top:20px;" onclick="window.print();">Print Now</button> -->
-    <script>
+    <button type="button" id="fet-print-btn" onclick="window.print();">Print Certificate Now</button>
+    <!--  -->
+    <!-- <script>
        document.addEventListener('DOMContentLoaded', printPage, false);
 function printPage () {
     window.print();
 }
-    </script>
+    </script> -->
 </body>
 </html>
