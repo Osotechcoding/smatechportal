@@ -6,5 +6,5 @@
     </ul>
     <p class="text-center text-muted">&copy; <script>
       document.write(new Date().getFullYear());
-    </script> Alright Reserved || <span class="text-danger">Powered By: <?php echo __OSO_DEV_COMPANY__; ?></span>  </p>
+    </script> Alright Reserved || <span class="text-danger">Powered By: <?php echo __OSOTECH__DEV_COMPANY__; ?></span>  </p>
   </footer>

@@ -1,6 +1,6 @@
 <?php
-if (!defined("__OSO_DEV_COMPANY__")) {
-    define("__OSO_DEV_COMPANY__", ucwords("osotech software inc"));
+if (!defined("__OSOTECH__DEV_COMPANY__")) {
+    define("__OSOTECH__DEV_COMPANY__", ucwords("Flat ERP Technologies"));
     define("__OSO_HOST__",'localhost');
     define("__OSO_USER__",'root');
     define("__OSO_PASS__",'osotech');
