@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2022 at 03:22 AM
+-- Generation Time: Dec 30, 2022 at 11:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -1319,14 +1319,14 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_admin_login_token`
 --
 
 INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
-(140, 'Smatech', 'admin@smatech.com', 'k1edEZoClQCrrMZXh75hgFqHn2sl61q219cJzSuB');
+(1, 'Smatech', 'admin@smatech.com', '7KYDlruPYEjH1zmGj2HXxDw67y13rJ5HLaNMQdMbCfv7wOQuAvfMU8z33hXftMtU1pqr8NlhugWHgVeqIKUwVINqFngUPROTaIVeM');
 
 -- --------------------------------------------------------
 
@@ -1353,7 +1353,7 @@ CREATE TABLE IF NOT EXISTS `visap_admission_open_tbl` (
 --
 
 INSERT INTO `visap_admission_open_tbl` (`id`, `admission_desc`, `batch`, `adm_start`, `adm_end`, `interview_date`, `interview_time`, `schl_session`, `note`, `status`) VALUES
-(3, 'September Admission', 'Batch A', '2022-08-08', '2022-08-25', '2022-08-29', '09:00:00', '2021/2022', 'A simple, good looking cookie alert for Bootstrap. No dependencies required. We recommend using Bootstrap 4, but Boostrap 3 should work fine as well.', 0);
+(3, 'September Admission', 'Batch A', '2022-08-08', '2022-08-25', '2022-08-29', '09:00:00', '2021/2022', 'A simple, good looking cookie alert for Bootstrap. No dependencies required. We recommend using Bootstrap 4, but Boostrap 3 should work fine as well.', 1);
 
 -- --------------------------------------------------------
 
@@ -2185,6 +2185,8 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
   `website_url` text DEFAULT NULL,
   `website_name` varchar(255) DEFAULT NULL,
   `school_logo` varchar(255) DEFAULT NULL,
+  `stamp` varchar(255) DEFAULT NULL,
+  `signature` varchar(255) DEFAULT NULL,
   `school_barcode` varchar(255) DEFAULT NULL,
   `school_badge` varchar(255) DEFAULT NULL,
   `school_favicon` varchar(25) DEFAULT NULL,
@@ -2208,8 +2210,8 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
 -- Dumping data for table `visap_school_profile`
 --
 
-INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
-(1, 'Iremide Group of Schools', 'C26313', 'Plot 8, Block 5,  Smapp Estate', 'Making Your Work Easier', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16721763554875820.png', NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for \r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
+INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `stamp`, `signature`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
+(1, 'Flat ERP Technologies Schools', 'C26313', 'Plot 8, Block 5,  Smapp Estate', 'School Application Portal', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', NULL, 'stamp_1672435072872829.png', 'sign_16724350724043882.png', NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'FLATERP', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for \r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2374,14 +2376,14 @@ CREATE TABLE IF NOT EXISTS `visap_staff_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_staff_login_token`
 --
 
 INSERT INTO `visap_staff_login_token` (`id`, `username`, `email`, `token`) VALUES
-(21, 'Samson', 'jerry@gmail.com', '5bI9YFswMh32srcvHXPZcpfYJU8MMa');
+(1, 'Yakubu', 'oiza@gmail.com', 'B8EDug0ox5Fpj9uWEYfZ3pfMFWIwfmbOiGArpxYjZ9hCgdcv4Lexe6bD8CnH3An41Y93nGaFUirK1HMgKRTyu6cUJhMHtNeY27');
 
 -- --------------------------------------------------------
 
@@ -2493,7 +2495,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_tbl` (
 --
 
 INSERT INTO `visap_staff_tbl` (`staffId`, `staffRegNo`, `staffGrade`, `staffRole`, `firstName`, `lastName`, `staffEmail`, `staffPass`, `staffUser`, `staffDob`, `staffEducation`, `staffPhone`, `staffCourse`, `staffAddress`, `confirmation_code`, `staffToken`, `tokenExpire`, `staffPassport`, `staffGender`, `maritalStatus`, `portalEmail`, `jobStatus`, `online`, `staffType`, `appliedDate`, `staffAssignedClass`) VALUES
-(2, 'SMP22002', 'Basic 5', 'Class Teacher', 'Yakubu Oiza', 'Blessing', 'oiza@gmail.com', '$2y$10$lGsL4bPIKPYk32fMZuPivOMvi7Iv1mqyEDr7Qba/XsxdoxUGJR/vS', 'Yakubu', '1992-09-11', 'Phd', '098765432', NULL, 'Some sample address', 'e1e63946043789b', NULL, NULL, NULL, 'Female', NULL, 'oiza@SMAPP.portal', 1, 0, 'Teaching', '2022-12-06', NULL),
+(2, 'SMP22002', 'Basic 5', 'Class Teacher', 'Yakubu Oiza', 'Blessing', 'oiza@gmail.com', '$2y$10$lGsL4bPIKPYk32fMZuPivOMvi7Iv1mqyEDr7Qba/XsxdoxUGJR/vS', 'Yakubu', '1992-09-11', 'Phd', '098765432', NULL, 'Some sample address', 'e1e63946043789b', NULL, NULL, NULL, 'Female', NULL, 'oiza@SMAPP.portal', 1, 1, 'Teaching', '2022-12-06', NULL),
 (3, 'SMP22003', NULL, 'Principal', 'Samson Jerry', 'Agberayi', 'jerry@gmail.com', '$2y$10$WbyLFYSgzlvkx60spbSTTOfvs3xHdL6krpt2Ngh0UUYey6Q.X7WSC', 'Samson', NULL, 'HND', '09098765432', NULL, NULL, '7da5813de25a0f1', NULL, NULL, NULL, 'Male', NULL, 'jerry@SMAPP.portal', 1, 1, 'Teaching', '2022-12-13', NULL);
 
 -- --------------------------------------------------------
@@ -2737,14 +2739,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_payment_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`paymentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_student_payment_tbl`
---
-
-INSERT INTO `visap_student_payment_tbl` (`paymentId`, `std_id`, `stdAdmNo`, `stdGrade`, `component_fee`, `total_fee`, `fee_paid`, `fee_due`, `payment_status`, `payment_date`, `term`, `sch_session`, `payment_method`, `teller`, `bank_name`, `collectedBy`, `today_date`) VALUES
-(1, 1, '2021C263130001', 'Basic 5', 'Exam Fee', 10000, 5000, 5000, 1, '2022-12-20', '1st Term', '2022/2023', 'Cash', NULL, NULL, '<br />\r\n<b>Notice</b>:  Undefined index: ADMIN_ID in <b>C:\nmpphtdocssmatechportaleportaldmin	emplat', '2022-12-20');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2777,7 +2772,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
   `admitted_class` varchar(50) DEFAULT NULL,
   `completed_date` date DEFAULT NULL,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_student_tbl`
@@ -2785,7 +2780,11 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
 
 INSERT INTO `visap_student_tbl` (`stdId`, `stdRegNo`, `stdEmail`, `stdUserName`, `stdPassword`, `studentClass`, `stdSurName`, `stdFirstName`, `stdMiddleName`, `stdDob`, `stdGender`, `stdAddress`, `stdPhone`, `stdAdmStatus`, `stdApplyDate`, `stdApplyType`, `stdPassport`, `stdConfToken`, `token`, `stdTokenExp`, `is_online`, `admitted_class`, `completed_date`) VALUES
 (1, '2021C263130001', 'osotech23@gmail.com', 'Oloruntoba', '$2y$10$tw8..VPDRHZmMuUfuiQj5eFTpZBicK1CORpzdb62Wugbu3e98XwYm', 'JSS 3', 'Oloruntoba', 'Elizabeth', 'Idowu', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131374443', 'Active', '2022-12-29', 'Day', '2021C2631300011034484.jpeg', '5d2f8bffa39c2b', NULL, NULL, 0, 'JSS 1', '2022-12-13'),
-(2, '2021C263130002', 'adeyandipper@gmail.com', 'Adeyan', '$2y$10$fzrvAxLHKJsskHc6GVHEVu2IqqZeveFDaUOgEJgu4I/ZSPmzjCqg2', 'JSS 2', 'Adeyan', 'Adetayo', 'Dipper', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132323456', 'Active', '2022-12-28', 'Boarding', '2021C263130002998187.png', 'b0481066aafd36', NULL, NULL, 0, 'JSS 2', NULL);
+(2, '2021C263130002', 'adeyandipper@gmail.com', 'Adeyan', '$2y$10$fzrvAxLHKJsskHc6GVHEVu2IqqZeveFDaUOgEJgu4I/ZSPmzjCqg2', 'SSS 3', 'Adeyan', 'Adetayo', 'Dipper', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132323456', 'Active', '2022-12-28', 'Boarding', '2021C263130002998187.png', 'b0481066aafd36', NULL, NULL, 0, 'JSS 2', '2022-12-29'),
+(3, '2021C263130003', 'flaterptech@gmail.com', 'Agberayi', '$2y$10$X2bbbQsC3weSXq2VDTLjjOSHK3GdEGsWpkF0aU71CAVJjlabBBQoS', 'JSS 1', 'Agberayi', 'Iremide', 'Ovayoza', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131373443', 'Active', '2000-03-07', 'Day', NULL, 'ebe713c7afb1b7', NULL, NULL, 0, 'JSS 1', NULL),
+(4, '2021C263130004', 'aadeyemi@gmail.com', 'Adeyemi', '$2y$10$6GrfhYdMrHfExuqUsfKqVOK6I3tVhCuo0hpyKBiRWLGfUkOQojdrW', 'JSS 1', 'Adeyemi', 'Adewumi', 'Adeola', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132353456', 'Active', '2001-08-08', 'Boarding', NULL, 'db35f8013a76b2', NULL, NULL, 0, 'JSS 1', NULL),
+(5, '2021C263130005', 'flaterptechnologies@gmail.com', 'Yakubu', '$2y$10$RMzrAEfWgNgz2kloHUYjkutyw5icW8d/iszllZJSV8chbbw.6xT5.', 'JSS 2', 'Yakubu', 'Elizabeth', 'Ovayoza', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131373743', 'Active', '2000-03-07', 'Day', NULL, '0e6640e186c630', NULL, NULL, 0, 'JSS 2', NULL),
+(6, '2021C263130006', 'aadeyemi247@gmail.com', 'Adeyemo', '$2y$10$S9NtzYfAK.qnRC9Zdo/H9u8IYX88Yxf9KPDAalvpTszQan9YIvyUy', 'JSS 2', 'Adeyemo', 'Oluwasegun', 'Adeola', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132359456', 'Active', '2001-08-08', 'Boarding', NULL, '05b0181e9e1dba', NULL, NULL, 0, 'JSS 2', NULL);
 
 -- --------------------------------------------------------
 
@@ -2821,14 +2820,15 @@ CREATE TABLE IF NOT EXISTS `visap_student_testimonial_tbl` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `stdRegNo` (`stdRegNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `visap_student_testimonial_tbl`
 --
 
 INSERT INTO `visap_student_testimonial_tbl` (`id`, `stdRegNo`, `admitted_class`, `admitted_date`, `class_completed`, `date_completed`, `academic_ability`, `sports_ability`, `office_held`, `school_club`, `general_remarks`, `student_character`, `subject1`, `subject2`, `subject3`, `subject4`, `subject5`, `subject6`, `subject7`, `subject8`, `subject9`, `subject10`, `subject11`, `cert_no`, `created_at`) VALUES
-(1, '2021C263130001', 'JSS 1', '2022-12-29', 'JSS 3', '2022-12-13', 'Distinction', 'Very Good', 'Student', 'Jet Club', 'Well Behaved Student', 'Satisfactory', 'General Mathematics', 'English Language', 'Agricultural Science', 'Biology', 'Chemistry', 'Civic Education', 'Economics', 'Physics', 'Yoruba Language', NULL, NULL, '2365736304', '2022-12-29 03:03:24');
+(1, '2021C263130002', 'JSS 2', '2022-12-28', 'SSS 3', '2022-12-29', 'Distinction', 'Distinction', 'Student', 'Jets Club', 'He is a Promising Child', 'Good Student', 'General Mathematics', 'English Language', 'Government', 'Further Mathematics', 'Health Habit', 'Yoruba Language', 'Civic Education', 'French', 'Poem Reading', NULL, NULL, '1700371124', '2022-12-29 22:33:45'),
+(2, '2021C263130001', 'JSS 1', '2022-12-29', 'JSS 3', '2022-12-13', 'Very Good', 'Excellent', 'Student', 'Young Shall Grow', 'He is a Good Student', 'Satisfactory', 'General Mathematics', 'English Language', 'Agricultural Science', 'Insurance', 'Economics', 'Government', 'Further Mathematics', 'Social Norms', 'Poem Reading', NULL, NULL, '8723528524', '2022-12-30 22:24:43');
 
 -- --------------------------------------------------------
 
