@@ -35,6 +35,6 @@ $staff_assigned_class = $staff_data->staffGrade;
 $session_data = $Administration->get_session_details();
 $activeSess = $Administration->get_active_session_details();
 
-if ($Staff->checkStaffTokenExists($_SESSION['STAFF_USERNAME'], $_SESSION['STAFF_EMAIL'], $_SESSION['staff_token']) === false) {
+if (!$Staff->checkStaffTokenExists($_SESSION['STAFF_USERNAME'], $_SESSION['STAFF_EMAIL'], $_SESSION['staff_token'])) {
   $Configuration->destroy();
 }

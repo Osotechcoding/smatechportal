@@ -5,7 +5,6 @@
 
         <html class="loading" lang="en" data-textdirection="ltr">
         <!-- BEGIN: Head-->
-
         <head>
           <?php include "../template/MetaTag.php"; ?>
           <title><?php echo $SmappDetails->school_name ?> :: School Profile Settings</title>
@@ -13,7 +12,6 @@
           <?php include "../template/HeaderLink.php"; ?>
           <!-- END: Head-->
           <!-- BEGIN: Body-->
-
         <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  "
           data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
           <!-- BEGIN: Header-->
@@ -57,28 +55,25 @@
                     <div class="col-12">
                       <div class="row">
                         <!-- left menu section -->
-
                         <!-- right content section -->
                         <div class="col-md-12">
                           <div class="card">
                             <div class="card-body">
-
                               <!-- Logo Form -->
-
-                              <form class="validate-form" id="upload-school-logo-form">
+                              <form id="uploadSchoolStampForm" enctype="multipart/form-data">
                                 <div class="row">
                                   <div class="col-md-6">
                                     <div class="form-group">
-                                      <label for="logoName">School Stamp <span class="text-danger">(png format
+                                      <label for="stamp">School Stamp <span class="text-danger">(png format
                                           Only)</span></label>
-                                      <input type="file" class="form-control form-control-lg" name="logoName"
+                                      <input type="file" class="form-control form-control-lg" name="stamp"
                                         onchange="previewFileStamp(this);">
                                     </div>
                                     <div class="col-md-6 offset-2" id="uploaded_logo">
                                       <img id="previewStamp" width="200"
                                         src="<?php echo $Configuration->getSchoolStamp(); ?>" alt="Placeholder"
                                         style="border: 2px solid darkblue;border-radius:10px;">
-                                      <p>Image Size: <span id="ImageSize"></span></p>
+                                      <p>Image Size: <span id="StampSize"></span></p>
                                     </div>
                                   </div>
                                   <div class="col-md-6">
@@ -98,20 +93,19 @@
                                   <div class="col-md-6">
                                     <div class="form-group">
                                       <div class="controls">
-                                        <input type="hidden" name="action" value="uploadschLogo">
-                                        <label>Authentication Code</label>
+                                        <input type="hidden" name="action" value="upload_school_stamp_signature_">
+                                        <label for="auth_code">Authentication Code</label>
                                         <input autocomplete="off" type="password" class="form-control"
-                                          placeholder="*********" name="m_auth">
+                                          placeholder="Enter Pass code" name="auth_code">
                                       </div>
                                     </div>
                                   </div>
-
                                   <div class="col-md-6">
                                     <label></label>
                                     <div class="form-group">
                                       <div class="controls">
                                         <button type="submit"
-                                          class="btn btn-dark btn-lg glow mb-1 __loadingBtn10__">Upload Stamp
+                                          class="btn btn-dark btn-lg glow mb-1 __loadingBtn__">Upload
                                         </button>
                                       </div>
                                     </div>
@@ -119,9 +113,7 @@
 
                                 </div>
                               </form>
-
                               <!-- Logo Form -->
-
                             </div>
                           </div>
                         </div>
@@ -137,18 +129,13 @@
 
           </div>
           <!-- demo chat-->
-
           <?php include "../template/footer.php"; ?>
           <!-- END: Footer-->
-
           <!-- BEGIN: Vendor JS-->
           <?php include "../template/FooterScript.php"; ?>
           <!-- BEGIN: Page JS-->
           <script src="smappjs/upload-stamp.js"></script>
           <!-- END: Page JS-->
-
-          <!-- END: Page JS-->
         </body>
         <!-- END: Body-->
-
         </html>

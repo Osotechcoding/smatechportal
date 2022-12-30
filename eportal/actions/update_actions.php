@@ -599,5 +599,12 @@ if ($request_method === "POST") {
         echo $result;
       }
     }
+    //upload_school_stamp_signature_
+    if ($_POST['action'] === "upload_school_stamp_signature_") {
+      $result = $Administration->UpdateSchoolStamp($_POST, $_FILES);
+      if ($result) {
+        echo $result;
+      }
+    }
   }
 }

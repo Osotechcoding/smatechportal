@@ -50,7 +50,7 @@ class Admin
 			$this->query = "SELECT * FROM {$this->table} WHERE adminEmail=? AND adminType=? LIMIT 1";
 			$this->stmt = $this->dbh->prepare($this->query);
 			$this->stmt->execute(array($email, $accessUser));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$result = $this->stmt->fetch();
 				$db_password = $result->adminPass;
 				//check if password entered match with db pwd
@@ -64,7 +64,7 @@ class Admin
 					$_SESSION['ADMIN_SES_TYPE'] = $result->adminType;
 					$_SESSION['ADMIN_USERNAME'] = $result->adminUser;
 					$_SESSION['ADMIN_EMAIL'] = $result->adminEmail;
-					$token = $this->config->generateRandomUserToken(40);
+					$token = $this->config->generateRandomUserToken(101);
 					$_SESSION['ADMIN_TOKEN'] = $token;
 					//check token 
 					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_admin_login_token` WHERE Name=? AND Email=?");
@@ -72,10 +72,10 @@ class Admin
 
 					if ($this->stmt->rowCount() > 0) {
 						// code... update the token
-						$this->stmt = $this->dbh->prepare("UPDATE `visap_admin_login_token` SET Token=? WHERE Name=? AND Email=?");
+						$this->stmt = $this->dbh->prepare("UPDATE `visap_admin_login_token` SET `Token`=? WHERE `Name`=? AND Email=?");
 						$this->stmt->execute(array($token, $_SESSION['ADMIN_USERNAME'], $_SESSION['ADMIN_EMAIL']));
 					} else {
-						$this->stmt = $this->dbh->prepare("INSERT INTO `visap_admin_login_token` (Name,Email,Token) VALUES (?,?,?);");
+						$this->stmt = $this->dbh->prepare("INSERT INTO `visap_admin_login_token` (`Name`,Email,`Token`) VALUES (?,?,?);");
 						$this->stmt->execute(array($_SESSION['ADMIN_USERNAME'], $_SESSION['ADMIN_EMAIL'], $token));
 					}
 					$admin_home_link = APP_ROOT . "admin/";
@@ -388,13 +388,15 @@ class Admin
 				//compare the two tokens
 				if ($token !== $currentToken) {
 					//return false
-					$this->response = false;
+				return false;
 				}else{
-					$this->response = true;
+				return true;
 				}
+			}else{
+			return false;
 			}
 		}
-		return $this->response;
+		
 	}
 
 	//update token upon logged out

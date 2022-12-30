@@ -29,7 +29,7 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
 <?php include_once "template/testimonialcss.php";?>
     <main>
         <section>
-            <nav><em>SSC / Cert. No.</em> <br><b><?php echo $testimonial_data->cert_no;?></b></nav>
+            <nav><em>Serial Number.</em> <br><b><?php echo $testimonial_data->cert_no;?></b></nav>
             <div>
             <div class="fet-upper-part">
                     <div class="fet-sch-name"> <?php echo strtoupper ($SmappDetails->school_name); ?></div>
@@ -58,17 +58,14 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                     <p class="fet-name-uline"></p>
                 </div>
                 <div>
-                    <p style="text-align:center; font-size:20px; margin-top: -2px;margin-bottom: -1px;">has successfully completed <?php switch ($testimonial_data->class_completed) {
-                        case 'JSS 3':
-                            echo 'Junior Secondary School.';
-                            break;
-                        case 'SSS 3':
-                            echo 'Senior Secondary School.';
-                            break;
-                        
-                        default:
-                          echo 'Primary School.';
-                            break;
+                    <p style="text-align:center; font-size:20px; margin-top: -2px;margin-bottom: -1px;">has successfully completed 
+                    <?php 
+                    if ($testimonial_data->class_completed === "Basic 5") {
+                            echo 'Primary School.';
+                    }else if($testimonial_data->class_completed === "JSS 3"){
+                        echo 'Junior Secondary School.';
+                    }else {
+                        echo 'Senior Secondary School.';
                     }?> </p>
                 </div>
                 <div class="fet-entrybg">
@@ -138,11 +135,11 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                 <div class="fet-sign-director">
                    
                     <p><b><em>Any alteration renders this document invalid.</em> </b></p>
-                    <img src="../schoolImages/Logo/sign.png" alt="Director's Sign" width="100" height="auto">
+                    <img src="<?php echo $Configuration->getSchoolSignature(); ?>" alt="Director's Sign" width="100" height="auto">
                     <p style="border-top: 1.5px dashed black;">Director of Studies</p>
                 </div>
                 <div class="fet-sign-principal">
-                    <p><img src="../schoolImages/Logo/stamp.png" alt="" width="150" height="auto"></p>
+                    <p><img src="<?php echo $Configuration->getSchoolStamp(); ?>" alt="" width="150" height="auto"></p>
                 </div>
             </div>
             <!-- Repeated bg -->

@@ -1,9 +1,5 @@
 <?php
-# https://www.youtube.com/watch?v=iG2jotQo9NI
-# https://www.youtube.com/watch?v=l4G2MVgXFkw
-/**
- * 
- */
+
 @session_start();
 require_once "Database.php";
 require_once "Session.php";
@@ -75,13 +71,13 @@ class Staff
 					$_SESSION['STAFF_EMAIL'] = $result->staffEmail;
 
 					//LOGIN TOKEN
-					$token = $this->config->generateRandomUserToken(30);
+					$token = $this->config->generateRandomUserToken(98);
 					$_SESSION['staff_token'] = $token;
 					//check token 
 					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_login_token` WHERE username=? AND email=?LIMIT 1");
 					$this->stmt->execute([$_SESSION['STAFF_USERNAME'], $_SESSION['STAFF_EMAIL']]);
 
-					if ($this->stmt->rowCount() == 1) {
+					if ($this->stmt->rowCount() > 0) {
 						// code... update the token
 						$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_login_token` SET token=? WHERE username=? AND email=? LIMIT 1");
 						$this->stmt->execute(array($token, $_SESSION['STAFF_USERNAME'], $_SESSION['STAFF_EMAIL']));
@@ -141,7 +137,6 @@ class Staff
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function login_from_cookie_staff($data)
@@ -172,13 +167,13 @@ class Staff
 					$_SESSION['STAFF_USERNAME'] = $result->staffUser;
 					$_SESSION['STAFF_EMAIL'] = $result->staffEmail;
 					//LOGIN TOKEN
-					$token = $this->config->generateRandomUserToken(30);
+					$token = $this->config->generateRandomUserToken(98);
 					$_SESSION['staff_token'] = $token;
 					//check token 
 					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_login_token` WHERE username=? AND email=?LIMIT 1");
 					$this->stmt->execute([$_SESSION['STAFF_USERNAME'], $_SESSION['STAFF_EMAIL']]);
 
-					if ($this->stmt->rowCount() == 1) {
+					if ($this->stmt->rowCount() >0) {
 						// code... update the token
 						$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_login_token` SET token=? WHERE username=? AND email=? LIMIT 1");
 						$this->stmt->execute(array($token, $_SESSION['STAFF_USERNAME'], $_SESSION['STAFF_EMAIL']));
@@ -235,7 +230,6 @@ class Staff
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//reset staff password
@@ -261,7 +255,7 @@ class Staff
 			//check the old pass with the one in the database
 			$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffId=? LIMIT 1");
 			$this->stmt->execute(array($staffId));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				// grab the old pasword from db
 				$row = $this->stmt->fetch();
 				$database_old_password = $row->staffPass;
@@ -296,7 +290,6 @@ class Staff
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 
@@ -328,7 +321,7 @@ class Staff
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -356,7 +349,7 @@ class Staff
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -369,7 +362,7 @@ class Staff
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -377,10 +370,10 @@ class Staff
 	{
 		$this->stmt = $this->dbh->prepare("SELECT *,concat(`firstName`,' ',`lastName`) as full_name FROM {$this->table} WHERE staffId=? LIMIT 1");
 		$this->stmt->execute([$staffId]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -391,7 +384,7 @@ class Staff
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return json_encode($this->response, JSON_PRETTY_PRINT);
-			$this->dbh = null;
+
 		}
 	}
 
@@ -441,7 +434,6 @@ class Staff
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function assign_staff_class_teacher($data)
@@ -454,7 +446,7 @@ class Staff
 		if ($this->stmt->execute([$id])) {
 			$this->response = true;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -481,7 +473,7 @@ class Staff
 			//lets check if this user already uploaded an account details
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_bank_details_tbl` WHERE staff_id=? LIMIT 1");
 			$this->stmt->execute(array($staffId));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "Bank Details already Uploaded,Please contact your portal admin for your bank Details update!", __OSO_APP_NAME__ . " Says");
 			} else {
 				//create a fresh account detaisl for the current user
@@ -507,7 +499,6 @@ class Staff
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//create new staff
 	public function create_new_staff($d)
@@ -576,20 +567,18 @@ class Staff
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function checkBankDetails($staffId): bool
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_bank_details_tbl` WHERE staff_id=? LIMIT 1");
 		$this->stmt->execute([$staffId]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = true;
 		} else {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//generate staff admission no
@@ -664,7 +653,6 @@ class Staff
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//fetch office details json format
@@ -673,10 +661,10 @@ class Staff
 		$office_id = $this->config->Clean($office_id);
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_post_tbl` WHERE id=? LIMIT 1");
 		$this->stmt->execute(array($office_id));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -714,7 +702,6 @@ class Staff
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function count_staff_by_gender($gender)
@@ -725,7 +712,7 @@ class Staff
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -755,7 +742,7 @@ class Staff
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -763,10 +750,10 @@ class Staff
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_post_tbl` WHERE id=? LIMIT 1");
 		$this->stmt->execute([$prefectId]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function count_all_online_staff()
@@ -777,7 +764,7 @@ class Staff
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->online;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -833,45 +820,54 @@ class Staff
 			$this->response = $this->alert->alert_toastr("error", "Please Select a passport to Upload", __OSO_APP_NAME__ . " Says");
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 
 	//CHECK STAFF TOKEN
-	public function checkStaffTokenExists($name, $email, $token)
+	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $name
+	 * @param [type] $email
+	 * @param [type] $token
+	 * @return boolean
+	 */
+	public function checkStaffTokenExists($name, $email, $token):bool
 	{
 		if (isset($name, $email, $token)) {
-			$this->stmt = $this->dbh->prepare("SELECT token FROM `visap_staff_login_token` WHERE username=? AND email=? LIMIT 1");
+			$this->stmt = $this->dbh->prepare("SELECT token FROM `visap_staff_login_token` WHERE username=? AND email=?");
 			$this->stmt->execute(array($name, $email));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				//collect the current token from db
 				$tokenRow = $this->stmt->fetch();
 				$currentToken = $tokenRow->token;
 				//compare the two tokens
 				if ($token !== $currentToken) {
 					//return false
-					$this->response = false;
+					return  false;
+				}else{
+					return true;
 				}
+			}else{
+				return false;
 			}
 		}
-		return $this->response;
-		$this->dbh = null;
+		// return $this->response;
 	}
 
 	//delete toke upon logged out
 	public function deleteSessionToken($name, $email, $token)
 	{
-		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_staff_login_token` WHERE username=? AND email=? LIMIT 1");
-		if ($this->stmt->execute(array($name, $email))) {
+		$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_login_token` SET `token`=NULL WHERE `token`=? AND username=? AND email=? LIMIT 1");
+		if ($this->stmt->execute(array($token, $name, $email))) {
 			$this->response = true;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function deleteStaffById($staff_id)
 	{
-		$staff_data = self::get_staff_ById($staff_id);
+		$staff_data = $this->get_staff_ById($staff_id);
 		$staffImage = "../schoolImages/staff/" . $staff_data->staffPassport;
 
 		try {
@@ -884,7 +880,7 @@ class Staff
 						unlink($staffImage);
 					}
 					$this->dbh->commit();
-					$this->dbh = null;
+		
 					$this->response = $this->alert->alert_toastr("success", "Staff Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 							window.location.reload();
 						},500);</script>";
@@ -984,7 +980,6 @@ class Staff
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function checkPasswordResetRedirectAuth($email, $token): bool

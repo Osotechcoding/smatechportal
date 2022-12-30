@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
    //update_school_social_link_form
-        $("#upload-school-logo-form").on("submit",function(event){
-        event.preventDefault();
+        $("#uploadSchoolStampForm").on("submit",function(evt){
+          evt.preventDefault();
         $.ajax({
         url:"../actions/update_actions",
         type:"POST",
@@ -11,20 +11,18 @@ $(document).ready(function(){
         cache:false,
         processData:false,
         beforeSend(){
-        $(".__loadingBtn10__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",true);
+        $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",true);
         },
         success:function(data){
         setTimeout(()=>{
-        $(".__loadingBtn10__").html('Upload').attr("disabled",false);
-        $("#upload-school-logo-form")[0].reset();
+        $(".__loadingBtn__").html('Upload').attr("disabled",false);
+          //$("#uploadSchoolStampForm")[0].reset();
+         // console.log(data);
         $("#server-response").html(data);
-        //alert(data);
-        },800);
+        },1000);
         }
-
         });
         })
-
         });
 
         function previewFileStamp(input){

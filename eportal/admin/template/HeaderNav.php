@@ -14,7 +14,7 @@
                   style="font-size: 21px;font-weight: 500;"></span></a>
               <div class="bookmark-input search-input">
                 <div class="bookmark-input-icon"><i class="bx bx-search primary"></i></div>
-                <input class="form-control input" type="text" placeholder="Explore Visap..." tabindex="0"
+                <input class="form-control input" type="text" placeholder="Explore SMATCH..." tabindex="0"
                   data-search="template-search">
                 <ul class="search-list"></ul>
               </div>

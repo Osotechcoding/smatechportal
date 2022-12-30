@@ -218,7 +218,7 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
             <br>
             <p>Kindly return to the school address or nearest Police Station, if found.</p>
             <div class="sign">
-                <img src="../schoolImages/Logo/sign.png" width="75" height="75" style="">
+                <img src="<?php echo $Configuration->getSchoolSignature(); ?>" width="75" height="75" style="">
                 <p><em><b>Authorised Signature</b></em></p>
             </div>
             

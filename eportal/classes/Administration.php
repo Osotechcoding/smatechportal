@@ -67,7 +67,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function create_classroom($data)
@@ -115,7 +114,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function updateClassroomDetails($data)
@@ -153,7 +151,7 @@ class Administration
 					$this->stmt = $this->dbh->prepare("UPDATE `visap_staff_tbl` SET staffGrade=? WHERE staffId=? LIMIT 1");
 					if ($this->stmt->execute(array($grade_name, $teacher))) {
 						$this->dbh->commit();
-						$this->dbh = null;
+			
 						$this->response  = $this->alert->alert_toastr("success", $grade_name . " Classroom Updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
@@ -178,7 +176,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 
@@ -320,7 +317,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_subjects()
@@ -334,7 +330,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_subjects_by_status(string $status)
@@ -347,7 +342,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	public function get_subject_ById($subjectId)
 	{
@@ -359,7 +353,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function delete_subject_ById($subjectId)
@@ -385,7 +378,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function count_all_subjects()
@@ -397,7 +389,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -409,7 +401,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -422,7 +414,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -435,7 +427,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -452,7 +444,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//Subject management methods end
 	//Fee management methods start
@@ -493,7 +484,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function update_fee_component($data)
@@ -522,7 +512,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function fee_component_inDropDown()
@@ -539,7 +528,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_fee_components()
@@ -591,7 +579,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//Fee management methods end
 	//FEE ALLOCATION METHODS
@@ -634,7 +621,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function update_allocation_fee($data)
@@ -664,7 +650,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_feeTypeByType($type)
@@ -675,7 +660,7 @@ class Administration
 			if ($this->stmt->rowCount() == 1) {
 				$this->response = $this->stmt->fetch();
 				return $this->response;
-				$this->dbh = null;
+	
 			}
 		}
 	}
@@ -690,7 +675,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_allocated_fees()
@@ -704,7 +688,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//public function delete_virtual_lecture_ById($id){}
@@ -724,7 +707,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function submit_student_update_payment($data)
@@ -799,7 +781,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function submit_new_student_payment_cash($data)
@@ -871,7 +852,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_alloction_by_gradeComponentId($grade)
@@ -882,7 +862,7 @@ class Administration
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -894,7 +874,7 @@ class Administration
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -907,7 +887,7 @@ class Administration
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -919,7 +899,7 @@ class Administration
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -932,7 +912,7 @@ class Administration
 			$row_data = $this->stmt->fetch();
 			$this->response = $row_data->total;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -945,7 +925,7 @@ class Administration
 			$row_data = $this->stmt->fetch();
 			$this->response = $row_data->total;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -956,7 +936,7 @@ class Administration
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -968,7 +948,7 @@ class Administration
 			// output json format...
 			$this->response = $this->stmt->fetch();
 			return json_encode($this->response, JSON_PRETTY_PRINT);
-			$this->dbh = null;
+
 		}
 	}
 
@@ -980,7 +960,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->paid;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -993,7 +973,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->paid;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1005,7 +985,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->paid;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1017,7 +997,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->paid;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1101,7 +1081,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	// count total watch or listened
@@ -1109,7 +1088,6 @@ class Administration
 	{
 		$this->stmt = $this->dbh->prepare("UPDATE `visap_virtual_lesson_tbl` SET counter=counter+1 WHERE lectureId=?");
 		$this->stmt->execute([$fid]);
-		$this->dbh = null;
 	}
 	public function get_all_virtual_lectures()
 	{
@@ -1118,7 +1096,7 @@ class Administration
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function get_virtual_lecture_ById($id)
@@ -1128,7 +1106,7 @@ class Administration
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function delete_virtual_lecture_ById($id)
@@ -1159,7 +1137,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 
@@ -1182,7 +1159,7 @@ class Administration
 					}
 				}
 			}
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1272,7 +1249,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_assigned_staff_weekly_duty()
@@ -1282,7 +1258,7 @@ class Administration
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1310,7 +1286,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//count all staff on assign to duties
@@ -1322,7 +1297,7 @@ class Administration
 			$get_counted = $this->stmt->fetch();
 			$this->response = $get_counted->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	// STAFF DUTY ASSIGN METHODS END
@@ -1372,7 +1347,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	public function get_all_loans_list()
 	{
@@ -1381,7 +1355,7 @@ class Administration
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1392,7 +1366,7 @@ class Administration
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return json_encode($this->response, JSON_PRETTY_PRINT);
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1431,7 +1405,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->total;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1443,7 +1417,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->total;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1455,7 +1429,7 @@ class Administration
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->total;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1489,7 +1463,7 @@ class Administration
 					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_school_expense_tbl` (expense_desc,cost,receiver,cterm,csession,created_on) VALUES (?,?,?,?,?,?);");
 					if ($this->stmt->execute(array($expense, $cost_, $receiver, $cterm, $csession, $date))) {
 						$this->dbh->commit();
-						$this->dbh = null;
+			
 						$this->response = $this->alert->alert_toastr("success", "Expense Submitted Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
@@ -1510,7 +1484,7 @@ class Administration
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1541,7 +1515,6 @@ class Administration
 		$this->stmt->execute();
 		$this->response = $this->stmt->fetch();
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get active session details
@@ -1556,7 +1529,6 @@ class Administration
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//set new academic session at visap_session_list
@@ -1599,7 +1571,6 @@ class Administration
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function update_academic_session($data)
@@ -1683,7 +1654,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get_all_session_history_lists
@@ -1700,7 +1670,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get_all_session_history_lists
@@ -1717,7 +1686,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//fetch all session list
@@ -1769,7 +1737,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	// School Session management methods end
@@ -1818,7 +1785,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//STUDENT ATTENDANT METHODS
 
@@ -1866,7 +1832,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1877,7 +1843,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1888,7 +1854,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -1912,7 +1878,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 
@@ -1960,7 +1925,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get student result details to coment on
@@ -1974,7 +1938,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	/*RESEND CONFIRMATION CODE TO STAFF STARTs*/
@@ -2000,7 +1963,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 				$this->response = false;
 			}
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2021,7 +1984,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response  = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), "ERROR");
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//
 	public function enable_disable_modules_by_id($status, $id)
@@ -2041,7 +2003,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_office_InDropDown_list()
@@ -2058,7 +2019,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_role_InDropDown_list()
@@ -2074,7 +2034,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_staff_office()
@@ -2084,7 +2043,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2126,7 +2085,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get school profile details
@@ -2138,7 +2096,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2151,7 +2109,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	// TO BE UPLOADED TO SERVER
@@ -2239,7 +2197,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	public function update_school_administrator_details($data)
 	{
@@ -2277,7 +2234,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function update_school_social_link_details($data)
@@ -2316,7 +2272,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//JUST DONE TODAY 18 may 2022
@@ -2364,7 +2319,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get all affective domain uploaded by class term and session
@@ -2375,7 +2329,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2425,7 +2379,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get all affective domain uploaded by class term and session
@@ -2436,7 +2389,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	// PSYCHOMOTOR METHOD
@@ -2449,7 +2402,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2485,7 +2438,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get oastudent office title in drop down
@@ -2503,7 +2455,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_office_all_students_office_title()
@@ -2513,7 +2464,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2524,7 +2475,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2554,7 +2505,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//TO BE UPDLOADED TO PORTAL SERVER
 	public function get_office_all_staff_office_title()
@@ -2564,7 +2514,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2575,7 +2525,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2605,7 +2555,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	//get total number of subject offered by a particular class
 	public function get_number_of_subejct_offered_by_class($stdGrade)
@@ -2644,7 +2593,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function get_class_teacher_class_name($stdRegNo, $stdGrade, $term, $session)
@@ -2655,7 +2604,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function get_class_teacher($stdGrade)
@@ -2666,7 +2615,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function get_principal_info()
@@ -2677,7 +2626,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2731,7 +2680,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = $this->alert->alert_toastr("error", "Please Select a Logo to Upload", __OSO_APP_NAME__ . " Says");
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_school_session_info()
@@ -2741,7 +2689,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2789,7 +2737,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = $this->alert->alert_toastr("error", "Please select at least a subject to register", __OSO_APP_NAME__ . " Says");
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function declareAdmissionPortalOpen($data)
@@ -2848,7 +2795,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getAdmissionPortalDetails()
@@ -2858,7 +2804,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -2897,7 +2843,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	public function checkAdmissionPortalStatus(): bool
 	{
@@ -2905,7 +2850,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		$this->stmt->execute();
 		$this->response = $this->stmt->rowCount();
 		return ($this->response == 1) ? true : false;
-		$this->dbh = null;
 	}
 	public function deleteAdmissionPortal($Id)
 	{
@@ -2927,7 +2871,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function submitExamQuestions($data, $file)
@@ -2987,7 +2930,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getAllUploadedExamQuestions()
@@ -2997,7 +2939,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3008,7 +2950,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3019,7 +2961,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3048,7 +2990,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete Gallery: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3094,7 +3036,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getAllHolidays()
@@ -3104,7 +3045,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3128,7 +3069,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 	public function deleteExamById($Id)
 	{
@@ -3150,7 +3090,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function fetch_all_local_govt_state($state)
@@ -3172,7 +3111,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_states_of_origin_InDropDown()
@@ -3188,7 +3126,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//`visap_career_portal_tbl`
@@ -3199,7 +3136,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3210,7 +3147,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3237,7 +3174,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -3252,7 +3189,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 				if ($this->stmt->execute([$record_id])) {
 					// code...
 					$this->dbh->commit();
-					$this->dbh = null;
+		
 					$this->response = $this->alert->alert_toastr("success", "Record was removed Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
@@ -3370,7 +3307,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//message type  admin, staff, student
@@ -3388,6 +3324,67 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 				$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
+	}
+
+	public function UpdateSchoolStamp(array $data, array $file){
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		$allowed = array("png");
+		$signname = $file['sign']['name'];
+		$sign_size = $file['sign']['size'] / 1024;
+		$sign_temp = $file['sign']['tmp_name'];
+		$sign_error = $file['sign']['error'];
+		$name_div1 = explode(".", $signname);
+		$image_ext1 = strtolower(end($name_div1));
+		//
+		
+		$stampname = $file['stamp']['name'];
+		$stamp_size = $file['stamp']['size'] / 1024;
+		$stamp_temp = $file['stamp']['tmp_name'];
+		$stamp_error = $file['stamp']['error'];
+		
+		$name_div2 = explode(".", $stampname);
+		$image_ext2 = strtolower(end($name_div2));
+		if (!$this->config->isEmptyStr($stampname) || !$this->config->isEmptyStr($signname)) {
+			if ($this->config->isEmptyStr($auth_pass)) {
+				$this->response = $this->alert->alert_toastr("error", "Authentication code is required", __OSO_APP_NAME__ . " Says");
+			} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+				$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+			} elseif (!in_array($image_ext1, $allowed) || !in_array($image_ext2, $allowed)) {
+				$this->response = $this->alert->alert_toastr("error", "Your File format is not supported, Only PNG is allowed", __OSO_APP_NAME__ . " Says");
+			} elseif (($stamp_size > 200) || ($sign_size > 200)) {
+				$this->response = $this->alert->alert_toastr("error", "File Size should not exceed 100KB, Your file Size is", __OSO_APP_NAME__ . " Says");
+			} elseif (($stamp_error != 0) || ($sign_error != 0)) {
+				$this->response = $this->alert->alert_toastr("error", "There was an error Uploading your image", __OSO_APP_NAME__ . " Says");
+			} else {
+				$sign = "sign_" . time() . mt_rand(1000000, 9999999) . "." . $image_ext1;
+				$stamp = "stamp_" . time() . mt_rand(100000, 999999) . "." . $image_ext2;
+				//lets update the stamp and sign in the db
+				$sign_destination = "../schoolImages/Logo/" . $sign;
+				$stamp_destination = "../schoolImages/Logo/" . $stamp;
+				try {
+					$this->dbh->beginTransaction();
+					$id = 1;
+					$this->stmt = $this->dbh->prepare("UPDATE `visap_school_profile` SET stamp=?, `signature`=? WHERE id=? LIMIT 1");
+					if ($this->stmt->execute(array($stamp,$sign, $id))) {
+						if ($this->config->move_file_to_folder($stamp_temp, $stamp_destination) && $this->config->move_file_to_folder($sign_temp, $sign_destination)) {
+							$this->dbh->commit();
+							$this->response = $this->alert->alert_toastr("success", "Stamp and Signature Uploaded  Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+							window.location.reload();
+						},1500);</script>";
+						}
+					}
+				} catch (PDOException $e) {
+					$this->dbh->rollback();
+					if (file_exists($stamp_destination) && file_exists($sign_destination) ) {
+						unlink($stamp_destination);
+						unlink($sign_destination);
+					}
+					$this->response = $this->alert->alert_toastr("error", "Error Occurred: Try again ", __OSO_APP_NAME__ . " Says");
+				}
+			}
+		} else {
+			$this->response = $this->alert->alert_toastr("error", "Please Select Files to Upload", __OSO_APP_NAME__ . " Says");
+		}
+		return $this->response;
 	}
 }

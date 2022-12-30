@@ -48,7 +48,7 @@ require_once "helpers/helper.php";
       <div class="content-body">
         <div class="row">
           <div class="col-12">
-            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-book fa-2x"></span> SCHOOL SUBJECT</h3>
+            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-book fa-1x"></span> SCHOOL SUBJECT</h3>
           </div>
         </div>
         <div class="row">
@@ -108,7 +108,7 @@ require_once "helpers/helper.php";
         <div class="card">
           <div class="card-header">
             <button type="button" class="btn btn-dark btn-md btn-rounded" data-toggle="modal"
-              data-target="#addSubjectModal"><i class="fa fa-book fa-2x"></i> Add New Subject</button>
+              data-target="#addSubjectModal"><span class="fa fa-book fa-1x"></span> Add Subject</button>
           </div>
           <div class="card-body">
             <div class="col-md-12 text-center" id="delete_response"></div>
@@ -144,21 +144,10 @@ require_once "helpers/helper.php";
                       <span class="badge badge-success badge-md"> Active</span>
                       <?php endif ?>
                     </td>
-                    <td>
-                      <div class="btn-group dropdown mb-1">
-                        <button type="button" class="btn btn-secondary">Options</button>
-                        <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-                          <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item text-info update_btn" data-id="<?php echo $subjects->subject_id; ?>"
-                            href="javascript:void(0);"><span class="fa fa-edit"></span> Update </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item text-danger delete_btn" data-action="delete_subject_now"
-                            data-id="<?php echo $subjects->subject_id; ?>" href="javascript:void(0);"> Delete</a>
-                        </div>
-                      </div>
+                    <td><button type="button" class="btn btn-dark btn-sm update_btn"
+                            data-id="<?php echo $subjects->subject_id; ?>"><span class="fa fa-edit"></span></button>
+                       <button type="button" class="btn btn-danger btn-sm delete_btn" data-action="delete_subject_now"
+                            data-id="<?php echo $subjects->subject_id; ?>"><span class="fa fa-trash-o"></span></button>
                     </td>
                   </tr>
                   <?php
