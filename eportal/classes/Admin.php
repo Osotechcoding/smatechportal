@@ -380,11 +380,11 @@ class Admin
 	{
 		if (isset($name, $email, $token)) {
 			$this->stmt = $this->dbh->prepare("SELECT `Token` FROM `visap_admin_login_token` WHERE `Name`=? AND `Email`=?");
-			$this->stmt->execute(array($name, $email,$token));
+			$this->stmt->execute(array($name, $email));
 			if ($this->stmt->rowCount()> 0) {
 				//collect the current token from db
 				$tokenRow = $this->stmt->fetch();
-				$currentToken = $tokenRow->token;
+				$currentToken = $tokenRow->Token;
 				//compare the two tokens
 				if ($token !== $currentToken) {
 					//return false
