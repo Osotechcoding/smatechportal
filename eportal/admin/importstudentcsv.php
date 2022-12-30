@@ -446,7 +446,6 @@ function importMassStudentResultSheetViaCSVFile($data, $csv_file)
     VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
             if ($stmt->execute(array($admission_no, $studentClass, $term, $session, $subject, $ca_score, $exam_score, $overallMark, $average, $today_time, $today_date, $rStatus))) {
               $dbh->commit();
-
               $response = $Alert->alert_toastr(
                 "success",
                 $subject . " Score imported Successfully...",
@@ -457,7 +456,7 @@ function importMassStudentResultSheetViaCSVFile($data, $csv_file)
     }, 1500);
     </script>";
             } else {
-              $response = $Alert->alert_toastr("error", "Unknown Error Occured, Please try again!", __OSO_APP_NAME__ .
+              $response = $Alert->alert_toastr("error", "Unknown Error Occurred, Please try again!", __OSO_APP_NAME__ .
                 " Says");
             }
           } catch (PDOException $e) {
@@ -545,12 +544,12 @@ function importMassStudentViaCSVFile($data, $csv_file)
           try {
             $dbh->beginTransaction();
             $stmt = $dbh->prepare("INSERT INTO `visap_student_tbl`
-    (stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdSurName,stdFirstName,stdMiddleName,stdDob,stdGender,stdAddress,stdPhone,stdAdmStatus,stdApplyDate,stdApplyType,stdConfToken)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+    (stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdSurName,stdFirstName,stdMiddleName,stdDob,stdGender,stdAddress,stdPhone,stdAdmStatus,stdApplyDate,stdApplyType,stdConfToken,admitted_class)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
             if ($stmt->execute(array(
               $stdRegNo, $stdEmail, $stdUserName, $stdPassword, $studentClass, $stdSurName,
               $stdFirstName, $stdMiddleName, $stdDob, $stdGender, $stdAddress, $stdPhone, $stdAdmStatus, $stdApplyDate,
-              $stdApplyType, $stdConfToken
+              $stdApplyType, $stdConfToken,$studentClass
             ))) {
               $dbh->commit();
               $response = $Alert->alert_toastr(

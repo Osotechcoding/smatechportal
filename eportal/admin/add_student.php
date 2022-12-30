@@ -73,7 +73,7 @@ require_once "helpers/helper.php";
                           <label for="email-id-icon">Scratch Card Pin</label>
                           <div class="position-relative has-icon-left">
                             <input autocomplete="off" type="password" class="form-control" name="cardpin"
-                              placeholder="**********">
+                              placeholder="xxxxxxxxxxx">
                             <div class="form-control-position">
                               <i class="bx bx-credit-card"></i>
                             </div>
@@ -85,7 +85,7 @@ require_once "helpers/helper.php";
                           <label for="email-id-icon">Card Serial</label>
                           <div class="position-relative has-icon-left">
                             <input autocomplete="off" type="text" class="form-control" name="cardserial"
-                              placeholder="**********">
+                              placeholder="xxxxxxxxxx">
                             <div class="form-control-position">
                               <i class="bx bx-barcode"></i>
                             </div>
@@ -140,7 +140,20 @@ require_once "helpers/helper.php";
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-12">
+                    
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="email-id-icon">Email</label>
+                          <div class="position-relative has-icon-left">
+                            <input type="text" autocomplete="off" class="form-control" name="student_email"
+                              placeholder="Email">
+                            <div class="form-control-position">
+                              <i class="bx bx-mail-send"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
                         <div class="form-group">
                           <label for="email-id-icon"> Home Address</label>
                           <div class="position-relative has-icon-left">
@@ -153,18 +166,6 @@ require_once "helpers/helper.php";
                         </div>
                       </div>
 
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="email-id-icon">Email</label>
-                          <div class="position-relative has-icon-left">
-                            <input type="text" autocomplete="off" class="form-control" name="student_email"
-                              placeholder="Email">
-                            <div class="form-control-position">
-                              <i class="bx bx-mail-send"></i>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="contact-info-icon">Admitted Class</label>

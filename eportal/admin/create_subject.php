@@ -119,7 +119,7 @@ require_once "helpers/helper.php";
                     <th>S/N</th>
                     <th> CODE</th>
                     <th>SUBJECT NAME</th>
-                    <th>TEACHER</th>
+                    <!-- <th>TEACHER</th> -->
                     <th>STATUS</th>
                     <th>ACTION</th>
                   </tr>
@@ -138,19 +138,6 @@ require_once "helpers/helper.php";
                     <td><?php echo $cnt; ?></td>
                     <td><?php echo $subjects->subject_code; ?></td>
                     <td><?php echo strtoupper($subjects->subject_desc); ?></td>
-                    <td><?php if ($subjects->subject_teacher == NULL) : ?>
-                      <span class="badge badge-warning badge-md">Not Assigned</span>
-                      <?php else : ?>
-                      <?php $teacher_arr = explode(",", $subjects->subject_teacher);
-                              foreach ($teacher_arr as $teacher) {
-                                $staff_data = $Staff->get_staff_ById($teacher);
-                                echo '<span class="badge badge-dark badge-md mr-1 mb-1">' . ucwords($staff_data->firstName) . '</span>' . "<br /> ";
-                              }
-                            ?>
-
-
-                      <?php endif ?>
-                    </td>
                     <td><?php if ($subjects->status == NULL || $subjects->status == 'inactive') : ?>
                       <span class="badge badge-danger badge-md">Not Active</span>
                       <?php else : ?>
@@ -177,10 +164,7 @@ require_once "helpers/helper.php";
                   <?php
                     }
                   }
-
-
                   ?>
-
                 </tbody>
               </table>
             </div>
@@ -196,57 +180,52 @@ require_once "helpers/helper.php";
   <div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <!-- modal-dialog-scrollable -->
-    <div class="modal-dialog modal-lg ">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i
-              class="fa fa-book fa-2x"></i> Add New Subject</h2>
+              class="fa fa-book fa-1x"></i> Add New Subject</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="bx bx-x"></i>
           </button>
         </div>
-        <div class="col-md-12 text-center mt-2" id="result-response"></div>
-        <form id="createSubjectForm">
+       
+        <form id="createSubjectForm" autocomplete="off">
           <div class="modal-body">
             <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-8">
                   <div class="form-group">
                     <label for="route_name">SUBJECT NAME</label>
-                    <input type="text" autocomplete="off" class="form-control form-control-lg" name="subjectName"
+                    <input type="text" class="form-control" name="subjectName"
                       placeholder="ENGLISH LANGUAGE">
                   </div>
                 </div>
-
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="code"> SUBJECT CODE </label>
-                    <input type="text" autocomplete="off" id="code" class="form-control" name="subjectCode"
+                    <input type="text" id="code" class="form-control" name="subjectCode"
                       placeholder="ENG0932">
                   </div>
                 </div>
+               
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="status"> STATUS </label>
                     <select name="subjectStatus" id="status" class="form-control custom-select">
-                      <option value="">Choose...</option>
-                      <option value="inactive">Inactive</option>
-                      <option value="active">Active</option>
+                      <option value="" selected>Choose...</option>
+                      <option value="active">Enable</option>
+                      <option value="inactive">Disable</option>
                     </select>
                   </div>
                 </div>
-
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
-                    <label for="subjectteacher">SUBJECT TEACHER(S) </label>
-                    <select multiple name="subjectTeacher[]" id="subjectteacher" class="select2 form-control">
-                      <option value="">Choose...</option>
-                      <?php echo $Staff->show_staff_indropdown_list(); ?>
-                    </select>
+                    <label for="auth_code"> Authentication Code </label>
+                    <input type="password" id="auth_code" class="form-control" name="auth_code"
+                      placeholder="xxxxxxxx">
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -270,11 +249,11 @@ require_once "helpers/helper.php";
   <div class="modal fade" id="UpdateSubjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
     aria-hidden="true">
     <!-- modal-dialog-scrollable -->
-    <div class="modal-dialog modal-lg ">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><i
-              class="fa fa-pen fa-2x"></i>Update Subject</h2>
+              class="fa fa-pen fa-1x"></i>Update Subject</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <i class="bx bx-x"></i>
           </button>
@@ -284,19 +263,11 @@ require_once "helpers/helper.php";
           <div class="modal-body">
             <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12" id="show_subject_details_div">
             </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="subject_teacher"> Subject Teacher(s) </label>
-                <select multiple name="subject_teacher[]" id="subject_teacher" class="form-control select2">
-                  <option value="">Choose...</option>
-                  <?php echo $Staff->show_staff_indropdown_list(); ?>
-                </select>
-              </div>
-            </div>
+            
           </div>
           <input type="hidden" name="action" value="update_subject_now">
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success btn-md ml-1 __loadingBtn2__">
+            <button type="submit" class="btn btn-dark btn-md ml-1 __loadingBtn2__">
               <i class="fa fa-book"></i> Save Changes</button>
             <button type="button" class="btn btn-danger ml-1" data-dismiss="modal">
               <span class="fa fa-power-off"> Back</span>
@@ -311,6 +282,7 @@ require_once "helpers/helper.php";
   <!-- END: Footer-->
   <!-- BEGIN: Vendor JS-->
   <?php include("../template/DataTableFooterScript.php"); ?>
+  <div id="server-response"></div>
 
   <script src="smappjs/create_subject.js"></script>
   <!-- DataTableFooterScript.php -->

@@ -169,8 +169,25 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
        .sign p{
         margin-top: -10px;
        }
+       #fet-print-btn {
+    position:relative;
+    width:auto;
+    padding:5px;
+    margin:15px 50px 25px 0px;
+    border-radius:20px;
+    background-color: darkred;
+    color:white;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+@media print {
+    .fet-print-non{
+        display:none;
+    }
+}
     </style>
-    <div class="school-desc">
+    <div class="school-desc fet-print-non">
         <h3><?php echo strtoupper($SmappDetails->school_name); ?></h2>
         <p><i>Below is the Generated School Identity Card for <b><?php echo $student_full_name; ?></b></i></p>
     </div>
@@ -217,6 +234,6 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
             </div>
         </div>
     </div>
-    <button onclick="window.print();" align="center">Print</button>
+    <button type="button" id="fet-print-btn" class="fet-print-non" onclick="window.print();">Print Now</button>
 </body>
 </html>

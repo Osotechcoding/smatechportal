@@ -9,7 +9,7 @@ $(document).ready(function(){
           //send request
           $.post("../actions/actions",submit_New_Session_Form.serialize(),function(data){
             setTimeout(()=>{
-              $("#server_result").html(data);
+              $("#server-response").html(data);
             },1000);
           })
         }else{
@@ -28,7 +28,7 @@ $(document).ready(function(){
           $.post("../actions/update_actions",update_academic_session_form.serialize(),function(result){
             setTimeout(()=>{
              $(".__loadingBtn__").html('Update Session').attr("disabled",false);
-              $("#server_result3").html(result);
+              $("#server-response").html(result);
             },1500);
           })
         }else{

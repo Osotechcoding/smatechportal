@@ -1,7 +1,7 @@
 <?php 
 require_once "helpers/helper.php";
 
-$ses_id = $_SESSION['ADMIN_ID'];
+$ses_id = $_SESSION['ADMIN_TOKEN_ID'];
 
 if (isset($_GET['action'])) {
 	if ($_GET['action'] ==="logout") {
@@ -12,11 +12,7 @@ if (isset($_GET['action'])) {
 		}else{
 		Session::destroy();
 		}
-		
 	}
 }else{
 	Session::destroy();
 }
-
-
- ?>

@@ -67,12 +67,12 @@ class Admin
 					$token = $this->config->generateRandomUserToken(40);
 					$_SESSION['ADMIN_TOKEN'] = $token;
 					//check token 
-					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_admin_login_token` WHERE Name=? AND Email=?LIMIT 1");
+					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_admin_login_token` WHERE Name=? AND Email=?");
 					$this->stmt->execute([$_SESSION['ADMIN_USERNAME'], $_SESSION['ADMIN_EMAIL']]);
 
-					if ($this->stmt->rowCount() == 1) {
+					if ($this->stmt->rowCount() > 0) {
 						// code... update the token
-						$this->stmt = $this->dbh->prepare("UPDATE `visap_admin_login_token` SET Token=? WHERE Name=? AND Email=? LIMIT 1");
+						$this->stmt = $this->dbh->prepare("UPDATE `visap_admin_login_token` SET Token=? WHERE Name=? AND Email=?");
 						$this->stmt->execute(array($token, $_SESSION['ADMIN_USERNAME'], $_SESSION['ADMIN_EMAIL']));
 					} else {
 						$this->stmt = $this->dbh->prepare("INSERT INTO `visap_admin_login_token` (Name,Email,Token) VALUES (?,?,?);");
@@ -89,9 +89,7 @@ class Admin
 				$this->response = $this->alert->alert_toastr("error", $lang['login_error5'], __OSO_APP_NAME__ . " Says"); // Email Address Not Found or User Details not found
 			}
 		}
-
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getAdminDetails()
@@ -101,11 +99,9 @@ class Admin
 		$this->stmt = $this->dbh->prepare($this->query);
 		$this->stmt->execute(array($session_id));
 		if ($this->stmt->rowCount() > 0) {
-			// code...
 			$this->response = $this->stmt->fetch();
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function isSuperAdmin($adminId)
@@ -116,7 +112,7 @@ class Admin
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -171,7 +167,6 @@ class Admin
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function check_Auth_data()
@@ -180,8 +175,13 @@ class Admin
 			Session::destroy();
 		}
 	}
-
-	public function reset_admin_password($data)
+/**
+ * Undocumented function
+ *
+ * @param array $data
+ * @return string
+ */
+	public function reset_admin_password(array $data):string
 	{
 		$adminId = $this->config->Clean($data['admin_id']);
 		$old_pass = $this->config->Clean($data['password']);
@@ -191,7 +191,6 @@ class Admin
 		if ($this->config->isEmptyStr($old_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Please enter your current password to continue!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($new_password)) {
-			// code...
 			$this->response = $this->alert->alert_toastr("error", "Enter your new Password to Continue!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($confirm_new_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Confirm your new Password to Continue!", __OSO_APP_NAME__ . " Says");
@@ -216,7 +215,6 @@ class Admin
 						$this->dbh->beginTransaction();
 						$this->stmt = $this->dbh->prepare("UPDATE {$this->table} SET adminPass=? WHERE adminId=? LIMIT 1");
 						if ($this->stmt->execute(array($real_pass, $adminId))) {
-							// code...
 							$this->dbh->commit();
 							$this->response = $this->alert->alert_toastr("success", "Password updated Successfully! Please wait...", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.href='logout?action=logout';
@@ -238,9 +236,14 @@ class Admin
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
-	public function update_admin_details_now($data)
+	/**
+	 * Undocumented function
+	 *
+	 * @param array $data
+	 * @return string
+	 */
+	public function update_admin_details_now(array $data): string
 	{
 		$UserName = $this->config->Clean($data['UserName']);
 		$admin_id = $this->config->Clean($data['admin_id']);
@@ -271,11 +274,16 @@ class Admin
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//GENERATE OAUTH CODE FOR SCHOOLS
-	public function generateOAuthCodeForSchools($data)
+/**
+ * Undocumented function
+ *
+ * @param array $data
+ * @return string message to User
+ */
+	public function generateOAuthCodeForSchools(array $data):string
 	{
 		$code = $this->config->Clean($data['code']);
 		$sessioncode = $this->config->Clean($data['sessioncode']);
@@ -314,9 +322,12 @@ class Admin
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
-
+/**
+ * Undocumented function
+ *
+ * @return void
+ */
 	public function getAllOauthCode()
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_oauth_code_tbl` ORDER BY school_name ASC LIMIT 50");
@@ -327,10 +338,14 @@ class Admin
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
-
+/**
+ * Undocumented function
+ *
+ * @param [type] $codeId
+ * @return void
+ */
 	public function deleteSchoolOauthCode($codeId)
 	{
 		if (!$this->config->isEmptyStr($codeId)) {
@@ -339,7 +354,6 @@ class Admin
 				//Delete the selected Subject
 				$this->stmt = $this->dbh->prepare("DELETE FROM `school_oauth_code_tbl` WHERE id=? LIMIT 1");
 				if ($this->stmt->execute([$codeId])) {
-					// code...
 					$this->dbh->commit();
 					$this->response = $this->alert->alert_toastr("success", "Oauth Code Deleted Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
@@ -349,20 +363,25 @@ class Admin
 				$this->dbh->rollback();
 				$this->response  = $this->alert->alert_toastr("error", "Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
-			// code...
 		} else {
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
-
-	public function checkAdminTokenExists($name, $email, $token)
+/**
+ * Undocumented function
+ *
+ * @param string $name
+ * @param string $email
+ * @param string $token
+ * @return boolean
+ */
+	public function checkAdminTokenExists(string $name,string $email,string $token):bool
 	{
 		if (isset($name, $email, $token)) {
-			$this->stmt = $this->dbh->prepare("SELECT token FROM `visap_admin_login_token` WHERE Name=? AND Email=? LIMIT 1");
-			$this->stmt->execute(array($name, $email));
-			if ($this->stmt->rowCount() == 1) {
+			$this->stmt = $this->dbh->prepare("SELECT `Token` FROM `visap_admin_login_token` WHERE `Name`=? AND `Email`=?");
+			$this->stmt->execute(array($name, $email,$token));
+			if ($this->stmt->rowCount()> 0) {
 				//collect the current token from db
 				$tokenRow = $this->stmt->fetch();
 				$currentToken = $tokenRow->token;
@@ -370,21 +389,21 @@ class Admin
 				if ($token !== $currentToken) {
 					//return false
 					$this->response = false;
+				}else{
+					$this->response = true;
 				}
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
-	//delete toke upon logged out
+	//update token upon logged out
 	public function deleteAdminSessionToken($name, $email, $token)
 	{
-		$this->stmt = $this->dbh->prepare("DELETE FROM `visap_admin_login_token` WHERE Name=? AND Email=? LIMIT 1");
-		if ($this->stmt->execute(array($name, $email))) {
+		$this->stmt = $this->dbh->prepare("UPDATE `visap_admin_login_token` SET `Token`=NULL WHERE `Token`=? AND `Name`=? AND `Email`=? LIMIT 1");
+		if ($this->stmt->execute(array($token,$name, $email))) {
 			$this->response = true;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 }

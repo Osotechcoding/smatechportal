@@ -1,5 +1,5 @@
 <?php
-@session_start();
+// @session_start();
 /**
  * 
  */
@@ -23,7 +23,7 @@ class Osotech
 
   public function osotech_session_kick()
   {
-    return @session_start();
+     session_start();
   }
 
   public function redirect_root($flink)
@@ -485,7 +485,6 @@ class Osotech
       }
     }
     return $this->response;
-    unset($this->dbh);
   }
 
   public function osotech_password_encryption($password)
@@ -515,7 +514,7 @@ class Osotech
       }
     }
     return $this->response;
-    //unset($this->dbh);
+   
   }
 
   public function validate_Mobile_Number($mobile)
@@ -577,7 +576,6 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
     }
   }
 
@@ -604,7 +602,6 @@ class Osotech
       $this->response = $value2;
     }
     return $this->response;
-    unset($this->dbh);
   }
   public function get_states_of_origin_InDropDown()
   {
@@ -640,7 +637,6 @@ class Osotech
       }
     }
     return $this->response;
-    unset($this->dbh);
   }
 
   public function get_student_infoId($studentId)
@@ -650,7 +646,6 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
     }
   }
 
@@ -661,7 +656,6 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
     }
   }
 
@@ -672,7 +666,6 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
     }
   }
 
@@ -684,7 +677,6 @@ class Osotech
     if ($this->stmt->rowCount() > 0) {
       $this->response = true;
       return $this->response;
-      $this->dbh = null;
     }
   }
   public function get_school_session_info()
@@ -694,7 +686,6 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
     }
   }
 
@@ -705,7 +696,6 @@ class Osotech
     if ($this->stmt->rowCount() > 0) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
     }
   }
 }

@@ -31,13 +31,12 @@
                 <div class="col-md-12">
                      <div class="form-group">
                   <label for="student_occupant">Student Name</label>
-              <select name="occupant_id" id="student_occupant" class="select2 form-control form-control-lg">
+              <select name="occupant_id" id="student_occupant" class="custom-select form-control form-control-lg">
                   <option value="">Choose...</option>
                   <?php echo $Student->getBoardingStudentInDropDownList();?>
               </select>
                     </div>
                   </div>
-                   
                  <div class="col-md-6">
                    <div class="form-group">
                   <label for="duration">Booking Duration</label>
@@ -46,21 +45,18 @@
               </select>
                     </div>
                   </div>
-
                    <div class="col-md-6">
                    <div class="form-group">
                   <label for="amount_paid">Amount Paid</label>
                 <input type="number" autocomplete="off" class="form-control form-control-lg" name="amount_paid" id="amount_paid" placeholder="&#8358;55,000.00">
                     </div>
                   </div>
-
                    <div class="col-md-6">
                      <div class="form-group">
                   <label for="expiry_date">Payment Expire Date</label>
                <input type="date" autocomplete="off" name="expiry_date" min="2022-01-01" id="expiry_date" class="form-control form-control-lg">
                     </div>
                   </div>
-                  
                <div class="col-md-6">
                      <div class="form-group">
                   <label for="auth_code">AUTHENTICATION CODE</label>

@@ -1,30 +1,21 @@
 <?php
-// error_reporting(1);
-@ob_start();
 if (!file_exists("Includes/Osotech.php")) {
   die("Access to this Page is Denied! <p>Please Contact Your Administrator for assistance</p>");
 }
 require_once("Includes/Osotech.php");
-//require_once("Includes/Database.php");
-
-//$conn = osotech_connect();
 $Osotech = new Osotech();
-@$Osotech->osotech_session_kick();
-
+$Osotech->osotech_session_kick();
 date_default_timezone_set("Africa/Lagos");
-if ($Osotech->checkAdmissionPortalStatus() !== true) : ?>
+if ($Osotech->checkAdmissionPortalStatus() != true) : ?>
 <?php header("Location:" . APP_ROOT);
   exit(); ?>
 <?php endif ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title> Online Registration Portal || <?php echo ($Osotech->getConfigData()->school_name); ?></title>
   <?php include_once("Head.php"); ?>
-
 </head>
-
 <body style="background:rgba(0, 0, 0, 0.4) url('schoolbg.jpg');
 background-position:center;
 background-size: cover;
@@ -32,8 +23,6 @@ background-repeat: no-repeat;">
   <div class="container mt-2">
     <?php include_once 'HeadNavBar.php'; ?>
     <br>
-
-
     <div class="col-md-12">
       <section class="h-100 bg-white">
         <div class="container py-2 h-60">

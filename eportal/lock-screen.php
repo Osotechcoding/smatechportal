@@ -66,7 +66,7 @@ background-repeat: no-repeat;">
 <button type="submit" class="btn btn-dark glow position-relative w-100 __loadingBtn__"> Unlock <i
         id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
 </form>
-<p class="text-center mt-3"><a href="https://glorysupremeschool.com">School Website</a></p></div>
+<p class="text-center mt-3"><a href="#">School Website</a></p></div>
 </div>
 </div>
 </div>

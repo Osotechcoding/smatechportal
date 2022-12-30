@@ -43,61 +43,28 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-book fa-1x"></span> MASS SUBJECT REGISTRATION</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-book fa-1x"></span> EXAMINATION SUBJECT REGISTRATION</h3>
   </div>
     </div>
-
-      <div class="card">
-
-        <div class="card-body">
-          <div class="text-center mb-3">
-            <h5><?php echo $Alert->alert_msg("Please note that Only an active subjects can be registered!","info");?></h5>
-          </div>
-          <div class="users-list-filter px-1">
-        <form action="" method="post">
-           <div class="row border rounded py-2 mb-2">
-           <div class="col-12 col-md-6 col-sm-12 col-lg-6">
-                  <label for="users-list-role">SUBJECT STATUS </label>
-                    <fieldset class="form-group">
-                        <select name="subject_status" class="form-control" id="users-list-role">
-                            <option value="active" selected>Active</option>
-                        </select>
-                    </fieldset>
-                </div>
-                <div class="col-12 col-md-6 col-sm-12 col-lg-6 d-flex align-items-center">
-                  <label for="">Click to show Subjects</label>
-                    <button type="submit" name="filter-btnx" value="show_list_of_subject" class="btn btn-dark btn-block btn-lg glow mb-1">Show Subjects</button>
-                </div>
-            </div>
-        </form>
-    </div>
-        </div>
-      </div>
        <!-- Revenue Growth Chart Starts -->
-       <?php if (isset($_POST['filter-btnx']) && $_POST['filter-btnx']!=""): ?>
-         <?php if (empty($_POST['subject_status'])) {
-           echo '<div class="text-center col-12 col-md-12">
-          '.$Alert->alert_msg("Subject Status is Required!","danger").'
-          </div>';
-         }else{
-          $status = $Configuration->Clean($_POST['subject_status']);
+       <?php 
+          $status = 'active';
           $subject_lists =$Administration->get_all_subjects_by_status($status);
           if ($subject_lists) {
             $count=0;
             ?>
             <div class="card">
       <div class="card-body">
+        <?php echo $Alert->alert_msg("Please note that Only an active subjects can be registered!","info");?></h5>
         <form id="bulk_subject_form">
          <div class="table-responsive">
       <table class="table table-bordered">
         <thead class="text-center bg-default">
           <tr>
-
             <th>S/N</th>
-          <th>SUBJECT CODE</th>
           <th>STATUS</th>
           <th>SUBJECT NAME</th>
-           <th>Add Subject<!-- <input type="checkbox" id="checkAll" class="form-check-input"> --> </th>
+           <th>Add</th>
         </tr>
       </thead>
         <tbody class="text-center">
@@ -105,7 +72,6 @@ require_once "helpers/helper.php";
           <?php $count++; ?>
            <tr>
             <td><?php echo $count;?> </td>
-    <td><?php echo strtoupper($subject->subject_code);?></td>
     <td><span class="badge badge-success badge-md badge-pill"><?php echo strtoupper($subject->status);?></span></td>
     <td><?php echo strtoupper($subject->subject_desc);?></td>
     <td><input type="checkbox" name="subject_arr[]" class="form-control-check form-check-input checkItem" value="<?php echo $subject->subject_desc;?>"></td>
@@ -113,11 +79,12 @@ require_once "helpers/helper.php";
          <?php endforeach;?>
       </tbody>
       </table>
+        </div>
       <div class="row">
         <div class="col-md-6">
         <div class="form-group">
           <label for="student_class">REGISTER SELECTED SUBJECTS FOR </label>
-          <select name="student_class" id="student_class" class="form-control select2">
+          <select name="student_class" id="student_class" class="form-control custom-select">
             <option value="" selected> Choose...</option>
             <?php echo $Administration->get_classroom_InDropDown_list();?>
           </select>
@@ -131,24 +98,21 @@ require_once "helpers/helper.php";
       </div>
       </div>
       <input type="hidden" name="action" value="submit_bulk_subject_reg">
-      <button type="submit" class="btn btn-dark btn-lg btn-round float-right mb-3 __loadingBtn__">REGISTER</button>
-    </div>
+      <button type="submit" class="btn btn-dark btn-lg btn-round  mb-1 __loadingBtn__">REGISTER</button>
+  
     </form>
       </div>
     </div>
             <?php
-          }else{
-             echo '<div class="text-center col-12 col-md-12">
-          '.$Alert->alert_msg("No Result Found!, Please try again","danger").'
-          </div>';
           }
-         } ?>
-       <?php endif ?>
+          ?>
         </div>
       </div>
     </div>
     <!-- END: Content-->
+    
     </div>
+    
     <!-- demo chat-->
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->

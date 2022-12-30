@@ -19,6 +19,7 @@ class Administration
 	protected $query;
 	protected $response;
 	protected $config;
+	protected $alert;
 	public function __construct()
 	{
 		$this->dbh = osotech_connect();
@@ -254,37 +255,36 @@ class Administration
 		$subject = $this->config->Clean($data['subjectName']);
 		$code = $this->config->Clean($data['subjectCode']);
 		$status = $this->config->Clean($data['subjectStatus']);
-		$bypass = $this->config->Clean($data['bypass']);
+		$auth_pass = $this->config->Clean($data['auth_code']);
 		//check for empty
-		if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
-			// code...
-			$this->response = $this->alert->alert_msg("Authentication Failed, Please Check your Connection and Try again!", "danger");
-		} elseif ($this->config->isEmptyStr($subject) || $this->config->isEmptyStr($code) || $this->config->isEmptyStr($status)) {
-			$this->response = $this->alert->alert_msg("Subject Name, Subject Code and Subject Status is required!", "danger");
-		} else {
+		if ($this->config->isEmptyStr($subject) || $this->config->isEmptyStr($code) || $this->config->isEmptyStr($status)) {
+			$this->response = $this->alert->alert_toastr("error","Invalid submission!", __OSO_APP_NAME__." Says");
+		} else if ($this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error","Authentication Code is required!", __OSO_APP_NAME__." Says");
+		} else if($auth_pass !== __OSO__CONTROL__KEY__){
+			$this->response = $this->alert->alert_toastr("error","Invalid Authentication Code!", __OSO_APP_NAME__." Says");
+		}else {
 			//check for duplicate subject name
-			$this->stmt = $this->dbh->prepare("SELECT subject_id FROM `school_subjects` WHERE subject_desc=? LIMIT 1");
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` WHERE subject_desc=?");
 			$this->stmt->execute([$subject]);
-			if ($this->stmt->rowCount() == 1) {
-				// code...
-				$this->response = $this->alert->alert_msg("$subject already Exists!", "danger");
+			if ($this->stmt->rowCount() > 0) {
+				$this->response = $this->alert->alert_toastr("error","$subject already Exists!",__OSO_APP_NAME__." Says");
 			} else {
 				try {
-					$teacher = isset($data['subjectTeacher']) ? implode(",", $data['subjectTeacher']) : "";
+					//$teacher = isset($data['subjectTeacher']) ? implode(",", $data['subjectTeacher']) : "";
 					$this->dbh->beginTransaction();
 					//create the new Subject
 					$date = date("Y-m-d");
-					$this->stmt = $this->dbh->prepare("INSERT INTO `school_subjects` (subject_desc,subject_teacher,status,subject_code,created_at) VALUES (?,?,?,?,?);");
-					if ($this->stmt->execute([$subject, $teacher, $status, $code, $date])) {
-						// code...
+					$this->stmt = $this->dbh->prepare("INSERT INTO `school_subjects` (subject_desc,`status`,subject_code,created_at) VALUES (?,?,?,?);");
+					if ($this->stmt->execute([$subject, $status, $code, $date])) {
 						$this->dbh->commit();
-						$this->response = $this->alert->alert_msg($subject . " Saved Successfully", "success") . "<script>setTimeout(()=>{
+						$this->response = $this->alert->alert_toastr("success", $subject . " Saved Successfully", __OSO_APP_NAME__." Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},1000);</script>";
 					}
 				} catch (PDOException $e) {
 					$this->dbh->rollback();
-					$this->response  = $this->alert->alert_msg("Failed to Add Subject: Error Occurred: " . $e->getMessage(), "danger");
+					$this->response  = $this->alert->alert_toastr("error","Failed to Add Subject: Error Occurred ", __OSO_APP_NAME__." Says");
 				}
 			}
 		}
@@ -1568,16 +1568,16 @@ class Administration
 		$bypass = $this->config->Clean($data['bypass_auth']);
 		if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			// show error...
-			$this->response = $this->alert->alert_msg("Authentication Failed, Please Check your Connection and Try again!", "danger");
+			$this->response = $this->alert->alert_toastr("error","Authentication Failed, Please Check your Connection and Try again!", __OSO_APP_NAME__." Says");
 		} elseif ($this->config->isEmptyStr($new_ses)) {
 			// show error...
-			$this->response = $this->alert->alert_msg("Session is Required!", "danger");
+			$this->response = $this->alert->alert_toastr("error","Session is Required!", __OSO_APP_NAME__." Says");
 		} else {
 			//check for duplicate session in session list
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_session_list` WHERE session_desc=? LIMIT 1");
 			$this->stmt->execute([$new_ses]);
 			if ($this->stmt->rowCount() == 1) {
-				$this->response = $this->alert->alert_msg("$new_ses Session already Exists!", "danger");
+				$this->response = $this->alert->alert_toastr("error","$new_ses Session already Exists!", __OSO_APP_NAME__." Says");
 			} else {
 				try {
 					$this->dbh->beginTransaction();
@@ -1587,14 +1587,14 @@ class Administration
 						$this->stmt = $this->dbh->prepare("UPDATE `current_session_tbl` SET session_desc_name=?,term_desc=? WHERE id=? LIMIT 1");
 						if ($this->stmt->execute([$new_ses, $term, $id])) {
 							$this->dbh->commit();
-							$this->response = $this->alert->alert_msg("$new_ses is Now the Current Academic Session and $term is Active ", "success") . "<script>setTimeout(()=>{
+							$this->response = $this->alert->alert_toastr("success","$new_ses is Now the Current Academic Session and $term is Active ", __OSO_APP_NAME__." Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},1000);</script>";
 						}
 					}
 				} catch (PDOException $e) {
 					$this->dbh->rollback();
-					$this->response  = $this->alert->alert_msg("Failed to Set New Academic Session: Error Occurred: " . $e->getMessage(), "danger");
+					$this->response  = $this->alert->alert_toastr("error"," Internal Error Occurred! Try again", __OSO_APP_NAME__." Says");
 				}
 			}
 		}
@@ -1612,13 +1612,11 @@ class Administration
 		$vdate = $this->config->Clean(date('Y-m-d', strtotime($data['vdate'])));
 		$next_term_start = $this->config->Clean(date('Y-m-d', strtotime($data['next_term_start'])));
 		$bypass = $this->config->Clean($data['bypass_auth3']);
-		//check for auth
-		if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
-			// show error...
-			$this->response = $this->alert->alert_msg("Authentication Failed, Please Check your Connection and Try again!", "danger");
+if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
+		$this->response = $this->alert->alert_toastr("error","Authentication Failed,  Try again!",  __OSO_APP_NAME__." Says");
+
 		} elseif ($this->config->isEmptyStr($active_session) || $this->config->isEmptyStr($term) || $this->config->isEmptyStr($days) || $this->config->isEmptyStr($noweeks) || $this->config->isEmptyStr($next_term_start) || $this->config->isEmptyStr($vdate)) {
-			// code...
-			$this->response = $this->alert->alert_msg("All fields are Required!", "danger");
+			$this->response = $this->alert->alert_toastr("error","Invalid Submission, Please check and try again!", __OSO_APP_NAME__." Says");
 		} else {
 			try {
 				$this->dbh->beginTransaction();
@@ -1626,18 +1624,17 @@ class Administration
 				$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_session_history_tbl` WHERE active_session=? AND active_term=? LIMIT 1");
 				$this->stmt->execute(array($active_session, $term));
 				//check row returns
-				if ($this->stmt->rowCount() == 1) {
+				if ($this->stmt->rowCount() > 0) {
 					$row = $this->stmt->fetch();
 					// Just Update the info...
 					$this->stmt = $this->dbh->prepare("UPDATE `visap_school_session_history_tbl` SET active_session=?,active_term=?,Days_open=?,Weeks_open=?,term_ended=?,new_term_begins=? WHERE active_session=? AND active_term=? AND sehisId=? LIMIT 1");
 					if ($this->stmt->execute(array($active_session, $term, $days, $noweeks, $vdate, $next_term_start, $active_session, $term, $row->sehisId))) {
 						$this->stmt = $this->dbh->prepare("UPDATE `visap_school_session_tbl` SET active_session=?,active_term=?,Days_open=?,Weeks_open=?,term_ended=?,new_term_begins=? WHERE seId=? LIMIT 1");
 						if ($this->stmt->execute(array($active_session, $term, $days, $noweeks, $vdate, $next_term_start, $seId))) {
-
 							$this->stmt = $this->dbh->prepare("UPDATE `current_session_tbl` SET term_desc=? WHERE session_desc_name=? AND id=? LIMIT 1");
 							if ($this->stmt->execute(array($term, $active_session, $seId))) {
 								$this->dbh->commit();
-								$this->response = $this->alert->alert_msg("$active_session is Now the Current Academic Session", "success") . "<script>setTimeout(()=>{
+								$this->response = $this->alert->alert_toastr("success","$active_session is Now the Current Academic Session", __OSO_APP_NAME__." Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
 							}
@@ -1645,7 +1642,7 @@ class Administration
 					}
 				} else {
 					//create new session history
-					$session_data = self::get_session_details();
+					$session_data = $this->get_session_details();
 					$osession = $session_data->active_session;
 					$oterm = $session_data->active_term;
 					$odays = $session_data->Days_open;
@@ -1661,7 +1658,7 @@ class Administration
 							$this->stmt = $this->dbh->prepare("UPDATE `current_session_tbl` SET term_desc=? WHERE session_desc_name=? AND id=? LIMIT 1");
 							if ($this->stmt->execute(array($term, $active_session, $seId))) {
 								$this->dbh->commit();
-								$this->response = $this->alert->alert_msg("$active_session is Now the Current Academic Session", "success") . "<script>setTimeout(()=>{
+								$this->response = $this->alert->alert_toastr("success","$active_session is Now the Current Academic Session", __OSO_APP_NAME__." Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";
 							}
@@ -1670,11 +1667,10 @@ class Administration
 				}
 			} catch (PDOException $e) {
 				$this->dbh->rollback();
-				$this->response  = $this->alert->alert_msg("Error Occurred!: Error Info: " . $e->getMessage(), "danger");
+				$this->response  = $this->alert->alert_toastr("error","Internal Server Error Occurred! ", __OSO_APP_NAME__." Says");
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_session_history_by_id($ses_name, $term)

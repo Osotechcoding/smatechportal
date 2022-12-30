@@ -38,26 +38,22 @@ $(document).ready(function(){
         //send to server
         $.post("../actions/update_actions",update_subject_form_modal,function(data){
           setTimeout(()=>{
-        $(".__loadingBtn2__").html('Save Changes').attr("disabled",false);
+        $(".__loadingBtn2__").html('<i class="fa fa-book"></i> Save Changes').attr("disabled",false);
         $("#result-response2").html(data);
           },500);
         })
         // self.location.reload();
       });
-
-
-      $("#createSubjectForm").on("submit", function(event){
-        event.preventDefault();
+      $("#createSubjectForm").on("submit", function(e){
+        e.preventDefault();
          $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
         const createSubjectForm = $(this).serialize();
-       // alert("Subject Saved Successfully");
         //send to server
-        $.post("../actions/actions",createSubjectForm,function(data){
-          setTimeout(()=>{
-        $(".__loadingBtn__").html('Submit').attr("disabled",false);
-        $("#result-response").html(data);
-          },500);
-        })
-
+        $.post("../actions/actions", createSubjectForm, function (data) {
+          setTimeout(() => {
+            $(".__loadingBtn__").html('<i class="fa fa-book"></i> Submit').attr("disabled", false);
+            $("#server-response").html(data);
+          }, 500);
+        });
       });
      })

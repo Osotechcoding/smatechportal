@@ -22,22 +22,17 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !== "") {
   </title>
   <?php include("../template/dataTableHeaderLink.php"); ?>
   <!-- include dataTableHeaderLink.php -->
-
 </head>
 <!-- END: Head-->
-
 <!-- BEGIN: Body-->
-
 <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  "
   data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
-
   <!-- BEGIN: Header-->
   <?php include("template/HeaderNav.php"); ?>
   <!-- END: Header-->
   <!-- BEGIN: Main Menu-->
   <?php include("template/Sidebar.php"); ?>
   <!-- END: Main Menu-->
-
   <!-- BEGIN: Content-->
   <div class="app-content content">
     <div class="content-overlay"></div>
@@ -70,7 +65,6 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !== "") {
               <?php echo strtoupper($roomDetails->room_desc) ?> </h3>
           </div>
         </div>
-
         <!-- Statistics Cards Starts -->
         <div class="row">
           <div class="col-xl-12 col-md-12">
@@ -118,12 +112,10 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !== "") {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
         <!-- Revenue Growth Chart Starts -->
-
         <!-- Column selectors with Export Options and print table -->
         <section id="column-selectors">
           <div class="row">
@@ -148,12 +140,10 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !== "") {
                         </tr>
                       </thead>
                       <tbody>
-
                         <?php if ($bonk_details) {
                           foreach ($bonk_details as $bonk) {
                             $hostels = $Hostel->getHostelById($bonk->hostel_id);
                             $student_data = $Student->get_student_data_byId($bonk->occupant);
-
                         ?>
                         <tr>
                           <td> <?php if ($student_data) {
@@ -190,10 +180,8 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !== "") {
                               data-id="<?php echo $bonk->bedId; ?>" data-action="checkout_bedspace"
                               data-occupant="<?php echo $bonk->occupant; ?>"> Checkout</button>
                             <?php endif ?>
-
                             <?php
                                   }
-
                                 ?>
                           </td>
                           <td>
@@ -219,7 +207,6 @@ if (isset($_GET['hostel']) && isset($_GET['room']) && $_GET['room'] !== "") {
                         <?php
                           }
                         } ?>
-
                       </tbody>
                     </table>
                   </div>

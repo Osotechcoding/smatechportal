@@ -688,9 +688,8 @@ class Student
 			//$portal_email = $student_username."@portal.".__OSO_APP_NAME__;
 			try {
 				$this->dbh->beginTransaction();
-
-				$this->stmt = $this->dbh->prepare("INSERT INTO $this->table_name (stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdSurName,stdFirstName,stdMiddleName,stdDob,stdGender,stdAddress,stdPhone,stdAdmStatus,stdApplyDate,stdApplyType,stdConfToken) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
-				if ($this->stmt->execute(array($stdRegNo, $student_email, $student_username, $hashed_password, $student_class, $surName, $firstName, $middleName, $Dob, $Gender, $address, $student_phone, $admitted, $adm_date, $student_type, $confirmation_code))) {
+				$this->stmt = $this->dbh->prepare("INSERT INTO $this->table_name (stdRegNo,stdEmail,stdUserName,stdPassword,studentClass,stdSurName,stdFirstName,stdMiddleName,stdDob,stdGender,stdAddress,stdPhone,stdAdmStatus,stdApplyDate,stdApplyType,stdConfToken,admitted_class) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+				if ($this->stmt->execute(array($stdRegNo, $student_email, $student_username, $hashed_password, $student_class, $surName, $firstName, $middleName, $Dob, $Gender, $address, $student_phone, $admitted, $adm_date, $student_type, $confirmation_code,$student_class))) {
 					//update used pin table
 					$change_status = 1;
 					$this->stmt = $this->dbh->prepare("UPDATE `tbl_reg_pins` SET pin_status=?,usedBy=? WHERE pin_code=? AND pin_serial=? LIMIT 1");
@@ -2046,7 +2045,11 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	$this->response = $this->alert->alert_toastr("error", "Upload the student passport and try again!", __OSO_APP_NAME__ . " Says");
 }else{
 	//generate the student identity based on the student current details
-	$this->response = $this->alert->alert_toastr("success", "Generating ID CARD, Please wait...!", __OSO_APP_NAME__ . " Says").$this->config->redirectWithTime("./identitycard?student-idcard=".$this->config->convert_string("code",$student_data->stdId));
+	$testimonial_link ="./identitycard?student-idcard=".$this->config->convert_string("code",$student_data->stdId);
+						$this->response = $this->alert->alert_toastr("success", "Generating ID CARD, Please wait...", __OSO_APP_NAME__ . " Says"). '<script>setTimeout(()=>{
+							window.open("' . $testimonial_link . '","_blank","top=10, left=100, width=550, height=550");
+						},4000);</script>';
+	
 }
 
 		}
@@ -2146,8 +2149,11 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 				$dateCompleted = $student_data->completed_date;
 				$admitted_class = $student_data->admitted_class;
 				$classCompleted = $student_data->studentClass;
+				$allowedClass = array("Basic 5", "JSS 3", "SSS 3");
 			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$classCompleted)){
 				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
+			}else if(!in_array($classCompleted,$allowedClass)){
+				$this->response = $this->alert->alert_toastr("error", "Testimonial is Restricted to Basic 5, JSS 3 and SSS 3 Only!", __OSO_APP_NAME__ . " Says");
 			}else{
 				try{
 					$this->dbh->beginTransaction();
@@ -2169,6 +2175,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 				}
 			}
 		}
+		$this->stmt->closeCursor();
 		return $this->response;
 	}
 	public function rePrintTestimonial($data){

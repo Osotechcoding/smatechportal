@@ -6,4 +6,4 @@
 <meta name="keywords"
   content="Elementary School, Basic Classes, Primary classes, College, Staff Portal, Student Portal, Admin Portal, Online Admission Online Result Checker">
 <meta name="author" content="<?php echo ucwords(__OSOTECH__DEV_COMPANY__); ?>">
-<link rel="icon" type="image/icon" href="<?php echo $Osotech->get_schoolLogoImage(); ?>">
+<link rel="icon" type="image/icon" href="<?php echo $Osotech->get_schoolLogoImage(); ?>"> 

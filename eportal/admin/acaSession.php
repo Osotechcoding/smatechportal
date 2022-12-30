@@ -143,7 +143,7 @@ require_once "helpers/helper.php";
                         </div>
                         <div class="col-md-8 form-group">
                           <div class="position-relative has-icon-left">
-                            <select name="cterm" id="cterm" class="custom-select form-control">
+                            <select name="cterm" id="cterm" class="custom-select form-control" required>
                               <option value="<?php echo $activeSess->term_desc; ?>" selected>
                                 <?php echo $activeSess->term_desc; ?></option>
                               <option value="1st Term">1st Term</option>
@@ -159,7 +159,7 @@ require_once "helpers/helper.php";
                         <div class="col-md-8 form-group">
                           <div class="position-relative has-icon-left">
                             <input type="number" id="days" class="form-control" name="days"
-                              placeholder="Days School Open">
+                              placeholder="Days School Open" required>
                             <div class="form-control-position">
                               <i class="bx bx-calendar"></i>
                             </div>
@@ -171,7 +171,7 @@ require_once "helpers/helper.php";
                         <div class="col-md-8 form-group">
                           <div class="position-relative has-icon-left">
                             <input type="number" id="noweeks" class="form-control" name="noweeks"
-                              placeholder="Weeks School Open">
+                              placeholder="Weeks School Open" required>
                             <div class="form-control-position">
                               <i class="bx bx-calendar"></i>
                             </div>
@@ -182,7 +182,7 @@ require_once "helpers/helper.php";
                         </div>
                         <div class="col-md-8 form-group">
                           <div class="position-relative has-icon-left">
-                            <input type="date" id="vdate" class="form-control" name="vdate" placeholder="Vacation date">
+                            <input type="date" id="vdate" class="form-control" name="vdate" placeholder="Vacation date" required>
                             <div class="form-control-position">
                               <i class="bx bx-calendar"></i>
                             </div>
@@ -193,7 +193,7 @@ require_once "helpers/helper.php";
                         </div>
                         <div class="col-md-8 form-group">
                           <div class="position-relative has-icon-left">
-                            <input type="date" id="next_term_start" class="form-control" name="next_term_start"
+                            <input type="date" id="next_term_start" class="form-control" name="next_term_start" required
                               placeholder="Resumption Date">
                             <div class="form-control-position">
                               <i class="bx bx-calendar"></i>
