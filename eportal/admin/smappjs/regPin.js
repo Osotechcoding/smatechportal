@@ -6,7 +6,7 @@
         let action = $(this).data("action");
         if (confirm("Are you sure, You want to delete this pin?")) {
           $.post("../actions/actions",{action:action,pinId:id,table_name:table_name},function(data){
-              console.log(data);
+             // console.log(data);
             setTimeout(()=>{
               $("#server-response").html(data);
             },500);
@@ -16,7 +16,6 @@
         }
       });
       //ends
-
        $(".view_reg_pins_btn").on("click", function(){
       setTimeout(()=>{
         window.location.href="./regPin";

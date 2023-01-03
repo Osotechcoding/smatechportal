@@ -40,7 +40,7 @@ background-repeat: no-repeat;">
                       </h3>
                       <div class="text-center mb-1" id="server-response">
                       </div>
-                      <form id="newStudentAdmissionform">
+                      <form id="new_Student_Admission_form">
                         <div class="row">
                           <input type="hidden" name="action" value="submit_first_step_admission">
                           <input type="hidden" name="osotech_csrf"
@@ -63,7 +63,7 @@ background-repeat: no-repeat;">
                             <div class="form-group">
                               <label for="studentEmail" class="form-label">Email address </label>
                               <input type="text" id="studentEmail" autocomplete="off" name="student_email"
-                                class="form-control form-control-lg" placeholder="student@example.com">
+                                class="form-control form-control-lg" placeholder="student@<?php echo strtolower($Osotech->getConfigData()->school_short_name); ?>.com">
                               <div id="Email-error" class="form-text"><span id="emailHelp"
                                   class="form-text text-danger">I don't have an e-mail <a
                                     href="https://accounts.google.com/SignUp" target="_blank"> Create Email
@@ -74,7 +74,7 @@ background-repeat: no-repeat;">
                             <div class="form-group">
                               <label for="username" class="form-label">Surname [Father's Name]</label>
                               <input type="text" autocomplete="off" id="username" name="username"
-                                class="form-control form-control-lg" placeholder="Smatech">
+                                class="form-control form-control-lg" placeholder="<?php echo ucfirst(strtolower($Osotech->getConfigData()->school_short_name)); ?>">
                             </div>
                           </div>
                           <div class="col-md-6 mb-3">
@@ -104,7 +104,7 @@ background-repeat: no-repeat;">
                               <select class="custom-select form-control form-control-lg" id="student_type"
                                 name="student_type">
                                 <option value="Day" selected>Day</option>
-                                <option value="Borading">Boarding</option>
+                                <option value="Boarding">Boarding</option>
                               </select>
                             </div>
                           </div>
@@ -117,7 +117,7 @@ background-repeat: no-repeat;">
                         </div>
 
                         <button type="submit" class="btn btn-dark btn-lg btn-round mb-2 __loadingBtn__"
-                          style="float:right">Start Registration</button>
+                          style="float:right">Submit</button>
                       </form>
                     </div>
                   </div>
@@ -135,17 +135,16 @@ background-repeat: no-repeat;">
     ?>
   </div>
   <!-- Footer -->
-
   <!-- Footer -->
   </div>
   <?php include_once("FooterScript.php"); ?>
   <script>
   $(document).ready(function() {
 
-    const ADMISSION_FORM_SUBMIT = $("#newStudentAdmissionform");
+    const ADMISSION_FORM_SUBMIT = $("#new_Student_Admission_form");
     ADMISSION_FORM_SUBMIT.on("submit", function(event) {
       event.preventDefault();
-      $(".__loadingBtn__").html('<img src="rolling_loader.svg" width="30"> Processing...').attr("disabled",
+      $(".__loadingBtn__").html('<img src="rolling_loader.svg" width="30"> Please wait...').attr("disabled",
         true);
       $.post("Includes/actions", ADMISSION_FORM_SUBMIT.serialize(), function(result) {
         setTimeout(() => {

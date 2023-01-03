@@ -2,7 +2,7 @@ $(document).ready(function(){
       const ADD_STUDENT_OFFICE_FORM =$("#student_office_form");
       ADD_STUDENT_OFFICE_FORM.on("submit", function(event){
       event.preventDefault();
-      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       $.post("../actions/actions",ADD_STUDENT_OFFICE_FORM.serialize(),function(res){
         setTimeout(()=>{
           $(".__loadingBtn2__").html('Submit').attr("disabled",false);
@@ -51,7 +51,7 @@ $(document).ready(function(){
        const _update_student_offi_ = $("#_update_student_offi_");
       _update_student_offi_.on("submit", function(e){
       e.preventDefault();
-       $(".__loadingBtn5__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+       $(".__loadingBtn5__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       $.post("../actions/update_actions",_update_student_offi_.serialize(),function(res){
             setTimeout(()=>{
                $(".__loadingBtn5__").html('Save Changes').attr("disabled",false);

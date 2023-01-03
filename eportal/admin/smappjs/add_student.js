@@ -4,7 +4,7 @@
         NEWSTUDENTFORM.on("submit", function(e){
         e.preventDefault();
         //myResponseText3
-        $(".__loadingBtn4__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+        $(".__loadingBtn4__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
         //send request 
         $.post("../actions/actions",NEWSTUDENTFORM.serialize(),function(res_data){
         setTimeout(()=>{

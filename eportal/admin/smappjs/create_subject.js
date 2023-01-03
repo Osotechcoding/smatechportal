@@ -32,7 +32,7 @@ $(document).ready(function(){
       //when update form is submitted
        $("#update_subject_form_modal").on("submit", function(event){
         event.preventDefault();
-         $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+         $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
         const update_subject_form_modal = $(this).serialize();
        // alert("Subject Saved Successfully");
         //send to server
@@ -46,7 +46,7 @@ $(document).ready(function(){
       });
       $("#createSubjectForm").on("submit", function(e){
         e.preventDefault();
-         $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+         $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
         const createSubjectForm = $(this).serialize();
         //send to server
         $.post("../actions/actions", createSubjectForm, function (data) {

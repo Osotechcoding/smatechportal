@@ -2,7 +2,7 @@ $(document).ready(function(){
       const  RosterForm = $("#RosterForm");
      RosterForm.on("submit", function(event){
       event.preventDefault();
-      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send a request 
       $.post("../actions/actions",RosterForm.serialize(),function(data){
         setTimeout(()=>{

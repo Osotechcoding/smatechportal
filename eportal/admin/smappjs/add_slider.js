@@ -6,7 +6,7 @@ $(document).ready(function(){
         let action = 'delete_slider';
          let is_true = confirm("Are you Sure you want to Remove this Image?");
       if (is_true) {
-        $(".__loadingBtn2__"+Id).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Processing...').attr("disabled",true);
+        $(".__loadingBtn2__"+Id).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Please wait...').attr("disabled",true);
         //send request 
         $.post("../actions/delete_actions",{action:action,tId:Id},function(response){
           setTimeout(()=>{
@@ -29,7 +29,7 @@ $(document).ready(function(){
     cache:false,
     processData:false,
     beforeSend(){
- $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",true);
+ $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
     },
     success:function(data){
       setTimeout(()=>{

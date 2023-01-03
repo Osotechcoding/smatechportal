@@ -16,7 +16,7 @@ $(document).ready(function(){
      const allocation_form = $("#allocation_form");
         allocation_form.on("submit", function(event){
           event.preventDefault();
-      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request
       $.post("../actions/actions",allocation_form.serialize(),function(data){
         setTimeout(()=>{
@@ -31,7 +31,7 @@ $(document).ready(function(){
      const update_allocated_form = $("#update_allocated_form");
         update_allocated_form.on("submit", function(event){
           event.preventDefault();
-      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request
       $.post("../actions/update_actions",update_allocated_form.serialize(),function(response){
         setTimeout(()=>{

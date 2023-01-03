@@ -19,7 +19,7 @@
     cache:false,
     processData:false,
     beforeSend(){
- $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",true);
+ $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
     },
     success:function(data){
       setTimeout(()=>{

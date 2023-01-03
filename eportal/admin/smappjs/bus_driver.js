@@ -38,7 +38,7 @@
       const EditedDriverModalForm = $("#editDriverModalForm");
       EditedDriverModalForm.on("submit", function(e){
         e.preventDefault();
-         $(".__loadingBtn__driver_edit").html('<img src="../assets/loaders/rolling_loader.svg" width="30""> Processing...').attr("disabled",true);
+         $(".__loadingBtn__driver_edit").html('<img src="../assets/loaders/rolling_loader.svg" width="30""> Please wait...').attr("disabled",true);
        $.post("../actions/update_actions",EditedDriverModalForm.serialize(),function(response){
           setTimeout(()=>{
         $(".__loadingBtn__driver_edit").html('Save Changes').attr("disabled",false);

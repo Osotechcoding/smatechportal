@@ -22,7 +22,7 @@ $(document).ready(function(){
      const Component_Form_Fee = $("#Component_Form_Fee");
         Component_Form_Fee.on("submit", function(event){
           event.preventDefault();
-      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request
       $.post("../actions/actions",Component_Form_Fee.serialize(),function(data){
         setTimeout(()=>{
@@ -37,7 +37,7 @@ $(document).ready(function(){
          const Update_Component_Form_Fee = $("#Update_Component_Form_Fee");
         Update_Component_Form_Fee.on("submit", function(event){
           event.preventDefault();
-      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request
       $.post("../actions/update_actions",Update_Component_Form_Fee.serialize(),function(data){
         setTimeout(()=>{

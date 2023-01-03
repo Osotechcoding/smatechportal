@@ -7,7 +7,7 @@
         let action = 'delete_oauth_code';
          let is_true = confirm("Are you Sure you want to Remove this Image?");
       if (is_true) {
-        $(".__loadingBtn2__"+codeId).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Processing...').attr("disabled",true);
+        $(".__loadingBtn2__"+codeId).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Please wait...').attr("disabled",true);
         //send request 
         $.post("../actions/delete_actions",{action:action,codeId:codeId},function(response){
           setTimeout(()=>{
@@ -24,7 +24,7 @@
         const GENAUTHCODEFORM = $("#authcodegen_form");
         GENAUTHCODEFORM.on("submit", function (event) {
               event.preventDefault();
-      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request
       $.post("../actions/actions",GENAUTHCODEFORM.serialize(),function(response){
         setTimeout(()=>{

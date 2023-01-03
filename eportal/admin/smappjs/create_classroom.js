@@ -39,7 +39,7 @@
       //when update form is submitted
        $("#update_classroom_form_modal").on("submit", function(event){
         event.preventDefault();
-         $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+         $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
         const update_classroom_form_modal = $(this).serialize();
        // alert("Subject Saved Successfully");
         //send to server
@@ -55,7 +55,7 @@
 
       $("#add_ClassModal_form").on("submit", function(event){
         event.preventDefault();
-         $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+         $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
         const add_ClassModal_form = $(this).serialize();
        // alert("Subject Saved Successfully");
         //send to server

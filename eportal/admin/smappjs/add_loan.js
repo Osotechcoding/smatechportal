@@ -3,7 +3,7 @@
     //when the calculate btn is clicked
     const calculate_loan_btn = $(".calculate_laon_btn");
     calculate_loan_btn.on("click", function(){
-      calculate_loan_btn.html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      calculate_loan_btn.html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       setTimeout(()=>{
          calculate_loan_btn.html('<i class="fa fa-refresh"></i> Calculate').attr("disabled",false);
         osotechLoanCalculator();},2000);
@@ -12,7 +12,7 @@
       const  LoanForm = $("#staff_loan_form");
      LoanForm.on("submit", function(event){
       event.preventDefault();
-      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send a request
       $.post("../actions/actions",LoanForm.serialize(),function(data){
         setTimeout(()=>{

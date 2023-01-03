@@ -23,7 +23,7 @@ $(document).ready(function(){
         event.preventDefault();
         var is_true_ = confirm ("Are you sure, You want to Update the Session Details? You cannot undo this action!");
         if (is_true_) {
-           $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+           $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
           //send request
           $.post("../actions/update_actions",update_academic_session_form.serialize(),function(result){
             setTimeout(()=>{

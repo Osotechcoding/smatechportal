@@ -5,7 +5,7 @@
         let Id = $(this).data("id");
         let action = $(this).data("action");
         let myTerm = $(this).data("term");
-         let is_true = confirm("Are you Sure you want to Remove this Result, this Action cannot be undo?");
+         let is_true = confirm("Are you Sure you want to Remove this Result, this action cannot be undo?");
       if (is_true) {
         $(".__loadingBtn__"+Id).html('<img src="../assets/loaders/rolling_loader.svg" width="20">').attr("disabled",true);
         //send request 

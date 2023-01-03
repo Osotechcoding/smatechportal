@@ -102,7 +102,7 @@ require_once "helpers/helper.php";
           <label for="student_office_name">SCHOOL OFFICE HELD</label>
           <select name="student_office_name" id="student_office_name" class="custom-select form-control" required>
         <option value="" selected>Choose...</option>
-        <option value="Student">Student</option>
+        <option value="None">None</option>
         <?php echo $Administration->get_student_office_title_inDropDown(); ?>
         </select>
         </div>
@@ -115,7 +115,7 @@ require_once "helpers/helper.php";
       </div>
       <div class="col-md-12">
         <div class="form-group">
-          <label for="remarks">GENERAL REMARKS (<span class="text-warning">Not more than Five (5) Words</span> )</label>
+          <label for="remarks">GENERAL REMARKS (<span class="text-warning">In Not more than Five (5) Words</span> )</label>
          <textarea type="text" required class="form-control" name="remarks" placeholder="General Remarks"></textarea>
         </div>
       </div>
@@ -200,7 +200,7 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
         <div class="form-group">
           <label for="subject_ten"> SUBJECT TEN </label>
           <select name="subject_ten" id="subject_ten" class="custom-select form-control">
@@ -210,13 +210,7 @@ require_once "helpers/helper.php";
         </div>
       </div>
         
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="cert_no">CERTIFICATE NUMBER</label>
-         <input type="text" readonly class="form-control" name="cert_no" value="<?php echo $Student->generateTestimonialSerialNo() ?>">
-        </div>
-      </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="auth_code">AUTHENTICATION CODE</label>
          <input type="password" autocomplete="off" class="form-control" name="auth_code" placeholder="Enter Pass code">

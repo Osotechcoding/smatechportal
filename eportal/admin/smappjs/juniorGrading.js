@@ -43,7 +43,7 @@ $(".update_grade_btn").on("click",function(){
   const update_grading_form = $("#update_grading_form");
   update_grading_form.on("submit",(event)=>{
   event.preventDefault();
-   $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+   $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
    //send request
    $.post("../actions/update_actions",update_grading_form.serialize(),function(data){
     setTimeout(()=>{

@@ -5,7 +5,7 @@ $(document).ready(function() {
         let action = 'delete_feedback';
          let is_true = confirm("Are you Sure you want to delete this Feedback?");
       if (is_true) {
-        $(".__loadingBtn2__"+Id).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Processing...').attr("disabled",true);
+        $(".__loadingBtn2__"+Id).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Please wait...').attr("disabled",true);
         //send request 
         $.post("../actions/delete_actions",{action:action,fbId:Id},function(response){
           setTimeout(()=>{

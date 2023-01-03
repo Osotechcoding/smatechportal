@@ -81,17 +81,13 @@ require_once "helpers/helper.php";
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">Registered </h3></div>
                   <h2 class="text-white mb-0"><?php echo $Administration->count_all_registered_subjects(); ?></h2>
-
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
         <!-- Revenue Growth Chart Starts -->
       </div>
-
     <div class="card">
 
       <div class="card-body">
@@ -121,7 +117,7 @@ require_once "helpers/helper.php";
     <?php
 
 if ($Configuration->isEmptyStr($_POST['subject_class'])) {
-   echo $Alert->alert_msg("Please Select a specific Class to View all the Registered Subject!");
+   echo $Alert->alert_msg("Please Select a Class to View all the Registered Subject!");
 }else{
   $subject_class = $Configuration->Clean($_POST['subject_class']);?>
   <div class="col-md-12 text-center" id="delete_response"></div>
@@ -171,7 +167,7 @@ if ($Configuration->isEmptyStr($_POST['subject_class'])) {
     ?>
     <div class="text-center text-bold">
       <h4 class="text-center text-bold">
-        <?php echo $Alert->alert_msg("No Subjects Found for ".strtoupper($subject_class)."!","danger"); ?>
+        <?php echo $Alert->alert_msg("No Subjects Found!","danger"); ?>
       </h4>
   
     </div>

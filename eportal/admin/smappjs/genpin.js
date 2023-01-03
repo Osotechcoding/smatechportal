@@ -13,7 +13,7 @@ $(document).ready(function(){
     })
     $("#osotechPinGenForm").on("submit", function(event){
       event.preventDefault();
-       $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing Request...').attr("disabled",true);
+       $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       const osotechPinGenForm = $(this).serialize();
       $.post("../actions/actions",osotechPinGenForm,function(d){
        // console.log(d);

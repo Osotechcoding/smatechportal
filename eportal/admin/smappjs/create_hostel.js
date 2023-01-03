@@ -10,7 +10,7 @@
       $("#NewHostelForm").on("submit", function(event){
         event.preventDefault();
         const NEW_HOSTEL_FORM = $(this);
-         $(".__loadingBtn__hostel").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+         $(".__loadingBtn__hostel").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
           //send request
           $.post("../actions/actions",NEW_HOSTEL_FORM.serialize(),function(result){
             setTimeout(()=>{

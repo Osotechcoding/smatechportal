@@ -2,7 +2,7 @@
       const ASSIGN_OFFICE_FORM = $("#assign_office_Form");
       ASSIGN_OFFICE_FORM.on("submit", function(ev){
       ev.preventDefault();
-      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn2__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
          $.post("../actions/actions",ASSIGN_OFFICE_FORM.serialize(), function(data){
           setTimeout(()=>{
             $("#server-response").html(data);
@@ -27,7 +27,7 @@
        const UPDATE_OFFICE_FORM = $("#submit_update_staff_office_form");
       UPDATE_OFFICE_FORM.on("submit", function(ev){
       ev.preventDefault();
-      $(".__loadingBtn5__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn5__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
          $.post("../actions/update_actions",UPDATE_OFFICE_FORM.serialize(), function(data){
           setTimeout(()=>{
             $("#server-response").html(data);

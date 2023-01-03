@@ -141,7 +141,12 @@ require_once "helpers/helper.php";
                       <span class="badge badge-warning badge-md">Not Assigned</span>
                       <?php else : ?>
                       <?php $staff_data = $Staff->get_staff_ById($classrooms->grade_teacher);
-                              echo strtoupper($staff_data->full_name); ?>
+                      if($staff_data){
+                        echo strtoupper($staff_data->full_name);
+                      }else{
+                        echo '<span class="badge badge-warning badge-md">Not Assigned</span>';
+                      }
+                              ?>
                       <?php endif ?>
                     </td>
                     <td>
@@ -157,19 +162,18 @@ require_once "helpers/helper.php";
                               break;
                           } ?></td>
                     <td> <button type="button" data-id="<?php echo $classrooms->gradeId; ?>"
-                        class="badge badge-dark badge-pill badge-md update_btn"><span class="fa fa-edit"></span>
-                        Edit</button>
-                      <button type="button" data-action="synchronize_teacher_btn"
-                        data-id="<?php echo $classrooms->gradeId; ?>"
-                        data-teacher="<?php echo $classrooms->grade_teacher; ?>"
+                        class="badge badge-dark badge-pill badge-md update_btn"><span class="fa fa-edit fa-1x"></span>
+                        </button>
+                      <!-- <button type="button" data-action="synchronize_teacher_btn"
+                        data-id="<?php //echo $classrooms->gradeId; ?>"
+                        data-teacher="<?php //echo $classrooms->grade_teacher; ?>"
                         class="badge badge-danger badge-pill badge-md sync_btn"><span class="fa fa-refresh"></span> Sync
-                        C.T</button>
+                        C.T</button> -->
                     </td>
                   </tr>
                   <?php
                     }
                   }
-
                   ?>
                 </tbody>
               </table>
@@ -193,7 +197,6 @@ require_once "helpers/helper.php";
               class="fa fa-plus fa-1x"></span> Add Classroom</h2>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="bx bx-x"></i></button>
         </div>
-        <!-- <div class="col-md-12 text-center mt-2" id="result-response"></div> -->
         <form id="add_ClassModal_form">
           <div class="modal-body">
             <div class="row">
@@ -201,25 +204,24 @@ require_once "helpers/helper.php";
                 <div class="form-group">
                   <label for="grade_name">CLASS DESC</label>
                   <input type="text" autocomplete="off" class="form-control form-control-lg" name="grade_name"
-                    placeholder="JSS3">
+                    placeholder="JSS 3">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="status"> STATUS </label>
-                  <select name="status" id="status" class="form-control form-control-lg">
-                    <option value="">Choose...</option>
+                  <select name="status" id="status" class="custom-select form-control">
+                    <option value="" selected>Choose...</option>
                     <option value="active">Enable</option>
                     <option value="pending">Disable</option>
                   </select>
                 </div>
               </div>
-
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="teacher"> CLASS TEACHER </label>
-                  <select name="teacher" id="teacher" class="form-control form-control-lg">
-                    <option value="">Choose...</option>
+                  <select name="teacher" id="teacher" class="custom-select form-control">
+                    <option value="" selected>Choose...</option>
                     <?php echo $Staff->show_staff_indropdown_list(); ?>
                   </select>
                 </div>
@@ -227,13 +229,11 @@ require_once "helpers/helper.php";
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="auth_code">Authentication Code</label>
-                  <input type="password" autocomplete="off" class="form-control form-control-lg" name="auth_code"
+                  <input type="password" autocomplete="off" class="form-control" name="auth_code"
                     placeholder="*********">
                 </div>
               </div>
-
             </div>
-
           </div>
           <input type="hidden" name="action" value="submit_new_classroom">
           <div class="modal-footer">

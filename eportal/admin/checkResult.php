@@ -56,18 +56,18 @@ require_once "helpers/helper.php";
           <h1 class="text-center text-info">Check Student Result</h1>
         </div>
         <div class="card-body">
-          <form class="form" id="SingleStudentResult_form">
+          <form autocomplete="off" id="SingleStudentResult_form">
             <div class="form-body">
               <div class="row">
-                <div class="col-12">
+                <div class="col-md-6">
                   <input type="hidden" name="action" value="check_single_student_result">
                   <div class="form-group">
                      <label for="admission-no"> Admission Number</label>
-                    <input type="text" autocomplete="off" id="admission-no" class="form-control" placeholder="***********"
+                    <input type="text" id="admission-no" class="form-control" placeholder="***********"
                       name="reg_number" onpaste="false">
                   </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="result_class">Result Class</label>
                    <select name="result_class" id="result_class" class="form-control custom-select">
@@ -76,7 +76,7 @@ require_once "helpers/helper.php";
                    </select>
                   </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="result_term">Result Term</label>
                    <select name="result_term" id="result_term" class="custom-select form-control">
@@ -87,7 +87,7 @@ require_once "helpers/helper.php";
                    </select>
                   </div>
                 </div>
-                <div class="col-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <label for="result_session">Result Session</label>
                     <select name="result_session" id="result_session" class="form-control custom-select">
@@ -99,7 +99,7 @@ require_once "helpers/helper.php";
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="form-group">
                     <label for="auth_pass"> Authentication Code</label>
-                    <input type="password" autocomplete="off" id="auth_pass" class="form-control" placeholder="*******"
+                    <input type="password" id="auth_pass" class="form-control" placeholder="*******"
                       name="auth_pass">
                     
                   </div>

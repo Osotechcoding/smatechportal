@@ -17,7 +17,7 @@
     //when resend confirmation btn is clicked
     const resendCodeBtn = $(".resend-btn");
     resendCodeBtn.on("click", function(){
-        $(".resend-btn").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Sending Mail...');
+        $(".resend-btn").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...');
         //evt.preventDefault();
         //alert("yes confirmation code was sent successfully");
         const staffName = $(this).data('name');
@@ -47,7 +47,7 @@
     UPDATE_BANK_FROM.on("submit", function(e){
         e.preventDefault();
         //myResponseText3
-          $(".__loadingBtn3__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+          $(".__loadingBtn3__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request 
       $.post("../actions/actions",UPDATE_BANK_FROM.serialize(),function(res_data){
         setTimeout(()=>{
@@ -69,7 +69,7 @@ const MY_PROFILE_UPDATE_FORM = $("#admin_profile_update_form");
     MY_PROFILE_UPDATE_FORM.on("submit", function(e){
         e.preventDefault();
         //myResponseText3
-          $(".__loadingBtn38__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+          $(".__loadingBtn38__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
       //send request 
       $.post("../actions/update_actions",MY_PROFILE_UPDATE_FORM.serialize(),function(re_data){
         setTimeout(()=>{

@@ -7,7 +7,7 @@ $(document).ready(function(){
       let action = 'unregistered_exam_subject_now';
       var is_true = confirm("Are you Sure you really want to unregister this Subject?");
       if (is_true) {
-        $(".__loadingBtn2__"+theId).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Processing...').attr("disabled",true);
+        $(".__loadingBtn2__"+theId).html('<img src="../assets/loaders/rolling_loader.svg" width="20"> Please wait...').attr("disabled",true);
         //send request 
         $.post("../actions/actions",{action:action,theId:theId,subId:subject},function(data){
           setTimeout(()=>{

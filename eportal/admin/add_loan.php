@@ -69,7 +69,7 @@ require_once "helpers/helper.php";
                       <div class="text-white line-ellipsis">
                         <h3 class="text-white">Recieved Today</h3>
                       </div>
-                      <h2 class="text-white mb-0">&#8358;10,000.00</h2>
+                      <h2 class="text-white mb-0">&#8358;0.00</h2>
 
                     </div>
                   </div>
@@ -83,7 +83,7 @@ require_once "helpers/helper.php";
                       <div class="text-white line-ellipsis">
                         <h3 class="text-white">Loaned Out</h3>
                       </div>
-                      <h2 class="text-white mb-0">&#8358;24,000.00</h2>
+                      <h2 class="text-white mb-0">&#8358;0.00</h2>
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@ require_once "helpers/helper.php";
                       <div class="text-white line-ellipsis">
                         <h3 class="text-white">Interest </h3>
                       </div>
-                      <h2 class="text-white mb-0">&#8358;34,000.00</h2>
+                      <h2 class="text-white mb-0">&#8358;0.00</h2>
                     </div>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ require_once "helpers/helper.php";
                       <div class="text-white line-ellipsis">
                         <h3 class="text-white">Total Amount </h3>
                       </div>
-                      <h2 class="text-white mb-0">&#8358;34,000.00</h2>
+                      <h2 class="text-white mb-0">&#8358;0.00</h2>
                     </div>
                   </div>
                 </div>
@@ -218,7 +218,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="staff_name">STAFF NAME</label>
-                    <select name="staff_name" id="staff_name" class="select2 form-control">
+                    <select name="staff_name" id="staff_name" class="custom-select form-control">
                       <option value="">--select--</option>
                       <?php echo $Staff->show_staff_indropdown_list(); ?>
                     </select>

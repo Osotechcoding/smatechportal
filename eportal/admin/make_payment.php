@@ -90,7 +90,6 @@ require_once "helpers/helper.php";
                   </div>
                 </div>
               </div>
-
               <div class="col-md-4 dashboard-users-success">
                 <div class="card text-center bg-danger">
                   <div class="card-body py-1">
@@ -107,11 +106,8 @@ require_once "helpers/helper.php";
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
-
         </div>
         <!-- Revenue Growth Chart Starts -->
         <div class="card">
@@ -204,7 +200,7 @@ require_once "helpers/helper.php";
               </table>
             </div>
             <?php } else {
-                  echo $Alert->alert_msg("Notice: No Student found for " . strtoupper($stdRegNo) . " in $stdClass", "danger");
+                  echo $Alert->alert_msg("Notice: No Record found!", "danger");
                 }
               }
             }

@@ -1,10 +1,10 @@
 $(document).ready(function(){
-
    //update_school_social_link_form
+  const href = "../actions/update_actions";
         $("#uploadSchoolStampForm").on("submit",function(evt){
           evt.preventDefault();
         $.ajax({
-        url:"../actions/update_actions",
+        url:href,
         type:"POST",
         data: new FormData(this),
         contentType:false,

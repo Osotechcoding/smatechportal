@@ -3,7 +3,7 @@ $(document).ready(function () {
     generateIdCardForm.on("submit", function(event){
   event.preventDefault();
   //alert("Submitted");
-  $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+  $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
   //send request 
   $.post("../actions/actions",generateIdCardForm.serialize(),function(data){
     setTimeout(()=>{

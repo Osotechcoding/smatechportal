@@ -14,7 +14,7 @@
      NEWADMISSION_FORM.on("submit", function (event) 
      {
       event.preventDefault();
-      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+      $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
         const NEWADMISSION_FORM = $(this).serialize();
        // alert("Subject Saved Successfully");
         //send to server

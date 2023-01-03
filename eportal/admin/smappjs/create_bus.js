@@ -19,7 +19,7 @@ function previewFile(input){
       const EditedSchoolModalForm = $("#editSchoolBusModalForm");
       EditedSchoolModalForm.on("submit", function(e){
         e.preventDefault();
-         $(".__loadingBtn__bus_edit").html('<img src="../assets/loaders/rolling_loader.svg" width="30""> Processing...').attr("disabled",true);
+         $(".__loadingBtn__bus_edit").html('<img src="../assets/loaders/rolling_loader.svg" width="30""> Please wait...').attr("disabled",true);
        $.post("../actions/update_actions",EditedSchoolModalForm.serialize(),function(response){
           setTimeout(()=>{
         $(".__loadingBtn__bus_edit").html('Save Changes').attr("disabled",false);
@@ -70,7 +70,7 @@ function previewFile(input){
     cache:false,
     processData:false,
     beforeSend(){
- $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Uploading...').attr("disabled",true);
+ $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
     },
     success:function(data){
       setTimeout(()=>{

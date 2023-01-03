@@ -22,7 +22,7 @@
              class="menu-title text-truncate" data-i18n="ADMINISTRATIVE">ADMINISTRATIVE</span></a>
          <ul class="menu-content">
            <li class="nav-item"><a href="acaSession"><i class="fa fa-calendar fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="academic year">Academic Year</span></a>
+                 class="menu-title text-truncate" data-i18n="Academic Session">Academic Session</span></a>
            </li>
            <li><a class="d-flex align-items-center" href="create_subject"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Subject Management">Subject Management</span></a>
@@ -31,9 +31,9 @@
            <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Class Management">Class Management</span></a>
            </li>
-           <li><a class="d-flex align-items-center" href="upload_lecture"><i class="bx bx-video-plus"></i><span
+           <!-- <li><a class="d-flex align-items-center" href="upload_lecture"><i class="bx bx-video-plus"></i><span
                  class="menu-item text-truncate" data-i18n="Online Class"> Online Class</span></a>
-           </li>
+           </li> -->
            <!-- <li><a class="d-flex align-items-center" href="registerStudentSubject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Exam Subject I">Exam Subject I</span></a>
               </li> -->
            <li><a class="d-flex align-items-center" href="bulkSubjectReg"><i class="bx bx-right-arrow-alt"></i><span
@@ -42,26 +42,41 @@
            <li><a class="d-flex align-items-center" href="examSubjectList"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Search Exam Subject">Search Subject</span></a>
            </li>
-           <li class=" nav-item"><a href="student_assignment"><i class="fa fa-book fa-1x"></i><span
+           <!-- <li class=" nav-item"><a href="student_assignment"><i class="fa fa-book fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Student Assignment"> Student Assignment</span></a>
            </li>
            <li class=" nav-item"><a href="markstudentass"><i class="fa fa-pencil fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Mark Assignment">Mark Assignment</span></a>
-           </li>
-
-
+           </li> -->
          </ul>
        </li>
        <!-- ADMISSION -->
-       <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-edit fa-1x" data-icon="notebook"></i><span
+       <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-lock fa-1x" data-icon="notebook"></i><span
              class="menu-title text-truncate" data-i18n="MANAGE PORTAL">MANAGE PORTAL</span></a>
          <ul class="menu-content">
            <li class=" nav-item"><a href="callAdmission"><i class="fa fa-cogs fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Portal Status">Admission Portal</span></a>
+                 class="menu-title text-truncate" data-i18n="Admission Portal">Admission Portal</span></a>
            </li>
          </ul>
        </li>
-       <!-- ADMISION ENDS -->
+       <!-- ADMISSION ENDS -->
+
+        <!-- ADMISSION -->
+        <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-certificate fa-1x" data-icon="certificate"></i><span
+             class="menu-title text-truncate" data-i18n="STUDENT DOCS">STUDENT DOCS</span></a>
+         <ul class="menu-content">
+           <li class=" nav-item"><a href="genIdCard"><i class="fa fa-address-book fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Generate ID Card">Generate ID Card</span></a>
+           </li>
+           <li class=" nav-item"><a href="generate-testimonial"><i class="fa fa-certificate fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Generate Testimonial"> Generate Testimonial</span></a>
+           </li>
+           <li class=" nav-item"><a href="reprintcert"><i class="fa fa-print fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Re-print Testimonial">Re-print Testimonial</span></a>
+           </li>
+         </ul>
+       </li>
+       <!-- ADMISSION ENDS -->
        <!-- RESULT -->
        <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-bar-chart fa-1x" data-icon="notebook"></i><span
              class="menu-title text-truncate" data-i18n="MANAGE RESULTS">MANAGE RESULTS</span></a>
@@ -69,26 +84,26 @@
            <li class="nav-item"><a href="rgrading"><i class="fa fa-line-chart fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Result Grading">Result Grading</span></a>
            </li>
-           <li class=" nav-item"><a href="result_uploading"><i class="fa fa-edit fa-1x"></i><span
+           <!-- <li class=" nav-item"><a href="result_uploading"><i class="fa fa-edit fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Upload Results">Upload Results</span></a>
-           </li>
+           </li> -->
            <li class=" nav-item"><a href="view_uploaded_result"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Results">View Results</span></a>
            </li>
-           <li class=" nav-item"><a href="uploading_behavior"><i class="fa fa-edit fa-1x"></i><span
+           <!-- <li class=" nav-item"><a href="uploading_behavior"><i class="fa fa-edit fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Affective Domain">Affective Domain</span></a>
-           </li>
+           </li> -->
            <li class=" nav-item"><a href="view_cognitive"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Affective">View Affective</span></a>
            </li>
-           <li class=" nav-item"><a href="psychomotor"><i class="fa fa-edit fa-1x"></i><span
+           <!-- <li class=" nav-item"><a href="psychomotor"><i class="fa fa-edit fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Psychomotor">Psychomotor</span></a>
-           </li>
+           </li> -->
            <li class=" nav-item"><a href="viewpsycho"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Psychomotor">View Psychomotor</span></a>
            </li>
            <li class=" nav-item"><a href="viewResultComments"><i class="fa fa-eye fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Result Comments">Result Comments</span></a>
+                 class="menu-title text-truncate" data-i18n="View Comments">View Comments</span></a>
            </li>
            <li class=" nav-item"><a href="checkResult"><i class="fa fa-line-chart fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Check Result">Check Result</span></a>
@@ -107,13 +122,6 @@
            <li class=" nav-item"><a href="viewPublishedResult"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Published">View Published</span></a>
            </li>
-           <li class=" nav-item"><a href="generate-testimonial"><i class="fa fa-certificate fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Generate Certificate">Generate Certificate</span></a>
-           </li>
-           <li class=" nav-item"><a href="reprintcert"><i class="fa fa-print fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Re-Print Certificate">Re-Print Certificate</span></a>
-           </li>
-
          </ul>
        </li>
        <!-- RESULT ENDS -->
@@ -125,20 +133,17 @@
            <li class="nav-item"><a href="add_student"><i class="fa fa-graduation-cap fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Single Registration">Single Registration</span></a>
            </li>
-           <li class="nav-item"><a href="studentcsvupload"><i class="fa fa-graduation-cap fa-1x"></i><span
+           <!-- <li class="nav-item"><a href="studentcsvupload"><i class="fa fa-graduation-cap fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Bulk Registration">Bulk Registration</span></a>
-           </li>
+           </li> -->
 
            <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Students">View Students</span></a>
            </li>
-           <li class="nav-item"><a href="genIdCard"><i class="fa fa-credit-card fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Student ID Card">Student ID Card</span></a>
-           </li>
            <!-- student_attendance -->
-           <li class="nav-item"><a href="upload-attendance"><i class="fa fa-child fa-1x"></i><span
+           <!-- <li class="nav-item"><a href="upload-attendance"><i class="fa fa-child fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Mark Attendance">Mark Attendance</span></a>
-           </li>
+           </li> -->
            <li class="nav-item"><a href="view-attendance"><i class="fa fa-child fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="view Attendance">View Attendance</span></a>
            </li>
@@ -172,7 +177,7 @@
            <li class="nav-item"><a href="HODs"><i class="fa fa-briefcase fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Staff Office">Staff Office</span></a>
            </li>
-           <li class="nav-item"><a href="staff_office_list"><i class="fa fa-pen fa-1x"></i><span
+           <li class="nav-item"><a href="staff_office_list"><i class="fa fa-edit fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Create Office">Create Office</span></a>
            </li>
          </ul>
@@ -296,19 +301,19 @@
                  class="menu-item text-truncate" data-i18n="Manage Newsletter"> Manage Newsletter</span></a>
            </li>
            <li><a class="d-flex align-items-center" href="feedback"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Manage FeedBack"> FeedBack</span></a>
+                 class="menu-item text-truncate" data-i18n="FeedBack"> FeedBack</span></a>
            </li>
            <li><a class="d-flex align-items-center" href="add_gallery"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Upload Gallery">Upload Gallery </span></a>
+                 class="menu-item text-truncate" data-i18n=" Gallery"> Gallery </span></a>
            <li><a class="d-flex align-items-center" href="add_slider"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Upload Home Slider">Upload Home Slider</span></a>
+                 class="menu-item text-truncate" data-i18n="Homepage Slider">Homepage Slider</span></a>
            </li>
            <li><a class="d-flex align-items-center" href="add_testimonial"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Upload Testimonials">Upload Testimonials</span></a>
+                 class="menu-item text-truncate" data-i18n="What People Say">What People Say</span></a>
            </li>
 
            <li><a class="d-flex align-items-center" href="visitor_book"><i class="bx bx-right-arrow-alt"></i><span
-                 class="menu-item text-truncate" data-i18n="Vistors Book">Vistors Book</span></a>
+                 class="menu-item text-truncate" data-i18n="Guest Book">Guest Book</span></a>
            </li>
          </ul>
        </li>
@@ -318,9 +323,9 @@
            <li class=" nav-item"><a href="examquestion"><i class="fa fa-edit fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Exam Questions">Exam Questions</span></a>
            </li>
-           <li><a class="d-flex align-items-center" href="javascript:void(0)"><i class="bx bx-calendar"></i><span
+           <!-- <li><a class="d-flex align-items-center" href="javascript:void(0)"><i class="bx bx-calendar"></i><span
                  class="menu-item text-truncate" data-i18n="Exam Timetable">Exam Timetable</span></a>
-           </li>
+           </li> -->
          </ul>
        </li>
        <!-- MSG -->

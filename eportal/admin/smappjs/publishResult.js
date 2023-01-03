@@ -3,7 +3,7 @@ $(document).ready(function(){
                 PUBLISHED_RESULT_FORM.on("submit", function(event){
                 event.preventDefault();
            if (confirm("Are you sure you want to execute this action?")) {
-             $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+             $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
             //send request 
             $.post("../actions/actions",PUBLISHED_RESULT_FORM.serialize(),function(data){
                 setTimeout(()=>{

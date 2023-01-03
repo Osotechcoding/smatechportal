@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2022 at 11:23 PM
+-- Generation Time: Jan 01, 2023 at 07:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -938,14 +938,7 @@ CREATE TABLE IF NOT EXISTS `school_oauth_code_tbl` (
   `oauth_code` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `school_oauth_code_tbl`
---
-
-INSERT INTO `school_oauth_code_tbl` (`id`, `school_name`, `term`, `active_ses`, `oauth_code`, `created_at`) VALUES
-(1, 'Glory Supreme School Ota', '1st Term', '2022/2023', 'SMA48778', '2022-08-28');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1121,18 +1114,7 @@ CREATE TABLE IF NOT EXISTS `tbl_reg_pins` (
   `created_at` date DEFAULT NULL,
   `usedBy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_reg_pins`
---
-
-INSERT INTO `tbl_reg_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `price`, `pin_status`, `created_at`, `usedBy`) VALUES
-(1, '9251033451762', 'SMA73BA38', 'Registration Pins', 10000, 0, '2022-12-20', NULL),
-(2, '3151438760229', 'SMA5113FB', 'Registration Pins', 10000, 0, '2022-12-20', NULL),
-(3, '1152302634597', 'SMABD38A3', 'Registration Pins', 10000, 0, '2022-12-20', NULL),
-(4, '2783531910246', 'SMA06443A', 'Registration Pins', 10000, 0, '2022-12-20', NULL),
-(5, '2379126531450', 'SMA2501B3', 'Registration Pins', 10000, 0, '2022-12-20', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1149,18 +1131,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_result_pins`
---
-
-INSERT INTO `tbl_result_pins` (`pin_id`, `pin_code`, `pin_serial`, `pin_desc`, `price`, `pin_status`, `created_at`) VALUES
-(1, '102456713325', 'SMRF3B15', 'Result Checker Pins', 200, 0, '2022-12-13'),
-(2, '350324168972', 'SMR338DB', 'Result Checker Pins', 200, 0, '2022-12-13'),
-(3, '723103654251', 'SMR69AFC', 'Result Checker Pins', 200, 0, '2022-12-13'),
-(4, '302731126455', 'SMR014F1', 'Result Checker Pins', 200, 0, '2022-12-13'),
-(5, '231614735052', 'SMR05127', 'Result Checker Pins', 200, 1, '2022-12-13');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1178,14 +1149,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result_pins_history` (
   `used_term` varchar(20) DEFAULT NULL,
   `used_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pinId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_result_pins_history`
---
-
-INSERT INTO `tbl_result_pins_history` (`pinId`, `studentRegNo`, `student_class`, `pin_code`, `pin_serial`, `pin_counter`, `used_term`, `used_session`) VALUES
-(1, '2021C263130002', 'Basic 4', '231614735052', 'SMR05127', 1, '1st Term', '2022/2023');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1268,16 +1232,7 @@ CREATE TABLE IF NOT EXISTS `visap_1st_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_1st_term_result_tbl`
---
-
-INSERT INTO `visap_1st_term_result_tbl` (`reportId`, `studentId`, `stdRegCode`, `studentGrade`, `term`, `aca_session`, `subjectName`, `ca`, `test1`, `test2`, `exam`, `overallMark`, `subjectRank`, `mark_average`, `uploadedTime`, `uploadedDate`, `rStatus`) VALUES
-(1, NULL, '2021C263130002', 'BASIC 4', '1st Term', '2022/2023', 'AGRICULTURAL SCIENCE', 38, NULL, NULL, 56, 94, NULL, 47, '06:42:43', '2022-12-13', 2),
-(2, NULL, '2021C263130002', 'BASIC 5', '1st Term', '2022/2023', 'AGRICULTURAL SCIENCE', 38, NULL, NULL, 56, 94, NULL, 47, '01:24:27', '2022-12-20', 2),
-(3, NULL, '2021C263130001', 'BASIC 5', '1st Term', '2022/2023', 'AGRICULTURAL SCIENCE', 38, NULL, NULL, 56, 94, NULL, 47, '01:24:28', '2022-12-20', 2);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1326,7 +1281,7 @@ CREATE TABLE IF NOT EXISTS `visap_admin_login_token` (
 --
 
 INSERT INTO `visap_admin_login_token` (`id`, `Name`, `Email`, `Token`) VALUES
-(1, 'Smatech', 'admin@smatech.com', '7KYDlruPYEjH1zmGj2HXxDw67y13rJ5HLaNMQdMbCfv7wOQuAvfMU8z33hXftMtU1pqr8NlhugWHgVeqIKUwVINqFngUPROTaIVeM');
+(1, 'Smatech', 'admin@smatech.com', '');
 
 -- --------------------------------------------------------
 
@@ -1421,19 +1376,7 @@ CREATE TABLE IF NOT EXISTS `visap_bed_space_tbl` (
   `school_session` varchar(50) DEFAULT NULL,
   `payment_expire` date DEFAULT NULL,
   PRIMARY KEY (`bedId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_bed_space_tbl`
---
-
-INSERT INTO `visap_bed_space_tbl` (`bedId`, `hostel_id`, `room_id`, `room`, `bed_space`, `is_available`, `occupant`, `book_duration`, `booked_today`, `amount`, `amount_paid`, `approve_booked`, `payment_status`, `payment_date`, `school_session`, `payment_expire`) VALUES
-(1, 1, 1, 'Room 101', 'Bonk-1', 1, NULL, NULL, NULL, 5000, NULL, 0, 0, NULL, NULL, NULL),
-(2, 1, 1, 'Room 101', 'Bonk-2', 1, NULL, NULL, NULL, 5000, NULL, 0, 0, NULL, NULL, NULL),
-(3, 1, 1, 'Room 101', 'Bonk-3', 1, NULL, NULL, NULL, 5000, NULL, 0, 0, NULL, NULL, NULL),
-(4, 1, 1, 'Room 101', 'Bonk-4', 1, NULL, NULL, NULL, 5000, NULL, 0, 0, NULL, NULL, NULL),
-(5, 1, 1, 'Room 101', 'Bonk-5', 1, NULL, NULL, NULL, 5000, NULL, 0, 0, NULL, NULL, NULL),
-(6, 1, 1, 'Room 101', 'Bonk-6', 1, NULL, NULL, NULL, 5000, NULL, 0, 0, NULL, NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1457,16 +1400,7 @@ CREATE TABLE IF NOT EXISTS `visap_behavioral_tbl` (
   `class_teacher` varchar(200) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_behavioral_tbl`
---
-
-INSERT INTO `visap_behavioral_tbl` (`id`, `student_id`, `reg_number`, `student_class`, `term`, `session`, `punctuality`, `neatness`, `honesty`, `self_control`, `attentiveness`, `leadership`, `class_teacher`, `uploaded_date`) VALUES
-(1, 2, '2021C263130002', 'BASIC 4', '1st Term', '2022/2023', 1, 1, 1, 1, 1, 1, 'Mr. Blessing Yakubu Oiza', '2022-12-13'),
-(2, 2, '2021C263130002', 'BASIC 5', '1st Term', '2022/2023', 3, 1, 1, 4, 1, 5, 'Mrs. Blessing Yakubu Oiza', '2022-12-20'),
-(3, 1, '2021C263130001', 'BASIC 5', '1st Term', '2022/2023', 2, 1, 2, 1, 1, 4, 'Mrs. Blessing Yakubu Oiza', '2022-12-20');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1631,7 +1565,7 @@ INSERT INTO `visap_class_grade_tbl` (`gradeId`, `gradeDesc`, `grade_teacher`, `g
 (7, 'Basic 2', NULL, 'active', '2022-06-14'),
 (8, 'Basic 3', NULL, 'active', '2022-06-14'),
 (9, 'Basic 4', NULL, 'active', '2022-06-14'),
-(10, 'Basic 5', 2, 'active', '2022-06-14'),
+(10, 'Basic 5', NULL, 'active', '2022-06-14'),
 (11, 'JSS 1', NULL, 'active', '2022-06-14'),
 (12, 'JSS 2', NULL, 'active', '2022-06-14'),
 (13, 'JSS 3', NULL, 'active', '2022-06-14'),
@@ -1709,15 +1643,7 @@ CREATE TABLE IF NOT EXISTS `visap_fee_component_tbl` (
   `fee_status` enum('Pending','Active') DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`compId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_fee_component_tbl`
---
-
-INSERT INTO `visap_fee_component_tbl` (`compId`, `feeType`, `fee_status`, `date`) VALUES
-(1, 'School Fee', 'Active', '2022-12-20'),
-(2, 'Exam Fee', 'Active', '2022-12-20');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1733,15 +1659,7 @@ CREATE TABLE IF NOT EXISTS `visap_gallery_tbl` (
   `type` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_gallery_tbl`
---
-
-INSERT INTO `visap_gallery_tbl` (`id`, `author`, `title`, `image`, `type`, `created_at`) VALUES
-(1, 'SMATech', 'Hotel Payment Details', 'SMAPPgallery639b3fad6ec95.png', 'gallery', '2022-12-15'),
-(2, 'SMATech', 'Visitor Logs', 'SMAPPgallery639b3fff804d1.png', 'gallery', '2022-12-15');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1774,14 +1692,7 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_rooms_tbl` (
   `amount` int(11) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`roomId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_hostel_rooms_tbl`
---
-
-INSERT INTO `visap_hostel_rooms_tbl` (`roomId`, `hostel_id`, `room_desc`, `beds`, `amount`, `created_at`) VALUES
-(1, 1, 'Room 101', 6, 5000, '2022-12-12');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1798,14 +1709,7 @@ CREATE TABLE IF NOT EXISTS `visap_hostel_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`hostel_id`),
   UNIQUE KEY `hostel_desc` (`hostel_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_hostel_tbl`
---
-
-INSERT INTO `visap_hostel_tbl` (`hostel_id`, `hostel_desc`, `hostel_type`, `status`, `hostel_master`, `created_at`) VALUES
-(1, 'Vila B', 'boys', 1, 'Mr Osotech', '2022-12-12');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1854,15 +1758,7 @@ CREATE TABLE IF NOT EXISTS `visap_messages_tbl` (
   PRIMARY KEY (`id`),
   KEY `sender_id` (`sender_email`),
   KEY `recipient_id` (`recipient_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_messages_tbl`
---
-
-INSERT INTO `visap_messages_tbl` (`id`, `sender_email`, `recipient_email`, `subject`, `msg`, `cc_email`, `bcc_email`, `attachment`, `file_size`, `file_type`, `status`, `userType`, `msg_datetime`) VALUES
-(1, 'oiza@gmail.com', 'admin@smatech.com', 'Please for the month of Dec 2022', 'What is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'admin@smatech.com', 'osotechcoding@gmail.com', NULL, NULL, NULL, 0, 'staff', '2022-12-19 14:58:57'),
-(2, 'samson@gmail.com', 'admin@smatech.com', 'Pay My Salary for Jan 2023', 'What is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'admin@smatech.com', 'admin@smatech.com', NULL, NULL, NULL, 0, 'staff', '2022-12-19 15:21:03');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1878,16 +1774,7 @@ CREATE TABLE IF NOT EXISTS `visap_messages_user_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0= suspend, 1=active',
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_messages_user_tbl`
---
-
-INSERT INTO `visap_messages_user_tbl` (`id`, `email`, `fullName`, `user_type`, `status`, `created_at`) VALUES
-(1, 'admin@smatech.com', 'Smatech Portal', 'admin', 1, '2022-12-19 14:04:54'),
-(2, 'oiza@gmail.com', 'Yakubu Oiza Blessing', 'staff', 1, '2022-12-19 14:56:21'),
-(3, 'samson@gmail.com', 'Samson Idowu', 'staff', 1, '2022-12-19 15:21:44');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1973,16 +1860,7 @@ CREATE TABLE IF NOT EXISTS `visap_psycho_tbl` (
   `class_teacher` varchar(100) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_psycho_tbl`
---
-
-INSERT INTO `visap_psycho_tbl` (`id`, `student_id`, `reg_number`, `student_class`, `term`, `session`, `Handwriting`, `Sports`, `Fluency`, `Handlingtools`, `Drawing`, `crafts`, `class_teacher`, `uploaded_date`) VALUES
-(1, 2, '2021C263130002', 'BASIC 4', '1st Term', '2022/2023', 2, 1, 3, 1, 3, 5, 'Mr. Blessing Yakubu Oiza', '2022-12-13'),
-(2, 2, '2021C263130002', 'BASIC 5', '1st Term', '2022/2023', 1, 1, 1, 1, 1, 1, 'Mrs. Blessing Yakubu Oiza', '2022-12-20'),
-(3, 1, '2021C263130001', 'BASIC 5', '1st Term', '2022/2023', 1, 1, 1, 1, 1, 1, 'Mrs. Blessing Yakubu Oiza', '2022-12-20');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1997,19 +1875,7 @@ CREATE TABLE IF NOT EXISTS `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_registered_subject_tbl`
---
-
-INSERT INTO `visap_registered_subject_tbl` (`id`, `subject_class`, `subject_name`, `createdBy`, `created_at`) VALUES
-(1, 'Basic 4', 'Agricultural Science', 'SMATech', '2022-12-07'),
-(2, 'Basic 4', 'English Language', 'SMATech', '2022-12-07'),
-(3, 'Basic 4', 'Mathematics', 'SMATech', '2022-12-07'),
-(4, 'Basic 5', 'Agricultural Science', 'SMATech', '2022-12-20'),
-(5, 'Basic 5', 'Basic Science', 'SMATech', '2022-12-20'),
-(6, 'Basic 5', 'Business Studies', 'SMATech', '2022-12-20');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2026,16 +1892,7 @@ CREATE TABLE IF NOT EXISTS `visap_result_comment_tbl` (
   `term` varchar(20) DEFAULT NULL,
   `schl_Sess` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_result_comment_tbl`
---
-
-INSERT INTO `visap_result_comment_tbl` (`commentId`, `stdRegNo`, `stdGrade`, `teacher_comment`, `principal_coment`, `term`, `schl_Sess`) VALUES
-(1, '2021C263130002', 'Basic 4', 'Good Student but lazy', 'Read more for next Term', '1st Term', '2022/2023'),
-(2, '2021C263130002', 'Basic 5', 'Good Student but lazy', 'Read more for next Term', '1st Term', '2022/2023'),
-(3, '2021C263130001', 'Basic 5', 'Good Student but lazy', 'Read more for next Term', '1st Term', '2022/2023');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2130,15 +1987,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_fee_allocation_tbl` (
   `created_on` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`faId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_school_fee_allocation_tbl`
---
-
-INSERT INTO `visap_school_fee_allocation_tbl` (`faId`, `component_id`, `gradeDesc`, `amount`, `created_on`, `updated_at`) VALUES
-(1, 'School Fee', 'Basic 5', 50000, '2022-12-20', NULL),
-(2, 'Exam Fee', 'Basic 5', 10000, '2022-12-20', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2211,7 +2060,7 @@ CREATE TABLE IF NOT EXISTS `visap_school_profile` (
 --
 
 INSERT INTO `visap_school_profile` (`id`, `school_name`, `govt_approve_number`, `school_address`, `school_slogan`, `school_director`, `director_mobile`, `registrar`, `registrar_mobile`, `principal`, `principal_mobile`, `school_state`, `school_city`, `country`, `postal_code`, `school_email`, `school_phone`, `school_fax`, `website_url`, `website_name`, `school_logo`, `stamp`, `signature`, `school_barcode`, `school_badge`, `school_favicon`, `default_language`, `school_history`, `founded_year`, `school_gmail`, `school_short_name`, `our_mission`, `our_vision`, `our_core_value`, `key_of_success`, `our_philosophy`, `our_principle`, `about_us`, `principal_welcome`) VALUES
-(1, 'Flat ERP Technologies Schools', 'C26313', 'Plot 8, Block 5,  Smapp Estate', 'School Application Portal', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', NULL, 'stamp_1672435072872829.png', 'sign_16724350724043882.png', NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'FLATERP', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for \r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
+(1, 'Flat ERP Technologies Schools', 'C26313', 'Plot 8, Block 5,  Smapp Estate', 'School Application Portal', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', 2345, 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', NULL, NULL, NULL, NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.\r\nWe praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!\r\n\r\nWe are saddled with the task to provide a world-class Christian-based educational experience with international standards.\r\n\r\nOur culture in SMATECH as reflected in our vision and mission statement is to imbibe the Christian values in our pupils, such that they grow into adulthood in the fear of God and become responsible citizen in the society at large.\r\n\r\nThat is why we are imploring our parents to partner in Christ with us in their homes and be role models to these wonderful children God has given to us. They should help us to check on their children and ensure they are not lazy at completing their school homework/projects. They should instil time management skills in them and ensure they do the right thing at the right time.\r\n\r\nChildren should not always stay glued to the TV watching cartoons and Nollywood movies which are great distractions to their education and future career. Parents should in addition monitor what their children watch and make sure they are not watching pornographic films and cartoons with immoral themes.\r\n\r\nThe decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.\r\n\r\nWe have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'FLATERP', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,\r\nRespect,\r\nIntegrity,\r\nExcellence,\r\nEntrepreneurship, \r\nService, Sustainability', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for Greensprings.\r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.\r\nIn general we expect our students to be responsible members of the community and ambassadors for \r\nStudents are expected to:\r\nWear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.\r\n\r\nThe school was established in the year 2012 and has since increase in population as our aim is to provide competitive and quality education in a conducive environment with all learning aids.\r\n\r\nWe have highly qualified teachers taking all the various subjects from Basic level to secondary level. All subjects are covered and the curriculum of the school is based on the scheme of work from the ministry of education. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages');
 
 -- --------------------------------------------------------
 
@@ -2376,14 +2225,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_staff_login_token`
---
-
-INSERT INTO `visap_staff_login_token` (`id`, `username`, `email`, `token`) VALUES
-(1, 'Yakubu', 'oiza@gmail.com', 'B8EDug0ox5Fpj9uWEYfZ3pfMFWIwfmbOiGArpxYjZ9hCgdcv4Lexe6bD8CnH3An41Y93nGaFUirK1HMgKRTyu6cUJhMHtNeY27');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2444,15 +2286,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_post_tbl` (
   `schlSes` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `staff_id` (`staff_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_staff_post_tbl`
---
-
-INSERT INTO `visap_staff_post_tbl` (`id`, `staff_id`, `duty`, `office`, `term`, `schlSes`) VALUES
-(5, 2, NULL, 'Class Teacher', NULL, NULL),
-(6, 3, NULL, 'Principal', NULL, NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2488,15 +2322,7 @@ CREATE TABLE IF NOT EXISTS `visap_staff_tbl` (
   `appliedDate` date DEFAULT NULL,
   `staffAssignedClass` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`staffId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_staff_tbl`
---
-
-INSERT INTO `visap_staff_tbl` (`staffId`, `staffRegNo`, `staffGrade`, `staffRole`, `firstName`, `lastName`, `staffEmail`, `staffPass`, `staffUser`, `staffDob`, `staffEducation`, `staffPhone`, `staffCourse`, `staffAddress`, `confirmation_code`, `staffToken`, `tokenExpire`, `staffPassport`, `staffGender`, `maritalStatus`, `portalEmail`, `jobStatus`, `online`, `staffType`, `appliedDate`, `staffAssignedClass`) VALUES
-(2, 'SMP22002', 'Basic 5', 'Class Teacher', 'Yakubu Oiza', 'Blessing', 'oiza@gmail.com', '$2y$10$lGsL4bPIKPYk32fMZuPivOMvi7Iv1mqyEDr7Qba/XsxdoxUGJR/vS', 'Yakubu', '1992-09-11', 'Phd', '098765432', NULL, 'Some sample address', 'e1e63946043789b', NULL, NULL, NULL, 'Female', NULL, 'oiza@SMAPP.portal', 1, 1, 'Teaching', '2022-12-06', NULL),
-(3, 'SMP22003', NULL, 'Principal', 'Samson Jerry', 'Agberayi', 'jerry@gmail.com', '$2y$10$WbyLFYSgzlvkx60spbSTTOfvs3xHdL6krpt2Ngh0UUYey6Q.X7WSC', 'Samson', NULL, 'HND', '09098765432', NULL, NULL, '7da5813de25a0f1', NULL, NULL, NULL, 'Male', NULL, 'jerry@SMAPP.portal', 1, 1, 'Teaching', '2022-12-13', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2620,15 +2446,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_attendance_tbl` (
   `uploaded_by` varchar(200) DEFAULT NULL,
   `uploaded_at` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_student_attendance_tbl`
---
-
-INSERT INTO `visap_student_attendance_tbl` (`id`, `stdRegNo`, `stdGrade`, `school_open`, `present`, `absent`, `term`, `schl_session`, `uploaded_by`, `uploaded_at`) VALUES
-(1, '2021C263130002', 'Basic 5', 61, '60', '1', '1st Term', '2022/2023', 'Yakubu Oiza Blessing', '2022-12-20 01:27:24'),
-(2, '2021C263130001', 'Basic 5', 61, '58', '3', '1st Term', '2022/2023', 'Yakubu Oiza Blessing', '2022-12-20 01:27:24');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2705,14 +2523,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_payment_history_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`phId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_student_payment_history_tbl`
---
-
-INSERT INTO `visap_student_payment_history_tbl` (`phId`, `std_id`, `stdAdmNo`, `stdGrade`, `component_fee`, `total_fee`, `fee_paid`, `fee_due`, `payment_status`, `payment_date`, `term`, `sch_session`, `payment_method`, `teller`, `bank_name`, `collectedBy`, `today_date`) VALUES
-(1, 1, '2021C263130001', 'Basic 5', 'Exam Fee', 10000, 5000, 5000, 1, '2022-12-20', '1st Term', '2022/2023', 'Cash', NULL, NULL, '<br />\r\n<b>Notice</b>:  Undefined index: ADMIN_ID in <b>C:\nmpphtdocssmatechportaleportaldmin	emplat', '2022-12-20');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2772,19 +2583,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_tbl` (
   `admitted_class` varchar(50) DEFAULT NULL,
   `completed_date` date DEFAULT NULL,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_student_tbl`
---
-
-INSERT INTO `visap_student_tbl` (`stdId`, `stdRegNo`, `stdEmail`, `stdUserName`, `stdPassword`, `studentClass`, `stdSurName`, `stdFirstName`, `stdMiddleName`, `stdDob`, `stdGender`, `stdAddress`, `stdPhone`, `stdAdmStatus`, `stdApplyDate`, `stdApplyType`, `stdPassport`, `stdConfToken`, `token`, `stdTokenExp`, `is_online`, `admitted_class`, `completed_date`) VALUES
-(1, '2021C263130001', 'osotech23@gmail.com', 'Oloruntoba', '$2y$10$tw8..VPDRHZmMuUfuiQj5eFTpZBicK1CORpzdb62Wugbu3e98XwYm', 'JSS 3', 'Oloruntoba', 'Elizabeth', 'Idowu', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131374443', 'Active', '2022-12-29', 'Day', '2021C2631300011034484.jpeg', '5d2f8bffa39c2b', NULL, NULL, 0, 'JSS 1', '2022-12-13'),
-(2, '2021C263130002', 'adeyandipper@gmail.com', 'Adeyan', '$2y$10$fzrvAxLHKJsskHc6GVHEVu2IqqZeveFDaUOgEJgu4I/ZSPmzjCqg2', 'SSS 3', 'Adeyan', 'Adetayo', 'Dipper', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132323456', 'Active', '2022-12-28', 'Boarding', '2021C263130002998187.png', 'b0481066aafd36', NULL, NULL, 0, 'JSS 2', '2022-12-29'),
-(3, '2021C263130003', 'flaterptech@gmail.com', 'Agberayi', '$2y$10$X2bbbQsC3weSXq2VDTLjjOSHK3GdEGsWpkF0aU71CAVJjlabBBQoS', 'JSS 1', 'Agberayi', 'Iremide', 'Ovayoza', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131373443', 'Active', '2000-03-07', 'Day', NULL, 'ebe713c7afb1b7', NULL, NULL, 0, 'JSS 1', NULL),
-(4, '2021C263130004', 'aadeyemi@gmail.com', 'Adeyemi', '$2y$10$6GrfhYdMrHfExuqUsfKqVOK6I3tVhCuo0hpyKBiRWLGfUkOQojdrW', 'JSS 1', 'Adeyemi', 'Adewumi', 'Adeola', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132353456', 'Active', '2001-08-08', 'Boarding', NULL, 'db35f8013a76b2', NULL, NULL, 0, 'JSS 1', NULL),
-(5, '2021C263130005', 'flaterptechnologies@gmail.com', 'Yakubu', '$2y$10$RMzrAEfWgNgz2kloHUYjkutyw5icW8d/iszllZJSV8chbbw.6xT5.', 'JSS 2', 'Yakubu', 'Elizabeth', 'Ovayoza', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131373743', 'Active', '2000-03-07', 'Day', NULL, '0e6640e186c630', NULL, NULL, 0, 'JSS 2', NULL),
-(6, '2021C263130006', 'aadeyemi247@gmail.com', 'Adeyemo', '$2y$10$S9NtzYfAK.qnRC9Zdo/H9u8IYX88Yxf9KPDAalvpTszQan9YIvyUy', 'JSS 2', 'Adeyemo', 'Oluwasegun', 'Adeola', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132359456', 'Active', '2001-08-08', 'Boarding', NULL, '05b0181e9e1dba', NULL, NULL, 0, 'JSS 2', NULL);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -2820,15 +2619,7 @@ CREATE TABLE IF NOT EXISTS `visap_student_testimonial_tbl` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `stdRegNo` (`stdRegNo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `visap_student_testimonial_tbl`
---
-
-INSERT INTO `visap_student_testimonial_tbl` (`id`, `stdRegNo`, `admitted_class`, `admitted_date`, `class_completed`, `date_completed`, `academic_ability`, `sports_ability`, `office_held`, `school_club`, `general_remarks`, `student_character`, `subject1`, `subject2`, `subject3`, `subject4`, `subject5`, `subject6`, `subject7`, `subject8`, `subject9`, `subject10`, `subject11`, `cert_no`, `created_at`) VALUES
-(1, '2021C263130002', 'JSS 2', '2022-12-28', 'SSS 3', '2022-12-29', 'Distinction', 'Distinction', 'Student', 'Jets Club', 'He is a Promising Child', 'Good Student', 'General Mathematics', 'English Language', 'Government', 'Further Mathematics', 'Health Habit', 'Yoruba Language', 'Civic Education', 'French', 'Poem Reading', NULL, NULL, '1700371124', '2022-12-29 22:33:45'),
-(2, '2021C263130001', 'JSS 1', '2022-12-29', 'JSS 3', '2022-12-13', 'Very Good', 'Excellent', 'Student', 'Young Shall Grow', 'He is a Good Student', 'Satisfactory', 'General Mathematics', 'English Language', 'Agricultural Science', 'Insurance', 'Economics', 'Government', 'Further Mathematics', 'Social Norms', 'Poem Reading', NULL, NULL, '8723528524', '2022-12-30 22:24:43');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 

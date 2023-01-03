@@ -1,6 +1,6 @@
 {
     "workbench.iconTheme": "vscode-great-icons",
-    "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+    "workbench.colorTheme": "Monokai",
     "php.suggest.basic": false,
     "php.validate.enable": false,
     "emmet.excludeLanguages": [
