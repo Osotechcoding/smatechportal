@@ -664,7 +664,7 @@ $attendance_records = $StudentResult->getStudentAttendanceRecord($student_reg_nu
     <br>
     <hr>
     <h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span
-        style="float: right;"> Powered by: <?php echo __OSO_DEV_COMPANY__ ?></span></h4>
+        style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
     <button onclick="javascript:window.print();" type="button"
       style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
 

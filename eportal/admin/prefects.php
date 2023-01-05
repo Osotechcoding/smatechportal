@@ -184,7 +184,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-12">
                      <div class="form-group">
                   <label for="updated_office">Change Office To</label>
-                    <select name="updated_office" id="updated_office" class="select2 form-control form-control-lg">
+                    <select name="updated_office" id="updated_office" class="custom-select form-control form-control-lg">
                       <option value="" selected>Choose...</option>
                        <?php echo $Administration->get_student_office_title_inDropDown(); ?>
                     </select>

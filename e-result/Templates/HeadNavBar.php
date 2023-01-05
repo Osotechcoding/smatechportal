@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="./"><img src="<?php echo $Osotech->get_schoolLogoImage(); ?>" class="img-fluid"
-        width="50"> <?php echo "ADMISSION"; ?></a>
+        width="50" style="margin-right: 3px;"> <?php echo "E-RESULT"; ?></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

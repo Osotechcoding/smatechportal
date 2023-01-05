@@ -75,14 +75,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-12">
+                <!-- <div class="col-lg-4 col-md-12">
                     <div class="search-student border px-4 py-3">
                         <h4 class="font-weight-bold color-orange">Search Old Student</h4>
                         <form>
                            
                             <div class="form-group">
                                 <label for="exampleDepartment">Graduation Year</label>
-                                <select id="exampleDepartment" class="form-control">
+                                <select id="exampleDepartment" class="form-control" disabled>
                                     <option selected>Choose...</option>
                                     <option>2020-2021</option>
                                     <option>2021-2022</option>
@@ -91,7 +91,7 @@
                                 </select>
                             </div>
                             
-                            <button type="submit" class="btn theme-orange border-0 mt-2">Search Now</button>
+                            <button type="submit" class="btn theme-orange border-0 mt-2" disabled>Coming Soon</button>
                         </form>
                     </div>
 
@@ -102,14 +102,14 @@
                             <i class="fa fa-play-circle fa-3x"></i>
                         </a>
                     </div>
-                </div>
-                <div class="col-lg-8 col-md-12">
+                </div> -->
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
                         <!-- startsss -->
                          <?php if ($allPrefects): ?>
                     <?php foreach ($allPrefects as $prefect): ?>
                         <?php $student_data = $Osotech->get_student_data_byId($prefect->student_id);?>
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-4 mb-4">
                             <div class="student-block">
                                 <div class="student-img">
                                      <?php if ($student_data->stdPassport==NULL || $student_data->stdPassport==""): ?>
@@ -127,7 +127,7 @@
                                     <div class="border-line"></div>
                                     <div class="std_desc_one text-center pt-3">
                                         <h5 class="font-weight-bold color-orange"><?php echo strtoupper($student_data->full_name);?></h5>
-                                        <h6><b>REG NO:</b> 2021C124310001</h6>
+                                        <h6><b>REG NO:</b> <?php echo strtoupper($student_data->stdRegNo);?></h6>
                                     </div>
                                     <div class="std_desc_two text-center">
                                         <h6><b>POSITION HELD:</b><?php echo ucwords($prefect->officeName);?></h6>

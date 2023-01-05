@@ -56,7 +56,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
 background-position:center;
 background-size: cover;
 background-repeat: no-repeat;">
-  <div class="container mt-2">
+  <div class="container mt-2" style="width: 60%;">
     <?php include_once 'Templates/HeadNavBar.php'; ?>
     <!-- <div class="accordion mt-1" id="accordionExample">
       <div class="accordion-item">
