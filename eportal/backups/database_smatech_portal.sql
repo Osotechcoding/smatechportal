@@ -1,6 +1,6 @@
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -32,13 +32,14 @@ CREATE TABLE `api_module_config` (
   `api_def` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `module` (`module`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table api_module_config (11 records)
+# Data contents of table api_module_config (12 records)
 #
  
 INSERT INTO `api_module_config` VALUES ('1', 'student_registration', 'registration', 'Student Registration', 'Enabling this will open admission portal for new students to Register on the school portal', '1', '', '', '') ; 
+INSERT INTO `api_module_config` VALUES ('2', 'upload_attendance', 'main', 'Student attendance uploading', 'When allowed staff can upload student attendance details', '1', '', '', '') ; 
 INSERT INTO `api_module_config` VALUES ('3', 'student_login', 'login', 'Student Login', 'When Enabled, students will be allowed to log in', '1', '', '', '') ; 
 INSERT INTO `api_module_config` VALUES ('4', 'staff_registration', 'registration', 'Staff Registration', 'When enabled, new Applicant Staff can submit their CV on the Career Portal', '1', '', '', '') ; 
 INSERT INTO `api_module_config` VALUES ('6', 'staff_login', 'login', 'Staff Login', 'When enabled, staff will be able to log in', '1', '', '', '') ; 
@@ -55,7 +56,7 @@ INSERT INTO `api_module_config` VALUES ('22', 'leave_request', 'main', 'Leave Re
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -83,7 +84,7 @@ CREATE TABLE `current_session_tbl` (
   `session_desc_name` varchar(20) DEFAULT NULL,
   `term_desc` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table current_session_tbl (1 records)
@@ -96,7 +97,7 @@ INSERT INTO `current_session_tbl` VALUES ('1', '2022/2023', '1st Term') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -127,7 +128,7 @@ CREATE TABLE `local_govt_tbl` (
   `state_id` int(11) DEFAULT NULL,
   `local_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`local_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=775 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=775 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table local_govt_tbl (774 records)
@@ -913,7 +914,7 @@ INSERT INTO `local_govt_tbl` VALUES ('774', '37', 'Zurmi') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -950,7 +951,7 @@ CREATE TABLE `reg_pin_history_tbl` (
   `dated` date DEFAULT NULL,
   `timed` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table reg_pin_history_tbl (0 records)
@@ -962,7 +963,7 @@ CREATE TABLE `reg_pin_history_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1003,7 +1004,7 @@ CREATE TABLE `register_exam_subject_tbl` (
   `schl_Sess` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`subId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table register_exam_subject_tbl (0 records)
@@ -1015,7 +1016,7 @@ CREATE TABLE `register_exam_subject_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1059,7 +1060,7 @@ CREATE TABLE `school_classes` (
   `class_teacher` varchar(255) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`class_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table school_classes (0 records)
@@ -1071,7 +1072,7 @@ CREATE TABLE `school_classes` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1117,20 +1118,19 @@ CREATE TABLE `school_oauth_code_tbl` (
   `oauth_code` varchar(50) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table school_oauth_code_tbl (1 records)
+# Data contents of table school_oauth_code_tbl (0 records)
 #
- 
-INSERT INTO `school_oauth_code_tbl` VALUES ('1', 'Glory Supreme School Ota', '1st Term', '2022/2023', 'SMA48778', '2022-08-28') ;
+
 #
 # End of data contents of table school_oauth_code_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1177,7 +1177,7 @@ CREATE TABLE `school_offices` (
   `status` varchar(20) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table school_offices (10 records)
@@ -1199,7 +1199,7 @@ INSERT INTO `school_offices` VALUES ('10', 'H.M', 'Active', '2022-08-27') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1252,7 +1252,7 @@ CREATE TABLE `school_subjects` (
   `subject_code` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table school_subjects (42 records)
@@ -1260,7 +1260,7 @@ CREATE TABLE `school_subjects` (
  
 INSERT INTO `school_subjects` VALUES ('1', 'Mathematics', NULL, '', 'active', 'MTH 201', '2022-06-14') ; 
 INSERT INTO `school_subjects` VALUES ('2', 'English Language', NULL, '', 'active', 'ENG20202', '2022-06-14') ; 
-INSERT INTO `school_subjects` VALUES ('3', 'Yoruba Language', NULL, '', 'inactive', 'YOR203', '2022-06-14') ; 
+INSERT INTO `school_subjects` VALUES ('3', 'Yoruba Language', NULL, '', 'active', 'YOR203', '2022-06-14') ; 
 INSERT INTO `school_subjects` VALUES ('4', 'History', NULL, '', 'active', 'HIS204', '2022-06-14') ; 
 INSERT INTO `school_subjects` VALUES ('5', 'French', NULL, '', 'active', 'FRE205', '2022-06-14') ; 
 INSERT INTO `school_subjects` VALUES ('6', 'Christian Religion Studies', NULL, '', 'active', 'CRS206', '2022-06-14') ; 
@@ -1306,7 +1306,7 @@ INSERT INTO `school_subjects` VALUES ('42', 'Spoken English', NULL, '', 'active'
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1366,21 +1366,21 @@ CREATE TABLE `tbl_admin` (
   `token` varchar(100) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`adminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table tbl_admin (2 records)
 #
  
-INSERT INTO `tbl_admin` VALUES ('1', 'Admin', 'admin@smatech.com', 'SMATech', '$2y$10$y.gA5dihV/vVsrjpH9JFY.FqLxf9n19eOumxg7KU7qblncFh9Kjdq', '0', 'Osotech Software', NULL, NULL, '23456vb8l0mpaxqwe234', '2022-01-26 08:34:42') ; 
-INSERT INTO `tbl_admin` VALUES ('2', 'Director', 'user@smatech.com', 'Director', '$2y$10$/pdf.OVS0iS8ZYvgVI3Zj.fIZsOnjnxH58VXaqpo06KE8HwbWtIXe', '1', 'Smapp User', NULL, NULL, '3wsxvnmk0oo9673saq12', '2022-05-15 22:17:37') ;
+INSERT INTO `tbl_admin` VALUES ('1', 'Admin', 'admin@smatech.com', 'Smatech', '$2y$10$y.gA5dihV/vVsrjpH9JFY.FqLxf9n19eOumxg7KU7qblncFh9Kjdq', '0', 'Osotech Software', NULL, NULL, '23456vb8l0mpaxqwe234', '2022-01-26 08:34:42') ; 
+INSERT INTO `tbl_admin` VALUES ('2', 'Director', 'user@smatech.com', 'Director', '$2y$10$/pdf.OVS0iS8ZYvgVI3Zj.fIZsOnjnxH58VXaqpo06KE8HwbWtIXe', '0', 'Smapp User', NULL, NULL, '3wsxvnmk0oo9673saq12', '2022-05-15 22:17:37') ;
 #
 # End of data contents of table tbl_admin
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1439,7 +1439,7 @@ CREATE TABLE `tbl_ewallet_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table tbl_ewallet_pins (0 records)
@@ -1451,7 +1451,7 @@ CREATE TABLE `tbl_ewallet_pins` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1513,7 +1513,7 @@ CREATE TABLE `tbl_exam_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table tbl_exam_pins (0 records)
@@ -1525,7 +1525,7 @@ CREATE TABLE `tbl_exam_pins` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1591,25 +1591,29 @@ CREATE TABLE `tbl_reg_pins` (
   `created_at` date DEFAULT NULL,
   `usedBy` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table tbl_reg_pins (6 records)
+# Data contents of table tbl_reg_pins (10 records)
 #
  
-INSERT INTO `tbl_reg_pins` VALUES ('1', '4750213198326', 'SMA84E1D3', 'Registration Pins', '5000', '0', '2022-08-05', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('2', '0733922156814', 'SMA114BF0', 'Registration Pins', '5000', '0', '2022-08-05', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('3', '0732386119452', 'SMA8A37B3', 'Registration Pins', '5000', '0', '2022-08-05', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('4', '6112932784530', 'SMA034A14', 'Registration Pins', '5000', '0', '2022-08-05', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('5', '3908622451137', 'SMA312057', 'Registration Pins', '5000', '0', '2022-08-05', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('6', '6214620135573', 'SMA378AB3', 'Registration Pins', '5000', '0', '2022-08-05', NULL) ;
+INSERT INTO `tbl_reg_pins` VALUES ('1', '9503217124683', 'SMA13B25F', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('2', '4320611655372', 'SMA071440', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('3', '3724215963105', 'SMA8E014D', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('4', '1051236473526', 'SMA38A37B', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('5', '6340951125372', 'SMA470143', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('6', '3021295614837', 'SMAA41034', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('7', '2362673151450', 'SMA702441', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('8', '6935540123271', 'SMA37AB83', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('9', '7541013296532', 'SMAE14D01', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
+INSERT INTO `tbl_reg_pins` VALUES ('10', '5073461632521', 'SMAB7A3A8', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ;
 #
 # End of data contents of table tbl_reg_pins
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1677,27 +1681,24 @@ CREATE TABLE `tbl_result_pins` (
   `pin_status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`pin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table tbl_result_pins (8 records)
+# Data contents of table tbl_result_pins (5 records)
 #
  
-INSERT INTO `tbl_result_pins` VALUES ('2', '612353419027', 'SMR387BA', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('3', '512420657163', 'SMR1401F', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('4', '127616350542', 'SMRC96FA', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('5', '253051421766', 'SMRF5B13', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('6', '106532527641', 'SMR11B3F', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('7', '322851340679', 'SMRE83D3', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('8', '261251043753', 'SMRF011B', 'Result Checker Pins', '200', '0', '2022-08-05') ; 
-INSERT INTO `tbl_result_pins` VALUES ('9', '143659017322', 'SMR41704', 'Result Checker Pins', '200', '0', '2022-08-05') ;
+INSERT INTO `tbl_result_pins` VALUES ('1', '417652309312', 'SMRA3906', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
+INSERT INTO `tbl_result_pins` VALUES ('2', '317435621520', 'SMR6340A', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
+INSERT INTO `tbl_result_pins` VALUES ('3', '279061133542', 'SMR8DE14', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
+INSERT INTO `tbl_result_pins` VALUES ('4', '423716952308', 'SMR40417', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
+INSERT INTO `tbl_result_pins` VALUES ('5', '125263614057', 'SMR34A60', 'Result Checker Pins', '500', '1', '2023-01-04') ;
 #
 # End of data contents of table tbl_result_pins
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1769,19 +1770,20 @@ CREATE TABLE `tbl_result_pins_history` (
   `used_term` varchar(20) DEFAULT NULL,
   `used_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pinId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table tbl_result_pins_history (0 records)
+# Data contents of table tbl_result_pins_history (1 records)
 #
-
+ 
+INSERT INTO `tbl_result_pins_history` VALUES ('1', '2021C263130002', 'JSS 3', '125263614057', 'SMR34A60', '1', '1st Term', '2022/2023') ;
 #
 # End of data contents of table tbl_result_pins_history
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1854,7 +1856,7 @@ CREATE TABLE `tbl_serial` (
   `user_name` varchar(255) DEFAULT NULL,
   `user_ip` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table tbl_serial (1 records)
@@ -1867,7 +1869,7 @@ INSERT INTO `tbl_serial` VALUES ('1', 'XTAS-KM87-EWA6-09CQ-5J0V', '2022-08-01', 
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1953,7 +1955,7 @@ CREATE TABLE `tbl_settings` (
   `town` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`config_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table tbl_settings (1 records)
@@ -1966,7 +1968,7 @@ INSERT INTO `tbl_settings` VALUES ('1', 'Osotech School Portal', 'All about your
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2056,19 +2058,20 @@ CREATE TABLE `visap_1st_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_1st_term_result_tbl (0 records)
+# Data contents of table visap_1st_term_result_tbl (1 records)
 #
-
+ 
+INSERT INTO `visap_1st_term_result_tbl` VALUES ('1', NULL, '2021C263130002', 'JSS 3', '1st Term', '2022/2023', 'AGRICULTURAL SCIENCE', '38', NULL, NULL, '56', '94', NULL, '47', '10:11:47', '2023-01-04', '2') ;
 #
 # End of data contents of table visap_1st_term_result_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2161,7 +2164,7 @@ CREATE TABLE `visap_2nd_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_2nd_term_result_tbl (0 records)
@@ -2173,7 +2176,7 @@ CREATE TABLE `visap_2nd_term_result_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2251,27 +2254,27 @@ DROP TABLE IF EXISTS `visap_admin_login_token`;
 #
 
 CREATE TABLE `visap_admin_login_token` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(30) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Token` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Email` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_admin_login_token (2 records)
 #
  
-INSERT INTO `visap_admin_login_token` VALUES ('86', 'Director', 'user@smatech.com', '5tNV4K301wB82Gy7ZfGfA1VmAF9iaNAwP2v4MkS1') ; 
-INSERT INTO `visap_admin_login_token` VALUES ('88', 'SMATech', 'admin@smatech.com', 'rxXsC2kffNbibliYMX7oRuL6ZDt2BCxFZo7IZv82') ;
+INSERT INTO `visap_admin_login_token` VALUES ('1', 'Smatech', 'admin@smatech.com', 's88BAMbntxjvMRyQtibTWrIgoc1r7DMucqifYJJMMWWNZL9dWgLDXP5N2UUQ7X2dvkwmgbGbohIBgxq0xzQAZStZXeC4oDPEtrnkO') ; 
+INSERT INTO `visap_admin_login_token` VALUES ('2', 'Director', 'user@smatech.com', '') ;
 #
 # End of data contents of table visap_admin_login_token
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2363,7 +2366,7 @@ CREATE TABLE `visap_admission_open_tbl` (
   `note` text DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_admission_open_tbl (1 records)
@@ -2376,7 +2379,7 @@ INSERT INTO `visap_admission_open_tbl` VALUES ('3', 'September Admission', 'Batc
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2472,8 +2475,10 @@ CREATE TABLE `visap_assignment_tbl` (
   `download_counter` int(11) DEFAULT NULL,
   `term` varchar(50) DEFAULT NULL,
   `schl_session` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`assId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`assId`),
+  KEY `teacherId` (`teacherId`),
+  CONSTRAINT `visap_assignment_tbl_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_assignment_tbl (0 records)
@@ -2485,7 +2490,7 @@ CREATE TABLE `visap_assignment_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2582,7 +2587,7 @@ CREATE TABLE `visap_bed_payment_history_tbl` (
   `payment_date` date DEFAULT NULL,
   `receiptNo` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_bed_payment_history_tbl (0 records)
@@ -2594,7 +2599,7 @@ CREATE TABLE `visap_bed_payment_history_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2701,7 +2706,7 @@ CREATE TABLE `visap_bed_space_tbl` (
   `school_session` varchar(50) DEFAULT NULL,
   `payment_expire` date DEFAULT NULL,
   PRIMARY KEY (`bedId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_bed_space_tbl (0 records)
@@ -2713,7 +2718,7 @@ CREATE TABLE `visap_bed_space_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2821,19 +2826,20 @@ CREATE TABLE `visap_behavioral_tbl` (
   `class_teacher` varchar(200) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_behavioral_tbl (0 records)
+# Data contents of table visap_behavioral_tbl (1 records)
 #
-
+ 
+INSERT INTO `visap_behavioral_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', '1st Term', '2022/2023', '3', '3', '2', '5', '3', '4', 'Mrs. Oiza Samuel Otti', '2023-01-04') ;
 #
 # End of data contents of table visap_behavioral_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2938,24 +2944,19 @@ CREATE TABLE `visap_blog_post_comments` (
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `comment_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_blog_post_comments (5 records)
+# Data contents of table visap_blog_post_comments (0 records)
 #
- 
-INSERT INTO `visap_blog_post_comments` VALUES ('2', '1', 'Mrs Blessing Oiza', 'oiza@gmail.com', NULL, 'another comment posted by me', '1', '2022-09-09 20:55:13') ; 
-INSERT INTO `visap_blog_post_comments` VALUES ('3', '1', 'Mr Agberayi Samson', 'osotech@gmail.com', NULL, 'In fact I really love this post', '1', '2022-09-09 20:58:34') ; 
-INSERT INTO `visap_blog_post_comments` VALUES ('4', '2', 'Adeola Samuel', 'adeola@gmail.com', NULL, 'Wow! this is superb, I really loved it so much', '1', '2022-09-09 22:27:47') ; 
-INSERT INTO `visap_blog_post_comments` VALUES ('5', '2', 'Elijah BIIT', 'osotechcoding@gmail.com', NULL, 'This is coming from Biit solution', '1', '2022-09-10 13:40:25') ; 
-INSERT INTO `visap_blog_post_comments` VALUES ('6', '3', 'Adedayo Ifeoluwa', 'alamin2012@smatech.com', NULL, 'In fact i love this song', '1', '2022-09-10 15:46:08') ;
+
 #
 # End of data contents of table visap_blog_post_comments
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3067,40 +3068,19 @@ CREATE TABLE `visap_blog_post_tbl` (
   `blog_time` time DEFAULT NULL,
   `tags` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`blog_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_blog_post_tbl (4 records)
+# Data contents of table visap_blog_post_tbl (0 records)
 #
- 
-INSERT INTO `visap_blog_post_tbl` VALUES ('1', 'Motivational', '2', 'Why Nigerian Student Fails WAEC 2022?', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim voluptatem odit nobis voluptatum mollitia repellat quisquam eos maxime quaerat in, necessitatibus quidem optio magnam nesciunt laudantium nemo, ipsam consequuntur suscipit architecto, a incidunt hic error minus, et! Asperiores eaque, ab nemo quasi molestias ducimus dolor sequi error tempore a delectus voluptatem earum, neque rerum, blanditiis provident nihil exercitationem odit, repellendus officia. Veniam, vero dolorem accusamus soluta perferendis nesciunt porro eos itaque a tenetur cumque explicabo eligendi, excepturi placeat consequuntur non omnis quis tempora delectus repellat natus architecto nam, unde eveniet. Accusamus eos ratione nam officia, placeat magnam blanditiis accusantium? Corporis reiciendis veritatis eligendi assumenda, magnam ipsum minus aperiam, aliquid labore maxime repellendus tenetur aut tempora. Ea, facere quos, sit illum deleniti esse voluptas ut repellendus totam itaque eius nostrum assumenda non aliquam tempore asperiores sint accusamus eum laboriosam nisi nihil excepturi! Commodi eius ad sint expedita repellat labore eveniet praesentium rem pariatur reprehenderit mollitia est iure doloremque ullam modi doloribus asperiores aliquid ipsa, non, magnam, totam aliquam. Odio aliquam tempore esse suscipit, itaque ipsa. Veniam ut accusantium totam accusamus tempore eos fugit quos voluptas vero eligendi illum et ducimus, aliquam nam molestias exercitationem? Corporis inventore odit numquam suscipit odio modi ab nemo nostrum. Explicabo vitae provident minima ea itaque, recusandae quia doloribus at aspernatur fugit. Repellendus quam modi aspernatur, enim, fuga sapiente voluptate obcaecati voluptatibus officiis aperiam consequuntur explicabo iste quas quidem fugiat optio perferendis. Numquam, rem? Reprehenderit magnam at praesentium impedit porro dicta iure quod totam recusandae, placeat tenetur minima vel esse odit exercitationem earum vitae dolorem eum aspernatur molestias, quis consequuntur dolores quas repellat? Autem deserunt incidunt qui tenetur, possimus quas optio culpa quis numquam voluptas harum, minus minima adipisci nisi exercitationem enim, ex excepturi fugiat, doloribus. Ipsum praesentium sequi quia ipsam numquam a velit est molestiae at!
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim voluptatem odit nobis voluptatum mollitia repellat quisquam eos maxime quaerat in, necessitatibus quidem optio magnam nesciunt laudantium nemo, ipsam consequuntur suscipit architecto, a incidunt hic error minus, et! Asperiores eaque, ab nemo quasi molestias ducimus dolor sequi error tempore a delectus voluptatem earum, neque rerum, blanditiis provident nihil exercitationem odit, repellendus officia. Veniam, vero dolorem accusamus soluta perferendis nesciunt porro eos itaque a tenetur cumque explicabo eligendi, excepturi placeat consequuntur non omnis quis tempora delectus repellat natus architecto nam, unde eveniet. Accusamus eos ratione nam officia, placeat magnam blanditiis accusantium? Corporis reiciendis veritatis eligendi assumenda, magnam ipsum minus aperiam, aliquid labore maxime repellendus tenetur aut tempora. Ea, facere quos, sit illum deleniti esse voluptas ut repellendus totam itaque eius nostrum assumenda non aliquam tempore asperiores sint accusamus eum laboriosam nisi nihil excepturi! Commodi eius ad sint expedita repellat labore eveniet praesentium rem pariatur reprehenderit mollitia est iure doloremque ullam modi doloribus asperiores aliquid ipsa, non, magnam, totam aliquam. Odio aliquam tempore esse suscipit, itaque ipsa. Veniam ut accusantium totam accusamus tempore eos fugit quos voluptas vero eligendi illum et ducimus, aliquam nam molestias exercitationem? Corporis inventore odit numquam suscipit odio modi ab nemo nostrum. Explicabo vitae provident minima ea itaque, recusandae quia doloribus at aspernatur fugit. Repellendus quam modi aspernatur, enim, fuga sapiente voluptate obcaecati voluptatibus officiis aperiam consequuntur explicabo iste quas quidem fugiat optio perferendis. Numquam, rem? Reprehenderit magnam at praesentium impedit porro dicta iure quod totam recusandae, placeat tenetur minima vel esse odit exercitationem earum vitae dolorem eum aspernatur molestias, quis consequuntur dolores quas repellat? Autem deserunt incidunt qui tenetur, possimus quas optio culpa quis numquam voluptas harum, minus minima adipisci nisi exercitationem enim, ex excepturi fugiat, doloribus. Ipsum praesentium sequi quia ipsam numquam a velit est molestiae at!
 
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim voluptatem odit nobis voluptatum mollitia repellat quisquam eos maxime quaerat in, necessitatibus quidem optio magnam nesciunt laudantium nemo, ipsam consequuntur suscipit architecto, a incidunt hic error minus, et! Asperiores eaque, ab nemo quasi molestias ducimus dolor sequi error tempore a delectus voluptatem earum, neque rerum, blanditiis provident nihil exercitationem odit, repellendus officia. Veniam, vero dolorem accusamus soluta perferendis nesciunt porro eos itaque a tenetur cumque explicabo eligendi, excepturi placeat consequuntur non omnis quis tempora delectus repellat natus architecto nam, unde eveniet. Accusamus eos ratione nam officia, placeat magnam blanditiis accusantium? Corporis reiciendis veritatis eligendi assumenda, magnam ipsum minus aperiam, aliquid labore maxime repellendus tenetur aut tempora. Ea, facere quos, sit illum deleniti esse voluptas ut repellendus totam itaque eius nostrum assumenda non aliquam tempore asperiores sint accusamus eum laboriosam nisi nihil excepturi! Commodi eius ad sint expedita repellat labore eveniet praesentium rem pariatur reprehenderit mollitia est iure doloremque ullam modi doloribus asperiores aliquid ipsa, non, magnam, totam aliquam. Odio aliquam tempore esse suscipit, itaque ipsa. Veniam ut accusantium totam accusamus tempore eos fugit quos voluptas vero eligendi illum et ducimus, aliquam nam molestias exercitationem? Corporis inventore odit numquam suscipit odio modi ab nemo nostrum. Explicabo vitae provident minima ea itaque, recusandae quia doloribus at aspernatur fugit. Repellendus quam modi aspernatur, enim, fuga sapiente voluptate obcaecati voluptatibus officiis aperiam consequuntur explicabo iste quas quidem fugiat optio perferendis. Numquam, rem? Reprehenderit magnam at praesentium impedit porro dicta iure quod totam recusandae, placeat tenetur minima vel esse odit exercitationem earum vitae dolorem eum aspernatur molestias, quis consequuntur dolores quas repellat? Autem deserunt incidunt qui tenetur, possimus quas optio culpa quis numquam voluptas harum, minus minima adipisci nisi exercitationem enim, ex excepturi fugiat, doloribus. Ipsum praesentium sequi quia ipsam numquam a velit est molestiae at!', '16627414511084190918.png', '2', '2022-09-09', NULL, NULL, '05:37:31', 'Education') ; 
-INSERT INTO `visap_blog_post_tbl` VALUES ('2', 'Educational', '2', '10 Ways to Improve Your Spoken English', 'Lorem ipsum dolor sit amet consectetur adipisicing, elit. Praesentium, ut in atque odit nihil, odio sapiente quibusdam et vero minima totam, facilis ratione, optio? Vitae minus dolorem nemo, amet dolor. Nisi deserunt fugit eligendi neque consectetur fuga explicabo voluptate! Soluta expedita maxime esse dolorum odit nisi magnam, laborum suscipit eaque itaque iusto, quae, unde aliquam earum sunt adipisci sapiente sint obcaecati amet assumenda ipsum odio, ex! Consequuntur id 
-
-quos, mollitia nam, officiis vitae sunt vero nostrum, reiciendis repellat ipsum minima ad expedita ullam doloribus cumque quas vel debitis. Quos delectus sit illo sint dicta assumenda ea nesciunt,
- quo minus, est suscipit, qui! Cupiditate temporibus, debitis architecto sapiente molestiae adipisci harum necessitatibus eum recusandae voluptatem ipsa, cumque tempore et vero? Consectetur quidem illum, nisi saepe eos. Quos quia, placeat doloribus nostrum quisquam, voluptate ex tempore quae eaque maiores quam similique cupiditate debitis nihil non ducimus, ipsa distinctio, possimus officia quo. Sit autem, quod suscipit eum iure! Qui incidunt magnam officiis molestiae consequuntur, assumenda nihil distinctio animi, officia voluptate similique ea labore doloremque totam tenetur. Vero esse molestias, animi voluptate nihil sequi asperiores inventore quibusdam 
-debitis magni temporibus? Ullam rerum cumque commodi voluptates corporis obcaecati quos 
-tenetur non impedit quis ratione quam autem unde incidunt veniam temporibus enim dicta minus reprehenderit voluptatum, minima? Nostrum deserunt, expedita at, accusamus libero veritatis provident veniam vel eaque repudiandae dignissimos autem. Pariatur inventore sit quasi esse ea temporibus eaque quibusdam consequatur iure sint rerum incidunt corrupti, illum maxime aperiam error alias vitae non ut facilis debitis atque perferendis cumque? Fugit, laudantium debitis modi libero excepturi fuga quas deserunt iusto numquam cupiditate doloribus sed tempore perspiciatis nihil soluta vero eos sit ab omnis voluptatem distinctio error quis exercitationem doloremque! 
-Eveniet, reiciendis facere quis, culpa officiis excepturi unde, consectetur tempore praesentium quo rem enim atque dolor ipsum facilis ut id tenetur optio nemo, et eum. Nesciunt, ex, nobis nemo, 
-quis labore sed sapiente obcaecati illum repudiandae aspernatur aliquam adipisci alias. A tenetur reiciendis provident hic at temporibus architecto quas, aliquid, itaque fuga quaerat incidunt et vel. Ea in, quod quibusdam repellendus magni soluta recusandae ipsa, dicta vel placeat blanditiis, 
-
-voluptate. Repudiandae voluptate omnis natus laboriosam veritatis, eligendi quod at, blanditiis, autem modi cum dolorum necessitatibus quo illum! Architecto porro dolore possimus inventore officiis, sunt praesentium perspiciatis aut consequatur hic dicta voluptatibus. Ducimus deleniti 
-maxime recusandae soluta nihil. Sint sit nam quis, eligendi illo. Quasi ea deleniti est sunt obcaecati minus aliquam aut unde et numquam quibusdam tempore quam quia voluptas earum enim impedit reiciendis, beatae aspernatur recusandae aliquid officiis. Dolorum magni accusamus natus corporis repudiandae, dicta ipsum sit culpa optio cupiditate repellat debitis et consequuntur illo at ea eaque totam molestiae? Eaque perspiciatis laborum, a ut porro quod veritatis amet eveniet ex cum eum sint molestias autem eligendi et nobis harum aut non maxime nulla provident quas modi praesentium voluptas facilis! Ipsam, modi magni ducimus rem quis dignissimos 
-quisquam vero illo labore dolorem a, eveniet accusamus iure expedita doloremque. Quod, nam, dignissimos ullam hic quasi voluptas velit corrupti!', '16627422892025712108.png', '2', '2022-09-09', NULL, NULL, '05:51:29', 'Education') ; 
-INSERT INTO `visap_blog_post_tbl` VALUES ('3', 'Inspirational', '2', 'Jesus is My Lord', 'djfjdjfjdffdkfkfjdlfjdl dlfjdfodfdififdf dfdjfodjf
-fdfjdkkfdknkfd
-dfdjfdfdhfdhfidfdf
-dfljfkdjfkjfk', '1662821056859899543.png', '2', '2022-09-10', NULL, NULL, '03:44:16', 'Marriage,Education') ; 
-INSERT INTO `visap_blog_post_tbl` VALUES ('4', 'Inspirational', '2', 'To The One and Only', '“Wishing you a day filled with happiness and a year filled with joy. Happy birthday!” “Sending you smiles for every moment of your special day…Have a wonderful time and a very happy birthday!” “Hope your special day brings you all that your heart desires! Here&#39;s wishing you a day full of pleasant surprises!', '1662825875866340653.png', '2', '2022-09-10', NULL, NULL, '05:04:35', 'Marriage') ;
 #
 # End of data contents of table visap_blog_post_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3184,6 +3164,131 @@ INSERT INTO `visap_blog_post_tbl` VALUES ('4', 'Inspirational', '2', 'To The One
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+
+
+#
+# Delete any existing table `visap_bus_expense_tbl`
+#
+
+DROP TABLE IF EXISTS `visap_bus_expense_tbl`;
+
+
+#
+# Table structure of table `visap_bus_expense_tbl`
+#
+
+CREATE TABLE `visap_bus_expense_tbl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `driverId` int(11) DEFAULT NULL,
+  `busId` int(11) DEFAULT NULL,
+  `cost_price` int(11) DEFAULT NULL,
+  `repair_type` text DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_on` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+
+#
+# Data contents of table visap_bus_expense_tbl (0 records)
+#
+
+#
+# End of data contents of table visap_bus_expense_tbl
+# --------------------------------------------------------
+
+# WordPress : buffernow.com MySQL database backup
+#
+# Generated: Friday 6. January 2023 11:45 WAT
+# Hostname: localhost
+# Database: `smatech_portal`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `api_module_config`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `current_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `local_govt_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `reg_pin_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `register_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_classes`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_oauth_code_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_offices`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_subjects`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_admin`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_ewallet_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_exam_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_reg_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins_history`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_serial`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_settings`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_1st_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_2nd_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admin_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admission_open_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_assignment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_payment_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_space_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_behavioral_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_comments`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -3210,20 +3315,19 @@ CREATE TABLE `visap_bus_tbl` (
   `vehicle_status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`busId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_bus_tbl (1 records)
+# Data contents of table visap_bus_tbl (0 records)
 #
- 
-INSERT INTO `visap_bus_tbl` VALUES ('1', 'BMW 2019 Model', 'KJA-123-XB', '25', '63065802b5c2b1.28757487.jpg', '0', '2022-08-24') ;
+
 #
 # End of data contents of table visap_bus_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3307,6 +3411,9 @@ INSERT INTO `visap_bus_tbl` VALUES ('1', 'BMW 2019 Model', 'KJA-123-XB', '25', '
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -3338,21 +3445,20 @@ CREATE TABLE `visap_career_portal_tbl` (
   `application_date` date DEFAULT NULL,
   `application_time` time DEFAULT NULL,
   PRIMARY KEY (`job_portal_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_career_portal_tbl (2 records)
+# Data contents of table visap_career_portal_tbl (1 records)
 #
  
-INSERT INTO `visap_career_portal_tbl` VALUES ('4', 'Omo-Oluwa Idowu', 'omooluwajec@gmail.com', '08131374443', 'Sample of my Cover Letter is this', 'Teaching', 'omooluwajec@gmail.com_resume_6318f5644ce25.pdf', '2022-09-07', '01:00:00') ; 
-INSERT INTO `visap_career_portal_tbl` VALUES ('5', 'ademola Adeola Adewumi', 'ademolaade@gmail.com', '08121232123', 'Just sample testing', 'Teaching', 'ademolaade@gmail.com_resume_6319aa27cb5dc.pdf', '2022-09-08', '01:00:00') ;
+INSERT INTO `visap_career_portal_tbl` VALUES ('1', 'Sample Name', 'sampleemail@gmail.com', '099999999999', 'Sample cover letter for the applicant', 'Teaching', 'sampleemail@gmail.com_resume_63b539d08d948.pdf', '2023-01-04', '01:00:00') ;
 #
 # End of data contents of table visap_career_portal_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3436,6 +3542,9 @@ INSERT INTO `visap_career_portal_tbl` VALUES ('5', 'ademola Adeola Adewumi', 'ad
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -3469,7 +3578,7 @@ CREATE TABLE `visap_class_attendance_tbl` (
   `schl_session` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`attend_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_class_attendance_tbl (0 records)
@@ -3481,7 +3590,7 @@ CREATE TABLE `visap_class_attendance_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3565,6 +3674,9 @@ CREATE TABLE `visap_class_attendance_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -3598,7 +3710,7 @@ CREATE TABLE `visap_class_grade_tbl` (
   `grade_status` enum('pending','active','closed') NOT NULL DEFAULT 'active',
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`gradeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_class_grade_tbl (16 records)
@@ -3612,11 +3724,11 @@ INSERT INTO `visap_class_grade_tbl` VALUES ('5', 'Nursery 2', NULL, 'active', '2
 INSERT INTO `visap_class_grade_tbl` VALUES ('6', 'Basic 1', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('7', 'Basic 2', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('8', 'Basic 3', NULL, 'active', '2022-06-14') ; 
-INSERT INTO `visap_class_grade_tbl` VALUES ('9', 'Basic 4', '1', 'active', '2022-06-14') ; 
+INSERT INTO `visap_class_grade_tbl` VALUES ('9', 'Basic 4', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('10', 'Basic 5', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('11', 'JSS 1', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('12', 'JSS 2', NULL, 'active', '2022-06-14') ; 
-INSERT INTO `visap_class_grade_tbl` VALUES ('13', 'JSS 3', NULL, 'active', '2022-06-14') ; 
+INSERT INTO `visap_class_grade_tbl` VALUES ('13', 'JSS 3', '2', 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('14', 'SSS 1', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('15', 'SSS 2', NULL, 'active', '2022-06-14') ; 
 INSERT INTO `visap_class_grade_tbl` VALUES ('16', 'SSS 3', NULL, 'active', '2022-06-14') ;
@@ -3626,7 +3738,7 @@ INSERT INTO `visap_class_grade_tbl` VALUES ('16', 'SSS 3', NULL, 'active', '2022
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3710,6 +3822,9 @@ INSERT INTO `visap_class_grade_tbl` VALUES ('16', 'SSS 3', NULL, 'active', '2022
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -3752,8 +3867,10 @@ CREATE TABLE `visap_classnote_tbl` (
   `term` varchar(50) DEFAULT NULL,
   `session` varchar(50) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
-  PRIMARY KEY (`noteId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`noteId`),
+  KEY `teacher_id` (`teacher_id`),
+  CONSTRAINT `visap_classnote_tbl_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_classnote_tbl (0 records)
@@ -3765,7 +3882,7 @@ CREATE TABLE `visap_classnote_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3849,6 +3966,9 @@ CREATE TABLE `visap_classnote_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -3894,20 +4014,19 @@ CREATE TABLE `visap_driver_tbl` (
   PRIMARY KEY (`dId`),
   UNIQUE KEY `driver_email` (`driver_email`),
   KEY `driver_name` (`driver_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_driver_tbl (1 records)
+# Data contents of table visap_driver_tbl (0 records)
 #
- 
-INSERT INTO `visap_driver_tbl` VALUES ('3', 'Adekola Idowu Samson', '08121343267', 'driver@expert.com', 'example address street xyz Abc Countries', 'ADK0908920221', 'ADK09089202216308968ff0d84.png', '1', '2022-08-26') ;
+
 #
 # End of data contents of table visap_driver_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3991,6 +4110,9 @@ INSERT INTO `visap_driver_tbl` VALUES ('3', 'Adekola Idowu Samson', '08121343267
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4036,8 +4158,10 @@ CREATE TABLE `visap_exam_subject_tbl` (
   `created_at` date DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `schl_session` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`examId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`examId`),
+  KEY `teacherId` (`teacherId`),
+  CONSTRAINT `visap_exam_subject_tbl_ibfk_1` FOREIGN KEY (`teacherId`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_exam_subject_tbl (0 records)
@@ -4049,7 +4173,7 @@ CREATE TABLE `visap_exam_subject_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4133,6 +4257,9 @@ CREATE TABLE `visap_exam_subject_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4177,20 +4304,21 @@ CREATE TABLE `visap_fee_component_tbl` (
   `fee_status` enum('Pending','Active') DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`compId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_fee_component_tbl (1 records)
+# Data contents of table visap_fee_component_tbl (2 records)
 #
  
-INSERT INTO `visap_fee_component_tbl` VALUES ('1', 'Tuition', 'Active', '2022-09-05') ;
+INSERT INTO `visap_fee_component_tbl` VALUES ('1', 'School Fee', 'Active', '2023-01-04') ; 
+INSERT INTO `visap_fee_component_tbl` VALUES ('2', 'Exam Fee', 'Active', '2023-01-04') ;
 #
 # End of data contents of table visap_fee_component_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4274,6 +4402,9 @@ INSERT INTO `visap_fee_component_tbl` VALUES ('1', 'Tuition', 'Active', '2022-09
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4324,21 +4455,19 @@ CREATE TABLE `visap_feedback_tbl` (
   `client_ip_address` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_feedback_tbl (2 records)
+# Data contents of table visap_feedback_tbl (0 records)
 #
- 
-INSERT INTO `visap_feedback_tbl` VALUES ('4', 'Mr Samson Idowu', 'samson@gmail.com', '098765454323', 'This is just a demo testing for the Contact page if working', '::1', '2022-09-08') ; 
-INSERT INTO `visap_feedback_tbl` VALUES ('5', 'Elijah BIIT', 'osotechcoding@gmail.com', NULL, 'Just testing', '::1', '2022-09-10') ;
+
 #
 # End of data contents of table visap_feedback_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4422,6 +4551,9 @@ INSERT INTO `visap_feedback_tbl` VALUES ('5', 'Elijah BIIT', 'osotechcoding@gmai
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4474,23 +4606,19 @@ CREATE TABLE `visap_gallery_tbl` (
   `type` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_gallery_tbl (4 records)
+# Data contents of table visap_gallery_tbl (0 records)
 #
- 
-INSERT INTO `visap_gallery_tbl` VALUES ('1', 'SMATech', 'Learning React-Dom', 'SMAPPgallery62fe472924d15.jpg', 'gallery', '2022-08-18') ; 
-INSERT INTO `visap_gallery_tbl` VALUES ('3', 'SMATech', 'Coding', 'SMAPPyearbook62fe4b064784a.jpg', 'yearbook', '2022-08-18') ; 
-INSERT INTO `visap_gallery_tbl` VALUES ('7', 'Director', 'sample', 'SMAPPanniversary6319e5d1f3055.png', 'anniversary', '2022-09-08') ; 
-INSERT INTO `visap_gallery_tbl` VALUES ('8', 'Director', 'Our Name on Sovenier', 'SMAPPyearbook6319e619c80cd.png', 'yearbook', '2022-09-08') ;
+
 #
 # End of data contents of table visap_gallery_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4574,6 +4702,9 @@ INSERT INTO `visap_gallery_tbl` VALUES ('8', 'Director', 'Our Name on Sovenier',
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4630,7 +4761,7 @@ CREATE TABLE `visap_holiday_tbl` (
   `note_msg` text DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_holiday_tbl (0 records)
@@ -4642,7 +4773,7 @@ CREATE TABLE `visap_holiday_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4726,6 +4857,9 @@ CREATE TABLE `visap_holiday_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4784,7 +4918,7 @@ CREATE TABLE `visap_hostel_rooms_tbl` (
   `amount` int(11) NOT NULL DEFAULT 0,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`roomId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_hostel_rooms_tbl (0 records)
@@ -4796,7 +4930,7 @@ CREATE TABLE `visap_hostel_rooms_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4880,6 +5014,9 @@ CREATE TABLE `visap_hostel_rooms_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -4942,20 +5079,19 @@ CREATE TABLE `visap_hostel_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`hostel_id`),
   UNIQUE KEY `hostel_desc` (`hostel_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_hostel_tbl (1 records)
+# Data contents of table visap_hostel_tbl (0 records)
 #
- 
-INSERT INTO `visap_hostel_tbl` VALUES ('1', 'Obasanjo Hostel', 'boys', '1', 'Mr Idowu John', '2022-08-28') ;
+
 #
 # End of data contents of table visap_hostel_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5039,6 +5175,9 @@ INSERT INTO `visap_hostel_tbl` VALUES ('1', 'Obasanjo Hostel', 'boys', '1', 'Mr 
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_bus_tbl`
@@ -5111,7 +5250,7 @@ CREATE TABLE `visap_loan_tbl` (
   `returnedAmount` float DEFAULT NULL,
   `due` float DEFAULT NULL,
   PRIMARY KEY (`loanId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_loan_tbl (0 records)
@@ -5123,7 +5262,7 @@ CREATE TABLE `visap_loan_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5209,6 +5348,9 @@ CREATE TABLE `visap_loan_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -5249,6 +5391,356 @@ CREATE TABLE `visap_loan_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+
+
+#
+# Delete any existing table `visap_messages_tbl`
+#
+
+DROP TABLE IF EXISTS `visap_messages_tbl`;
+
+
+#
+# Table structure of table `visap_messages_tbl`
+#
+
+CREATE TABLE `visap_messages_tbl` (
+  `id` bigint(30) NOT NULL AUTO_INCREMENT,
+  `sender_email` varchar(255) NOT NULL,
+  `recipient_email` varchar(255) NOT NULL,
+  `subject` varchar(255) DEFAULT NULL,
+  `msg` text DEFAULT NULL,
+  `cc_email` varchar(255) DEFAULT NULL,
+  `bcc_email` varchar(255) DEFAULT NULL,
+  `attachment` varchar(255) DEFAULT NULL,
+  `file_size` varchar(50) DEFAULT NULL,
+  `file_type` varchar(50) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0= unread, 1=read',
+  `userType` varchar(50) NOT NULL DEFAULT 'admin',
+  `msg_datetime` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `sender_id` (`sender_email`),
+  KEY `recipient_id` (`recipient_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+
+#
+# Data contents of table visap_messages_tbl (0 records)
+#
+
+#
+# End of data contents of table visap_messages_tbl
+# --------------------------------------------------------
+
+# WordPress : buffernow.com MySQL database backup
+#
+# Generated: Friday 6. January 2023 11:45 WAT
+# Hostname: localhost
+# Database: `smatech_portal`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `api_module_config`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `current_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `local_govt_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `reg_pin_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `register_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_classes`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_oauth_code_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_offices`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_subjects`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_admin`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_ewallet_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_exam_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_reg_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins_history`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_serial`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_settings`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_1st_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_2nd_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admin_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admission_open_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_assignment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_payment_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_space_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_behavioral_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_comments`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_career_portal_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_grade_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_classnote_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_driver_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_fee_component_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_feedback_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_gallery_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_holiday_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_rooms_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
+# --------------------------------------------------------
+
+
+#
+# Delete any existing table `visap_messages_user_tbl`
+#
+
+DROP TABLE IF EXISTS `visap_messages_user_tbl`;
+
+
+#
+# Table structure of table `visap_messages_user_tbl`
+#
+
+CREATE TABLE `visap_messages_user_tbl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `fullName` varchar(255) DEFAULT NULL,
+  `user_type` varchar(50) NOT NULL DEFAULT 'admin',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0= suspend, 1=active',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+
+#
+# Data contents of table visap_messages_user_tbl (0 records)
+#
+
+#
+# End of data contents of table visap_messages_user_tbl
+# --------------------------------------------------------
+
+# WordPress : buffernow.com MySQL database backup
+#
+# Generated: Friday 6. January 2023 11:45 WAT
+# Hostname: localhost
+# Database: `smatech_portal`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `api_module_config`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `current_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `local_govt_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `reg_pin_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `register_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_classes`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_oauth_code_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_offices`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_subjects`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_admin`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_ewallet_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_exam_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_reg_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins_history`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_serial`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_settings`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_1st_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_2nd_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admin_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admission_open_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_assignment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_payment_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_space_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_behavioral_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_comments`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_career_portal_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_grade_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_classnote_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_driver_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_fee_component_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_feedback_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_gallery_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_holiday_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_rooms_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -5276,7 +5768,7 @@ CREATE TABLE `visap_notice_board_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_notice_board_tbl (0 records)
@@ -5288,7 +5780,7 @@ CREATE TABLE `visap_notice_board_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5374,6 +5866,9 @@ CREATE TABLE `visap_notice_board_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -5414,6 +5909,12 @@ CREATE TABLE `visap_notice_board_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -5440,7 +5941,7 @@ CREATE TABLE `visap_offered_subject_tbl` (
   `subject` varchar(100) DEFAULT NULL,
   `aca_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_offered_subject_tbl (0 records)
@@ -5452,7 +5953,7 @@ CREATE TABLE `visap_offered_subject_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5538,6 +6039,9 @@ CREATE TABLE `visap_offered_subject_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -5578,6 +6082,12 @@ CREATE TABLE `visap_offered_subject_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -5609,23 +6119,21 @@ CREATE TABLE `visap_people_say_tbl` (
   `job` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_people_say_tbl (4 records)
+# Data contents of table visap_people_say_tbl (2 records)
 #
  
-INSERT INTO `visap_people_say_tbl` VALUES ('1', 'Samson Jerry', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable', 'SMAPP_testi_62fe3148c4ec2.jpg', 'Developer', '2022-08-18') ; 
-INSERT INTO `visap_people_say_tbl` VALUES ('2', 'Alade Samuel', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form', 'SMAPP_testi_62fe3401e9744.png', 'Parent', '2022-08-18') ; 
-INSERT INTO `visap_people_say_tbl` VALUES ('3', 'Ifeoluwa Idowu', 'Am just Testing this Message', 'SMAPP_testi_6301aec816e01.jpg', 'Programmer', '2022-08-21') ; 
-INSERT INTO `visap_people_say_tbl` VALUES ('4', 'Elijah BIIT', 'This is superb', 'SMAPP_testi_631ca0fb9db2c.png', 'Doctor', '2022-09-10') ;
+INSERT INTO `visap_people_say_tbl` VALUES ('1', 'Osotech Sam', 'Wow! This is aweseome', 'SMAPP_testi_63b548da46608.png', 'Teacher', '2023-01-04') ; 
+INSERT INTO `visap_people_say_tbl` VALUES ('2', 'Ojo Ayomide', 'This is the Bsst school i had ever seen in my Entire Life', 'SMAPP_testi_63b54913f17c4.jpeg', 'Pastor', '2023-01-04') ;
 #
 # End of data contents of table visap_people_say_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5711,6 +6219,9 @@ INSERT INTO `visap_people_say_tbl` VALUES ('4', 'Elijah BIIT', 'This is superb',
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -5751,6 +6262,12 @@ INSERT INTO `visap_people_say_tbl` VALUES ('4', 'Elijah BIIT', 'This is superb',
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -5783,22 +6300,21 @@ CREATE TABLE `visap_prefect_title_tbl` (
   `status` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_prefect_title_tbl (3 records)
+# Data contents of table visap_prefect_title_tbl (2 records)
 #
  
-INSERT INTO `visap_prefect_title_tbl` VALUES ('1', 'Head Girl', 'Active', '2022-08-21') ; 
-INSERT INTO `visap_prefect_title_tbl` VALUES ('2', 'TimeKeeper', 'Active', '2022-08-21') ; 
-INSERT INTO `visap_prefect_title_tbl` VALUES ('3', 'Head Boy', 'Active', '2022-08-28') ;
+INSERT INTO `visap_prefect_title_tbl` VALUES ('1', 'Head Boy', 'Active', '2023-01-04') ; 
+INSERT INTO `visap_prefect_title_tbl` VALUES ('2', 'Head Girl', 'Active', '2023-01-04') ;
 #
 # End of data contents of table visap_prefect_title_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5884,6 +6400,9 @@ INSERT INTO `visap_prefect_title_tbl` VALUES ('3', 'Head Boy', 'Active', '2022-0
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -5924,6 +6443,12 @@ INSERT INTO `visap_prefect_title_tbl` VALUES ('3', 'Head Boy', 'Active', '2022-0
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -5969,19 +6494,20 @@ CREATE TABLE `visap_psycho_tbl` (
   `class_teacher` varchar(100) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_psycho_tbl (0 records)
+# Data contents of table visap_psycho_tbl (1 records)
 #
-
+ 
+INSERT INTO `visap_psycho_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', '1st Term', '2022/2023', '2', '3', '4', '5', '4', '3', 'Mrs. Oiza Samuel Otti', '2023-01-04') ;
 #
 # End of data contents of table visap_psycho_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6067,6 +6593,9 @@ CREATE TABLE `visap_psycho_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -6107,6 +6636,12 @@ CREATE TABLE `visap_psycho_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -6146,23 +6681,27 @@ CREATE TABLE `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_registered_subject_tbl (4 records)
+# Data contents of table visap_registered_subject_tbl (8 records)
 #
  
-INSERT INTO `visap_registered_subject_tbl` VALUES ('1', 'Basic 4', 'Agricultural Science', 'Director', '2022-09-06') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('2', 'Basic 4', 'Basic Science', 'Director', '2022-09-06') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('3', 'Basic 4', 'Business Studies', 'Director', '2022-09-06') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('4', 'Basic 4', 'CCA', 'Director', '2022-09-06') ;
+INSERT INTO `visap_registered_subject_tbl` VALUES ('1', 'JSS 3', 'Agricultural Science', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('2', 'JSS 3', 'Basic Science', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('3', 'JSS 3', 'Business Studies', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('4', 'JSS 3', 'CCA', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('5', 'JSS 3', 'Computer', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('6', 'JSS 3', 'Current Affairs', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('7', 'JSS 3', 'English Language', 'Smatech', '2023-01-04') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('8', 'JSS 3', 'Mathematics', 'Smatech', '2023-01-04') ;
 #
 # End of data contents of table visap_registered_subject_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6248,6 +6787,9 @@ INSERT INTO `visap_registered_subject_tbl` VALUES ('4', 'Basic 4', 'CCA', 'Direc
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -6288,6 +6830,12 @@ INSERT INTO `visap_registered_subject_tbl` VALUES ('4', 'Basic 4', 'CCA', 'Direc
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -6332,19 +6880,20 @@ CREATE TABLE `visap_result_comment_tbl` (
   `term` varchar(20) DEFAULT NULL,
   `schl_Sess` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`commentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_result_comment_tbl (0 records)
+# Data contents of table visap_result_comment_tbl (1 records)
 #
-
+ 
+INSERT INTO `visap_result_comment_tbl` VALUES ('1', '2021C263130002', 'JSS 3', 'Good student', 'Well behave student', '1st Term', '2022/2023') ;
 #
 # End of data contents of table visap_result_comment_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6430,6 +6979,9 @@ CREATE TABLE `visap_result_comment_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -6470,6 +7022,12 @@ CREATE TABLE `visap_result_comment_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -6517,7 +7075,7 @@ CREATE TABLE `visap_result_grading_tbl` (
   `score_remark` varchar(50) DEFAULT NULL,
   `school_ses` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`grading_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_result_grading_tbl (21 records)
@@ -6540,7 +7098,7 @@ INSERT INTO `visap_result_grading_tbl` VALUES ('14', 'Senior', 'B2', '75', '79',
 INSERT INTO `visap_result_grading_tbl` VALUES ('15', 'Senior', 'B3', '70', '74', 'Good', '2021/2022') ; 
 INSERT INTO `visap_result_grading_tbl` VALUES ('16', 'Senior', 'C4', '65', '69', 'Credit', '2021/2022') ; 
 INSERT INTO `visap_result_grading_tbl` VALUES ('17', 'Senior', 'C5', '60', '64', 'Credit', '2021/2022') ; 
-INSERT INTO `visap_result_grading_tbl` VALUES ('18', 'Senior', 'C6', '50', '59', 'Pass', '2021/2022') ; 
+INSERT INTO `visap_result_grading_tbl` VALUES ('18', 'Senior', 'C6', '50', '59', 'Credit', '2021/2022') ; 
 INSERT INTO `visap_result_grading_tbl` VALUES ('19', 'Senior', 'D7', '40', '49', 'Pass', '2021/2022') ; 
 INSERT INTO `visap_result_grading_tbl` VALUES ('20', 'Senior', 'E8', '30', '39', 'Poor', '2021/2022') ; 
 INSERT INTO `visap_result_grading_tbl` VALUES ('21', 'Senior', 'F9', '1', '29', 'Failed', '2021/2022') ;
@@ -6550,7 +7108,7 @@ INSERT INTO `visap_result_grading_tbl` VALUES ('21', 'Senior', 'F9', '1', '29', 
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6636,6 +7194,9 @@ INSERT INTO `visap_result_grading_tbl` VALUES ('21', 'Senior', 'F9', '1', '29', 
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -6676,6 +7237,12 @@ INSERT INTO `visap_result_grading_tbl` VALUES ('21', 'Senior', 'F9', '1', '29', 
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -6727,20 +7294,19 @@ CREATE TABLE `visap_routes_tbl` (
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `route_desc` (`route_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_routes_tbl (1 records)
+# Data contents of table visap_routes_tbl (0 records)
 #
- 
-INSERT INTO `visap_routes_tbl` VALUES ('2', 'Ogba-Iyo Route', 'Oando plc, Sinai Junction, NNPC Ijoko, First Monac, Bamfort Hotel, Vulcanizer B/Stop', '15000', '3', '1', '2022-08-25') ;
+
 #
 # End of data contents of table visap_routes_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6826,6 +7392,9 @@ INSERT INTO `visap_routes_tbl` VALUES ('2', 'Ogba-Iyo Route', 'Oando plc, Sinai 
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -6866,6 +7435,12 @@ INSERT INTO `visap_routes_tbl` VALUES ('2', 'Ogba-Iyo Route', 'Oando plc, Sinai 
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -6919,7 +7494,7 @@ CREATE TABLE `visap_school_expense_tbl` (
   `csession` varchar(20) DEFAULT NULL,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`expense_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_school_expense_tbl (0 records)
@@ -6931,7 +7506,7 @@ CREATE TABLE `visap_school_expense_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7017,6 +7592,9 @@ CREATE TABLE `visap_school_expense_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -7057,6 +7635,12 @@ CREATE TABLE `visap_school_expense_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -7112,22 +7696,21 @@ CREATE TABLE `visap_school_fee_allocation_tbl` (
   `created_on` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`faId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_school_fee_allocation_tbl (3 records)
+# Data contents of table visap_school_fee_allocation_tbl (2 records)
 #
  
-INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('1', 'Tuition', 'Creche', '30000', '2022-09-05', NULL) ; 
-INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('2', 'Tuition', 'Basic 4', '40000', '2022-09-05', NULL) ; 
-INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('3', 'Tuition', 'JSS 1', '50000', '2022-09-06', NULL) ;
+INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('1', 'School Fee', 'JSS 3', '50000', '2023-01-04', NULL) ; 
+INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('2', 'Exam Fee', 'JSS 3', '10000', '2023-01-04', NULL) ;
 #
 # End of data contents of table visap_school_fee_allocation_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7213,6 +7796,9 @@ INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('3', 'Tuition', 'JSS 1', '
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -7253,6 +7839,12 @@ INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('3', 'Tuition', 'JSS 1', '
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -7312,19 +7904,21 @@ CREATE TABLE `visap_school_prefect_tbl` (
   `activeness` tinyint(1) NOT NULL DEFAULT 1,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`prefectId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_school_prefect_tbl (0 records)
+# Data contents of table visap_school_prefect_tbl (2 records)
 #
-
+ 
+INSERT INTO `visap_school_prefect_tbl` VALUES ('1', '2', 'JSS 3', 'Head Girl', '2022/2023', '1', '2023-01-04') ; 
+INSERT INTO `visap_school_prefect_tbl` VALUES ('2', '1', 'JSS 1', 'Head Boy', '2022/2023', '1', '2023-01-04') ;
 #
 # End of data contents of table visap_school_prefect_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7410,6 +8004,9 @@ CREATE TABLE `visap_school_prefect_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -7450,6 +8047,12 @@ CREATE TABLE `visap_school_prefect_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -7525,6 +8128,8 @@ CREATE TABLE `visap_school_profile` (
   `website_url` text DEFAULT NULL,
   `website_name` varchar(255) DEFAULT NULL,
   `school_logo` varchar(255) DEFAULT NULL,
+  `stamp` varchar(255) DEFAULT NULL,
+  `signature` varchar(255) DEFAULT NULL,
   `school_barcode` varchar(255) DEFAULT NULL,
   `school_badge` varchar(255) DEFAULT NULL,
   `school_favicon` varchar(25) DEFAULT NULL,
@@ -7542,13 +8147,13 @@ CREATE TABLE `visap_school_profile` (
   `about_us` mediumtext DEFAULT NULL,
   `principal_welcome` mediumtext DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_school_profile (1 records)
 #
  
-INSERT INTO `visap_school_profile` VALUES ('1', 'School management Application', 'C26313', 'Plot 8, Block 5, Flat 5 Smapp Estate', 'Education Is Life', 'Engr. Samson Peter P', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Osun State', 'Ifelodun', 'Nigeria', '2345', 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16624732726694968.png', NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.
+INSERT INTO `visap_school_profile` VALUES ('1', 'FLAT ERP TECHNOLOGIES', 'C26313', 'Plot 8, Block 5,  Flat ERP Estate', 'Ultimate ICT Solutions', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Lagos State', 'Ikeja', 'Nigeria', '2345', 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16728263764260615.png', NULL, NULL, NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.
 We praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!
 
 We are saddled with the task to provide a world-class Christian-based educational experience with international standards.
@@ -7561,7 +8166,7 @@ Children should not always stay glued to the TV watching cartoons and Nollywood 
 
 The decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.
 
-We have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'SMATECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,
+We have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'FLATERP', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,
 Respect,
 Integrity,
 Excellence,
@@ -7570,7 +8175,7 @@ Service, Sustainability', 'Our mission is to promote lifelong learning in an ope
 In general we expect our students to be responsible members of the community and ambassadors for Greensprings.
 Students are expected to:
 Wear the full uniform and to be smartly dressed at all times.', 'A specific Code of Conduct is issued to all Secondary School students and to students in Years 4 to 6 of the Elementary School. The Code of Conduct is an agreement between the student, the student’s family and the school, which must be signed and returned.
-In general we expect our students to be responsible members of the community and ambassadors for Greensprings.
+In general we expect our students to be responsible members of the community and ambassadors for 
 Students are expected to:
 Wear the full uniform and to be smartly dressed at all times.', 'School Management Application designed to provide learning in conducive environment for the teaching of students under the direction of qualified teachers. In our school, students progress through a series of school activities.
 
@@ -7583,7 +8188,7 @@ We have highly qualified teachers taking all the various subjects from Basic lev
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7669,6 +8274,9 @@ We have highly qualified teachers taking all the various subjects from Basic lev
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -7709,6 +8317,12 @@ We have highly qualified teachers taking all the various subjects from Basic lev
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -7775,7 +8389,7 @@ CREATE TABLE `visap_school_session_history_tbl` (
   `new_term_begins` date NOT NULL,
   `updated_at` date NOT NULL,
   PRIMARY KEY (`sehisId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_school_session_history_tbl (0 records)
@@ -7787,7 +8401,7 @@ CREATE TABLE `visap_school_session_history_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7873,6 +8487,9 @@ CREATE TABLE `visap_school_session_history_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -7913,6 +8530,12 @@ CREATE TABLE `visap_school_session_history_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -7981,7 +8604,7 @@ CREATE TABLE `visap_school_session_tbl` (
   `term_ended` date NOT NULL,
   `new_term_begins` date NOT NULL,
   PRIMARY KEY (`seId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_school_session_tbl (1 records)
@@ -7994,7 +8617,7 @@ INSERT INTO `visap_school_session_tbl` VALUES ('1', '2022/2023', '1st Term', '61
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8080,6 +8703,9 @@ INSERT INTO `visap_school_session_tbl` VALUES ('1', '2022/2023', '1st Term', '61
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -8120,6 +8746,12 @@ INSERT INTO `visap_school_session_tbl` VALUES ('1', '2022/2023', '1st Term', '61
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -8186,7 +8818,7 @@ CREATE TABLE `visap_session_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `session_desc` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_session_list (1 records)
@@ -8199,7 +8831,7 @@ INSERT INTO `visap_session_list` VALUES ('1', '2022/2023') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8285,6 +8917,9 @@ INSERT INTO `visap_session_list` VALUES ('1', '2022/2023') ;
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -8325,6 +8960,12 @@ INSERT INTO `visap_session_list` VALUES ('1', '2022/2023') ;
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -8398,7 +9039,7 @@ CREATE TABLE `visap_sliders_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_sliders_tbl (6 records)
@@ -8416,7 +9057,7 @@ INSERT INTO `visap_sliders_tbl` VALUES ('19', 'The human mind is our fundamental
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8502,6 +9143,9 @@ INSERT INTO `visap_sliders_tbl` VALUES ('19', 'The human mind is our fundamental
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -8542,6 +9186,12 @@ INSERT INTO `visap_sliders_tbl` VALUES ('19', 'The human mind is our fundamental
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -8620,7 +9270,7 @@ CREATE TABLE `visap_social_link_tbl` (
   `linkedin` varchar(200) DEFAULT NULL,
   `WhatsApp` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_social_link_tbl (1 records)
@@ -8633,7 +9283,7 @@ INSERT INTO `visap_social_link_tbl` VALUES ('1', 'https://www.twitter.com/smatec
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8719,6 +9369,9 @@ INSERT INTO `visap_social_link_tbl` VALUES ('1', 'https://www.twitter.com/smatec
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -8759,6 +9412,12 @@ INSERT INTO `visap_social_link_tbl` VALUES ('1', 'https://www.twitter.com/smatec
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -8838,8 +9497,10 @@ CREATE TABLE `visap_staff_bank_details_tbl` (
   `account_type` varchar(50) DEFAULT NULL,
   `account_number` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`id`),
+  KEY `staff_id` (`staff_id`),
+  CONSTRAINT `visap_staff_bank_details_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_staff_bank_details_tbl (0 records)
@@ -8851,7 +9512,7 @@ CREATE TABLE `visap_staff_bank_details_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8937,6 +9598,9 @@ CREATE TABLE `visap_staff_bank_details_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -8977,6 +9641,12 @@ CREATE TABLE `visap_staff_bank_details_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -9061,7 +9731,7 @@ CREATE TABLE `visap_staff_duty_tbl` (
   `session` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`duty_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_staff_duty_tbl (0 records)
@@ -9073,7 +9743,7 @@ CREATE TABLE `visap_staff_duty_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9159,6 +9829,9 @@ CREATE TABLE `visap_staff_duty_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -9199,6 +9872,12 @@ CREATE TABLE `visap_staff_duty_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -9283,19 +9962,21 @@ CREATE TABLE `visap_staff_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_staff_login_token (0 records)
+# Data contents of table visap_staff_login_token (2 records)
 #
-
+ 
+INSERT INTO `visap_staff_login_token` VALUES ('1', 'Samuel', 'oiza@gmail.com', NULL) ; 
+INSERT INTO `visap_staff_login_token` VALUES ('2', 'Samson', 'osotech@gmail.com', NULL) ;
 #
 # End of data contents of table visap_staff_login_token
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9381,6 +10062,9 @@ CREATE TABLE `visap_staff_login_token` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -9421,6 +10105,12 @@ CREATE TABLE `visap_staff_login_token` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -9514,21 +10204,23 @@ CREATE TABLE `visap_staff_paid_salary_tbl` (
   `csession` varchar(20) DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`salaryId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`salaryId`),
+  KEY `staff_id` (`staff_id`),
+  CONSTRAINT `visap_staff_paid_salary_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_staff_paid_salary_tbl (1 records)
 #
  
-INSERT INTO `visap_staff_paid_salary_tbl` VALUES ('1', '1', '69500', 'January', 'Cash', '2022-09-05', NULL, NULL, 'Paid', '2022/2023', '1st Term', '2022-09-05') ;
+INSERT INTO `visap_staff_paid_salary_tbl` VALUES ('3', '1', '109800', 'January', 'Cash', '2023-01-04', NULL, NULL, 'Paid', '2022/2023', '1st Term', '2023-01-04') ;
 #
 # End of data contents of table visap_staff_paid_salary_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9614,6 +10306,9 @@ INSERT INTO `visap_staff_paid_salary_tbl` VALUES ('1', '1', '69500', 'January', 
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -9654,6 +10349,12 @@ INSERT INTO `visap_staff_paid_salary_tbl` VALUES ('1', '1', '69500', 'January', 
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -9748,22 +10449,23 @@ CREATE TABLE `visap_staff_payroll_tbl` (
   `tds` float DEFAULT NULL,
   `net_salary` float DEFAULT NULL,
   `created_at` date DEFAULT NULL,
-  PRIMARY KEY (`payrollId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`payrollId`),
+  KEY `staff_id` (`staff_id`),
+  CONSTRAINT `visap_staff_payroll_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_staff_payroll_tbl (2 records)
+# Data contents of table visap_staff_payroll_tbl (1 records)
 #
  
-INSERT INTO `visap_staff_payroll_tbl` VALUES ('1', '1', '60000', '2000', '1000', '5000', '2000', '500', '69500', '2022-09-05') ; 
-INSERT INTO `visap_staff_payroll_tbl` VALUES ('2', '2', '100000', '20000', '10000', '30000', '15000', '7500', '167500', '2022-09-06') ;
+INSERT INTO `visap_staff_payroll_tbl` VALUES ('4', '1', '100000', '2000', '1000', '5000', '2000', '200', '109800', '2023-01-04') ;
 #
 # End of data contents of table visap_staff_payroll_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9849,6 +10551,9 @@ INSERT INTO `visap_staff_payroll_tbl` VALUES ('2', '2', '100000', '20000', '1000
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -9889,6 +10594,12 @@ INSERT INTO `visap_staff_payroll_tbl` VALUES ('2', '2', '100000', '20000', '1000
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -9982,22 +10693,24 @@ CREATE TABLE `visap_staff_post_tbl` (
   `office` varchar(100) DEFAULT NULL,
   `term` varchar(20) DEFAULT NULL,
   `schlSes` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`id`),
+  KEY `staff_id` (`staff_id`),
+  CONSTRAINT `visap_staff_post_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_staff_post_tbl (2 records)
 #
  
-INSERT INTO `visap_staff_post_tbl` VALUES ('1', '1', NULL, 'Class Teacher', NULL, NULL) ; 
-INSERT INTO `visap_staff_post_tbl` VALUES ('2', '2', NULL, 'Principal', NULL, NULL) ;
+INSERT INTO `visap_staff_post_tbl` VALUES ('1', '2', NULL, 'Class Teacher', NULL, NULL) ; 
+INSERT INTO `visap_staff_post_tbl` VALUES ('2', '1', NULL, 'Principal', NULL, NULL) ;
 #
 # End of data contents of table visap_staff_post_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10083,6 +10796,9 @@ INSERT INTO `visap_staff_post_tbl` VALUES ('2', '2', NULL, 'Principal', NULL, NU
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -10123,6 +10839,12 @@ INSERT INTO `visap_staff_post_tbl` VALUES ('2', '2', NULL, 'Principal', NULL, NU
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -10240,22 +10962,21 @@ CREATE TABLE `visap_staff_tbl` (
   `appliedDate` date DEFAULT NULL,
   `staffAssignedClass` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`staffId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_staff_tbl (3 records)
+# Data contents of table visap_staff_tbl (2 records)
 #
  
-INSERT INTO `visap_staff_tbl` VALUES ('1', 'SMP22001', 'Basic 4', 'Class Teacher', 'Ademola Adeola', 'Ade', 'ademola@gmail.com', '$2y$10$skbk3cf44seMPfke6jiZPuDe/6lljb4YRpZ8JE6i3T0dAxDCIi3ke', 'Adeola', '1990-09-11', 'BSc', '09098765432', NULL, 'Ijoko road, Sango Ota', '9e29f6bec4c1820', NULL, NULL, 'SMP220017530549.jpg', 'Male', NULL, 'ademola@SMAPP.portal', '1', '0', 'Teaching', '2022-08-19', NULL) ; 
-INSERT INTO `visap_staff_tbl` VALUES ('2', 'SMP22002', NULL, 'Principal', 'John Doe', 'Smith', 'doe@gmail.com', '$2y$10$T0ypu6cTUOMiG.yq9W6.UO9VWUnUVkEhHVZwHSeROSq2CapZT3MB2', 'Doe', NULL, 'Phd', '09087654323', NULL, NULL, '33ef8cfa5f157df', NULL, NULL, 'SMP220022481084.jpg', 'Male', NULL, 'doe@SMAPP.portal', '1', '0', 'Teaching', '2022-08-19', NULL) ; 
-INSERT INTO `visap_staff_tbl` VALUES ('3', 'SMP22003', NULL, NULL, 'Gbenga Festus', 'Agberayi', 'festus@gmail.com', '$2y$10$sE4LfzbVe9P8UyDk/VWoA.PUwPxOr7jzshleaLHxINpyJf3MMGm0.', 'Gbenga', NULL, 'HND', '08140122566', NULL, NULL, '9ff06b06a638b0f', NULL, NULL, 'SMP220035091724.jpg', 'Male', NULL, 'festus@SMAPP.portal', '1', '0', 'Teaching', '2022-08-28', NULL) ;
+INSERT INTO `visap_staff_tbl` VALUES ('1', 'SMP23001', NULL, 'Principal', 'Samson Sam', 'Osotech', 'osotech@gmail.com', '$2y$10$mxz1rYpKldW9bNq14jgfNO97Y.3pnb84bfiAdroLTsC.F/zBXB9.q', 'Samson', NULL, 'BSc', '09000090000', NULL, NULL, '6b7201e2ecf3a0f', NULL, NULL, NULL, 'Male', NULL, 'osotech@SMAPP.portal', '1', '0', 'Teaching', '2023-01-04', NULL) ; 
+INSERT INTO `visap_staff_tbl` VALUES ('2', 'SMP23002', 'JSS 3', 'Class Teacher', 'Samuel Otti', 'Oiza', 'oiza@gmail.com', '$2y$10$5PY1dVgg4asrxcZnDl9M9O.YdV4nfT5Sqg/OyfFRbGT8T64zLCwVW', 'Samuel', NULL, 'BSc', '91999999991', NULL, NULL, 'fbe8cb280a441bc', NULL, NULL, NULL, 'Female', NULL, 'oiza@SMAPP.portal', '1', '0', 'Teaching', '2023-01-04', NULL) ;
 #
 # End of data contents of table visap_staff_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10341,6 +11062,9 @@ INSERT INTO `visap_staff_tbl` VALUES ('3', 'SMP22003', NULL, NULL, 'Gbenga Festu
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -10381,6 +11105,12 @@ INSERT INTO `visap_staff_tbl` VALUES ('3', 'SMP22003', NULL, NULL, 'Gbenga Festu
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -10477,7 +11207,7 @@ CREATE TABLE `visap_state_tbl` (
   `state_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`state_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_state_tbl (37 records)
@@ -10526,7 +11256,7 @@ INSERT INTO `visap_state_tbl` VALUES ('37', 'Zamfara State') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10612,6 +11342,9 @@ INSERT INTO `visap_state_tbl` VALUES ('37', 'Zamfara State') ;
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -10652,6 +11385,12 @@ INSERT INTO `visap_state_tbl` VALUES ('37', 'Zamfara State') ;
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -10763,8 +11502,10 @@ CREATE TABLE `visap_stdmedical_tbl` (
   `stdSurgical` varchar(100) DEFAULT NULL COMMENT '0=No, 1=Yes',
   `stdLastScanedReport` varchar(255) DEFAULT NULL,
   `stdBcertificate` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`medicalId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`medicalId`),
+  KEY `studId` (`studId`),
+  CONSTRAINT `visap_stdmedical_tbl_ibfk_1` FOREIGN KEY (`studId`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_stdmedical_tbl (0 records)
@@ -10776,7 +11517,7 @@ CREATE TABLE `visap_stdmedical_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10862,6 +11603,9 @@ CREATE TABLE `visap_stdmedical_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -10902,6 +11646,12 @@ CREATE TABLE `visap_stdmedical_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -11013,8 +11763,10 @@ CREATE TABLE `visap_stdpreschlinfo` (
   `stdPresentClass` varchar(50) DEFAULT NULL,
   `stdReasonInPreClass` text DEFAULT NULL,
   `stdLastReportSheet` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`preId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`preId`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `visap_stdpreschlinfo_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_stdpreschlinfo (0 records)
@@ -11026,7 +11778,7 @@ CREATE TABLE `visap_stdpreschlinfo` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11112,6 +11864,9 @@ CREATE TABLE `visap_stdpreschlinfo` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -11152,6 +11907,12 @@ CREATE TABLE `visap_stdpreschlinfo` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -11236,6 +11997,270 @@ CREATE TABLE `visap_stdpreschlinfo` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+
+
+#
+# Delete any existing table `visap_student_attendance_tbl`
+#
+
+DROP TABLE IF EXISTS `visap_student_attendance_tbl`;
+
+
+#
+# Table structure of table `visap_student_attendance_tbl`
+#
+
+CREATE TABLE `visap_student_attendance_tbl` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `stdRegNo` varchar(50) DEFAULT NULL,
+  `stdGrade` varchar(50) DEFAULT NULL,
+  `school_open` int(5) DEFAULT NULL,
+  `present` varchar(50) DEFAULT NULL,
+  `absent` varchar(50) DEFAULT NULL,
+  `term` varchar(50) DEFAULT NULL,
+  `schl_session` varchar(50) DEFAULT NULL,
+  `uploaded_by` varchar(200) DEFAULT NULL,
+  `uploaded_at` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+
+#
+# Data contents of table visap_student_attendance_tbl (1 records)
+#
+ 
+INSERT INTO `visap_student_attendance_tbl` VALUES ('1', '2021C263130002', 'JSS 3', '61', '58', '3', '1st Term', '2022/2023', 'Samuel Otti Oiza', '2023-01-04 10:12:33') ;
+#
+# End of data contents of table visap_student_attendance_tbl
+# --------------------------------------------------------
+
+# WordPress : buffernow.com MySQL database backup
+#
+# Generated: Friday 6. January 2023 11:45 WAT
+# Hostname: localhost
+# Database: `smatech_portal`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `api_module_config`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `current_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `local_govt_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `reg_pin_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `register_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_classes`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_oauth_code_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_offices`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_subjects`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_admin`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_ewallet_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_exam_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_reg_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins_history`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_serial`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_settings`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_1st_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_2nd_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admin_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admission_open_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_assignment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_payment_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_space_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_behavioral_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_comments`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_career_portal_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_grade_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_classnote_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_driver_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_fee_component_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_feedback_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_gallery_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_holiday_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_rooms_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_notice_board_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_offered_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_people_say_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_prefect_title_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_psycho_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_registered_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_result_comment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_result_grading_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_routes_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_fee_allocation_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_prefect_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_profile`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_session_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_session_list`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_sliders_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_social_link_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_bank_details_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_duty_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_paid_salary_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_payroll_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_state_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_stdmedical_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_info_tbl`
@@ -11278,8 +12303,10 @@ CREATE TABLE `visap_student_info_tbl` (
   `stdFGEmail` varchar(100) DEFAULT NULL,
   `stdFGOccupation` varchar(255) DEFAULT NULL,
   `stdFGAddress` text DEFAULT NULL,
-  PRIMARY KEY (`stdInfoId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`stdInfoId`),
+  KEY `studentId` (`studentId`),
+  CONSTRAINT `visap_student_info_tbl_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_student_info_tbl (0 records)
@@ -11291,7 +12318,7 @@ CREATE TABLE `visap_student_info_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11377,6 +12404,9 @@ CREATE TABLE `visap_student_info_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -11417,6 +12447,12 @@ CREATE TABLE `visap_student_info_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -11501,6 +12537,9 @@ CREATE TABLE `visap_student_info_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_info_tbl`
@@ -11528,7 +12567,7 @@ CREATE TABLE `visap_student_login_token` (
   `token` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_student_login_token (0 records)
@@ -11540,7 +12579,7 @@ CREATE TABLE `visap_student_login_token` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11626,6 +12665,9 @@ CREATE TABLE `visap_student_login_token` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -11666,6 +12708,12 @@ CREATE TABLE `visap_student_login_token` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -11750,6 +12798,9 @@ CREATE TABLE `visap_student_login_token` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_info_tbl`
@@ -11792,19 +12843,20 @@ CREATE TABLE `visap_student_payment_history_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`phId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_student_payment_history_tbl (0 records)
+# Data contents of table visap_student_payment_history_tbl (1 records)
 #
-
+ 
+INSERT INTO `visap_student_payment_history_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', 'School Fee', '50000', '40000', '10000', '1', '2023-01-04', '1st Term', '2022/2023', 'Bank', '12312356789234', 'FCMB', '1', '2023-01-04') ;
 #
 # End of data contents of table visap_student_payment_history_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11890,6 +12942,9 @@ CREATE TABLE `visap_student_payment_history_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -11930,6 +12985,12 @@ CREATE TABLE `visap_student_payment_history_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -12014,6 +13075,9 @@ CREATE TABLE `visap_student_payment_history_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_info_tbl`
@@ -12059,19 +13123,20 @@ CREATE TABLE `visap_student_payment_tbl` (
   `collectedBy` varchar(100) DEFAULT NULL,
   `today_date` date DEFAULT NULL,
   PRIMARY KEY (`paymentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_student_payment_tbl (0 records)
+# Data contents of table visap_student_payment_tbl (1 records)
 #
-
+ 
+INSERT INTO `visap_student_payment_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', 'School Fee', '50000', '40000', '10000', '1', '2023-01-04', '1st Term', '2022/2023', 'Bank', NULL, NULL, '1', '2023-01-04') ;
 #
 # End of data contents of table visap_student_payment_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12157,6 +13222,9 @@ CREATE TABLE `visap_student_payment_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -12197,6 +13265,12 @@ CREATE TABLE `visap_student_payment_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -12281,6 +13355,9 @@ CREATE TABLE `visap_student_payment_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_info_tbl`
@@ -12319,34 +13396,37 @@ CREATE TABLE `visap_student_tbl` (
   `studentClass` varchar(50) DEFAULT NULL,
   `stdSurName` varchar(100) DEFAULT NULL,
   `stdFirstName` varchar(50) DEFAULT NULL,
-  `stdMiddleName` varchar(50) NOT NULL,
+  `stdMiddleName` varchar(50) DEFAULT NULL,
   `stdDob` date DEFAULT NULL,
   `stdGender` varchar(20) DEFAULT NULL,
   `stdAddress` text DEFAULT NULL,
   `stdPhone` varchar(20) DEFAULT NULL,
-  `stdAdmStatus` enum('Pending','Active','Expelled','Suspended','Transfered','Graduated') NOT NULL DEFAULT 'Pending',
+  `stdAdmStatus` enum('Pending','Active','Expelled','Suspended','Transfered','Graduated','Left') NOT NULL DEFAULT 'Pending',
   `stdApplyDate` date DEFAULT NULL,
   `stdApplyType` enum('Day','Boarding') NOT NULL DEFAULT 'Day',
   `stdPassport` varchar(255) DEFAULT NULL,
   `stdConfToken` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
   `stdTokenExp` datetime DEFAULT NULL,
   `is_online` tinyint(1) NOT NULL DEFAULT 0,
+  `admitted_class` varchar(50) DEFAULT NULL,
+  `completed_date` date DEFAULT NULL,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_student_tbl (2 records)
 #
  
-INSERT INTO `visap_student_tbl` VALUES ('1', '2021C263130001', 'osotech23@gmail.com', 'Oloruntoba', '$2y$10$dUZriH8jYQkQhp2NGiU7Rethou1PyxCEcQ6lbzK04fa6w9S4VFGsi', 'KG 1', 'Oloruntoba', 'Elizabeth', 'Idowu', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8131374443', 'Active', '2000-03-07', 'Day', NULL, '212baba9a9aa1b', NULL, '0') ; 
-INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'adeyandipper@gmail.com', 'Adeyan', '$2y$10$H724FA2sKs.rDWIaHIxNuOpd/G4czNRYqPTMGB3M46qQwDhEC/pVC', 'KG 1', 'Adeyan', 'Adetayo', 'Dipper', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8132323456', 'Active', '2001-08-08', 'Boarding', NULL, '48a43d02128fea', NULL, '0') ;
+INSERT INTO `visap_student_tbl` VALUES ('1', '2021C263130001', 'flaterptechnologies@yahoo.com', 'Afolayan', '$2y$10$/iX.tBX3H4Di9dMogmPn0eoQJzbRbbLMW7pOpWix5kvJOl5mLGXXq', 'JSS 1', 'Afolayan', 'Ayoola', 'Mide', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8031373743', 'Active', '2000-03-07', 'Day', '2021C2631300014552512.jpeg', '33efa7e376d414', NULL, NULL, '0', 'JSS 1', NULL) ; 
+INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'ladeyemi2022@gmail.com', 'Adeyemo', '$2y$10$Vk7qLK6vUhIPZQ2pRx6Eo.EZ2MTr8RYO5625I5VeGMLvQNQaZ6/mq', 'JSS 3', 'Adeyemo', 'Victoria', 'Mervelous', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8032359456', 'Active', '2001-08-08', 'Boarding', '2021C2631300028750785.jpg', 'cabb00553cba45', NULL, NULL, '0', 'JSS 1', '2023-01-04') ;
 #
 # End of data contents of table visap_student_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12432,6 +13512,9 @@ INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'adeyandipper@gma
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -12472,6 +13555,12 @@ INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'adeyandipper@gma
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -12558,6 +13647,9 @@ INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'adeyandipper@gma
 # Table: `visap_stdpreschlinfo`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_student_info_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -12571,6 +13663,304 @@ INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'adeyandipper@gma
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_testimonial_tbl`
+# --------------------------------------------------------
+
+
+#
+# Delete any existing table `visap_student_testimonial_tbl`
+#
+
+DROP TABLE IF EXISTS `visap_student_testimonial_tbl`;
+
+
+#
+# Table structure of table `visap_student_testimonial_tbl`
+#
+
+CREATE TABLE `visap_student_testimonial_tbl` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `stdRegNo` varchar(50) DEFAULT NULL,
+  `admitted_class` varchar(50) DEFAULT NULL,
+  `admitted_date` date DEFAULT NULL,
+  `class_completed` varchar(50) DEFAULT NULL,
+  `date_completed` date DEFAULT NULL,
+  `academic_ability` varchar(100) DEFAULT NULL,
+  `sports_ability` varchar(100) DEFAULT NULL,
+  `office_held` varchar(50) DEFAULT NULL,
+  `school_club` varchar(100) DEFAULT NULL,
+  `general_remarks` text DEFAULT NULL,
+  `student_character` varchar(255) DEFAULT NULL,
+  `subject1` varchar(255) DEFAULT NULL,
+  `subject2` varchar(255) DEFAULT NULL,
+  `subject3` varchar(255) DEFAULT NULL,
+  `subject4` varchar(255) DEFAULT NULL,
+  `subject5` varchar(255) DEFAULT NULL,
+  `subject6` varchar(255) DEFAULT NULL,
+  `subject7` varchar(255) DEFAULT NULL,
+  `subject8` varchar(255) DEFAULT NULL,
+  `subject9` varchar(255) DEFAULT NULL,
+  `subject10` varchar(255) DEFAULT NULL,
+  `subject11` varchar(255) DEFAULT NULL,
+  `cert_no` varchar(50) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `stdRegNo` (`stdRegNo`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+
+#
+# Data contents of table visap_student_testimonial_tbl (1 records)
+#
+ 
+INSERT INTO `visap_student_testimonial_tbl` VALUES ('1', '2021C263130002', 'JSS 1', '2001-08-08', 'JSS 3', '2023-01-04', 'Distinction', 'Distinction', 'None', 'Jets Club', 'Well Behave and good Student', 'Satisfactory', 'General Mathematics', 'English Language', 'Agricultural Science', 'Physics', 'Chemistry', 'Christian Religion Studies', 'Current Affairs', 'Computer', 'Yoruba Language', NULL, NULL, '1480000657', '2023-01-04 09:42:35') ;
+#
+# End of data contents of table visap_student_testimonial_tbl
+# --------------------------------------------------------
+
+# WordPress : buffernow.com MySQL database backup
+#
+# Generated: Friday 6. January 2023 11:45 WAT
+# Hostname: localhost
+# Database: `smatech_portal`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `api_module_config`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `current_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `local_govt_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `reg_pin_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `register_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_classes`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_oauth_code_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_offices`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `school_subjects`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_admin`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_ewallet_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_exam_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_reg_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_result_pins_history`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_serial`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `tbl_settings`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_1st_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_2nd_term_result_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admin_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_admission_open_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_assignment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_payment_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bed_space_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_behavioral_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_comments`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_blog_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_bus_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_career_portal_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_class_grade_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_classnote_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_driver_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_exam_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_fee_component_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_feedback_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_gallery_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_holiday_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_rooms_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_hostel_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_notice_board_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_offered_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_people_say_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_prefect_title_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_psycho_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_registered_subject_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_result_comment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_result_grading_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_routes_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_fee_allocation_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_prefect_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_profile`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_session_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_school_session_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_session_list`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_sliders_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_social_link_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_bank_details_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_duty_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_paid_salary_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_payroll_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_post_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_staff_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_state_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_stdmedical_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_stdpreschlinfo`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_info_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_login_token`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_payment_history_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_payment_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_testimonial_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_submitted_class_assignment_tbl`
@@ -12603,7 +13993,7 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
   `Submitted_at` date DEFAULT NULL,
   `note_to_student` text DEFAULT NULL,
   PRIMARY KEY (`aId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_submitted_class_assignment_tbl (0 records)
@@ -12615,7 +14005,7 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12701,6 +14091,9 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -12741,6 +14134,12 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -12827,6 +14226,9 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
 # Table: `visap_stdpreschlinfo`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_student_info_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -12840,6 +14242,9 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_testimonial_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_submitted_class_assignment_tbl`
@@ -12879,7 +14284,7 @@ CREATE TABLE `visap_termly_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_termly_result_tbl (0 records)
@@ -12891,7 +14296,7 @@ CREATE TABLE `visap_termly_result_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12977,6 +14382,9 @@ CREATE TABLE `visap_termly_result_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -13017,6 +14425,12 @@ CREATE TABLE `visap_termly_result_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -13103,6 +14517,9 @@ CREATE TABLE `visap_termly_result_tbl` (
 # Table: `visap_stdpreschlinfo`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_student_info_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -13116,6 +14533,9 @@ CREATE TABLE `visap_termly_result_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_testimonial_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_submitted_class_assignment_tbl`
@@ -13152,21 +14572,19 @@ CREATE TABLE `visap_upcoming_event_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`eventId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_upcoming_event_tbl (2 records)
+# Data contents of table visap_upcoming_event_tbl (0 records)
 #
- 
-INSERT INTO `visap_upcoming_event_tbl` VALUES ('1', '1', 'A Day Workshop on Soap Making', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'SMAPP_event62ff0739bfeb90.14629632.jpg', 'Student Union', '2022-08-27', '10:30:00', 'School Main Hall', '2', '2022-08-19') ; 
-INSERT INTO `visap_upcoming_event_tbl` VALUES ('2', '1', 'Just Testing', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum', 'SMAPP_event62ff0ca57d41b9.79025403.jpg', 'Student Union', '2022-08-24', '07:00:00', 'Ademola Hall', '2', '2022-08-19') ;
+
 #
 # End of data contents of table visap_upcoming_event_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -13252,6 +14670,9 @@ INSERT INTO `visap_upcoming_event_tbl` VALUES ('2', '1', 'Just Testing', 'Lorem 
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -13292,6 +14713,12 @@ INSERT INTO `visap_upcoming_event_tbl` VALUES ('2', '1', 'Just Testing', 'Lorem 
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -13378,6 +14805,9 @@ INSERT INTO `visap_upcoming_event_tbl` VALUES ('2', '1', 'Just Testing', 'Lorem 
 # Table: `visap_stdpreschlinfo`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_student_info_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -13391,6 +14821,9 @@ INSERT INTO `visap_upcoming_event_tbl` VALUES ('2', '1', 'Just Testing', 'Lorem 
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_testimonial_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_submitted_class_assignment_tbl`
@@ -13429,8 +14862,10 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
   `date_to` date DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   `counter` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`lectureId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ;
+  PRIMARY KEY (`lectureId`),
+  KEY `teacher` (`teacher`),
+  CONSTRAINT `visap_virtual_lesson_tbl_ibfk_1` FOREIGN KEY (`teacher`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_virtual_lesson_tbl (0 records)
@@ -13442,7 +14877,7 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 7. October 2022 17:16 WAT
+# Generated: Friday 6. January 2023 11:45 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -13528,6 +14963,9 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
 # Table: `visap_blog_post_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_bus_expense_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_bus_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -13568,6 +15006,12 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_loan_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_messages_user_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_notice_board_tbl`
@@ -13654,6 +15098,9 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
 # Table: `visap_stdpreschlinfo`
 # --------------------------------------------------------
 # --------------------------------------------------------
+# Table: `visap_student_attendance_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
 # Table: `visap_student_info_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
@@ -13667,6 +15114,9 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_student_tbl`
+# --------------------------------------------------------
+# --------------------------------------------------------
+# Table: `visap_student_testimonial_tbl`
 # --------------------------------------------------------
 # --------------------------------------------------------
 # Table: `visap_submitted_class_assignment_tbl`
@@ -13711,7 +15161,7 @@ CREATE TABLE `visitor_book` (
   `cterm` varchar(50) DEFAULT NULL,
   `cses` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`visitor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visitor_book (0 records)

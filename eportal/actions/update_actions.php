@@ -455,7 +455,7 @@ if ($request_method === "POST") {
     }
 
     //show_staff_office_title_update_modal
-    if ($_POST['action'] === "show_staff_office_title_update_modal") {
+    if ($_POST['action'] === "show_staff_office_title_update_modal_") {
       $prefect_id = $Configuration->Clean($_POST['prefect_id']);
       $result = $Staff->get_staff_office_ById($prefect_id);
       $staff_data = $Staff->get_staff_ById($result->staff_id);
