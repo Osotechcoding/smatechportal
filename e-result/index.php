@@ -17,7 +17,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
 <html lang="en">
     <head>
        <?php include_once "Templates/MetaTags.php";?>
-        <title> Student Result Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
+        <title> Result Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/styles.css" rel="stylesheet" />
@@ -233,7 +233,8 @@ if ($StudentResult->checkResultPortalStatus() === true) {
     </script> Alright Reserved || <?php echo ($Osotech->getConfigData()->school_name); ?> <span class="st-icon-pandora float-end" style="color:yellow;">Powered By: <b style="color:#f00"><?php echo __OSOTECH__DEV_COMPANY__; ?></b> </span></p> </div>
         </footer>
         <!-- jquery  -->
-        <script src="assets/js/jquery-3.6.0.min.js" charset="utf-8"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+        <!-- <script src="assets/js/jquery-3.6.0.min.js" charset="utf-8"></script> -->
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

@@ -67,12 +67,12 @@ require_once "helpers/helper.php";
               <thead>
                 <tr>
                   <th>PASSPORT</th>
-          <th>FULLNAME</th>
+          <th>FULL NAME</th>
           <th>ADMISSION NO</th>
-          <th>CLASS</th>
+          <th>ADMISSION LEVEL</th>
           <th>VERIFICATION</th>
           <th>STATUS</th>
-          <th>PHOTOCARD</th>
+          <th>PHOTO-CARD</th>
           <th>ACTION</th>
                 </tr>
               </thead>

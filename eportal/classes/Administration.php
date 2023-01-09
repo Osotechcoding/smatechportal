@@ -3387,4 +3387,15 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		}
 		return $this->response;
 	}
+
+	public function getGeneratedStudentTestimonials()
+	{
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_testimonial_tbl` ORDER BY `id` DESC");
+		$this->stmt->execute();
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetchAll();
+			return $this->response;
+
+		}
+	}
 }

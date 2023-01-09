@@ -16,11 +16,11 @@ if(isset($_GET['email']) && isset($_GET['code']) && !$Osotech->isEmptyStr($_GET[
     $code = $Osotech->Clean($_GET['code']);
 $applicant_data = $Osotech->get_double_data("visap_student_tbl","stdEmail",$email,"stdConfToken",$code);
 if(!$applicant_data){
-    header("Location:" . APP_ROOT);
+    header("Location: ./");
     exit();  
 }
 }else{
-    header("Location:" . APP_ROOT);
+    header("Location: ./");
     exit();  
 }
 ?>
@@ -28,68 +28,13 @@ if(!$applicant_data){
 <html lang="en">
     <head>
     <?php include_once ("MetaTags.php");?>
-        <title>Student Admission Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
-        <!-- Favicon-->
-       
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="asset/css/styles.css" rel="stylesheet" />
-        <style type="text/css">
-            .fet-card{
-                background-color: whitesmoke;
-                padding: 10px; 
-                border-radius: 25px;
-                 color: black;
-        box-shadow: -10px 8px 5px 8px rgba(0,0,0,0.75);
-        -webkit-box-shadow: -13px 8px 5px 6px rgba(0,0,0,0.75);
-        -moz-box-shadow: -13px 8px 5px 6px rgba(0,0,0,0.75);
-            }
-        </style>
+        <title>Admission Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
+        <?php include_once "Head.php"; ?>
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
             <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><img src="<?php echo $Osotech->get_schoolLogoImage(); ?>" alt="" class="img-fluid brand-logo" width="50" style="margin-right: 10px;"> Flat ERP Technologies</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item text-white"><a class="nav-link" href="./">Home</a></li>
-                            <li class="nav-item text-white"><a class="nav-link" href="faq.html">FAQ</a></li>
-                             <li class="nav-item text-white"><a class="nav-link" href="contact.html">Help?</a><li>
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Apply</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
-                                    <li><a class="dropdown-item" href="portfolio-item.html">Application Procedure</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">Fee & Payment Details</a></li>
-                                    <li><a class="dropdown-item" href="portfolio-item.html">Entrance Exam Date</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Header-->
-            <header class="bg-danger py-2">
-                <div class="container px-5">
-                    <div class="row gx-5 align-items-center justify-content-center">
-                        <div class="col-lg-8 col-xl-7 col-xxl-6">
-                            <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-5 fw-bolder text-white mb-2">Welcome to student admission portal</h1>
-                                <p class="lead fw-normal text-white mb-3">Please click on <b style="background-color: black;border-radius: 10px; padding: 2px 5px ;">Apply</b> at the right hand corner of this page to read the instruction on how to apply!</p>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="<?php echo EPORTAL_ROOT; ?>" target="_blank">Student Portal</a>
-                                    <a class="btn btn-outline-light btn-lg px-4" href="javascript:void(0);">Purchase Scratch Card</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="asset/scratch-Card1.jpg" alt="..." /></div>
-                    </div>
-                </div>
-            </header>
+            <?php include_once "HeadNavBar.php"; ?>
             <!-- Features section-->
             <section class="py-5" id="features">
                 <div class="container px-5 my-5">
@@ -102,6 +47,7 @@ if(!$applicant_data){
                         <div class="row">
                         
   <h4 class="text-center fw-bolder text-uppercase mt-3 text-muted">Student Bio Data </h4>
+  <h4 class="text-center fw-normal mt-3 text-info">Compulsory fields are marked with red label </h4>
   <div class="col-md-4 mb-2">
   <input type="hidden" name="action" value="submit_second_step_admission">
     <input type="hidden" name="osotech_csrf"
@@ -133,14 +79,14 @@ if(!$applicant_data){
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-        <label class="mb-2">First Name</label>
+        <label class="mb-2 text-danger">First Name</label>
          <input type="text" class="form-control form-control-lg" name="first_name" placeholder="First name" aria-label="First name">
     </div>
    
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-        <label class="mb-2">Other Names</label>
+        <label class="mb-2 text-danger">Other Names</label>
          <input type="text" class="form-control form-control-lg" name="middle_name" placeholder="Other Names" aria-label="Other Names">
     </div>
    
@@ -148,7 +94,7 @@ if(!$applicant_data){
   
   <div class="col-md-2 mb-2">
     <div class="form-group">
-        <label class="mb-2">Birth Day</label>
+        <label class="mb-2 text-danger">Birth Day</label>
         <select class="form-select custom-select form-control form-control-lg" name="day">
             <option value="" selected> Choose...</option>
             <?php for ($i=1; $i <=31 ; $i++) { 
@@ -159,7 +105,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-2 mb-2">
     <div class="form-group">
-        <label class="mb-2">Birth Month</label>
+        <label class="mb-2 text-danger">Birth Month</label>
         <select class="form-select custom-select form-control form-control-lg" name="month">
             <option value="" selected> Choose...</option>
             <?php for( $m=1; $m<=12; ++$m ) { 
@@ -172,7 +118,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-2 mb-2">
     <div class="form-group">
-        <label class="mb-2">Birth Year</label>
+        <label class="mb-2 text-danger">Birth Year</label>
         <select class="form-select custom-select form-control form-control-lg" name="year">
             <option value="" selected> Choose...</option>
             <?php 
@@ -188,7 +134,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-        <label class="mb-2">Gender</label>
+        <label class="mb-2 text-danger">Gender</label>
         <select class="form-select custom-select form-control form-control-lg" name="gender">
             <option value="" selected> Choose...</option>
             <option value="Male"> Male</option>
@@ -199,7 +145,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-        <label for="birth_cert">Birth Certification </label>
+        <label for="birth_cert" class="mb-2 text-danger">Birth Certification </label>
       <select name="birth_cert" id="birth_cert" class="custom-select form-control form-control-lg">
         <option value="" selected>Choose...</option>
         <option value="Certificate">Certificate</option>
@@ -211,7 +157,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-         <label for="nationality">NATIONALITY</label>
+         <label for="nationality" class="mb-2 text-danger">NATIONALITY</label>
           <select name="nationality" id="nationality" class="custom-select form-control form-control-lg">
             <option value="" selected>Choose...</option>
             <option value="Nigerian">Nigerian</option>
@@ -222,7 +168,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-         <label for="state_origin">STATE OF ORIGIN</label>
+         <label for="state_origin" class="mb-2 text-danger">STATE OF ORIGIN</label>
       <select name="state_origin" id="state_origin" class="custom-select form-control form-control-lg">
         <option value="" selected>Choose...</option>
          <?php echo $Osotech->get_states_of_origin_InDropDown(); ?> 
@@ -232,7 +178,7 @@ if(!$applicant_data){
   </div>
   <div class="col-md-6 mb-2">
     <div class="form-group">
-        <label for="localgovt">LGA OF ORIGIN</label>
+        <label for="localgovt" class="mb-2 text-danger">LGA OF ORIGIN</label>
       <select name="local_govt" id="localgovt" class="custom-select form-control form-control-lg"
         required></select>
     </div>
@@ -241,7 +187,7 @@ if(!$applicant_data){
  
   <div class="col-md-3 mb-2">
     <div class="form-group">
-       <label for="hometown">Home Town</label>
+       <label for="hometown" class="mb-2 text-danger">Home Town</label>
       <input type="text" name="hometown" class="form-control form-control-lg" id="hometown"
         placeholder="Home town" aria-label="Home Town">
     </div>
@@ -249,7 +195,7 @@ if(!$applicant_data){
   </div>
    <div class="col-md-3 mb-2">
     <div class="form-group">
-        <label for="religion">RELIGION</label>
+        <label for="religion" class="mb-2 text-danger">RELIGION</label>
       <select name="religion" id="religion" class="custom-select form-control form-control-lg">
         <option value="" selected>Choose...</option>
         <option value="Christianity">Christianity</option>
@@ -261,7 +207,7 @@ if(!$applicant_data){
   
   <div class="col-md-6 mb-3">
 <div class="form-group">
-  <label for="challenges">CHALLENGES THAT IMPACT ABILITY</label>
+  <label for="challenges" class="mb-2 text-danger">CHALLENGES THAT IMPACT ABILITY</label>
   <select name="challenges" id="challenges" class="custom-select form-control form-control-lg">
     <option value="" selected>Choose...</option>
     <option value="Visually Challenged">Visually Challenged</option>
@@ -278,7 +224,7 @@ if(!$applicant_data){
 </div>
 <div class="col-md-12 mb-2">
     <div class="form-group">
-      <label for="home_address">Home Address </label>
+      <label for="home_address" class="mb-2 text-danger">Home Address </label>
       <textarea name="home_address" class="form-control form-control-lg" placeholder="Home Address"></textarea>
     </div>
   </div>
@@ -286,49 +232,49 @@ if(!$applicant_data){
                          
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label>Title </label>
+                                <label class="mb-2 text-danger">Title </label>
                                 <input type="text" autocomplete="off" name="mg_title" class="form-control form-control-lg"
                                   placeholder="High Chief">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label>Full Name</label>
+                                <label class="mb-2 text-danger">Full Name</label>
                                 <input type="text" autocomplete="off" name="mg_name" class="form-control form-control-lg"
                                   placeholder="Prof. Hamad Sani O">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Relationship </label>
+                                <label class="mb-2 text-danger"> Relationship </label>
                                 <input type="text" autocomplete="off" name="mg_relation" class="form-control form-control-lg"
                                   placeholder=" Father">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Phone </label>
+                                <label class="mb-2 text-danger"> Phone </label>
                                 <input type="text" autocomplete="off" name="mg_phone" class="form-control form-control-lg"
-                                  placeholder="082135432123">
+                                  placeholder="Phone number">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Email </label>
+                                <label class="mb-2 text-danger"> Email </label>
                                 <input type="text" autocomplete="off" name="mg_email" class="form-control form-control-lg"
                                   placeholder=" myfather@gmail.com" />
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Occupation </label>
+                                <label class="mb-2 text-danger"> Occupation </label>
                                 <input type="text" autocomplete="off" name="mg_occu" class="form-control form-control-lg"
                                   placeholder="Doctor" />
                               </div>
                             </div>
                             <div class="col-md-12 mb-3">
                               <div class="form-group">
-                                <label> Address </label>
+                                <label class="mb-2 text-danger"> Address </label>
                                 <textarea type="text" autocomplete="off" name="mg_address" class="form-control form-control-lg"
                                   placeholder=" Sango Ota Ogun State"></textarea>
                               </div>
@@ -336,49 +282,49 @@ if(!$applicant_data){
                           <h3 class="text-center fw-bolder text-uppercase mt-3 text-muted">MOTHER/FEMALE GUARDIAN DETAILS</h3>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label>Title </label>
+                                <label class="mb-2 text-danger">Title </label>
                                 <input type="text" autocomplete="off" name="fg_title" class="form-control form-control-lg"
                                   placeholder="High Chief">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label>Full Name</label>
+                                <label class="mb-2 text-danger">Full Name</label>
                                 <input type="text" autocomplete="off" name="fg_name" class="form-control form-control-lg"
                                   placeholder="Osotech Software">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Relationship </label>
+                                <label class="mb-2 text-danger"> Relationship </label>
                                 <input type="text" autocomplete="off" name="fg_relation" class="form-control form-control-lg"
                                   placeholder="Mother">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Phone </label>
+                                <label class="mb-2 text-danger"> Phone </label>
                                 <input type="text" autocomplete="off" name="fg_phone" class="form-control form-control-lg"
                                   placeholder="082135432123">
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Email </label>
+                                <label class="mb-2 text-danger"> Email </label>
                                 <input type="text" autocomplete="off" name="fg_email" class="form-control form-control-lg"
                                   placeholder="mymother@gmail.com" />
                               </div>
                             </div>
                             <div class="col-md-6 mb-3">
                               <div class="form-group">
-                                <label> Occupation </label>
+                                <label class="mb-2 text-danger"> Occupation </label>
                                 <input type="text" autocomplete="off" name="fg_occu" class="form-control form-control-lg"
                                   placeholder="Doctor" />
                               </div>
                             </div>
                             <div class="col-md-12 mb-3">
                               <div class="form-group">
-                                <label> Address </label>
+                                <label class="mb-2 text-danger"> Address </label>
                                 <textarea type="text" autocomplete="off" name="fg_address" class="form-control form-control-lg"
                                   placeholder=" Sango Ota Ogun State"></textarea>
                               </div>
@@ -439,14 +385,14 @@ if(!$applicant_data){
                           </div>
                           <div class="col-md-6 mb-3">
                             <div class="form-group">
-                              <label>YOUR PRESENT CLASS </label>
+                              <label class="mb-2 text-danger">YOUR PRESENT CLASS </label>
                               <input type="text" class="form-control form-control-lg" name="present_class"
                                 placeholder="Enter Your Present Class here">
                             </div>
                           </div>
                           <div class="col-md-6 mb-3">
                             <div class="form-group">
-                              <label>REASON FOR CHANGE OF SCHOOL </label>
+                              <label class="mb-2 text-danger">REASON FOR CHANGE OF SCHOOL </label>
                               <input type="text" name="reason_to" class="form-control form-control-lg">
                             </div>
                           </div>
@@ -494,7 +440,7 @@ if(!$applicant_data){
                         <div class="row">
                           <div class="col-md-6 mb-3">
                             <div class="form-group">
-                              <label for="blood_group">Blood Group</label>
+                              <label for="blood_group" class="mb-2 text-danger">Blood Group</label>
                               <select name="blood_group" class="custom-select form-control form-control-lg">
                                 <option selected>Choose...</option>
                                 <option value="A+">A+ Positive</option>
@@ -511,7 +457,7 @@ if(!$applicant_data){
 
                           <div class="col-md-6 mb-3">
                             <div class="form-group">
-                              <label for="genotype">Genotype</label>
+                              <label for="genotype" class="mb-2 text-danger">Genotype</label>
                               <select name="genotype" class="custom-select form-control form-control-lg">
                                 <option selected>Choose...</option>
                                 <option value="AA">AA</option>
@@ -523,14 +469,14 @@ if(!$applicant_data){
                           </div>
                           <div class="col-md-4 mb-3">
                             <div class="form-group">
-                              <label for="illness">FREQUENT ILLNESS</label>
+                              <label for="illness" class="mb-2 text-danger">FREQUENT ILLNESS</label>
                               <input type="text" class="form-control form-control-lg" name="illness" placeholder="Cough">
                             </div>
                           </div>
 
                           <div class="col-md-4 mb-3">
                             <div class="form-group">
-                              <label for="hospitalized">Have you Been Hospitalized?</label>
+                              <label for="hospitalized" class="mb-2 text-danger">Have you Been Hospitalized?</label>
                               <select name="hospitalized" id="hospitalized" class="form-control form-control-lg">
                                 <option value="" selected>Choose...</option>
                                 <option value="Yes">Yes</option>
@@ -540,7 +486,7 @@ if(!$applicant_data){
                           </div>
                           <div class="col-md-4 mb-3">
                             <div class="form-group">
-                              <label for="surgical_operation">Any Surgical Operation?</label>
+                              <label for="surgical_operation" class="mb-2 text-danger">Any Surgical Operation?</label>
                               <select name="surgical_operation" id="surgical_operation" class="custom-select form-control form-control-lg">
                                 <option value="">Choose...</option>
                                 <option value="Yes">Yes</option>
@@ -556,24 +502,24 @@ if(!$applicant_data){
                       <div class="col-md-6" id="uploaded_passport">
                               <img id="previewImg" width="200" src="asset/male.png" alt="Placeholder"
                                 style="border: 5px solid darkblue;border-radius:10px;">
-                              <p class="text-center text-muted">Image Size: <span id="ImageSize"></span></p>
+                              <h6 class="text-center text-muted">Image Size: <span id="ImageSize"></span></h6>
                             </div>
                             <div class="col-md-6 mb-3">
                             <div class="form-group">
                               <i class="text-danger">Please Note that Passport size must not exceed 20KB and
                                 dimension should be (100 x 100 pixels)</i>
-                              <label for="student_passport">Choose Passport</label>
+                              <label for="student_passport" class="mb-2 text-danger">Choose Passport</label>
                               <input type="file" class="form-control custom-file form-control-lg" name="student_passport"
                                 id="student_passport" onchange="previewFile(this);">
                             </div>
                           </div>
                       </center>
-                          <p class="mt-2 text-danger"><input type="checkbox" class="checkbox__input"> <b>By submitting
+                          <h5 class="mt-2 text-danger"><input type="checkbox" class="checkbox__input"> <b>By submitting
                               your admission form you agree to the Terms and Condition of </b> <strong
                               class="text-info">
                                <?php echo ($Osotech->getConfigData()->school_name); ?>
                               <?php echo ($Osotech->getConfigData()->school_state); ?> 
-                               </strong></p>
+                               </strong></h5>
                         </div>
 
                  </div>

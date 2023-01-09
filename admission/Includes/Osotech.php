@@ -185,7 +185,9 @@ class Osotech
                   $link = ADMISSION_PORTAL_ROOT."submit-application?email=$stu_email&code=$confirmation_code&page=2";
                 if($this->OsotechMailer->sendAdmissionVerificationEmail($stu_email,$surname,$link,$expire_date,$school_name) == true){
                   $this->dbh->commit();
-                  $this->response = $this->alert_msg("success", "SUCCESS", "Verification link have been sent to <b>$stu_email</b>  click on the link to complete your admission!");
+                  $this->response = $this->alert_msg("success", "SUCCESS", "Verification link have been sent to <b>$stu_email</b>  click on the link to complete your admission!")."<script>setTimeout(()=>{
+                    $('#new_Student_Admission_form')[0].reset();
+                  },3000)</script>";
                 }else{
                   $this->dbh->rollback();
                   $this->response  = $this->alert_msg("danger", "WARNING", "Error Occurred Please try again!") . $this->loadOsotechCaptcha();
@@ -308,20 +310,9 @@ class Osotech
           $this->isEmptyStr($fg_phone) || 
           $this->isEmptyStr($fg_email) || 
           $this->isEmptyStr($fg_occu) || 
-          $this->isEmptyStr($fg_address)||
-          $this->isEmptyStr($schoolname) ||
-          $this->isEmptyStr($proprietress) ||
-          $this->isEmptyStr($schl_phone) || 
-          $this->isEmptyStr($prev_schl_loca) ||
-          $this->isEmptyStr($edu_offered) ||
-          $this->isEmptyStr($category) || 
+          $this->isEmptyStr($fg_address)|| 
           $this->isEmptyStr($present_class)|| 
           $this->isEmptyStr($reason_to)|| 
-          $this->isEmptyStr($hospital_name) ||
-          $this->isEmptyStr($doctor_name) || 
-          $this->isEmptyStr($phone) || 
-          $this->isEmptyStr($member_since) || 
-          $this->isEmptyStr($address) || 
           $this->isEmptyStr($blood_group) ||
           $this->isEmptyStr($genotype) || 
           $this->isEmptyStr($illness) || 
@@ -366,13 +357,13 @@ class Osotech
               if ($this->stmt->execute(array($applicant_id, $hospital_name, $doctor_name, $phone, $member_since, $address, $blood_group, $genotype, $illness, $hospitalized, $surgical_operation))) {
                 if (move_uploaded_file($passport_temp, $destination)) {
                   $this->dbh->commit();
-                  $this->response = $this->alert_msg("success", "SUCCESS", "Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card") . "<script>setTimeout(()=>{
-                  window.location.href='" . ADMISSION_PORTAL_ROOT . "photo-card?email=" . $this->saltifyString($applicant_email) . "';
-                },3500);</script>";
+                  $student_photo_card_page = ADMISSION_PORTAL_ROOT . "photo-card?email=" .  $this->saltifyString($applicant_email);
+                  $this->response = $this->alert_msg("success", "SUCCESS", "Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card") . '<script>setTimeout(()=>{
+                    window.open("' . $student_photo_card_page . '","_blank", "top=50, left=50, width=800, height=900");$("#submitStudentApplicationForm")[0].reset();
+                    },1000); window.location.href="./";</script>';
                 }
               }
             }
-           
           }
         }
       } catch (PDOException $e) {

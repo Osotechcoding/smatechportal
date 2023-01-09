@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
     <?php include "../template/MetaTag.php";?>
     <title><?php echo $SmappDetails->school_name ?> :: Re-print Certificate </title>
    <!-- include template/HeaderLink.php -->
-   <?php include "../template/HeaderLink.php";?>
+   <?php include "../template/dataTableHeaderLink.php";?>
   <!-- END: Head-->
   <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
@@ -42,8 +42,57 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>  STUDENT CERTIFICATE MODULE</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>  STUDENT CERTIFICATE MODULE <span><a href="javascript:void(0);" onclick="window.location.href='./generate-testimonial'" class="btn btn-light-primary btn-sm btn-pill">Generate Certificate</a> </span></h3>
   </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+      <div class="table-responsive">
+      <table class="table table-hover table-bordered table-striped osotechExp">
+        <thead class="text-center">
+          <tr>
+          <th>S/N</th>
+          <th>Student Name</th>
+          <th>Certificate No</th>
+          <th>Graduated Year</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+        <tbody class="text-center">
+          <?php 
+$testimonials = $Administration->getGeneratedStudentTestimonials();
+if ($testimonials) {
+  // code...
+  $cnt =0;
+  foreach ($testimonials as $testimonial) { 
+    $student_data = $Student->get_student_data_ByRegNo($testimonial->stdRegNo);
+    $cnt++;
+    ?>
+    <tr>
+<td><?php echo $cnt;?></td>
+<td><?php echo strtoupper($student_data->full_name);?></td>
+<td><?php echo $testimonial->cert_no;?></td>
+<td><?php echo date("F, Y",strtotime($testimonial->date_completed));?></td>
+<td class="text-right">
+</a>
+<button type="button" data-id="<?php echo $testimonial->id;?>" data-value="<?php echo $testimonial->id;?>" class="btn btn-danger btn-sm mb-1 remove_sub_btn __loadingBtn2__<?php echo $testimonial->id;?>">
+<i class="fa fa-trash fa-1x"></i> Delete
+</button>
+</td>
+</tr>
+    <?php
+    // code...
+  }
+}
+
+
+   ?>
+      </tbody>
+      </table>
+    </div>
+      </div>
+
     </div>
 
     <div class="card" style="border-radius: 10px;">
@@ -85,7 +134,7 @@ require_once "helpers/helper.php";
    <?php include "../template/footer.php"; ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
-    <?php include "../template/FooterScript.php"; ?>
+    <?php include "../template/DataTableFooterScript.php"; ?>
 
     <script src="smappjs/reprintcert.js"></script>
      <!-- BEGIN: Page JS-->

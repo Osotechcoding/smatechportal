@@ -44,7 +44,7 @@ require_once "helpers/helper.php";
           <div class="row">
              <div class="col-12">
     <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>
-     STUDENT TESTIMONIAL MODULE <span><a href="javascript:void(0);" onclick="window.location.href='./reprintcert'" class=" btn btn-light-info btn-sm btn-pill">Re-Print Certificate</a> </span> </h3>
+     STUDENT TESTIMONIAL MODULE <span><a href="javascript:void(0);" onclick="window.location.href='./reprintcert'" class="btn btn-light-primary btn-sm btn-pill">Re-Print Certificate</a> </span> </h3>
   </div>
     </div>
 
