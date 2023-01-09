@@ -17,33 +17,31 @@ class OsotechMailer
   public $_User;
   public $_Password;
   public $_Port;
-  protected $SIB_API_SEC_KEY = SIB_API_SECRET_KEY;
-  public $SIB_ACC_PASS = SIB_ACC_PASS;
-  public $SIB_ACC_USER = SIB_ACC_USER;
-  public $SIB_EMAIL_SERVER = SIB_EMAIL_SERVER;
+  // protected $SIB_API_SEC_KEY = SIB_API_SECRET_KEY;
+  // public $SIB_ACC_PASS = SIB_ACC_PASS;
+  // public $SIB_ACC_USER = SIB_ACC_USER;
+  // public $SIB_EMAIL_SERVER = SIB_EMAIL_SERVER;
 
   function __construct()
   {
     // code...
   }
 
-  public function SendClientFeedBackEmail($email, $message): bool
+  public function SendClientFeedBackEmail($email,$name, $message): bool
   {
 
     $mail = new PHPMailer(true);
     try {
       //Server settings
       //SMTP::DEBUG_SERVER
-      $mail->SMTPDebug = 0;                      //Enable verbose debug output
-      $mail->isSMTP();                                            //Send using SMTP
-      $mail->Host       = $this->SIB_EMAIL_SERVER;                     //Set the SMTP server to send through
-      $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-      $mail->Username   = $this->SIB_ACC_USER;                     //SMTP username
-      $mail->Password   = $this->SIB_ACC_PASS;                               //SMTP password
-      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;           //ENCRYPTION_SMTPS; //Enable implicit TLS encryption
-      $mail->Port       = 587;
-      $mail->setFrom("osotechcoding@gmail.com", "Admin");
-      $mail->addAddress("info.ftchelpdesk@gmail.com");     //Add a recipient
+      $mail->isSMTP();
+      $mail->Host = 'smtp.mailtrap.io';
+      $mail->SMTPAuth = true;
+      $mail->Port = 2525;
+      $mail->Username = '71f8d31ac958eb';
+      $mail->Password = '5479f82c1922d6';
+      $mail->setFrom($email, $name);
+      $mail->addAddress("osotechcoding@gmail.com","Admin");     //Add a recipient
       $mail->isHTML(true);                                  //Set email 
       $mail->Subject = 'Feedback From ' . $email;
       $mail->Body    = $message;
@@ -60,5 +58,3 @@ class OsotechMailer
     }
   }
 }
-
-//$OsotechMailer = new OsotechMailer();

@@ -263,8 +263,8 @@ class Osotech
 
     public function getConfigData()
     {
-        $this->query = "SELECT * FROM `visap_school_profile` WHERE id=1";
-        $this->stmt = $this->dbh->prepare($this->query);
+        $query = "SELECT * FROM `visap_school_profile` WHERE id=1";
+        $this->stmt = $this->dbh->prepare($query);
         $this->response = $this->stmt->execute();
         if ($this->stmt->rowCount() > 0) {
             // code...
@@ -422,7 +422,7 @@ class Osotech
                 $this->stmt = $this->dbh->prepare("INSERT INTO `visap_feedback_tbl` (client_name,client_email,client_phone,message,client_ip_address,created_at) VALUES (?,?,?,?,?,?);");
                 if ($this->stmt->execute(array($name, $email, $phone, $message, $ip, $date))) {
                     $OsotechMailer = new OsotechMailer();
-                    if ($OsotechMailer->SendClientFeedBackEmail($email, $message) === true) {
+                    if ($OsotechMailer->SendClientFeedBackEmail($email, $name, $message) === true) {
                         $this->dbh->commit();
                         $this->response = self::alert_msg("success", "SUCCESS", "Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>" . self::getConfigData()->school_name . "!</strong>") . '<script>setTimeout(()=>{location.reload();},10000); </script>';
                     } else {
