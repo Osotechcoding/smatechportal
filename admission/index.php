@@ -1,144 +1,144 @@
 <?php
-if (!file_exists("Includes/Osotech.php")) {
-  die("Access to this Page is Denied! <p>Please Contact Your Administrator for assistance</p>");
+    if (!file_exists("Includes/Osotech.php")) {
+     die(" Access to this Page is Denied! 
+     <p>Please Contact Your Administrator for assistance</p>");
 }
-require_once("Includes/Osotech.php");
-$Osotech = new Osotech();
-$Osotech->osotech_session_kick();
-date_default_timezone_set("Africa/Lagos");
-if ($Osotech->checkAdmissionPortalStatus() != true) : ?>
-<?php header("Location:" . APP_ROOT);
-  exit(); ?>
-<?php endif ?>
+    require_once("Includes/Osotech.php");
+    $Osotech = new Osotech();
+    $Osotech->osotech_session_kick();
+    date_default_timezone_set("Africa/Lagos");
+    if(!$Osotech->checkAdmissionPortalStatus()){
+    header("Location:" . APP_ROOT);
+    exit();
+} ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title> Online Registration Portal || <?php echo ($Osotech->getConfigData()->school_name); ?></title>
-  <?php include_once("Head.php"); ?>
-</head>
-<body style="background:rgba(0, 0, 0, 0.4) url('schoolbg.jpg');
-background-position:center;
-background-size: cover;
-background-repeat: no-repeat;">
-  <div class="container mt-2">
-    <?php include_once 'HeadNavBar.php'; ?>
-    <br>
-    <div class="col-md-12">
-      <section class="h-100 bg-white">
-        <div class="container py-2 h-60">
-          <div class="row d-flex justify-content-center align-items-center h-70">
-            <div class="col">
-              <div class="card card-registration my-4 osotech-bg-color">
-                <h4 class="text-center lead text-danger"> <a href="#" style="text-decoration: none; color:red;">Click
-                    here</a> <span> to read the Instruction on
-                    How To
-                    Apply</span></h4>
-                <div class="row g-0">
-                  <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card-body p-md-3 text-black">
-                      <h3 class="mb-3 text-uppercase text-center text-black">Scratch Card &amp; Academic Information
-                      </h3>
-                      <div class="text-center mb-1" id="server-response">
+    <head>
+    <?php include_once ("MetaTags.php");?>
+    <title>Admission Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
+       <?php include_once "Head.php"; ?>
+    </head>
+    <body class="d-flex flex-column h-100">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <?php include_once "HeadNavBar.php"; ?>
+            <!-- Features section-->
+            <section class="py-5" id="features">
+                <div class="col-md-10 offset-1">
+                <!-- start  -->
+                <div class="row gx-4 justify-content-center">
+                   <div class="col-lg-5 mb-4 px-4">
+                       <div class="container px-2">
+                        <div class="card fet-card">
+                        <div class="card-header">
+                        <h5 class="text-center py-3 fet-text">Carefully read the instruction below!</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>Step 1: <span>Log on to https://admission.flaterptech.com/</span></p>
+                                <p>Step 2: <span>Carefully scratch off the covered area of your scratch card to unveil your 13 digit secret PIN Number</span></p>
+                                <p>Step 3: Enter a valid and active email address, Surname,active phone number in the space provided</p>
+                                <p> Step 4:Choose your admission type and admission Level,Solve the puzzle to proceed</p>
+                                <p>Step 5: Click on start Registration button and wait for the response</p>
+                                <p>Step 6:On successful, You will see a notification message like this: <em class="text-success">Verification link have been sent to <b>student@gmail.com</b>  click on the link to complete your admission!</em></p>
+                                <p>Step 7: Go to your mail inbox to continue with your registration</p>
+                                <p>Step 8: On successful registration; print your e-photo-card for reference</p>
+                            </div>
+                        </div>
                       </div>
-                      <form id="new_Student_Admission_form">
+                    </div>
+                     <div class="col-lg-7">
+                       <div class="container px-3">
+                         <div class="card fw-bolder fet-card py-4">
+                            <div class="card-header">
+                            <h5 class="text-center py-3 fet-text">Fill in the form below to start your admission</h5>
+                            </div>
+                            <div class="card-body">
+                            <div class="text-center mb-1" id="server-response"></div>
+                            <form  id="new_Student_Admission_form" enctype="multipart/form-data" autocomplete="off">
                         <div class="row">
-                          <input type="hidden" name="action" value="submit_first_step_admission">
+                            <h4 class="text-center fw-bolder text-uppercase mt-3 text-muted">Scratch Card &amp; Academic Information</h4>
+                            <div id="server-response" class="text-center m-2"></div>
+                            <div class="col-md-6 mb-2">
+                               <input type="hidden" name="action" value="submit_first_step_admission">
                           <input type="hidden" name="osotech_csrf"
                             value="<?php echo md5('iremideoizasamsonosotech'); ?>">
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="card_pin" class="form-label">Scratch Card Pin</label>
-                              <input type="password" name="card_pin" class="form-control form-control-lg"
-                                placeholder="**********" id="card_pin">
+                                <div class="form-group">
+                                    <label class="mb-2">Scratch Card Pin</label>
+                                    <input type="number" class="form-control form-control-lg" placeholder="Enter Card Pin" aria-label="Card Pin" name="card_pin">
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="card_serial" class="form-label">Card Serial</label>
-                              <input type="text" autocomplete="off" name="card_serial" id="card_serial"
-                                class="form-control form-control-lg" placeholder="**********">
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="mb-2">Card Serial</label>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Enter Pin Serial" aria-label="Card Serial" name="card_serial">
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="studentEmail" class="form-label">Email address </label>
-                              <input type="text" id="studentEmail" autocomplete="off" name="student_email"
-                                class="form-control form-control-lg" placeholder="student@<?php echo strtolower($Osotech->getConfigData()->school_short_name); ?>.com">
-                              <div id="Email-error" class="form-text"><span id="emailHelp"
-                                  class="form-text text-danger">I don't have an e-mail <a
-                                    href="https://accounts.google.com/SignUp" target="_blank"> Create Email
-                                    Account</a></span></div>
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="mb-2">Student/Pupil Email (<small class="text-danger">Active e-mail</small>) </label>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Enter e-mail address" aria-label="E-mail address" name="student_email">
+                                    <span id="emailHelp" class="form-text text-danger">I don't have an e-mail <a
+                                        href="https://accounts.google.com/SignUp" target="_blank"> Signup gmail account</a></span>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="username" class="form-label">Surname [Father's Name]</label>
-                              <input type="text" autocomplete="off" id="username" name="username"
-                                class="form-control form-control-lg" placeholder="<?php echo ucfirst(strtolower($Osotech->getConfigData()->school_short_name)); ?>">
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="mb-2">Surname [Father's Name]</label>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Enter Surname" aria-label="Surname" name="username">
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="student_phone" class="form-label">Phone </label>
-                              <input type="text" autocomplete="off" name="student_phone"
-                                class="form-control form-control-lg" placeholder="000-0000-0000" id="studentPhone">
-                              <div id="phone-error" class="form-text"><span id="phoneHelp"
-                                  class="form-text text-danger">Allowed phone format 000-0000-0000 </span></div>
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="mb-2">NGN Phone No</label>
+                                    <input type="number" class="form-control form-control-lg" placeholder="00000000000" aria-label="Phone Number" name="student_phone">
+                                    <span id="phoneHelp" class="form-text text-danger">Allowed phone format 000-0000-0000 </span>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="class_level" class="form-label">Admission into Class Level</label>
-                              <select class="custom-select form-control form-control-lg" id="class_level"
-                                name="class_level">
-                                <option value="" selected>Choose...</option>
-                                <option value="Basic">Basic</option>
-                                <option value="Junior">Junior</option>
-                                <option value="Senior">Senior</option>
-                              </select>
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="mb-2">Admission Class Level</label>
+                                    <select class="form-select custom-select form-control form-control-lg" name="class_level">
+                                        <option value="" selected> Choose...</option>
+                                        <option value="Primary"> Primary</option>
+                                        <option value="Secondary"> Secondary</option>
+                                    </select>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                              <label for="student_type" class="form-label">Admission Type</label>
-                              <select class="custom-select form-control form-control-lg" id="student_type"
-                                name="student_type">
-                                <option value="Day" selected>Day</option>
-                                <option value="Boarding">Boarding</option>
-                              </select>
+                            <div class="col-md-6 mb-2">
+                                <div class="form-group">
+                                    <label class="mb-2">Admission Type</label>
+                                    <select class="form-select custom-select form-control form-control-lg" name="student_type">
+                                        <option value="" selected> Choose...</option>
+                                        <option value="Day"> Day Student</option>
+                                        <option value="Boarding"> Boarding Student</option>
+                                    </select>
+                                </div>
                             </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
+                             <div class="col-md-6 mb-2">
                             <div class="form-group">
-                              <div class="" id="captcha_load">
+                              <div id="captcha_load">
                               </div>
                             </div>
                           </div>
-                        </div>
+                          <button class="btn btn-dark float-end btn-lg mt-3 __loadingBtn__">Start Registration</button>
+                           </div>
+                    </form>
+     </div>
+    
+                      </div>
+</div>
 
-                        <button type="submit" class="btn btn-dark btn-lg btn-round mb-2 __loadingBtn__"
-                          style="float:right">Submit</button>
-                      </form>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    </section>
-    <?php
-    if (file_exists("./footer.php")) {
-      include_once("./footer.php");
-    }
-    ?>
-  </div>
-  <!-- Footer -->
-  <!-- Footer -->
-  </div>
-  <?php include_once("FooterScript.php"); ?>
-  <script>
+                <!-- end -->
+                </div>
+</section>
+        </main>
+        <!-- Footer-->
+       
+        <?php include_once "footer.php"; ?>
+<?php include_once "FooterScript.php"; ?>
+        <script>
   $(document).ready(function() {
 
     const ADMISSION_FORM_SUBMIT = $("#new_Student_Admission_form");
@@ -159,10 +159,9 @@ background-repeat: no-repeat;">
   <?php
   function loadCaptcha()
   {
-    echo '<script> $("#captcha_load").load("osotech_captcha.php");</script>';
+    echo '<script> $("#captcha_load").load("osotech_captcha");</script>';
   }
   loadCaptcha();
-  ?>
-</body>
-
+  ?> 
+    </body>
 </html>

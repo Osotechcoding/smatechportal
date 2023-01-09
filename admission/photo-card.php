@@ -11,16 +11,21 @@ if ($Osotech->checkAdmissionPortalStatus() != true) {
   header("Location:" . APP_ROOT);
   exit();
 }
-if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMATECH_APPLICANT_ID'])) {
-  $auth_code_applicant_id = $_SESSION['AUTH_SMATECH_APPLICANT_ID'];
-  $admission_no = $_SESSION['AUTH_CODE_ADMISSION_NO'];
-  $student_data = $Osotech->get_student_details_byRegNo($admission_no);
-  $student_infos = $Osotech->get_student_infoId($auth_code_applicant_id);
-  $student_medInfos = $Osotech->get_student_medical_infoId($auth_code_applicant_id);
+if (isset($_GET['email']) && !$Osotech->isEmptyStr($_GET['email'])) {
+  $email = $Osotech->unsaltifyString($_GET['email']);
+  $email = $Osotech->Clean($email);
+
+  $student_data = $Osotech->get_single_data("visap_student_tbl","stdEmail",$email);
+  if(!$student_data){
+    header("Location: ./submit-application");
+  exit();
+  }
+  $student_infos = $Osotech->get_student_infoId($student_data->stdId);
+  $student_medInfos = $Osotech->get_student_medical_infoId($student_data->stdId);
   $CardUserDetails = $Osotech->getAdmissionCardUser($student_data->stdRegNo);
-  $sps = $Osotech->get_student_previous_school_info($auth_code_applicant_id);
+  $sps = $Osotech->get_student_previous_school_info($student_data->stdId);
 } else {
-  header("Location: ./submitapplication");
+  header("Location: ./submit-application");
   exit();
 }
 ?>
@@ -28,11 +33,9 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?php echo ($Osotech->getConfigData()->school_name); ?> :: <?php echo ucwords($student_data->full_name); ?>
-    REGISTRATION PHOTO SLIP</title>
+  <?php include_once "MetaTags.php";?>
+  <title><?php echo ($Osotech->getConfigData()->school_name); ?> :: <?php echo ucwords($student_data->stdSurName.' '.$student_data->stdFirstName.' '.$student_data->stdMiddleName); ?>
+    Registration Slip</title>
   <style>
   html {
     font-family: arial;
@@ -41,14 +44,14 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
 
   body {
     /* background-color: #726E6D; */
-    height: 842px;
-    width: 665px;
+    height: 100vh;
+    width: 750px;
     margin-left: auto;
     margin-right: auto;
   }
 
   thead {
-    font-weight: bold;
+    font-weight: bolder;
     text-align: center;
     background: #625D5D;
     color: white;
@@ -75,10 +78,12 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
 
   .textArea {
     text-align: center;
+    justify-content: center;
+    width: 80%;
   }
 
   .schLogo {
-    width: 100px;
+    width: 20%;
     height: auto;
     border-radius: 20px !important;
   }
@@ -88,9 +93,10 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
   }
 
   .schName {
+    display: block;
     text-transform: uppercase !important;
-    font-size: 23px;
-    line-height: 2px;
+    font-size: 30px;
+    line-height: 3px;
   }
 
   .textArea p:first-of-type {
@@ -105,7 +111,6 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
     margin-left: auto;
     margin-right: auto;
   }
-
   .topinfo {
     margin-top: -60px;
   }
@@ -115,7 +120,7 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
   }
 
   #result {
-    border: 2px solid grey;
+    /* border: 0px solid grey; */
     padding: 5px;
     border-radius: 10px;
   }
@@ -123,6 +128,9 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
   @media print {
     page {
       size: 8.26cm 11.69cm;
+    }
+    .fet-no-print{
+        display: none;
     }
   }
   </style>
@@ -148,7 +156,7 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
     <!-- <br><br> -->
     <h2 style="text-align:center; text-decoration: underline; margin-top: -50px;">ACKNOWLEDGEMENT SLIP</h2><br><br><br>
     <img src="<?php echo EPORTAL_ROOT . "/schoolImages/students/" . $student_data->stdPassport; ?>" alt="passport"
-      style="float: right; width: 100px; margin-top: -100px; border: 4px solid #625D5D; padding: 2px; border-radius:10px;">
+      style="float: right; width: 120px; margin-top: -100px; border: 4px solid #625D5D; padding: 2px; border-radius:10px;">
     <div class="topinfo">
       <h3 class="same">Application ID: <?php echo $student_data->stdRegNo; ?></h3>
       <hr width="300" align="left">
@@ -253,20 +261,20 @@ if (isset($_SESSION['AUTH_SMATECH_APPLICANT_ID']) && !empty($_SESSION['AUTH_SMAT
                 <div class="bottom-info">
                   <p><b>NOTE:</b> <br>
                     You are to come to the school premises on <b>
-                      <?php echo date("l jS F, Y", strtotime("+10day")) ?></b> for your <em> screening/entrance
+                      <?php echo date("l jS F, Y", strtotime("+3day")) ?></b> for your <em> screening/entrance
                       examination</em>. <br>
                     Come along with Your Birth Certificate, Writing materials and make sure to dress properly.
                   </p>
                 </div>
                 <h4 style="color:#f00;align-items:center; text-align:center;">Note: <b>Any alteration renders this
-                    result invalid.</b></h4>
-                <!-- End of result -->
+                Photo-card invalid.</b></h4>
+                <!-- End of Photo-card -->
                 <h4 align="center" class="text-center mt-1">Thanks for choosing
                   <?php echo ($Osotech->getConfigData()->school_name); ?>!</h4>
                 <hr>
-                <button id="myprintbtn" onclick="javascript:window.print();" type="button"
+                <button id="myprintbtn" class="fet-no-print" onclick="javascript:window.print();" type="button"
                   style="background: black; color: white; margin-bottom: 15px;border-radius: 10px;">Print Now</button>
-                <a href="logout?action=logoutapplicant&applicant=newstudent" id="mylogoutbtn"> <button
+                <a href="logout?action=logoutapplicant&applicant=newstudent" id="mylogoutbtn" class="fet-no-print"> <button
                     onclick="return confirm('Ensure you print put your entrance examination Photo-card before signing out');"
                     type="button"
                     style="background: darkred; color: white; margin-bottom: 15px;border-radius: 10px;">Logout</button></a>

@@ -17,7 +17,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
 <html lang="en">
     <head>
        <?php include_once "Templates/MetaTags.php";?>
-        <title> <?php echo ($Osotech->getConfigData()->school_name); ?> || Online Result Portal</title>
+        <title> Student Result Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/styles.css" rel="stylesheet" />
@@ -94,7 +94,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
             <div class="container px-4">
-                <a class="navbar-brand" href="#page-top"><img src="<?php echo $Osotech->get_schoolLogoImage(); ?>" class="brand-logo img-fluid" alt="logo"> <?php echo ($Osotech->getConfigData()->school_name); ?></a>
+                <a class="navbar-brand" href="<?php echo APP_ROOT; ?>"><img src="<?php echo $Osotech->get_schoolLogoImage(); ?>" class="brand-logo img-fluid" alt="logo"> <?php echo ($Osotech->getConfigData()->school_name); ?></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
@@ -134,7 +134,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
                         ?>">Admin</a></h4>
                 <hr>
                 <div class="row gx-4 justify-content-center">
-                   <div class="col-lg-6">
+                   <div class="col-lg-6 mb-4">
                        <div class="container">
                         <div class="card fet-card">
                         <div class="card-header">
@@ -145,7 +145,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
                                 <p>Enter Your Admission Number in the space provided</p>
                                 <p>Choose Examination Result Class from the list</p>
                                 <p>Select Result Session from the list</p>
-                                <p>Choose your Result Term (1st,2nd or 3rd)</p>
+                                <p>Choose your Result Term (e.g 1st, 2nd or 3rd) Term</p>
                                 <p>Enter the PIN Number in your scratch card correctly</p>
                                 <p>Enter your scratch card SERIAL Number.</p>
                                 <p>Finally, Click  check result Button and wait for your result to display.</p>

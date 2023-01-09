@@ -6,6 +6,7 @@
         </div>
         <div class="table-responsive">
           <!-- table start -->
+          <button onclick="return window.location.href='./student_adm_portal';" type="button" class="btn btn-dark btn-pill btn-buy-now mb-2 ml-2">Admission Portal</button>
           <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
             <thead>
               <tr>
@@ -14,7 +15,7 @@
                 <th>Admission Class</th>
                 <th>Application Number</th>
                 <th>Application Date</th>
-                <th class="text-center">Action</th>
+               
               </tr>
             </thead>
             <tbody>
@@ -34,13 +35,7 @@
           <td><?php echo strtoupper($students->studentClass)?></td>
           <td><?php echo strtoupper($students->stdRegNo)?></td>
           <td><?php echo date("F j, Y",strtotime($students->stdApplyDate))?></td>
-         <td>
-          <div class="btn-group mb-1">
-            <a class="text-info" href="editstudentinfo?student-data=<?php echo($students->stdId);?>">
-              <button type="button" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></button></a> 
-          </div>
-          <!--  -->
-        </td>
+         
         </tr>
           <?php }
           }

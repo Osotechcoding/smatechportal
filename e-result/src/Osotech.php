@@ -27,7 +27,7 @@ class Osotech
 
   public function redirect_root($flink)
   {
-    header("Location: " . ADMISSION_PORTAL_ROOT . $flink);
+    @header("Location: " . ADMISSION_PORTAL_ROOT . $flink);
     exit();
   }
 
@@ -44,11 +44,11 @@ class Osotech
   public function get_classroom_InDropDown_list()
   {
     $this->response = "";
-    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeDesc ASC LIMIT 30");
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
     $this->stmt->execute();
     if ($this->stmt->rowCount() > 0) {
       while ($row = $this->stmt->fetch()) {
-        $this->response .= '<option value="' . $row->gradeDesc . ' ' . $row->grade_division . '">' . $row->gradeDesc . ' ' . $row->grade_division . '</option>';
+        $this->response .= '<option value="' . $row->gradeDesc . '">' . $row->gradeDesc . '</option>';
       }
     } else {
       $this->response = false;
@@ -66,11 +66,9 @@ class Osotech
       while ($row = $this->stmt->fetch()) {
         $this->response .= '<option value="' . $row->session_desc . '">' . $row->session_desc . '</option>';
         return $this->response;
-        unset($this->dbh);
       }
     }
   }
-
 
   public function isEmptyStr($str)
   {
@@ -85,8 +83,6 @@ class Osotech
     }
     return $this->response;
   }
-
-
 
   public function alert_msg($alert_type = "warning", $alert_title = "", $alert_msg = "")
   {
@@ -116,7 +112,6 @@ class Osotech
       }
     }
     return $this->response;
-    unset($this->dbh);
   }
 
   public function osotech_password_encryption($password)
@@ -146,7 +141,6 @@ class Osotech
       }
     }
     return $this->response;
-    //unset($this->dbh);
   }
 
   public function validate_Mobile_Number($mobile)
@@ -169,11 +163,10 @@ class Osotech
 
   public function getConfigData()
   {
-    $this->query = "SELECT * FROM `visap_school_profile` WHERE id=1";
-    $this->stmt = $this->dbh->prepare($this->query);
+    $query = "SELECT * FROM `visap_school_profile` WHERE id=1";
+    $this->stmt = $this->dbh->prepare($query);
     $this->response = $this->stmt->execute();
     if ($this->stmt->rowCount() > 0) {
-      // code...
       $this->response = $this->stmt->fetch();
       return $this->response;
     }
@@ -199,7 +192,7 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+
     }
   }
 
@@ -210,11 +203,9 @@ class Osotech
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+
     }
   }
-
-
 
   public function get_school_session_info()
   {
@@ -223,7 +214,7 @@ class Osotech
     if ($this->stmt->rowCount() > 0) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      unset($this->dbh);
+
     }
   }
   public function get_student_age($dateOfBirth)
@@ -238,7 +229,6 @@ class Osotech
     $this->stmt->execute();
     $this->response = $this->stmt->fetch();
     return $this->response;
-    unset($this->dbh);
   }
 
   public function getSchoolSignature()
@@ -266,4 +256,3 @@ class Osotech
     return $ourStamp;
   }
 }
-//$Osotech = new Osotech();

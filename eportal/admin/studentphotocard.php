@@ -9,10 +9,9 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
     header("Location: student_adm_portal");
     exit();
   }
-  $student_data = $Student->get_student_details_byRegNo($student_data->stdRegNo);
-  $student_infos = $Student->get_student_infoId($student_data->stdId);
-  $student_medInfos = $Student->get_student_medical_infoId($student_data->stdId);
-  $sps = $Student->get_student_previous_school_info($student_data->stdId);
+  $student_infos = $Student->get_student_infoId($studentId);
+  $student_medInfos = $Student->get_student_medical_infoId($studentId);
+  $sps = $Student->get_student_previous_school_info($studentId);
   $CardUserDetails = $Student->getAdmissionCardUser($student_data->stdRegNo);
 } else {
   header("Location: student_adm_portal");
@@ -24,13 +23,10 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php include_once "../template/MetaTag.php";?>
   <title><?php echo ($Configuration->getConfigData()->school_name); ?> ::
-    <?php echo ucwords($student_data->full_name); ?>
-    REGISTRATION PHOTO SLIP</title>
-  <style>
+    <?php echo ucwords($student_data->full_name); ?> Registration Slip</title>
+    <style>
   html {
     font-family: arial;
     font-size: 16px;
@@ -38,14 +34,14 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
 
   body {
     /* background-color: #726E6D; */
-    height: 842px;
-    width: 665px;
+    height: 100vh;
+    width: 800px;
     margin-left: auto;
     margin-right: auto;
   }
 
   thead {
-    font-weight: bold;
+    font-weight: bolder;
     text-align: center;
     background: #625D5D;
     color: white;
@@ -72,10 +68,12 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
 
   .textArea {
     text-align: center;
+    justify-content: center;
+    width: 80%;
   }
 
   .schLogo {
-    width: 100px;
+    width: 20%;
     height: auto;
     border-radius: 20px !important;
   }
@@ -85,9 +83,10 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
   }
 
   .schName {
+    display: block;
     text-transform: uppercase !important;
-    font-size: 23px;
-    line-height: 2px;
+    font-size: 30px;
+    line-height: 3px;
   }
 
   .textArea p:first-of-type {
@@ -102,7 +101,6 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
     margin-left: auto;
     margin-right: auto;
   }
-
   .topinfo {
     margin-top: -60px;
   }
@@ -112,7 +110,7 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
   }
 
   #result {
-    border: 2px solid grey;
+    /* border: 0px solid grey; */
     padding: 5px;
     border-radius: 10px;
   }
@@ -120,6 +118,9 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
   @media print {
     page {
       size: 8.26cm 11.69cm;
+    }
+    .fet-no-print{
+        display: none;
     }
   }
   </style>
@@ -255,12 +256,12 @@ if (isset($_GET['newstudentdata']) && isset($_GET['action']) && $_GET['newstuden
                   </p>
                 </div>
                 <h4 style="color:#f00;align-items:center; text-align:center;">Note: <b>Any alteration renders this
-                    result invalid.</b></h4>
+                Photo-card invalid.</b></h4>
                 <!-- End of result -->
                 <h4 align="center" class="text-center mt-1">Thanks for choosing
                   <?php echo ($Configuration->getConfigData()->school_name); ?>!</h4>
                 <hr>
-                <button id="myprintbtn" onclick="javascript:window.print();" type="button"
+                <button id="myprintbtn" class="fet-no-print" onclick="javascript:window.print();" type="button"
                   style="background: black; color: white; margin-bottom: 15px;border-radius: 10px;">Print Now</button>
 
   </section>

@@ -211,12 +211,11 @@ class Student
 
 	public function get_student_data_byId($stdId)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT *,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdId=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdId=?");
 		$this->stmt->execute(array($stdId));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			
 		}
 	}
 
