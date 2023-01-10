@@ -27,7 +27,7 @@ require_once "helpers/helper.php";
         <div class="content-header row">
           <div class="content-header-left col-12 mb-2 mt-1">
             <div class="breadcrumbs-top">
-              <h5 class="content-header-title float-left pr-1 mb-0">VISAP PORTAL</h5>
+              <h5 class="content-header-title float-left pr-1 mb-0"><?php echo __OSO_APP_NAME__ ?> PORTAL</h5>
               <div class="breadcrumb-wrapper d-none d-sm-block">
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
@@ -120,7 +120,7 @@ require_once "helpers/helper.php";
                <div class="col-md-6">
                   <div class="form-group">
                   <label for="fee_type_id">Component Type</label>
-             <select name="fee_type_id" id="fee_type_id" class="select2 w-100 form-control">
+             <select name="fee_type_id" id="fee_type_id" class="form-select form-control">
                    <option value="">Choose...</option>
                 <?php echo $Administration->fee_component_inDropDown();?>
                   </select>
@@ -129,7 +129,7 @@ require_once "helpers/helper.php";
                <div class="col-md-6">
                      <div class="form-group">
                   <label for="grade_desc"> CLASS </label>
-               <select name="grade_desc" id="grade_desc" class="select2 w-100 form-control">
+               <select name="grade_desc" id="grade_desc" class="form-select form-control">
                      <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list();?>
                   </select>

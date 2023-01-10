@@ -159,7 +159,7 @@ require_once "helpers/helper.php";
                 <thead class="text-center">
                   <tr>
                     <th>PASSPORT</th>
-                    <th>FULLNAME</th>
+                    <th>FULL NAME</th>
                     <th>ADMISSION NO</th>
                     <th>CLASS</th>
                     <th>TOTAL FEE</th>

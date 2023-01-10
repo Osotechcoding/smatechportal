@@ -2,7 +2,7 @@
 require_once "helpers/helper.php";
 $ses_id = $_SESSION['STAFF_SES_ID'];
 
-if (isset($_GET['action'])) {
+if (isset($_GET['action']) && isset($_SESSION['STAFF_SES_ID'])) {
 	if ($_GET['action'] ==="logout") {
 	//$ses_id = $_SESSION['STAFF_ID'];
 		if ($Staff->deleteSessionToken($_SESSION['STAFF_USERNAME'],$_SESSION['STAFF_EMAIL'],$_SESSION['staff_token'])) {

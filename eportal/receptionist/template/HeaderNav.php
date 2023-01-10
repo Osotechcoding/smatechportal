@@ -32,8 +32,12 @@
               </li>
              
               <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="javascript:void(0);" data-toggle="dropdown">
-                  <div class="user-nav d-sm-flex d-none"><span class="user-name"><?php echo strtoupper($_SESSION['STAFF_USERNAME']); ?></span><span class="user-status text-success"><?php echo $lang['Online'] ?></span></div><span><img class="round" src="../result-asset/author.jpg" alt="avatar" height="40" width="40"></span></a>
-                <div class="dropdown-menu dropdown-menu-right pb-0"><a class="dropdown-item" href="page-user-profile"><i class="bx bx-user mr-50"></i>  <?php echo $lang['Edit Profile'] ?></a>
+                  <div class="user-nav d-sm-flex d-none"><span class="user-name"><?php echo strtoupper($_SESSION['STAFF_USERNAME']); ?></span><span class="user-status text-success"><?php echo $lang['Online'] ?></span></div><span><?php if ($staff_data->staffPassport==NULL || $staff_data->staffPassport==""): ?>
+    <img src="../schoolImages/staff/teacher.jpg" width="40" alt="photo" class="round">
+      <?php else: ?>
+        <img src="../schoolImages/staff/<?php echo $staff_data->staffPassport;?>" width="40" alt="photo" class="round">
+    <?php endif ?></span></a>
+                <div class="dropdown-menu dropdown-menu-right pb-0"><a class="dropdown-item" href="account-settings"><i class="bx bx-user mr-50"></i>  <?php echo $lang['Edit Profile'] ?></a>
                   <div class="dropdown-divider mb-0"></div><a class="dropdown-item text-danger" onclick=" return confirm('<?php echo $lang["logout-sure?"];?>');" href="logout?action=logout"><i class="bx bx-power-off mr-50"></i> <?php echo $lang['Logout'] ?></a>
                 </div>
               </li>

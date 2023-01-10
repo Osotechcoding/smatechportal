@@ -45,7 +45,7 @@ require_once "helpers/helper.php";
                   </li>
                   <li class="breadcrumb-item"><a href="#"><?php echo $_SESSION['STAFF_ROLE'] ?></a>
                   </li>
-                  <li class="breadcrumb-item active">VISTOR'S MANAGEMENT
+                  <li class="breadcrumb-item active">VISITOR'S MANAGEMENT
                   </li>
                 </ol>
               </div>
@@ -55,7 +55,7 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
   <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-user-secret fa-2x"></span> VISTOR'S BOOK </h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-user-secret fa-2x"></span> VISITOR'S BOOK </h3>
   </div>
 </div>
 
@@ -84,7 +84,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-user-secret fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">This Week</h3></div>
-                  <h2 class="text-white mb-0"> <?php echo $Visitor->get_this_week_visitors();?></h2>
+                  <h2 class="text-white mb-0"> <?php echo $Visitor->get_this_week_visitors($activeSess->term_desc,$activeSess->session_desc_name);?></h2>
                  
                 </div>
               </div>
@@ -97,7 +97,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-user-secret fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white"> This Term</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_term_visitors(); ?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_term_visitors($activeSess->term_desc,$activeSess->session_desc_name); ?></h2>
                   
                 </div>
               </div>
@@ -109,7 +109,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-user-secret fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">This Session</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_session_visitors(); ?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_session_visitors($activeSess->session_desc_name); ?></h2>
                   
                 </div>
               </div>

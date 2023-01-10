@@ -134,15 +134,6 @@ if (isset($_GET['student-data']) && $_GET['student-data']!="") {
                   <input type="text" class="form-control" name="studenClass" placeholder="JSS 1 A" readonly value="<?php echo $student_data->studentClass;?>">
                 </div>
                  <div class="col-md-4">
-                  <label>Change Student Class To:</label>
-                </div>
-                <div class="col-md-8 form-group">
-                  <select name="presentClass" class="form-control select2">
-                    <option value="<?php echo $student_data->studentClass;?>" selected><?php echo $student_data->studentClass ?></option>
-                  <?php echo $Administration->get_classroom_InDropDown_list();?>
-                  </select>
-                </div>
-                 <div class="col-md-4">
                   <label>Gender:</label>
                 </div>
                 <div class="col-md-8 form-group">

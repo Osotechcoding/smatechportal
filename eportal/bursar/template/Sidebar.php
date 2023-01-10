@@ -28,6 +28,10 @@
                <li><a class="d-flex align-items-center" href="running_cost"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Loan">Bus Maintenance</span></a> </li>
            <li class=" nav-item"><a href="account-settings" target="_blank"><i class="fa fa-edit fa-1x" data-icon="help"></i><span class="menu-title text-truncate" data-i18n="Accoun Settings"> Edit Profile</span></a>
           </li> 
+          <li>
+                <a class="d-flex align-items-center" onclick=" return confirm('<?php echo $lang['logout-sure?'];?>');" href="logout?action=logout"><i class="fa fa-power-off"></i>
+                  <span class="menu-item text-truncate"> <?php echo $lang['Logout'] ?></span></a>
+              </li>
             </ul>
          
       </div>

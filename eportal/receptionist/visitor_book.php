@@ -84,7 +84,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-user-secret fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">This Week</h3></div>
-                  <h2 class="text-white mb-0"> <?php echo $Visitor->get_this_week_visitors();?></h2>
+                  <h2 class="text-white mb-0"> <?php echo $Visitor->get_this_week_visitors($activeSess->term_desc,$activeSess->session_desc_name);?></h2>
                  
                 </div>
               </div>
@@ -97,7 +97,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-user-secret fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white"> This Term</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_term_visitors(); ?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_term_visitors($activeSess->term_desc,$activeSess->session_desc_name); ?></h2>
                   
                 </div>
               </div>
@@ -109,7 +109,7 @@ require_once "helpers/helper.php";
                     <i class="fa fa-user-secret fa-2x font-medium-10"></i>
                   </div>
                   <div class="text-white line-ellipsis"><h3 class="text-white">This Session</h3></div>
-                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_session_visitors(); ?></h2>
+                  <h2 class="text-white mb-0"><?php echo $Visitor->get_current_session_visitors($activeSess->session_desc_name); ?></h2>
                   
                 </div>
               </div>
@@ -118,7 +118,7 @@ require_once "helpers/helper.php";
             
           </div>
         </div>
-        <!-- Revenue Growth Chart Starts -->
+       
       </div>
   <div class="row">
     <div class="col-12">

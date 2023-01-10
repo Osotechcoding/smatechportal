@@ -1,6 +1,6 @@
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -56,7 +56,7 @@ INSERT INTO `api_module_config` VALUES ('22', 'leave_request', 'main', 'Leave Re
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -97,7 +97,7 @@ INSERT INTO `current_session_tbl` VALUES ('1', '2022/2023', '1st Term') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -914,7 +914,7 @@ INSERT INTO `local_govt_tbl` VALUES ('774', '37', 'Zurmi') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -951,19 +951,21 @@ CREATE TABLE `reg_pin_history_tbl` (
   `dated` date DEFAULT NULL,
   `timed` time DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table reg_pin_history_tbl (0 records)
+# Data contents of table reg_pin_history_tbl (2 records)
 #
-
+ 
+INSERT INTO `reg_pin_history_tbl` VALUES ('1', '2023C263130001', '5073461632521', 'SMAB7A3A8', '2023-01-09', '09:32:54') ; 
+INSERT INTO `reg_pin_history_tbl` VALUES ('3', '2023C263130002', '7541013296532', 'SMAE14D01', '2023-01-09', '10:22:53') ;
 #
 # End of data contents of table reg_pin_history_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1016,7 +1018,7 @@ CREATE TABLE `register_exam_subject_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1072,7 +1074,7 @@ CREATE TABLE `school_classes` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1130,7 +1132,7 @@ CREATE TABLE `school_oauth_code_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1199,7 +1201,7 @@ INSERT INTO `school_offices` VALUES ('10', 'H.M', 'Active', '2022-08-27') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1306,7 +1308,7 @@ INSERT INTO `school_subjects` VALUES ('42', 'Spoken English', NULL, '', 'active'
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1380,7 +1382,7 @@ INSERT INTO `tbl_admin` VALUES ('2', 'Director', 'user@smatech.com', 'Director',
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1451,7 +1453,7 @@ CREATE TABLE `tbl_ewallet_pins` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1525,7 +1527,7 @@ CREATE TABLE `tbl_exam_pins` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1605,15 +1607,15 @@ INSERT INTO `tbl_reg_pins` VALUES ('5', '6340951125372', 'SMA470143', 'Registrat
 INSERT INTO `tbl_reg_pins` VALUES ('6', '3021295614837', 'SMAA41034', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
 INSERT INTO `tbl_reg_pins` VALUES ('7', '2362673151450', 'SMA702441', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
 INSERT INTO `tbl_reg_pins` VALUES ('8', '6935540123271', 'SMA37AB83', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('9', '7541013296532', 'SMAE14D01', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ; 
-INSERT INTO `tbl_reg_pins` VALUES ('10', '5073461632521', 'SMAB7A3A8', 'Registration Pins', '15000', '0', '2023-01-04', NULL) ;
+INSERT INTO `tbl_reg_pins` VALUES ('9', '7541013296532', 'SMAE14D01', 'Registration Pins', '15000', '1', '2023-01-04', '2023C263130002') ; 
+INSERT INTO `tbl_reg_pins` VALUES ('10', '5073461632521', 'SMAB7A3A8', 'Registration Pins', '15000', '1', '2023-01-04', '2023C263130001') ;
 #
 # End of data contents of table tbl_reg_pins
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1691,14 +1693,14 @@ INSERT INTO `tbl_result_pins` VALUES ('1', '417652309312', 'SMRA3906', 'Result C
 INSERT INTO `tbl_result_pins` VALUES ('2', '317435621520', 'SMR6340A', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
 INSERT INTO `tbl_result_pins` VALUES ('3', '279061133542', 'SMR8DE14', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
 INSERT INTO `tbl_result_pins` VALUES ('4', '423716952308', 'SMR40417', 'Result Checker Pins', '500', '0', '2023-01-04') ; 
-INSERT INTO `tbl_result_pins` VALUES ('5', '125263614057', 'SMR34A60', 'Result Checker Pins', '500', '1', '2023-01-04') ;
+INSERT INTO `tbl_result_pins` VALUES ('5', '125263614057', 'SMR34A60', 'Result Checker Pins', '500', '0', '2023-01-04') ;
 #
 # End of data contents of table tbl_result_pins
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1770,20 +1772,19 @@ CREATE TABLE `tbl_result_pins_history` (
   `used_term` varchar(20) DEFAULT NULL,
   `used_session` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pinId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table tbl_result_pins_history (1 records)
+# Data contents of table tbl_result_pins_history (0 records)
 #
- 
-INSERT INTO `tbl_result_pins_history` VALUES ('1', '2021C263130002', 'JSS 3', '125263614057', 'SMR34A60', '1', '1st Term', '2022/2023') ;
+
 #
 # End of data contents of table tbl_result_pins_history
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1869,7 +1870,7 @@ INSERT INTO `tbl_serial` VALUES ('1', 'XTAS-KM87-EWA6-09CQ-5J0V', '2022-08-01', 
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -1968,7 +1969,7 @@ INSERT INTO `tbl_settings` VALUES ('1', 'Osotech School Portal', 'All about your
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2058,20 +2059,19 @@ CREATE TABLE `visap_1st_term_result_tbl` (
   `uploadedDate` date DEFAULT NULL,
   `rStatus` smallint(1) NOT NULL DEFAULT 2,
   PRIMARY KEY (`reportId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_1st_term_result_tbl (1 records)
+# Data contents of table visap_1st_term_result_tbl (0 records)
 #
- 
-INSERT INTO `visap_1st_term_result_tbl` VALUES ('1', NULL, '2021C263130002', 'JSS 3', '1st Term', '2022/2023', 'AGRICULTURAL SCIENCE', '38', NULL, NULL, '56', '94', NULL, '47', '10:11:47', '2023-01-04', '2') ;
+
 #
 # End of data contents of table visap_1st_term_result_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2176,7 +2176,7 @@ CREATE TABLE `visap_2nd_term_result_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2266,7 +2266,7 @@ CREATE TABLE `visap_admin_login_token` (
 # Data contents of table visap_admin_login_token (2 records)
 #
  
-INSERT INTO `visap_admin_login_token` VALUES ('1', 'Smatech', 'admin@smatech.com', 's88BAMbntxjvMRyQtibTWrIgoc1r7DMucqifYJJMMWWNZL9dWgLDXP5N2UUQ7X2dvkwmgbGbohIBgxq0xzQAZStZXeC4oDPEtrnkO') ; 
+INSERT INTO `visap_admin_login_token` VALUES ('1', 'Smatech', 'admin@smatech.com', 'bEIRigOrXSXJ2bV4YKSY8Xfb2llsdH9rDdYPulmNCrWKHWUvfnx4wzNLCv9yXWW8SUxd4XkDuIvNAjN2IRZKPO9h9iQuFQugQeiZz') ; 
 INSERT INTO `visap_admin_login_token` VALUES ('2', 'Director', 'user@smatech.com', '') ;
 #
 # End of data contents of table visap_admin_login_token
@@ -2274,7 +2274,7 @@ INSERT INTO `visap_admin_login_token` VALUES ('2', 'Director', 'user@smatech.com
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2379,7 +2379,7 @@ INSERT INTO `visap_admission_open_tbl` VALUES ('3', 'September Admission', 'Batc
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2490,7 +2490,7 @@ CREATE TABLE `visap_assignment_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2599,7 +2599,7 @@ CREATE TABLE `visap_bed_payment_history_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2718,7 +2718,7 @@ CREATE TABLE `visap_bed_space_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2826,20 +2826,19 @@ CREATE TABLE `visap_behavioral_tbl` (
   `class_teacher` varchar(200) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_behavioral_tbl (1 records)
+# Data contents of table visap_behavioral_tbl (0 records)
 #
- 
-INSERT INTO `visap_behavioral_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', '1st Term', '2022/2023', '3', '3', '2', '5', '3', '4', 'Mrs. Oiza Samuel Otti', '2023-01-04') ;
+
 #
 # End of data contents of table visap_behavioral_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -2956,7 +2955,7 @@ CREATE TABLE `visap_blog_post_comments` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3080,7 +3079,7 @@ CREATE TABLE `visap_blog_post_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3202,7 +3201,7 @@ CREATE TABLE `visap_bus_expense_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3327,7 +3326,7 @@ CREATE TABLE `visap_bus_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3445,20 +3444,19 @@ CREATE TABLE `visap_career_portal_tbl` (
   `application_date` date DEFAULT NULL,
   `application_time` time DEFAULT NULL,
   PRIMARY KEY (`job_portal_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_career_portal_tbl (1 records)
+# Data contents of table visap_career_portal_tbl (0 records)
 #
- 
-INSERT INTO `visap_career_portal_tbl` VALUES ('1', 'Sample Name', 'sampleemail@gmail.com', '099999999999', 'Sample cover letter for the applicant', 'Teaching', 'sampleemail@gmail.com_resume_63b539d08d948.pdf', '2023-01-04', '01:00:00') ;
+
 #
 # End of data contents of table visap_career_portal_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3590,7 +3588,7 @@ CREATE TABLE `visap_class_attendance_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3738,7 +3736,7 @@ INSERT INTO `visap_class_grade_tbl` VALUES ('16', 'SSS 3', NULL, 'active', '2022
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -3882,7 +3880,7 @@ CREATE TABLE `visap_classnote_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4026,7 +4024,7 @@ CREATE TABLE `visap_driver_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4173,7 +4171,7 @@ CREATE TABLE `visap_exam_subject_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4318,7 +4316,7 @@ INSERT INTO `visap_fee_component_tbl` VALUES ('2', 'Exam Fee', 'Active', '2023-0
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4455,7 +4453,7 @@ CREATE TABLE `visap_feedback_tbl` (
   `client_ip_address` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_feedback_tbl (0 records)
@@ -4467,7 +4465,7 @@ CREATE TABLE `visap_feedback_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4606,7 +4604,7 @@ CREATE TABLE `visap_gallery_tbl` (
   `type` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_gallery_tbl (0 records)
@@ -4618,7 +4616,7 @@ CREATE TABLE `visap_gallery_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4773,7 +4771,7 @@ CREATE TABLE `visap_holiday_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -4930,7 +4928,7 @@ CREATE TABLE `visap_hostel_rooms_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5091,7 +5089,7 @@ CREATE TABLE `visap_hostel_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5262,7 +5260,7 @@ CREATE TABLE `visap_loan_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5437,7 +5435,7 @@ CREATE TABLE `visap_messages_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5606,7 +5604,7 @@ CREATE TABLE `visap_messages_user_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5780,7 +5778,7 @@ CREATE TABLE `visap_notice_board_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -5953,7 +5951,7 @@ CREATE TABLE `visap_offered_subject_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6119,21 +6117,22 @@ CREATE TABLE `visap_people_say_tbl` (
   `job` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_people_say_tbl (2 records)
+# Data contents of table visap_people_say_tbl (3 records)
 #
  
 INSERT INTO `visap_people_say_tbl` VALUES ('1', 'Osotech Sam', 'Wow! This is aweseome', 'SMAPP_testi_63b548da46608.png', 'Teacher', '2023-01-04') ; 
-INSERT INTO `visap_people_say_tbl` VALUES ('2', 'Ojo Ayomide', 'This is the Bsst school i had ever seen in my Entire Life', 'SMAPP_testi_63b54913f17c4.jpeg', 'Pastor', '2023-01-04') ;
+INSERT INTO `visap_people_say_tbl` VALUES ('2', 'Ojo Ayomide', 'This is the Bsst school i had ever seen in my Entire Life', 'SMAPP_testi_63b54913f17c4.jpeg', 'Pastor', '2023-01-04') ; 
+INSERT INTO `visap_people_say_tbl` VALUES ('3', 'Flat ERP Tech', 'It is in fact a part of the function of education to help us escape, not from our own time', 'SMAPP_testi_63bd3aac66674.jpg', 'Developer', '2023-01-10') ;
 #
 # End of data contents of table visap_people_say_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6314,7 +6313,7 @@ INSERT INTO `visap_prefect_title_tbl` VALUES ('2', 'Head Girl', 'Active', '2023-
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6494,20 +6493,19 @@ CREATE TABLE `visap_psycho_tbl` (
   `class_teacher` varchar(100) DEFAULT NULL,
   `uploaded_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_psycho_tbl (1 records)
+# Data contents of table visap_psycho_tbl (0 records)
 #
- 
-INSERT INTO `visap_psycho_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', '1st Term', '2022/2023', '2', '3', '4', '5', '4', '3', 'Mrs. Oiza Samuel Otti', '2023-01-04') ;
+
 #
 # End of data contents of table visap_psycho_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6681,27 +6679,26 @@ CREATE TABLE `visap_registered_subject_tbl` (
   `createdBy` varchar(100) DEFAULT NULL,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_registered_subject_tbl (8 records)
+# Data contents of table visap_registered_subject_tbl (7 records)
 #
  
-INSERT INTO `visap_registered_subject_tbl` VALUES ('1', 'JSS 3', 'Agricultural Science', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('2', 'JSS 3', 'Basic Science', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('3', 'JSS 3', 'Business Studies', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('4', 'JSS 3', 'CCA', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('5', 'JSS 3', 'Computer', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('6', 'JSS 3', 'Current Affairs', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('7', 'JSS 3', 'English Language', 'Smatech', '2023-01-04') ; 
-INSERT INTO `visap_registered_subject_tbl` VALUES ('8', 'JSS 3', 'Mathematics', 'Smatech', '2023-01-04') ;
+INSERT INTO `visap_registered_subject_tbl` VALUES ('1', 'Creche', 'BST', 'Smatech', '2023-01-10') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('2', 'Creche', 'CCA', 'Smatech', '2023-01-10') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('3', 'Creche', 'Number Work', 'Smatech', '2023-01-10') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('4', 'Creche', 'Picture Reading', 'Smatech', '2023-01-10') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('5', 'Creche', 'PVS', 'Smatech', '2023-01-10') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('6', 'Creche', 'Social Norms', 'Smatech', '2023-01-10') ; 
+INSERT INTO `visap_registered_subject_tbl` VALUES ('7', 'Creche', 'Verbal Aptitude', 'Smatech', '2023-01-10') ;
 #
 # End of data contents of table visap_registered_subject_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -6893,7 +6890,7 @@ INSERT INTO `visap_result_comment_tbl` VALUES ('1', '2021C263130002', 'JSS 3', '
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7108,7 +7105,7 @@ INSERT INTO `visap_result_grading_tbl` VALUES ('21', 'Senior', 'F9', '1', '29', 
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7306,7 +7303,7 @@ CREATE TABLE `visap_routes_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7506,7 +7503,7 @@ CREATE TABLE `visap_school_expense_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7696,21 +7693,20 @@ CREATE TABLE `visap_school_fee_allocation_tbl` (
   `created_on` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
   PRIMARY KEY (`faId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_school_fee_allocation_tbl (2 records)
+# Data contents of table visap_school_fee_allocation_tbl (1 records)
 #
  
-INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('1', 'School Fee', 'JSS 3', '50000', '2023-01-04', NULL) ; 
-INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('2', 'Exam Fee', 'JSS 3', '10000', '2023-01-04', NULL) ;
+INSERT INTO `visap_school_fee_allocation_tbl` VALUES ('1', 'Exam Fee', 'Basic 5', '30000', '2023-01-09', NULL) ;
 #
 # End of data contents of table visap_school_fee_allocation_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -7904,21 +7900,19 @@ CREATE TABLE `visap_school_prefect_tbl` (
   `activeness` tinyint(1) NOT NULL DEFAULT 1,
   `created_on` date DEFAULT NULL,
   PRIMARY KEY (`prefectId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_school_prefect_tbl (2 records)
+# Data contents of table visap_school_prefect_tbl (0 records)
 #
- 
-INSERT INTO `visap_school_prefect_tbl` VALUES ('1', '2', 'JSS 3', 'Head Girl', '2022/2023', '1', '2023-01-04') ; 
-INSERT INTO `visap_school_prefect_tbl` VALUES ('2', '1', 'JSS 1', 'Head Boy', '2022/2023', '1', '2023-01-04') ;
+
 #
 # End of data contents of table visap_school_prefect_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8153,7 +8147,7 @@ CREATE TABLE `visap_school_profile` (
 # Data contents of table visap_school_profile (1 records)
 #
  
-INSERT INTO `visap_school_profile` VALUES ('1', 'FLAT ERP TECHNOLOGIES', 'C26313', 'Plot 8, Block 5,  Flat ERP Estate', 'Ultimate ICT Solutions', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Lagos State', 'Ikeja', 'Nigeria', '2345', 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16728263764260615.png', NULL, NULL, NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.
+INSERT INTO `visap_school_profile` VALUES ('1', 'OSOTECH GROUP OF SCHOOLS', 'C26313', 'Plot 8, Block 5,  Flat ERP Estate', 'Ultimate ICT Solutions', 'Engr Samson Agberayi', '+2348131374443', 'Miss Iremide Agberayi E', '+2348140122566', 'Mrs. Blessing Agberayi T (BSc)', '+2349036583063', 'Lagos State', 'Ikeja', 'Nigeria', '2345', 'info@smatechportal.com', '08131374443', '09036583063', 'www.smatechportal.com', 'www.smatechportal.com', 'logo_16733426192544610.png', NULL, NULL, NULL, NULL, NULL, 'English', 'As the name School management Application  implies, it is the foundation for training children for excellence in academics, spiritual development, growth and sound morals.
 We praise the Lord Almighty for His manifold mercies upon us and for bringing into reality, the SMATECH Website. This webpage is designed to provide you with all available information related to SMATECH. We shall continue to update the information throughout the school year on what we do!
 
 We are saddled with the task to provide a world-class Christian-based educational experience with international standards.
@@ -8166,7 +8160,7 @@ Children should not always stay glued to the TV watching cartoons and Nollywood 
 
 The decadence in our society and the world at large should strengthen our determination for a lasting change for decency and a corrupt-free society. We must teach and counsel these children and nurture them in the fear of the Lord. So that when they grow old, they will not depart from it.
 
-We have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'FLATERP', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,
+We have so much to do in order to bring into reality the vision for School Management Application. We are resolved by divine injunction to train up these awesome kids in the ways and fear of the Lord. May the Lord help our resolve. Amen!', '2nd May,1998', 'smatechportal@gmail.com', 'OSOTECH', 'Our mission is to promote lifelong learning in an open and caring atmosphere that motivates students to be confident and responsible global citizens. As an organization, we will deliver on our promise to all our stakeholders.', 'To lead holistic, inclusive, innovative world class education in Africa.', 'Child Centredness,
 Respect,
 Integrity,
 Excellence,
@@ -8188,7 +8182,7 @@ We have highly qualified teachers taking all the various subjects from Basic lev
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8401,7 +8395,7 @@ CREATE TABLE `visap_school_session_history_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8617,7 +8611,7 @@ INSERT INTO `visap_school_session_tbl` VALUES ('1', '2022/2023', '1st Term', '61
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -8831,7 +8825,7 @@ INSERT INTO `visap_session_list` VALUES ('1', '2022/2023') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9039,25 +9033,22 @@ CREATE TABLE `visap_sliders_tbl` (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_sliders_tbl (6 records)
+# Data contents of table visap_sliders_tbl (3 records)
 #
  
 INSERT INTO `visap_sliders_tbl` VALUES ('14', 'I am still learning', 'Tell me and I forget. Teach me and I remember. Involve me and I learn', 'SMAPP_63138ef78eca0_.jpg', '1', '2022-09-03') ; 
-INSERT INTO `visap_sliders_tbl` VALUES ('15', 'All learning has an emotional base', 'Life is an open book test. Learning how to learn is your most valuable skill in the online world', 'SMAPP_63138f5d8d4af_.jpg', '1', '2022-09-03') ; 
 INSERT INTO `visap_sliders_tbl` VALUES ('16', 'A little learning is a dangerous thing', 'You don’t understand anything until you learn it more than one way.', 'SMAPP_63138f93d1b64_.jpg', '1', '2022-09-03') ; 
-INSERT INTO `visap_sliders_tbl` VALUES ('17', 'A little learning is a dangerous thing.', 'Take what you learn and make a difference with it.', 'SMAPP_63138feabaadf_.jpg', '1', '2022-09-03') ; 
-INSERT INTO `visap_sliders_tbl` VALUES ('18', 'Be curious, not judgmental.', 'Being ignorant is not so much a shame, as being unwilling to learn.', 'SMAPP_631390215d3e2_.jpg', '1', '2022-09-03') ; 
-INSERT INTO `visap_sliders_tbl` VALUES ('19', 'The human mind is our fundamental resource', 'It is in fact a part of the function of education to help us escape, not from our own time – for we are bound by that—but from the intellectual and emotional limitations of our time', 'SMAPP_63139068caf7c_.jpg', '1', '2022-09-03') ;
+INSERT INTO `visap_sliders_tbl` VALUES ('18', 'Be curious, not judgmental.', 'Being ignorant is not so much a shame, as being unwilling to learn.', 'SMAPP_631390215d3e2_.jpg', '1', '2022-09-03') ;
 #
 # End of data contents of table visap_sliders_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9283,7 +9274,7 @@ INSERT INTO `visap_social_link_tbl` VALUES ('1', 'https://www.twitter.com/smatec
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9512,7 +9503,7 @@ CREATE TABLE `visap_staff_bank_details_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9743,7 +9734,7 @@ CREATE TABLE `visap_staff_duty_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -9976,7 +9967,7 @@ INSERT INTO `visap_staff_login_token` VALUES ('2', 'Samson', 'osotech@gmail.com'
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10207,20 +10198,19 @@ CREATE TABLE `visap_staff_paid_salary_tbl` (
   PRIMARY KEY (`salaryId`),
   KEY `staff_id` (`staff_id`),
   CONSTRAINT `visap_staff_paid_salary_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_staff_paid_salary_tbl (1 records)
+# Data contents of table visap_staff_paid_salary_tbl (0 records)
 #
- 
-INSERT INTO `visap_staff_paid_salary_tbl` VALUES ('3', '1', '109800', 'January', 'Cash', '2023-01-04', NULL, NULL, 'Paid', '2022/2023', '1st Term', '2023-01-04') ;
+
 #
 # End of data contents of table visap_staff_paid_salary_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10452,20 +10442,19 @@ CREATE TABLE `visap_staff_payroll_tbl` (
   PRIMARY KEY (`payrollId`),
   KEY `staff_id` (`staff_id`),
   CONSTRAINT `visap_staff_payroll_tbl_ibfk_1` FOREIGN KEY (`staff_id`) REFERENCES `visap_staff_tbl` (`staffId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_staff_payroll_tbl (1 records)
+# Data contents of table visap_staff_payroll_tbl (0 records)
 #
- 
-INSERT INTO `visap_staff_payroll_tbl` VALUES ('4', '1', '100000', '2000', '1000', '5000', '2000', '200', '109800', '2023-01-04') ;
+
 #
 # End of data contents of table visap_staff_payroll_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10710,7 +10699,7 @@ INSERT INTO `visap_staff_post_tbl` VALUES ('2', '1', NULL, 'Principal', NULL, NU
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -10976,7 +10965,7 @@ INSERT INTO `visap_staff_tbl` VALUES ('2', 'SMP23002', 'JSS 3', 'Class Teacher',
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11256,7 +11245,7 @@ INSERT INTO `visap_state_tbl` VALUES ('37', 'Zamfara State') ;
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11505,19 +11494,21 @@ CREATE TABLE `visap_stdmedical_tbl` (
   PRIMARY KEY (`medicalId`),
   KEY `studId` (`studId`),
   CONSTRAINT `visap_stdmedical_tbl_ibfk_1` FOREIGN KEY (`studId`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_stdmedical_tbl (0 records)
+# Data contents of table visap_stdmedical_tbl (2 records)
 #
-
+ 
+INSERT INTO `visap_stdmedical_tbl` VALUES ('1', '1', 'None', 'None', '09097673333', '2023-01-04', 'Sample address ikole ekiti', 'A-', 'AA', 'None', NULL, 'No', 'I Don Not know', NULL, NULL) ; 
+INSERT INTO `visap_stdmedical_tbl` VALUES ('2', '3', NULL, NULL, NULL, '1970-01-01', NULL, 'A+', 'AA', 'None', NULL, 'Yes', 'No', NULL, NULL) ;
 #
 # End of data contents of table visap_stdmedical_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -11766,19 +11757,21 @@ CREATE TABLE `visap_stdpreschlinfo` (
   PRIMARY KEY (`preId`),
   KEY `student_id` (`student_id`),
   CONSTRAINT `visap_stdpreschlinfo_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_stdpreschlinfo (0 records)
+# Data contents of table visap_stdpreschlinfo (2 records)
 #
-
+ 
+INSERT INTO `visap_stdpreschlinfo` VALUES ('1', '1', 'None', 'None', 'None', 'Rural', NULL, 'PUBLIC', 'PRIMARY &amp; SECONDARY', 'Primary Two', 'Change of Environment', NULL) ; 
+INSERT INTO `visap_stdpreschlinfo` VALUES ('2', '3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'JSS One', 'Change of Location', NULL) ;
 #
 # End of data contents of table visap_stdpreschlinfo
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12039,7 +12032,7 @@ INSERT INTO `visap_student_attendance_tbl` VALUES ('1', '2021C263130002', 'JSS 3
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12306,19 +12299,21 @@ CREATE TABLE `visap_student_info_tbl` (
   PRIMARY KEY (`stdInfoId`),
   KEY `studentId` (`studentId`),
   CONSTRAINT `visap_student_info_tbl_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `visap_student_tbl` (`stdId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
-# Data contents of table visap_student_info_tbl (0 records)
+# Data contents of table visap_student_info_tbl (2 records)
 #
-
+ 
+INSERT INTO `visap_student_info_tbl` VALUES ('1', '1', 'Certificate', 'Nigerian', 'Ekiti State', 'Ikole', 'Ikole Ekiti', 'Christianity', 'None', 'Sample address ikole ekiti', 'Mr', 'Osotech Samson', 'Father', '09090987632', 'fathertoson@gmail.com', 'Doctor', 'Sample address ikole ekiti', 'Mrs', 'osotech Yemisi', 'Mother', '09098745321', 'mothercare@gmail.com', 'Trader', 'Sample address ikole ekiti') ; 
+INSERT INTO `visap_student_info_tbl` VALUES ('2', '3', 'Certificate', 'Nigerian', 'Ebonyi State', 'Abakaliki', 'Abakaliki', 'Christianity', 'None', '21B, Broad Street, Abakaliki Central Mosque, Ebonyi', 'High Chief', 'James Agunah', 'Father', '09090987611', 'myfatherlovesme@gmail.com', 'Doctor', '21B, Broad Street, Abakaliki Central Mosque, Ebonyi', 'Mrs', 'Agunah Hannah', 'Mother', '09090987619', 'motherc@gmail.com', 'Trading', '21B, Broad Street, Abakaliki Central Mosque, Ebonyi') ;
 #
 # End of data contents of table visap_student_info_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12579,7 +12574,7 @@ CREATE TABLE `visap_student_login_token` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -12849,14 +12844,14 @@ CREATE TABLE `visap_student_payment_history_tbl` (
 # Data contents of table visap_student_payment_history_tbl (1 records)
 #
  
-INSERT INTO `visap_student_payment_history_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', 'School Fee', '50000', '40000', '10000', '1', '2023-01-04', '1st Term', '2022/2023', 'Bank', '12312356789234', 'FCMB', '1', '2023-01-04') ;
+INSERT INTO `visap_student_payment_history_tbl` VALUES ('1', '1', '2023C263130001', 'Basic 5', 'Exam Fee', '30000', '20000', '10000', '1', '2023-01-09', '1st Term', '2022/2023', 'Cash', NULL, NULL, '1', '2023-01-09') ;
 #
 # End of data contents of table visap_student_payment_history_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -13129,14 +13124,14 @@ CREATE TABLE `visap_student_payment_tbl` (
 # Data contents of table visap_student_payment_tbl (1 records)
 #
  
-INSERT INTO `visap_student_payment_tbl` VALUES ('1', '2', '2021C263130002', 'JSS 3', 'School Fee', '50000', '40000', '10000', '1', '2023-01-04', '1st Term', '2022/2023', 'Bank', NULL, NULL, '1', '2023-01-04') ;
+INSERT INTO `visap_student_payment_tbl` VALUES ('1', '1', '2023C263130001', 'Basic 5', 'Exam Fee', '30000', '20000', '10000', '1', '2023-01-09', '1st Term', '2022/2023', 'Cash', NULL, NULL, '1', '2023-01-09') ;
 #
 # End of data contents of table visap_student_payment_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -13412,21 +13407,21 @@ CREATE TABLE `visap_student_tbl` (
   `admitted_class` varchar(50) DEFAULT NULL,
   `completed_date` date DEFAULT NULL,
   PRIMARY KEY (`stdId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ;
 
 #
 # Data contents of table visap_student_tbl (2 records)
 #
  
-INSERT INTO `visap_student_tbl` VALUES ('1', '2021C263130001', 'flaterptechnologies@yahoo.com', 'Afolayan', '$2y$10$/iX.tBX3H4Di9dMogmPn0eoQJzbRbbLMW7pOpWix5kvJOl5mLGXXq', 'JSS 1', 'Afolayan', 'Ayoola', 'Mide', '1992-05-25', 'Female', 'Sango Ota, Ogun State, Nigeria', '8031373743', 'Active', '2000-03-07', 'Day', '2021C2631300014552512.jpeg', '33efa7e376d414', NULL, NULL, '0', 'JSS 1', NULL) ; 
-INSERT INTO `visap_student_tbl` VALUES ('2', '2021C263130002', 'ladeyemi2022@gmail.com', 'Adeyemo', '$2y$10$Vk7qLK6vUhIPZQ2pRx6Eo.EZ2MTr8RYO5625I5VeGMLvQNQaZ6/mq', 'JSS 3', 'Adeyemo', 'Victoria', 'Mervelous', '2000-09-24', 'Male', 'Sango Ota, Ogun State, Nigeria', '8032359456', 'Active', '2001-08-08', 'Boarding', '2021C2631300028750785.jpg', 'cabb00553cba45', NULL, NULL, '0', 'JSS 1', '2023-01-04') ;
+INSERT INTO `visap_student_tbl` VALUES ('1', '2023C263130001', 'flaterptech247@gmail.com', 'Osotech', '$2y$10$WYxfeUu2QBj6AmK.yoztL.vqJ63syBUKdvne4DAwsJLmvK6pnZQfe', 'Basic 5', 'Osotech', 'James', 'Abimbola', '2018-02-01', 'Male', 'Sample address ikole ekiti', '08123543212', 'Active', '2023-01-09', 'Day', '2023C2631300014531723.jpg', NULL, NULL, NULL, '0', 'Basic 2', '2023-01-09') ; 
+INSERT INTO `visap_student_tbl` VALUES ('3', '2023C263130002', 'flaterptechy@gmail.com', 'Agberayi', '$2y$10$13xXmJw9nGEERXuKsmas1.ujIK17YyvQ.Cp8TiIBLO82NEp3v8OOK', 'JSS 1', 'Agberayi', 'Idowu', 'Dada', '2009-12-01', 'Male', '21B, Broad Street, Abakaliki Central Mosque, Ebonyi', '09012123412', 'Active', '2023-01-09', 'Boarding', '2023C2631300027674551.jpg', NULL, NULL, NULL, '0', 'JSS 1', NULL) ;
 #
 # End of data contents of table visap_student_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -13714,14 +13709,14 @@ CREATE TABLE `visap_student_testimonial_tbl` (
 # Data contents of table visap_student_testimonial_tbl (1 records)
 #
  
-INSERT INTO `visap_student_testimonial_tbl` VALUES ('1', '2021C263130002', 'JSS 1', '2001-08-08', 'JSS 3', '2023-01-04', 'Distinction', 'Distinction', 'None', 'Jets Club', 'Well Behave and good Student', 'Satisfactory', 'General Mathematics', 'English Language', 'Agricultural Science', 'Physics', 'Chemistry', 'Christian Religion Studies', 'Current Affairs', 'Computer', 'Yoruba Language', NULL, NULL, '1480000657', '2023-01-04 09:42:35') ;
+INSERT INTO `visap_student_testimonial_tbl` VALUES ('1', '2023C263130001', 'Basic 2', '2023-01-09', 'Basic 5', '2023-01-09', 'Distinction', 'Very Good', 'None', 'JETS CLUB', 'She is a good girl', 'WELL BEHAVED', 'General Mathematics', 'English Language', 'Biology', 'CCA', 'Current Affairs', 'Financial Accounting', 'Social Norms', 'Verbal Aptitude', 'Social Norms', NULL, NULL, '4494174028', '2023-01-09 15:42:44') ;
 #
 # End of data contents of table visap_student_testimonial_tbl
 # --------------------------------------------------------
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -14005,7 +14000,7 @@ CREATE TABLE `visap_submitted_class_assignment_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -14296,7 +14291,7 @@ CREATE TABLE `visap_termly_result_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -14584,7 +14579,7 @@ CREATE TABLE `visap_upcoming_event_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------
@@ -14877,7 +14872,7 @@ CREATE TABLE `visap_virtual_lesson_tbl` (
 
 # WordPress : buffernow.com MySQL database backup
 #
-# Generated: Friday 6. January 2023 11:45 WAT
+# Generated: Tuesday 10. January 2023 11:17 WAT
 # Hostname: localhost
 # Database: `smatech_portal`
 # --------------------------------------------------------

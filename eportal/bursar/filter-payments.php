@@ -7,7 +7,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title>Fee Management - GSSOTA</title>
+    <title>Fee Management -</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
     <!-- include dataTableHeaderLink.php -->
   </head>
@@ -27,7 +27,7 @@ require_once "helpers/helper.php";
         <div class="content-header row">
           <div class="content-header-left col-12 mb-2 mt-1">
             <div class="breadcrumbs-top">
-              <h5 class="content-header-title float-left pr-1 mb-0">VISAP PORTAL</h5>
+            <h5 class="content-header-title float-left pr-1 mb-0"><?php echo __OSO_APP_NAME__ ?> PORTAL</h5>
               <div class="breadcrumb-wrapper d-none d-sm-block">
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
@@ -105,7 +105,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-2">
                     <label for="ClassGrade">Student Class</label>
                     <fieldset class="form-group">
-                        <select class="form-control select2" name="ClassGrade" id="ClassGrade">
+                        <select class="form-control custom-select" name="ClassGrade" id="ClassGrade">
                             <option value="">Choose...</option>
                            <?php echo $Administration->get_classroom_InDropDown_list(); ?>
                         </select>
@@ -124,7 +124,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-2">
                     <label for="feeType">Fee Type</label>
                     <fieldset class="form-group">
-                     <select class="form-control select2" name="feeType" id="feeType">
+                     <select class="form-control form-select" name="feeType" id="feeType">
                             <option value="">Choose...</option>
                            <?php echo $Administration->fee_component_inDropDown(); ?>
                         </select>
@@ -157,10 +157,7 @@ require_once "helpers/helper.php";
         </form>
     </div>
       <!-- filter student ends -->
-     <!--  <div class="card-header">
-          
-          <a href="fee_component"> <button type="button" class="btn btn-outline-warning btn-md btn-round" > View Component </button></a>
-        </div> -->
+     
       <div class="card-body">
         <?php 
         if (isset($_POST['submit_search_payment'])) {
@@ -177,11 +174,11 @@ require_once "helpers/helper.php";
             $search_data =  $Administration->filter_students_by_payments_type_status($studentClass,$feeType,$status,$term,$session);
             if ($search_data!=false) { ?>
   <div class="table-responsive">
-     <table class="table osotechDatatable table-hover table-bordered">
+     <table class="table table-hover table-bordered">
         <thead class="text-center">
           <tr>
           <th>PASSPORT</th>
-          <th>FULLNAME</th>
+          <th>FULL NAME</th>
           <th>ADMISSION NO</th>
           <th>CLASS</th>
           <th>FEE TYPE</th>
@@ -196,7 +193,19 @@ require_once "helpers/helper.php";
               foreach ($search_data as $val) {
             $student_data = $Student->get_single_student_details_by_regId($val->std_id,$val->stdAdmNo);?>
             <tr>
-          <td><img src="result-asset/author.jpg" width="80" alt="photo"></td>
+          <td><?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
+
+            <?php if ($student_data->stdGender == "Male") : ?>
+            <img src="../schoolImages/students/male.png" width="80" alt="photo"
+              style="border-radius: 10px;border: 3px solid deepskyblue;">
+            <?php else : ?>
+            <img src="../schoolImages/students/female.png" width="80" alt="photo"
+              style="border-radius: 10px;border: 3px solid deepskyblue;">
+            <?php endif; ?>
+            <?php else : ?>
+            <img src="../schoolImages/students/<?php echo $student_data->stdPassport; ?>" width="80"
+              alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+<?php endif ?></td>
           <td><?php echo strtoupper($student_data->full_name) ?> </td>
           <td><?php echo strtoupper($student_data->stdRegNo) ?></td>
           <td><?php echo strtoupper($student_data->studentClass) ?></td>

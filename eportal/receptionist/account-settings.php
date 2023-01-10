@@ -60,20 +60,20 @@ require_once "helpers/helper.php";
                             </a>
                         </li>
                         
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" id="account-pill-info" data-toggle="pill"
                                 href="#account-vertical-info" aria-expanded="false">
                                 <i class="bx bx-info-circle"></i>
                                 <span>Update Info</span>
                             </a>
-                        </li>
-                         <li class="nav-item">
+                        </li> -->
+                         <!-- <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" id="account-pill-password" data-toggle="pill"
                                 href="#update-avatar-photo" aria-expanded="false">
                                 <i class="fa fa-camera"></i>
                                 <span>Profile Image</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link d-flex align-items-center" id="account-pill-password" data-toggle="pill"
                                 href="#account-vertical-password" aria-expanded="false">
@@ -101,8 +101,11 @@ require_once "helpers/helper.php";
                                     aria-labelledby="account-pill-general" aria-expanded="true">
                                     <div class="media text-center">
                                         <a href="javascript: void(0);">
-                                            <img src="../schlogo.jpg"
-                                                class="rounded mr-75" alt="profile image" height="100" width="100" style="border: solid black 2px; border-radius: 20px;">
+                                        <?php if ($staff_data->staffPassport==NULL || $staff_data->staffPassport==""): ?>
+    <img src="../schoolImages/staff/teacher.jpg" width="150" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+      <?php else: ?>
+        <img src="../schoolImages/staff/<?php echo $staff_data->staffPassport;?>" width="150" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+    <?php endif ?>
                                         </a>
                                         
                                     </div>
@@ -188,46 +191,18 @@ require_once "helpers/helper.php";
                                                 </div>
                                             </div>
                                             <?php endif ?>
-                                            
-                                            
-                                            <!-- <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">Save
-                                                    changes</button>
-                                                <button type="reset" class="btn btn-light mb-1">Cancel</button>
-                                            </div> -->
+                                        
                                         </div>
                                     </form>
                                 </div>
 
-                                <div class="tab-pane fade" id="update-avatar-photo" role="tabpanel">
-                                  <form method="POST" enctype="multipart/form-data" >
-                                     <div class="media-body mt-25">
-                                <div class="col-12 px-0 d-flex flex-sm-row flex-column justify-content-start">
-                                                <label  class="btn btn-sm btn-light-primary">
-                                                  <span>Upload Profile Image</span>
-                                                  <input autocomplete="off" type="file" id="myavatar" name="myavatar" class="form-control form-control-file">
-                                                </label>
-                                            </div>
-                                            <p class="text-muted ml-1 mt-50"><small class="text-danger"><em>Allowed JPG or PNG Only. Max size of 100kB</em></small></p>
-                                        </div>
-                                        <div class="myPreview" style="display: none;">
-                                          <img src="../schlogo.jpg" width="100" height="100" alt="profile-image" style="border: solid darkgreen 2px; border-radius: 20%;">
-                                        </div>
-                                        <h3 id="osotech-result"></h3>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                         <button type="button" id="upload_avatar_photo_form" class="btn btn-dark glow mr-sm-1 mb-1">Upload
-                                            </button>
-                                            
-                                            </div>
-                                  </form>
-                                </div>
                                 <div class="tab-pane fade " id="account-vertical-password" role="tabpanel"
                                     aria-labelledby="account-pill-password" aria-expanded="false">
                                     <h4 class="text-center text-muted"> UPDATE ACCOUNT PASSWORD</h4>
                                     <form class="validate-form" id="password-update-form">
                                       <div class="col-md-12 text-center" id="myResponseText"></div>
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Old Password</label>
@@ -237,7 +212,7 @@ require_once "helpers/helper.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>New Password</label>
@@ -248,7 +223,7 @@ require_once "helpers/helper.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Retype new Password</label>
@@ -270,137 +245,7 @@ require_once "helpers/helper.php";
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane fade" id="account-vertical-info" role="tabpanel"
-                                    aria-labelledby="account-pill-info" aria-expanded="false">
-                                    <form class="validate-form">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Bio</label>
-                                                    <textarea class="form-control" id="accountTextarea" name="bio_data" rows="3"
-                                                        placeholder="Your Bio data here..."></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Birth date</label>
-                                                        <input type="text" class="form-control birthdate-picker"
-                                                            placeholder="Birth date"
-                                                            name="dob">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Nationality</label>
-                                                    <select class="form-control" id="accountSelect">
-                                                        <option>Nigerian</option>
-                                                        <option>Non-Nigerian</option>
-                                                        
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>State of Origin</label>
-                                                    <select name="state_origin" class="form-control select2" id="">
-                                    <option value="Lagos State" selected>Lagos State</option>
-                                            </select>
-                                                </div>
-                                            </div>
-                                             <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Local Govt.</label>
-                                                    <select name="state_origin" class="form-control select2" id="">
-                                    <option value="Lagos State" selected>Ikeja</option>
-                                            </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Home Town</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Idimu" value=""
-                                                            name="homeTown">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Phone number" value="(+656) 254 2568"
-                                                            name="phone">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Residence Address</label>
-                                                        <textarea class="form-control" id="accountTextarea" name="res_address" rows="3"
-                                                        placeholder="Your Residence address..."></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>Permanent Address</label>
-                                                       <textarea class="form-control" id="accountTextarea" name="per_address" rows="3"
-                                                        placeholder="Your Permanent address..."></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>School Attended</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Website address">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Course Studied</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Website address">
-                                                </div>
-                                            </div>
-                                              <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>From Date</label>
-                                                    <input type="date" class="form-control"
-                                                        placeholder="Website address">
-                                                </div>
-                                            </div>
-                                              <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>To Date</label>
-                                                    <input type="date" class="form-control"
-                                                        placeholder="Website address">
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label>Higher Certificate Obtained</label>
-                                                    <select class="form-control" id="musicselect2">
-                                                    <option value="Rock">Rock</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">Save
-                                                    changes</button>
-                                                <button type="reset" class="btn btn-light mb-1">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                              
+                               
                               <div class="tab-pane fade" id="bank-info" role="tabpanel"
                                     aria-labelledby="update-bank-info" aria-expanded="false">
                                     <form class="validate-form" id="staff-update-bank-info">
@@ -408,7 +253,7 @@ require_once "helpers/helper.php";
                                       <h4 class="text-center text-muted"> UPDATE YOUR BANK INFO</h4>
                                       <div class="col-md-12 text-center" id="myResponseText3"></div>
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Bank Name:</label>
@@ -418,7 +263,7 @@ require_once "helpers/helper.php";
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="controls">
                                                         <label>Account Name</label>

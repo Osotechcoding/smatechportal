@@ -10,6 +10,7 @@ class Blog
 	protected $query;
 	protected $response;
 	protected $config;
+	protected $alert;
 	public function __construct()
 	{
 		$this->dbh = osotech_connect();
@@ -51,7 +52,7 @@ class Blog
 			//create image save path
 			$newFileName = time() . mt_rand() . "." . $image_ext;
 			$file_destination = "../news-images/" . $newFileName;
-			//check if the boldg is already created
+			//check if the blog is already created
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_tbl` WHERE blog_title=? LIMIT 1");
 			$this->stmt->execute(array($blogTitle));
 			if ($this->stmt->rowCount() == 1) {
@@ -83,7 +84,6 @@ class Blog
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function osotech_resize_image($image_resource_id, $width, $height)
@@ -103,7 +103,7 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -128,7 +128,6 @@ class Blog
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -140,7 +139,6 @@ class Blog
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -152,7 +150,6 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -163,7 +160,6 @@ class Blog
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -191,7 +187,6 @@ class Blog
 				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -202,7 +197,6 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 	//count all blogs
@@ -214,7 +208,6 @@ class Blog
 			$row = $this->stmt->fetch();
 			$this->response = $row->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -227,7 +220,6 @@ class Blog
 			$row = $this->stmt->fetch();
 			$this->response = $row->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -239,7 +231,7 @@ class Blog
 				$this->stmt = $this->dbh->prepare("UPDATE `visap_blog_post_comments` SET status='1' WHERE commentId=? LIMIT 1");
 				if ($this->stmt->execute(array($commentId))) {
 					$this->dbh->commit();
-					$this->dbh = null;
+		
 					$this->response = $this->alert->alert_toastr("success", "Comment approved Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 	window.location.reload();
 	},500);</script>";
@@ -260,7 +252,6 @@ class Blog
 			$row = $this->stmt->fetch();
 			$this->response = $row->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -285,7 +276,6 @@ class Blog
 		$name_div = explode(".", $EventFileName);
 		$image_ext = strtolower(end($name_div));
 		//CHECK FOR EMPTY FIELDS
-		//
 		if ($this->config->isEmptyStr($desc) || $this->config->isEmptyStr($organizer) || $this->config->isEmptyStr($eventDate) || $this->config->isEmptyStr($eventTime) || $this->config->isEmptyStr($event_detail) || $this->config->isEmptyStr($status) || $this->config->isEmptyStr($EventFileName)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid form Submission, Pls try again!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($auth_pass)) {
@@ -330,7 +320,6 @@ class Blog
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_event_ById($Id)
@@ -340,7 +329,6 @@ class Blog
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -352,7 +340,6 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -364,7 +351,6 @@ class Blog
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -376,7 +362,6 @@ class Blog
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -388,7 +373,6 @@ class Blog
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -409,7 +393,6 @@ class Blog
 		$name_div = explode(".", $GalleryFileName);
 		$image_ext = strtolower(end($name_div));
 		//CHECK FOR EMPTY FIELDS
-		//
 		if ($this->config->isEmptyStr($desc) || $this->config->isEmptyStr($galleryType) || $this->config->isEmptyStr($GalleryFileName)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid form Submission, Pls try again!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($auth_pass)) {
@@ -454,7 +437,6 @@ class Blog
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//get gallery images
@@ -465,7 +447,6 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 	public function countGalleryByType(string $type)
@@ -476,7 +457,6 @@ class Blog
 			$cont = $this->stmt->fetch();
 			$this->response = $cont->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -488,7 +468,6 @@ class Blog
 			$cont = $this->stmt->fetch();
 			$this->response = $cont->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 	public function getGalleryById($Id)
@@ -498,7 +477,6 @@ class Blog
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -526,10 +504,8 @@ class Blog
 				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete Gallery: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
-
 
 	public function getSliderById($Id)
 	{
@@ -538,7 +514,6 @@ class Blog
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -567,7 +542,6 @@ class Blog
 				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete Gallery: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -585,7 +559,6 @@ class Blog
 		$name_div = explode(".", $SliderFileName);
 		$image_ext = strtolower(end($name_div));
 		//CHECK FOR EMPTY FIELDS
-		//
 		if ($this->config->isEmptyStr($slider_title) || $this->config->isEmptyStr($slider_desc) || $this->config->isEmptyStr($SliderFileName)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid form Submission, Pls try again!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($auth_pass)) {
@@ -606,7 +579,7 @@ class Blog
 			if ($this->stmt->rowCount() == 1) {
 				$this->response = $this->alert->alert_toastr("error", "$slider_title is already Created, Please check and try again!", __OSO_APP_NAME__ . " Says");
 				//limit the amount of slider to 5 for this version of smatech
-			} elseif (self::checkSliderRowNumber() == false) {
+			} elseif ($this->checkMaximumSliderLimit()) {
 				$this->response = $this->alert->alert_toastr("error", "Maximum Limit of Image Slider reached, upgrade to premium Version to Enjoy Unlimited Uploads!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -633,7 +606,6 @@ class Blog
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getAllSliders()
@@ -643,19 +615,24 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
 	//check total number of slider available
-	public function checkSliderRowNumber()
+	/**
+	 * Undocumented function
+	 *
+	 * @return boolean
+	 */
+	public function checkMaximumSliderLimit():bool
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl`");
 		$this->stmt->execute();
-		$rows = $this->stmt->rowCount();
-		if ($rows >= '6') {
-			//maximum reached
-			//return false;
+		//max of 5 image sliders for non premium user
+		if( $this->stmt->rowCount() >= 5){
+		// 	maximum reached
+		 	return true;
+		}else{
 			return false;
 		}
 	}
@@ -669,7 +646,6 @@ class Blog
 			$cont = $this->stmt->fetch();
 			$this->response = $cont->cnt;
 			return $this->response;
-			$this->dbh = null;
 		}
 	}
 
@@ -683,7 +659,7 @@ class Blog
 			$cont = $this->stmt->fetch();
 			$this->response = $cont->cnt;
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -748,7 +724,6 @@ class Blog
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 
@@ -759,7 +734,7 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -770,7 +745,7 @@ class Blog
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -799,7 +774,7 @@ class Blog
 				$this->response  = $this->alert->alert_toastr("error", "Failed to Delete: Error: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 			}
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	public function getAllFeedBack()
@@ -809,7 +784,7 @@ class Blog
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 	//delete feed back 
@@ -822,7 +797,7 @@ class Blog
 				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_feedback_tbl` WHERE id=? LIMIT 1");
 				if ($this->stmt->execute([$id])) {
 					$this->dbh->commit();
-					$this->dbh = null;
+		
 					$this->response = $this->alert->alert_toastr("success", "Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 			window.location.reload();
 			},500);</script>";

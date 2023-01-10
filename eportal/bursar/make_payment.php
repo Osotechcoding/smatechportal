@@ -7,7 +7,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title>Fee Management - GSSOTA</title>
+    <title>Fee Management - </title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
     <!-- include dataTableHeaderLink.php -->
   </head>
@@ -98,85 +98,103 @@ require_once "helpers/helper.php";
     
       </div>
            <!-- Revenue Growth Chart Starts -->
-     <div class="card">
-      <!-- filter student -->
-       <div class="users-list-filter px-1">
-        <form action="" method="post">
-            <div class="row border rounded py-2 mb-2">
-                
-                <div class="col-md-4">
-                    <label for="ClassGrade">Student Class</label>
-                    <fieldset class="form-group">
-                        <select class="form-control select2" name="ClassGrade" id="ClassGrade">
-                            <option value="">Choose...</option>
-                           <?php echo $Administration->get_classroom_InDropDown_list(); ?>
-                        </select>
-                    </fieldset>
-                </div>
-                <div class="col-md-5">
-                    <label for="RegNo">Student RegNo</label>
-                    <fieldset class="form-group">
-                     <input type="text" autocomplete="off" class="form-control to-uppercase" name="RegNo" placeholder="Enter Student Admission No" style="text-transform: uppercase;">
-                     <!-- oninput="this.value=this.value.toUpperCase();" -->
-                    </fieldset>
-                </div>
-                <div class="col-md-3 d-flex align-items-center">
-                    <button type="submit" class="btn btn-primary btn-block glow users-list-clear mb-0" name="submit_search_btn">Get Details</button>
-                </div>
-            </div>
-        </form>
-    </div>
-      <!-- filter student ends -->
-     <!--  <div class="card-header">
-          
-          <a href="fee_component"> <button type="button" class="btn btn-outline-warning btn-md btn-round" > View Component </button></a>
-        </div> -->
-      <div class="card-body">
-        <?php 
-        if (isset($_POST['submit_search_btn'])) {
-          // code...
-          $stdClass = $Configuration->Clean($_POST['ClassGrade']);
-          $stdRegNo = $Configuration->Clean($_POST['RegNo']);
+           <div class="card">
+          <!-- filter student -->
+          <div class="users-list-filter px-1">
+            <form action="" method="post">
+              <div class="row border rounded py-2 mb-2">
 
-          if ($Configuration->isEmptyStr($stdClass) || $Configuration->isEmptyStr($stdRegNo)) {
-            echo $Alert->alert_msg("Notice: Please Enter Stdent Class and Admission No to proceed","danger");
-          }else{
-            $search_data =  $Student->filter_students_by_payments($stdClass,$stdRegNo);
-            if ($search_data) { ?>
-        <div class="table-responsive">
-     <table class="table osotechDatatable table-hover table-bordered">
-        <thead class="text-center">
-          <tr>
-          <th>PASSPORT</th>
-          <th>FULLNAME</th>
-          <th>ADMISSION NO</th>
-          <th>CLASS</th>
-          <th>TOTAL FEE</th>
-          <th>ACTION</th>
-        </tr>
-      </thead>
-        <tbody class="text-center">
-          <tr>
-          <td><img src="result-asset/author.jpg" width="80" alt="photo"></td>
-          <td><?php echo strtoupper($search_data->full_name) ?> </td>
-          <td><?php echo strtoupper($search_data->stdRegNo) ?></td>
-          <td><?php echo strtoupper($search_data->studentClass) ?></td>
-           <td><h3 class="text-info"> &#8358;<?php echo number_format($Administration->get_sum_of_allocated_fee_by_className($search_data->studentClass),2) ?></h3> </td>
-         <td>
-          <a href="student_payment_info?std_regNo=<?php echo base64_encode(urlencode(($search_data->stdRegNo)));?>&stuId=<?php echo base64_encode(urlencode(($search_data->stdId)));?>&stuClass=<?php echo base64_encode(urlencode(($search_data->studentClass))) ?>"><button type="button" class="btn btn-dark btn-sm">Make Payment</button></a>
-        </td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
-           <?php }else{
- echo $Alert->alert_msg("Notice: No Student found for $stdRegNo in $stdClass","danger");
+                <!-- <div class="col-md-4">
+                  <label for="ClassGrade">Student Class</label>
+                  <fieldset class="form-group">
+                    <select class="form-control custom-select" name="ClassGrade" id="ClassGrade">
+                      <option value="">Choose...</option>
+                      <?php //echo $Administration->get_classroom_InDropDown_list(); 
+                      ?>
+                    </select>
+                  </fieldset>
+                </div> -->
+                <div class="col-md-7">
+                  <label for="RegNo">Enter Student Registration Number</label>
+                  <fieldset class="form-group">
+                    <input type="text" autocomplete="off" class="form-control to-uppercase" name="RegNo"
+                      placeholder="2021C26313xxxx" style="text-transform: uppercase;">
+                    <!-- oninput="this.value=this.value.toUpperCase();" -->
+                  </fieldset>
+                </div>
+                <div class="col-md-5 d-flex align-items-center">
+                  <button type="submit" class="btn btn-dark btn-block glow users-list-clear mb-0"
+                    name="submit_search_btn">Get Payment Details</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- filter student ends -->
+          <div class="card-body">
+            <?php
+            if (isset($_POST['submit_search_btn'])) {
+              // code...
+              // $stdClass = $Configuration->Clean($_POST['ClassGrade']);
+              $stdRegNo = $Configuration->Clean($_POST['RegNo']);
+
+              if ($Configuration->isEmptyStr($stdRegNo)) {
+                echo $Alert->alert_msg("Notice: Please Enter the student admission No to proceed", "danger");
+              } else {
+                $search_data =  $Student->filter_students_by_payments($stdRegNo);
+                if ($search_data) { ?>
+            <div class="table-responsive">
+              <table class="table osotechDatatable table-hover table-bordered">
+                <thead class="text-center">
+                  <tr>
+                    <th>PASSPORT</th>
+                    <th>FULL NAME</th>
+                    <th>ADMISSION NO</th>
+                    <th>CLASS</th>
+                    <th>TOTAL FEE</th>
+                    <th>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  <tr>
+                    <td><?php if ($search_data->stdPassport == NULL || $search_data->stdPassport == "") : ?>
+
+                      <?php if ($search_data->stdGender == "Male") : ?>
+                      <img src="../schoolImages/students/male.png" width="80" alt="photo"
+                        style="border-radius: 10px;border: 3px solid deepskyblue;">
+                      <?php else : ?>
+                      <img src="../schoolImages/students/female.png" width="80" alt="photo"
+                        style="border-radius: 10px;border: 3px solid deepskyblue;">
+                      <?php endif; ?>
+                      <?php else : ?>
+                      <img src="../schoolImages/students/<?php echo $search_data->stdPassport; ?>" width="80"
+                        alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
+                      <?php endif ?>
+                    </td>
+                    <td><?php echo ucfirst($search_data->full_name) ?> </td>
+                    <td><?php echo strtoupper($search_data->stdRegNo) ?></td>
+                    <td><?php echo strtoupper($search_data->studentClass) ?></td>
+                    <td>
+                      <h3 class="text-info">
+                        &#8358;<?php echo number_format($Administration->get_sum_of_allocated_fee_by_className($search_data->studentClass), 2) ?>
+                      </h3>
+                    </td>
+                    <td>
+                      <a
+                        href="student_payment_info?std_regNo=<?php echo base64_encode(urlencode(($search_data->stdRegNo))); ?>&stuId=<?php echo base64_encode(urlencode(($search_data->stdId))); ?>&stuClass=<?php echo base64_encode(urlencode(($search_data->studentClass))) ?>"><button
+                          type="button" class="btn btn-dark btn-sm">Pay</button></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <?php } else {
+                  echo $Alert->alert_msg("Notice: No Record found!", "danger");
+                }
+              }
             }
-          }
-        }
-         ?>
-      </div>
-    </div>
+            ?>
+          </div>
+        </div>
         </div>
       </div>
     </div>
