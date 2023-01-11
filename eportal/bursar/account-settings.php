@@ -7,7 +7,7 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo ucwords($staff_data->full_name);?> || <?php echo $lang['webtitle']?></title>
+    <title><?php echo $SmappDetails->school_name;?> :: <?php echo ucwords($staff_data->full_name);?></title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->
@@ -101,8 +101,11 @@ require_once "helpers/helper.php";
                                     aria-labelledby="account-pill-general" aria-expanded="true">
                                     <div class="media text-center">
                                         <a href="javascript: void(0);">
-                                            <img src="../schlogo.jpg"
-                                                class="rounded mr-75" alt="profile image" height="100" width="100" style="border: solid black 2px; border-radius: 20px;">
+                                            <?php if ($staff_data->staffPassport==NULL || $staff_data->staffPassport==""): ?>
+    <img src="../author.jpg" width="150" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+      <?php else: ?>
+        <img src="../schoolImages/staff/<?php echo $staff_data->staffPassport;?>" width="150" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+    <?php endif ?>
                                         </a>
                                         
                                     </div>
@@ -211,7 +214,11 @@ require_once "helpers/helper.php";
                                             <p class="text-muted ml-1 mt-50"><small class="text-danger"><em>Allowed JPG or PNG Only. Max size of 100kB</em></small></p>
                                         </div>
                                         <div class="myPreview" style="display: none;">
-                                          <img src="../schlogo.jpg" width="100" height="100" alt="profile-image" style="border: solid darkgreen 2px; border-radius: 20%;">
+                                         <?php if ($staff_data->staffPassport==NULL || $staff_data->staffPassport==""): ?>
+    <img src="../author.jpg" width="150" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+      <?php else: ?>
+        <img src="../schoolImages/staff/<?php echo $staff_data->staffPassport;?>" width="150" alt="photo" style="border-radius: 10px;border: 3px solid darkblue;">
+    <?php endif ?>
                                         </div>
                                         <h3 id="osotech-result"></h3>
                                         <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
@@ -225,7 +232,7 @@ require_once "helpers/helper.php";
                                     aria-labelledby="account-pill-password" aria-expanded="false">
                                     <h4 class="text-center text-muted"> UPDATE ACCOUNT PASSWORD</h4>
                                     <form class="validate-form" id="password-update-form">
-                                      <div class="col-md-12 text-center" id="myResponseText"></div>
+                                     <!--  <div class="col-md-12 text-center" id="myResponseText"></div> -->
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
@@ -494,8 +501,8 @@ require_once "helpers/helper.php";
       $.post("../actions/actions",UPDATEPWDFORM.serialize(),function(data){
         setTimeout(()=>{
           $(".__loadingBtn__").html('Save Changes').attr("disabled",false);
-          $("#myResponseText").html(data);
-        },1000);
+          $("#server-response").html(data);
+        },500);
       })
     });
 
@@ -523,8 +530,8 @@ require_once "helpers/helper.php";
         $.post("../actions/actions",myData,function(result){
             setTimeout(()=>{
                  $(".resend-btn").html('Resend Confirmation');
-            $("#resendResponse").html(result);
-            },1500);
+            $("#server-response").html(result);
+            },500);
         })
     })
 
@@ -538,25 +545,10 @@ require_once "helpers/helper.php";
       $.post("../actions/actions",UPDATE_BANK_FROM.serialize(),function(res_data){
         setTimeout(()=>{
           $(".__loadingBtn3__").html('Save Changes').attr("disabled",false);
-          $("#myResponseText3").html(res_data);
-        },1000);
+          $("#server-response").html(res_data);
+        },500);
       })
     })
-
-    //upload photo start
-    const UPLOADPHOTOFORM = $("#upload_avatar_photo_form");
-    UPLOADPHOTOFORM.on("click", function(e){
-      e.preventDefault();
-     
-    })
-
-    //when update profile details form is submitted
-
-
-    /*$("#myavatar").on("change", function(e){
-      var file = e.target.files[0].name;
-      $("#osotech-result").html(file + " is the selected file");
-    })*/
   })
 </script>
     <!-- END: Page JS-->

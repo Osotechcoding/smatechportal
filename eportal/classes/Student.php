@@ -2239,4 +2239,25 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		return $this->response;
 
 	}
+	  /**
+   * Undocumented function
+   *
+   * @param string $passport
+   * @param string $gender
+   * @return string $imagePath
+   */
+  public function displayStudentPassport(string $passport, string $gender) : string 
+  {
+    if($passport == NULL || $passport == ""){
+      if($gender == "Male"){
+          $imagePath = APP_ROOT."schoolImages/students/male.png";
+        }else{
+          $imagePath = APP_ROOT."schoolImages/students/female.png";
+        }
+  }else{
+    $imagePath = APP_ROOT."schoolImages/students/".$passport;
+  }
+
+  return $imagePath;
+  }
       }

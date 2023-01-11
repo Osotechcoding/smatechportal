@@ -76,7 +76,7 @@
                 </div>
               </div>
               <!--  -->
-              <input type="hidden" name="paidTo" value="<?php echo $_SESSION['ADMIN_TOKEN_ID'];?>">
+              <input type="hidden" name="paidTo" value="<?php echo $_SESSION['STAFF_SES_ID'];?>">
                 <input type="hidden" name="student_id" value="<?php echo $stuId;?>">
                 <input type="hidden" name="paymentId" id="paymentId">
                 <input type="hidden" name="std_class" value="<?php echo $stuClass;?>">

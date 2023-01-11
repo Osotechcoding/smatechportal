@@ -1,8 +1,11 @@
 <?php 
 require_once "helpers/helper.php";
  ?>
-
  <?php 
+  function redirect___(){
+     header("Location: ./make_payment");
+     exit();
+ }
 $request_method = $_SERVER['REQUEST_METHOD'];
 if ($request_method ==="GET") {
  
@@ -14,16 +17,13 @@ if ($request_method ==="GET") {
   if ($student_data) {
   $fetch_details = $Student->get_single_student_details_by_regId($stuId,$std_regNo);
   }else{
-    header("location: ./make_payment");
-  exit();
+  redirect___();
   }
  }else{
-  header("location: ./make_payment");
-  exit();
+ redirect___();
  }
 }else{
-  header("location: ./make_payment");
-  exit();
+  redirect___();
 }
 
   ?>
@@ -33,7 +33,7 @@ if ($request_method ==="GET") {
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo strtoupper($fetch_details->full_name);?> - <?php echo __OSO_APP_NAME__ ?></title>
+    <title><?php echo $SmappDetails->school_name; ?> :: <?php echo strtoupper($fetch_details->full_name);?></title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
     <!-- include dataTableHeaderLink.php -->
   </head>
@@ -58,7 +58,7 @@ if ($request_method ==="GET") {
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
                   </li>
-                  <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo strtoupper($_SESSION['STAFF_ROLE']);?></a>
+                  <li class="breadcrumb-item"><a href="./"><?php echo strtoupper($_SESSION['STAFF_ROLE']) ?></a>
                   </li>
                   <li class="breadcrumb-item active"><?php echo strtoupper($fetch_details->full_name);?> PAYMENTS
                   </li>
@@ -117,9 +117,9 @@ if ($request_method ==="GET") {
         <!-- Revenue Growth Chart Starts -->
       </div>
      <div class="card">
-      <div class="card-header">
-          <a href="fee_component"> <button type="button" class="btn btn-outline-warning btn-md btn-round" > Results Info </button></a>
-        </div>
+      <!--<div class="card-header">-->
+      <!--    <a href="fee_component"> <button type="button" class="btn btn-outline-warning btn-md btn-round" > Results Info </button></a>-->
+      <!--  </div>-->
       <div class="card-body">
         <div class="table-responsive">
       <table class="table osotechDatatable table-hover">
@@ -194,10 +194,15 @@ if ($request_method ==="GET") {
       </div>
     </div>
     <!-- END: Content-->
+
+  
     </div>
-    <?php include("../template/updateStuFeeModal.php");?>
+   
+
+    <?php include("template/updateStuFeeModal.php");?>
+
      <!-- BUS MODAL Start -->
-   <?php include ("../template/StuPaymentFeeModal.php");?>
+   <?php include ("template/StuPaymentFeeModal.php");?>
     <!-- BUS MODAL  END -->
     <!-- BEGIN: Footer-->
   <?php include ("../template/footer.php"); ?>

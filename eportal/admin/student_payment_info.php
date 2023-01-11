@@ -161,25 +161,10 @@ if ($request_method ==="GET") {
               echo '<span class="badge badge-warning badge-md"> No Record</span>';
             }
            ?></td>
-          <td><div class="btn-group dropdown mb-1">
-            <button type="button" class="btn btn-dark">Options</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           <div class="dropdown-menu">
-            <?php if ($payment_records):?>
-              <?php if ($payment_records->payment_status=='2'): ?>
-                <?php else: ?>
-            <a class="dropdown-item text-warning update_student_fee_btn" data-term="<?php echo $activeSess->term_desc;?>" data-session="<?php echo $activeSess->session_desc_name;?>" data-payment="<?php echo $payment_records->paymentId;?>" data-fee="<?php echo $feeType_data->feeType;?>" data-student="<?php echo $std_regNo;?>" data-id="<?php echo $stuId; ?>" data-stdroom="<?php echo $value->studentClass;?>" href="javascript:void(0);"><span class="fa fa-edit"></span>&nbsp;Update Payment</a>
-              <?php endif ?>
-              
-              <?php else: ?>
-            <a class="dropdown-item text-success make_payment_btn" href="javascript:void(0);" data-fee="<?php echo $feeType_data->feeType;?>" data-student="<?php echo $std_regNo;?>" data-id="<?php echo $stuId; ?>" data-stdClass="<?php echo $value->studentClass;?>" data-amount="<?php echo $value->amount; ?>"><span class="fa fa-edit"></span>&nbsp;Make Payment</a>
-            <?php endif ?>
-              <a class="dropdown-item text-info" href="student_reciept_list?std_regNo=<?php echo base64_encode(urlencode(($std_regNo)));?>&stuId=<?php echo base64_encode(urlencode(($stuId)));?>&stuClass=<?php echo base64_encode(urlencode(($stuClass)));?>"><span class="fa fa-address-card"></span>&nbsp; Receipt List</a>
-
-            </div>
-          </div></td>
+          <td> <?php if ($payment_records):?>
+            
+            <a class="text-info" href="student_reciept_list?std_regNo=<?php echo base64_encode(urlencode(($std_regNo)));?>&stuId=<?php echo base64_encode(urlencode(($stuId)));?>&stuClass=<?php echo base64_encode(urlencode(($stuClass)));?>"><span class="fa fa-address-card"></span>Receipt</a>
+          <?php endif ?></td>
         </tr>
             <?php
           }
@@ -199,7 +184,7 @@ if ($request_method ==="GET") {
     </div>
    
 
-    <?php include("template/updateStuFeeModal.php");?>
+    <?php //include("template/updateStuFeeModal.php");?>
 
      <!-- BUS MODAL Start -->
    <?php include ("template/StuPaymentFeeModal.php");?>

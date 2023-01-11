@@ -255,4 +255,24 @@ class Osotech
     }
     return $ourStamp;
   }
+  /**
+   * Undocumented function
+   *
+   * @param string $passport
+   * @param string $gender
+   * @return string $imagePath
+   */
+  public function displayStudentPassport(string $passport, string $gender) : string 
+  {
+    if($passport == NULL || $passport == ""){
+      if($gender == "Male"){
+          $imagePath = APP_ROOT."eportal/schoolImages/students/male.png";
+        }else{
+          $imagePath = APP_ROOT."eportal/schoolImages/students/female.png";
+        }
+  }else{
+    $imagePath = APP_ROOT."eportal/schoolImages/students/".$passport;
+  }
+  return $imagePath;
+  }
 }

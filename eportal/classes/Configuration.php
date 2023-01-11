@@ -263,7 +263,7 @@ $ denotes the end
 
   public function get_schoolLogoImage()
   {
-    $schoolDatas = self::getConfigData();
+    $schoolDatas = $this->getConfigData();
     //school real logo 
     $schoolLogo = $schoolDatas->school_logo;
     if ($schoolLogo == NULL || $schoolLogo == "") {

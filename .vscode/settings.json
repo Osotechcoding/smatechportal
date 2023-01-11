@@ -12,7 +12,7 @@
     "editor.tabCompletion": "on",
     "editor.formatOnSave": false,
     "editor.lineHeight": 22,
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 2,
     "explorer.autoReveal": false,
     "editor.mouseWheelZoom": true,
     "editor.cursorBlinking": "phase",

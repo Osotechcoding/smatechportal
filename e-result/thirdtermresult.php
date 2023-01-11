@@ -34,6 +34,7 @@ $schl_session_data = $Osotech->get_school_session_info();
 //get attendance records
 
 $attendance_records = $StudentResult->getStudentAttendanceRecord($student_reg_number, $student_class, $term, $rsession);
+$Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,21 +81,9 @@ $attendance_records = $StudentResult->getStudentAttendanceRecord($student_reg_nu
       <b><?php echo $StudentResult->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
-    <?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
-    <?php if ($student_data->stdGender == "Male") : ?>
-    <img src="<?php echo APP_ROOT; ?>eportal/schoolImages/students/male.png" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php else : ?>
-    <img src="<?php echo APP_ROOT; ?>eportal/schoolImages/students/female.png" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php endif ?>
-    <?php else : ?>
-    <img src="<?php echo APP_ROOT; ?>eportal/schoolImages/students/<?php echo $student_data->stdPassport; ?>"
+    <img src="<?php echo $Passport; ?>"
       alt="passport"
       style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php endif ?>
-
-
     <div class="container-ca">
       <div class="cog-domain">
         <table style="table-layout: auto; width:100%;" id="congnitiveDomain">

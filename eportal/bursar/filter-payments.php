@@ -114,7 +114,7 @@ require_once "helpers/helper.php";
                   <div class="col-md-2">
                     <label for="pstatus">Payment Status</label>
                     <fieldset class="form-group">
-                        <select class="form-control" name="pstatus" id="pstatus">
+                        <select class="form-select form-control" name="pstatus" id="pstatus">
                             <option value="">Choose...</option>
                           <option value="1">Part Payment</option>
                           <option value="2">Complete Payment</option>
@@ -133,7 +133,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-2">
                     <label for="term">Term</label>
                     <fieldset class="form-group">
-                    <select class="form-control" name="term" id="term">
+                    <select class="form-select form-control" name="term" id="term">
                             <option value="">Choose...</option>
                            <option value="1st Term">1st Term</option>
                      <option value="2nd Term">2nd Term</option>
@@ -144,7 +144,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-2">
                     <label for="session">Session</label>
                     <fieldset class="form-group">
-                    <select class="form-control select2" name="session" id="session">
+                    <select class="form-control form-select" name="session" id="session">
                             <option value="">Choose...</option>
                            <?php echo $Administration->get_all_session_lists(); ?>
                         </select>

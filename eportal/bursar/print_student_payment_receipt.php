@@ -27,7 +27,7 @@ if ($request_method!=="GET") {
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo  ucwords($student_data->full_name); ?> || <?php echo $lang['webtitle'] ?></title>
+    <title><?php echo $SmappDetails->school_name ?> :: <?php echo  ucwords($student_data->full_name); ?> </title>
    <!-- include template/HeaderLink.php -->
 
    <?php include "../template/HeaderLink.php";?>
@@ -35,13 +35,6 @@ if ($request_method!=="GET") {
   <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Header-->
-    <?php //include "template/HeaderNav.php"; ?>
-    <!-- include headernav.php -->
-    <!-- END: Header-->
-    <!-- BEGIN: Main Menu-->
-    <?php// include "template/Sidebar.php";?>
-    <!-- include Sidebar.php -->
-    <!-- END: Main Menu-->
     <!-- BEGIN: Content-->
     <div class="app-content content">
       <div class="content-overlay"></div>
@@ -75,7 +68,6 @@ if ($request_method!=="GET") {
             </div>
           </div>
             <div class="text-info text-center">
-              
             </div>
           <!-- logo and title -->
           <div class="row my-2 my-sm-3">
@@ -85,7 +77,7 @@ if ($request_method!=="GET") {
             </div>
            
             <div class="col-sm-6 col-12 text-center text-sm-right order-1 order-sm-2 d-sm-flex justify-content-end mb-1 mb-sm-0">
-              <img src="result-asset/logo.png" alt="logo" height="100" width="100">
+              <img src="<?php echo $Configuration->get_schoolLogoImage();?>" alt="logo" width="100">
             </div>
           </div>
           <hr>
@@ -94,16 +86,16 @@ if ($request_method!=="GET") {
             <div class="col-sm-6 col-12 mt-1">
               <h6 class="invoice-from">FROM</h6>
               <div class="mb-1">
-                <span>GLORY SUPREME SCHOOL OTA.</span>
+                <span><?php  echo strtoupper($SmappDetails->school_name) ?></span>
               </div>
               <div class="mb-1">
-                <span>45,Olaotan Avenue, Ajao Estate, Lagos</span>
+                <span><?php  echo ucwords($SmappDetails->school_address) ?><br /> <?php  echo ucwords($SmappDetails->country) ?></span>
               </div>
               <div class="mb-1">
-                <span>enquiry@glorysupremeschool.com</span>
+                <span><?php echo $SmappDetails->school_email; ?></span>
               </div>
               <div class="mb-1">
-                <span>+234(803)-137-4443</span>
+                <span><?php echo $SmappDetails->school_phone; ?></span>
               </div>
             </div>
             <div class="col-sm-6 col-12 mt-1">
@@ -150,39 +142,35 @@ if ($request_method!=="GET") {
             </tbody>
           </table>
         </div>
-
         <!-- invoice subtotal -->
         <div class="card-body pt-0 mx-25">
           <hr>
           <div class="row">
-           <!--  <div class="col-4 col-sm-6 col-12 mt-75">
-              <p>Thanks for your business.</p>
-            </div> -->
-            <div class="col-8 col-sm-6 col-12 float-right justify-content-end mt-75" style="align-items: right;">
+            <div class="col-4 col-sm-6 col-12 mt-75">
+              <p>Thank You <span class="text-info"><?php echo $student_data->full_name;?></span></p>
+            </div>
+            <div class="col-8 col-sm-6 col-12 d-flex justify-content-end mt-75">
               <div class="invoice-subtotal">
                 <div class="invoice-calc d-flex justify-content-between">
-                  <span class="invoice-title">Subtotal</span>
-                  <span class="invoice-value">$76.00</span>
-                </div>
-                <hr>
-                <div class="invoice-calc d-flex justify-content-between">
-                  <span class="invoice-title">Fee Total</span>
+                  <span class="invoice-title">Total Fee</span>
                   <span class="invoice-value">&#8358; <?php echo number_format($get_data->total_fee,2);?></span>
                 </div>
+                <hr>
+              
                 <div class="invoice-calc d-flex justify-content-between">
                   <span class="invoice-title">Paid to date</span>
                   <span class="invoice-value">&#8358; <?php echo number_format($get_data->fee_paid,2);?></span>
                 </div>
                 <div class="invoice-calc d-flex justify-content-between">
                   <span class="invoice-title">Balance (NGN)</span>
-                  <span class="invoice-value">&#8358; <?php echo number_format($get_data->fee_due,2);?></span>
+                  <span class="invoice-value text-warning">&#8358; <?php echo number_format($get_data->fee_due,2);?></span>
                 </div>
               </div>
 
             </div>
+             
           </div>
         </div>
-        <div class="clearfix"></div>
       </div>
     </div>
     <!-- invoice action  -->

@@ -9,7 +9,7 @@
           <table id="table-marketing-campaigns" class="table table-borderless table-marketing-campaigns mb-0">
             <thead>
               <tr>
-                <th>Fullname</th>
+                <th>Full Name</th>
                 <th>Qualification</th>
                 <th>Application Type</th>
                 <th>Job Position</th>

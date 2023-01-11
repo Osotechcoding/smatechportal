@@ -13,9 +13,11 @@ $Result         = new Result();
 $Staff          = new Staff();
 $Configuration  = new Configuration();
 $Administration = new Administration();
-$Admin         = new Admin();
+$Admin          = new Admin();
 $Pin_serial     = new Pins();
 $Alert          = new Alert();
+$Payroll        = new Payroll();
+$Bus = new Bus();
 
 $Configuration->osotech_session_kick();
 $Configuration->check_session_data();
@@ -27,7 +29,6 @@ $SmappDetails = $Configuration->getConfigData();
 $staff_data = $Staff->get_staff_ById($staffId);
 $name_arr = explode(" ", $staff_data->firstName);
 /*STAFF SESS DETAILS*/
-
 //Session Details
 $session_data = $Administration->get_session_details();
 $activeSess = $Administration->get_active_session_details();
