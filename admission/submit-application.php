@@ -500,13 +500,13 @@ if(!$applicant_data){
                       </h4>
                       <center>
                       <div class="col-md-6" id="uploaded_passport">
-                              <img id="previewImg" width="200" src="asset/male.png" alt="Placeholder"
+                              <img id="previewImg" width="200" src="asset/placeholder.png" alt="placeholder"
                                 style="border: 5px solid darkblue;border-radius:10px;">
                               <h6 class="text-center text-muted">Image Size: <span id="ImageSize"></span></h6>
                             </div>
                             <div class="col-md-6 mb-3">
                             <div class="form-group">
-                              <i class="text-danger">Please Note that Passport size must not exceed 20KB and
+                              <i class="text-info">Please Note that Passport size must not exceed 20KB and
                                 dimension should be (100 x 100 pixels)</i>
                               <label for="student_passport" class="mb-2 text-danger">Choose Passport</label>
                               <input type="file" class="form-control custom-file form-control-lg" name="student_passport"
