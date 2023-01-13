@@ -9,7 +9,7 @@ $Osotech->osotech_session_kick();
 $schoolSesDetail = $Osotech->get_school_session_info();
 $StudentResult = new StudentResult();
 date_default_timezone_set("Africa/Lagos");
-if ($StudentResult->checkResultPortalStatus() === true) {
+if ($StudentResult->checkResultPortalStatus()) {
   header("Location: ../");
   exit();
 } ?>
@@ -28,7 +28,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
         <section class="bg-light" id="Result">
             <div class="container px-2">
                 <div class="">
-                <h1 class="fw-bolder text-center">Welcome to  <a href="<?php echo EPORTAL_ROOT; ?>">Student</a> Result Checker Portal</h1>
+                <h1 class="fw-bolder text-center">Welcome to  <a href="<?php echo EPORTAL_ROOT; ?>">Student</a> Result Portal</h1>
                
                 <h2 class="text-danger text-center fw-bolder"><span class="blinking">Public Notice!</span> </h2>
                 <p class="fet-text text-center blinking"><span><?php echo strtoupper(($schoolSesDetail->session_desc_name)) ?>
@@ -126,8 +126,8 @@ if ($StudentResult->checkResultPortalStatus() === true) {
      <input type="text" autocomplete="off" name="cardSerial_" id="cardSerial_"
     class="form-control form-control-lg" placeholder="**********">
   </div>
-<div class="mb-2">
-     <button type="submit" class="btn btn-dark btn-lg btn-block btn-round mb-2 __loadingBtn__" style="width:100%;">Check Result</button>  
+<div class="mt-4">
+     <button type="submit" class="btn btn-dark btn-block mb-2 __loadingBtn__" style="width:100%;">Check Result</button>  
 </div>
  
 </form>
@@ -157,7 +157,7 @@ if ($StudentResult->checkResultPortalStatus() === true) {
     const CHECK_RESULT_FORM = $("#checkResultForm");
     CHECK_RESULT_FORM.on("submit", function(e) {
       e.preventDefault();
-      $(".__loadingBtn__").html('<img src="rolling_loader.svg" width="30"> Please wait...').attr("disabled",
+      $(".__loadingBtn__").html('<img src="rolling.svg" width="20"> Please wait...').attr("disabled",
         true);
       $.post("./src/actions", CHECK_RESULT_FORM.serialize(), function(result) {
         setTimeout(() => {

@@ -14,7 +14,7 @@ class Osotech
   function __construct()
   {
     if ((substr($_SERVER['REQUEST_URI'], -4) == ".php") or (stripos($_SERVER['REQUEST_URI'], ".php") == true)) {
-      self::redirect_root("error");
+     $this->redirect_root("error");
     }
 
     $this->dbh = osotech_connect();
@@ -173,7 +173,7 @@ class Osotech
   }
   public function get_schoolLogoImage()
   {
-    $schoolDatas = self::getConfigData();
+    $schoolDatas =$this->getConfigData();
     //school real logo
     $schoolLogo = $schoolDatas->school_logo;
     if ($schoolLogo == NULL || $schoolLogo == "") {
@@ -233,7 +233,7 @@ class Osotech
 
   public function getSchoolSignature()
   {
-    $schoolDatas = self::getConfigData();
+    $schoolDatas =$this->getConfigData();
     //school real logo
     $signature = $schoolDatas->signature;
     if ($signature == NULL || $signature == "") {
@@ -245,7 +245,7 @@ class Osotech
   }
   public function getSchoolStamp()
   {
-    $schoolDatas = self::getConfigData();
+    $schoolDatas =$this->getConfigData();
     //school real logo
     $stamp = $schoolDatas->stamp;
     if ($stamp == NULL || $stamp == "") {

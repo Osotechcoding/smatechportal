@@ -509,9 +509,9 @@ class Blog
 
 	public function getSliderById($Id)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` WHERE id=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` WHERE id=?");
 		$this->stmt->execute([$Id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 		}
@@ -574,9 +574,9 @@ class Blog
 		} else {
 			$newFileName = __OSO_APP_NAME__ . "_" . uniqid() . "_." . $image_ext;
 			$file_destination = "../gallery/Sliders/" . $newFileName;
-			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` WHERE title=? LIMIT 1");
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` WHERE title=?");
 			$this->stmt->execute(array($slider_title));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$slider_title is already Created, Please check and try again!", __OSO_APP_NAME__ . " Says");
 				//limit the amount of slider to 5 for this version of smatech
 			} elseif ($this->checkMaximumSliderLimit()) {
@@ -628,8 +628,8 @@ class Blog
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl`");
 		$this->stmt->execute();
-		//max of 5 image sliders for non premium user
-		if( $this->stmt->rowCount() >= 5){
+		//max of 6 image sliders for non premium user
+		if( $this->stmt->rowCount() >= 6){
 		// 	maximum reached
 		 	return true;
 		}else{

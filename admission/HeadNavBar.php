@@ -20,14 +20,14 @@
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                                 <h1 class="display-5 fw-bolder text-white mb-2">Welcome to student admission portal</h1>
-                                <p class="lead fw-normal text-white mb-3">Please carefully read the instruction below on how to apply for our online admission!</p>
+                                <p class="lead fw-normal text-white mb-3">Please carefully read the instruction below on how to apply!</p>
                                 <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
                                     <a class="btn btn-primary btn-lg px-4 me-sm-3" href="<?php echo EPORTAL_ROOT; ?>" target="_blank">Student Portal</a>
                                     <a class="btn btn-outline-light btn-lg px-4" href="javascript:void(0);">Purchase Scratch Card</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="assets/scratch-Card2.jpg" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center mt-5"><img class="img-fluid rounded-3 my-5" src="assets/scratch-Card2.jpg" alt="..." /></div>
                     </div>
                 </div>
             </header>
