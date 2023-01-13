@@ -1,16 +1,18 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="<?php echo APP_ROOT; ?>"><img src="<?php echo $Osotech->get_schoolLogoImage(); ?>" alt="" class="img-fluid brand-logo" width="50" style="margin-right: 10px;"> <?php echo ucwords ($Osotech->getConfigData()->school_name); ?></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse text-white" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item text-white"><a class="nav-link" href="./">Home</a></li>
-                            <!-- <li class="nav-item text-white"><a class="nav-link" href="faq.html">FAQ</a></li> -->
-                             <li class="nav-item text-white"><a class="nav-link" href="javascript:void(0);">Help?</a><li>
-                        </ul>
-                    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <div class="container px-4">
+                <a class="navbar-brand" href="<?php echo APP_ROOT; ?>"><img src="<?php echo $Osotech->get_schoolLogoImage(); ?>" class="brand-logo img-fluid" alt="logo" width="50"> <?php echo ($Osotech->getConfigData()->school_name); ?></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="<?php echo APP_ROOT; ?>" target="_blank">HOME</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo EPORTAL_ROOT; ?>" target="_blank"> E-PORTAL</a></li>
+                        <li class="nav-item"> <a onclick="return confirm('Are you sure you anto to logout?');"
+      href="logout?action=logout&applicant=new"><button class="btn btn-dark" type="button"
+        style="color: #fff;">Logout</button></a> </li>
+                    </ul>
                 </div>
-            </nav>
+            </div>
+        </nav>
              <!-- Header-->
              <header class="bg-danger py-2">
                 <div class="container px-5">
@@ -25,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="asset/scratch-Card2.jpg" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="assets/scratch-Card2.jpg" alt="..." /></div>
                     </div>
                 </div>
             </header>

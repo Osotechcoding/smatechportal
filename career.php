@@ -87,7 +87,7 @@
                   </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                   <div class="form-group col-md-6">
                     <label for="phone">Phone Number</label>
                     <input class="form-control" id="phone" autocomplete="off" placeholder="Enter Number" type="number"

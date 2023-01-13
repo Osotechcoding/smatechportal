@@ -360,7 +360,7 @@ class Osotech
                   $student_photo_card_page = ADMISSION_PORTAL_ROOT . "photo-card?email=" .  $this->saltifyString($applicant_email);
                   $this->response = $this->alert_msg("success", "SUCCESS", "Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card") . '<script>setTimeout(()=>{
                     window.open("' . $student_photo_card_page . '","_blank", "top=50, left=50, width=800, height=900");$("#submitStudentApplicationForm")[0].reset();
-                    },1000); window.location.href="./";</script>';
+                    },1000);</script>';
                 }
               }
             }
