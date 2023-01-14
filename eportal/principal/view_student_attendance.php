@@ -73,22 +73,13 @@ require_once "helpers/helper.php";
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="student_class"> Class</label>
-                    <select name="student_class" id="student_class" class="form-control select2" style="width: 100%;">
+                    <select name="student_class" id="student_class" class="form-control form-select">
                       <option value="">Choose...</option>
                      <?php echo $Administration->get_classroom_InDropDown_list();?>
                     </select>
                   </div>
                 </div>
-                <!-- <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="rollType"> Class</label>
-                    <select name="rollType" id="rollType" class="form-control custom-select" style="width: 100%;">rollType
-                      <option value="">Choose...</option>
-                     <option value="Present">Present</option>
-                     <option value="Absent">Absent</option>
-                    </select>
-                  </div>
-                </div>     -->            
+                    
                  <div class="col-md-6">
                   <div class="form-group">
                     <label for="att_date">Attendance Date</label>

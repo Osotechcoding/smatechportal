@@ -70,7 +70,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="comment_class"> Class</label>
-                    <select name="comment_class" id="comment_class" class="form-control select2">
+                    <select name="comment_class" id="comment_class" class="form-control form-select">
                       <option value="" selected>Choose...</option>
                       <!-- show all the uploaded comment by class name -->
                       <?php echo $Result->fetchUploadedResultByClass(); ?>

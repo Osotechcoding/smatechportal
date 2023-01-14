@@ -35,9 +35,13 @@ require_once "helpers/helper.php";
                 </li>
                 <li class="breadcrumb-item"><a href="#"><?php echo $_SESSION['ADMIN_SES_TYPE']; ?></a>
                 </li>
-                <li class="breadcrumb-item active"><a href="studentcsvupload"
+                <?php if ($Admin->isSuperAdmin($admin_data->adminId)){?>
+                  <li class="breadcrumb-item active"><a href="studentcsvupload"
                     style="color:red;font-weight:700;">Register Bulk Student</a>
                 </li>
+                <?php
+                }?>
+               
               </ol>
             </div>
           </div>
@@ -59,9 +63,12 @@ require_once "helpers/helper.php";
               <div class="text-center">
 
                 <h2 class="text-center mt-1">Student Registration Form</h2>
-                <h5 class="text-bold">Click here to <a href="studentcsvupload"
+                <?php if ($Admin->isSuperAdmin($admin_data->adminId)){?>
+                  <h5 class="text-bold">Click here to <a href="studentcsvupload"
                     style="color:red;font-weight:700;">Register </a>Bulk
                   Student</h5>
+                  <?php
+                }?>
               </div>
               <div class="card-body">
                 <form class="form form-vertical" id="create_new_student_form">

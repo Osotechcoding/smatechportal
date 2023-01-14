@@ -921,27 +921,21 @@ class Result
 	public function uploadTermyStudentAttendance($data)
 	{
 		$total_count 	= $data['total_count'];
-		$auth_pass 		= $data['auth_pass'];
 		$term 			= $data['term'];
 		$schl_open 			= $data['schl_open'];
 		$student_class 	= $data['_attendance_class'];
 		$school_session = $data['school_session'];
 		$teacher = $data['teacher_name'];
 		//check for empty values 
-		if ($this->config->isEmptyStr($auth_pass)) {
-			$this->response = $this->alert->alert_toastr("warning", "You need to Authenticate this Upload!", __OSO_APP_NAME__ . " Says");
-		} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
-			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
-		} elseif (!$this->config->check_user_activity_allowed("upload_attendance")) {
+		if (!$this->config->check_user_activity_allowed("upload_attendance")) {
 			$this->response = $this->alert->alert_toastr("error", "Student attendance Uploading is not allowed at the moment!", __OSO_APP_NAME__ . " Says");
 		} else {
 			//loop through all the student involved
 			for ($i = 0; $i < (int)$total_count; $i++) {
 				$student_regNo = $data['stureg'][$i];
 				$present 	= 	$data['present_time'][$i];
-				$absent 	= 	$data['absent_time'][$i];
 				//check for empty comment
-				if ($this->config->isEmptyStr($present) || $this->config->isEmptyStr($absent)) {
+				if ($this->config->isEmptyStr($present)) {
 					$this->response = $this->alert->alert_toastr("error", "Invalid submission, Please check your inputs and try again!", __OSO_APP_NAME__ . " Says");
 				} else {
 					//check for duplicate comment upload
@@ -953,6 +947,7 @@ class Result
 					} else {
 						//let upload the comment now
 						try {
+							$absent = (int)($schl_open - $present);
 							$date = date("Y-m-d h:i:s");
 							$this->dbh->beginTransaction();
 							$this->stmt = $this->dbh->prepare("INSERT INTO `visap_student_attendance_tbl` (stdRegNo,stdGrade,school_open,present,`absent`,term,schl_session,uploaded_by,uploaded_at) VALUES (?,?,?,?,?,?,?,?,?);");
@@ -973,7 +968,6 @@ class Result
 		}
 
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function showAttendanceRecord($grade, $term, $session)

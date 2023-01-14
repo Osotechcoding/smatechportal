@@ -445,6 +445,22 @@ class Administration
 		}
 		return $this->response;
 	}
+
+	//showing the list of all the registered subjects for a class
+	public function getAllRegisteredSubjectInDropDown_list(string $grade)
+	{
+		$this->response = "";
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_registered_subject_tbl` WHERE `subject_class`=? ORDER BY subject_name ASC LIMIT 50");
+		$this->stmt->execute([$grade]);
+		if ($this->stmt->rowCount() > 0) {
+			while ($row = $this->stmt->fetch()) {
+				$this->response .= '<option value="' . $row->subject_name . '">' . $row->subject_name . '</option>';
+			}
+		} else {
+			$this->response = false;
+		}
+		return $this->response;
+	}
 	//Subject management methods end
 	//Fee management methods start
 	public function create_fee_component($data)

@@ -62,10 +62,10 @@ require_once "helpers/helper.php";
           <form class="form form-vertical" action="" method="POST">
             <div class="form-body">
               <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="comment_class"> Class</label>
-                    <select name="comment_class" id="comment_class" class="form-control select2">
+                    <select name="comment_class" id="comment_class" class="form-control form-select">
                       <option value="" selected>Choose...</option>
                       <!-- show all the uploaded comment by class name -->
                       <?php echo $Result->fetchUploadedResultByClass(); ?>
@@ -74,7 +74,7 @@ require_once "helpers/helper.php";
                   </div>
                 </div>
                 
-                <div class="col-md-5">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="comment_term">Result Term</label>
                    <select name="comment_term" class="form-control">
@@ -85,7 +85,7 @@ require_once "helpers/helper.php";
                   </select>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label for="comment_sess">Academic Session</label>
                     <input type="text" id="comment_sess" class="form-control" name="comment_sess" value="<?php echo $activeSess->session_desc_name;?>" readonly>

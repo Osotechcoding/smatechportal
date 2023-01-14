@@ -7,7 +7,7 @@ if (!isset($_SESSION['resultmi']) || $_SESSION['resultmi'] == "") {
   exit(0);
 }
 
-$dbh = $con->osotech_connect();
+$dbh = osotech_connect();
 
 $result_regNo = $_SESSION['result_regNo'];
 if (isset($_SESSION['resultmi'])) {
@@ -26,25 +26,8 @@ if (isset($_SESSION['resultmi'])) {
 $student_data = $Student->get_student_data_ByRegNo($student_reg_number);
 $schl_session_data = $Administration->get_session_details();
 //get time present and absent
-$pre = 'Present';
-$ab = 'Absent';
-$timePresent = $Student->get_student_attendance_details($student_reg_number, $student_class, $pre, $term, $rsession);
-$timeAbsent = $Student->get_student_attendance_details($student_reg_number, $student_class, $ab, $term, $rsession);
-
-$presentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$presentQuery->execute(array($student_reg_number, $student_class, $pre, $term, $rsession));
-if ($presentQuery->rowCount() > 0) {
-  $rows = $presentQuery->fetch();
-  $timePresent = $rows->cnt;
-}
-
-//Time absent
-$absentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$absentQuery->execute(array($student_reg_number, $student_class, $ab, $term, $rsession));
-if ($absentQuery->rowCount() > 0) {
-  $rows = $absentQuery->fetch();
-  $timeAbsent = $rows->cnt;
-}
+$attendance_records = $Result->getStudentAttendanceRecord($student_reg_number, $student_class, $term, $rsession);
+$Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,8 +36,10 @@ if ($absentQuery->rowCount() > 0) {
   <?php include_once("../template/MetaTag.php"); ?>
   <title><?php echo ucwords($SmappDetails->school_name); ?> :: <?php echo ucwords($student_data->full_name); ?> Report
     Card for <?php echo $schl_session_data->active_session; ?> </title>
-  <link rel="stylesheet" href="result.css" />
-
+  <!-- <link rel="stylesheet" href="result-css.php" /> -->
+<?php 
+include "result-css.php";
+?>
 </head>
 
 <body>
@@ -147,7 +132,7 @@ if ($absentQuery->rowCount() > 0) {
                 $firstTermTotal = $stmt4->fetch();
                 $_firstTermTotal = $firstTermTotal->overallMark;
               } else {
-                $_firstTermTotal = '-';
+                $_firstTermTotal = '0';
               }
               ?>
 
@@ -308,15 +293,15 @@ if ($absentQuery->rowCount() > 0) {
           </thead>
           <tr>
             <td>No of Times School Opened </td>
-            <td><?php echo $schl_session_data->Days_open; ?> </td>
+            <td><?php echo $attendance_records->school_open; ?> </td>
           </tr>
           <tr>
             <td>No of Times Present </td>
-            <td><?php echo $timePresent; ?> </td>
+            <td><?php echo $attendance_records->present; ?> </td>
           </tr>
           <tr>
             <td>No of Times Absent </td>
-            <td><?php echo $timeAbsent; ?> </td>
+            <td><?php echo $attendance_records->absent ?> </td>
           </tr>
         </table>
         <br>
@@ -588,35 +573,12 @@ if ($absentQuery->rowCount() > 0) {
         <table style="table-layout: auto; width: 100%;" id="gradeAnalysis">
           <thead>
             <tr>
-              <td colspan="7"><b style="font-size: 9px;">GRADE ANALYSIS</b> </td>
-              <!-- <td><b style="font-size: 9px;">&nbsp;5&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;4&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;3&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;2&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;1&nbsp;</b> </td> -->
+              <td colspan="7"><b style="font-size: 9px;">SUBJECTS ANALYSIS</b> </td>
             </tr>
           </thead>
-          <tr style="text-align:center;">
-            <td style="font-size: 8px;">GRADE</td>
-            <td>&nbsp;A&nbsp;</td>
-            <td>&nbsp;B&nbsp;</td>
-            <td>&nbsp;C&nbsp;</td>
-            <td>&nbsp;D&nbsp;</td>
-            <td>&nbsp;E&nbsp;</td>
-            <td>&nbsp;F&nbsp;</td>
-          </tr>
-          <tr style="text-align:center;">
-            <td style="font-size: 8px;">NO</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
           <tr>
-            <td colspan="4">TOTAL SUBJECTS OFFERED</td>
-            <td colspan="3" style="text-align:center;"><?php echo intval($subjectOffered) ?></td>
+            <td colspan="3">TOTAL SUBJECTS OFFERED</td>
+            <td colspan="3" style="text-align:center; width:fit-content"><?php echo intval($subjectOffered) ?></td>
           </tr>
         </table>
       </div>
@@ -664,7 +626,9 @@ if ($absentQuery->rowCount() > 0) {
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
           Next Term Begins: <?php echo date("l jS F, Y", strtotime($schl_session_data->new_term_begins)); ?>.</h4>
         <br>
-        <img src="../sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+        <img src="<?php echo $Configuration->getSchoolSignature();
+        
+        ?>" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
 
       </div>
       <!-- <p style="font-size: 15px;">Promoted</p> -->
@@ -673,8 +637,8 @@ if ($absentQuery->rowCount() > 0) {
     <hr>
     <h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span
         style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
-    <button onclick="javascript:window.print();" type="button"
-      style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
+        <button onclick="javascript:window.print();" type="button"
+      style="background: black; color: white; margin-bottom: 15px;border-radius:10px; padding:2px 4px;">Print Now</button>
 
     <!-- End of result -->
   </section>

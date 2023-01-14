@@ -29,25 +29,8 @@ if (isset($_SESSION['resultmi'])) {
 $student_data = $Student->get_student_details_byRegNo($student_reg_number);
 $schl_session_data = $Administration->get_school_session_info();
 //get time present and absent
-$pre = 'Present';
-$ab = 'Absent';
-$timePresent = $Student->get_student_attendance_details($student_reg_number, $student_class, $pre, $term, $rsession);
-$timeAbsent = $Student->get_student_attendance_details($student_reg_number, $student_class, $ab, $term, $rsession);
-
-$presentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$presentQuery->execute(array($student_reg_number, $student_class, $pre, $term, $rsession));
-if ($presentQuery->rowCount() > 0) {
-  $rows = $presentQuery->fetch();
-  $timePresent = $rows->cnt;
-}
-
-//Time absent
-$absentQuery = $dbh->prepare("SELECT count(`attend_id`) as cnt FROM `visap_class_attendance_tbl` WHERE stdReg=? AND studentGrade=? AND roll_call=? AND term=? AND schl_session=?");
-$absentQuery->execute(array($student_reg_number, $student_class, $ab, $term, $rsession));
-if ($absentQuery->rowCount() > 0) {
-  $rows = $absentQuery->fetch();
-  $timeAbsent = $rows->cnt;
-}
+$attendance_records = $Result->getStudentAttendanceRecord($student_reg_number, $student_class, $term, $rsession);
+$Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +41,10 @@ if ($absentQuery->rowCount() > 0) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo ucwords($SmappDetails->school_name); ?> :: <?php echo ucwords($student_data->full_name); ?> Report
     Card for <?php echo $schl_session_data->active_session; ?> </title>
-  <link rel="stylesheet" href="result.css" />
+  <!-- <link rel="stylesheet" href="result-css.php" /> -->
+  <?php 
+  include("result-css.php");
+  ?>
 </head>
 
 <body>
@@ -169,11 +155,11 @@ if ($absentQuery->rowCount() > 0) {
                     $firstTermTotal = $stmt4->fetch();
                     $_firstTermTotal = $firstTermTotal->overallMark;
                   } else {
-                    $_firstTermTotal = '-';
+                    $_firstTermTotal = '0';
                   }
 
               ?>
-          <td style="text-align: center;"> <?php echo ucwords(strtolower($showResult->subjectName)); ?></td>
+         <td style="text-align: center;"> <?php echo ucwords(strtolower($showResult->subjectName)); ?></td>
           <td style="background-color: rgba(243, 241, 105, 0.267);"><?php echo intval($_firstTermTotal); ?></td>
           <td><?php echo intval($showResult->ca); ?></td>
           <td> <?php echo $showResult->exam; ?></td>
@@ -296,15 +282,15 @@ if ($absentQuery->rowCount() > 0) {
           </thead>
           <tr>
             <td>No of Times School Opened </td>
-            <td><?php echo $schl_session_data->Days_open; ?> </td>
+            <td><?php echo $attendance_records->school_open; ?> </td>
           </tr>
           <tr>
             <td>No of Times Present </td>
-            <td><?php echo $timePresent; ?> </td>
+            <td><?php echo $attendance_records->present; ?> </td>
           </tr>
           <tr>
             <td>No of Times Absent </td>
-            <td><?php echo $timeAbsent ?> </td>
+            <td><?php echo $attendance_records->absent ?> </td>
           </tr>
           <tr>
             <td style="background-color: rgba(21, 10, 10, .3);color: black;">Scratch Usage Info</td>
@@ -581,32 +567,9 @@ if ($absentQuery->rowCount() > 0) {
         <table style="table-layout: auto; width: 100%;" id="gradeAnalysis">
           <thead>
             <tr>
-              <td colspan="7"><b style="font-size: 9px;">GRADE ANALYSIS</b> </td>
-              <!-- <td><b style="font-size: 9px;">&nbsp;5&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;4&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;3&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;2&nbsp;</b> </td>
-                  <td><b style="font-size: 9px;">&nbsp;1&nbsp;</b> </td> -->
+              <td colspan="7"><b style="font-size: 9px;">SUBJECTS ANALYSIS</b> </td>
             </tr>
           </thead>
-          <tr style="text-align:center;">
-            <td style="font-size: 8px;">GRADE</td>
-            <td>&nbsp;A&nbsp;</td>
-            <td>&nbsp;B&nbsp;</td>
-            <td>&nbsp;C&nbsp;</td>
-            <td>&nbsp;D&nbsp;</td>
-            <td>&nbsp;E&nbsp;</td>
-            <td>&nbsp;F&nbsp;</td>
-          </tr>
-          <tr style="text-align:center;">
-            <td style="font-size: 8px;">NO</td>
-            <td>11</td>
-            <td>2</td>
-            <td>-</td>
-            <td>1</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
           <tr>
             <td colspan="4">TOTAL SUBJECTS OFFERED</td>
             <td colspan="3" style="text-align:center;"><?php echo intval($subjectOffered) ?></td>
@@ -620,29 +583,23 @@ if ($absentQuery->rowCount() > 0) {
         <h4>Class Teacher's Remark:</h4>
         <hr>
         <?php if ($teacher_res_comment = $Administration->get_student_result_comment_details($student_reg_number, $student_class, $term, $rsession)) { ?>
-        <p><b><?php echo ucwords($student_data->full_name); ?></b> <?php echo $teacher_res_comment->teacher_comment; ?>
+        <p> <?php echo $teacher_res_comment->teacher_comment; ?>
         </p>
         <?php
           // code...
         } ?>
         <p style="text-align: right;"><b>
-            <?php $staff_data_details = $Administration->get_class_teacher_class_name($student_class) ?>
-            <?php if ($staff_data_details) : ?>
-            <?php $staff_Gender = $staff_data_details->staffGender;
-              if ($staff_Gender == "Male") {
-                $tTitle = "Mr. ";
-              } else {
-                $tTitle = "Mrs. ";
-              }
-              echo $tTitle . $staff_data_details->firstName . " " . $staff_data_details->lastName;
-              ?>
-            <?php endif ?></b></p>
+            <?php $staff_data_details = $Administration->get_class_teacher_class_name($student_reg_number, $student_class, $term, $rsession) ?>
+            <?php if ($staff_data_details){
+        echo  $staff_data_details->class_teacher;
+            } ?>
+              </b></p>
       </div>
       <div class="principal">
         <h4>Head of School's Remark:</h4>
         <hr>
         <?php if ($principal_res_comment = $Administration->get_student_result_comment_details($student_reg_number, $student_class, $term, $rsession)) { ?>
-        <p><b><?php echo ucwords($student_data->full_name); ?></b>
+        <p>
           <?php echo $principal_res_comment->principal_coment; ?></p>
         <?php
           // code...
@@ -664,15 +621,16 @@ if ($absentQuery->rowCount() > 0) {
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
           Next Term Begins: <?php echo date("l jS F, Y", strtotime($schl_session_data->new_term_begins)); ?>.</h4>
         <br>
-        <img src="../sign.png" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
+        <img src="<?php echo $Configuration->getSchoolSignature();
+                  ?>" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
       </div>
     </div>
     <br>
     <hr>
     <h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span
-        style="float: right;"> Powered by: <?php echo __OSO_APP_NAME__ ?></span></h4>
+        style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
     <button onclick="javascript:window.print();" type="button"
-      style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
+      style="background: black; color: white; margin-bottom: 15px;border-radius:10px; padding:2px 4px;">Print Now</button>
 
     <!-- End of result -->
   </section>

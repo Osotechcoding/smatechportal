@@ -68,11 +68,17 @@ require_once "helpers/helper.php";
                       <div class="row">
                         <div class="col-md-4">
                           <div class="form-group">
-                            <label for="result_subject">Select Subject</label>
+                            <label for="result_subject">Registered Subject</label>
                             <select name="result_subject" id="result_subject"
                               class="custom-select form-control form-control-lg">
                               <option value="">Choose...</option>
-                              <?php echo $Administration->get_all_subjects_InDropDown_list(); ?>
+                              <?php 
+                              if($staff_assigned_class){
+                                 echo $Administration->getAllRegisteredSubjectInDropDown_list($staff_assigned_class);
+                              }else{
+                                echo $Administration->get_all_subjects_InDropDown_list();
+                              }
+                              ?>
                             </select>
                           </div>
                         </div>

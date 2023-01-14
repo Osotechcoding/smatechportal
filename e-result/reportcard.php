@@ -586,8 +586,8 @@ $Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student
     <hr>
     <h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span
         style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
-    <button onclick="javascript:window.print();" type="button"
-      style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
+        <button onclick="javascript:window.print();" type="button"
+      style="background: black; color: white; margin-bottom: 15px;border-radius:10px; padding:2px 4px;">Print Now</button>
     <!-- End of result -->
   </section>
 

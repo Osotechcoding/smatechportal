@@ -3,8 +3,8 @@
 <div id="sidebar-menu" class="sidebar-menu">
 <div class="header-left">
 <a href="./" class="logo">
-<img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="60" height="60" alt="">
-<span class="text-uppercase"><?php echo __OSO_APP_NAME__; ?></span>
+<img src="<?php echo $Configuration->get_schoolLogoImage();?>" width="50" height="50" alt="logo">
+<span class="text-uppercase"><?php echo strtoupper($SmappDetails->school_short_name);?></span>
 </a>
 </div>
 <ul class="sidebar-ul">

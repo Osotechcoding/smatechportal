@@ -3,6 +3,7 @@
 // @session_start();
 require_once "../languages/config.php";
 date_default_timezone_set("Africa/Lagos");
+include_once "../classes/Database.php";
 //create an autoload function
 spl_autoload_register(function ($filename) {
   require_once "../classes/" . ucfirst($filename) . ".php";

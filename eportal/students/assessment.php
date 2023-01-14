@@ -78,7 +78,7 @@
     <strong>Warning!</strong> Academic Term & Academic Session is Required!.
      </div></div>';
 	}else{?>
-<h3 class="mt-3 text-center mb-3 text-success">ASSESSMENT REPORT FOR <?php echo $term;?> TERM <?php echo $aca_session; ?>.</h3>
+<h3 class="mt-3 text-center mb-3 text-success">ASSESSMENT REPORT FOR <?php echo strtoupper($term) ;?> <?php echo $aca_session; ?>.</h3>
 <div class="row">
 <div class="col-lg-12 mb-3">
 <div class="table-responsive">
@@ -86,7 +86,7 @@
 <thead class="thead-light">
 <tr>
 <th>Subject Name</th>
-<th>Continous Assessment (40)</th>
+<th>Assessment (40)</th>
 <th>Examination (60)</th>
 <th>Overall (100)</th>
 </tr>
@@ -117,7 +117,7 @@ if ($filter_assessments) {
 	echo ' <div class="text-center col-md-12">
           <div class="alert alert-danger alert-dismissible fade show">
            <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Warning!</strong> No Result Found!.
+    <strong>Warning!</strong> No Record Found!.
      </div></div>';
 }
 

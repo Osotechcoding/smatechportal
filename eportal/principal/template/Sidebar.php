@@ -1,8 +1,8 @@
  <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-          <li class="nav-item mr-auto"><a class="navbar-brand" href="./">
-          <h2 class="brand-text mb-0"><?php echo $lang['owner'] ?></h2></a></li>
+          <li class="nav-item mr-auto"><a class="navbar-brand mb-2" href="./"><img class="logo" src="<?php echo $Configuration->get_schoolLogoImage();?>" width="40" height="40" alt="logo">
+          <h2 class="brand-text mb-0"><?php echo strtoupper($SmappDetails->school_short_name);?></h2></a></li>
           <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>
         </ul>
       </div>
@@ -65,7 +65,7 @@
           </li>
           <!-- STUDENT ENDS -->
          
-          <li class=" navigation-header text-truncate"><span data-i18n="FINANCIAL">FINANCIAL</span>
+          <!-- <li class=" navigation-header text-truncate"><span data-i18n="FINANCIAL">FINANCIAL</span>
           </li>
           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-money fa-1x" data-icon="retweet"></i><span class="menu-title text-truncate" data-i18n="Accounting">ACCOUNTING</span></a>
             <ul class="menu-content">
@@ -81,7 +81,7 @@
               </li>
                
             </ul>
-          </li>
+          </li> -->
           <li class=" navigation-header text-truncate"><span data-i18n="SCHOOL ACTIVITY">SCHOOL ACTIVITY</span>
           </li>
           <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-credit-card-alt fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="SCRATCH CARD">SCRATCH CARD</span></a>

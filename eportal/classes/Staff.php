@@ -844,15 +844,15 @@ class Staff
 				//compare the two tokens
 				if ($token !== $currentToken) {
 					//return false
-					return  false;
+					$this->response = false;
 				}else{
-					return true;
+					$this->response =true;
 				}
 			}else{
-				return false;
+				$this->response =false;
 			}
 		}
-		// return $this->response;
+		 return $this->response;
 	}
 
 	//delete toke upon logged out

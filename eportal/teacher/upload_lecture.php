@@ -222,7 +222,7 @@ iframe[seamless] {
                <div class="col-md-6">
                   <div class="form-group">
                   <label for="subject">LESSON SUBJECT</label>
-                <select name="subject" id="subject" class="select2 form-control">
+                <select name="subject" id="subject" class="form-select form-control">
                  <option value="">Choose...</option>
                 <?php echo $Administration->get_all_subjects_InDropDown_list();?>
                </select>
@@ -231,7 +231,7 @@ iframe[seamless] {
                 <div class="col-md-6">
                   <div class="form-group">
                   <label for="std_grade">UPLOAD FOR CLASS</label>
-               <select name="std_grade" id="std_grade" class="select2 form-control">
+               <select name="std_grade" id="std_grade" class="form-select form-control">
                   <option value="">Choose...</option>
                 <?php echo $Administration->get_classroom_InDropDown_list();?>
                </select>
@@ -240,7 +240,7 @@ iframe[seamless] {
                 <div class="col-md-6">
                      <div class="form-group">
                   <label for="posted_by">UPLOADED BY </label>
-                <select name="posted_by" id="posted_by" class="select2 form-control">
+                <select name="posted_by" id="posted_by" class="form-select form-control">
                  <option value="">--select--</option>
                 <?php echo $Staff->show_staff_indropdown_list() ?>
                </select>

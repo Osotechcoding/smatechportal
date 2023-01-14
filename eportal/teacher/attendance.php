@@ -170,13 +170,11 @@ require_once "helpers/helper.php";
                     <tr>
                       <th width="5%">S/N</th>
                       <th width="25%">Student Name</th>
-                      <th width="15%">School Opens</th>
-                      <th width="20%">Time Present</th>
-                      <th width="20%">Time Absent</th>
+                      <th width="15%">No of Time School Opens</th>
+                      <th width="20%">No of Time Present</th>
                     </tr>
                   </thead>
                   <tbody class="text-center">
-
                     <?php foreach ($getstudetNames as $student) : ?>
                     <?php
                             $total_count++;
@@ -196,8 +194,7 @@ require_once "helpers/helper.php";
                           value="<?php echo $timeOpen->Days_open ?> Days"></td>
                       <td><input type="number" name="present_time[]" class="form-control"
                           placeholder="No of Time Present">
-                      <td><input type="number" name="absent_time[]" class="form-control"
-                          placeholder="No of Time Absent">
+                     
                         <input type="hidden" name="total_count" value="<?php echo $total_count; ?>">
                       </td>
                     </tr>
@@ -209,19 +206,14 @@ require_once "helpers/helper.php";
               <div class="row">
                 <input type="hidden" name="action" value="upload_class_attendance_now_">
                 <input type="hidden" name="_attendance_class" value="<?php echo $attendance_class; ?>">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group">
                     <label>Class Teacher</label>
                     <input type="text" class="form-control" value="<?php echo ucwords($staff_data->full_name); ?>"
                       name="teacher_name" readonly>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Authentication Code</label>
-                    <input type="password" class="form-control" placeholder="**********" name="auth_pass">
-                  </div>
-                </div>
+                
               </div>
 
               <button class="btn btn-dark submit-btn btn-md mr-2 float-right mt-1 __loadingBtn__" type="submit"

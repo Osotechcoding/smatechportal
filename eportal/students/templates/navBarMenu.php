@@ -16,11 +16,8 @@
 <ul class="nav user-menu float-right">
  <li class="nav-item dropdown has-arrow">
 <a href="#" class=" nav-link user-link" data-toggle="dropdown">
-<span class="user-img"><?php if ($student_data->stdPassport ==NULL || $student_data->stdPassport == ""): ?>
-    <img src="assets/img/author.jpg" width="35" alt="passport" style="border:2px solid grey;border-radius: 10px;" class="rounded-circle">
-<?php else: ?>
-    <img src="../schoolImages/students/<?php echo $student_data->stdPassport;?>" width="35" alt="passport" style="border:2px solid darkblue;border-radius: 10px;" class="rounded-circle">
-<?php endif ?>
+<span class="user-img">
+<img src="<?php echo  $Passport;?>" width="35" alt="passport" style="border:2px solid darkblue;border-radius: 10px;" class="rounded-circle">
 <span class="status online"></span></span>
 <span><?php echo $_SESSION['STD_USERNAME'];?></span>
 </a>

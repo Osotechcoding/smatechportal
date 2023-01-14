@@ -63,7 +63,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="result_subject">Select Subject</label>
-                    <select name="result_subject" id="result_subject" class="select2 form-control form-control-lg">
+                    <select name="result_subject" id="result_subject" class="form-select form-control form-control-lg">
                       <option value="">Choose...</option>
                       <?php echo $Administration->get_all_subjects_InDropDown_list();?>
                     </select>
@@ -72,7 +72,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-4">
                   <div class="form-group">
                     <label for="result_class">Select Class</label>
-                     <select name="result_class" id="result_class" class="select2 form-control form-control-lg">
+                     <select name="result_class" id="result_class" class="form-select form-control form-control-lg">
                       <option value="">Choose...</option>
                       <?php echo $Administration->get_classroom_InDropDown_list();?>
                     </select>

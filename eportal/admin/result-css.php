@@ -1,7 +1,7 @@
-
+<style> 
 html {
   font-family:arial;
-  font-size: 9px;
+  font-size: 9.3px;
 }
 
 body {
@@ -84,21 +84,30 @@ tbody >tr:nth-child(odd) {
 }
 .signarea{
   width: 195px;
-  background-image: url(../stamp.png);
+  background-image: url(<?php echo $Configuration->getSchoolStamp();?>);
   background-repeat: no-repeat;
   background-size:contain;
 }
 .upperSection{
   display: flex;
+  flex-direction: grid;
+  gap: 2;
   margin-top: 5px;
 }
 .textArea {
+  width: 80%;
+  max-width: fit-content;
   text-align: center;
+  justify-items: center;
+ justify-content: center;
 }
 .schLogo{
-  width: 100px;
-  height: auto;
-    margin-top: 5px;
+  /* width: 100px; */
+  /* height: auto; */
+    margin-top: 20px;
+    width: 17%;
+    height: 17%;
+    border-radius: 20px !important;
 }
 .schScope{
   margin-top: 5px;
@@ -107,29 +116,53 @@ tbody >tr:nth-child(odd) {
 .schName{
   width: fit-content;
   text-align: center;
-  font-size: 18px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 24px;
+  text-shadow: -2px -2px 2px rgba(0, 0, 0, 0.6);
   line-height: 2px;
   color: red;
+  font-weight: 1000;
   margin-left: auto;
 }
 .textArea p:first-of-type{
   margin-top: 3px;
   /* background-color: red; */
-  justify-content: center;
   text-align: center;
+  justify-items: center;
+  justify-content: center;
   color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 14px;
   line-height: 20px;
   border-radius: 10px;
   width: fit-content;
   padding-left: 20px;
   padding-right: 20px;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 80px;
   font-weight: bold;
 }
-/* .osotech-style{
+.textArea p {
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+  color: black;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 12px;
+  border-radius: 10px;
+  width: fit-content;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: 80px;
+  font-weight: bold;
+}
+
+ .osotech-style{
   color:red;
   justify-content: center;
   align-items: center;
   margin-left: 20px;
-} */
+} 
+
+</style>

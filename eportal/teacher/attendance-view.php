@@ -158,7 +158,7 @@ require_once "helpers/helper.php";
                     <th width="15%">School Opens</th>
                     <th width="20%">Time Present</th>
                     <th width="19%">Time Absent</th>
-                    <th width="3%">Action</th>
+                   
                   </tr>
                 </thead>
                 <tbody class="text-center">
@@ -179,7 +179,7 @@ require_once "helpers/helper.php";
                     <td><input type="text" readonly class="form-control" value="<?php echo $attend->absent; ?> days">
 
                     </td>
-                    <td><button class="btn btn-danger btn-sm" type="button">Delete</button></td>
+                    <!-- <td><button class="btn btn-danger btn-sm" type="button">Delete</button></td> -->
                   </tr>
                   <?php endforeach; ?>
                 </tbody>

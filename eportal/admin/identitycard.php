@@ -10,6 +10,7 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
     exit();
   }
     $student_full_name = $student_data->stdSurName . " " . $student_data->stdFirstName . " " . substr($student_data->stdMiddleName, 0, 1);
+    $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
 } else {
     $Configuration->redirect("./ab_students");
     exit();
@@ -199,11 +200,10 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
             <div class="id-schtag">...<?php echo ($SmappDetails->school_slogan); ?>.</div>
             <div class="id-schaddr"><?php echo ucwords($Configuration->getConfigData()->school_address); ?>,
           <?php echo ucwords($Configuration->getConfigData()->school_state); ?></div>
-            <div><img src="../schoolImages/students/<?php echo $student_data->stdPassport; ?>" width="114" height="130" style="border-radius: 10px;border:2px solid black;margin-top:10px;"></div>
+            <div><img src="<?php echo $Passport; ?>" width="114" height="130" style="border-radius: 10px;border:2px solid black;margin-top:10px;"></div>
             <div class="id-studname"><?php echo $student_full_name;?></div>
             <div class="id-status"><span>Class:</span> <?php echo $student_data->studentClass;?> <span style="display: none;">(Library Prefect)</span></div>
             <div class="id-no"><?php echo $student_data->stdRegNo;?></div>
-
             <!-- background of the ID Front -->
             <div class="fet-back1"></div>
             <div class="fet-back2"></div>
@@ -222,12 +222,12 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
                 <p><em><b>Authorised Signature</b></em></p>
             </div>
             
-            <!-- <div class="down-part">
-                <img src="./barcode.gif" alt="barcode" width="100%" height="50">
-            </div> -->
+             <!-- <div class="down-part">
+                <img src="./barcode.gif" alt="barcode" width="100%" height="30">
+            </div>  -->
             <div class="watermark">
-                <p><?php echo ($SmappDetails->school_name); ?></p>
-                <p><?php echo ($SmappDetails->school_name); ?></p>
+                <p><?php echo ($SmappDetails->school_short_name); ?></p>
+                <p><?php echo ($SmappDetails->school_short_name); ?></p>
             </div>
             <div class="watermark2">
                 <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>">

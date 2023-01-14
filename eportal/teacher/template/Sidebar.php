@@ -1,9 +1,8 @@
  <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
    <div class="navbar-header">
      <ul class="nav navbar-nav flex-row">
-       <li class="nav-item mr-auto"><a class="navbar-brand" href="./">
-           <h2 class="brand-text mb-0"><?php echo $lang['owner'] ?></h2>
-         </a></li>
+     <li class="nav-item mr-auto"><a class="navbar-brand mb-2" href="./"><img class="logo" src="<?php echo $Configuration->get_schoolLogoImage();?>" width="40" height="40" alt="logo">
+          <h2 class="brand-text mb-0"><?php echo strtoupper($SmappDetails->school_short_name);?></h2></a></li>
        <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
              class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i
              class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block primary" data-ticon="bx-disc"></i></a></li>
@@ -29,10 +28,10 @@
        </li>
        <!-- RESULT -->
        <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-bar-chart fa-1x" data-icon="notebook"></i><span
-             class="menu-title text-truncate" data-i18n="Manage Results">REPORT SHEET</span></a>
+             class="menu-title text-truncate" data-i18n="REPORT SHEET">REPORT SHEET</span></a>
          <ul class="menu-content">
            <li class=" nav-item"><a href="examinationquestion"><i class="fa fa-briefcase fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Exam Question">Submit Questions</span></a>
+                 class="menu-title text-truncate" data-i18n="Submit Questions">Submit Questions</span></a>
            </li>
            <li class="nav-item"><a href="result_uploading"><i class="fa fa-upload fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Upload Result">Upload Results</span></a>
@@ -45,19 +44,12 @@
            </li>
            <!-- RESULT COMMENT SECTION -->
            <?php if ($staff_data->staffRole == "Class Teacher") : ?>
-           <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-check-square-o fa-1x"
-                 data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="Attendance">
-                 Attendance</span></a>
-             <ul class="menu-content">
-               <!-- student_attendance -->
-               <li class="nav-item"><a href="attendance"><i class="fa fa-edit fa-1x"></i><span
+            <li class="nav-item"><a href="attendance"><i class="fa fa-edit fa-1x"></i><span
                      class="menu-title text-truncate" data-i18n="Mark Attendance">Mark Attendance</span></a>
                </li>
                <li class="nav-item"><a href="attendance-view"><i class="fa fa-eye fa-1x"></i><span
                      class="menu-title text-truncate" data-i18n="View Attendance">View Attendance </span></a>
                </li>
-             </ul>
-           </li>
            <li class="nav-item"><a href="class_teacher_comment"><i class="fa fa-upload fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Result Comments"> Result Comments</span></a>
            </li>
@@ -76,10 +68,8 @@
            <li class=" nav-item"><a href="viewpsychomotor"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Psychomotor">View Psychomotor</span></a>
            </li>
-
            <?php endif ?>
            <!-- RESULT COMMENT SECTION -->
-
          </ul>
        </li>
        <!-- RESULT ENDS -->
@@ -87,15 +77,13 @@
        <!-- SUBJECT REGISTRATION -->
        <?php if ($staff_data->staffRole === "Class Teacher") : ?>
        <li class="nav-item"><a href="registerStudentSubject"><i class="fa fa-book fa-1x"></i><span
-             class="menu-title text-truncate" data-i18n="Subjects Offered"> Subjects Offered</span></a>
+             class="menu-title text-truncate" data-i18n="Subjects Offered"> Subjects</span></a>
        </li>
        <li><a class="d-flex align-items-center" href="mystudents"><i class="fa fa-graduation-cap"></i><span
              class="menu-item text-truncate" data-i18n="Students">Students</span></a>
        </li>
-
        <?php endif ?>
        <!-- SUBJECT REGISTRATION -->
-
        <!-- STUDENT ENDS -->
        <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-calendar fa-1x" data-icon="retweet"></i><span
              class="menu-title text-truncate" data-i18n="blog & event"> EVENTS</span></a>
@@ -113,16 +101,17 @@
              class="menu-item text-truncate" data-i18n="Virtual Lecture">Edit Profile</span></a>
        </li>
        <li>
+         <a class="d-flex align-items-center" href="../../" target="_blank"><i class="fa fa-globe"></i>
+           <span class="menu-item text-truncate"> <?php echo 'Visit Website' ?></span></a>
+
+       </li>
+       <li>
          <a class="d-flex align-items-center" onclick=" return confirm('<?php echo $lang["logout-sure?"]; ?>');"
            href="logout?action=logout"><i class="fa fa-power-off"></i>
            <span class="menu-item text-truncate"> <?php echo $lang['Logout'] ?></span></a>
 
        </li>
-       <li>
-         <a class="d-flex align-items-center" href="../../" target="_blank"><i class="fa fa-globe"></i>
-           <span class="menu-item text-truncate"> <?php echo 'Visit Website' ?></span></a>
-
-       </li>
+      
      </ul>
    </div>
  </div>

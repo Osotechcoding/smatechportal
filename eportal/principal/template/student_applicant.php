@@ -10,25 +10,23 @@
             <thead>
               <tr>
                 <th>Passport</th>
-                <th>FullName</th>
-                <th>Admission Class</th>
+                <th>Full Name</th>
+                <th>Admission Level</th>
                 <th>Application Number</th>
                 <th>Application Date</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Admission Status</th>
               </tr>
             </thead>
             <tbody>
              <?php 
           $all_active_students = $Student->get_all_students_by_status("pending");
           if ($all_active_students) {
-           foreach ($all_active_students as $students) {?>
+           foreach ($all_active_students as $students) { 
+            $Passport = $Student->displayStudentPassport($students->stdPassport,$students->stdGender);
+            ?>
             <tr>
              <td>
-              <?php if ($students->stdPassport ==""||$students->stdPassport ==NULL): ?>
-                <img src="../author.jpg" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
-                <?php else: ?>
-                  <img src="../schoolImages/students/<?php echo $students->stdPassport;?>" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
-              <?php endif ?>
+             <img src="<?php echo $Passport;?>" width="80" style="border-radius: 10px;border: 3px solid deepskyblue;" alt="student-passport">
               </td>
           <td><?php echo ucwords($students->stdSurName." ".$students->stdFirstName." ".$students->stdMiddleName) ?></td>
           <td><?php echo strtoupper($students->studentClass)?></td>
@@ -36,8 +34,7 @@
           <td><?php echo date("F j, Y",strtotime($students->stdApplyDate))?></td>
          <td>
           <div class="btn-group mb-1">
-            <a class="text-info" href="editstudentinfo?student-data=<?php echo($students->stdId);?>">
-              <button type="button" class="btn btn-dark btn-sm"><span class="fa fa-edit"></span></button></a> 
+            <span class="badge badge-pill badge-info badge-sm">Pending</span>
           </div>
           <!--  -->
         </td>

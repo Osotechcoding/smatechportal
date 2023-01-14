@@ -30,3 +30,4 @@
   if ($Student->checkStudentTokenExists($_SESSION['STD_USERNAME'], $_SESSION['STD_EMAIL'], $_SESSION['student_log_token']) === false) {
     $Configuration->destroy();
   }
+  $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);

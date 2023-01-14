@@ -1,4 +1,5 @@
 <?php
+@session_start();
 require_once "../languages/config.php";
 require_once "../classes/Database.php";
 date_default_timezone_set("Africa/Lagos");

@@ -72,7 +72,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-3">
                   <div class="form-group">
                    <label for="subject">Result Subject</label>
-                    <select name="subject" id="subject" class="select2 form-control">
+                    <select name="subject" id="subject" class="form-select form-control">
                       <option value="">Choose...</option>
                       <?php echo $Administration->get_all_subjects_InDropDown_list();?>
                     </select>
@@ -81,7 +81,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="result_class">STUDENT CLASS</label>
-                    <select name="result_class" id="result_class" class="select2 form-control form-control-lg">
+                    <select name="result_class" id="result_class" class="form-select form-control">
                       <option value="">Choose...</option>
                       <?php echo $Administration->get_classroom_InDropDown_list(); ?>
                     </select>
@@ -91,7 +91,7 @@ require_once "helpers/helper.php";
                  <div class="col-md-3">
                   <div class="form-group">
                     <label for="result_term">Term</label>
-                    <select name="result_term" class="custom-select form-control" id="">
+                    <select name="result_term" class="form-select form-control" id="">
                       <option value="">Choose...</option>
                       <option value="1st Term">1st Term</option>
                       <option value="2nd Term">2nd Term</option>
@@ -103,7 +103,7 @@ require_once "helpers/helper.php";
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="result_session"> Session</label>
-                    <select name="result_session" id="result_session" class="select2 form-control form-control-lg">
+                    <select name="result_session" id="result_session" class="form-select form-control">
                       <option value="">Choose...</option>
                       <?php echo $Administration->get_all_session_lists();?>
                     </select>

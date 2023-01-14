@@ -82,7 +82,13 @@ require_once "helpers/helper.php";
                             <label for="subject">Result Subject</label>
                             <select name="subject" id="subject" class="custom-select form-control">
                               <option value="">Choose...</option>
-                              <?php echo $Administration->get_all_subjects_InDropDown_list(); ?>
+                              <?php 
+                              if($staff_assigned_class){
+                                 echo $Administration->getAllRegisteredSubjectInDropDown_list($staff_assigned_class);
+                              }else{
+                                echo $Administration->get_all_subjects_InDropDown_list();
+                              }
+                              ?>
                             </select>
                           </div>
                         </div>

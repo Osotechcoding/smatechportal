@@ -153,7 +153,7 @@ $Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student
                     $firstTermTotal = $stmt4->fetch();
                     $_firstTermTotal = $firstTermTotal->overallMark;
                   } else {
-                    $_firstTermTotal = '-';
+                    $_firstTermTotal = '0';
                   }
 
               ?>
@@ -207,7 +207,6 @@ $Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student
           //id,student_class,subject,aca_session
           $stmt = $dbh->prepare("SELECT count(reportId) as total_sub FROM `visap_2nd_term_result_tbl` WHERE studentGrade=? AND stdRegCode=? AND aca_session=?");
           $stmt->execute(array($student_class, $student_reg_number, $rsession));
-          $stmt->execute(array($student_class));
           if ($stmt->rowCount() > 0) {
             $reSet = $stmt->fetch();
             $subjectOffered = $reSet->total_sub;
@@ -621,7 +620,7 @@ $Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student
       <div class="signarea">
         <h4
           style="font-size: 10px; text-align: center; background-color: rgba(192, 15, 15, 0.205); border-top: 1px solid red; margin-top: -0.7px; padding-top: 3px; padding-bottom: 3px; border-bottom: 1px solid red;">
-          Next Term Begins: <?php echo date("l jS F, Y", strtotime($schl_session_data->new_term_begins)); ?>.</h4>
+          Next Term Begins: <?php echo date("l jS F, Y", strtotime($schoolSesDetail->new_term_begins)); ?>.</h4>
         <br>
         <img src="<?php echo $Osotech->getSchoolSignature();
                   ?>" alt="" style="margin-left:40px; margin-top: -5px; margin-right:auto; width: 50%;">
@@ -631,8 +630,8 @@ $Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student
     <hr>
     <h4 style="margin-bottom: 20px;color: darkred;">Note: <b>Any alteration renders this result invalid.</b><span
         style="float: right;"> Powered by: <?php echo __OSOTECH__DEV_COMPANY__ ?></span></h4>
-    <button onclick="javascript:window.print();" type="button"
-      style="background: black; color: white; margin-bottom: 15px;">Print Now</button>
+        <button onclick="javascript:window.print();" type="button"
+      style="background: black; color: white; margin-bottom: 15px;border-radius:10px; padding:2px 4px;">Print Now</button>
 
     <!-- End of result -->
   </section>

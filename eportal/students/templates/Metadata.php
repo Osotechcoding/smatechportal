@@ -3,5 +3,5 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="description" content="<?php echo ucwords($SmappDetails->school_name); ?>,Online School Portal,Education is Light, Affordable School Fee,Online Admission Process">
     <meta name="keywords" content="Online Student Result Processing,Elementary School, Basic Classes, Primary classes, College, Staff Portal,Student Portal,Admin Portal, Online Admission">
-    <meta name="author" content="<?php echo __AUTHOR_NAME__;?>">
+    <meta name="author" content="<?php echo __OSOTECH__DEV_COMPANY__;?>">
     <link rel="icon" type="image/icon" href="<?php echo $Configuration->get_schoolLogoImage();?>">
