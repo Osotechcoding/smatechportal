@@ -11,14 +11,10 @@ require('../vendor/autoload.php');
 class OsotechMailer
 {
   //for smtp details
-  public $_Host;
-  public $_User;
-  public $_Password;
-  public $_Port;
-  //protected $SIB_API_SEC_KEY = SIB_API_SECRET_KEY;
-  protected $FET_ACC_PASS = MAILER_ACC_PASS;
-  protected $FET_ACC_USER = MAILER_ACC_USER;
-  protected $FET_EMAIL_SERVER = MAILER_EMAIL_SERVER;
+  public $FET_ACC_PASS = MAILER_ACC_PASS;
+  public $FET_ACC_USER = MAILER_ACC_USER;
+  public $FET_EMAIL_SERVER = MAILER_EMAIL_SERVER;
+  public $FET_EMAIL_PORT = MAILER_PORT;
 
   function __construct()
   {
@@ -34,11 +30,11 @@ class OsotechMailer
       //SMTP::DEBUG_SERVER
     
       $mailer->isSMTP();
-      $mailer->Host = 'smtp.mailtrap.io';
+      $mailer->Host = $this->FET_EMAIL_SERVER; //'smtp.mailtrap.io';
       $mailer->SMTPAuth = true;
-      $mailer->Port = 2525;
-      $mailer->Username = '71f8d31ac958eb';
-      $mailer->Password = '5479f82c1922d6';
+      $mailer->Port =      $this->FET_EMAIL_PORT; // 2525
+      $mailer->Username =  $this->FET_ACC_USER; //'71f8d31ac958eb';
+      $mailer->Password =  $this->FET_ACC_PASS; //'5479f82c1922d6';
       //Recipients
       $mailer->setFrom('osotechcoding@gmail.com', 'Smatech Portal');
       $mailer->addAddress($studentEmail, $studentSurname);     //Add a recipient
@@ -70,18 +66,18 @@ class OsotechMailer
     try {
       $megBody ="
     Hello <b>$surname</b> <br>\r\n
-    Your admission at <b>$schoolName</b> is just a step away, in order to complete your admission and enroll fully into our school,<br>\r\n you need to verify that this is your email address by clicking : <a href='".$link."'> Verify Me</a> <br>\r\n
+    Your admission at <b>$schoolName</b> is just a step away, in order to complete your admission and enroll fully into our school,<br>\r\n you need to verify your email address by clicking the link below: \r\n \r\n<a href='".$link."'> Verify E-mail</a> <br>\r\n
     This above Link expires  on ".date("D jS F Y @ h:i:s a", strtotime($expire_date))."
     <br>
-    Kind Regards,<br> \r\n<b>$schoolName</b>";
+    Kind Regards,<br><b>$schoolName</b>";
       //Server settings
       //SMTP::DEBUG_SERVER
       $mailer->isSMTP();
-      $mailer->Host = 'smtp.mailtrap.io';
+      $mailer->Host = $this->FET_EMAIL_SERVER; 
       $mailer->SMTPAuth = true;
-      $mailer->Port = 2525;
-      $mailer->Username = '71f8d31ac958eb';
-      $mailer->Password = '5479f82c1922d6';
+      $mailer->Port =      $this->FET_EMAIL_PORT;
+      $mailer->Username =  $this->FET_ACC_USER; 
+      $mailer->Password =  $this->FET_ACC_PASS;
       //Recipients
       $mailer->setFrom('osotechcoding@gmail.com', 'Flat ERP Technologies');
       $mailer->addAddress($email, $surname);     //Add a recipient

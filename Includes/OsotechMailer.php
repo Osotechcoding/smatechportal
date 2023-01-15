@@ -13,14 +13,10 @@ require_once 'src/SMTP.php';
 class OsotechMailer
 {
   //for smtp details
-  public $_Host;
-  public $_User;
-  public $_Password;
-  public $_Port;
-  // protected $SIB_API_SEC_KEY = SIB_API_SECRET_KEY;
-  // public $SIB_ACC_PASS = SIB_ACC_PASS;
-  // public $SIB_ACC_USER = SIB_ACC_USER;
-  // public $SIB_EMAIL_SERVER = SIB_EMAIL_SERVER;
+  public $FET_ACC_PASS = MAILER_ACC_PASS;
+  public $FET_ACC_USER = MAILER_ACC_USER;
+  public $FET_EMAIL_SERVER = MAILER_EMAIL_SERVER;
+  public $FET_EMAIL_PORT = MAILER_PORT;
 
   function __construct()
   {
@@ -35,11 +31,11 @@ class OsotechMailer
       //Server settings
       //SMTP::DEBUG_SERVER
       $mail->isSMTP();
-      $mail->Host = 'smtp.mailtrap.io';
+      $mail->Host = $this->FET_EMAIL_SERVER; 
       $mail->SMTPAuth = true;
-      $mail->Port = 2525;
-      $mail->Username = '71f8d31ac958eb';
-      $mail->Password = '5479f82c1922d6';
+      $mail->Port =      $this->FET_EMAIL_PORT; 
+      $mail->Username =  $this->FET_ACC_USER; 
+      $mail->Password =  $this->FET_ACC_PASS;
       $mail->setFrom($email, $name);
       $mail->addAddress("osotechcoding@gmail.com","Admin");     //Add a recipient
       $mail->isHTML(true);                                  //Set email 
