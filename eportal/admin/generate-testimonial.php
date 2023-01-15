@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name ?> :: Mass Student promotion </title>
+    <title><?php echo $SmappDetails->school_name ?> | Generate Testimonial </title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -44,13 +44,13 @@ require_once "helpers/helper.php";
           <div class="row">
              <div class="col-12">
     <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>
-     STUDENT TESTIMONIAL MODULE <span><a href="javascript:void(0);" onclick="window.location.href='./reprintcert'" class="btn btn-light-primary btn-sm btn-pill">Re-Print Certificate</a> </span> </h3>
+     GENERATE STUDENT TESTIMONIAL <span><a href="javascript:void(0);" onclick="window.location.href='./reprintcert'" class="btn btn-light-primary btn-sm btn-pill">Re-Print Testimonial</a> </span> </h3>
   </div>
     </div>
 
             <div class="card">
               <div class="card-header">
-              <p class="text-danger text-uppercase"><i> NOTE: that Certificate is ONLY available for students in <b>(Basic 5, JSS 3 and SSS 3) Classes</b></i></p>
+              <p class="text-danger text-uppercase"><i> NB: Testimonial is ONLY available for students in <b>(Basic 5, JSS 3 and SSS 3) Classes</b></i></p>
               </div>
       <div class="card-body">
         <form id="StudentTestimonialForm" autocomplete="off">
@@ -120,13 +120,13 @@ require_once "helpers/helper.php";
         </div>
       </div>
       </div>
-      <h4>List of Subjects Offered by the Student (<span class="text-danger"><small>Select at least 8 Subjects</small></span>) </h4>
+      <h4>Subjects Offered (<span class="text-danger"><small>Select at least 8 Subjects</small></span>) </h4>
       <div class="row">
         <div class="col-md-4">
         <div class="form-group">
           <label for="subject_one"> SUBJECT ONE </label>
           <input type="text" name="subject_one" id="subject_one"
-           class="form-control" readonly value="General Mathematics">
+           class="form-control" readonly value="Mathematics">
         </div>
       </div>
         <div class="col-md-4">

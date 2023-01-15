@@ -44,7 +44,8 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
             border: 1px solid lightblue;
         }
         .id-container div:first-child{
-            position: relative;    
+            position: relative; 
+            margin-top:5px;   
             background-blend-mode: darken;
             text-align: center;
             padding: 0.6px;
@@ -64,6 +65,7 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         color: white;
         display: inline;
         border-radius: 3px;
+        margin-bottom:5px;
        }
        .id-back{
         position: relative;
@@ -171,9 +173,9 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         margin-top: -10px;
        }
        #fet-print-btn {
-    position:relative;
+    position:absolute;
     width:auto;
-    padding:5px;
+    padding:2px 3px;
     margin:15px 50px 25px 0px;
     border-radius:20px;
     background-color: darkred;
@@ -213,21 +215,21 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         </div>
         <div class="id-back">
             <p>This ID Card remains a property of <b><?php echo strtoupper($SmappDetails->school_name); ?></b>
-             and identifies the bearer with passport photograph overleaf as our <b>STUDENT</b>.
-              <br>It is not transferable </p>
+             and identifies the bearer with passport photograph appear overleaf as our <b>STUDENT</b>.
+              <br>This card is not transferable </p>
             <br>
             <p>Kindly return to the school address or nearest Police Station, if found.</p>
             <div class="sign">
                 <img src="<?php echo $Configuration->getSchoolSignature(); ?>" width="75" height="75" style="">
-                <p><em><b>Authorised Signature</b></em></p>
+                <p><em><b>Authorized Signature</b></em></p>
             </div>
             
              <!-- <div class="down-part">
                 <img src="./barcode.gif" alt="barcode" width="100%" height="30">
             </div>  -->
             <div class="watermark">
-                <p><?php echo ($SmappDetails->school_short_name); ?></p>
-                <p><?php echo ($SmappDetails->school_short_name); ?></p>
+                <p><?php echo ($SmappDetails->school_name); ?></p>
+                <p><?php echo ($SmappDetails->school_name); ?></p>
             </div>
             <div class="watermark2">
                 <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>">

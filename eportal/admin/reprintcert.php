@@ -6,7 +6,7 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title><?php echo $SmappDetails->school_name ?> :: Re-print Certificate </title>
+    <title><?php echo $SmappDetails->school_name ?> | Student Testimonials </title>
    <!-- include template/HeaderLink.php -->
    <?php include "../template/dataTableHeaderLink.php";?>
   <!-- END: Head-->
@@ -32,7 +32,7 @@ require_once "helpers/helper.php";
                   </li>
                   <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']) ?></a>
                   </li>
-                  <li class="breadcrumb-item active">RE-PRINT STUDENT CERTIFICATE 
+                  <li class="breadcrumb-item active">RE-PRINT STUDENT TESTIMONIAL 
                   </li>
                 </ol>
               </div>
@@ -42,7 +42,7 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>  STUDENT CERTIFICATE MODULE <span><a href="javascript:void(0);" onclick="window.location.href='./generate-testimonial'" class="btn btn-light-primary btn-sm btn-pill">Generate Certificate</a> </span></h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-certificate fa-1x"></span>  STUDENT TESTIMONIAL <span><a href="javascript:void(0);" onclick="window.location.href='./generate-testimonial'" class="btn btn-light-primary btn-sm btn-pill">Generate Testimonial</a> </span></h3>
   </div>
     </div>
 
@@ -85,48 +85,39 @@ if ($testimonials) {
     // code...
   }
 }
-
-
    ?>
       </tbody>
       </table>
     </div>
       </div>
-
     </div>
-
     <div class="card" style="border-radius: 10px;">
         <div class="card-header">
-          <h4 class="card-title">RE-PRINT STUDENT CERTIFICATE</h4>
+          <h4 class="card-title">RE-PRINT STUDENT TESTIMONIAL</h4>
         </div>
         <div class="card-body">
-        
           <form class="form" id="rePrintCertificateForm" autocomplete="off">
             <div class="form-body">
               <div class="row">
                 <input type="hidden" name="action" value="_reprint_testimonial_certificate_action_">
                  <div class="col-md-6 col-12">
-                   <label for="cert_number">Certificate No</label>
-                 <input type="text" class="form-control" name="cert_number" placeholder="Enter Certificate Number">
+                   <label for="cert_number">Testimonial Serial No</label>
+                 <input type="text" class="form-control" name="cert_number" placeholder="Enter Serial Number">
                 </div>
                 <div class="col-md-6 col-12">
-                   <label for="auth_code"> Authentication Code</label>
+                   <label for="auth_code"> Authentication</label>
                  <input type="password" class="form-control" name="auth_code" placeholder="xxxxxxxxxxx" autocomplete="off">
                 </div>
-  <!-- daterange end -->
                 </div>
                 <div class="col-12 d-flex justify-content-end mt-2">
-                <button type="submit" class="btn btn-dark btn-lg mr-1 __loadingBtn__">Re-Print Certificate</button>
+                <button type="submit" class="btn btn-dark btn-lg mr-1 __loadingBtn__">Re-Print</button>
                 </div>
               </div>
-            
           </form>
         </div>
       </div>
       <!-- filter student ends -->
-  
       </div>
-
         </div>
       </div>
     <!-- END: Content-->
@@ -135,7 +126,6 @@ if ($testimonials) {
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include "../template/DataTableFooterScript.php"; ?>
-
     <script src="smappjs/reprintcert.js"></script>
      <!-- BEGIN: Page JS-->
   </body>

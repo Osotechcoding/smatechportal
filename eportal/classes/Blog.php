@@ -44,18 +44,18 @@ class Blog
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 		} elseif (!in_array($image_ext, $allowed)) {
 			$this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try again!", __OSO_APP_NAME__ . " Says");
-		} elseif ($blogFile_size > 500) {
+		} elseif ($blogFile_size > 900) {
 			$this->response = $this->alert->alert_toastr("error", "Blog Image Size should not exceed 200KB, Selected Image Size is :" . number_format($blogFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
 		} elseif ($blogFile_error !== 0) {
 			$this->response = $this->alert->alert_toastr("error", "There was an error Uploading Blog Image, Try again!", __OSO_APP_NAME__ . " Says");
 		} else {
 			//create image save path
-			$newFileName = time() . mt_rand() . "." . $image_ext;
+			$newFileName = strtolower( __OSO_APP_NAME__).time() . mt_rand() . "." . $image_ext;
 			$file_destination = "../news-images/" . $newFileName;
 			//check if the blog is already created
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_tbl` WHERE blog_title=? LIMIT 1");
 			$this->stmt->execute(array($blogTitle));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$blogTitle is already Created, Please check and try again!", __OSO_APP_NAME__ . " Says");
 			} else {
 				//create a fresh one
@@ -157,7 +157,7 @@ class Blog
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_blog_post_tbl` WHERE blog_id=? LIMIT 1");
 		$this->stmt->execute([$Id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 		}
@@ -166,7 +166,7 @@ class Blog
 	public function delete_Blog_PostById($Id)
 	{
 		if (!$this->config->isEmptyStr($Id)) {
-			$blog_details = self::get_blog_ById($Id);
+			$blog_details = $this->get_blog_ById($Id);
 			$filePath = "../news-images/" . $blog_details->blog_image;
 			try {
 				$this->dbh->beginTransaction();
@@ -284,16 +284,16 @@ class Blog
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 		} elseif (!in_array($image_ext, $allowed)) {
 			$this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try again!", __OSO_APP_NAME__ . " Says");
-		} elseif ($EventFile_size > 200) {
-			$this->response = $this->alert->alert_toastr("error", "Event Image Size should not exceed 200KB, Selected Image Size is :" . number_format($EventFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
+		} elseif ($EventFile_size > 500) {
+			$this->response = $this->alert->alert_toastr("error", "Event Image Size should not exceed 500KB, Selected Image Size is :" . number_format($EventFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
 		} elseif ($EventFile_error !== 0) {
 			$this->response = $this->alert->alert_toastr("error", "There was an error Uploading Event Image, Try again!", __OSO_APP_NAME__ . " Says");
 		} else {
-			$newFileName = __OSO_APP_NAME__ . "_event" . uniqid('', true) . "." . $image_ext;
+			$newFileName = strtolower( __OSO_APP_NAME__) . "_event" . uniqid('', true) . "." . $image_ext;
 			$file_destination = "../events-images/" . $newFileName;
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_upcoming_event_tbl` WHERE event_title=? LIMIT 1");
 			$this->stmt->execute(array($desc));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$desc is already Created, Please check and try again!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -326,7 +326,7 @@ class Blog
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_upcoming_event_tbl` WHERE eventId=? LIMIT 1");
 		$this->stmt->execute([$Id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 		}
@@ -401,16 +401,16 @@ class Blog
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 		} elseif (!in_array($image_ext, $allowed)) {
 			$this->response = $this->alert->alert_toastr("error", "Your file format is not supported, Please check and try again!", __OSO_APP_NAME__ . " Says");
-		} elseif ($GalleryFile_size > 200) {
-			$this->response = $this->alert->alert_toastr("error", "Gallery Image Size should not exceed 200KB, Selected Image Size is :" . number_format($GalleryFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
+		} elseif ($GalleryFile_size > 900) {
+			$this->response = $this->alert->alert_toastr("error", "Gallery Image Size should not exceed 900KB, Selected Image Size is :" . number_format($GalleryFile_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
 		} elseif ($GalleryFile_error !== 0) {
 			$this->response = $this->alert->alert_toastr("error", "There was an error Uploading Gallery Image, Try again!", __OSO_APP_NAME__ . " Says");
 		} else {
-			$newFileName = __OSO_APP_NAME__ . $galleryType . uniqid() . "." . $image_ext;
+			$newFileName = strtolower( __OSO_APP_NAME__) . $galleryType . uniqid() . "." . $image_ext;
 			$file_destination = "../gallery/" . $newFileName;
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_gallery_tbl` WHERE title=? LIMIT 1");
 			$this->stmt->execute(array($desc));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$desc is already Created, Please check and try again!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -474,7 +474,7 @@ class Blog
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_gallery_tbl` WHERE id=? LIMIT 1");
 		$this->stmt->execute([$Id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 		}
@@ -483,7 +483,7 @@ class Blog
 	public function delete_galleryById($Id)
 	{
 		if (!$this->config->isEmptyStr($Id)) {
-			$gallery_details = self::getGalleryById($Id);
+			$gallery_details = $this->getGalleryById($Id);
 			$filePath = "../gallery/" . $gallery_details->image;
 			try {
 				$this->dbh->beginTransaction();
@@ -521,7 +521,7 @@ class Blog
 	public function delete_SliderById($Id)
 	{
 		if (!$this->config->isEmptyStr($Id)) {
-			$slider_details = self::getSliderById($Id);
+			$slider_details = $this->getSliderById($Id);
 			$filePath = "../gallery/Sliders/" . $slider_details->image;
 			try {
 				$this->dbh->beginTransaction();
@@ -572,7 +572,7 @@ class Blog
 		} elseif ($SliderFile_error !== 0) {
 			$this->response = $this->alert->alert_toastr("error", "There was an error Uploading Slider Image, Try again!", __OSO_APP_NAME__ . " Says");
 		} else {
-			$newFileName = __OSO_APP_NAME__ . "_" . uniqid() . "_." . $image_ext;
+			$newFileName =strtolower( __OSO_APP_NAME__) . "_" . uniqid() . "_." . $image_ext;
 			$file_destination = "../gallery/Sliders/" . $newFileName;
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` WHERE title=?");
 			$this->stmt->execute(array($slider_title));
@@ -688,7 +688,7 @@ class Blog
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 		} elseif (!in_array($image_ext, $allowed)) {
 			$this->response = $this->alert->alert_toastr("error", "Passport format is not supported!", __OSO_APP_NAME__ . " Says");
-		} elseif ($photo_size > 50) {
+		} elseif ($photo_size > 100) {
 			$this->response = $this->alert->alert_toastr("error", "Photo Size should not exceed 50KB, Selected Image Size is :" . number_format($photo_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
 		} elseif ($photo_error !== 0) {
 			$this->response = $this->alert->alert_toastr("error", "There was an error Uploading Gallery Image, Try again!", __OSO_APP_NAME__ . " Says");
@@ -742,7 +742,7 @@ class Blog
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_people_say_tbl` WHERE id=? LIMIT 1");
 		$this->stmt->execute([$Id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 
@@ -753,7 +753,7 @@ class Blog
 	public function deleteTestimonialById($testiId)
 	{
 		if (!$this->config->isEmptyStr($testiId)) {
-			$testimonials_details = self::getTestimonialById($testiId);
+			$testimonials_details = $this->getTestimonialById($testiId);
 			$filePath = "../testimonials/" . $testimonials_details->image;
 			try {
 				$this->dbh->beginTransaction();

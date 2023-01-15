@@ -10,7 +10,7 @@
   <!-- ========== Meta Tags ========== -->
   <?php include_once './Templates/MetaTags.php'; ?>
   <!-- ========== Page Title ========== -->
-  <title> Homepage :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
+  <title> Homepage | <?php echo ($Osotech->getConfigData()->school_name); ?></title>
 
   <?php if (!file_exists("./Templates/HeaderScript.php")) : ?>
   <?php die("Access not Aallowed"); ?>
@@ -215,7 +215,7 @@
   <?php include_once("./Partials/EventListing.php"); ?>
   <!-- end event listing -->
   <!-- start video & FAQ -->
-  <?php include_once("./Partials/HomePageFaqs.php"); ?>
+  <!-- <?php //include_once("./Partials/HomePageFaqs.php"); ?> -->
   <!-- end video & FAQ -->
   <!-- start event gallery -->
   <?php include_once("./Partials/HomePageGallery.php"); ?>

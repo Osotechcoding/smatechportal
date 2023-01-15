@@ -158,7 +158,7 @@ require_once "helpers/helper.php";
                   <div class="row">
                     <div class="col-md-12">
                      <div class="form-group">
-                  <label for="lecture_mp4">Event Image <span class="text-danger">(png,jpg or jpeg format Only; Max Size 200KB)</span></label>
+                  <label for="lecture_mp4">Event Image <span class="text-danger">(png,jpg or jpeg format Only; Max Size 900KB)</span></label>
                 <input type="file" class="form-control form-control-lg" id="galleryImage" name="galleryImage" onchange="previewFile(this);">
                     </div>
                     <div class="col-md-6 offset-md-3" id="uploaded_passport">

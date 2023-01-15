@@ -42,7 +42,7 @@ require_once "helpers/helper.php";
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
                   </li>
-                  <li class="breadcrumb-item"><a href="#">Admin </a>
+                  <li class="breadcrumb-item"><a href="javascript:void(0)"><?php echo $_SESSION['STAFF_ROLE'];?> </a>
                   </li>
                   <li class="breadcrumb-item active"> School Events
                   </li>
@@ -54,55 +54,61 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-calendar fa-2x"></span> SCHOOL EVENTS</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-calendar fa-1x"></span> SCHOOL EVENTS</h3>
   </div>
           </div>
            <!-- Statistics Cards Starts -->
-    <div class="row">
-       
-        <div class="col-xl-12 col-md-12">
-          <div class="row">
-            <div class="col-md-4 dashboard-users-success">
-              <div class="card text-center bg-info">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-calendar fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Today's Events</h3></div>
-                  <h2 class="text-white mb-0">3</h2>
-                 
-                </div>
-              </div>
-            </div>
+           <div class="row">
 
-             <div class="col-md-4 dashboard-users-success">
-              <div class="card text-center bg-danger">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-calendar fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Upcoming </h3></div>
-                  <h2 class="text-white mb-0">4</h2>
-                  
-                </div>
-              </div>
-            </div>
-
-              <div class="col-md-4 dashboard-users-success">
-              <div class="card text-center bg-dark">
-                <div class="card-body py-1">
-                  <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
-                    <i class="fa fa-calendar fa-2x font-medium-10"></i>
-                  </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">All Events </h3></div>
-                  <h2 class="text-white mb-0">40</h2>
-                  
-                </div>
-              </div>
-            </div>
+<div class="col-xl-12 col-md-12">
+  <div class="row">
+    <div class="col-md-4 dashboard-users-success">
+      <div class="card text-center bg-info">
+        <div class="card-body py-1">
+          <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
+            <i class="fa fa-calendar fa-2x font-medium-10"></i>
           </div>
+          <div class="text-white line-ellipsis">
+            <h3 class="text-white">Today's Events</h3>
+          </div>
+          <h2 class="text-white mb-0"><?php echo $Blog->count_today_events(); ?></h2>
+
         </div>
       </div>
+    </div>
+
+    <div class="col-md-4 dashboard-users-success">
+      <div class="card text-center bg-danger">
+        <div class="card-body py-1">
+          <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
+            <i class="fa fa-calendar fa-2x font-medium-10"></i>
+          </div>
+          <div class="text-white line-ellipsis">
+            <h3 class="text-white">Upcoming </h3>
+          </div>
+          <h2 class="text-white mb-0"><?php echo $Blog->count_Upcoming_events(); ?></h2>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 dashboard-users-success">
+      <div class="card text-center bg-dark">
+        <div class="card-body py-1">
+          <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
+            <i class="fa fa-calendar fa-2x font-medium-10"></i>
+          </div>
+          <div class="text-white line-ellipsis">
+            <h3 class="text-white">All Events </h3>
+          </div>
+          <h2 class="text-white mb-0"><?php echo $Blog->count_all_events_by_status(2); ?></h2>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
            <!-- Revenue Growth Chart Starts -->
     <div class="card">
      
@@ -118,33 +124,49 @@ require_once "helpers/helper.php";
           <th>VENUE</th>
           <th>TIME</th>
           <th>STATUS</th>
-          <th>ACTION</th>
         </tr>
       </thead>
-        <tbody class="text-center">
-          <tr>
-          <td>A Day Workshop</td>
-          <td>School Prefects</td>
-          <td><?php echo date("Y-m-d");?></td>
-          <td>School Main Hall</td>
-          <td><?php echo date("h:i:s A");?></td>
-          <td><span class="badge badge-pill badge-warning">upcoming</span></td>
-         <td> <!-- Dropdown Buttons options -->
-    <div class="btn-group dropdown mb-1">
-            <button type="button" class="btn btn-info">Options</button>
-            <button type="button" class="btn btn-outline-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-reference="parent">
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-           <div class="dropdown-menu">
-              <a class="dropdown-item text-danger" href="javascript:void(0);"> Event Info</a>
-             
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item text-danger" href="javascript:void(0);"><span class="fa fa-trash"></span> Delete</a>
-            </div>
-          </div>
-          <!-- Dropdown Buttons options --></td>
-        </tr>
-      </tbody>
+      <tbody class="text-center">
+                  <?php
+                  $all_events = $Blog->get_all_active_events();
+                  if ($all_events) {
+                    foreach ($all_events as $values) {
+
+                  ?>
+                  <tr>
+                    <td><img src="../events-images/<?php echo $values->event_image; ?>" alt="EventImage" width="100">
+                    </td>
+                    <td><?php echo $values->event_title; ?></td>
+                    <td><?php echo $values->eorganizer; ?></td>
+                    <td><?php echo date("M j, Y", strtotime($values->edate)); ?> &nbsp;
+                      <?php echo date("h:i:s A", strtotime($values->etime)); ?></td>
+                    <td><?php echo $values->evenue; ?></td>
+                    <td><?php if (str_word_count($values->event_detail) > '20') {
+                              echo substr($values->event_detail, 0, 20) . "...";
+                              echo '<span class="badge badge-warning badge-md badge-pill view_event_details_btn" style="cursor:pointer;" data-info="' . $values->event_detail . '">Read Full Content</span>';
+                            } else {
+                              echo $values->event_detail;
+                            }
+                            ?></td>
+                    <td>
+                      <?php $eventDate = date("Y-m-d", strtotime($values->edate));
+                          $cudate = date("Y-m-d");
+                          ?>
+                      <?php if ($eventDate > $cudate) {
+                            echo '<span class="badge badge-pill badge-warning">upcoming</span>';
+                          } elseif ($eventDate == $cudate) {
+                            echo '<span class="badge badge-pill badge-success">Today\'s Event</span>';
+                          } else {
+                            echo ' <span class="badge badge-pill badge-dark">Past Event</span>';
+                          }
+                          ?> </td>
+                    
+                  </tr>
+                  <?php
+                    }
+                  }
+                  ?>
+                </tbody>
       </table>
     </div>
       </div>
@@ -152,125 +174,13 @@ require_once "helpers/helper.php";
         </div>
       </div>
     </div>
-    <!-- END: Content-->
-   <!-- BEGIN: Customizer-->
-   <?php //include ("template/Customizer.php");?>
-    <!-- End: Customizer-->
+
     </div>
     <!-- demo chat-->
-   
-   <!-- BUS MODAL Start -->
-   <div class="modal fade" id="addHolidayModal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-            <!-- modal-dialog-scrollable -->
-            <div class="modal-dialog modal-lg ">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h2 class="modal-title" id="exampleModalLongTitle" style="font-size: 30px;font-weight: 700;"><span class="fa fa-calendar fa-2x"></span> Add Upcoming Event</h2>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="bx bx-x"></i>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="col-md-12 col-12 col-xl-12 col-lg-12 col-sm-12">
-                  <div class="row">
-               <div class="col-md-12">
-                  <div class="form-group">
-                  <label for="route_name">EVENT DESC</label>
-                <input type="text" autocomplete="off" class="form-control form-control-lg" name="pin_view_code" placeholder="A Day Sweing Workshop">
-                    </div>
-               </div>
-                <div class="col-md-6">
-                     <div class="form-group">
-                  <label for="organizer"> ORGANIZER </label>
-                <input type="text" class="form-control form-control-lg" name="organizer" placeholder="Student Union">
-                </div>
-              </div>
-               
-                   <div class="col-md-3">
-                     <div class="form-group">
-                  <label for="class_teacher">DATE </label>
-              <fieldset class="form-group position-relative has-icon-left">
-                  <input type="text" class="form-control form-control-lg pickadate">
-                  <div class="form-control-position">
-                      <i class='bx bx-calendar-check'></i>
-                  </div>
-              </fieldset>
-                </div>
-              </div>
-              <div class="col-md-3">
-                     <div class="form-group">
-                  <label for="class_teacher">EVENT TIME </label>
-              <fieldset class="form-group position-relative has-icon-left">
-                  <input type="date" class="form-control form-control-lg pickatime-format">
-                  <div class="form-control-position">
-                      <i class='bx bx-calendar-check'></i>
-                  </div>
-              </fieldset>
-                </div>
-              </div>
-               <div class="col-md-6">
-                     <div class="form-group">
-                  <label for="venue"> EVENT VENUE </label>
-                <input type="text" class="form-control form-control-lg" name="venue" placeholder="School Main Hall">
-                </div>
-              </div>
-               <div class="col-md-6">
-                     <div class="form-group">
-                  <label for="image"> EVENT IMAGE </label>
-                <input type="file" class="form-control form-control-lg" name="image" placeholder="Student Union">
-                </div>
-              </div>
-              
-               <div class="col-12 mt-1">
-                      <fieldset class="form-label-group mb-0">
-                          <textarea data-length=1000 class="form-control char-textarea" id="textarea-counter" rows="5" placeholder="Instruction (Max Character (1000))"></textarea>
-                          <label for="textarea-counter">Event Details (Max Character (1000))</label>
-                      </fieldset>
-                      <small class="counter-value float-right"><span class="char-count">0</span> / 1000 </small>
-                  </div>
-             <div class="col-md-6">
-               <div class="form-group">
-                   <fieldset>
-                    <div class="checkbox">
-                      <input type="checkbox" class="checkbox__input" id="checkbox1">
-                      <label for="checkbox1">Signed by Director </label>
-                    </div>
-                  </fieldset>
-               </div>
-             </div>
-                 </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                   <button type="submit" class="btn btn-success ml-1">
-                    <span class="d-none d-sm-block"><span class="fa fa-calendar fa-1x"></span> Save Class</span>
-                  <button type="button" class="btn btn-warning ml-1" data-dismiss="modal">
-                    <i class="bx bx-check d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Back</span>
-                  </button>
-                </div>
-                 </form>
-              </div>
-            </div>
-          </div>
-    <!-- BUS MODAL  END -->
   <?php include ("../template/footer.php"); ?>
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
    <?php include ("../template/DataTableFooterScript.php"); ?>
-  
-    <script src="../app-assets/js/scripts/pickers/dateTime/pick-a-datetime.min.js"></script>
-   <script>
-     $(document).ready(function(){
-      $("#ComponentFormFee").on("submit", function(event){
-        event.preventDefault();
-        const ComponentFormFee = $(this).serialize();
-        alert("Yes Component Fee Saved");
-        self.location.reload();
-      })
-     })
-   </script>
   </body>
   <!-- END: Body-->
 

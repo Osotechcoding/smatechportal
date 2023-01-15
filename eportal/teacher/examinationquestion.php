@@ -115,7 +115,7 @@ require_once "helpers/helper.php";
                     <div class="col-md-12">
                      <div class="form-group">
                   <label for="examClass"> Exam Class </label>
-                <select name="examClass" id="examClass" class="form-control form-control-lg select2">
+                <select name="examClass" id="examClass" class="form-control form-control-lg form-select">
                   <option value="" selected>Choose...</option>
                <?php echo $Administration->get_classroom_InDropDown_list();?>
                </select>
@@ -124,7 +124,7 @@ require_once "helpers/helper.php";
               <div class="col-md-12">
                      <div class="form-group">
                   <label for="subject"> Exam Subject </label>
-                <select name="subject" id="subject" class="form-control form-control-lg select2">
+                <select name="subject" id="subject" class="form-control form-control-lg form-select">
                   <option value="" selected>Choose...</option>
                <?php echo $Administration->get_all_subjects_InDropDown_list();?>
                </select>

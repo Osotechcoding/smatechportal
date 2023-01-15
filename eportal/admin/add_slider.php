@@ -9,7 +9,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name; ?> :: Frontpage Image Slider</title>
+    <title><?php echo $SmappDetails->school_name; ?> | Homepage Image Slider</title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -36,7 +36,7 @@ require_once "helpers/helper.php";
                   </li>
                   <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']) ?> </a>
                   </li>
-                  <li class="breadcrumb-item active"> Front Page Sliders
+                  <li class="breadcrumb-item active"> Home Page Sliders
                   </li>
                 </ol>
               </div>
@@ -146,7 +146,7 @@ require_once "helpers/helper.php";
                   <div class="row">
                     <div class="col-md-12">
                      <div class="form-group">
-                  <label for="sliderImage">Image <span class="text-danger">(jpg format Only; Max Size 200KB ; Dimension 1920 * 960)</span></label>
+                  <label for="sliderImage">Image <span class="text-danger">(jpg format Only; Max Size 900KB ; Dimension 1920 * 960)</span></label>
                 <input type="file" class="form-control form-control-lg" id="sliderImage" name="sliderImage" onchange="previewFile(this);">
                     </div>
                     <div class="col-md-6 offset-md-3" id="uploaded_passport">

@@ -18,4 +18,3 @@ if (isset($_GET['action'])  && isset($_SESSION['STAFF_SES_ID'])) {
 		
 	}
 }
- ?>

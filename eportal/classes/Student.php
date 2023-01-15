@@ -1,10 +1,5 @@
 <?php
-
-
 @session_start();
-/**
- *
- */
 require_once "Database.php";
 require_once "Session.php";
 require_once "Configuration.php";
@@ -74,10 +69,10 @@ class Student
 						$token = $this->config->generateRandomUserToken(35);
 						$_SESSION['student_log_token'] = $token;
 						//check token
-						$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_login_token` WHERE username=? AND email=?LIMIT 1");
+						$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT 1");
 						$this->stmt->execute([$_SESSION['STD_USERNAME'], $_SESSION['STD_EMAIL']]);
 
-						if ($this->stmt->rowCount() == 1) {
+						if ($this->stmt->rowCount() > 0) {
 							// code... update the token
 							$this->stmt = $this->dbh->prepare("UPDATE `visap_student_login_token` SET token=? WHERE username=? AND email=? LIMIT 1");
 							$this->stmt->execute(array($token, $_SESSION['STD_USERNAME'], $_SESSION['STD_EMAIL']));
@@ -85,9 +80,8 @@ class Student
 							$this->stmt = $this->dbh->prepare("INSERT INTO `visap_student_login_token` (username,email,token) VALUES (?,?,?);");
 							$this->stmt->execute(array($_SESSION['STD_USERNAME'], $_SESSION['STD_EMAIL'], $token));
 						}
-
 						$urlLink = APP_ROOT . "students/";
-						$this->response = $this->alert->alert_toastr("success", "Login Successful,Please wait... ", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+						$this->response = $this->alert->alert_toastr("success", "Login Successful, Please wait... ", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
          window.location.href='" . $urlLink . "';
         },1000);</script>";
 					}
@@ -99,7 +93,6 @@ class Student
 			}
 		}
 		return $this->response;
-		
 	}
 
 	public function count_students_by_gender($gender)
@@ -141,7 +134,6 @@ class Student
 			$this->response = "0";
 		}
 		return $this->response;
-		
 	}
 
 	public function count_recent_applicants()
@@ -192,7 +184,6 @@ class Student
 		} else {
 			$this->response = false;
 		}
-
 		return $this->response;
 	}
 
@@ -204,10 +195,8 @@ class Student
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			
 		}
 	}
-
 
 	public function get_student_data_byId($stdId)
 	{
@@ -231,7 +220,6 @@ class Student
 		return $this->response;
 	}
 	//get all admitted students
-
 	public function get_all_students_by_status(string $status)
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE stdAdmStatus=? ORDER BY stdSurName ASC");
@@ -243,7 +231,7 @@ class Student
 		}
 		return $this->response;
 	}
-	//fliter student payment by regno and class
+	//filter student payment by reg no and class
 	public function filter_students_by_payments($stdRegNo)
 	{
 		$this->stmt = $this->dbh->prepare("SELECT *,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdRegNo=? AND stdAdmStatus='Active' LIMIT 1");
@@ -376,7 +364,6 @@ class Student
 			$this->response = $value2;
 		}
 		return $this->response;
-		
 	}
 
 	public function register_exam_subject($data)
@@ -438,7 +425,6 @@ class Student
 			$this->response = $this->stmt->fetchAll();
 			//$this->dbh->close();
 			return $this->response;
-			
 		}
 	}
 
@@ -541,14 +527,11 @@ class Student
 		} else {
 			$this->response = false;
 		}
-
 		return $this->response;
-		
 	}
 
 	public function get_all_my_assessments_by_filter($stdRegNo, $stdGrade, $term, $aca_session)
 	{
-		// TODO LIST visap_termly_result_tbl will be dynamic
 		switch ($term) {
 			case '3rd Term':
 				$resultTable = 'visap_termly_result_tbl';
@@ -572,22 +555,18 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		
 	}
 
-	//
 	public function get_all_my_assessments_by_student_id($stdId, $stdRegNo, $stdGrade)
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE studentId=? AND stdRegCode=? AND studentGrade=? ORDER BY uploadedDate DESC");
 		$this->stmt->execute(array($stdId, $stdRegNo, $stdGrade));
 		if ($this->stmt->rowCount() > 0) {
-			// code...
 			$this->response = $this->stmt->fetchAll();
 		} else {
 			$this->response = false;
 		}
 		return $this->response;
-		
 	}
 
 	public function logout($id)
@@ -596,7 +575,6 @@ class Student
 		if ($this->stmt->execute([$id])) {
 			$this->response = true;
 			return $this->response;
-			
 		}
 	}
 
@@ -608,7 +586,6 @@ class Student
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			
 		}
 	}
 
@@ -620,32 +597,28 @@ class Student
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			
 		}
 	}
 
 	/*REGISTER STUDENT MANUALLY*/
-	public function register_student_manually($d)
+	public function register_student_manually(array $data)
 	{
-		$surName = $this->config->Clean($d['student_surname']);
+		$surName = $this->config->Clean($data['student_surname']);
 
-		$cardpin = $this->config->Clean($d['cardpin']);
-		$cardserial = $this->config->Clean($d['cardserial']);
+		$cardpin = $this->config->Clean($data['cardpin']);
+		$cardserial = $this->config->Clean($data['cardserial']);
 
-		$firstName = $this->config->Clean($d['student_first_name']);
-		$middleName = $this->config->Clean($d['student_middle_name']);
-		$address = $this->config->Clean($d['student_home_address']);
-		$Dob = $this->config->Clean(date("Y-m-d", strtotime($d['student_dob'])));
-		$Gender = $this->config->Clean($d['student_gender']);
-		$student_email = $this->config->Clean($d['student_email']);
-		$student_phone = $this->config->Clean($d['student_phone']);
-		$student_type = $this->config->Clean($d['student_type']);
-		// $student_username = $this->config->Clean($d['student_username']);
-		//$student_password = $this->config->Clean($d['student_password']);
-		$student_class = $this->config->Clean($d['student_class']);
-		$adm_date = $this->config->Clean(date("Y-m-d", strtotime($d['admission_date'])));
-		$auth_pass = $this->config->Clean($d['auth_code']);
-
+		$firstName = $this->config->Clean($data['student_first_name']);
+		$middleName = $this->config->Clean($data['student_middle_name']);
+		$address = $this->config->Clean($data['student_home_address']);
+		$Dob = $this->config->Clean(date("Y-m-d", strtotime($data['student_dob'])));
+		$Gender = $this->config->Clean($data['student_gender']);
+		$student_email = $this->config->Clean($data['student_email']);
+		$student_phone = $this->config->Clean($data['student_phone']);
+		$student_type = $this->config->Clean($data['student_type']);
+		$student_class = $this->config->Clean($data['student_class']);
+		$adm_date = $this->config->Clean(date("Y-m-d", strtotime($data['admission_date'])));
+		$auth_pass = $this->config->Clean($data['auth_code']);
 		if (
 			$this->config->isEmptyStr($surName) ||
 			$this->config->isEmptyStr($firstName) ||
@@ -661,7 +634,7 @@ class Student
 			$this->config->isEmptyStr($cardpin) ||
 			$this->config->isEmptyStr($cardserial)
 		) {
-			$this->response = $this->alert->alert_toastr("error", "All fileds are Required!", __OSO_APP_NAME__ . " Says");
+			$this->response = $this->alert->alert_toastr("error", "All fields are Required!", __OSO_APP_NAME__ . " Says");
 		} elseif (!$this->config->is_Valid_Email($student_email)) {
 			$this->response = $this->alert->alert_toastr("error", "<$student_email> is not a valid e-mail address!", __OSO_APP_NAME__ . " Says");
 		} elseif (strlen($cardpin) <> 13) {
@@ -676,9 +649,10 @@ class Student
 			$this->response = $this->alert->alert_toastr("error", "$student_email is already taken on this Portal, Please try another Email address!", __OSO_APP_NAME__ . " Says");
 		} else {
 			$admitted_year = date("Y", strtotime($adm_date));
+			//student is the default student password
 			$default_pass = "student";
 			$hashed_password = $this->config->encrypt_user_password($default_pass);
-			$stdRegNo = self::generate_admission_number($admitted_year);
+			$stdRegNo = $this->generate_admission_number($admitted_year);
 			$confirmation_code = substr(md5(uniqid(mt_rand(), true)), 0, 14);
 			$reg_date = date("Y-m-d");
 			$time = date("h:i:s");
@@ -711,7 +685,6 @@ class Student
 			}
 		}
 		return $this->response;
-		
 	}
 	/*REGISTER STUDENT MANUALLY*/
 
@@ -724,12 +697,9 @@ class Student
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->cnt;
 			return $this->response;
-			
 		}
 	}
-
 	//get student list in dropDown
-
 	public function get_students_InDropDown()
 	{
 		$this->response = "";
@@ -743,7 +713,6 @@ class Student
 			$this->response = false;
 		}
 		return $this->response;
-		
 	}
 
 	//GET ALL BOARDING HOUSE STUDENT
@@ -784,7 +753,7 @@ class Student
 			//check for duplicate office
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_prefect_tbl` WHERE student_id=? AND school_session=? LIMIT 1");
 			$this->stmt->execute(array($studentId, $session));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("warning", "This Student is already an active Prefect for the $session Academic Session!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -845,7 +814,7 @@ class Student
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_prefect_tbl` WHERE prefectId=? LIMIT 1");
 		$this->stmt->execute([$prefectId]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 			
@@ -937,7 +906,6 @@ class Student
 		$name_div = explode(".", $passport_name);
 		$image_ext = strtolower(end($name_div));
 		if (!$this->config->isEmptyStr($passport_name)) {
-			//$response = $Alert->alert_msg("You Selected $passport_name","success");
 			if ($this->config->isEmptyStr($auth_code)) {
 				$this->response = $this->alert->alert_toastr("error", "Please provide the Authentication Code to proceed", __OSO_APP_NAME__ . " Says");
 			} elseif ($auth_code !== __OSO__CONTROL__KEY__) {
@@ -961,7 +929,7 @@ class Student
 							$this->dbh->commit();
 							$this->dbh = null;
 							$this->response = $this->alert->alert_toastr("success", "Passport Uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-							window.location.href='./';
+							window.location.href='./ab_students';
 						},500);</script>";
 						}
 					}
@@ -1079,7 +1047,7 @@ class Student
   }
   }
 
-  //get all subejcts offered by the students
+  //get all subjects offered by the students
   public function get_student_offered_subjects($stdGrade)
   {
   $this->stmt = $this->dbh->prepare("SELECT count(id) as total_sub FROM `visap_registered_subject_tbl` WHERE
@@ -1233,8 +1201,8 @@ class Student
   {
   $from_date = $this->config->Clean(date("Y-m-d", strtotime($from)));
   $to_date = $this->config->Clean(date("Y-m-d", strtotime($to)));
-  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE stdGrade=? AND subject=? AND
-  DATE(created_at) BETWEEN ? AND ? ORDER BY subject ASC");
+  $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE stdGrade=? AND `subject`=? AND
+  DATE(created_at) BETWEEN ? AND ? ORDER BY `subject` ASC");
   $this->stmt->execute([$stdGrade, $subject, $from_date, $to_date]);
   if ($this->stmt->rowCount() > 0) {
   $this->response = $this->stmt->fetchAll();
@@ -1365,7 +1333,7 @@ class Student
     $assignmentId, $teacherId, $stdRegCode, $subject, $stdGrade, $submitted_at, $term,
     $schl_sess
     ));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->alert->alert_toastr("error", "This Assignment is already Submitted!", __OSO_APP_NAME__ . "
     Says");
     } else {
@@ -1375,7 +1343,7 @@ class Student
     try {
     $this->dbh->beginTransaction();
     $this->stmt = $this->dbh->prepare("INSERT INTO `visap_submitted_class_assignment_tbl`
-    (question_id,tId,stdRegno,subject,stdGrade,answer,term,school_session,Submitted_at) VALUES (?,?,?,?,?,?,?,?,?);");
+    (question_id,tId,stdRegno,`subject`,stdGrade,answer,term,school_session,Submitted_at) VALUES (?,?,?,?,?,?,?,?,?);");
     if ($this->stmt->execute(array(
     $assignmentId, $teacherId, $stdRegCode, $subject, $stdGrade, $file_realName, $term,
     $schl_sess, $submitted_at
@@ -1428,7 +1396,6 @@ class Student
     }
     }
 
-    //
     public function submit_marked_student_assignments($data)
     {
     $stdRegNo = $this->config->Clean($data['admNo']);
@@ -1455,9 +1422,9 @@ class Student
     } else {
     //check if this assignment has been submitted once
     $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_submitted_class_assignment_tbl` WHERE aId=? AND tId=? AND
-    status=1 AND score!=0 AND stdRegno=? AND subject=? AND stdGrade=?");
+    `status`=1 AND score!=0 AND stdRegno=? AND `subject`=? AND stdGrade=?");
     $this->stmt->execute(array($aId, $tId, $stdRegNo, $subject, $studclass));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->alert->alert_toastr(
     "error",
     "This Score and Remark is already submitted!",
@@ -1467,7 +1434,7 @@ class Student
     try {
     $this->dbh->beginTransaction();
     $this->stmt = $this->dbh->prepare("UPDATE `visap_submitted_class_assignment_tbl` SET score=?,
-    status=?,note_to_student=? WHERE aId=? AND tId=? AND stdRegno=? AND subject=? LIMIT 1");
+    status=?,note_to_student=? WHERE aId=? AND tId=? AND stdRegno=? AND `subject`=? LIMIT 1");
     $status = 1;
     if ($this->stmt->execute(array($mark, $status, $remark, $aId, $tId, $stdRegNo, $subject))) {
     $this->dbh->commit();
@@ -1497,7 +1464,7 @@ class Student
     public function remove_student_assignment_file_now($assId)
     {
     if (!$this->config->isEmptyStr($assId)) {
-    $data_file = self::get_assignmentById($assId);
+    $data_file = $this->get_assignmentById($assId);
     $filePath = "../assignments/" . $data_file->ass_content;
     try {
     $this->dbh->beginTransaction();
@@ -1542,8 +1509,6 @@ class Student
     //update the student class
     try {
     $this->dbh->beginTransaction();
-	// $student_data = $this->get_student_data_byId($keyId);
-	
 	if($promoted_to =="Basic 5" || $promoted_to =="JSS 3" || $promoted_to =="SSS 3"){
 		$completed_date = date("Y-m-d");
 		$this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=?,completed_date=? WHERE stdId=?");
@@ -1585,7 +1550,7 @@ class Student
     $this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
     full_name FROM $this->table_name WHERE stdRegNo=? LIMIT 1");
     $this->stmt->execute(array($stdRegNo));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1598,7 +1563,7 @@ class Student
     $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_psycho_tbl` WHERE reg_number=? AND student_class=? AND
     term=? AND session=? LIMIT 1");
     $this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1609,7 +1574,7 @@ class Student
     $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND
     term=? AND session=? LIMIT 1");
     $this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1622,7 +1587,7 @@ class Student
     $this->stmt = $this->dbh->prepare("SELECT token FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT
     1");
     $this->stmt->execute(array($name, $email));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     //collect the current token from db
     $tokenRow = $this->stmt->fetch();
     $currentToken = $tokenRow->token;
@@ -1652,7 +1617,7 @@ class Student
     $this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
     full_name FROM `{$this->table_name}` WHERE `stdRegNo`=? OR `stdEmail`=? OR `stdPhone`=? LIMIT 1");
     $this->stmt->execute(array($q, $q, $q));
-    if ($this->stmt->rowCount() == '1') {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1663,7 +1628,7 @@ class Student
     {
     $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_student_info_tbl` WHERE studentId=? LIMIT 1");
     $this->stmt->execute([$studentId]);
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1673,7 +1638,7 @@ class Student
     {
     $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_stdmedical_tbl` WHERE studId=? LIMIT 1");
     $this->stmt->execute([$studentId]);
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1683,7 +1648,7 @@ class Student
     {
     $this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE usedBy=? AND pin_status=1 LIMIT 1");
     $this->stmt->execute(array($stdRegNo));
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1839,7 +1804,7 @@ class Student
     //app_root = loclahost/smatechportal/eportal/
     $urlLink = APP_ROOT . "update-password?email=$email&token=$token";
     if ($OsotechMailer->generatePasswordResetLink($fullname, $email, $urlLink, $tokenExpire)) {
-    $this->response = $this->alert->alert_msg("Reset link has been sent to $email, Click on the Link to
+    $this->response = $this->alert->alert_msg("Reset link have been sent to <b>$email</b>, Click on the Link to
     reset your password!", "success");
     } else {
     $this->response = $this->alert->alert_msg("Oops!, Something went wrong, Reset link sent failed, Please try
@@ -2047,7 +2012,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	$testimonial_link ="./identitycard?student-idcard=".$this->config->convert_string("code",$student_data->stdId);
 						$this->response = $this->alert->alert_toastr("success", "Generating ID CARD, Please wait...", __OSO_APP_NAME__ . " Says"). '<script>setTimeout(()=>{
 							window.open("' . $testimonial_link . '","_blank","top=10, left=100, width=550, height=550");
-						},4000);</script>';
+						},3000);</script>';
 	
 }
 
