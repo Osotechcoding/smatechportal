@@ -35,8 +35,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 		define("MAILER_ACC_USER", "o71f8d31ac958eb");
 		define("MAILER_ACC_PASS", "5479f82c1922d6");
 		define("MAILER_PORT", 2525);
-		define("ADMISSION_PORTAL_ROOT", "https://www.admission.flaterptech.com");
-		define("APP_ROOT", "https://www.flaterptech.com");
-		define("EPORTAL_ROOT", "https://www.eportal.flaterptech.com");
+		define("ADMISSION_PORTAL_ROOT", "https://www.admission.yourwebsite.com");
+		define("APP_ROOT", "https://www.yourwebsite.com");
+		define("EPORTAL_ROOT", "https://www.eportal.yourwebsite.com");
 	}
 }

@@ -36,8 +36,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 		define("__OSO_APP_VERSION__", "version 2.0.5");
 		define("__OSO_APP_DEV_YEAR__", "2022");
 		define("__OSO_APP_NAME__", "SMAPP");
-		define("WEBSITE_HOME_PAGE", "https://www.flaterptech.com");
-		define("APP_ROOT", "https://www.eportal.flaterptech.com");
+		define("WEBSITE_HOME_PAGE", "https://www.yourwebsite.com");
+		define("APP_ROOT", "https://www.eportal.yourwebsite.com");
 	}
 }
 
