@@ -11,7 +11,7 @@ class Osotech
     public function __construct()
     {
         if (substr($_SERVER['REQUEST_URI'], -4) == ".php" or (stripos($_SERVER['REQUEST_URI'], ".php") == true)) {
-            self::redirect_root("error");
+            $this->redirect_root("error");
         }
         //$Database = new Database();
         $this->dbh = osotech_connect();
@@ -275,7 +275,7 @@ class Osotech
 
     public function get_schoolLogoImage()
     {
-        $schoolDatas = self::getConfigData();
+        $schoolDatas = $this->getConfigData();
         //school real logo
         $schoolLogo = $schoolDatas->school_logo;
         if ($schoolLogo == NULL || $schoolLogo == "") {
@@ -402,18 +402,18 @@ class Osotech
     //send feedback message on contact Us Page
     public function sendFeedBackMessage($data)
     {
-        $name = self::Clean($data['feedback_name']);
-        $email = self::Clean($data['feedback_email']);
-        $phone = self::Clean($data['feedback_phone']);
-        $message = self::Clean($data['feedback_message']);
+        $name = $this->Clean($data['feedback_name']);
+        $email = $this->Clean($data['feedback_email']);
+        $phone = $this->Clean($data['feedback_phone']);
+        $message = $this->Clean($data['feedback_message']);
         $ip = $_SERVER['REMOTE_ADDR'];
         //check for empty fields
-        if (self::isEmptyStr($name) || self::isEmptyStr($email) || self::isEmptyStr($message)) {
-            $this->response = self::alert_msg("danger", "WARNING", "Please fill in all the required fileds!");
-        } elseif (!self::is_Valid_Email($email)) {
-            $this->response = self::alert_msg("danger", "WARNING", "Please enter a valid email address!");
-        } elseif (self::check_single_data('visap_feedback_tbl', "client_email", $email)) {
-            $this->response = self::alert_msg("danger", "WARNING", "$email is already taken!");
+        if ($this->isEmptyStr($name) || $this->isEmptyStr($email) || $this->isEmptyStr($message)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "Please fill in all the required fileds!");
+        } elseif (!$this->is_Valid_Email($email)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "Please enter a valid email address!");
+        } elseif ($this->check_single_data('visap_feedback_tbl', "client_email", $email)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "$email is already taken!");
         } else {
             //insert into db
             try {
@@ -421,22 +421,24 @@ class Osotech
                 $date = date("Y-m-d");
                 $this->stmt = $this->dbh->prepare("INSERT INTO `visap_feedback_tbl` (client_name,client_email,client_phone,message,client_ip_address,created_at) VALUES (?,?,?,?,?,?);");
                 if ($this->stmt->execute(array($name, $email, $phone, $message, $ip, $date))) {
-                    $OsotechMailer = new OsotechMailer();
-                    if ($OsotechMailer->SendClientFeedBackEmail($email, $name, $message) === true) {
-                        $this->dbh->commit();
-                        $this->response = self::alert_msg("success", "SUCCESS", "Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>" . self::getConfigData()->school_name . "!</strong>") . '<script>setTimeout(()=>{location.reload();},10000); </script>';
-                    } else {
-                        //ictzoneone@gmail.com
-                        $this->response = self::alert_msg("danger", "WARNING", "Message could not be sent. Mailer Error!");
-                    }
+                    $this->dbh->commit();
+                    $this->response = $this->alert_msg("success", "SUCCESS", "Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>" . $this->getConfigData()->school_name . "!</strong>") . '<script>setTimeout(()=>{location.reload();},10000); </script>';
+                }else{
+                    $this->response = $this->alert_msg("danger", "WARNING", "Message could not be sent. Mailer Error!");
                 }
-            } catch (PDOException $e) {
+                    /*$OsotechMailer = new OsotechMailer();
+                    if ($OsotechMailer->SendClientFeedBackEmail($email, $name, $message)) {
+                        $this->dbh->commit();
+                        $this->response = $this->alert_msg("success", "SUCCESS", "Your message has been received, we shall get back to you within 24 hrs, Your feedback really mean alot to Us @ <strong>" . $this->getConfigData()->school_name . "!</strong>") . '<script>setTimeout(()=>{location.reload();},10000); </script>';
+                    } else {
+                        $this->response = $this->alert_msg("danger", "WARNING", "Message could not be sent. Mailer Error!");
+                    }*/
+                } catch (PDOException $e) {
                 $this->dbh->rollback();
-                $this->response = self::alert_msg("danger", "ERROR", "Internal Error Occured:" . $e->getMessage());
+                $this->response = $this->alert_msg("danger", "ERROR", "Internal Error Occured:" . $e->getMessage());
             }
         }
         return $this->response;
-        $this->dbh = NULL;
     }
 
     public function move_file_to_folder($filename, $destination): bool
@@ -448,11 +450,11 @@ class Osotech
     //submit staff application form
     public function submitStaffResumeApplicationForm($data, $file)
     {
-        $fullname = self::Clean($data['applicant_name']);
-        $email = self::Clean($data['email']);
-        $phone = self::Clean($data['phone']);
-        $job_desc = self::Clean($data['job_type']);
-        $coverLetter = self::Clean($data['coverLetter']);
+        $fullname = $this->Clean($data['applicant_name']);
+        $email = $this->Clean($data['email']);
+        $phone = $this->Clean($data['phone']);
+        $job_desc = $this->Clean($data['job_type']);
+        $coverLetter = $this->Clean($data['coverLetter']);
         $resume_temp = $file['resume']['tmp_name'];
         $FileName = $file['resume']['name'];
         $File_size = $file['resume']['size'] / 1024;
@@ -462,23 +464,23 @@ class Osotech
         $name_div = explode(".", $FileName);
         $image_ext = strtolower(end($name_div));
         //CHECK FOR EMPTY FIELDS
-        if (self::isEmptyStr($fullname) || self::isEmptyStr($email) || self::isEmptyStr($phone) || self::isEmptyStr($FileName) || self::isEmptyStr($job_desc) || self::isEmptyStr($coverLetter)) {
-            $this->response = self::alert_msg("danger", "WARNING", "Invalid submission, all input fileds are required!");
-        } elseif (!self::is_Valid_Email($email)) {
-            $this->response = self::alert_msg("danger", "WARNING", "$email is not a valid e-mail address, Please check and try again!");
+        if ($this->isEmptyStr($fullname) || $this->isEmptyStr($email) || $this->isEmptyStr($phone) || $this->isEmptyStr($FileName) || $this->isEmptyStr($job_desc) || $this->isEmptyStr($coverLetter)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "Invalid submission, all input fileds are required!");
+        } elseif (!$this->is_Valid_Email($email)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "$email is not a valid e-mail address, Please check and try again!");
         } elseif (!in_array($image_ext, $allowed)) {
-            $this->response = self::alert_msg("danger", "WARNING", "Your file format is not supported, Only PDF is allowed!");
+            $this->response = $this->alert_msg("danger", "WARNING", "Your file format is not supported, Only PDF is allowed!");
         } elseif ($File_size > 1000) {
-            $this->response = self::alert_msg("danger", "WARNING", "Your Resume Size should not exceed 1MB, Selected File Size is :" . number_format($File_size, 2) . "KB");
+            $this->response = $this->alert_msg("danger", "WARNING", "Your Resume Size should not exceed 1MB, Selected File Size is :" . number_format($File_size, 2) . "KB");
         } elseif ($File_error !== 0) {
-            $this->response = self::alert_msg("danger", "WARNING", "There was an error Uploading Resume, Please try again!");
+            $this->response = $this->alert_msg("danger", "WARNING", "There was an error Uploading Resume, Please try again!");
         } else {
             $newFileName = $email . "_resume_" . uniqid() . "." . $image_ext;
             $file_destination = "../eportal/resume/" . $newFileName;
             $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_career_portal_tbl` WHERE applicant_email=? LIMIT 1");
             $this->stmt->execute(array($email));
             if ($this->stmt->rowCount() == 1) {
-                $this->response = self::alert_msg("danger", "WARNING", "$email is already taken, Please check and try again!");
+                $this->response = $this->alert_msg("danger", "WARNING", "$email is already taken, Please check and try again!");
             } else {
                 try {
                     $created_at = date("Y-m-d");
@@ -486,10 +488,10 @@ class Osotech
                     $this->dbh->beginTransaction();
                     $this->stmt = $this->dbh->prepare("INSERT INTO `visap_career_portal_tbl` (applicant_name,applicant_email,phone_number,cover_letter,jobType,uploaded_cv,application_date,application_time) VALUES (?,?,?,?,?,?,?,?);");
                     if ($this->stmt->execute(array($fullname, $email, $phone, $coverLetter, $job_desc, $newFileName, $created_at, $time))) {
-                        if (self::move_file_to_folder($resume_temp, $file_destination)) {
+                        if ($this->move_file_to_folder($resume_temp, $file_destination)) {
                             $this->dbh->commit();
                             $this->dbh = null;
-                            $this->response = self::alert_msg("success", "SUCCESS", "Your application has been submitted Successfully, We shall get back to you via <strong> $email </strong>,Thanks!") . "<script>setTimeout(()=>{
+                            $this->response = $this->alert_msg("success", "SUCCESS", "Your application has been submitted Successfully, We shall get back to you via <strong> $email </strong>,Thanks!") . "<script>setTimeout(()=>{
                             window.location.reload();
                         },10000);</script>";
                         }
@@ -499,7 +501,7 @@ class Osotech
                     if (file_exists($file_destination)) {
                         unlink($file_destination);
                     }
-                    $this->response = self::alert_msg("danger", "ERROR", "Internal Error:" . $e->getMessage());
+                    $this->response = $this->alert_msg("danger", "ERROR", "Internal Error:" . $e->getMessage());
                 }
             }
         }
@@ -514,7 +516,6 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows;
             return $this->response;
-            $this->dbh = null;
         }
     }
 
@@ -528,7 +529,6 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->total;
             return $this->response;
-            $this->dbh = null;
         }
     }
 
@@ -541,7 +541,6 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->total;
             return $this->response;
-            $this->dbh = null;
         }
     }
 
@@ -554,7 +553,6 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->total;
             return $this->response;
-            $this->dbh = null;
         }
     }
 
@@ -567,25 +565,24 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->total;
             return $this->response;
-            $this->dbh = null;
         }
     }
 
     //submit blog comment method
     public function submitClientBlogComment($data)
     {
-        $name = self::Clean($data['commenter_name']);
-        $email = self::Clean($data['commenter_email']);
-        $comment = self::Clean($data['comment_msg']);
-        $blog_id = self::Clean($data['blogId']);
+        $name = $this->Clean($data['commenter_name']);
+        $email = $this->Clean($data['commenter_email']);
+        $comment = $this->Clean($data['comment_msg']);
+        $blog_id = $this->Clean($data['blogId']);
         //$created_at = date("Y-m-d H:i:s");
         //CHECK FOR EMPTY FIELDS
-        if (self::isEmptyStr($name) || self::isEmptyStr($email) || self::isEmptyStr($comment) || self::isEmptyStr($blog_id)) {
-            $this->response = self::alert_msg("danger", "WARNING", "Invalid submission, all fileds are required!");
-        } elseif (!self::is_Valid_Email($email)) {
-            $this->response = self::alert_msg("danger", "WARNING", "<strong> $email</strong> is not a valid  e-mail address, Please try again!");
-        } elseif (self::check_single_data("visap_blog_post_comments", "user_email", $email)) {
-            $this->response = self::alert_msg("danger", "WARNING", "$email is already taken!");
+        if ($this->isEmptyStr($name) || $this->isEmptyStr($email) || $this->isEmptyStr($comment) || $this->isEmptyStr($blog_id)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "Invalid submission, all fileds are required!");
+        } elseif (!$this->is_Valid_Email($email)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "<strong> $email</strong> is not a valid  e-mail address, Please try again!");
+        } elseif ($this->check_single_data("visap_blog_post_comments", "user_email", $email)) {
+            $this->response = $this->alert_msg("danger", "WARNING", "$email is already taken!");
         } else {
             try {
                 $this->dbh->beginTransaction();
@@ -593,13 +590,13 @@ class Osotech
                 if ($this->stmt->execute(array($blog_id, $name, $email, $comment))) {
                     $this->dbh->commit();
                     $this->dbh = null;
-                    $this->response = self::alert_msg("success", "SUCCESS", "Your comment has been submitted for approval<strong> Thanks!</strong>") . "<script>setTimeout(()=>{
+                    $this->response = $this->alert_msg("success", "SUCCESS", "Your comment has been submitted for approval<strong> Thanks!</strong>") . "<script>setTimeout(()=>{
                             window.location.reload();
                         },6000);</script>";
                 }
             } catch (PDOException $e) {
                 $this->dbh->rollback();
-                $this->response = self::alert_msg("danger", "ERROR", "Internal Error:" . $e->getMessage());
+                $this->response = $this->alert_msg("danger", "ERROR", "Internal Error:" . $e->getMessage());
             }
         }
         return $this->response;
@@ -621,7 +618,6 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->cnt;
             return $this->response;
-            $this->dbh = null;
         }
     }
 }

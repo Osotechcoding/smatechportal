@@ -21,12 +21,12 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo strtoupper ($SmappDetails->school_name); ?> - Certificate for - <?php echo $student_data->full_name;?></title>
+    <title><?php echo strtoupper ($SmappDetails->school_name); ?> - Testimonial for - <?php echo $student_data->full_name;?></title>
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Gwendolyn:wght@700&family=Satisfy&family=Special+Elite&display=swap" rel="stylesheet">
     <style> @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Gwendolyn:wght@700&family=Satisfy&family=Special+Elite&display=swap'); </style>
 </head>
 <body>
-<?php include_once "template/testimonialcss.php";?>
+<?php include_once "./template/testimonialcss.php";?>
     <main>
         <section>
             <nav><em>Serial Number.</em> <br><b><?php echo $testimonial_data->cert_no;?></b></nav>
@@ -34,6 +34,7 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
             <div class="fet-upper-part">
                     <div class="fet-sch-name"> <?php echo strtoupper ($SmappDetails->school_name); ?></div>
                     <div><span class="fet-schScope fet-levels">CRECHE, NURSERY, PRIMARY & SECONDARY</span> </div>
+                    <em> <p class="fet-schScope"><?php echo ucwords($Configuration->getConfigData()->school_slogan); ?></p></em>
                     <p class="fet-schScope"><?php echo ucwords($Configuration->getConfigData()->school_address); ?>,
           <?php echo ucwords($Configuration->getConfigData()->school_city); ?>,
           <?php echo ucwords($Configuration->getConfigData()->school_state); ?>.</p>
@@ -71,14 +72,14 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                 <div class="fet-entrybg">
                     <p style="text-align:left; font-size:20px; font-style: italic;line-height: 18px;">Class on Admission:_________________________ Date Admitted:________________</p>
                     <div class="fet-entrybg-values">
-                        <p style="text-align:left; font-size:25px; line-height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($testimonial_data->admitted_class);?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo strtoupper(date("M., Y", strtotime($testimonial_data->admitted_date)));?></p></div>
+                        <p style="text-align:left; font-size:25px; line-height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($testimonial_data->admitted_class);?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo strtoupper(date("M, Y", strtotime($testimonial_data->admitted_date)));?></p></div>
                     <p style="text-align:left; font-style: italic;font-size:20px;">Admission No:__________________________________________________________</p>
                     <div class="fet-entrybg-values">
                         <p style="text-align:left; font-size:25px; line-height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->stdRegNo;?></p></div>
                     <p style="text-align:left;font-style: italic; font-size:20px;">Class Completed:___________________________ Date Completed:_______________</p>
                 </div>
                 <div class="fet-entrybg-values1">
-                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date("M., Y",strtotime($testimonial_data->date_completed)));?></p>
+                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date("M, Y",strtotime($testimonial_data->date_completed)));?></p>
                 </div>
 
                 <div class="fet-subject-offered">
@@ -143,14 +144,15 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                 </div>
             </div>
             <!-- Repeated bg -->
-            <p id="fet-bg-repeat"><?php for($i=1; $i<185; $i++){
-                    echo  '<span>&nbsp; &nbsp;'.strtoupper ($SmappDetails->school_name).'&nbsp; &nbsp;</span> ';
+            <p id="fet-bg-repeat">
+                <?php for($i=1; $i<=200; $i++){
+                    echo  '<span>&nbsp; &nbsp;'.strtoupper ($SmappDetails->school_name).'&nbsp; &nbsp;</span>';
             } ?> 
            </p>
         </section>
        
     </main>
-    <button type="button" id="fet-print-btn" onclick="window.print();">Print Certificate Now</button>
+    <button type="button" id="fet-print-btn" onclick="window.print();">Print Now</button>
     <!--  -->
     <!-- <script>
        document.addEventListener('DOMContentLoaded', printPage, false);

@@ -55,7 +55,10 @@ section > div{
     width: 120px;
     height: 150px;
     border-radius: 10%;
-    border: 2px solid blue;
+    border: 2px solid darkblue;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     z-index: 200;
 }
 .fet-sch-name{

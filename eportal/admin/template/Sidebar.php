@@ -15,8 +15,7 @@
        <li class="active"><a class="d-flex align-items-center" href="./"><i class="fa fa-desktop fa-1x"></i><span
              class="menu-item text-truncate" data-i18n="Dashboard"><?php echo $lang['Dashboard'] ?></span></a>
        </li>
-       <!--  <li class="navigation-header text-truncate"><span data-i18n="MANAGEMENT">MANAGEMENT</span>
-          </li> -->
+      
        <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-edit fa-1x" data-icon="notebook"></i><span
              class="menu-title text-truncate" data-i18n="ADMINISTRATIVE">ADMINISTRATIVE</span></a>
          <ul class="menu-content">
@@ -30,23 +29,14 @@
            <li><a class="d-flex align-items-center" href="create_classroom"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Class Management">Class Management</span></a>
            </li>
-           <!-- <li><a class="d-flex align-items-center" href="upload_lecture"><i class="bx bx-video-plus"></i><span
-                 class="menu-item text-truncate" data-i18n="Online Class"> Online Class</span></a>
-           </li> -->
-           <!-- <li><a class="d-flex align-items-center" href="registerStudentSubject"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Exam Subject I">Exam Subject I</span></a>
-              </li> -->
+          
            <li><a class="d-flex align-items-center" href="bulkSubjectReg"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Exam Subject"> Exam Subject</span></a>
            </li>
            <li><a class="d-flex align-items-center" href="examSubjectList"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Search Exam Subject">Search Subject</span></a>
            </li>
-           <!-- <li class=" nav-item"><a href="student_assignment"><i class="fa fa-book fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Student Assignment"> Student Assignment</span></a>
-           </li>
-           <li class=" nav-item"><a href="markstudentass"><i class="fa fa-pencil fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Mark Assignment">Mark Assignment</span></a>
-           </li> -->
+          
          </ul>
        </li>
        <!-- ADMISSION -->
@@ -83,21 +73,15 @@
            <li class="nav-item"><a href="rgrading"><i class="fa fa-line-chart fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Result Grading">Result Grading</span></a>
            </li>
-           <!-- <li class=" nav-item"><a href="result_uploading"><i class="fa fa-edit fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Upload Results">Upload Results</span></a>
-           </li> -->
+          
            <li class=" nav-item"><a href="view_uploaded_result"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Results">View Results</span></a>
            </li>
-           <!-- <li class=" nav-item"><a href="uploading_behavior"><i class="fa fa-edit fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Affective Domain">Affective Domain</span></a>
-           </li> -->
+          
            <li class=" nav-item"><a href="view_cognitive"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Affective">View Affective</span></a>
            </li>
-           <!-- <li class=" nav-item"><a href="psychomotor"><i class="fa fa-edit fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Psychomotor">Psychomotor</span></a>
-           </li> -->
+          
            <li class=" nav-item"><a href="viewpsycho"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Psychomotor">View Psychomotor</span></a>
            </li>
@@ -130,34 +114,25 @@
              STUDENTS</span></a>
          <ul class="menu-content">
            <li class="nav-item"><a href="add_student"><i class="fa fa-graduation-cap fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Single Registration">Single Registration</span></a>
+                 class="menu-title text-truncate" data-i18n="Registration">Registration</span></a>
            </li>
-           <!-- <li class="nav-item"><a href="studentcsvupload"><i class="fa fa-graduation-cap fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Bulk Registration">Bulk Registration</span></a>
-           </li> -->
-
            <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="View Students">View Students</span></a>
+                 class="menu-title text-truncate" data-i18n="Students"> Students</span></a>
            </li>
-           <!-- student_attendance -->
-           <!-- <li class="nav-item"><a href="upload-attendance"><i class="fa fa-child fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Mark Attendance">Mark Attendance</span></a>
-           </li> -->
            <li class="nav-item"><a href="view-attendance"><i class="fa fa-child fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="view Attendance">View Attendance</span></a>
+                 class="menu-title text-truncate" data-i18n="Attendance">Attendance</span></a>
            </li>
            <li class="nav-item"><a href="prefects"><i class="fa fa-user-secret fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Manage Prefects">Manage Prefects</span></a>
+                 class="menu-title text-truncate" data-i18n="Prefects">Prefects</span></a>
            </li>
            <li class="nav-item"><a href="student_office_list"><i class="fa fa-user-secret fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Student Prefects">Student Office</span></a>
            </li>
            <li class="nav-item"><a href="massPromotion"><i class="fa fa-line-chart fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Student Promotion">Student Promotion</span></a>
+                 class="menu-title text-truncate" data-i18n="Promotion"> Promotion</span></a>
            </li>
-
            <li class="nav-item"><a href="searchstudent"><i class="fa fa-search fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Search Student">Search Student</span></a>
+                 class="menu-title text-truncate" data-i18n="Search">Search</span></a>
            </li>
          </ul>
        </li>

@@ -23,10 +23,13 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
   <title><?php echo ($SmappDetails->school_name); ?> :: IDENTITY MANAGEMENT </title>
 </head>
 <body>
-    <style type="text/css">
+<style type="text/css">
         .school-desc h3, .school-desc p{
             text-align: center;
             
+        }
+        .school-desc h3 {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
 
         .id-container{
@@ -40,18 +43,18 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
             width: 211.2px;
             height: 326.2px;
             margin: 10px;
-            border-radius:10px;
-            border: 1px solid lightblue;
+            border: 2px solid lightblue;
+            border-radius: 10px;
         }
         .id-container div:first-child{
-            position: relative; 
-            margin-top:5px;   
+            position: relative;    
             background-blend-mode: darken;
             text-align: center;
             padding: 0.6px;
         }
        .id-schtag, .id-schaddr, .id-no{
         font-size: x-small;
+        font-weight: 600;
        }
        .id-studname{
         background-color: black;
@@ -65,7 +68,6 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         color: white;
         display: inline;
         border-radius: 3px;
-        margin-bottom:5px;
        }
        .id-back{
         position: relative;
@@ -172,14 +174,22 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
        .sign p{
         margin-top: -10px;
        }
+       .id-schname, #fet-schname {
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+       }
+       #fet-schname{
+        font-size: 16px;
+       }
+
        #fet-print-btn {
     position:absolute;
     width:auto;
     padding:2px 3px;
-    margin:15px 50px 25px 0px;
+    margin-bottom: 20px;
     border-radius:20px;
     background-color: darkred;
     color:white;
+    border: none;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -197,12 +207,12 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
 
     <div class="id-container">
         <div class="id-front">
-            <div class="id-logo"><img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="auto" height="50"></div>
+            <div class="id-logo"><img src="<?php echo $Configuration->get_schoolLogoImage(); ?>" width="auto" height="40"></div>
             <div class="id-schname"><?php echo strtoupper ($SmappDetails->school_name); ?></div>
-            <div class="id-schtag">...<?php echo ($SmappDetails->school_slogan); ?>.</div>
+            <div class="id-schtag"><em> ...<?php echo ($SmappDetails->school_slogan); ?>...</em></div>
             <div class="id-schaddr"><?php echo ucwords($Configuration->getConfigData()->school_address); ?>,
           <?php echo ucwords($Configuration->getConfigData()->school_state); ?></div>
-            <div><img src="<?php echo $Passport; ?>" width="114" height="130" style="border-radius: 10px;border:2px solid black;margin-top:10px;"></div>
+            <div><img src="<?php echo $Passport; ?>" width="115" height="144" style="border-radius: 10px;border:2px solid black;margin-top:10px;"></div>
             <div class="id-studname"><?php echo $student_full_name;?></div>
             <div class="id-status"><span>Class:</span> <?php echo $student_data->studentClass;?> <span style="display: none;">(Library Prefect)</span></div>
             <div class="id-no"><?php echo $student_data->stdRegNo;?></div>
@@ -214,8 +224,8 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
 
         </div>
         <div class="id-back">
-            <p>This ID Card remains a property of <b><?php echo strtoupper($SmappDetails->school_name); ?></b>
-             and identifies the bearer with passport photograph appear overleaf as our <b>STUDENT</b>.
+            <p>This ID Card remains a property of <b id="fet-schname"><?php echo strtoupper($SmappDetails->school_name); ?></b>
+             and identifies the bearer whose passport photograph appear overleaf as our <b id="fet-schname">STUDENT</b>.
               <br>This card is not transferable </p>
             <br>
             <p>Kindly return to the school address or nearest Police Station, if found.</p>
