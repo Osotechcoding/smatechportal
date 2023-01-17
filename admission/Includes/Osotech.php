@@ -340,7 +340,7 @@ class Osotech
         $_SESSION["auth_student_applicant_id"] = $applicant_data->stdId;
         $applicant_id = $applicant_data->stdId;
       try {
-        $passport_realName = $applicant_data->stdRegNo . mt_rand(10, 9999999) . "." . $image_ext;
+        $passport_realName = $applicant_data->stdRegNo . mt_rand(1000000, 9999999) . "." . $image_ext;
       //lets update the student passport in the db
       $destination = "../../eportal/schoolImages/students/" . $passport_realName;
         $birthDate = $year."-".$month."-".$day;
@@ -360,7 +360,8 @@ class Osotech
                   $this->dbh->commit();
                   $student_photo_card_page = ADMISSION_PORTAL_ROOT . "photo-card?email=" .  $this->saltifyString($applicant_email);
                   $this->response = $this->alert_msg("success", "SUCCESS", "Congratulations, Your registration with us was successful, Pls wait... while we generate your Registration Photo Card") . '<script>setTimeout(()=>{
-                    window.open("' . $student_photo_card_page . '","_blank", "top=50, left=50, width=800, height=900");$("#submitStudentApplicationForm")[0].reset();
+                    window.location.href="'.$student_photo_card_page.'";
+                    $("#submitStudentApplicationForm")[0].reset();
                     },1000);</script>';
                 }
               }
