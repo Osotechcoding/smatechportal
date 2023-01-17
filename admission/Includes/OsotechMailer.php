@@ -30,11 +30,11 @@ class OsotechMailer
       //SMTP::DEBUG_SERVER
     
       $mailer->isSMTP();
-      $mailer->Host = $this->FET_EMAIL_SERVER; //'smtp.mailtrap.io';
+      $mailer->Host = 'smtp.mailtrap.io';
       $mailer->SMTPAuth = true;
-      $mailer->Port =      $this->FET_EMAIL_PORT; // 2525
-      $mailer->Username =  $this->FET_ACC_USER; //'71f8d31ac958eb';
-      $mailer->Password =  $this->FET_ACC_PASS; //'5479f82c1922d6';
+      $mailer->Port =       2525;
+      $mailer->Username =  '71f8d31ac958eb';
+      $mailer->Password = '5479f82c1922d6';
       //Recipients
       $mailer->setFrom('osotechcoding@gmail.com', 'Smatech Portal');
       $mailer->addAddress($studentEmail, $studentSurname);     //Add a recipient
@@ -73,11 +73,11 @@ class OsotechMailer
       //Server settings
       //SMTP::DEBUG_SERVER
       $mailer->isSMTP();
-      $mailer->Host = $this->FET_EMAIL_SERVER; 
+      $mailer->Host = 'smtp.mailtrap.io';
       $mailer->SMTPAuth = true;
-      $mailer->Port =      $this->FET_EMAIL_PORT;
-      $mailer->Username =  $this->FET_ACC_USER; 
-      $mailer->Password =  $this->FET_ACC_PASS;
+      $mailer->Port =       2525;
+      $mailer->Username =  '71f8d31ac958eb';
+      $mailer->Password = '5479f82c1922d6';
       //Recipients
       $mailer->setFrom('osotechcoding@gmail.com', 'Flat ERP Technologies');
       $mailer->addAddress($email, $surname);     //Add a recipient

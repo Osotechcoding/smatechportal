@@ -21,6 +21,7 @@ class Osotech
     }
 
     $this->dbh = osotech_connect();
+    $this->OsotechMailer = new OsotechMailer;
   }
 
   public function osotech_session_kick()

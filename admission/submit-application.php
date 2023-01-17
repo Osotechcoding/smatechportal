@@ -500,7 +500,7 @@ if(!$applicant_data){
                       </h4>
                       <center>
                       <div class="col-md-6" id="uploaded_passport">
-                              <img id="previewImg" width="200" src="asset/placeholder.png" alt="placeholder"
+                              <img id="previewImg" width="200" src="assets/placeholder.png" alt="placeholder"
                                 style="border: 5px solid darkblue;border-radius:10px;">
                               <h6 class="text-center text-muted">Image Size: <span id="ImageSize"></span></h6>
                             </div>
