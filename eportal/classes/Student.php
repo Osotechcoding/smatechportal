@@ -2225,4 +2225,18 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 
   return $imagePath;
   }
+
+
+  public function studentExamSubjectIsUploaded($subjectClass) 
+  {
+	$sql = "SELECT * FROM `visap_registered_subject_tbl` WHERE `subject_class`= ? ORDER BY subject_name ASC LIMIT 15";
+	$this->stmt = $this->dbh->prepare($sql);
+	$this->stmt->execute([$subjectClass]);
+	if($this->stmt->rowCount() > 0){
+	return $this->stmt->fetchAll();
+	}else{
+	return '';
+	}
+  }
+
       }

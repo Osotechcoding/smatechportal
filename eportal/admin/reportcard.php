@@ -8,9 +8,9 @@ if (!isset($_SESSION['resultmi']) || $_SESSION['resultmi'] == "") {
 }
 $dbh = osotech_connect();
 $result_regNo = $_SESSION['result_regNo'];
-if (isset($_SESSION['resultmi'])) {
-  $stmt = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
-  $stmt->execute(array($_SESSION['resultmi']));
+if (isset($_SESSION['result_regNo'])) {
+  $stmt = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? ORDER BY reportId ASC");
+  $stmt->execute(array($_SESSION['result_regNo']));
   if ($stmt->rowCount() > 0) {
     while ($rowResult = $stmt->fetch()) {
       $student_reg_number = $rowResult->stdRegCode;
@@ -19,15 +19,16 @@ if (isset($_SESSION['resultmi'])) {
       $rsession = $rowResult->aca_session;
     }
   }
+}else{
+   header("Location: ./checkResult");
+  exit(); 
 }
 
 $student_data = $Student->get_student_data_ByRegNo($student_reg_number);
 $schl_session_data = $Administration->get_session_details();
 //get time present and absent
-$pre = 'Present';
-$ab = 'Absent';
-$timePresent = $Student->get_student_attendance_details($student_reg_number, $student_class, $pre, $term, $rsession);
-$timeAbsent = $Student->get_student_attendance_details($student_reg_number, $student_class, $ab, $term, $rsession);
+$attendance_records = $Result->getStudentAttendanceRecord($student_reg_number, $student_class, $term, $rsession);
+$Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +37,13 @@ $timeAbsent = $Student->get_student_attendance_details($student_reg_number, $stu
   <?php include_once("../template/MetaTag.php"); ?>
   <title> <?php echo ucwords($SmappDetails->school_name); ?> :: <?php echo ucwords($student_data->full_name); ?> Report
     Card for <?php echo $schl_session_data->active_session; ?> <?php echo $term ?></title>
-  <link rel="stylesheet" href="result.css" />
+    <?php 
+include "result-css.php";
+?>
 </head>
 
 <body>
+
   <section id="result">
     <div class="upperSection">
       <img src="<?php echo $Configuration->get_schoolLogoImage(); ?>"
@@ -69,18 +73,7 @@ $timeAbsent = $Student->get_student_attendance_details($student_reg_number, $stu
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
     <!--  -->
-    <?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
-    <?php if ($student_data->stdGender == "Male") : ?>
-    <img src="../schoolImages/students/male.png" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php else : ?>
-    <img src="../schoolImages/students/female.png" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php endif ?>
-    <?php else : ?>
-    <img src="../schoolImages/students/<?php echo $student_data->stdPassport; ?>" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php endif ?>
+    <img src="<?php echo $Passport;?>" alt="passport" class="fet-img">
 
     <div class="container-ca">
       <div class="cog-domain">
@@ -102,10 +95,10 @@ $timeAbsent = $Student->get_student_attendance_details($student_reg_number, $stu
             </tr>
           </thead>
           <?php
-          $resultScore = $dbh->prepare("SELECT * FROM  `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=?");
-          $resultScore->execute(array($student_reg_number, $student_class, $term, $rsession));
-          if ($resultScore->rowCount() > 0) {
-            while ($showResult = $resultScore->fetch()) {
+          $statement = $dbh->prepare("SELECT * FROM `visap_1st_term_result_tbl` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
+          $statement->execute(array($student_reg_number, $student_class, $rsession));
+          if ($statement->rowCount() > 0) {
+            while ($showResult = $statement->fetch()) {
               $myTotalMark = intval($showResult->overallMark);
           ?>
           <?php
@@ -139,9 +132,7 @@ $timeAbsent = $Student->get_student_attendance_details($student_reg_number, $stu
           <?php
                 }
               }
-              ?>
-
-          <?php }
+               }
           }
           ?>
         </table>
@@ -244,15 +235,15 @@ $timeAbsent = $Student->get_student_attendance_details($student_reg_number, $stu
           </thead>
           <tr>
             <td>No of Times School Opened </td>
-            <td><?php echo $schl_session_data->Days_open; ?> </td>
+            <td><?php echo $attendance_records->school_open; ?> </td>
           </tr>
           <tr>
             <td>No of Times Present </td>
-            <td><?php echo $timePresent; ?> </td>
+            <td><?php echo $attendance_records->present; ?> </td>
           </tr>
           <tr>
             <td>No of Times Absent </td>
-            <td><?php echo $timeAbsent ?> </td>
+            <td><?php echo $attendance_records->absent ?> </td>
           </tr>
 
         </table>

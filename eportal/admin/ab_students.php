@@ -176,14 +176,14 @@ require_once "helpers/helper.php";
                   <tr>
                     <th>S/N</th>
                     <th>PASSPORT</th>
-                    <th>FULLNAME</th>
-                    <th>STUDENT TYPE</th>
+                    <th>FULL NAME</th>
+                    <th> TYPE</th>
                     <th>CLASS</th>
                     <th>Gender</th>
                     <!-- <th>VERIFICATION</th> -->
-                    <th>STATUS</th>
-                  
-                    <th>ACTION</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Upload Result</th>
                   </tr>
                 </thead>
                 <tbody class="text-center">
@@ -252,9 +252,19 @@ require_once "helpers/helper.php";
                                   } ?> </td>
                     <td>
                       <div class="btn-group mb-1">
-                        <a class="text-info" href="editstudentinfo?student-data=<?php echo ($filtered->stdId); ?>">
+                        <a class="text-info mr-1" href="editstudentinfo?student-data=<?php echo ($filtered->stdId); ?>">
                           <button type="button" class="btn btn-dark btn-sm"><span
-                              class="fa fa-edit"></span></button></a>
+                              class="fa fa-edit"></span></button></a> 
+                              
+                      </div>
+                      <!--  -->
+                    </td>
+                    <td>
+                      <div class="btn-group mb-1">
+                      
+                              <?php if($Student->studentExamSubjectIsUploaded($student_class) != ''){?>
+                              <a href="upload-single-result?student=<?php echo $Configuration->saltifyString($filtered->stdId)?>&grade=<?php echo $Configuration->saltifyString($student_class);?>" class=""><button type="button" class="btn btn-dark btn-sm">Upload Result</button> </a>
+                            <?php  } ?>
                       </div>
                       <!--  -->
                     </td>

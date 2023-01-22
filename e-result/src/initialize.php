@@ -25,10 +25,10 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
         define("__OSO_DB_DRIVER__",'mysql');
         define("__OSO_CHARSET__",'utf8mb4');
         define("__OSO_APP_NAME__", strtoupper("smatech"));
-        define("APP_ROOT","https://www.yourwebsite.com");
-        define("EPORTAL_ROOT","https://www.eportal.yourwebsite.com");
-        define("ADMISSION_ROOT","https://www.admission.yourwebsite.com");
-        define("RESULT_ROOT","https://www.e-result.yourwebsite.com");
+        define("APP_ROOT","http://192.168.0.102:80/smatechportal/");
+        define("EPORTAL_ROOT","http://192.168.0.102:80/smatechportal/eportal/");
+        define("ADMISSION_ROOT","http://192.168.0.102:80/smatechportal/admission/");
+        define("RESULT_ROOT","http://192.168.0.102:80/smatechportal/e-result/");
     }
 }
 

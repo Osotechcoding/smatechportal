@@ -39,7 +39,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = true;
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -53,7 +53,7 @@ class StudentResult
       $this->response = false;
     }
     return $this->response;
-    $this->dbh = null;
+   
   }
 
   public function checkResultPortalStatus()
@@ -64,7 +64,7 @@ class StudentResult
       //result checking is not allowed at the momemnt
       $this->response = true;
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -104,7 +104,7 @@ class StudentResult
       //not allowed
       $this->response = true;
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -115,7 +115,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
   //code to check the student results
@@ -338,7 +338,7 @@ class StudentResult
       }
     }
     return $this->response;
-    $this->dbh = null;
+   
   }
 
   //get student psychomotor
@@ -349,7 +349,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -360,7 +360,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -372,7 +372,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -384,7 +384,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -395,7 +395,7 @@ class StudentResult
     if ($this->stmt->rowCount() == 1) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -407,7 +407,7 @@ class StudentResult
       $rollCall = $this->stmt->fetch();
       $this->response = $rollCall->cnt;
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -426,7 +426,7 @@ class StudentResult
       $res = $this->stmt->fetch();
       $this->response = $res->pin_counter;
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 
@@ -437,7 +437,7 @@ class StudentResult
     if ($this->stmt->rowCount() > 0) {
       $this->response = $this->stmt->fetch();
       return $this->response;
-      $this->dbh = null;
+     
     }
   }
 }

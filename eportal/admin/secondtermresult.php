@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(1);
 require_once "helpers/helper.php";
 
 if (!isset($_SESSION['resultmi']) || $_SESSION['resultmi'] == "") {
@@ -72,18 +73,7 @@ include "result-css.php";
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
     <!--  -->
-    <?php if ($student_data->stdPassport == NULL || $student_data->stdPassport == "") : ?>
-    <?php if ($student_data->stdGender == "Male") : ?>
-    <img src="../schoolImages/students/male.png" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php else : ?>
-    <img src="../schoolImages/students/female.png" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php endif ?>
-    <?php else : ?>
-    <img src="../schoolImages/students/<?php echo $student_data->stdPassport; ?>" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
-    <?php endif ?>
+    <img src="<?php echo $Passport;?>" alt="passport" class="fet-img">
 
     <div class="container-ca">
       <div class="cog-domain">
@@ -135,7 +125,6 @@ include "result-css.php";
                 $_firstTermTotal = '0';
               }
               ?>
-
           <?php
               //grab the first three letters of the student class
               $nthclass = substr($showResult->studentGrade, 0, 3);
@@ -166,11 +155,8 @@ include "result-css.php";
 
               $stmt2 = $dbh->prepare("SELECT * FROM `visap_result_grading_tbl` WHERE grade_class='$amInClass' AND $grandScore>=score_from AND $grandScore<=score_to");
               $stmt2->execute();
-              if ($stmt->rowCount() > 0) {
-                while ($r = $stmt2->fetch()) {
-
-
-              ?>
+              if ($stmt2->rowCount() > 0) {
+                while ($r = $stmt2->fetch()) {?>
           <tr>
             <td style="text-align: center;"> <?php echo strtoupper($showResult->subjectName); ?></td>
             <td align="center" style="background-color: rgba(243, 241, 105, 0.267);">

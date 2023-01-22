@@ -84,9 +84,7 @@ $Passport = $Osotech->displayStudentPassport($student_data->stdPassport,$student
       <b><?php echo $StudentResult->get_student_age($student_data->stdDob); ?>yrs</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
-    <img src="<?php echo $Passport; ?>"
-      alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
+    <img src="<?php echo $Passport; ?>" alt="passport" class="fet-img">
 
     <div class="container-ca">
       <div class="cog-domain">

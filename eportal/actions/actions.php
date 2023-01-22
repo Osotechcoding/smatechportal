@@ -649,5 +649,12 @@
 					echo  $result;
 				}
 			}
+			//submit_single_student_result_sheet
+			if ($_POST['action'] === "submit_single_student_result_sheet") {
+				$result = $Result->uploadSingleStudentResultSheet($_POST);
+				if ($result) {
+					echo  $result;
+				}
+			}
 		}
 	}

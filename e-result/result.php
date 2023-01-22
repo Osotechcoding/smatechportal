@@ -16,6 +16,8 @@ body {
   margin-top:6px;
   background-color: black;
   color: aliceblue;
+  text-align: center;
+  margin-left: 20px !important;
     }
 td {
   border: 1px solid black;
@@ -43,7 +45,7 @@ tbody >tr:nth-child(odd) {
 }
 .schname{
     display: block;
-    /* margin-left: auto; */
+     /* margin-left: 10px !important; */
     margin-right: auto;
     width: 80%;
 }
@@ -122,7 +124,8 @@ tbody >tr:nth-child(odd) {
   line-height: 2px;
   color: red;
   font-weight: 1000;
-  margin-left: auto;
+  /* margin-left: auto; */
+  margin-left: 20px !important;
 }
 .textArea p:first-of-type{
   margin-top: 3px;
@@ -164,5 +167,14 @@ tbody >tr:nth-child(odd) {
   align-items: center;
   margin-left: 20px;
 } 
+img.fet-img{
+  float: right;
+   width: 100px;
+   height: 125px;
+  margin-top: -150px; 
+  border: 4px solid #625D5D; 
+  padding: 2px;
+  border-radius: 10px !important;
+}
 
 </style>

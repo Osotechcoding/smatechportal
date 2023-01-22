@@ -7,12 +7,10 @@ class Session {
 
 	 public static function web_root(){
 	 	return APP_ROOT;
-		//https://eportal.smapp.com/
 	}
 	public static function redirect_root($flink) {
 		header("Location: ".self::web_root().$flink);
-    exit();
-    //https://eportal.smapp.com/index
+    	exit();
 	}
 	
 	public static function set($k,$v){

@@ -174,7 +174,7 @@ class Result
 			$this->response = $this->alert->alert_toastr("error", "Invalid Submission: Unable to Process your Request!", __OSO_APP_NAME__ . " Says");
 		} elseif ($auth_pass !== __OSO__PUBLISH_RESULT__KEY__) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
-		} elseif (!self::checkResultUploadedByClass($resultTable, $result_class, $result_term, $result_session)) {
+		} elseif (!$this->checkResultUploadedByClass($resultTable, $result_class, $result_term, $result_session)) {
 			$this->response = $this->alert->alert_toastr("error", "Result not found for $result_class", __OSO_APP_NAME__ . " Says");
 		} else {
 			switch ($status) {
@@ -287,15 +287,11 @@ class Result
 			$this->response = $this->alert->alert_toastr("error", "Result Checking is currently not allowed!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($stdGrade) || $this->config->isEmptyStr($stdTerm) || $this->config->isEmptyStr($stdSession) || $this->config->isEmptyStr($auth_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid submission, Please check all your inputs!", __OSO_APP_NAME__ . " Says");
-		}/*elseif (result is not commented by class teacher) {
-			// code...
-		}elseif (result is not commented by principal) {
-			// code...
-		}*/ elseif (!$this->config->check_single_data("visap_student_tbl", "stdRegNo", $stdRegNo)) {
+		} elseif (!$this->config->check_single_data("visap_student_tbl", "stdRegNo", $stdRegNo)) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid student admission number!", __OSO_APP_NAME__ . " Says");
-		} elseif (!self::checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+		} elseif (!$this->checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 			$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
-		} elseif (!self::checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+		} elseif (!$this->checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 			$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
 		} else {
 			switch ($stdTerm) {
@@ -321,8 +317,6 @@ class Result
 					if ($result_opened == '2') {
 						// create a session result Id...
 						$_SESSION['resultmi'] = $result_id;
-						// $_SESSION['pin'] = $cardPin;
-						// $_SESSION['serial'] = $cardSerial;
 						$_SESSION['result_regNo'] = $stdRegNo;
 						$_SESSION['result_class'] = $stdGrade;
 						$_SESSION['result_term'] = $stdTerm;
@@ -339,7 +333,7 @@ class Result
 								break;
 						}
 						$this->response = $this->alert->alert_toastr("success", "Generating Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
-			window.open("' . $student_result_page . '","_blank", "top=100, left=100, width=700, height=850");$("#SingleStudentResult_form")[0].reset();
+			window.open("' . $student_result_page . '","_blank", "top=10, left=10, width=750, height=850");$("#SingleStudentResult_form")[0].reset();
 		},3000)</script>';
 					} elseif ($result_opened == '3') {
 						$this->response = $this->alert->alert_toastr("error", "This Result is Held, Please contact your Admin!", __OSO_APP_NAME__ . " Says");
@@ -352,7 +346,6 @@ class Result
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function update_school_result_grading($data)
@@ -389,7 +382,6 @@ class Result
 			}
 		}
 		return $this->response;
-		//unset($this->dbh);
 	}
 	public function get_school_result_grading($grade_desc)
 	{
@@ -398,7 +390,7 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -409,7 +401,7 @@ class Result
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -420,7 +412,7 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -461,8 +453,6 @@ class Result
 				//$arr_stdId = $stdId[$i];
 				$arr_student_regNo = $student_regNo[$i];
 				$arr_result_class = $result_class[$i];
-				// $arr_result_term = $result_term[$i];
-				// $arr_result_session = $result_session[$i];
 				$arr_cass = $cass[$i];
 				$arr_exam = $exam[$i];
 				$arr_subject = $subject[$i];
@@ -494,9 +484,7 @@ class Result
 				}
 			}
 		}
-
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function get_all_uploaded_school_result($resultTable, $stdGrade, $subject, $term, $session)
@@ -506,7 +494,7 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -525,14 +513,14 @@ class Result
 		return $this->response;
 	}
 
-	public function filter_students_result_by_admission_no_subject($mytable, $studentClass, $admission_no, $subject, $term, $session)
+	public function filter_students_result_by_admission_no_subject($my_table, $studentClass, $admission_no, $subject, $term, $session)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$mytable}` WHERE stdRegCode=? AND studentGrade=? AND subjectName=? AND term=? AND aca_session=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$my_table}` WHERE stdRegCode=? AND studentGrade=? AND subjectName=? AND term=? AND aca_session=? LIMIT 1");
 		$this->stmt->execute(array($admission_no, $studentClass, $subject, $term, $session));
 		if ($this->stmt->rowCount() == 1) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -590,20 +578,18 @@ class Result
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
-	public function checkResultReadyModule($querytable, $stdReg, $stdGrade, $term, $session): bool
+	public function checkResultReadyModule($query_table, $stdReg, $stdGrade, $term, $session): bool
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM {$querytable} WHERE reg_number=? AND student_class=? AND term=? AND session=? LIMIT 1");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM {$query_table} WHERE reg_number=? AND student_class=? AND term=? AND session=?");
 		$this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = true;
 		} else {
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
 	}
 
 	//View uploaded result method
@@ -620,7 +606,7 @@ class Result
 			$this->response = false;
 		}
 		return $this->response;
-		unset($this->dbh);
+
 	}
 
 	//get student termly offered subjects
@@ -635,7 +621,6 @@ class Result
 			$this->response = 0;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function getUploadedResultByClass($resultTable, $stdgrade, $subject, $term, $session)
@@ -645,7 +630,7 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -688,7 +673,6 @@ class Result
 			$this->response = false;
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	public function checkMyResultByMySelf($data)
@@ -730,34 +714,34 @@ class Result
 				$this->response = $this->alert->alert_toastr("error", "Invalid Scratch Card Pin Number!", __OSO_APP_NAME__ . " Says");
 			} else {
 				//lets check the pin if exists in our system
-				$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins` WHERE pin_code=? AND pin_serial=? LIMIT 1");
+				$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins` WHERE pin_code=? AND pin_serial=?");
 				$this->stmt->execute(array($cardPin, $cardSerial));
 				//lets check the pin if exists in our system
-				if ($this->stmt->rowCount() == 1) {
+				if ($this->stmt->rowCount() > 0) {
 					// the Pin Exists...
 					//now let's check the status of the entered pin
 					$pin_data = $this->stmt->fetch();
 					$status = $pin_data->pin_status;
 					$PinId = $pin_data->pin_id;
-					//unset($this->dbh);
+					
 					if ($status == '1') {
 						// pin has been used let's get the user details from pin history
-						$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE pin_code=? AND pin_serial=? AND used_term=? AND used_session=? LIMIT 1");
+						$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_result_pins_history` WHERE pin_code=? AND pin_serial=? AND used_term=? AND used_session=?");
 						$this->stmt->execute(array($cardPin, $cardSerial, $stdTerm, $stdSession));
-						if ($this->stmt->rowCount() == 1) {
+						if ($this->stmt->rowCount() > 0) {
 							//grab the regNo of the Checker and Compare
-							$pin_hitory_data = $this->stmt->fetch();
-							$usedCounter = $pin_hitory_data->pin_counter;
-							$userRegNo = $pin_hitory_data->studentRegNo;
-							$phId = $pin_hitory_data->pinId;
+							$pin_history_data = $this->stmt->fetch();
+							$usedCounter = $pin_history_data->pin_counter;
+							$userRegNo = $pin_history_data->studentRegNo;
+							$phId = $pin_history_data->pinId;
 							if ($stdRegNo !== $userRegNo) {
 								$this->response = $this->alert->alert_toastr("error", "This Pin has been used by another Student!", __OSO_APP_NAME__ . " Says");
 							} elseif ($usedCounter >= '3') {
 								$this->response = $this->alert->alert_toastr("error", "You Have Exhausted Your Time Usage Validity of this Pin!", __OSO_APP_NAME__ . " Says");
-							} elseif (!self::checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+							} elseif (!$this->checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 
 								$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
-							} elseif (!self::checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+							} elseif (!$this->checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 								$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
 							} else {
 								//let's increase the counter
@@ -807,7 +791,7 @@ class Result
 														break;
 												}
 												$this->response = $this->alert->alert_toastr("success", "Processing your Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
-	window.open("' . $student_result_page . '","_blank", "top=100, left=100, width=750, height=842");$("#checkResultForm")[0].reset();
+	window.open("' . $student_result_page . '","_blank", "top=10, left=10, width=750, height=842");$("#checkResultForm")[0].reset();
 	},1000)</script>';
 											} elseif ($result_opened == '3') {
 												$this->response = $this->alert->alert_toastr("error", "This Result is Held, Please contact your Admin!", __OSO_APP_NAME__ . " Says");
@@ -829,9 +813,9 @@ class Result
 						$this->stmt->execute(array($stdRegNo, $stdGrade, $cardPin, $cardSerial, $stdTerm, $stdSession));
 						if ($this->stmt->rowCount() == '0') {
 
-							if (!self::checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+							if (!$this->checkResultReadyModule("visap_behavioral_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 								$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
-							} elseif (!self::checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
+							} elseif (!$this->checkResultReadyModule("visap_psycho_tbl", $stdRegNo, $stdGrade, $stdTerm, $stdSession)) {
 								$this->response = $this->alert->alert_toastr("error", "This Result is not yet Ready!", __OSO_APP_NAME__ . " Says");
 							} else {
 								//create pin used history
@@ -914,7 +898,6 @@ class Result
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
 	}
 
 	//uploadning result comment method
@@ -977,7 +960,7 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-			$this->dbh = null;
+
 		}
 	}
 
@@ -988,7 +971,67 @@ class Result
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-			$this->dbh = null;
+
 		}
+	}
+
+	public function uploadSingleStudentResultSheet(array $data)
+	{
+		$admNo = $this->config->Clean($data['admNo']);
+		$studentClass = $this->config->Clean($data['student_class']);
+		$term = $this->config->Clean($data['term']);
+		$cses = $this->config->Clean($data['cses']);
+		$total_count = $this->config->Clean($data['total_count']);
+		switch ($term) {
+			case '3rd Term':
+				$resultTable = 'visap_termly_result_tbl';
+				break;
+			case '2nd Term':
+				$resultTable = 'visap_2nd_term_result_tbl';
+				break;
+			case '1st Term':
+				$resultTable = 'visap_1st_term_result_tbl';
+				break;
+			default:
+				$resultTable = 'visap_1st_term_result_tbl';
+				break;
+		}
+		for ($i = 0; $i < (int)$total_count; $i++) {
+			$subject = $data['subject'][$i] ?? '';
+			$arr_cass = $data['ca'][$i]?? '';
+			$arr_exam = $data['exam'][$i] ?? '';
+			if($this->config->isEmptyStr($arr_cass) ||$this->config->isEmptyStr($arr_exam) ||$this->config->isEmptyStr($subject)){
+				$this->response = $this->alert->alert_toastr("error", "Invalid submission!", __OSO_APP_NAME__ . " Says");
+			}else{
+				//check if the subject already uploaded
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? AND subjectName=?");
+			$this->stmt->execute(array($admNo, $studentClass, $term, $cses, $subject));
+			if ($this->stmt->rowCount() > 0) {
+				$this->response = $this->alert->alert_toastr("error", "$subject is already Uploaded!", __OSO_APP_NAME__ . " Says");
+			} else {
+				try {
+					$this->dbh->beginTransaction();
+					$rStatus = '1';
+					$this->stmt = $this->dbh->prepare("INSERT INTO `{$resultTable}` (stdRegCode,studentGrade,term,aca_session,subjectName,ca,exam,overallMark,mark_average,uploadedTime,uploadedDate,rStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
+					$total_sum = doubleval($arr_cass + $arr_exam);
+					$average_score = round(($total_sum / 2));
+					$time = date("h:i:s");
+					$date = date("Y-m-d");
+					if ($this->stmt->execute(array($admNo, $studentClass, $term, $cses, $subject, $arr_cass, $arr_exam, $total_sum, $average_score, $time, $date, $rStatus))) {
+						//update subjectRank will be here later
+						$this->dbh->commit();
+							//$this->dbh = null;
+						$this->response = $this->alert->alert_toastr("success", "Score uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+		window.location.href='./ab_students';
+		}, 1000);</script>";
+					}
+				} catch (PDOException $e) {
+					$this->dbh->rollback();
+					$this->response  = $this->alert->alert_toastr("error", "Upload Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+				}
+			}
+			}
+		}
+		return $this->response;
 	}
 }

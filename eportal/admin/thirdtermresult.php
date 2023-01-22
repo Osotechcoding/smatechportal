@@ -40,7 +40,6 @@ $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student
 include "result-css.php";
 ?>
 </head>
-
 <body>
   <section id="result">
     <div class="upperSection">
@@ -71,8 +70,7 @@ include "result-css.php";
     </P>
     <!-- <P>CLUB / SOCIETY:&nbsp;&nbsp; <b>JET, CHOIR</b>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</P> -->
     <!--  -->
-    <img src="<?php echo $Passport;?>" alt="passport"
-      style="float: right; width: 100px;height: 125px; margin-top: -150px; border: 4px solid #625D5D; padding: 2px;">
+    <img src="<?php echo $Passport;?>" class="fet-img">
     <div class="container-ca">
       <div class="cog-domain">
         <table style="table-layout: auto; width:100%;" id="congnitiveDomain">

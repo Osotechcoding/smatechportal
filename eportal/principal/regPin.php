@@ -76,12 +76,13 @@ $_Pins_ = new Pins();
                   <!-- <th>Action</th> -->
                 </tr>
               </thead>
-              <tbody>
-                <?php 
-                $pin_datas = $_Pins_->get_pins("tbl_reg_pins");
+              <tbody class="text-center">
+                <?php
+                $pin_datas = $Pin_serial->get_pins("tbl_reg_pins");
                  if ($pin_datas!="") {
                   $cnt =1;
-                 foreach ($pin_datas as $pin_data):?> 
+                 foreach ($pin_datas as $pin_data):?>
+              <?php $userData = $Pin_serial->get_admission_pin_card_user($pin_data->pin_code,$pin_data->pin_serial); ?>
                    <tr>
                   <td><?php echo $cnt++; ?></td>
                   <td><?php echo $pin_data->pin_serial;?></td>
@@ -101,11 +102,18 @@ $_Pins_ = new Pins();
                    echo '<span class="badge badge-pill badge-success badge-sm">Active</span>';
                   }else{
                      echo '<span class="badge badge-pill badge-danger badge-sm">Used</span>';
-                  } 
+                  }
 
                    ?>
                     </td>
-                  <td><span class="badge badge-pill badge-success badge-sm">Not Used</span></td>
+                  <td>
+                    <?php if ($userData): ?>
+                  <span class="badge badge-pill badge-dark badge-sm"><?php echo $userData->used_by;?></span>
+                    <?php else: ?>
+                      <span class="badge badge-pill badge-success badge-sm">No User</span>
+                  <?php endif ?>
+                    </td>
+                    
                 </tr>
                   <?php endforeach; ?>
                <?php } ?>

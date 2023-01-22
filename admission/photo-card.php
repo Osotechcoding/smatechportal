@@ -274,7 +274,7 @@ if (isset($_GET['email']) && !$Osotech->isEmptyStr($_GET['email'])) {
                 <hr>
                 <button id="myprintbtn" class="fet-no-print" onclick="javascript:window.print();" type="button"
                   style="background: black; color: white; margin-bottom: 15px;border-radius: 10px;">Print Now</button>
-                <a href="logout?action=logoutapplicant&applicant=newstudent" id="mylogoutbtn" class="fet-no-print"> <button
+                <a href="logout?action=logout&applicant=new" id="mylogoutbtn" class="fet-no-print"> <button
                     onclick="return confirm('Ensure you print put your entrance examination Photo-card before signing out');"
                     type="button"
                     style="background: darkred; color: white; margin-bottom: 15px;border-radius: 10px;">Logout</button></a>

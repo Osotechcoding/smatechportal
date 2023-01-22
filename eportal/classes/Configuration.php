@@ -246,7 +246,6 @@ $ denotes the end
     if ($this->stmt->rowCount() > 0) {
       $this->response = $this->stmt->fetchAll();
       return $this->response;
-      $this->dbh = null;
     }
   }
   public function check_user_activity_allowed($module)
@@ -257,7 +256,6 @@ $ denotes the end
     if ($this->stmt->rowCount() == 1) {
       $this->response = true;
       return $this->response;
-      $this->dbh = null;
     }
   }
 
@@ -306,7 +304,6 @@ $ denotes the end
     if ($this->stmt->rowCount() == 1) {
       $this->response = true;
       return $this->response;
-      $this->dbh = null;
     }
   }
 
