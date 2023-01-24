@@ -35,8 +35,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 		define("MAILER_ACC_USER", "o71f8d31ac958eb");
 		define("MAILER_ACC_PASS", "5479f82c1922d6");
 		define("MAILER_PORT", 2525);
-		define("ADMISSION_PORTAL_ROOT", "http://192.168.0.102:80/smatechportal/admission/");
-		define("APP_ROOT", "http://192.168.0.102:80/smatechportal/");
-		define("EPORTAL_ROOT", "http://192.168.0.102:80/smatechportal/eportal/");
+		define("ADMISSION_PORTAL_ROOT", "http://192.168.1.62:80/smatechportal/admission/");
+		define("APP_ROOT", "http://192.168.1.62:80/smatechportal/");
+		define("EPORTAL_ROOT", "http://192.168.1.62:80/smatechportal/eportal/");
 	}
 }

@@ -606,5 +606,12 @@ if ($request_method === "POST") {
         echo $result;
       }
     }
+    //submit_edited_single_student_result_sheet
+    if ($_POST['action'] === "submit_edited_single_student_result_sheet") {
+      $result = $Result->UpdateSingleStudentResultSheet($_POST);
+      if ($result) {
+        echo $result;
+      }
+    }
   }
 }

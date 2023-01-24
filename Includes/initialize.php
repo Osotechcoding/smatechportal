@@ -28,16 +28,16 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
     define("__OSO_DBNAME__", 'smatech_portal');
     define("__OSO_DB_DRIVER__", 'mysql');
     define("__OSO_CHARSET__", 'utf8mb4');
-    define("OSO_DOCUMENTATION_ROOT", 'http://192.168.0.102/smatechportal/docs/v1/');
+    define("OSO_DOCUMENTATION_ROOT", 'http://192.168.1.62:80/smatechportal/docs/v1/');
     define("__OSO_APP_NAME__", strtoupper("smatech"));
     define("MAILER_EMAIL_SERVER", "'smtp.mailtrap.io");
     define("MAILER_ACC_USER", "o71f8d31ac958eb");
     define("MAILER_ACC_PASS", "5479f82c1922d6");
     define("MAILER_PORT", 2525);
-    define("APP_ROOT", "http://192.168.0.102:80/smatechportal/");
-    define("ADMISSION_ROOT", "http://192.168.0.102:80/smatechportal/admission/");
-    define("RESULT_ROOT", "http://192.168.0.102:80/smatechportal/e-result/");
-    define("EPORTAL_ROOT", "http://192.168.0.102:80/smatechportal/eportal/");
+    define("APP_ROOT", "http://192.168.1.62:80/smatechportal/");
+    define("ADMISSION_ROOT", "http://192.168.1.62:80/smatechportal/admission/");
+    define("RESULT_ROOT", "http://192.168.1.62:80/smatechportal/e-result/");
+    define("EPORTAL_ROOT", "http://192.168.1.62:80/smatechportal/eportal/");
   }
 }
 

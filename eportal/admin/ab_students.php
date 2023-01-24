@@ -252,7 +252,7 @@ require_once "helpers/helper.php";
                                   } ?> </td>
                     <td>
                       <div class="btn-group mb-1">
-                        <a class="text-info mr-1" href="editstudentinfo?student-data=<?php echo ($filtered->stdId); ?>">
+                        <a class="text-info mr-1" href="./editstudentinfo?student-data=<?php echo ($filtered->stdId); ?>">
                           <button type="button" class="btn btn-dark btn-sm"><span
                               class="fa fa-edit"></span></button></a> 
                               
@@ -264,7 +264,9 @@ require_once "helpers/helper.php";
                       
                               <?php if($Student->studentExamSubjectIsUploaded($student_class) != ''){?>
                               <a href="upload-single-result?student=<?php echo $Configuration->saltifyString($filtered->stdId)?>&grade=<?php echo $Configuration->saltifyString($student_class);?>" class=""><button type="button" class="btn btn-dark btn-sm">Upload Result</button> </a>
-                            <?php  } ?>
+                            <?php } else {
+                                echo '<span class="badge badge-pill badge-sm badge-danger">No Subjects Found</span>';
+                              }?>
                       </div>
                       <!--  -->
                     </td>

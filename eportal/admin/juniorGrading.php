@@ -175,7 +175,7 @@ require_once "helpers/helper.php";
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="auth_code">Authentication Code</label>
-                  <input type="text" autocomplete="off" id="auth_code" class="form-control" name="auth_code"
+                  <input type="password" autocomplete="off" id="auth_code" class="form-control" name="auth_code"
                     placeholder="Auth Code">
                 </div>
               </div>

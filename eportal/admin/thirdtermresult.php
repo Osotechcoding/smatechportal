@@ -1,17 +1,16 @@
 <?php
-session_start();
 require_once "helpers/helper.php";
 
-if (!isset($_SESSION['resultmi']) || $_SESSION['resultmi'] == "") {
+if (!isset($_SESSION['student_result_id']) || $_SESSION['student_result_id'] == "") {
   header("Location: ./checkResult");
   exit();
 }
 
 $dbh = osotech_connect();
 $result_regNo = $_SESSION['result_regNo'];
-if (isset($_SESSION['resultmi'])) {
+if (isset($_SESSION['student_result_id'])) {
   $stmt = $dbh->prepare("SELECT * FROM `visap_termly_result_tbl` WHERE reportId=? ORDER BY reportId ASC");
-  $stmt->execute(array($_SESSION['resultmi']));
+  $stmt->execute(array($_SESSION['student_result_id']));
   if ($stmt->rowCount() > 0) {
     while ($rowResult = $stmt->fetch()) {
       $student_reg_number = $rowResult->stdRegCode;
@@ -19,7 +18,13 @@ if (isset($_SESSION['resultmi'])) {
       $term = $rowResult->term;
       $rsession = $rowResult->aca_session;
     }
+  }else{
+      header("Location: ./checkResult");
+      exit();
   }
+}else{
+    header("Location: ./checkResult");
+    exit();
 }
 
 $student_data = $Student->get_student_data_ByRegNo($student_reg_number);

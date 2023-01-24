@@ -2238,5 +2238,29 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	return '';
 	}
   }
+  public function studentResultIsUploaded($regNo,$student_class,$term,$session) 
+  {
+	switch ($term) {
+		case '3rd Term':
+			$resultTable = 'visap_termly_result_tbl';
+			break;
+		case '2nd Term':
+			$resultTable = 'visap_2nd_term_result_tbl';
+			break;
+
+		default:
+			$resultTable = 'visap_1st_term_result_tbl';
+			break;
+	}
+	$sql = "SELECT * FROM `{$resultTable}` WHERE `stdRegCode` =? AND `studentGrade`= ? AND `term`=? AND `aca_session`=? ORDER BY subjectName ASC LIMIT 15";
+	$this->stmt = $this->dbh->prepare($sql);
+	$this->stmt->execute([$regNo,$student_class,$term,$session]);
+	if($this->stmt->rowCount() > 0){
+	return $this->stmt->fetchAll();
+	}else{
+	return '';
+	}
+  }
+
 
       }

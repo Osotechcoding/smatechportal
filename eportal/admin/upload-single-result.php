@@ -91,9 +91,41 @@ $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student
                       <td><img src="<?php echo $Passport;?>" style="width: 100px;border: 2px solid #625D5D; padding: 2px;border-radius:15px"></td>
                     <td><span><?php echo strtoupper($student_data->full_name) ?></span></td>
                   <td><?php echo strtoupper($student_data->studentClass) ?></td>
-                  <td><a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=1st Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-primary badge-rounded badge-lg">Upload</span></a></td>
-                  <td><a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=2nd Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-dark badge-rounded badge-lg">Upload</span></a></td>
-                  <td><a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=3rd Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-success badge-rounded badge-lg">Upload</span></a></td>
+                  <td> 
+                  <?php 
+                  if($Student->studentResultIsUploaded($student_data->stdRegNo,$student_data->studentClass,'1st Term',$activeSess->session_desc_name) !=''){?>
+                  <a href="edit-single-result?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=1st Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-warning badge-pill badge-rounded badge-lg m-1">Edit Score</span></a>
+                  <?php
+                  } else{?>
+                  <a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=1st Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-primary badge-rounded badge-lg">Upload Score</span></a>
+
+                <?php
+                  } 
+                  ?>
+                 </td>
+                  <td> 
+                  <?php 
+                  if($Student->studentResultIsUploaded($student_data->stdRegNo,$student_data->studentClass,'2nd Term',$activeSess->session_desc_name) !=''){?>
+                  <a href="edit-single-result?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=2nd Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-warning badge-pill badge-rounded badge-lg m-1">Edit Score</span></a>
+                  <?php
+                  } else{?>
+                  <a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=2nd Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-dark badge-rounded badge-lg">Upload</span></a>
+                  <?php
+                  } 
+                  ?>
+                </td>
+                  <td> 
+                  <?php 
+                  if($Student->studentResultIsUploaded($student_data->stdRegNo,$student_data->studentClass,'3rd Term',$activeSess->session_desc_name) !=''){?>
+                  <a href="edit-single-result?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=3rd Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-warning badge-pill badge-rounded badge-lg m-1">Edit Score</span></a>
+                  <?php
+                  } else{?>
+<a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=3rd Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student_data->studentClass));?>"><span class="badge badge-success badge-rounded badge-lg">Upload</span></a>
+                  <?php
+
+                  } 
+                  ?>
+                </td>
                 </tr>
                 </tbody>
                 </table>

@@ -55,7 +55,7 @@ class Result
 					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_result_comment_tbl` WHERE stdRegNo=? AND stdGrade=? AND term=? AND schl_Sess=? LIMIT 1");
 					$this->stmt->execute(array($student_regNo, $comment_class, $term, $school_session));
 					//check the row that was returned 
-					if ($this->stmt->rowCount() == 1) {
+					if ($this->stmt->rowCount() > 0) {
 						$this->response = $this->alert->alert_toastr("warning", "Comment already uploaded for student with Reg No: $student_regNo", __OSO_APP_NAME__ . " Says");
 					} else {
 						//let upload the comment now
@@ -112,7 +112,7 @@ class Result
 					$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_result_comment_tbl` WHERE stdRegNo=? AND stdGrade=? AND principal_coment!=NULL AND term=? AND schl_Sess=? LIMIT 1");
 					$this->stmt->execute(array($student_regNo, $comment_class, $term, $school_session));
 					//check the row that was returned 
-					if ($this->stmt->rowCount() == 1) {
+					if ($this->stmt->rowCount() > 0) {
 						$this->response = $this->alert->alert_toastr("error", "Comment already uploaded for student with Reg No: $student_regNo", __OSO_APP_NAME__ . " Says");
 					} else {
 						//let upload the comment now
@@ -192,7 +192,7 @@ class Result
 					break;
 
 				default:
-					$resStatus = 1;
+					//$resStatus = 1;
 					break;
 			}
 			//let's do the result publishing
@@ -207,7 +207,7 @@ class Result
 					$resultTable = 'visap_1st_term_result_tbl';
 					break;
 				default:
-					$resultTable = 'visap_1st_term_result_tbl';
+					//$resultTable = 'visap_1st_term_result_tbl';
 					break;
 			}
 			try {
@@ -263,7 +263,7 @@ class Result
 		}
 	}
 
-	// count no of student that wrote a perticular exam
+	// count no of student that wrote a particular exam
 	public function getNumberOfStudentSitForExamByClass($resultTable, $stdGrade, $term, $session)
 	{
 		$this->stmt = $this->dbh->prepare("SELECT DISTINCT(`stdRegCode`) FROM `{$resultTable}` WHERE studentGrade=? AND term=? AND aca_session=?");
@@ -301,9 +301,7 @@ class Result
 				case '2nd Term':
 					$resultTable = 'visap_2nd_term_result_tbl';
 					break;
-				case '1st Term':
-					$resultTable = 'visap_1st_term_result_tbl';
-					break;
+
 				default:
 					$resultTable = 'visap_1st_term_result_tbl';
 					break;
@@ -312,13 +310,13 @@ class Result
 			$this->stmt->execute(array($stdRegNo, $stdGrade, $stdTerm, $stdSession));
 			if ($this->stmt->rowCount() > 0) {
 				while ($result_data = $this->stmt->fetch()) {
-					$result_id = $result_data->reportId;
+					//$result_id = $result_data->reportId;
 					$result_opened = $result_data->rStatus;
 					if ($result_opened == '2') {
 						// create a session result Id...
-						$_SESSION['resultmi'] = $result_id;
-						$_SESSION['result_regNo'] = $stdRegNo;
-						$_SESSION['result_class'] = $stdGrade;
+						$_SESSION['student_result_id'] = $result_data->reportId;
+						$_SESSION['result_regNo'] = $result_data->stdRegCode;
+						$_SESSION['result_class'] = $result_data->studentGrade;
 						$_SESSION['result_term'] = $stdTerm;
 						$_SESSION['result_session'] = $stdSession;
 						switch ($_SESSION['result_term']) {
@@ -333,7 +331,7 @@ class Result
 								break;
 						}
 						$this->response = $this->alert->alert_toastr("success", "Generating Report Sheet, Pls wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
-			window.open("' . $student_result_page . '","_blank", "top=10, left=10, width=750, height=850");$("#SingleStudentResult_form")[0].reset();
+			window.open("' . $student_result_page . '","_blank", "top=10, left=10, width=800, height=900");$("#SingleStudentResult_form")[0].reset();
 		},3000)</script>';
 					} elseif ($result_opened == '3') {
 						$this->response = $this->alert->alert_toastr("error", "This Result is Held, Please contact your Admin!", __OSO_APP_NAME__ . " Says");
@@ -1034,4 +1032,62 @@ class Result
 		}
 		return $this->response;
 	}
+	public function UpdateSingleStudentResultSheet(array $data)
+	{
+		$admNo = $this->config->Clean($data['admNo']);
+		$studentClass = $this->config->Clean($data['student_class']);
+		$term = $this->config->Clean($data['term']);
+		$cses = $this->config->Clean($data['cses']);
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		$total_count = $this->config->Clean($data['total_count']);
+		if ($this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error", " Authentication Code is Required!", __OSO_APP_NAME__ . " Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		}else{
+			switch ($term) {
+				case '3rd Term':
+					$resultTable = 'visap_termly_result_tbl';
+					break;
+				case '2nd Term':
+					$resultTable = 'visap_2nd_term_result_tbl';
+					break;
+				case '1st Term':
+					$resultTable = 'visap_1st_term_result_tbl';
+					break;
+				default:
+					$resultTable = 'visap_1st_term_result_tbl';
+					break;
+			}
+			for ($i = 0; $i < (int)$total_count; $i++) {
+				$subject = $data['subject'][$i] ?? '';
+				$arr_cass = $data['ca'][$i]?? '';
+				$arr_exam = $data['exam'][$i] ?? '';
+				if($this->config->isEmptyStr($arr_cass) ||$this->config->isEmptyStr($arr_exam) ||$this->config->isEmptyStr($subject) || $this->config->isEmptyStr($admNo)){
+					$this->response = $this->alert->alert_toastr("error", "Invalid submission!", __OSO_APP_NAME__ . " Says");
+				} else {
+					try {
+						$this->dbh->beginTransaction();
+						$this->stmt = $this->dbh->prepare("UPDATE `{$resultTable}` SET ca=?,exam=?,overallMark=?,mark_average=?,uploadedTime=?,uploadedDate=? WHERE stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? AND subjectName=?");
+						$total_sum = doubleval($arr_cass + $arr_exam);
+						$average_score = round(($total_sum / 2));
+						$time = date("h:i:s");
+						$date = date("Y-m-d");
+						if ($this->stmt->execute(array($arr_cass, $arr_exam, $total_sum, $average_score, $time, $date,$admNo, $studentClass, $term, $cses, $subject))) {
+							//update subjectRank will be here later
+							$this->dbh->commit();
+							$this->response = $this->alert->alert_toastr("success", "Score updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+			window.location.href='./ab_students';
+			}, 1000);</script>";
+						}
+					} catch (PDOException $e) {
+						$this->dbh->rollback();
+						$this->response  = $this->alert->alert_toastr("error", "Upload Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+					}
+				}
+				}
+		}
+		
+			return $this->response;
+		}
 }
