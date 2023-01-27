@@ -541,6 +541,14 @@ function importMassStudentViaCSVFile($data, $csv_file)
           $response = $Alert->alert_toastr("error", "$stdEmail is already taken on this Portal!", __OSO_APP_NAME__
             . " Says");
         } else {
+          if ($stdGender == "f" || $stdGender == "F") {
+            $stdGender = "Female";
+          } else if ($stdGender == "m" || $stdGender == "M") {
+            $stdGender = "Male";
+          } else {
+            $stdGender = "Other";
+          }
+          $stdPhone = "0" . $stdPhone;
           try {
             $dbh->beginTransaction();
             $stmt = $dbh->prepare("INSERT INTO `visap_student_tbl`

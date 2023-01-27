@@ -63,7 +63,7 @@ section > div{
 }
 .fet-sch-name{
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
     line-height: 70px;
     justify-content: center;

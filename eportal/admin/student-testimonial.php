@@ -72,14 +72,14 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                 <div class="fet-entrybg">
                     <p style="text-align:left; font-size:20px; font-style: italic;line-height: 18px;">Class on Admission:_________________________ Date Admitted:________________</p>
                     <div class="fet-entrybg-values">
-                        <p style="text-align:left; font-size:25px; line-height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($testimonial_data->admitted_class);?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo strtoupper(date("M, Y", strtotime($testimonial_data->admitted_date)));?></p></div>
+                        <p style="text-align:left; font-size:25px; line-height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper($testimonial_data->admitted_class);?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo strtoupper(date(" Y", strtotime($testimonial_data->admitted_date)));?></p></div>
                     <p style="text-align:left; font-style: italic;font-size:20px;">Admission No:__________________________________________________________</p>
                     <div class="fet-entrybg-values">
                         <p style="text-align:left; font-size:25px; line-height: 18px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->stdRegNo;?></p></div>
                     <p style="text-align:left;font-style: italic; font-size:20px;">Class Completed:___________________________ Date Completed:_______________</p>
                 </div>
                 <div class="fet-entrybg-values1">
-                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date("M, Y",strtotime($testimonial_data->date_completed)));?></p>
+                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date(" Y",strtotime($testimonial_data->date_completed)));?></p>
                 </div>
 
                 <div class="fet-subject-offered">
@@ -145,7 +145,7 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
             </div>
             <!-- Repeated bg -->
             <p id="fet-bg-repeat">
-                <?php for($i=1; $i<=200; $i++){
+                <?php for($i=1; $i<=150; $i++){
                     echo  '<span>&nbsp; &nbsp;'.strtoupper ($SmappDetails->school_name).'&nbsp; &nbsp;</span>';
             } ?> 
            </p>
