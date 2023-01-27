@@ -46,7 +46,7 @@ require_once "helpers/helper.php";
         <div class="content-body">
           <div class="row">
              <div class="col-12">
-    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-image fa-1x"></span> IMAGE SLIDERS</h3>
+    <h3 class="bd-lead text-primary text-bold"><span class="fa fa-image fa-1x"></span> HOME PAGE IMAGE SLIDERS</h3>
   </div>
           </div>
            <!-- Statistics Cards Starts -->
@@ -97,6 +97,7 @@ require_once "helpers/helper.php";
           <th>Image</th>
           <th>Title</th>
           <th>Description</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -110,7 +111,12 @@ require_once "helpers/helper.php";
             <td><img src="../gallery/Sliders/<?php echo $slider->image;?>" alt="<?php echo $slider->title;?>" width="100"></td>
           <td><?php echo ucwords($slider->title);?></td>
           <td><?php echo ucfirst($slider->slider_desc);?></td>
-         <td> <button type="button" class="btn btn-danger btn-md delete_slider_btn __loadingBtn2__<?php echo $slider->id;?>" data-id="<?php echo $slider->id;?>">Delete</button> </td>
+          <td><?php echo $slider->status == 1 ? '<span class="badge badge-pill badge-success badge-sm">Enabled</span>' : '<span class="badge badge-pill badge-danger badge-sm">Disabled</span>' ?> </td>
+         <td><?php if ($slider->status==1): ?>
+          <span class="btn btn-warning btn-sm disable_slider_btn m-1 __enable_loadingBtn__<?php echo $slider->id;?>" data-action="disable_slider" data-id="<?php echo $slider->id;?>">Disable </span> 
+      <?php else: ?>
+        <span class="btn btn-dark btn-sm enable_slider_btn m-1 __enable_loadingBtn__<?php echo $slider->id;?>" data-action="enable_slider" data-id="<?php echo $slider->id;?>">Enable </span>
+          <?php endif ?>  <button type="button" class="btn btn-danger btn-sm delete_slider_btn __loadingBtn2__<?php echo $slider->id;?>" data-id="<?php echo $slider->id;?>">Delete</button> </td>
         </tr>
          <?php
                   }

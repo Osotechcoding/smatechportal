@@ -1,4 +1,30 @@
 $(document).ready(function(){
+    //disable and enable slider btn action 
+    $('.disable_slider_btn').on('click', function(){
+    let slider_id = $(this).data('id');
+    let action = $(this).data('action');
+    $(".__enable_loadingBtn__"+slider_id).html('<img src="../assets/loaders/rolling_loader.svg" width="15">').attr("disabled",true);
+    $.post("../actions/actions",{slider_id:slider_id,
+    action:action},function(data){
+    setTimeout(()=>{
+      $(".__enable_loadingBtn__"+slider_id).html("Disable").attr("disabled",false);
+    $("#server-response").html(data);
+    },1000);
+    })
+    });
+    //disable and enable module btn action 
+    $('.enable_slider_btn').on('click', function(){
+    let slider_id = $(this).data('id');
+    let action = $(this).data('action');
+    $(".__enable_loadingBtn__"+slider_id).html('<img src="../assets/loaders/rolling_loader.svg" width="15">').attr("disabled",true);
+    $.post("../actions/actions",{slider_id:slider_id,
+    action:action},function(data){
+    setTimeout(()=>{
+      $(".__enable_loadingBtn__"+slider_id).html("Enable").attr("disabled",false);
+    $("#server-response").html(data);
+    },1000);
+    });
+        });
       //when the delete gallery btn is clicked
       const delete_slider_btn = $(".delete_slider_btn");
       delete_slider_btn.on("click", function(){

@@ -71,7 +71,7 @@ class Osotech
             while ($row = $this->stmt->fetch()) {
                 $this->response .= '<option value="' . $row->session_desc . '">' . $row->session_desc . '</option>';
                 return $this->response;
-                $this->dbh = null;
+               
             }
         }
     }
@@ -83,7 +83,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = true;
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -109,7 +109,7 @@ class Osotech
         if ($this->stmt->rowCount()>0) {
         $this->response = $this->stmt->fetchAll();
         return $this->response;
-         $this->dbh = null;
+        
         }
         }*/
 
@@ -120,7 +120,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -132,7 +132,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -144,7 +144,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
     //Validate a date input
@@ -162,7 +162,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = true;
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -173,7 +173,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = true;
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -197,7 +197,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -209,7 +209,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -220,7 +220,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -232,7 +232,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -245,7 +245,7 @@ class Osotech
             $rows = $this->stmt->fetch();
             $this->response = $rows->cnt;
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -257,7 +257,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -302,7 +302,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -313,18 +313,18 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
     public function getAllSliders()
     {
-        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` ORDER BY id DESC");
+        $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_sliders_tbl` WHERE `status`= 1 ORDER BY id DESC");
         $this->stmt->execute();
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -335,7 +335,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
     //AND DATE(`created_at`) >= DATE(CURRENT_DATE())
@@ -346,7 +346,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -357,7 +357,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -373,7 +373,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -384,7 +384,7 @@ class Osotech
         if ($this->stmt->rowCount() > 0) {
             $this->response = $this->stmt->fetchAll();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -395,7 +395,7 @@ class Osotech
         if ($this->stmt->rowCount() == 1) {
             $this->response = $this->stmt->fetch();
             return $this->response;
-            $this->dbh = null;
+           
         }
     }
 
@@ -490,7 +490,7 @@ class Osotech
                     if ($this->stmt->execute(array($fullname, $email, $phone, $coverLetter, $job_desc, $newFileName, $created_at, $time))) {
                         if ($this->move_file_to_folder($resume_temp, $file_destination)) {
                             $this->dbh->commit();
-                            $this->dbh = null;
+                           
                             $this->response = $this->alert_msg("success", "SUCCESS", "Your application has been submitted Successfully, We shall get back to you via <strong> $email </strong>,Thanks!") . "<script>setTimeout(()=>{
                             window.location.reload();
                         },10000);</script>";
@@ -589,7 +589,7 @@ class Osotech
                 $this->stmt = $this->dbh->prepare("INSERT INTO `visap_blog_post_comments` (blogId,guestName,user_email,comment) VALUES (?,?,?,?);");
                 if ($this->stmt->execute(array($blog_id, $name, $email, $comment))) {
                     $this->dbh->commit();
-                    $this->dbh = null;
+                   
                     $this->response = $this->alert_msg("success", "SUCCESS", "Your comment has been submitted for approval<strong> Thanks!</strong>") . "<script>setTimeout(()=>{
                             window.location.reload();
                         },6000);</script>";

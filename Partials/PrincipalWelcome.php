@@ -11,7 +11,7 @@
                     </div>
                     <p class="p-17"><?php echo nl2br($Osotech->getConfigData()->principal_welcome);?></p>
                     
-                    <button type="button" class="btn theme-orange theme-btn my-2 join-us">Enroll Your Ward(s) Now</button>
+                    <button type="button" class="btn theme-orange theme-btn my-2 join-us" onclick="window.location.assign('<?php echo ADMISSION_ROOT ?>')">Enroll Your Ward(s) Now</button>
                 </div>
                 <div class="col-lg-6">
                     <div class="course-block  d-flex justify-content-between bg-light pa-2 mx-5 my-3" data-aos="fade-up"

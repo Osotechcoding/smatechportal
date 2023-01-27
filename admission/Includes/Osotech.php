@@ -184,16 +184,16 @@ class Osotech
                   $expire_date = date("Y-m-d h:i:s", strtotime('+ 10day'));
                   $school_name = $this->getConfigData()->school_name;
                   $link = ADMISSION_PORTAL_ROOT."submit-application?email=$stu_email&code=$confirmation_code&page=2";
-                if($this->OsotechMailer->sendAdmissionVerificationEmail($stu_email,$surname,$link,$expire_date,$school_name) == true){
+                /*if($this->OsotechMailer->sendAdmissionVerificationEmail($stu_email,$surname,$link,$expire_date,$school_name) == true){*/
+                  //Verification link have been sent to <b>$stu_email</b>  click on the link to complete your admission
                   $this->dbh->commit();
-                  $this->response = $this->alert_msg("success", "SUCCESS", "Verification link have been sent to <b>$stu_email</b>  click on the link to complete your admission!")."<script>setTimeout(()=>{
-                    $('#new_Student_Admission_form')[0].reset();
+                  $this->response = $this->alert_msg("success", "SUCCESS", "Please wait while we load your application <b>Form</b>  Click <a href='".$link."'>Here</a> if the page is not redirect!")."<script>setTimeout(()=>{
+                    window.location.href='".$link."';
                   },3000)</script>";
-                }else{
+                }
+                else{
                   $this->dbh->rollback();
                   $this->response  = $this->alert_msg("danger", "WARNING", "Error Occurred Please try again!") . $this->loadOsotechCaptcha();
-                }
-                 
                 }
               }
             }

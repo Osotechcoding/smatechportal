@@ -240,7 +240,7 @@ include "result-css.php";
 
           //$no_of_subject_offered = 14;
           $mx = intval($subjectOffered * 100);
-          $markOb = intval($total / 3);
+          $markOb = intval($total);
           $percentage_mark = number_format(($markOb / $mx) * (100), 2);
 
           ?>

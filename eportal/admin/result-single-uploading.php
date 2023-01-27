@@ -121,6 +121,10 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
                 </tbody>
                 </table>
             </div>
+            <div class="row col-md-6 mb-2">
+                <label for="auth_code">Pass Code</label>
+            <input type="password" class="form-control form-control-lg rounded" name="auth_code" placeholder="Authentication Code" style="border-radius: 10px !important;">
+        </div> 
        <div class="mt-2 float-right">
         <input type="hidden" name="term" value="<?php echo $term;?>">
         <input type="hidden" name="admNo" value="<?php echo $student_data->stdRegNo;?>">

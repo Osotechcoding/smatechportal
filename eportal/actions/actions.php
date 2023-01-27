@@ -656,5 +656,19 @@
 					echo  $result;
 				}
 			}
+			//disable_slider
+			if ($_POST['action'] === "disable_slider") {
+				$result = $Administration->enable_disable_slider_by_id("2", $_POST['slider_id']);
+				if ($result) {
+					echo $result;
+				}
+			}
+			//disable_slider
+			if ($_POST['action'] === "enable_slider") {
+				$result = $Administration->enable_disable_slider_by_id("1", $_POST['slider_id']);
+				if ($result) {
+					echo $result;
+				}
+			}
 		}
 	}

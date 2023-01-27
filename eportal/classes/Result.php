@@ -979,7 +979,13 @@ class Result
 		$studentClass = $this->config->Clean($data['student_class']);
 		$term = $this->config->Clean($data['term']);
 		$cses = $this->config->Clean($data['cses']);
+		$auth_pass = $this->config->Clean($data['auth_code']);
 		$total_count = $this->config->Clean($data['total_count']);
+		if ($this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error", " Authentication Code is Required!", __OSO_APP_NAME__ . " Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		}else{
 		switch ($term) {
 			case '3rd Term':
 				$resultTable = 'visap_termly_result_tbl';
@@ -1030,6 +1036,7 @@ class Result
 			}
 			}
 		}
+	}
 		return $this->response;
 	}
 	public function UpdateSingleStudentResultSheet(array $data)

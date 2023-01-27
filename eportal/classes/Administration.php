@@ -2020,6 +2020,24 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 
 		return $this->response;
 	}
+	public function enable_disable_slider_by_id($status, $id)
+	{
+		try {
+			$this->dbh->beginTransaction();
+			$this->stmt = $this->dbh->prepare("UPDATE `visap_sliders_tbl` SET `status`=? WHERE id=? LIMIT 1");
+			if ($this->stmt->execute(array($status, $id))) {
+				$this->dbh->commit();
+				$this->response = $this->alert->alert_toastr("success", "Slider Updated Successfully", "SUCCESS") . "<script>setTimeout(()=>{
+              window.location.reload();
+            },500);</script>";
+			}
+		} catch (PDOException $e) {
+			$this->dbh->rollback();
+			$this->response  = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), "ERROR");
+		}
+
+		return $this->response;
+	}
 
 	public function get_office_InDropDown_list()
 	{

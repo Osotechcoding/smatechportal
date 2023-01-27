@@ -15,7 +15,7 @@
 <html lang="en">
     <head>
     <?php include_once ("MetaTags.php");?>
-    <title>Admission Portal :: <?php echo ($Osotech->getConfigData()->school_name); ?></title>
+    <title>Admission Portal - <?php echo ($Osotech->getConfigData()->school_name); ?></title>
        <?php include_once "Head.php"; ?>
     </head>
     <body class="d-flex flex-column h-100">
