@@ -389,7 +389,7 @@ class Student
 			//execute
 			$this->stmt->execute(array($stdId, $stdAdmNo, $student_class, $subject, $school_sess));
 			//check row return
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				// code...
 				$this->response = $this->alert->alert_msg($subject . " is already Registered!", "danger");
 			} else {
@@ -2211,7 +2211,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
    * @param string $gender
    * @return string $imagePath
    */
-  public function displayStudentPassport(string $passport, string $gender) : string 
+  public function displayStudentPassport($passport,$gender) : string 
   {
     if($passport == NULL || $passport == ""){
       if($gender == "Male"){

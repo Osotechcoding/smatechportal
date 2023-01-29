@@ -183,12 +183,12 @@ require_once "helpers/helper.php";
                     <!-- <th>VERIFICATION</th> -->
                     <th>Status</th>
                     <th>Edit</th>
-                    <th>Upload Result</th>
+                   
                   </tr>
                 </thead>
                 <tbody class="text-center">
                   <?php
-                        //$all_active_students = $Student->get_all_students_by_status("Active");
+                       
                         foreach ($filtered_students as $filtered) {
                           $count++;
                         ?>
@@ -259,17 +259,7 @@ require_once "helpers/helper.php";
                       </div>
                       <!--  -->
                     </td>
-                    <td>
-                      <div class="btn-group mb-1">
-                      
-                              <?php if($Student->studentExamSubjectIsUploaded($student_class) != ''){?>
-                              <a href="upload-single-result?student=<?php echo $Configuration->saltifyString($filtered->stdId)?>&grade=<?php echo $Configuration->saltifyString($student_class);?>" class=""><button type="button" class="btn btn-dark btn-sm">Upload Result</button> </a>
-                            <?php } else {
-                                echo '<span class="badge badge-pill badge-sm badge-danger">No Subjects Found</span>';
-                              }?>
-                      </div>
-                      <!--  -->
-                    </td>
+                    
                   </tr>
                   <?php }
                         ?>

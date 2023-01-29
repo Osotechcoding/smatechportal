@@ -11,7 +11,7 @@ spl_autoload_register(function ($filename) {
   require_once "../classes/" . ucfirst($filename) . ".php";
 });
 require_once "../classes/Database.php";
-//$dbh = osotech_connect();
+$dbh = osotech_connect();
 $Student = new Student();
 $Staff = new Staff();
 $Alert = new Alert;

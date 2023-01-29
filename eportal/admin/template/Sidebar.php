@@ -73,6 +73,9 @@
            <li class="nav-item"><a href="rgrading"><i class="fa fa-line-chart fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Result Grading">Result Grading</span></a>
            </li>
+            <li class="nav-item"><a href="add-result"><i class="fa fa-line-chart fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Upload Result">Upload Result</span></a>
+           </li>
           
            <li class=" nav-item"><a href="view_uploaded_result"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Results">View Results</span></a>

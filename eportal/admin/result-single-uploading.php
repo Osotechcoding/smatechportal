@@ -10,7 +10,7 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
   $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
   
   }else{
-    header("Location: ./upload-single-result");
+    header("Location: ./add-result");
     exit();
   }
  ?>
@@ -132,7 +132,7 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
         <input type="hidden" name="student_class" value="<?php echo $student_data->studentClass;?>">
         <input type="hidden" name="action" value="submit_single_student_result_sheet">
           <button class="btn btn-dark submit-btn btn-lg mr-2 __loadingBtn__" type="submit"><span class="fa fa-cloud-upload"></span> UPLOAD </button>
-          <button onclick="return window.history.back();" class="btn btn-danger submit-btn btn-md mr-2" type="button"><span class="fa fa-arrow-left"></span> Back </button>
+          <button onclick="return window.location.assign('add-result');" class="btn btn-danger submit-btn btn-md mr-2" type="button"><span class="fa fa-arrow-left"></span> Back </button>
        </div>
            </div>
            </form>
