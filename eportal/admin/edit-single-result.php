@@ -124,6 +124,7 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
                 <label for="auth_code">Pass Code</label>
             <input type="password" class="form-control form-control-lg rounded" name="auth_code" placeholder="Authentication Code" style="border-radius: 10px !important;">
         </div> 
+         <hr class="text-bold-700">
        <div class="mt-2 float-right">
         <input type="hidden" name="term" value="<?php echo $term;?>">
         <input type="hidden" name="admNo" value="<?php echo $student_data->stdRegNo;?>">
@@ -132,7 +133,7 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
         <input type="hidden" name="action" value="submit_edited_single_student_result_sheet">
           
           <button class="btn btn-dark submit-btn btn-lg mr-2 __loadingBtn__" type="submit"><span class="fa fa-cloud-upload"></span> SAVE CHANGES </button>
-          <button onclick="return window.history.back();" class="btn btn-danger submit-btn btn-md mr-2" type="button"><span class="fa fa-arrow-left"></span> Back </button>
+          <button onclick="return window.location.assign('add-result');" class="btn btn-danger submit-btn btn-md mr-2" type="button"><span class="fa fa-arrow-left"></span> Back </button>
        </div>
            </div>
            </form>

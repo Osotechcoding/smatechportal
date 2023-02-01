@@ -107,7 +107,7 @@ function importMassTeacherViaCSVExcelFile($csv_data, $csv_file)
         $mpassword = "staff123";
         $hashed_password = $config->encrypt_user_password($mpassword);
         $staffRegNo = $Staff->generate_staff_registration_number();
-        $confirmation_code = substr(md5(uniqid(mt_rand(11111, 9999), true)), 0, 15);
+        $confirmation_code = substr(md5(uniqid(mt_rand(11111, 99999), true)), 0, 15);
         //$reg_date = date("Y-m-d");
         $div_email = explode("@", $staffEmail);
         $portal_email = $div_email[0] . "@" . __OSO_APP_NAME__ . ".portal";

@@ -1,9 +1,5 @@
 <?php
 
-/**
- * 
- */
-
 require_once "Database.php";
 require_once "Configuration.php";
 class Payroll

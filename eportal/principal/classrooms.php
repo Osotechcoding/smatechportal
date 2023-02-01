@@ -63,7 +63,7 @@ require_once "helpers/helper.php";
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-book fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Active Classes</h3></div>
+                  <div class="text-white line-ellipsis"><h3 class="text-white">Active </h3></div>
                   <h2 class="text-white mb-0"><?php echo $Administration->count_all_classrooms_status("active"); ?></h2>
                   
                 </div>
@@ -75,7 +75,7 @@ require_once "helpers/helper.php";
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-book fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">Inactive Classes </h3></div>
+                  <div class="text-white line-ellipsis"><h3 class="text-white">Inactive  </h3></div>
                   <h2 class="text-white mb-0"><?php echo $Administration->count_all_classrooms_status("pending"); ?></h2>
                   
                 </div>
@@ -88,7 +88,7 @@ require_once "helpers/helper.php";
                   <div class="badge-circle badge-circle-lg badge-circle-light-white mx-auto mb-50">
                     <i class="fa fa-book fa-2x font-medium-10"></i>
                   </div>
-                  <div class="text-white line-ellipsis"><h3 class="text-white">All Classes</h3></div>
+                  <div class="text-white line-ellipsis"><h3 class="text-white">Total </h3></div>
                   <h2 class="text-white mb-0"><?php echo $Administration->count_all_classrooms(); ?></h2>
                  
                 </div>

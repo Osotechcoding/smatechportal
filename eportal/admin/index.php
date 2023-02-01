@@ -6,15 +6,15 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Head-->
 <head>
     <?php include "../template/MetaTag.php";?>
-    <title>Dashboard :: <?php echo $SmappDetails->school_name ?> :: <?php echo $_SESSION['ADMIN_SES_TYPE'] ?> </title>
-   <!-- include template/HeaderLink.php -->
+    <title> <?php echo $_SESSION['ADMIN_SES_TYPE'] ?> | Dashboard | <?php echo $SmappDetails->school_name ?> </title>
+  
    <?php include "../template/HeaderLink.php";?>
   <!-- END: Head-->
   <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Header-->
     <?php include "template/HeaderNav.php"; ?>
-    <!-- include headernav.php -->
+
     <!-- END: Header-->
     <!-- BEGIN: Main Menu-->
     <?php include "template/Sidebar.php";?>

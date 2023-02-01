@@ -1,13 +1,8 @@
 <?php
 
-/**
- * 
- */
-
 require_once "Database.php";
 require_once "Session.php";
 require_once "Configuration.php";
-@Session::init_ses();
 class Prospect
 {
 

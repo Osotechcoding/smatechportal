@@ -21,6 +21,7 @@
   $Bus = new Bus();
   $Hostel = new Hostel();
   $Payroll    = new Payroll();
+  $Parents    = new Parents();
 
   $request_method = $_SERVER['REQUEST_METHOD'];
 

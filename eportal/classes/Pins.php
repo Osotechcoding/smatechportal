@@ -3,11 +3,6 @@ require_once 'Database.php';
 require_once 'Configuration.php';
 include_once 'Alert.php';
 include_once 'Session.php';
-/*
-Pin_and_serial Class
- */
-Session::init_ses();
-
 class Pins
 {
 	private $dbh;

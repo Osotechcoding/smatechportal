@@ -1,11 +1,6 @@
 <?php
-// @session_start();
 require_once 'Database.php';
 require_once 'Session.php';
-/*
-Configuration Class
- */
-
 class Configuration
 {
   private $dbh;

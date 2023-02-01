@@ -20,6 +20,7 @@ $Blog          = new Blog();
 $Hostel        = new Hostel();
 $Bus = new Bus();
 $Payroll    = new Payroll();
+$Parents    = new Parents();
 $TimeAgo  = new TimeAgo();
 
 $Configuration->osotech_session_kick();

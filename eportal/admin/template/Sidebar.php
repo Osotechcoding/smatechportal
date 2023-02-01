@@ -331,6 +331,12 @@
          </ul>
        </li>
        <li>
+         <a 
+           class="d-flex align-items-center" href="./parents"><i
+             class="fa fa-users"></i>
+           <span class="menu-item text-truncate"> <?php echo 'Manage Parents' ?></span></a>
+       </li>
+       <li>
          <a onclick="return confirm('Are you sure to open a new tab for the Homepage?');"
            class="d-flex align-items-center" href="<?php echo WEBSITE_HOME_PAGE; ?>" target="_blank"><i
              class="fa fa-globe"></i>

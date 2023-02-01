@@ -1,15 +1,8 @@
 <?php
-@session_start();
-/*
-*@author -- Osotech Software
-*Desc -- this class will contain all administaror tasks
-* creating of classroom,subject,hostel,bus,events,holidays,blogs,library
-
-*/
 require_once "Database.php";
 require_once "Session.php";
 require_once "Configuration.php";
-//@$Configuration->osotech_session_kick();
+
 class Administration
 {
 

@@ -117,7 +117,7 @@ require_once "helpers/helper.php";
                   <?php 
                   if ($Student->studentExamSubjectIsUploaded($Grade) != '') {
                     if($Student->studentResultIsUploaded($student->stdRegNo,$student->studentClass,'1st Term',$activeSess->session_desc_name) !=''){?>
-                  <a href="edit-single-result?student-id=<?php echo $Configuration->saltifyString($studentId);?>&term=1st Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student->studentClass));?>"><span class="badge badge-warning badge-pill badge-rounded badge-lg m-1">Edit Score</span></a>
+                  <a href="edit-single-result?student-id=<?php echo $Configuration->saltifyString($student->stdId);?>&term=1st Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student->studentClass));?>"><span class="badge badge-warning badge-pill badge-rounded badge-lg m-1">Edit Score</span></a>
                   <?php
                   } else{?>
                   <a href="result-single-uploading?student-id=<?php echo $Configuration->saltifyString($student->stdId);?>&term=1st Term&cses=<?php echo $activeSess->session_desc_name;?>&student-class=<?php echo $Configuration->saltifyString(strtoupper($student->studentClass));?>"><span class="badge badge-primary badge-rounded badge-lg">Upload Score</span></a>

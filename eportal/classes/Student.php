@@ -1509,7 +1509,7 @@ class Student
     //update the student class
     try {
     $this->dbh->beginTransaction();
-	if($promoted_to =="Basic 5" || $promoted_to =="JSS 3" || $promoted_to =="SSS 3"){
+	if($promoted_to =="Basic 5" || $promoted_to =="JSS 3A" || $promoted_to =="JSS 3B" || $promoted_to =="JSS 3C" || $promoted_to =="SSS 3A" || $promoted_to =="SSS 3B" || $promoted_to =="SSS 3C"){
 		$completed_date = date("Y-m-d");
 		$this->stmt = $this->dbh->prepare("UPDATE {$this->table_name} SET studentClass=?,completed_date=? WHERE stdId=?");
 	}else{
@@ -1571,8 +1571,7 @@ class Student
 
     public function getStudentAffectiveDomainDetails($stdReg, $stdGrade, $term, $session)
     {
-    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND
-    term=? AND session=? LIMIT 1");
+    $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_behavioral_tbl` WHERE reg_number=? AND student_class=? AND term=? AND session=? LIMIT 1");
     $this->stmt->execute(array($stdReg, $stdGrade, $term, $session));
     if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
@@ -1584,8 +1583,7 @@ class Student
     public function checkStudentTokenExists($name, $email, $token)
     {
     if (isset($name, $email, $token)) {
-    $this->stmt = $this->dbh->prepare("SELECT token FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT
-    1");
+    $this->stmt = $this->dbh->prepare("SELECT token FROM `visap_student_login_token` WHERE username=? AND email=? LIMIT 1");
     $this->stmt->execute(array($name, $email));
     if ($this->stmt->rowCount() > 0) {
     //collect the current token from db
@@ -2113,7 +2111,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 				$dateCompleted = $student_data->completed_date;
 				$admitted_class = $student_data->admitted_class;
 				$classCompleted = $student_data->studentClass;
-				$allowedClass = array("Basic 5", "JSS 3", "SSS 3");
+				$allowedClass = array("Basic 5", "JSS 3A", "JSS 3B","JSS 3C", "SSS 3A" , "SSS 3B" , "SSS 3C");
 			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$classCompleted)){
 				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
 			}else if(!in_array($classCompleted,$allowedClass)){
@@ -2130,7 +2128,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 						$this->dbh->commit();
 						$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$stdRegNo);
 						$this->response = $this->alert->alert_toastr("success", "Generating Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says"). '<script>setTimeout(()=>{
-							window.open("' . $testimonial_link . '","_blank","top=10, left=100, width=850, height=950");
+							window.open("' . $testimonial_link . '","_blank","top=10, left=10, width=850, height=950");
 						},4000);</script>';
 					}
 				}catch(PDOException $e){
@@ -2147,9 +2145,9 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		$auth_code = $this->config->Clean($data['auth_code']);
 		//check for empty values
 		if($this->config->isEmptyStr($cert_no)){
-			$this->response = $this->alert->alert_toastr("error", "Certificate Number is Required", __OSO_APP_NAME__ ." Says");
+			$this->response = $this->alert->alert_toastr("error", "Testimonial Number is Required", __OSO_APP_NAME__ ." Says");
 		}else if(strlen($cert_no) <> 10){
-			$this->response = $this->alert->alert_toastr("error", "Invalid Certificate Number", __OSO_APP_NAME__ ." Says");
+			$this->response = $this->alert->alert_toastr("error", "Invalid Testimonial Number", __OSO_APP_NAME__ ." Says");
 		}
 		else if($this->config->isEmptyStr($auth_code)){
 			$this->response = $this->alert->alert_toastr("error", "Authentication Code is Required!", __OSO_APP_NAME__ ." Says");
@@ -2157,16 +2155,16 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 			//check if the student with the entered reg no exist
 		}else if(!$this->config->check_single_data("visap_student_testimonial_tbl","cert_no", $cert_no)){
-			$this->response = $this->alert->alert_toastr("error", "Do Not Play Smart: This Certificate Number is Invalid", __OSO_APP_NAME__ ." Says");
+			$this->response = $this->alert->alert_toastr("error", "Do Not Play Smart: This Testimonial Number is Invalid", __OSO_APP_NAME__ ." Says");
 		}else{
 	$testimonial_data = $this->config->get_single_data("visap_student_testimonial_tbl","cert_no",$cert_no);
 	if($testimonial_data){
 		$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$testimonial_data->stdRegNo);
-		$this->response = $this->alert->alert_toastr("success", "Re-printing Testimonials, Please wait...!", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
-			window.open("' . $testimonial_link . '","_blank", "top=10, left=100, width=850, height=950");
-		},5000);</script>';
+		$this->response = $this->alert->alert_toastr("success", "Re-printing, Please wait...", __OSO_APP_NAME__ . " Says") . '<script>setTimeout(()=>{
+			window.open("' . $testimonial_link . '","_blank", "top=10, left=10, width=850, height=950");
+		},3000);</script>';
 	}else{
-		$this->response = $this->alert->alert_toastr("error", "No Record Found!", __OSO_APP_NAME__ ." Says");
+		$this->response = $this->alert->alert_toastr("error", "No Record Found, Try again!", __OSO_APP_NAME__ ." Says");
 	}
 	
 		}
@@ -2252,7 +2250,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 			$resultTable = 'visap_1st_term_result_tbl';
 			break;
 	}
-	$sql = "SELECT * FROM `{$resultTable}` WHERE `stdRegCode` =? AND `studentGrade`= ? AND `term`=? AND `aca_session`=? ORDER BY subjectName ASC LIMIT 15";
+	$sql = "SELECT * FROM `{$resultTable}` WHERE `stdRegCode` =? AND `studentGrade`= ? AND `term`=? AND `aca_session`=? ORDER BY `subjectName` ASC LIMIT 15";
 	$this->stmt = $this->dbh->prepare($sql);
 	$this->stmt->execute([$regNo,$student_class,$term,$session]);
 	if($this->stmt->rowCount() > 0){

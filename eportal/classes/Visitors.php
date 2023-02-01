@@ -1,15 +1,9 @@
 <?php
-@session_start();
-/*Result Class
-*@author -- Osotech Software
-*Desc -- this class will contain all tasks regarding Visitors
-* sign In,Sign Out...
 
-*/
 require_once "Database.php";
 require_once "Configuration.php";
 require_once "Alert.php";
-@Session::init_ses();
+
 class Visitors
 {
 

@@ -163,9 +163,6 @@ class Result
 			case '2nd Term':
 				$resultTable = 'visap_2nd_term_result_tbl';
 				break;
-			case '1st Term':
-				$resultTable = 'visap_1st_term_result_tbl';
-				break;
 			default:
 				$resultTable = 'visap_1st_term_result_tbl';
 				break;
@@ -203,11 +200,8 @@ class Result
 				case '2nd Term':
 					$resultTable = 'visap_2nd_term_result_tbl';
 					break;
-				case '1st Term':
-					$resultTable = 'visap_1st_term_result_tbl';
-					break;
 				default:
-					//$resultTable = 'visap_1st_term_result_tbl';
+					$resultTable = 'visap_1st_term_result_tbl';
 					break;
 			}
 			try {
@@ -439,9 +433,6 @@ class Result
 				case '2nd Term':
 					$resultTable = 'visap_2nd_term_result_tbl';
 					break;
-				case '1st Term':
-					$resultTable = 'visap_1st_term_result_tbl';
-					break;
 				default:
 					$resultTable = 'visap_1st_term_result_tbl';
 					break;
@@ -549,9 +540,7 @@ class Result
 				case '2nd Term':
 					$resultTable = 'visap_2nd_term_result_tbl';
 					break;
-				case '1st Term':
-					$resultTable = 'visap_1st_term_result_tbl';
-					break;
+
 				default:
 					$resultTable = 'visap_1st_term_result_tbl';
 					break;
@@ -642,9 +631,6 @@ class Result
 					break;
 				case '2nd Term':
 					$resultTable = 'visap_2nd_term_result_tbl';
-					break;
-				case '1st Term':
-					$resultTable = 'visap_1st_term_result_tbl';
 					break;
 				default:
 					$resultTable = 'visap_1st_term_result_tbl';
@@ -755,9 +741,6 @@ class Result
 										case '2nd Term':
 											$resultTable = 'visap_2nd_term_result_tbl';
 											break;
-										case '1st Term':
-											$resultTable = 'visap_1st_term_result_tbl';
-											break;
 										default:
 											$resultTable = 'visap_1st_term_result_tbl';
 											break;
@@ -833,9 +816,6 @@ class Result
 													break;
 												case '2nd Term':
 													$resultTable = 'visap_2nd_term_result_tbl';
-													break;
-												case '1st Term':
-													$resultTable = 'visap_1st_term_result_tbl';
 													break;
 												default:
 													$resultTable = 'visap_1st_term_result_tbl';
@@ -993,9 +973,6 @@ class Result
 			case '2nd Term':
 				$resultTable = 'visap_2nd_term_result_tbl';
 				break;
-			case '1st Term':
-				$resultTable = 'visap_1st_term_result_tbl';
-				break;
 			default:
 				$resultTable = 'visap_1st_term_result_tbl';
 				break;
@@ -1026,7 +1003,7 @@ class Result
 						$this->dbh->commit();
 							//$this->dbh = null;
 						$this->response = $this->alert->alert_toastr("success", "Score uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-		window.location.href='./ab_students';
+		window.location.href='./add-result';
 		}, 1000);</script>";
 					}
 				} catch (PDOException $e) {
@@ -1059,9 +1036,6 @@ class Result
 				case '2nd Term':
 					$resultTable = 'visap_2nd_term_result_tbl';
 					break;
-				case '1st Term':
-					$resultTable = 'visap_1st_term_result_tbl';
-					break;
 				default:
 					$resultTable = 'visap_1st_term_result_tbl';
 					break;
@@ -1084,7 +1058,7 @@ class Result
 							//update subjectRank will be here later
 							$this->dbh->commit();
 							$this->response = $this->alert->alert_toastr("success", "Score updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-			window.location.href='./ab_students';
+			window.location.href='./add-result';
 			}, 1000);</script>";
 						}
 					} catch (PDOException $e) {

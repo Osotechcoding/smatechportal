@@ -61,9 +61,9 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                 <div>
                     <p style="text-align:center; font-size:20px; margin-top: -2px;margin-bottom: -1px;">has successfully completed 
                     <?php 
-                    if ($testimonial_data->class_completed === "Basic 5") {
+                    if ($testimonial_data->class_completed == "Basic 5") {
                             echo 'Primary School.';
-                    }else if($testimonial_data->class_completed === "JSS 3"){
+                    }else if($testimonial_data->class_completed == "JSS 3A" || $testimonial_data->class_completed == "JSS 3B" || $testimonial_data->class_completed == "JSS 3C" ){
                         echo 'Junior Secondary School.';
                     }else {
                         echo 'Senior Secondary School.';
@@ -79,7 +79,7 @@ if (isset($_GET['data']) && $_GET['data'] != "") {
                     <p style="text-align:left;font-style: italic; font-size:20px;">Class Completed:___________________________ Date Completed:_______________</p>
                 </div>
                 <div class="fet-entrybg-values1">
-                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date(" Y",strtotime($testimonial_data->date_completed)));?></p>
+                   <p style="text-align:left; font-size:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $testimonial_data->class_completed;?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo strtoupper( date(" Y",strtotime($testimonial_data->date_completed)));?></p>
                 </div>
 
                 <div class="fet-subject-offered">

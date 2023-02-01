@@ -1,6 +1,5 @@
  <?php
 
-	// @session_start();
 	include_once "../languages/config.php";
 	require_once '../classes/Session.php';
 	date_default_timezone_set("Africa/Lagos");
@@ -22,6 +21,7 @@
 	$Hostel = new Hostel();
 	$Bus = new Bus();
 	$Payroll    = new Payroll();
+	$Parents    = new Parents();
 
 	$request_method  = $_SERVER['REQUEST_METHOD'];
 	if ($request_method === "POST") {
@@ -666,6 +666,13 @@
 			//disable_slider
 			if ($_POST['action'] === "enable_slider") {
 				$result = $Administration->enable_disable_slider_by_id("1", $_POST['slider_id']);
+				if ($result) {
+					echo $result;
+				}
+			}
+			//submit_new_parent_detail
+			if ($_POST['action'] === "submit_new_parent_detail") {
+				$result = $Parents->registerParent($_POST);
 				if ($result) {
 					echo $result;
 				}

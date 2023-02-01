@@ -20,6 +20,7 @@ $Administration = new Administration();
 $Hostel = new Hostel();
 $Bus = new Bus();
 $Payroll    = new Payroll();
+$Parents    = new Parents();
 
 $request_method = $_SERVER['REQUEST_METHOD'];
 if ($request_method === "POST") {
