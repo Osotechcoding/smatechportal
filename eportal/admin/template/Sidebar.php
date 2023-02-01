@@ -166,7 +166,9 @@
        <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-money fa-1x" data-icon="retweet"></i><span
              class="menu-title text-truncate" data-i18n="Accounting">ACCOUNTING</span></a>
          <ul class="menu-content">
-           <li><a class="d-flex align-items-center" href="make_payment"><i class="bx bx-right-arrow-alt"></i><span
+           <li><a class="d-flex align-items-center" href="payment-list"><i class="bx bx-right-arrow-alt"></i><span
+                 class="menu-item text-truncate" data-i18n="Default Payment"> Payments List</span></a> </li>
+                 <li><a class="d-flex align-items-center" href="make_payment"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n=" Make Payment">Make Payment</span></a> </li>
            <li><a class="d-flex align-items-center" href="filter-payments"><i class="bx bx-right-arrow-alt"></i><span
                  class="menu-item text-truncate" data-i18n="Search Payment"> Search Payment</span></a> </li>
@@ -223,6 +225,12 @@
                  class="menu-item text-truncate" data-i18n="Manage Hostel">Create Hostels</span></a>
            </li>
          </ul>
+       </li>
+       <li>
+         <a 
+           class="d-flex align-items-center" href="./parents"><i
+             class="fa fa-users"></i>
+           <span class="menu-item text-truncate">MANAGE PARENTS</span></a>
        </li>
        <!--  <li class=" nav-item"><a href="javaScript:void(0)"><i class="fa fa-book fa-1x" data-icon="pie-chart"></i><span class="menu-title text-truncate" data-i18n="LIBRARY">LIBRARY</span></a>
             <ul class="menu-content">
@@ -330,12 +338,7 @@
            </li>
          </ul>
        </li>
-       <li>
-         <a 
-           class="d-flex align-items-center" href="./parents"><i
-             class="fa fa-users"></i>
-           <span class="menu-item text-truncate"> <?php echo 'Manage Parents' ?></span></a>
-       </li>
+       
        <li>
          <a onclick="return confirm('Are you sure to open a new tab for the Homepage?');"
            class="d-flex align-items-center" href="<?php echo WEBSITE_HOME_PAGE; ?>" target="_blank"><i

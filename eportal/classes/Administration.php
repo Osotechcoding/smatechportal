@@ -80,7 +80,7 @@ class Administration
 			//check for duplicate Class name
 			$this->stmt = $this->dbh->prepare("SELECT gradeId FROM `visap_class_grade_tbl` WHERE gradeDesc=? LIMIT 1");
 			$this->stmt->execute([$grade_name]);
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$grade_name  already Exists!", __OSO_APP_NAME__ . " Says");
 			} elseif ($this->config->check_single_data(`visap_class_grade_tbl`, "grade_teacher", $teacher)) {
 				$this->response = $this->alert->alert_toastr("error", "This Teacher is already Assinged to Class!", __OSO_APP_NAME__ . " Says");
@@ -471,7 +471,7 @@ class Administration
 			//check for Duplicate Component
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_fee_component_tbl` WHERE feeType=? LIMIT 1");
 			$this->stmt->execute(array($component));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_msg("$component already Exists! Please check and try again!", "danger");
 			} else {
 				//create a fresh Component
@@ -695,6 +695,33 @@ class Administration
 			$this->response = $this->stmt->fetchAll();
 		} else {
 			$this->response = false;
+		}
+		return $this->response;
+	}
+
+	public function getAllocatedFeeByClass(string $grade)
+	{
+		$query = "SELECT * FROM `visap_school_fee_allocation_tbl` WHERE `gradeDesc`=? ORDER BY `component_id` ASC";
+		$this->stmt = $this->dbh->prepare($query);
+		$this->stmt->execute([$grade]);
+		if($this->stmt->rowCount() > 0){
+		$this->response = $this->stmt->fetchAll();
+		}else{
+			$this->response = false;
+		}
+		return $this->response;
+	}
+
+	public function getSumOfAllocatedFeeByClass(string $grade)
+	{
+		$query = "SELECT sum(amount) as total FROM `visap_school_fee_allocation_tbl` WHERE `gradeDesc`=?";
+		$this->stmt = $this->dbh->prepare($query);
+		$this->stmt->execute([$grade]);
+		if($this->stmt->rowCount() > 0){
+		$result = $this->stmt->fetch();
+		$this->response = $result->total;
+		}else{
+			$this->response = '0.00';
 		}
 		return $this->response;
 	}

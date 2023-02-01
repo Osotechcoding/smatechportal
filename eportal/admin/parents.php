@@ -74,13 +74,13 @@ require_once "helpers/helper.php";
              ?>
             <tr>
               <td><?php echo $cnt; ?></td>
-              <td><?php echo $parent->full_name;?></td>
+              <td><?php echo ucfirst($parent->title)." ". ucwords($parent->full_name);?></td>
               <td><?php echo $parent->email;?></td>
               <td><?php echo $parent->phone;?></td>
               <td><?php echo $parent->address;?></td>
               <td><?php echo $parent->pta_post;?></td>
               <td><?php echo $parent->occupation;?></td>
-              <td><button class="btn btn-primary btn-md btn-pill">Edit</button></td>
+              <td><a href="./edit-parent?pi=<?php echo $Configuration->convert_String("code",$parent->id)?>&action=edit"><button class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></button></a> <button class="btn btn-danger btn-sm"><span class="fa fa-trash-o"></span></button></td>
             </tr>
 
         <?php

@@ -1,5 +1,12 @@
 <?php
 require_once "helpers/helper.php";
+if (isset($_GET['pi']) && $_GET['pi'] != "" && isset($_GET['action']) && $_GET['action'] ==="edit") {
+  $pId = $Configuration->Clean($Configuration->convert_String("decode",$_GET['pi']));
+  $parent_data = $Parents->getParentById($pId);
+}else{
+  $Configuration->redirect('parents');
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
@@ -7,8 +14,7 @@ require_once "helpers/helper.php";
 
 <head>
   <?php include "../template/MetaTag.php"; ?>
-  <title><?php echo $SmappDetails->school_name ?> :: Add Parent </title>
-  <!-- include template/HeaderLink.php -->
+  <title><?php echo $SmappDetails->school_name ?> :: <?php echo $parent_data->full_name;?> </title>
   <?php include "../template/HeaderLink.php"; ?>
   <!-- END: Head-->
   <!-- BEGIN: Body-->
@@ -49,7 +55,7 @@ require_once "helpers/helper.php";
       <div class="content-body">
         <div class="row">
           <div class="col-md-12">
-            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-user-plus fa-1x"></span> Parents Registration Page
+            <h3 class="bd-lead text-primary text-bold"><span class="fa fa-user-plus fa-1x"></span> Update <?php echo ucfirst($parent_data->title).' '. strtoupper($parent_data->full_name);?> Details
                </h3>
           </div>
         </div>
@@ -61,17 +67,12 @@ require_once "helpers/helper.php";
 
               <div class="text-center">
 
-                <h2 class="text-center mt-1">Parents Registration Form</h2>
-                <?php if ($Admin->isSuperAdmin($admin_data->adminId)){?>
-                  <h5 class="text-bold">Click here to <a href="parentcsvupload"
-                    style="color:red;font-weight:700;">Import </a>Mass
-                  Parents from Excel file</h5>
-                  <?php
-                }?>
+                <h2 class="text-center mt-1">Parent update form</h2>
+                
               </div>
               <div class="card-body">
-                <form class="form form-vertical" id="CreateParentForm" autocomplete="off">
-                  <input type="hidden" name="action" value="submit_new_parent_detail">
+                <form class="form form-vertical" id="EditParentForm" autocomplete="off">
+                  <input type="hidden" name="action" value="submit_edit_parent_detail">
                   <div class="form-body">
                     <div class="row">
                     
@@ -79,15 +80,16 @@ require_once "helpers/helper.php";
                         <div class="form-group">
                           <label for="title"> Title (Mr/Mrs)</label>
                             <input type="text" class="form-control form-control-lg" name="title"
-                              placeholder="Mr/Mrs">
+                              placeholder="Mr/Mrs" value="<?php echo $parent_data->title; ?>">
                         </div>
                       </div>
+                      <input type="hidden" name="parent_id" value="<?php echo $parent_data->id;?>">
                        <div class="col-md-5">
                         <div class="form-group">
                           <label for="first-name-icon"> First Name</label>
                           <div class="position-relative has-icon-left">
                             <input type="text" class="form-control form-control-lg" name="first_name"
-                              placeholder="Father's Name">
+                              placeholder="Father's Name" value="<?php echo $parent_data->fname; ?>">
                             <div class="form-control-position">
                               <i class="bx bx-user"></i>
                             </div>
@@ -99,7 +101,7 @@ require_once "helpers/helper.php";
                           <label for="email-id-icon"> LastName</label>
                           <div class="position-relative has-icon-left">
                             <input type="text" class="form-control form-control-lg" placeholder="Last Name"
-                              name="last_name">
+                              name="last_name" value="<?php echo $parent_data->lname; ?>">
                             <div class="form-control-position">
                               <i class="bx bx-user"></i>
                             </div>
@@ -112,7 +114,7 @@ require_once "helpers/helper.php";
                           <label for="contact-info-icon">Mobile</label>
                           <div class="position-relative has-icon-left">
                             <input type="number" class="form-control form-control-lg" placeholder="080*********"
-                              name="mobile">
+                              name="mobile" value="<?php echo $parent_data->phone; ?>">
                             <div class="form-control-position">
                               <i class="bx bx-mobile"></i>
                             </div>
@@ -125,7 +127,7 @@ require_once "helpers/helper.php";
                           <label for="email-id-icon">Email</label>
                           <div class="position-relative has-icon-left">
                             <input type="text" class="form-control form-control-lg" name="email"
-                              placeholder="e.g example@smatech.com">
+                              placeholder="e.g example@smatech.com" value="<?php echo $parent_data->email; ?>">
                             <div class="form-control-position">
                               <i class="bx bx-mail-send"></i>
                             </div>
@@ -137,7 +139,7 @@ require_once "helpers/helper.php";
                           <label for="email-id-icon"> Home Address</label>
                           <div class="position-relative has-icon-left">
                             <textarea name="address" id="address" class="form-control form-control-lg" placeholder="Write Home address..."
-                             ></textarea>
+                             ><?php echo $parent_data->address; ?></textarea>
                             <div class="form-control-position">
                               <i class="bx bx-home-alt"></i>
                             </div>
@@ -149,7 +151,7 @@ require_once "helpers/helper.php";
                         <div class="form-group">
                           <label for="contact-info-icon">Occupation</label>
                           <div class="position-relative has-icon-left">
-                           <input type="text" class="form-control form-control-lg" placeholder="Write Parent Occupation" name="occupation">
+                           <input type="text" class="form-control form-control-lg" placeholder="Write Parent Occupation" name="occupation" value="<?php echo $parent_data->occupation; ?>">
                             <div class="form-control-position">
                               <i class="bx bx-briefcase"></i>
                             </div>
@@ -160,7 +162,7 @@ require_once "helpers/helper.php";
                         <div class="form-group">
                           <label for="email-id-icon">PTA Post Held</label>
                           <div class="position-relative has-icon-left">
-                          <input type="text" class="form-control form-control-lg" name="pta_status" placeholder="e.g PTA Chairman">
+                          <input type="text" class="form-control form-control-lg" name="pta_status" placeholder="e.g PTA Chairman" value="<?php echo $parent_data->pta_post; ?>">
                             <div class="form-control-position">
                               <i class="bx bx-user-secret"></i>
                             </div>
@@ -172,6 +174,7 @@ require_once "helpers/helper.php";
                           <label for="contact-info-icon">Gender</label>
                           <div class="position-relative has-icon-left">
                             <select name="sex" id="sex" class="custom-select form-control">
+                              <option value="<?php echo $parent_data->gender; ?>" selected><?php echo $parent_data->gender; ?></option>
                               <option value="">Choose...</option>
                               <option value="Male">Male</option>
                               <option value="Female">Female </option>
@@ -197,7 +200,7 @@ require_once "helpers/helper.php";
                       </div>
                     </div>
                     <div class="justify-content-end pull-right">
-                      <button type="submit" class="btn btn-dark btn-md mr-1 __loadingBtn__">Register</button>
+                      <button type="submit" class="btn btn-dark btn-md mr-1 __loadingBtn__">Save Changes</button>
                       <button type="reset" class="btn btn-danger btn-md">Reset</button>
                     </div>
                   </div>
@@ -215,7 +218,7 @@ require_once "helpers/helper.php";
   <!-- END: Footer-->
   <!-- BEGIN: Vendor JS-->
   <?php include "../template/FooterScript.php"; ?>
-  <script src="smappjs/parents.js"></script>
+  <script src="smappjs/edit-parents.js"></script>
 </body>
 <!-- END: Body-->
 

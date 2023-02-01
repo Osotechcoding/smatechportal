@@ -614,5 +614,12 @@ if ($request_method === "POST") {
         echo $result;
       }
     }
+    //submit_edit_parent_detail
+    if ($_POST['action'] === "submit_edit_parent_detail") {
+      $result = $Parents->UpdateParentDetails($_POST);
+      if ($result) {
+        echo $result;
+      }
+    }
   }
 }
