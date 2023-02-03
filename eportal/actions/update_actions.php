@@ -621,5 +621,13 @@ if ($request_method === "POST") {
         echo $result;
       }
     }
+
+    //update_fee_component_structure_now
+    if ($_POST['action'] === "update_fee_component_structure_now") {
+      $result = $Administration->UpdateFeeDetailsStructure($_POST);
+      if ($result) {
+        echo $result;
+      }
+    }
   }
 }

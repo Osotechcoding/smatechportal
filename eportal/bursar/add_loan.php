@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
 <head>
   <!-- metaTag -->
   <?php include("../template/MetaTag.php"); ?>
-  <title><?php echo $SmappDetails->school_name ?> :: Manage Loan</title>
+  <title><?php echo $SmappDetails->school_name ?> | Manage Loan</title>
   <?php include("../template/dataTableHeaderLink.php"); ?>
   <!-- include dataTableHeaderLink.php -->
   <style>

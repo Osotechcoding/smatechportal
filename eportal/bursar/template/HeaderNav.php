@@ -22,17 +22,17 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="?lang=yor" data-language="yor"><i class="flag-icon flag-icon-ng mr-50"></i> Yoruba</a><a class="dropdown-item" href="?lang=hausa" data-language="hausa"><i class="flag-icon flag-icon-ng mr-50"></i> Hausa</a><a class="dropdown-item" href="?lang=igbo" data-language="igbo"><i class="flag-icon flag-icon-ng mr-50"></i> Igbo</a><a class="dropdown-item" href="?lang=en" data-language="en"><i class="flag-icon flag-icon-us mr-50"></i> English</a></div>
               </li>
               <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon bx bx-fullscreen"></i></a></li> -->
-              <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon bx bx-search"></i></a>
+              <!-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon bx bx-search"></i></a>
                 <div class="search-input">
                   <div class="search-input-icon"><i class="bx bx-search primary"></i></div>
                   <input class="input" type="text" placeholder="Explore Visap..." tabindex="-1" data-search="template-search">
                   <div class="search-input-close"><i class="bx bx-x"></i></div>
                   <ul class="search-list"></ul>
                 </div>
-              </li>
+              </li> -->
              
               <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="javascript:void(0);" data-toggle="dropdown">
-                  <div class="user-nav d-sm-flex d-none"><span class="user-name"><?php echo strtoupper($_SESSION['STAFF_USERNAME']); ?></span><span class="user-status text-success"><?php echo $lang['Online'] ?></span></div><span><?php if ($staff_data->staffPassport==NULL || $staff_data->staffPassport==""): ?>
+                  <div class="user-nav d-sm-flex d-none"><span class="user-name text-danger">Welcome <?php echo strtoupper($_SESSION['STAFF_USERNAME']); ?></span><span class="user-status text-success"><?php echo $lang['Online'] ?></span></div><span><?php if ($staff_data->staffPassport==NULL || $staff_data->staffPassport==""): ?>
     <img src="../schoolImages/staff/teacher.jpg" width="40" alt="photo" class="round">
       <?php else: ?>
         <img src="../schoolImages/staff/<?php echo $staff_data->staffPassport;?>" width="40" alt="photo" class="round">

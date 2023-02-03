@@ -18,9 +18,9 @@ $(document).ready(function(){
       $.post("../actions/actions",osotechPinGenForm,function(d){
        // console.log(d);
         setTimeout(()=>{
-           $(".__loadingBtn__").html('Generate').attr("disabled",false);
+           $(".__loadingBtn__").html('<span class="fa fa-refresh"></span> Generate').attr("disabled",false);
           $("#server-response").html(d);
-          $("#osotechPinGenForm")[0].reset();
+          //$("#osotechPinGenForm")[0].reset();
         },1500)
       })
    

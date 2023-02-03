@@ -75,11 +75,11 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
                       <label for="q">No of Scratch Crads to Generate</label>
                       <input type="number" autocomplete="off" id="q" class="form-control" name="q"
                         placeholder="e.g 200">
-                      <span class="text-danger">Maximum: 200 Pins</span>
+                      <span class="text-danger">Max Pins Per Batch: 250</span>
 
                     </div>
-                    <div class="col-md-12 col-12 mb-2">
-                      <label for="cardtype">Choose Scratch Card Type</label>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-2">
+                      <label for="cardtype">Scratch Card Type</label>
                       <select name="cardtype" id="cardtype" class=" custom-select form-control">
                         <option value="" selected> Select Pin Type </option>
                         <option value="rp">Admission Scratch Card</option>
@@ -89,13 +89,17 @@ if (!$Admin->isSuperAdmin($admin_data->adminId)) {
                       </select>
                     </div>
 
-                    <div class="col-12 mb-2">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-2">
                       <label for="p">Enter Card Price</label>
                       <input type="number" id="p" class="form-control" name="p" placeholder="&#8358; 5,000.00">
                     </div>
+                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-2">
+                      <label for="auth_token">Card Auth Token</label>
+                      <input type="password" id="auth_token" class="form-control" name="auth_token" placeholder="Token">
+                    </div>
                     <input type="hidden" name="action" value="genCard">
                     <div class="col-12 d-flex justify-content-end">
-                      <button type="submit" class="btn btn-dark btn-lg mr-1 btn-block __loadingBtn__">Generate</button>
+                      <button type="submit" class="btn btn-dark btn-lg mr-1 btn-block __loadingBtn__"><span class="fa fa-refresh"></span> Generate</button>
                     </div>
                   </div>
                 </div>

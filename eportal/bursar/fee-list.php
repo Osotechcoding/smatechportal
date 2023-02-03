@@ -8,7 +8,7 @@ require_once "helpers/helper.php";
 <head>
     <!-- metaTag -->
     <?php include ("../template/MetaTag.php"); ?>
-    <title><?php echo $SmappDetails->school_name ?> | Payment List </title>
+    <title><?php echo $SmappDetails->school_name ?> | Fee List </title>
      <?php include ("../template/dataTableHeaderLink.php"); ?>
   </head>
   <!-- END: Head-->
@@ -32,7 +32,7 @@ require_once "helpers/helper.php";
                 <ol class="breadcrumb p-0 mb-0 pl-1">
                   <li class="breadcrumb-item"><a href="./"><i class="bx bx-home-alt"></i></a>
                   </li>
-                  <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo strtoupper($_SESSION['ADMIN_SES_TYPE']);?></a>
+                  <li class="breadcrumb-item"><a href="javascript:void(0);"><?php echo strtoupper($_SESSION['STAFF_ROLE']);?></a>
                   </li>
                   <li class="breadcrumb-item active">Payment List
                   </li>
@@ -84,7 +84,7 @@ if (isset($_POST['show_payment_list']) && isset($_POST['payment_class'])) {
   <div class="card">
       <div class="card-body">
         <h3 class="text-center mb-2">List of Payments for <?php echo strtoupper($class); ?></h3>
-        <form id="updatePaymentListForm">
+         <form id="updatePaymentListForm">
           <input type="hidden" name="action" value="update_fee_component_structure_now">
          <div class="table-responsive">
       <table class="table table-bordered">
@@ -154,7 +154,24 @@ echo $Alert->alert_msg("No Record Found!","danger");
     <!-- END: Footer-->
     <!-- BEGIN: Vendor JS-->
     <?php include ("../template/DataTableFooterScript.php"); ?>
-    <script src="smappjs/payment-list.js"></script>
+    <script>
+      $(document).ready(function () {
+    const updatePaymentListForm = $("#updatePaymentListForm");
+    updatePaymentListForm.on("submit", function(event){
+  event.preventDefault();
+  //alert("Submitted");
+  $(".__loadingBtn__").html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Please wait...').attr("disabled",true);
+  //send request 
+  $.post("../actions/update_actions",updatePaymentListForm.serialize(),function(data){
+    setTimeout(()=>{
+      $(".__loadingBtn__").html('Update Payment').attr("disabled",false);
+      $("#server-response").html(data);
+    },1500);
+  })
+});;
+
+});
+    </script>
   </body>
   <!-- END: Body-->
 </html>

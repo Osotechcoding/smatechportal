@@ -28,18 +28,20 @@ class Pins
 		$q = $this->config->Clean($data['q']);
 		$p = $this->config->Clean($data['p']);
 		$t = $this->config->Clean($data['cardtype']);
+		$token = $this->config->Clean($data['auth_token']);
 		//check for empty form values 
-		if ($this->config->isEmptyStr($q) || $this->config->isEmptyStr($p) || $this->config->isEmptyStr($t)) {
+		if ($this->config->isEmptyStr($q) || $this->config->isEmptyStr($p) || $this->config->isEmptyStr($t) || $this->config->isEmptyStr($token)) {
 			// show error
 			$this->response = $this->alert->alert_toastr("error", "Invalid submission, Please try again!", __OSO_APP_NAME__ . " Says");
-		} elseif ($q > 200) {
+		} elseif ($q > 250) {
 			// code...
-			$this->response = $this->alert->alert_toastr("error", "Maximum Pin to generate is 200, Please check and try again!", __OSO_APP_NAME__ . "Says");
-		} else {
+			$this->response = $this->alert->alert_toastr("error", "Maximum Pins to generate per batch is 250, Please check and try again!", __OSO_APP_NAME__ . "Says");
+		}elseif ($token !== strrev('543210')) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Token Provided!", __OSO_APP_NAME__ . "Says");
+		}else {
 			//check if card generate is allowed at the time of try creating 
 			if (!$this->config->check_user_activity_allowed("card_generator")) {
-				// code...
-				$this->response = $this->alert->alert_toastr("error", "Oops! PIN Creation is not allowed at the Moment!", __OSO_APP_NAME__ . " Says");
+				$this->response = $this->alert->alert_toastr("error", "Oops! PIN Creation is currently not allowed at the Moment!", __OSO_APP_NAME__ . " Says");
 			} else {
 				switch ($t) {
 					case 'rp':
@@ -100,48 +102,48 @@ class Pins
 				$countInserted = 0;
 				for ($i = 1; $i <= $q; $i++) {
 					// let reshuffle 
-					@$pn = str_shuffle(substr($nums, mt_rand(0, (strlen($nums) - $this->_Pins_code)), $this->_Pins_code));
-					@$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha, mt_rand(0, (strlen($alpha) - $this->_Pins_serial)), $this->_Pins_serial)));
+					$pn = str_shuffle(substr($nums, mt_rand(0, (strlen($nums) - $this->_Pins_code)), $this->_Pins_code));
+					$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha, mt_rand(0, (strlen($alpha) - $this->_Pins_serial)), $this->_Pins_serial)));
 					// check if pin already exists in db
 					$this->query = "SELECT COUNT(*) AS cnt FROM $this->_table_ WHERE pin_code=? OR pin_serial=?";
 					$this->stmt = $this->dbh->prepare($this->query);
 					$this->stmt->execute(array($pn, $sn));
 					$fetch_objX = $this->stmt->fetch();
 					$count_check1 = $fetch_objX->cnt;
-					if ($count_check1 >= 1) {
+					if ($count_check1 > 0) {
 						// do a kind of reshuffle again
-						@$pn = str_shuffle(substr($nums2, mt_rand(0, (strlen($nums2) - $this->_Pins_code)), $this->_Pins_code));
-						@$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha2, mt_rand(0, (strlen($alpha2) - $this->_Pins_serial)), $this->_Pins_serial)));
+						$pn = str_shuffle(substr($nums2, mt_rand(0, (strlen($nums2) - $this->_Pins_code)), $this->_Pins_code));
+						$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha2, mt_rand(0, (strlen($alpha2) - $this->_Pins_serial)), $this->_Pins_serial)));
 						//check for the second time
 						$this->query = "SELECT COUNT(*) AS cnt FROM $this->_table_ WHERE pin_code=? OR pin_serial=?";
 						$this->stmt = $this->dbh->prepare($this->query);
 						$this->stmt->execute(array($pn, $sn));
 						$fetch_objX2 = $this->stmt->fetch();
 						$count_check2 = $fetch_objX2->cnt;
-						if ($count_check2 >= 1) {
+						if ($count_check2 > 0) {
 							// do a kind of reshuffle again
-							@$pn = str_shuffle(substr($nums3, mt_rand(0, (strlen($nums3) - $this->_Pins_code)), $this->_Pins_code));
-							@$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha3, mt_rand(0, (strlen($alpha3) - $this->_Pins_serial)), $this->_Pins_serial)));
+							$pn = str_shuffle(substr($nums3, mt_rand(0, (strlen($nums3) - $this->_Pins_code)), $this->_Pins_code));
+							$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha3, mt_rand(0, (strlen($alpha3) - $this->_Pins_serial)), $this->_Pins_serial)));
 							//check for the third time
 							$this->query = "SELECT COUNT(*) AS cnt FROM $this->_table_ WHERE pin_code=? OR pin_serial=?";
 							$this->stmt = $this->dbh->prepare($this->query);
 							$this->stmt->execute(array($pn, $sn));
 							$fetch_objX3 = $this->stmt->fetch();
 							$count_check3 = $fetch_objX3->cnt;
-							if ($count_check3 >= 1) {
+							if ($count_check3 > 0) {
 								// do a kind of reshuffle again
-								@$pn = str_shuffle(substr($nums4, mt_rand(0, (strlen($nums4) - $this->_Pins_code)), $this->_Pins_code));
-								@$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha4, mt_rand(0, (strlen($alpha4) - $this->_Pins_serial)), $this->_Pins_serial)));
+								$pn = str_shuffle(substr($nums4, mt_rand(0, (strlen($nums4) - $this->_Pins_code)), $this->_Pins_code));
+								$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha4, mt_rand(0, (strlen($alpha4) - $this->_Pins_serial)), $this->_Pins_serial)));
 								//check for the fourth time
 								$this->query = "SELECT COUNT(*) AS cnt FROM $this->_table_ WHERE pin_code=? OR pin_serial=?";
 								$this->stmt = $this->dbh->prepare($this->query);
 								$this->stmt->execute(array($pn, $sn));
 								$fetch_objX4 = $this->stmt->fetch();
 								$count_check4 = $fetch_objX4->cnt;
-								if ($count_check4 >= 1) {
+								if ($count_check4 > 0) {
 									// reshuffle for the last time
-									@$pn = str_shuffle(substr($nums5, mt_rand(0, (strlen($nums5) - $this->_Pins_code)), $this->_Pins_code));
-									@$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha5, mt_rand(0, (strlen($alpha5) - $this->_Pins_serial)), $this->_Pins_serial)));
+									$pn = str_shuffle(substr($nums5, mt_rand(0, (strlen($nums5) - $this->_Pins_code)), $this->_Pins_code));
+									$sn = strtoupper($this->_Pins_prefix . str_shuffle(substr($alpha5, mt_rand(0, (strlen($alpha5) - $this->_Pins_serial)), $this->_Pins_serial)));
 								}
 							}
 						}
@@ -154,7 +156,6 @@ class Pins
 					$countInserted = $countInserted + $rowCount;
 				}
 				if ($this->stmt != NULL) {
-					// code...
 					$this->response = $this->alert->alert_toastr("success", "You have Successfully Generated <b>" . $countInserted . " " . $this->_pin_desc_ . "", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{window.location.href='" . $this->redirectedPage . "';},1000)</script>";
 				} else {
 					$this->response = $this->alert->alert_toastr("error", "Internal Server Error", __OSO_APP_NAME__ . " Says");
@@ -162,7 +163,7 @@ class Pins
 			}
 		}
 		return $this->response;
-		$this->dbh = null;
+		
 	}
 
 	public function get_pins($table)
@@ -213,7 +214,7 @@ class Pins
 			}
 
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 
@@ -228,7 +229,7 @@ class Pins
 				$data_count = $this->stmt->fetch();
 				$this->response = $data_count->cnt;
 				return $this->response;
-				$this->dbh = null;
+				
 			}
 		}
 	}
@@ -244,7 +245,7 @@ class Pins
 				$data_count = $this->stmt->fetch();
 				$this->response = $data_count->cnt;
 				return $this->response;
-				$this->dbh = null;
+				
 			}
 		}
 	}
@@ -258,7 +259,7 @@ class Pins
 			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->stmt->fetch();
 				return $this->response;
-				$this->dbh = null;
+				
 			}
 		}
 	}
@@ -272,7 +273,7 @@ class Pins
 			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->stmt->fetch();
 				return $this->response;
-				$this->dbh = null;
+				
 			}
 		}
 	}
@@ -283,7 +284,7 @@ class Pins
 		if (!$this->config->isEmptyStr($pinId)) {
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `$table` WHERE pin_id=? LIMIT 1");
 			$this->stmt->execute([$pinId]);
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->stmt->fetch();
 				return $this->response;
 			}
@@ -298,7 +299,7 @@ class Pins
 			$res = $this->stmt->fetch();
 			$this->response = $res->pin_counter;
 			return $this->response;
-			$this->dbh = null;
+			
 		}
 	}
 }

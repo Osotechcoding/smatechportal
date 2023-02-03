@@ -13,7 +13,7 @@
      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"
        data-icon-style="lines">
        <li class="active"><a class="d-flex align-items-center" href="./"><i class="fa fa-desktop fa-1x"></i><span
-             class="menu-item text-truncate" data-i18n="Dashboard"><?php echo $lang['Dashboard'] ?></span></a>
+             class="menu-item text-truncate" data-i18n="Dashboard">DASHBOARD</span></a>
        </li>
       
        <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-edit fa-1x" data-icon="notebook"></i><span

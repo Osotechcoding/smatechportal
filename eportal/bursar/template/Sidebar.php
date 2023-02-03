@@ -13,6 +13,7 @@
               </li>
           <li class="navigation-header text-truncate"><span data-i18n="FINANCIAL">FINANCIAL MANAGEMENT</span>
           </li>
+           <li><a class="d-flex align-items-center" href="fee-list"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Fee List">Fee List</span></a> </li>
            <li><a class="d-flex align-items-center" href="fee_component"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Fee Component">Payment Component</span></a> </li>
           <li><a class="d-flex align-items-center" href="fee_allocate"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Fee Allocation">Payment Structure</span></a> </li>
          <li><a class="d-flex align-items-center" href="make_payment"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Payment"> Make Payment </span></a> </li>
@@ -26,7 +27,7 @@
               </li>
                <li><a class="d-flex align-items-center" href="add_loan"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Loan">Loan Management</span></a> </li>
                <li><a class="d-flex align-items-center" href="running_cost"><i class="bx bx-right-arrow-alt"></i><span class="menu-item text-truncate" data-i18n="Manage Loan">Bus Maintenance</span></a> </li>
-           <li class=" nav-item"><a href="account-settings" target="_blank"><i class="fa fa-edit fa-1x" data-icon="help"></i><span class="menu-title text-truncate" data-i18n="Accoun Settings"> Edit Profile</span></a>
+           <li class=" nav-item"><a href="account-settings"><i class="fa fa-edit fa-1x" data-icon="help"></i><span class="menu-title text-truncate" data-i18n="Accoun Settings"> Edit Profile</span></a>
           </li> 
           <li>
                 <a class="d-flex align-items-center" onclick=" return confirm('<?php echo $lang['logout-sure?'];?>');" href="logout?action=logout"><i class="fa fa-power-off"></i>

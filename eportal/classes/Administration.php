@@ -726,6 +726,47 @@ class Administration
 		return $this->response;
 	}
 
+	public function UpdateFeeDetailsStructure(array $data)
+	{
+		$total_count 	= count($data['count_total']);
+		$auth_pass 		= $data['auth_code'];
+		if ($this->config->isEmptyStr($auth_pass)) {
+		$this->response = $this->alert->alert_toastr("error", "Authentication code is Required!", __OSO_APP_NAME__ . " Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		}else{
+			for ($i = 0; $i < (int)$total_count; $i++) { 
+				$feeId = $data['fid'][$i];
+				$default_price = $data['default_price'][$i];
+				$fee_class =   $data['fee_class'][$i];
+				$component = $data['component'][$i];
+				$new_price = $data['new_price'][$i];
+				if ($this->config->isEmptyStr($new_price)) {
+					$new_amount = (float)$default_price;
+				}else{
+					$new_amount = (float)$new_price;
+				}
+				try {
+					$this->dbh->beginTransaction();
+					$query = "UPDATE `visap_school_fee_allocation_tbl` SET amount=? WHERE faId=? AND gradeDesc=? AND component_id=?";
+				$this->stmt = $this->dbh->prepare($query);
+				if($this->stmt->execute([$new_amount,$feeId,$fee_class,$component])){
+					$this->dbh->commit();
+					$this->response = $this->alert->alert_toastr("success", "Fee updated Successfully!", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+			window.location.href='./payment-list';
+			},1000);</script>";
+				}
+					
+				} catch (PDOException $e) {
+					$this->dbh->rollback();
+					$this->response = $this->alert->alert_toastr("error", "Internal error Occurred, Try again!", __OSO_APP_NAME__ . " Says");
+				}
+				
+			}
+		}
+		return $this->response;
+	}
+
 	//public function delete_virtual_lecture_ById($id){}
 
 
@@ -875,7 +916,6 @@ class Administration
 		}
 
 		return $this->response;
-		unset($this->response);
 	}
 
 	public function get_student_payment_by_regNo($stuId, $stdRegNo, $std_class)
@@ -1074,7 +1114,7 @@ class Administration
 			//check for duplicate entry
 			$this->stmt = $this->dbh->prepare("SELECT lectureId FROM `visap_virtual_lesson_tbl` WHERE lesson_topic=? AND lesson_grade=? AND subject=? AND teacher=? LIMIT 1");
 			$this->stmt->execute(array($topic, $lesson_class, $subject, $posted_by));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "This Lesson file already uploaded!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -1264,7 +1304,7 @@ class Administration
 			$this->stmt = $this->dbh->prepare("SELECT duty_id FROM `visap_staff_duty_tbl` WHERE staff_name=? AND duty=? AND duty_week=? AND term=? AND session=? LIMIT 1");
 			$this->stmt->execute(array($staffName, $duty_post, $duty_duration, $cterm, $csession));
 			//check row return
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_msg("$duty_post already assigned to $staffName on $duty_duration!", "danger");
 			} else {
 				//let create a fresh duty
