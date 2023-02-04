@@ -33,7 +33,6 @@
 <thead class="thead-light">
 <tr>
 <th>Payment Type </th>
-<th>Class</th>
 <th>Amount</th>
 <th>Paid</th>
 <th>Due Balance</th>
@@ -52,13 +51,12 @@
       ?>
       <tr>
         <td><?php echo strtoupper($feeType_data->feeType);?></td>
-          <td><?php echo strtoupper($value->studentClass);?></td>
           <td>&#8358;<?php echo number_format($value->amount,2);?></td>
           <td> <?php 
             if ($payment_records) {
              echo "&#8358;".number_format($payment_records->fee_paid,2);
             }else{
-              echo '<span class="badge badge-warning badge-md"> No Record</span>';
+              echo '<span class="badge badge-danger badge-md"> No Record</span>';
             }
            ?></td>
            <td><?php 
@@ -69,10 +67,15 @@
                   echo "&#8358;".number_format($payment_records->fee_due,2);
               }
             }else{
-              echo '<span class="badge badge-warning badge-md"> No Record</span>';
+              echo '<span class="badge badge-danger badge-md"> No Record</span>';
             }
            ?></td>
-           <td><?php echo date("l jS F, Y",strtotime($payment_records->payment_date)); ?> </td>
+           <td><?php if ($payment_records) {
+            echo date("l jS F, Y",strtotime($payment_records->payment_date));
+          }else{
+             echo '<span class="badge badge-danger badge-md"> No Record</span>';
+          }
+             ?> </td>
       </tr>
 
       <?php
