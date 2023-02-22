@@ -94,7 +94,6 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
                          $cnt++;
                          ?>
                     <tr>
-
                     <td width="10%"><span><?php echo $cnt; ?></span></td>
                     <td width="40%"> <input type="text" max="40" name="subject[]"  class="form-control form-control-lg" value="<?php echo $item->subjectName; ?>" readonly> <input type="hidden" name="report_id[]" value="<?php echo $item->reportId;?>"></td>
                     <td width="25%"><input type="number" max="40" name="ca[]" class="form-control form-control-lg" placeholder="C.A" value="<?php echo $item->ca;?>" required></td>

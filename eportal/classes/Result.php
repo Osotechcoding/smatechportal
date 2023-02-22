@@ -1016,7 +1016,7 @@ class Result
 	}
 		return $this->response;
 	}
-	public function UpdateSingleStudentResultSheet(array $data)
+	/*public function UpdateSingleStudentResultSheet(array $data)
 	{
 		$admNo = $this->config->Clean($data['admNo']);
 		$studentClass = $this->config->Clean($data['student_class']);
@@ -1070,14 +1070,14 @@ class Result
 		}
 		
 			return $this->response;
-		}
+		}*/
 
 		public function updateStudentScore($data)
 		{
 		$admNo = $this->config->Clean($data['admNo']);
 		$studentClass = $this->config->Clean($data['student_class']);
-		$term = $this->config->Clean($data['term']);
-		$total_count = $this->config->Clean($data['total_count']);
+		$result_term = $this->config->Clean($data['term']);
+		// $total_count = $data['total_count'];
 		$cses = $this->config->Clean($data['cses']);
 		$auth_pass = $this->config->Clean($data['auth_code']);
 		if ($this->config->isEmptyStr($auth_pass)) {
@@ -1085,36 +1085,40 @@ class Result
 		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 		}else{
-		switch ($term) {
+		switch ($result_term) {
 			case '3rd Term':
 				$resultTable = 'visap_termly_result_tbl';
 				break;
 			case '2nd Term':
 				$resultTable = 'visap_2nd_term_result_tbl';
 				break;
+
+				case '1st Term':
+				$resultTable = 'visap_1st_term_result_tbl';
+				break;
 			default:
 				$resultTable = 'visap_1st_term_result_tbl';
 				break;
 		}
-		for ($i = 1; $i <= (int)($total_count); $i++) {
+		for ($i = 0; $i < (int)($data['total_count']); $i++) {
 			$subject = (string)$data['subject'][$i];
 			$reportId = (int)$data['report_id'][$i];
 			$arr_cass = (int)$data['ca'][$i];
 			$arr_exam = (int)$data['exam'][$i];
 		try {
-		$this->stmt = $this->dbh->prepare("UPDATE `{$resultTable}` SET ca=?,exam=?,overallMark=?,mark_average=? WHERE reportId=? AND stdRegCode=? AND studentGrade=? AND term=? AND aca_session=? AND subjectName=?");
+		$this->stmt = $this->dbh->prepare("UPDATE `{$resultTable}` SET ca=?, exam=?, overallMark=?, mark_average=? WHERE reportId=?");
 					$total_sum = intval($arr_cass + $arr_exam);
 					$average_score = round(($total_sum / 2));
 					$time = date("h:i:s");
 					$date = date("Y-m-d");
-		if ($this->stmt->execute([$arr_cass, $arr_exam, $total_sum, $average_score, $reportId,$admNo, $studentClass, $term, $cses, $subject])) {
-		//update subjectRank will be here later
-		
+		$this->stmt->execute([$arr_cass, $arr_exam, $total_sum, $average_score, $reportId]);
+		if ($this->stmt->rowCount() > 0) {
+				//update subjectRank will be here later
 	$this->response = $this->alert->alert_toastr("success", "Score updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 		window.location.href='./add-result';
 		}, 1000);</script>";
-					}
-				} catch (PDOException $e) {
+		}
+	} catch (PDOException $e) {
 	$this->response  = $this->alert->alert_toastr("error", "Update Failed: Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
 				}
 			}
