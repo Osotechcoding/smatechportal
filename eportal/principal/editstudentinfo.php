@@ -119,7 +119,7 @@ if (isset($_GET['student-data']) && $_GET['student-data']!="") {
                   <label>Admission No:</label>
                 </div>
                 <div class="col-md-8 form-group">
-                  <input type="text" class="form-control" name="admission_no" placeholder="Admission No" value="<?php echo $student_data->stdRegNo;?>" readonly>
+                  <input type="text" class="form-control" name="student_reg_number" placeholder="Admission No" value="<?php echo $student_data->stdRegNo;?>" readonly>
                 </div>
                  <div class="col-md-4">
                   <label>Date Of Birth:</label>

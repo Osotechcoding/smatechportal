@@ -70,34 +70,30 @@ require_once "helpers/helper.php";
   </div>
   </div>
       <!-- filter student ends -->
-      <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12 col-xs-12">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12 col-xs-12"> 
 
           <?php
           if (isset($_POST['submit_student_search_btn'])) {
           $qe = $Configuration->Clean($_POST['qe']);
             if ($Configuration->isEmptyStr($qe) ) {
-              echo $Alert->alert_msg("Notice: Please enter either admission No or Email or Phone to search student","danger");
+              echo $Alert->alert_msg("Notice: Please enter value to search student","danger");
             }else{
-              $search_data =  $Student->searchStudentByRegEmailPhone($qe);
-              if ($search_data) { ?>
-        <!-- card will be here -->
+              $search_datas =  $Student->searchStudentsDetails($qe);
+              if ($search_datas) {
+                foreach ($search_datas as $search_data) {
+$Passport = $Student->displayStudentPassport($search_data->stdPassport,$search_data->stdGender);
+                  ?>
+ <!-- card will be here -->
         <div class="card" style="border-radius:10px;">
           <div class="card-body">
-            <h2 class="text-muted text-center"><span class="fa fa-graduation-cap fa-2x"></span> Student Information</h2>
+            <h2 class="text-muted text-center"><span class="fa fa-graduation-cap fa-2x"></span> Search Results</h2>
             <hr class="m-1 text-bold">
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-lg-4 col-xl-4 col-xs-4">
                   <div class="text-center"style="border:4px solid orange; border-radius:10px;">
                   <div class="text-center m-1">
-                    <?php if ($search_data->stdPassport==NULL || $search_data->stdPassport==""): ?>
-              <?php if ($search_data->stdGender == "Male"): ?>
-                  <img src="../schoolImages/students/male.png" width="250" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
-                <?php else: ?>
-                    <img src="../schoolImages/students/female.png" width="250" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
-              <?php endif; ?>
-                <?php else: ?>
-                  <img src="../schoolImages/students/<?php echo $search_data->stdPassport;?>" width="250" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
-              <?php endif ?>
+                   <img src="<?php echo $Passport;?>" width="250" alt="photo" style="border-radius: 10px;border: 3px solid deepskyblue;">
               <h5 class="text-center mt-1 text-bold">REG: <?php echo $search_data->stdRegNo;?></h5>
                   </div>
               </div>
@@ -145,11 +141,13 @@ require_once "helpers/helper.php";
             </div>
               <hr class="m-1 text-bold">
           </div>
-
         </div>
-             <?php }else{
+                  <?php
+                }
+
+               }else{
       echo '<div class="text-center">
-      <h4 class="text-center">'.$Alert->alert_msg("Notice: No records found for {$qe}","danger").'</h4>
+      <h4 class="text-center">'.$Alert->alert_msg("Notice: No records found for your search <b>{$qe} </b>","danger").'</h4>
       </div>';
               }
             }
@@ -157,7 +155,7 @@ require_once "helpers/helper.php";
            ?>
 
       </div>
-
+</div>
         </div>
       </div>
     </div>

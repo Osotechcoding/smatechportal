@@ -1,7 +1,7 @@
  <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
    <div class="navbar-header">
      <ul class="nav navbar-nav flex-row">
-     <li class="nav-item mr-auto"><a class="navbar-brand mb-2" href="./"><img class="logo" src="<?php echo $Configuration->get_schoolLogoImage();?>" width="40" height="40" alt="logo">
+     <li class="nav-item mr-auto"><a class="navbar-brand mb-2" href="./"><img class="logo" src="<?php echo $Configuration->get_schoolLogoImage();?>" width="40" height="40" alt="logo" style="border-radius: 50%;">
           <h2 class="brand-text mb-0"><?php echo strtoupper($SmappDetails->school_short_name);?></h2></a></li>
        <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
              class="bx bx-x d-block d-xl-none font-medium-4 primary"></i><i
@@ -119,8 +119,11 @@
            <li class="nav-item"><a href="add_student"><i class="fa fa-graduation-cap fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Registration">Registration</span></a>
            </li>
-           <li class="nav-item"><a href="ab_students"><i class="fa fa-user-plus fa-1x"></i><span
-                 class="menu-title text-truncate" data-i18n="Students"> Students</span></a>
+           <li class="nav-item"><a href="student-classes"><i class="fa fa-users fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Students">View Grid</span></a>
+           </li>
+           <li class="nav-item"><a href="ab_students"><i class="fa fa-users fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Students">View List</span></a>
            </li>
            <li class="nav-item"><a href="view-attendance"><i class="fa fa-child fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Attendance">Attendance</span></a>
@@ -146,8 +149,13 @@
          <ul class="menu-content">
            <li class="nav-item"><a href="add_staff"><i class="fa fa-user-plus fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Register Staff">Register Staff</span></a></li>
-           <li class="nav-item"><a href="staffs"><i class="fa fa-users fa-1x"></i><span class="menu-title text-truncate"
-                 data-i18n="Staff">View Staff</span></a></li>
+                  <li class="nav-item"><a href="staff-list"><i class="fa fa-th fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Staff">View Grid</span></a>
+           </li>
+           <li class="nav-item"><a href="staffs"><i class="fa fa-list fa-1x"></i><span class="menu-title text-truncate"
+                 data-i18n="Staff">View List</span></a></li>
+                 <li class="nav-item"><a href="staff-bank-info"><i class="fa fa-credit-card fa-1x"></i><span class="menu-title text-truncate"
+                 data-i18n="Staff Bank Info">Staff Bank Info</span></a></li>
            <li class=" nav-item"><a href="dutyAssignment"><i class="fa fa-briefcase fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Assign Staff Duty">Assign Staff Duty</span></a>
            </li>

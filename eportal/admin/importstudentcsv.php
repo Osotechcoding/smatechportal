@@ -507,10 +507,10 @@ function importMassStudentViaCSVFile($data, $csv_file)
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($File_tmp);
     $sheet_data = $spreadsheet->getActiveSheet()->ToArray();
     $count = "0";
-    //Omitting the first line such Heading Title
+    //Omitting the first line such as Heading Title
     foreach ($sheet_data as $row) {
       if ($count > 0) {
-        //name the columns ndeeded
+        //name the columns needed
         //Surname,Firstname,Lastname,Date_of_birth,Gender,Address,Phone,Email,Admission_date,Student_Type, Admission_number
         $stdSurName = $config->Clean($row[0]);
         $stdUserName = $stdSurName;
@@ -528,16 +528,10 @@ function importMassStudentViaCSVFile($data, $csv_file)
         $stdPassword = $config->encrypt_user_password($default_pass);
         $stdAdmStatus = "Active";
         $stdRegNo = $Student->generate_admission_number($config->Clean($row[10]));
-        $stdConfToken = substr(
-          md5(uniqid(mt_rand(10, 999), true)),
-          0,
-          14
-        );
+        $stdConfToken = substr(md5(uniqid(mt_rand(10, 999), true)),0,14);
         if ($config->check_single_data('visap_staff_tbl', 'staffEmail', $stdEmail)) {
-
           $response = $Alert->alert_toastr("error", "$stdEmail is already taken!", __OSO_APP_NAME__ . " Says");
         } elseif ($config->check_single_data('visap_student_tbl', 'stdEmail', $stdEmail)) {
-
           $response = $Alert->alert_toastr("error", "$stdEmail is already taken on this Portal!", __OSO_APP_NAME__
             . " Says");
         } else {

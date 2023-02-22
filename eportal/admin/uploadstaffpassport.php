@@ -132,7 +132,7 @@ if (isset($_GET['staffRegId']) && $_GET['staffRegId']!="" && isset($_GET['action
                 
                 <div class="col-12 d-flex justify-content-end">
                   <button type="submit" class="btn btn-dark mr-1 __loadingBtn__">Upload</button>
-                 <a href="./staffs"> <button type="button" class="btn btn-danger">Back</button></a>
+                 <a href="javascript:void(0);" onclick="window.history.back();"> <button type="button" class="btn btn-danger">Back</button></a>
                 </div>
               </div>
             </div>

@@ -609,7 +609,7 @@ if ($request_method === "POST") {
     }
     //submit_edited_single_student_result_sheet
     if ($_POST['action'] === "submit_edited_single_student_result_sheet") {
-      $result = $Result->UpdateSingleStudentResultSheet($_POST);
+      $result = $Result->updateStudentScore($_POST);
       if ($result) {
         echo $result;
       }

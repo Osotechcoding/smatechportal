@@ -677,5 +677,21 @@
 					echo $result;
 				}
 			}
+
+			//submit_new_staff_bank_info
+			if ($_POST['action'] === "submit_new_staff_bank_info") {
+				$result = $Staff->addBankDetails($_POST);
+				if ($result) {
+					echo $result;
+				}
+			}
+
+			//show_staff_bank_info
+		if ($_POST['action'] === "show_staff_bank_info") {
+				$result = $Staff->get_staff_bank_details($_POST['staffId']);
+				if ($result) {
+					echo $result;
+				}
+			}
 		}
 	}

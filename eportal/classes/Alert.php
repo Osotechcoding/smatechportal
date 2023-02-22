@@ -12,7 +12,7 @@ class Alert
 
 	public function alert_toastr($type = 'error', $msg ='', $title = '')
 	{
-		$this->response = '<script style="text/javascript">
+		$this->response = '<script type="text/javascript">
       toastr.' . $type . '("' . $msg . '","' . $title . '",{closeButton:!0,extendedTimeOut:5000,tapToDismiss:!1,progressBar:!0,showMethod:"slideDown",hideMethod:"fadeOut",showDuration:500,timeOut:5000,hideDuration:500});
       </script>';
 		return $this->response;

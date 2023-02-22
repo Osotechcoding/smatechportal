@@ -9,11 +9,11 @@ if (isset($_GET['record-id']) && $_GET['record-id'] != "") {
   if ($staff_data) {
     // code...
   } else {
-    header("Location: staffs");
+    header("Location: staff-list");
     exit();
   }
 } else {
-  header("Location: staffs");
+  header("Location: staff-list");
   exit();
 }
 
@@ -195,6 +195,7 @@ if (isset($_GET['record-id']) && $_GET['record-id'] != "") {
                             <option value="NCE">NCE</option>
                             <option value="HND">HND</option>
                             <option value="BSc">BSc </option>
+                            <option value="BED">BED </option>
                             <option value="Phd">Phd</option>
                           </select>
                         </div>
@@ -231,7 +232,7 @@ if (isset($_GET['record-id']) && $_GET['record-id'] != "") {
                         </div>
                         <div class="col-sm-12 d-flex justify-content-end">
                           <button type="submit" class="btn btn-dark btn-lg mr-1 __loadingBtn__">Save Changes</button>
-                          <a href="./staffs"><button type="button" class="btn btn-danger btn-lg">Go Back</button></a>
+                          <a href="./staff-list"><button type="button" class="btn btn-danger btn-lg">Go Back</button></a>
                         </div>
                       </div>
                     </div>

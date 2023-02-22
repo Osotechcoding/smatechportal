@@ -38,7 +38,7 @@ class Student
 		} else {
 			$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table_name} WHERE stdEmail=? AND stdAdmStatus='Active' LIMIT 1");
 			$this->stmt->execute(array($email));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$result = $this->stmt->fetch();
 				$db_password = $result->stdPassword;
 				//check if password entered match with db pwd
@@ -109,6 +109,20 @@ class Student
 		
 	}
 
+	public function count_students_by_gender_by_grade($grade,$gender)
+	{
+		$this->stmt = $this->dbh->prepare("SELECT count(`stdId`) as cgender FROM {$this->table_name} WHERE stdGender=? AND studentClass=? AND stdAdmStatus='Active'");
+		$this->stmt->execute(array($gender,$grade));
+		if ($this->stmt->rowCount() > 0) {
+			$rows = $this->stmt->fetch();
+			$this->response = $rows->cgender;
+		} else {
+			$this->response = "0";
+		}
+		return $this->response;
+		
+	}
+
 	public function countStudentByType($studentType)
 	{
 		$this->stmt = $this->dbh->prepare("SELECT count(`stdId`) as studentType FROM {$this->table_name} WHERE stdApplyType=? AND stdAdmStatus='Active'");
@@ -154,6 +168,19 @@ class Student
 	{
 		$this->stmt = $this->dbh->prepare("SELECT count(`stdId`) as students FROM `{$this->table_name}` WHERE stdAdmStatus='Active'");
 		$this->stmt->execute();
+		if ($this->stmt->rowCount() > 0) {
+			$rows = $this->stmt->fetch();
+			$this->response = $rows->students;
+		} else {
+			$this->response = "0";
+		}
+		return $this->response;
+	}
+
+	public function count_total_visap_students_by_grade($grade)
+	{
+		$this->stmt = $this->dbh->prepare("SELECT count(`stdId`) as students FROM `{$this->table_name}` WHERE studentClass=? AND stdAdmStatus='Active'");
+		$this->stmt->execute([$grade]);
 		if ($this->stmt->rowCount() > 0) {
 			$rows = $this->stmt->fetch();
 			$this->response = $rows->students;
@@ -212,7 +239,7 @@ class Student
 	{
 		$this->stmt = $this->dbh->prepare("SELECT *,concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as full_name FROM {$this->table_name} WHERE stdId=? AND stdRegNo=? LIMIT 1");
 		$this->stmt->execute(array($stdId, $regNo));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 		} else {
 			$this->response = false;
@@ -279,7 +306,7 @@ class Student
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `tbl_reg_pins` WHERE pin_code=? AND pin_serial=? LIMIT 1");
 			$this->stmt->execute(array($card_pin, $card_serial));
 			//check the row returns
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				//let check if the CARD PIN has been Used
 				//fetch the card details
 				$card_details = $this->stmt->fetch();
@@ -343,12 +370,12 @@ class Student
 
 	public function generate_admission_number($admitted_year)
 	{
-		$this->response = "";
+		//$this->response = "";
 		$schoolDatas = $this->config->getConfigData();
 		$schoolCode = $schoolDatas->govt_approve_number; //school Code
 		$this->stmt = $this->dbh->prepare("SELECT stdRegNo FROM $this->table_name ORDER BY stdRegNo DESC LIMIT 1");
 		$this->stmt->execute();
-		if ($this->stmt->rowCount() == '1') {
+		if ($this->stmt->rowCount() > 0) {
 			$row = $this->stmt->fetch();
 			$value2 = $row->stdRegNo;
 			//separating numeric part
@@ -483,7 +510,7 @@ class Student
 				$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_classnote_tbl` WHERE std_id=? AND class=? AND subjectId=? AND topic=? AND teacher_id=? AND term=? AND session=? LIMIT 1");
 				$this->stmt->execute([$stdId, $student_class, $subject, $topic, $teacher, $term, $school_sess]);
 				/*tablename: noteId, std_id,reg_number,class,subjectId,topic,subtopic,note_content teacher_id,term,session,created_on*/
-				if ($this->stmt->rowCount() == 1) {
+				if ($this->stmt->rowCount() > 0) {
 					// code...
 					$this->response = $this->alert->alert_msg("This Note is already submitted!", "danger");
 				} else {
@@ -912,13 +939,13 @@ class Student
 				$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 			} elseif (!in_array($image_ext, $allowed)) {
 				$this->response = $this->alert->alert_toastr("error", "Your passport format is not supported, Only PNG,JPG,JPEG", __OSO_APP_NAME__ . " Says");
-			} elseif ($passport_size > 20) {
-				$this->response = $this->alert->alert_toastr("error", "Your Image Size should not exceed 20KB, Your file Size is :" . number_format($passport_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
+			} elseif ($passport_size > 30) {
+				$this->response = $this->alert->alert_toastr("error", "Your Image Size should not exceed 30KB, Your file Size is :" . number_format($passport_size, 2) . "KB", __OSO_APP_NAME__ . " Says");
 			} elseif ($passport_error != 0) {
 				$this->response = $this->alert->alert_toastr("error", "There was an error Uploading your image", __OSO_APP_NAME__ . " Says");
 			} else {
 				$student_data = self::get_student_data_byId($studentId);
-				$passport_realName = $student_data->stdRegNo . mt_rand(0, 9999999) . "." . $image_ext;
+				$passport_realName = $student_data->stdRegNo . mt_rand(100, 9999999) . "." . $image_ext;
 				//lets update the student passport in the db
 				$passport_destination = "../schoolImages/students/" . $passport_realName;
 				try {
@@ -929,7 +956,7 @@ class Student
 							$this->dbh->commit();
 							$this->dbh = null;
 							$this->response = $this->alert->alert_toastr("success", "Passport Uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-							window.location.href='./ab_students';
+							window.location.href='./view-students?grade-desc=".$student_data->studentClass."';
 						},500);</script>";
 						}
 					}
@@ -1274,7 +1301,7 @@ class Student
     {
     $this->stmt = $this->dbh->prepare("SELECT * FROM `visap_assignment_tbl` WHERE assId=? LIMIT 1");
     $this->stmt->execute([$assId]);
-    if ($this->stmt->rowCount() == 1) {
+    if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
     return $this->response;
     }
@@ -1617,6 +1644,20 @@ class Student
     $this->stmt->execute(array($q, $q, $q));
     if ($this->stmt->rowCount() > 0) {
     $this->response = $this->stmt->fetch();
+    return $this->response;
+    }
+    }
+    }
+
+    public function searchStudentsDetails($q)
+    {
+    if (!$this->config->isEmptyStr($q)) {
+    	$q = "%".$q."%";
+    $this->stmt = $this->dbh->prepare("SELECT *, concat(`stdSurName`,' ',`stdFirstName`,' ',`stdMiddleName`) as
+    full_name FROM `{$this->table_name}` WHERE `stdRegNo` LIKE ? OR `stdEmail` LIKE ? OR `stdPhone` LIKE ? OR `stdFirstName` LIKE ? OR `stdMiddleName` LIKE ? OR `stdSurName` LIKE ? ORDER BY `stdSurName` ASC LIMIT 10");
+    $this->stmt->execute(array($q, $q, $q, $q, $q, $q));
+    if ($this->stmt->rowCount() > 0) {
+    $this->response = $this->stmt->fetchAll();
     return $this->response;
     }
     }
@@ -2055,12 +2096,12 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	 */
 	public function generateTestimonialSerialNo():string 
 	{
-	$cert_no = mt_rand(1000000000,9999999999);
+	$cert_no = mt_rand(1111111111,9999999999);
 	//check if the cert no already exists
 	$sql = "SELECT cert_no FROM `visap_student_testimonial_tbl` WHERE `cert_no`= ?";
 	$this->stmt = $this->dbh->prepare($sql);
 	$this->stmt->execute([$cert_no]);
-	if($this->stmt->rowCount()> 0){
+	if($this->stmt->rowCount() > 0){
 	$cert_no = mt_rand(1000000000,9999999999);
 	}
 	return $cert_no;
@@ -2111,11 +2152,11 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 				$dateCompleted = $student_data->completed_date;
 				$admitted_class = $student_data->admitted_class;
 				$classCompleted = $student_data->studentClass;
-				$allowedClass = array("Basic 5", "JSS 3A", "JSS 3B","JSS 3C", "SSS 3A" , "SSS 3B" , "SSS 3C");
+				$allowedClass = array("Basic 5","Basic 6", "JSS 3A", "JSS 3B","JSS 3C", "SSS 3A" , "SSS 3B" , "SSS 3C");
 			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$classCompleted)){
 				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
 			}else if(!in_array($classCompleted,$allowedClass)){
-				$this->response = $this->alert->alert_toastr("error", "Testimonial is Restricted to Basic 5, JSS 3 and SSS 3 Only!", __OSO_APP_NAME__ . " Says");
+				$this->response = $this->alert->alert_toastr("error", "Testimonial is Restricted to Basic 5 or 6, JSS 3 and SSS 3 Only!", __OSO_APP_NAME__ . " Says");
 			}else{
 				try{
 					$this->dbh->beginTransaction();

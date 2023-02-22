@@ -354,9 +354,7 @@ require_once "helpers/helper.php";
   <!-- BEGIN: Vendor JS-->
   <?php include("../template/DataTableFooterScript.php"); ?>
   <script src="smappjs/create_classroom.js"></script>
-  <!-- DataTableFooterScript.php -->
-
+  
 </body>
-<!-- END: Body-->
 
 </html>

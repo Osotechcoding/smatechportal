@@ -8,7 +8,6 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
   $session = $Configuration->Clean($_GET['cses']);
   $student_data = $Student->get_student_data_byId($studentId);
   $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
-  
   }else{
     header("Location: ./upload-single-result");
     exit();
@@ -28,15 +27,7 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
   <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
     <!-- BEGIN: Header-->
     <?php include "template/HeaderNav.php"; ?>
-    <!-- include headernav.php -->
-    <!-- END: Header-->
-    <!-- BEGIN: Main Menu-->
     <?php include "template/Sidebar.php";?>
-    <!-- include Sidebar.php -->
-    <!-- END: Main Menu-->
-
-    <!-- BEGIN: Content-->
-    <!-- BEGIN: Content-->
     <div class="app-content content">
       <div class="content-overlay"></div>
       <div class="content-wrapper">
@@ -50,7 +41,6 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
                   </li>
                   <li class="breadcrumb-item"><a href="#"></a>
                   </li>
-                 
                 </ol>
               </div>
             </div>
@@ -63,7 +53,6 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
   </div>
     </div>
     <!-- content goes here -->
-    
         <div class="card">
        <div class="card-body">
 <section>
@@ -72,7 +61,6 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
           <!-- Starts -->
         <div class="card">
             <div class="card-body">
-        <!-- Validation Tooltips -->
         <hr class="text-bold-700">
         <div class="justify-content-center text-center">
           <img src="<?php echo $Passport; ?>" style="width: 150px;border: 2px solid #625D5D; padding: 2px;border-radius:15px">
@@ -100,15 +88,15 @@ if(isset($_GET['student-id']) && isset($_GET['term']) && isset($_GET['student-cl
                         <tbody>
                        <?php 
                        $examScore = $Student->studentResultIsUploaded($student_data->stdRegNo,$Grade,$term,$session);
-                       
-                       if($examScore != ''){
+                       if($examScore){
                         $cnt =0;
                         foreach ($examScore as $item) {
                          $cnt++;
                          ?>
                     <tr>
+
                     <td width="10%"><span><?php echo $cnt; ?></span></td>
-                    <td width="40%"> <input type="text" max="40" name="subject[]"  class="form-control form-control-lg" value="<?php echo $item->subjectName; ?>" readonly></td>
+                    <td width="40%"> <input type="text" max="40" name="subject[]"  class="form-control form-control-lg" value="<?php echo $item->subjectName; ?>" readonly> <input type="hidden" name="report_id[]" value="<?php echo $item->reportId;?>"></td>
                     <td width="25%"><input type="number" max="40" name="ca[]" class="form-control form-control-lg" placeholder="C.A" value="<?php echo $item->ca;?>" required></td>
                   <td width="25%"><input type="number" max="60" name="exam[]" class="form-control form-control-lg" placeholder="60" value="<?php echo $item->exam;?>" required></td>
                   <input type="hidden" name="total_count" value="<?php echo $cnt; ?>">

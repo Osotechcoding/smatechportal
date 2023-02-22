@@ -62,6 +62,7 @@ class Administration
 		return $this->response;
 	}
 
+
 	public function create_classroom($data)
 	{
 		//visap_class_grade_tbl
@@ -78,7 +79,7 @@ class Administration
 			$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
 		} else {
 			//check for duplicate Class name
-			$this->stmt = $this->dbh->prepare("SELECT gradeId FROM `visap_class_grade_tbl` WHERE gradeDesc=? LIMIT 1");
+			$this->stmt = $this->dbh->prepare("SELECT gradeId FROM `visap_class_grade_tbl` WHERE gradeDesc=?");
 			$this->stmt->execute([$grade_name]);
 			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$grade_name  already Exists!", __OSO_APP_NAME__ . " Says");
@@ -163,7 +164,6 @@ class Administration
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
-			// code...
 			$this->response = $this->stmt->fetchAll();
 		} else {
 			$this->response = false;

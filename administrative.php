@@ -55,7 +55,7 @@
         <div class="container">
             <div class="sec-title text-center mb-3" data-aos="fade-up" data-aos-duration="1000">
                 <span class="title">Admins</span>
-                <h2>Our Dedicated Executives</h2>
+                <h2>Board of Directors</h2>
                 <div class="divider">
                     <span class="fa fa-mortar-board"></span>
                 </div>
@@ -69,8 +69,8 @@
                         </div>
                         <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:20px;">
                             <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Prof. Ayoade John</h5>
-                                <h6>Director/Chairman</h6>
+                                <h5 class="font-weight-bold">Pastor R.A Alao</h5>
+                                <h6>C.E.O</h6>
                             </div>
                             <div class="fac-social text-center">
                                 <ul class="social-icon mb-0">
@@ -92,8 +92,8 @@
                         </div>
                         <div class="faculties-info theme-blue py-2 mt-3" data-aos="zoom-in" data-aos-duration="550" style="border-radius:20px;">
                             <div class="fac-text text-center">
-                                <h5 class="font-weight-bold">Mrs. Ayoade Blessing</h5>
-                                <h6>Propietress</h6>
+                                <h5 class="font-weight-bold">Mr G.A Alao</h5>
+                                <h6>Director</h6>
                             </div>
                             <div class="fac-social text-center">
                                 <ul class="social-icon mb-0">

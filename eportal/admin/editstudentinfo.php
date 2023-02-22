@@ -198,7 +198,7 @@ if (isset($_GET['student-data']) && $_GET['student-data'] != "") {
                         </div>
                         <div class="col-sm-12 d-flex justify-content-end">
                           <button type="submit" class="btn btn-dark btn-lg mr-1 __loadingBtn__">Save Changes</button>
-                          <button type="button" class="btn btn-danger" onclick="window.location.assign('./');">Back</button>
+                          <button type="button" class="btn btn-danger" onclick="window.history.back();">Back</button>
                         </div>
                       </div>
                     </div>

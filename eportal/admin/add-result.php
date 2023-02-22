@@ -9,7 +9,7 @@ require_once "helpers/helper.php";
 <head>
   <!-- metaTag -->
   <?php include("../template/MetaTag.php"); ?>
-  <title><?php echo ($SmappDetails->school_name); ?> :: Manage Students </title>
+  <title><?php echo ($SmappDetails->school_name); ?> :: Manage Student Report Sheet </title>
   <?php include("../template/dataTableHeaderLink.php"); ?>
 </head>
 <!-- END: Head-->
@@ -92,17 +92,22 @@ require_once "helpers/helper.php";
           ?>
         <div class="card">
           <div class="card-body">
+            <div class="card-header">
+              <div class="col-md-12">
+                <h1 class="text-center"><span class="text-center"> <?php echo strtoupper($Grade) ?> TERMINAL REPORT </span></h1> 
+              </div>
+            </div>
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
              <div class="table-responsive">
                   <table class="table table-bordered table-striped table-hover">
                         <thead class="text-center">
                         <tr>
-                           <th> PASSPORT</th>
-                            <th> STUDENT</th>
-                            <th> Class</th>
-                            <th> 1st Term</th>
-                            <th> 2nd Term </th>
-                            <th>3rd Term</th>
+                           <th> Passport</th>
+                            <th> Student</th>
+                            <!-- <th> Class</th> -->
+                            <th> 1st Term Report</th>
+                            <th> 2nd Term Report</th>
+                            <th>3rd Term Report</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -112,7 +117,7 @@ require_once "helpers/helper.php";
                 <tr>
                       <td><img src="<?php echo $Passport;?>" style="width: 100px;border: 2px solid #625D5D; padding: 2px;border-radius:15px"></td>
                     <td><span><?php echo strtoupper($student->full_name) ?></span></td>
-                  <td><?php echo strtoupper($student->studentClass) ?></td>
+                  <!-- <td><?php //echo strtoupper($student->studentClass) ?></td> -->
                   <td> 
                   <?php 
                   if ($Student->studentExamSubjectIsUploaded($Grade) != '') {

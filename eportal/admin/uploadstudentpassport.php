@@ -9,11 +9,11 @@ if (isset($_GET['stdRegistrationId']) && $_GET['stdRegistrationId'] != "" && iss
   if ($student_data) {
     // code...
   } else {
-    header("Location: ab_students");
+    header("Location: view-class-students?grade-desc=".$student_data->studentClass);
     exit();
   }
 } else {
-  header("Location: ab_students");
+  header("Location: student-classes");
   exit();
 }
 
@@ -84,12 +84,7 @@ if (isset($_GET['stdRegistrationId']) && $_GET['stdRegistrationId'] != "" && iss
           <div class="card">
             <div class="card-body">
               <div class="col-md-12 text-center">
-                <h5><?php //if (isset($response)): 
-                    ?>
-                  <?php //echo $response; 
-                  ?>
-                  <?php //endif 
-                  ?></h5>
+              
               </div>
               <form class="form form-vertical" id="studentPassport_form" method="post" enctype="multipart/form-data">
                 <div class="form-body">
@@ -154,7 +149,7 @@ if (isset($_GET['stdRegistrationId']) && $_GET['stdRegistrationId'] != "" && iss
 
                     <div class="col-12 d-flex justify-content-end">
                       <button type="submit" class="btn btn-dark mr-1 __loadingBtn__">Upload</button>
-                      <a href="./ab_students"> <button type="button" class="btn btn-danger">Back</button></a>
+                      <a href="javascript:void(0);" onclick="window.history.back();"> <button type="button" class="btn btn-danger">Back</button></a>
                     </div>
                   </div>
                 </div>

@@ -21,11 +21,9 @@ class Staff
 	//new job application method
 	public function login_staff($data)
 	{
-		//@Session::init_ses();
 		global $lang;
 		$email = $this->config->Clean($data['login_email']);
 		$password = $this->config->Clean($data['login_password']);
-		//$userType = $this->config->Clean(ucfirst($data['login_as']));
 		if (!$this->config->check_user_activity_allowed("staff_login")) {
 			$this->response = $this->alert->alert_toastr("error", "Login is currently not allowed!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($email) || $this->config->isEmptyStr($password)) {
@@ -55,8 +53,6 @@ class Staff
 						setcookie("login_pass", "", time() - 100, '/');
 						setcookie("login_role", "", time() - 100, '/');
 					}
-					//session_regenerate_id();
-					//$session_token = Session::set_xss_token();
 					$_COOKIE['login_email'] = $email;
 					$_COOKIE['login_pass'] = $password;
 					$_COOKIE['login_role'] = $result->staffRole;
@@ -67,7 +63,6 @@ class Staff
 					$_SESSION['STAFF_FULL_NAME'] = $result->lastName . " " . $result->firstName;
 					$_SESSION['STAFF_USERNAME'] = $result->staffUser;
 					$_SESSION['STAFF_EMAIL'] = $result->staffEmail;
-
 					//LOGIN TOKEN
 					$token = $this->config->generateRandomUserToken(98);
 					$_SESSION['staff_token'] = $token;
@@ -144,7 +139,6 @@ class Staff
 		$password = $this->config->Clean($data['cpass']);
 		//$crole = $this->config->Clean(ucfirst($data['crole']));
 		if ($this->config->isEmptyStr($password)) {
-			// code...
 			$this->response = $this->alert->alert_toastr("warning", "Please Enter Password to Unlock your Session", __OSO_APP_NAME__ . " Says");
 		} else {
 			$this->stmt = $this->dbh->prepare("SELECT * FROM {$this->table} WHERE staffEmail=? AND `jobStatus`=1 LIMIT 1");
@@ -237,11 +231,9 @@ class Staff
 		$old_pass = $this->config->Clean($data['password']);
 		$new_password = $this->config->Clean($data['new-password']);
 		$confirm_new_pass = $this->config->Clean($data['confirm-new-password']);
-		//check for empty
 		if ($this->config->isEmptyStr($old_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Please your current password to continue!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($new_password)) {
-			// code...
 			$this->response = $this->alert->alert_toastr("error", "Enter your new Password to Continue!", __OSO_APP_NAME__ . " Says");
 		} elseif ($this->config->isEmptyStr($confirm_new_pass)) {
 			$this->response = $this->alert->alert_toastr("error", "Confirm your new Password to Continue!", __OSO_APP_NAME__ . " Says");
@@ -319,7 +311,6 @@ class Staff
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
 			return $this->response;
-
 		}
 	}
 
@@ -371,7 +362,6 @@ class Staff
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
-
 		}
 	}
 
@@ -379,10 +369,9 @@ class Staff
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_bank_details_tbl` WHERE staff_id=? LIMIT 1");
 		$this->stmt->execute([$staff_id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return json_encode($this->response, JSON_PRETTY_PRINT);
-
 		}
 	}
 
@@ -421,7 +410,7 @@ class Staff
 				if ($this->stmt->execute(array($presentClass, $fname, $surname, $portal_username, $dob, $education, $phone, $address, $gender, $status, $staffId))) {
 					$this->dbh->commit();
 					$this->response = $this->alert->alert_toastr("success", "Updated Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
-							window.location.href='./staffs';
+							window.location.href='./staff-list';
 						},500);</script>";
 				} else {
 					$this->response = $this->alert->alert_toastr("error", "Something went wrong, Please try again ...", __OSO_APP_NAME__ . " Says");
@@ -444,7 +433,6 @@ class Staff
 		if ($this->stmt->execute([$id])) {
 			$this->response = true;
 			return $this->response;
-
 		}
 	}
 
@@ -476,20 +464,59 @@ class Staff
 			} else {
 				//create a fresh account detaisl for the current user
 				try {
-
 					$this->dbh->beginTransaction();
 					$created_at = date("Y-m-d");
 					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_staff_bank_details_tbl` (staff_id,bank_name,account_name,account_type,account_number,created_at) VALUES (?,?,?,?,?,?);");
-					//lets execute
 					if ($this->stmt->execute(array($staffId, $bankName, $account_name, $account_type, $account_no, $created_at))) {
 						// code...
 						$this->dbh->commit();
 						$this->response = $this->alert->alert_toastr("success", " Bank info Uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
 							window.location.reload();
 						},500);</script>";
-					} else {
-						$this->response = $this->alert->alert_toastr("error", "Something went wrong, Please try again ...", __OSO_APP_NAME__ . " Says");
-					}
+					} 
+				} catch (PDOException $e) {
+					$this->dbh->rollback();
+					$this->response  = $this->alert->alert_toastr("error", "This error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+				}
+			}
+		}
+
+		return $this->response;
+	}
+
+	//admin create staff bank info
+	public function addBankDetails(array $data)
+	{
+		$staffId = $this->config->Clean($data['staff_id']);
+		$bankName = $this->config->Clean($data['bank_name']);
+		$account_name = $this->config->Clean($data['staff_account_name']);
+		$account_no = $this->config->Clean($data['staff_bank_account_no']);
+		$account_type = $this->config->Clean($data['accountType']);
+		$auth_pass = $this->config->Clean($data['auth_code']);
+		//check for any null values
+		if ($this->config->isEmptyStr($staffId) || $this->config->isEmptyStr($bankName) || $this->config->isEmptyStr($account_name) || $this->config->isEmptyStr($account_no) || $this->config->isEmptyStr($account_type) || $this->config->isEmptyStr($auth_pass)) {
+			$this->response = $this->alert->alert_toastr("error", "All fields are Required!", __OSO_APP_NAME__ . " Says");
+		}elseif (strlen($account_no) > 10 || strlen($account_no) < 10) {
+			$this->response = $this->alert->alert_toastr("error", "Please enter a valid account Number!", __OSO_APP_NAME__ . " Says");
+		}elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
+		$this->response = $this->alert->alert_toastr("error", "Invalid Authentication Code!", __OSO_APP_NAME__ . " Says");
+		}else {
+			//lets check if this user already uploaded an account details
+			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_bank_details_tbl` WHERE staff_id=?");
+			$this->stmt->execute(array($staffId));
+			if ($this->stmt->rowCount() > 0) {
+				$this->response = $this->alert->alert_toastr("error", "This information is already Exists!", __OSO_APP_NAME__ . " Says");
+			} else {
+				try {
+					$this->dbh->beginTransaction();
+					$created_at = date("Y-m-d");
+					$this->stmt = $this->dbh->prepare("INSERT INTO `visap_staff_bank_details_tbl` (staff_id,bank_name,account_name,account_type,account_number,created_at) VALUES (?,?,?,?,?,?);");
+					if ($this->stmt->execute(array($staffId, $bankName, $account_name, $account_type, $account_no, $created_at))) {
+						$this->dbh->commit();
+						$this->response = $this->alert->alert_toastr("success", "Uploaded Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+							window.location.reload();
+						},1500);</script>";
+					} 
 				} catch (PDOException $e) {
 					$this->dbh->rollback();
 					$this->response  = $this->alert->alert_toastr("error", "This error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
@@ -992,4 +1019,30 @@ class Staff
 			}
 		}
 	}
+
+
+	public function getStaffBankInfo()
+	{
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_staff_bank_details_tbl` ORDER BY staff_id DESC");
+		$this->stmt->execute();
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetchAll();
+			return $this->response;
+		}
+	}
+
+	 public function displayStaffPassport($passport,$gender) : string 
+  {
+    if($passport == NULL || $passport == ""){
+      if($gender == "Male"){
+          $imagePath = APP_ROOT."schoolImages/staff/male.jpg";
+        }else{
+          $imagePath = APP_ROOT."schoolImages/staff/female.jpg";
+        }
+  }else{
+    $imagePath = APP_ROOT."schoolImages/staff/".$passport;
+  }
+
+  return $imagePath;
+  }
 }

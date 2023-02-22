@@ -146,9 +146,8 @@ require_once "helpers/helper.php";
                                 <span class="fa fa-edit"></span> Action
                               </button>
                               <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-                                <?php if ($Staff->checkBankDetails($staff_data->staffId) === true) : ?>
-                                <a class="dropdown-item text-info" data-toggle="modal"
-                                  data-target="#viewbankInfoModalForm" href="javascript:void(0);"> Bank Details</a>
+                                <?php if ($Staff->checkBankDetails($staff_data->staffId)) : ?>
+                                <a class="dropdown-item text-info viewbankInfoModalForm" data-id="<?php echo $payrolls->staff_id;?>" data-action="show_staff_bank_info" href="javascript:void(0);"> Bank Details</a>
                                 <?php endif ?>
                                 <a class="dropdown-item text-warning pay_form_btn"
                                   data-id="<?php echo $payrolls->staff_id; ?>" data-action="show_pay_salary_modal"
@@ -180,9 +179,7 @@ require_once "helpers/helper.php";
   </div>
   <!-- END: Content-->
   </div>
-  <!--  <div class="sidenav-overlay"></div>
-    <div class="drag-target"></div> -->
-  <!-- BEGIN: Footer-->
+
   <!-- BANK MODAL -->
   <div class="modal fade" id="viewbankInfoModalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -202,11 +199,10 @@ require_once "helpers/helper.php";
           </div>
           <div class="card-desc">
             <!-- if transfer -->
-            <h4>Name of Bank: <small><b id="nameofbank">FIRST BANK PLC</b></small></h4>
-            <h4>Account Holder's Name: <small><b id="nameofowner">AGBERAYI IDOWU SAM</b></small></h4>
-            <h4>Account No: <b class="text-danger" id="accountnumber">3107991990</b></h4>
-            <h4>Account Type: <b><span class="badge badge-info text-white badge-lg" id="owneraccounttype ">Saving
-                  Account</span></b></h4>
+            <h4>Name of Bank: <small class="text-uppercase"><b id="nameofbank"></b></small></h4>
+            <h4>Account Name: <small class="text-uppercase"><b id="nameofowner"></b></small></h4>
+            <h4>Account No: <b class="text-danger" id="accountnumber"></b></h4>
+            <h4>Account Type: <span class="badge badge-info text-white badge-lg"><b id="owneraccounttype"></b></span></h4>
           </div>
           <!-- Ends -->
           <div class="modal-footer">
@@ -423,6 +419,29 @@ require_once "helpers/helper.php";
   <?php include("../template/DataTableFooterScript.php"); ?>
   <script>
   $(document).ready(function() {
+
+    //when staff bank detail btn is clicked
+    
+    $(document).on("click",".viewbankInfoModalForm", function(){
+      //$("#viewbankInfoModalForm").modal("show");
+      let staffId = $(this).data('id');
+      let action_ = $(this).data('action');
+      //send request to server to fetch the staff bank info
+      $.post("../actions/actions",{action:action_,staffId:staffId}, function(response){
+        setTimeout(()=>{
+          console.log(response);
+          if (response) {
+            $("#nameofbank").html(response.bank_name);
+            $("#nameofowner").html(response.account_name);
+            $("#accountnumber").html(response.account_number)
+            $("#owneraccounttype").html(response.account_type);
+             $("#viewbankInfoModalForm").modal("show");
+          }
+        },200);
+      },"JSON");
+    });
+
+
     const STAFFPAYROLLFORM = $("#staffPayrollForm");
     STAFFPAYROLLFORM.on("submit", function(event) {
       event.preventDefault();
