@@ -2,12 +2,12 @@
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 	//development server localhost
 	if (!defined("__OSOTECH__DEV_COMPANY__")) {
-		define("__OSOTECH__DEV_COMPANY__", "Flat ERP Technologies");
+		define("__OSOTECH__DEV_COMPANY__", "Kode Made Eazy");
 		define("__OSO_HOST__", 'localhost');
 		define("__OSO_USER__", 'root');
 		define("__OSO_PASS__", 'osotech');
 		define("__OSO_DBNAME__", 'smatech_portal');
-		define("__OSO_SCHOOL_CODE__", "C24314");
+		define("__OSO_SCHOOL_CODE__", "C12345");
 		define("__OSO_DB_DRIVER__", 'mysql');
 		define("__OSO_CHARSET__", 'utf8mb4');
 		define("__OSO_SERIAL__NUMBER_", "XTAS-KM87-EWA6-09CQ-5J0V");
@@ -22,7 +22,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 }else{
 		//deployment or Production server
 	if (!defined("__OSOTECH__DEV_COMPANY__")) {
-		define("__OSOTECH__DEV_COMPANY__", "Flat ERP Technologies");
+		define("__OSOTECH__DEV_COMPANY__", "Kode Made Eazy");
 		define("__OSO_HOST__", 'localhost');
 		define("__OSO_USER__", 'root');
 		define("__OSO_PASS__", 'osotech');
@@ -36,8 +36,8 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 		define("__OSO_APP_VERSION__", "version 2.0.5");
 		define("__OSO_APP_DEV_YEAR__", "2022");
 		define("__OSO_APP_NAME__", "SMAPP");
-		define("WEBSITE_HOME_PAGE", "http://192.168.1.62:80/smatechportal/");
-		define("APP_ROOT", "http://192.168.1.62:80/smatechportal/eportal/");
+		define("WEBSITE_HOME_PAGE", "http://127.0.0.1/smatechportal/");
+		define("APP_ROOT", "http://127.0.0.1/smatechportal/eportal/");
 	}
 }
 

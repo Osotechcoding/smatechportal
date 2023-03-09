@@ -2,7 +2,7 @@
 
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 	if (!defined("__OSOTECH__DEV_COMPANY__")) {
-		define("__OSOTECH__DEV_COMPANY__", "Flat ERP Technologies");
+		define("__OSOTECH__DEV_COMPANY__", "Kode Made Eazy");
 		define("__OSO_HOST__", 'localhost');
 		define("__OSO_USER__", 'root');
 		define("__OSO_PASS__", 'osotech');
@@ -22,7 +22,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 }else{
 	//Production Server 
 	if (!defined("__OSOTECH__DEV_COMPANY__")) {
-		define("__OSOTECH__DEV_COMPANY__", "Flat ERP Technologies");
+		define("__OSOTECH__DEV_COMPANY__", "Kode Made Eazy");
 		define("__OSO_HOST__", 'localhost');
 		define("__OSO_USER__", 'root');
 		define("__OSO_PASS__", 'osotech');

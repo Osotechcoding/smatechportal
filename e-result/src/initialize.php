@@ -2,7 +2,7 @@
 
 if($_SERVER['SERVER_NAME'] == 'localhost'){
     if (!defined("__OSOTECH__DEV_COMPANY__")) {
-        define("__OSOTECH__DEV_COMPANY__", ucwords("Flat ERP Technologies"));
+        define("__OSOTECH__DEV_COMPANY__", ucwords("Kode Made Eazy"));
         define("__OSO_HOST__",'localhost');
         define("__OSO_USER__",'root');
         define("__OSO_PASS__",'osotech');
@@ -17,7 +17,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
     }
 }else {
     if (!defined("__OSOTECH__DEV_COMPANY__")) {
-        define("__OSOTECH__DEV_COMPANY__", ucwords("Flat ERP Technologies"));
+        define("__OSOTECH__DEV_COMPANY__", ucwords("Kode Made Eazy"));
         define("__OSO_HOST__",'localhost');
         define("__OSO_USER__",'root');
         define("__OSO_PASS__",'osotech');
@@ -25,10 +25,10 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
         define("__OSO_DB_DRIVER__",'mysql');
         define("__OSO_CHARSET__",'utf8mb4');
         define("__OSO_APP_NAME__", strtoupper("smatech"));
-        define("APP_ROOT","http://192.168.1.62:80/smatechportal/");
-        define("EPORTAL_ROOT","http://192.168.1.62:80/smatechportal/eportal/");
-        define("ADMISSION_ROOT","http://192.168.1.62:80/smatechportal/admission/");
-        define("RESULT_ROOT","http://192.168.1.62:80/smatechportal/e-result/");
+        define("APP_ROOT","http://127.0.0.1/smatechportal/");
+        define("EPORTAL_ROOT","http://127.0.0.1/smatechportal/eportal/");
+        define("ADMISSION_ROOT","http://127.0.0.1/smatechportal/admission/");
+        define("RESULT_ROOT","http://127.0.0.1/smatechportal/e-result/");
     }
 }
 
