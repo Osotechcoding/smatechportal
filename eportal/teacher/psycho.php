@@ -63,9 +63,9 @@ require_once "helpers/helper.php";
               <div class="row match-height">
                 <div class="col-md-12 col-12">
                   <div class="card">
-                    <!--<div class="card-header">-->
-                    <!-- <button type="button" class="btn btn-danger btn-md badge-pill" data-toggle="modal" data-target="#csv_Modal"><span class="fa fa-file fa-1x"></span> UPLOAD BY CSV</button>-->
-                    <!--</div>-->
+                    <div class="card-header">
+                     <button type="button" class="btn btn-danger btn-md badge-pill" data-toggle="modal" data-target="#csv_Modal"><span class="fa fa-file fa-1x"></span> UPLOAD BY CSV</button>
+                    </div>
                     <div class="card-body">
                       <form class="form form-vertical" action="" method="POST">
                         <div class="form-body">

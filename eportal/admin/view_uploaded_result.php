@@ -6,15 +6,11 @@ require_once "helpers/helper.php";
 
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
-
 <head>
   <?php include "../template/MetaTag.php"; ?>
-  <title><?php echo $SmappDetails->school_name; ?> :: Uploaded Student Result</title>
-  <!-- include template/HeaderLink.php -->
+  <title><?php echo $SmappDetails->school_name; ?> :: Uploaded Result</title>
   <?php include("../template/dataTableHeaderLink.php"); ?>
-  <!-- END: Head-->
-  <!-- BEGIN: Body-->
-
+  
 <body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static  "
   data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="semi-dark-layout">
   <!-- BEGIN: Header-->

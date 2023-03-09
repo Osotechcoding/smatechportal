@@ -4,14 +4,11 @@
 *@author -- Osotech Software
 *Desc -- this class will contain all tasks in school result
 * uploading,viewing,checking of student Results
-
 */
 require_once "Database.php";
 require_once "Configuration.php";
-//@Session::init_ses();
 class Result
 {
-
 	//Result properties
 	private $dbh; //database connection
 	protected $stmt; //database statement
@@ -453,7 +450,7 @@ class Result
 				} else {
 					try {
 						$this->dbh->beginTransaction();
-						$rStatus = '1';
+						$rStatus = '2';
 						$this->stmt = $this->dbh->prepare("INSERT INTO `{$resultTable}` (stdRegCode,studentGrade,term,aca_session,subjectName,ca,exam,overallMark,mark_average,uploadedTime,uploadedDate,rStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
 						$total_sum = doubleval($arr_cass + $arr_exam);
 						$average_score = round(($total_sum / 2));
@@ -583,7 +580,7 @@ class Result
 	public function fetchUploadedResultByClass()
 	{
 		$this->response = "";
-		$this->stmt = $this->dbh->prepare("SELECT DISTINCT(`stdGrade`) FROM `visap_result_comment_tbl` ORDER BY stdGrade ASC LIMIT 30");
+		$this->stmt = $this->dbh->prepare("SELECT DISTINCT(`stdGrade`) FROM `visap_result_comment_tbl` ORDER BY stdGrade ASC LIMIT 50");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			while ($row = $this->stmt->fetch()) {
@@ -992,7 +989,7 @@ class Result
 			} else {
 				try {
 					$this->dbh->beginTransaction();
-					$rStatus = '1';
+					$rStatus = '2';
 					$this->stmt = $this->dbh->prepare("INSERT INTO `{$resultTable}` (stdRegCode,studentGrade,term,aca_session,subjectName,ca,exam,overallMark,mark_average,uploadedTime,uploadedDate,rStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);");
 					$total_sum = doubleval($arr_cass + $arr_exam);
 					$average_score = round(($total_sum / 2));

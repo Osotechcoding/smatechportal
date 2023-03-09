@@ -131,11 +131,11 @@ $Passport = $Student->displayStudentPassport($student->stdPassport,$student->std
         <div class="card-footer mb-0">
           <div class="text-center">
          <a class="card-link text-white" href="editstudentinfo?student-data=<?php echo ($student->stdId); ?>"><span class="fa fa-edit"></span> Edit </a>
-        <a href="javascript:void(0);" class="card-link text-white"><span class="fa fa-credit-card"></span>  Payment</a>
+        <!-- <a href="javascript:void(0);" class="card-link text-white"><span class="fa fa-credit-card"></span>  Payment</a> -->
         <?php if ($student->stdPassport == NULL || $student->stdPassport ==""): ?>
-           <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $student->stdRegNo; ?>&actionId=<?php echo $student->stdId;?>" class="card-link text-white"><span class="fa fa-camera"></span> Upload Passport</a>
+           <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $student->stdRegNo; ?>&actionId=<?php echo $student->stdId;?>" class="card-link text-white"><span class="fa fa-camera"></span> Passport</a>
            <?php else: ?>
-            <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $student->stdRegNo; ?>&actionId=<?php echo $student->stdId;?>" class="card-link text-white"><span class="fa fa-camera"></span> Change Passport</a>
+            <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $student->stdRegNo; ?>&actionId=<?php echo $student->stdId;?>" class="card-link text-white"><span class="fa fa-camera"></span> Change</a>
         <?php endif ?>
           </div>
         </div>

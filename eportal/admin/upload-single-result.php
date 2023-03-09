@@ -8,7 +8,7 @@ $student_data = $Student->get_student_data_byId($studentId);
 $Passport = $Student->displayStudentPassport($student_data->stdPassport,$student_data->stdGender);
 
 }else{
-  header("Location: /add-result");
+  header("Location: ./add-result");
   exit();
 }
  ?>

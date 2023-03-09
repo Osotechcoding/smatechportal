@@ -50,7 +50,7 @@ class Administration
 	public function get_classroom_InDropDown()
 	{
 		$this->response = "";
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 50");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			while ($row = $this->stmt->fetch()) {
@@ -161,7 +161,7 @@ class Administration
 
 	public function get_all_classrooms()
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 30");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` ORDER BY gradeId ASC LIMIT 50");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
@@ -176,7 +176,7 @@ class Administration
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_class_grade_tbl` WHERE gradeId=? LIMIT 1");
 		$this->stmt->execute([$grade]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 		} else {
 			$this->response = false;
@@ -314,7 +314,7 @@ class Administration
 
 	public function get_all_subjects()
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` ORDER BY subject_desc ASC LIMIT 50");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` ORDER BY subject_desc ASC LIMIT 100");
 		$this->stmt->execute();
 		if ($this->stmt->rowCount() > 0) {
 			// code...
@@ -327,7 +327,7 @@ class Administration
 
 	public function get_all_subjects_by_status(string $status)
 	{
-		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` WHERE status=? ORDER BY subject_desc ASC LIMIT 50");
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` WHERE status=? ORDER BY subject_desc ASC LIMIT 100");
 		$this->stmt->execute([$status]);
 		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetchAll();
@@ -340,7 +340,7 @@ class Administration
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `school_subjects` WHERE subject_id=? LIMIT 1");
 		$this->stmt->execute([$subjectId]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 		} else {
 			$this->response = false;
@@ -556,7 +556,7 @@ class Administration
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_fee_component_tbl` WHERE compId=? LIMIT 1");
 		$this->stmt->execute([$id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			// code...
 			$this->response = $this->stmt->fetch();
 		} else {
@@ -608,7 +608,7 @@ class Administration
 			//check for Duplicate Entry
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_school_fee_allocation_tbl` WHERE component_id=? AND gradeDesc=? LIMIT 1");
 			$this->stmt->execute(array($fee_type_id, $grade_desc));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_msg("$grade_desc Fee is already Allocated! Please check and try again!", "danger");
 			} else {
 				//create a fresh Allocation
@@ -666,7 +666,7 @@ class Administration
 		if (!$this->config->isEmptyStr($type)) {
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_fee_component_tbl` WHERE feeType=? LIMIT 1");
 			$this->stmt->execute([$type]);
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->stmt->fetch();
 				return $this->response;
 	
@@ -678,7 +678,7 @@ class Administration
 	{
 		$this->stmt = $this->dbh->prepare("SELECT al.*,c.* FROM `visap_school_fee_allocation_tbl` as al, `visap_fee_component_tbl` as c WHERE c.feeType=al.component_id AND al.faId=? LIMIT 1");
 		$this->stmt->execute([$allocateId]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 		} else {
 			$this->response = false;
@@ -768,7 +768,6 @@ class Administration
 	}
 
 	//public function delete_virtual_lecture_ById($id){}
-
 
 	//FEE ALLOCATION METHODS
 
@@ -2735,7 +2734,6 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		$name_div = explode(".", $logoname);
 		$image_ext = strtolower(end($name_div));
 		if (!$this->config->isEmptyStr($logoname)) {
-			//$response = $Alert->alert_msg("You Selected $logo_name","success");
 			if ($this->config->isEmptyStr($auth_pass)) {
 				$this->response = $this->alert->alert_toastr("error", "Please provide the Authentication Code to proceed", __OSO_APP_NAME__ . " Says");
 			} elseif ($auth_pass !== __OSO__CONTROL__KEY__) {
@@ -2864,7 +2862,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 				$admEnd = date("Y-m-d", strtotime($adm_div[1]));
 				$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_admission_open_tbl` WHERE admission_desc=? AND batch=? AND adm_start=? AND adm_end=? AND schl_session=? LIMIT 1");
 				$this->stmt->execute(array($desc, $batch, $admStart, $admEnd, $admission_session));
-				if ($this->stmt->rowCount() == 1) {
+				if ($this->stmt->rowCount() > 0) {
 					$this->response = $this->alert->alert_toastr("error", "This information is already Created!", __OSO_APP_NAME__ . " Says");
 				} else {
 					//create a fresh adimission portal
@@ -2997,7 +2995,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			$file_destination = "../exams/" . $newFileName;
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_exam_subject_tbl` WHERE teacherId=? AND exam_class=? AND subject=? AND term=? AND schl_session=? LIMIT 1");
 			$this->stmt->execute(array($teacher, $exam_class, $subject, $term, $schl_session));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "$subject Examination Question is already Uploaded for $term $schl_session, Please check and try again!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -3052,7 +3050,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 	{
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_exam_subject_tbl` WHERE examId=? LIMIT 1");
 		$this->stmt->execute([$Id]);
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$this->response = $this->stmt->fetch();
 			return $this->response;
 
@@ -3108,7 +3106,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 			//check for duplicate holiday
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_holiday_tbl` WHERE holiday_desc=? AND declared_by=? AND date_from=? AND to_date=? LIMIT 1");
 			$this->stmt->execute(array($description, $by, $from, $to));
-			if ($this->stmt->rowCount() == 1) {
+			if ($this->stmt->rowCount() > 0) {
 				$this->response = $this->alert->alert_toastr("error", "This $description is already Declared!", __OSO_APP_NAME__ . " Says");
 			} else {
 				try {
@@ -3191,7 +3189,7 @@ if ($this->config->isEmptyStr($bypass) || $bypass != md5("oiza1")) {
 		$this->response = "";
 		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_state_tbl` WHERE name=? LIMIT 1");
 		$this->stmt->execute(array($state));
-		if ($this->stmt->rowCount() == 1) {
+		if ($this->stmt->rowCount() > 0) {
 			$state_list = $this->stmt->fetch();
 			//grab all local govt that have this state id
 			$this->stmt = $this->dbh->prepare("SELECT * FROM `local_govt_tbl` WHERE state_id=? ORDER BY local_name ASC");

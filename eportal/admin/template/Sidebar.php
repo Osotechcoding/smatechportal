@@ -54,6 +54,9 @@
         <li class="nav-item"><a href="javaScript:void(0)"><i class="fa fa-certificate fa-1x" data-icon="certificate"></i><span
              class="menu-title text-truncate" data-i18n="STUDENT DOCS">STUDENT DOCS</span></a>
          <ul class="menu-content">
+           <li class=" nav-item"><a href="uploadcsvfiles"><i class="fa fa-files-o fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Upload CSV Record">Upload CSV Record</span></a>
+           </li>
            <li class=" nav-item"><a href="genIdCard"><i class="fa fa-address-book fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Generate ID Card">Generate ID Card</span></a>
            </li>
