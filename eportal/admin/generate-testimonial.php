@@ -50,7 +50,7 @@ require_once "helpers/helper.php";
 
             <div class="card">
               <div class="card-header">
-              <p class="text-danger text-uppercase"><i> NB: Testimonial is ONLY available for students in <b>(Basic 5, JSS 3 and SSS 3) Classes</b></i></p>
+              <p class="text-danger text-uppercase"><i> NB: Testimonial is ONLY available for students in <b>(Basic 5 or 6, JSS 3 and SSS 3) Classes</b></i></p>
               </div>
       <div class="card-body">
         <form id="StudentTestimonialForm" autocomplete="off">
@@ -61,10 +61,73 @@ require_once "helpers/helper.php";
          <input type="text" class="form-control" id="admissionNumber" name="admissionNumber" placeholder="XXXXC26313XXXX" required>
         </div>
       </div>
+       <div class="col-md-4">
+        <div class="form-group">
+          <label for="admission_date">DATE OF ADMISSION</label>
+         <input type="date" class="form-control" name="admission_date" required>
+        </div>
+      </div>
+       <div class="col-md-4">
+        <div class="form-group">
+          <label for="date_completed">GRADUATED DATE</label>
+         <input type="date" class="form-control" name="date_completed" required>
+        </div>
+      </div>
+      <!-- 2021C123450001 -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="admitted_class">ADMITTED CLASS </label>
+          <select name="admitted_class" id="admitted_class" class="custom-select form-control" required>
+            <option value="" selected> Choose...</option>
+              <option value="Creche">Creche</option>
+              <option value="KG 1">KG 1</option>
+              <option value="KG 2">KG 2</option>
+              <option value="Nursery 1">Nursery 1</option>
+              <option value="Nursery 2">Nursery 2</option>
+              <option value="Basic 1">Basic 1</option>
+              <option value="Basic 2">Basic 2</option>
+              <option value="Basic 3">Basic 3</option>
+              <option value="Basic 4">Basic 4</option>
+              <option value="Basic 5">Basic 5</option>
+              <option value="Basic 6">Basic 6</option>
+              <option value="JSS 1">JSS 1</option>
+              <option value="JSS 2">JSS 2</option>
+              <option value="JSS 3">JSS 3</option>
+              <option value="SSS 1">SSS 1</option>
+              <option value="SSS 2">SSS 2</option>
+              <option value="SSS 3">SSS 3</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="class_completed"> CLASS COMPLETED</label>
+          <select name="class_completed" id="class_completed" class="custom-select form-control" required>
+            <option value="" selected> Choose...</option>
+            <option value="Creche">Creche</option>
+              <option value="KG 1">KG 1</option>
+              <option value="KG 2">KG 2</option>
+              <option value="Nursery 1">Nursery 1</option>
+              <option value="Nursery 2">Nursery 2</option>
+              <option value="Basic 1">Basic 1</option>
+              <option value="Basic 2">Basic 2</option>
+              <option value="Basic 3">Basic 3</option>
+              <option value="Basic 4">Basic 4</option>
+              <option value="Basic 5">Basic 5</option>
+              <option value="Basic 6">Basic 6</option>
+              <option value="JSS 1">JSS 1</option>
+              <option value="JSS 2">JSS 2</option>
+              <option value="JSS 3">JSS 3</option>
+              <option value="SSS 1">SSS 1</option>
+              <option value="SSS 2">SSS 2</option>
+              <option value="SSS 3">SSS 3</option>
+             </select>
+        </div>
+      </div>
       <div class="col-md-4">
         <div class="form-group">
           <label for="Auth">ACADEMIC ABILITY</label>
-          <select name="academic_ability" id="student_class" class="custom-select form-control" required>
+          <select name="academic_ability" class="custom-select form-control" required>
             <option value="" selected> Choose...</option>
             <option value="Distinction">Distinction</option>
             <option value="Excellent">Excellent</option>
@@ -76,7 +139,7 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="sports_ability"> ABILITY IN SPORTS</label>
           <select name="sports_ability" id="sports_ability" class="custom-select form-control" required>
@@ -91,13 +154,13 @@ require_once "helpers/helper.php";
           </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="club">SCHOOL CLUB / SOCIETY MEMBERSHIP</label>
          <input type="text" class="form-control" name="club" placeholder="Literary & Debating, Jets" required>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="student_office_name">SCHOOL OFFICE HELD</label>
           <select name="student_office_name" id="student_office_name" class="custom-select form-control" required>
@@ -107,7 +170,7 @@ require_once "helpers/helper.php";
         </select>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="form-group">
           <label for="character">CONDUCT & CHARACTER</label>
          <input type="text" class="form-control" name="character" placeholder="Satisfactory" required>

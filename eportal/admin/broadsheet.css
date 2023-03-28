@@ -1,0 +1,61 @@
+html {
+    font-family:arial;
+    font-size: 9px;
+  }
+  
+  body {
+        background-color: #726E6D;
+        height: 600px;
+        width: 1240px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      section{
+        background-color: white;
+        padding: 20px;
+    }
+        .schname{
+            display: block;
+            /* margin-left: auto; */
+            margin-right: auto;
+            width: 80%;
+        }
+        .upperSection{
+            display: flex;
+            justify-content: center;
+          }
+          
+          .textArea {
+            text-align: center;
+          }
+          .schLogo{
+            width: 100px;
+            height: auto;
+          }
+          .schScope{
+            line-height: 3px;
+          }
+          .schName{
+            font-size: 30px;
+            line-height: 2px;
+          }
+          /* main .fet-broadsheet{
+            justify-content: center;
+          } */
+          table{
+            /* table-layout: fixed; */
+            width: 1200px;
+            border-collapse: collapse;
+            background-color: white;
+        }
+          thead{
+            background-color: lightgray;
+          }
+          td{
+            border: 1px solid black;
+            line-height: 20px;
+          }
+          td:nth-child(2), td:nth-child(3){
+            white-space: nowrap;
+            font-weight: 700;
+          }

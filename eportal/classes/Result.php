@@ -342,7 +342,7 @@ class Result
 		$auth_code = $this->config->Clean($data['auth_code']);
 		$grading_id = ($data['grading_id']);
 		$result_class = $this->config->Clean($data['result_class']);
-		$score_from = isset($data['score_from']) ? $data['score_from'] : '0';
+		$score_from = $data['score_from'] ?? '0';
 		$score_to = $this->config->Clean($data['score_to']);
 		$mark_grade = $this->config->Clean($data['mark_grade']);
 		$score_remark = $this->config->Clean($data['score_remark']);
@@ -1121,5 +1121,88 @@ class Result
 			}
 		}
 		return $this->response;
+	}
+
+	public function getBroadSheetSubjects($student_class)
+	{
+	
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `visap_registered_subject_tbl` WHERE subject_class =? ORDER BY subject_name ASC ");
+		$this->stmt->execute([$student_class]);
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetchAll();
+			$this->stmt = null;
+			return $this->response;
+
+		}
+	}
+
+	public function getBroadSheetSubjectsScores($student_class,$term,$session)
+	{
+		switch ($term) {
+			case '3rd Term':
+				$resultTable = 'visap_termly_result_tbl';
+				break;
+			case '2nd Term':
+				$resultTable = 'visap_2nd_term_result_tbl';
+				break;
+			default:
+				$resultTable = 'visap_1st_term_result_tbl';
+				break;
+		}
+		$this->stmt = $this->dbh->prepare("SELECT * FROM `{$resultTable}` WHERE studentGrade =? AND aca_session=? ORDER BY subjectName ASC");
+		$this->stmt->execute([$student_class,$session]);
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetchAll();
+			$this->stmt = null;
+			return $this->response;
+
+		}
+	}
+
+	public function getNumberOfBroadSheetSubject($regNo,$stdGrade,$term,$session)
+	{
+		switch ($term) {
+			case '3rd Term':
+				$resultTable = 'visap_termly_result_tbl';
+				break;
+			case '2nd Term':
+				$resultTable = 'visap_2nd_term_result_tbl';
+				break;
+			default:
+				$resultTable = 'visap_1st_term_result_tbl';
+				break;
+		}
+		$this->stmt = $this->dbh->prepare("SELECT count(`reportId`) as cnt FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade=? AND aca_session=?");
+		$this->stmt->execute([$regNo,$stdGrade,$session]);
+		if ($this->stmt->rowCount() > 0) {
+			$rows = $this->stmt->fetch();
+			$this->response = $rows->cnt;
+		} else {
+			$this->response = 0;
+		}
+		return $this->response;
+	}
+
+	public function getBroadSheetSubjectsByRegNo($regNo,$stdGrade,$term,$session)
+	{
+		switch ($term) {
+			case '3rd Term':
+				$resultTable = 'visap_termly_result_tbl';
+				break;
+			case '2nd Term':
+				$resultTable = 'visap_2nd_term_result_tbl';
+				break;
+			default:
+				$resultTable = 'visap_1st_term_result_tbl';
+				break;
+		}
+		$this->stmt = $this->dbh->prepare("SELECT (`subjectName`) FROM `{$resultTable}` WHERE stdRegCode=? AND studentGrade =? AND aca_session=? ORDER BY subjectName ASC");
+		$this->stmt->execute([$regNo,$stdGrade,$session]);
+		if ($this->stmt->rowCount() > 0) {
+			$this->response = $this->stmt->fetch();
+			$this->stmt = null;
+			return $this->response;
+
+		}
 	}
 }

@@ -103,14 +103,17 @@
            <li class=" nav-item"><a href="deleteExamResults"><i class="fa fa-trash fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Remove Result">Remove Result</span></a>
            </li>
+             <li class=" nav-item"><a href="broadsheet"><i class="fa fa-book fa-1x"></i><span
+                 class="menu-title text-truncate" data-i18n="Broadsheet">Broadsheet</span></a>
+           </li>
 
-           <li class=" nav-item"><a href="publishResult"><i class="fa fa-paper-plane fa-1x"></i><span
+          <!--  <li class=" nav-item"><a href="publishResult"><i class="fa fa-paper-plane fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="Publish Results">Publish Results</span></a>
-           </li>
+           </li> -->
 
-           <li class=" nav-item"><a href="viewPublishedResult"><i class="fa fa-eye fa-1x"></i><span
+          <!--  <li class=" nav-item"><a href="viewPublishedResult"><i class="fa fa-eye fa-1x"></i><span
                  class="menu-title text-truncate" data-i18n="View Published">View Published</span></a>
-           </li>
+           </li> -->
          </ul>
        </li>
        <!-- RESULT ENDS -->

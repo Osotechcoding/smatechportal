@@ -2113,6 +2113,10 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		$academic_ability = $this->config->clean($data['academic_ability']);
 		$sports_ability = $this->config->clean($data['sports_ability']);
 		$pass_code = $this->config->clean($data['auth_code']);
+		$admission_date = $this->config->clean(date("Y-m-d",strtotime($data['admission_date'])));
+		$completed_date = $this->config->clean(date("Y-m-d",strtotime($data['date_completed'])));
+		$admitted_class = $this->config->clean($data['admitted_class']);
+		$completed_class = $this->config->clean($data['class_completed']);
 		$character = $this->config->clean($data['character']);
 		$cert_no = $this->generateTestimonialSerialNo();
 
@@ -2130,7 +2134,22 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		$subject9 = $this->config->clean($data['subject_nine']);
 		$subject10 = $this->config->clean($data['subject_ten']);
 		//check for compulsary values 
-		if($this->config->isEmptyStr($stdRegNo) || $this->config->isEmptyStr($academic_ability) || $this->config->isEmptyStr($sports_ability)|| $this->config->isEmptyStr($subject1) || $this->config->isEmptyStr($subject2) || $this->config->isEmptyStr($subject3) || $this->config->isEmptyStr($subject4) || $this->config->isEmptyStr($subject5) || $this->config->isEmptyStr($subject6) || $this->config->isEmptyStr($subject7) || $this->config->isEmptyStr($subject8) || $this->config->isEmptyStr($character)){
+		if($this->config->isEmptyStr($stdRegNo) ||
+		 $this->config->isEmptyStr($admission_date) ||
+		  $this->config->isEmptyStr($completed_date) || 
+		  $this->config->isEmptyStr($admitted_class) || 
+		  $this->config->isEmptyStr($completed_class) ||
+		   $this->config->isEmptyStr($academic_ability) ||
+		    $this->config->isEmptyStr($sports_ability)||
+		     $this->config->isEmptyStr($subject1) || 
+		     $this->config->isEmptyStr($subject2) || 
+		     $this->config->isEmptyStr($subject3) || 
+		     $this->config->isEmptyStr($subject4) || 
+		     $this->config->isEmptyStr($subject5) || 
+		     $this->config->isEmptyStr($subject6) || 
+		     $this->config->isEmptyStr($subject7) || 
+		     $this->config->isEmptyStr($subject8) || 
+		     $this->config->isEmptyStr($character)){
 			$this->response = $this->alert->alert_toastr("error", "Select at least Eight(8) Subjects , to continue!", __OSO_APP_NAME__ . " Says");
 
 		}else if($this->config->isEmptyStr($pass_code)){
@@ -2146,16 +2165,16 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 		else if(!$this->config->check_single_data($this->table_name,"stdRegNo", $stdRegNo)){
 			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
 		}else{
-			//check if this testimonial is already generated for the student in Basic 5, Jss3 or SSS 3
-			$student_data = $this->get_student_data_ByRegNo($stdRegNo);
-				$admittedDate = $student_data->stdApplyDate;
-				$dateCompleted = $student_data->completed_date;
+		//check if this testimonial is already generated for the student in Basic 5, Jss3 or SSS 3
+			//$student_data = $this->get_student_data_ByRegNo($stdRegNo);
+				//$admittedDate = $student_data->stdApplyDate;
+				/*$dateCompleted = $student_data->completed_date;
 				$admitted_class = $student_data->admitted_class;
-				$classCompleted = $student_data->studentClass;
+				$classCompleted = $student_data->studentClass;*/
 				$allowedClass = array("Basic 5","Basic 6", "JSS 3A", "JSS 3B","JSS 3C", "SSS 3A" , "SSS 3B" , "SSS 3C");
-			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$classCompleted)){
+			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$completed_class)){
 				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
-			}else if(!in_array($classCompleted,$allowedClass)){
+			}else if(!in_array($completed_class,$allowedClass)){
 				$this->response = $this->alert->alert_toastr("error", "Testimonial is Restricted to Basic 5 or 6, JSS 3 and SSS 3 Only!", __OSO_APP_NAME__ . " Says");
 			}else{
 				try{
@@ -2163,8 +2182,7 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 					$sql_query = "INSERT INTO `visap_student_testimonial_tbl` (stdRegNo,admitted_class,
 					admitted_date,class_completed,date_completed,academic_ability,sports_ability,office_held,school_club,general_remarks,student_character,subject1,subject2,subject3,subject4,subject5,subject6,subject7,subject8,subject9,subject10,cert_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 					$this->stmt = $this->dbh->prepare($sql_query);
-					if($this->stmt->execute([$stdRegNo,$admitted_class, $admittedDate,$classCompleted,
-					$dateCompleted,$academic_ability,$sports_ability,$office,$club,$remarks,$character,$subject1,$subject2,$subject3,$subject4,$subject5,$subject6,$subject7,$subject8,$subject9,$subject10,$cert_no
+					if($this->stmt->execute([$stdRegNo,$admitted_class, $admission_date,$completed_class,$completed_date,$academic_ability,$sports_ability,$office,$club,$remarks,$character,$subject1,$subject2,$subject3,$subject4,$subject5,$subject6,$subject7,$subject8,$subject9,$subject10,$cert_no
 					])){
 						$this->dbh->commit();
 						$testimonial_link ="./student-testimonial?data=".$this->config->convert_string("code",$stdRegNo);
@@ -2300,6 +2318,5 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	return '';
 	}
   }
-
 
       }
