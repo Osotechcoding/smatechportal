@@ -2166,11 +2166,6 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 			$this->response = $this->alert->alert_toastr("error", "No Student Found for $stdRegNo", __OSO_APP_NAME__ ." Says");
 		}else{
 		//check if this testimonial is already generated for the student in Basic 5, Jss3 or SSS 3
-			//$student_data = $this->get_student_data_ByRegNo($stdRegNo);
-				//$admittedDate = $student_data->stdApplyDate;
-				/*$dateCompleted = $student_data->completed_date;
-				$admitted_class = $student_data->admitted_class;
-				$classCompleted = $student_data->studentClass;*/
 				$allowedClass = array("Basic 5","Basic 6", "JSS 3A", "JSS 3B","JSS 3C", "SSS 3A" , "SSS 3B" , "SSS 3C");
 			if($this->config->checkMultipleValues("visap_student_testimonial_tbl","stdRegNo", $stdRegNo,"class_completed",$completed_class)){
 				$this->response = $this->alert->alert_toastr("error", "This Certificate is already generated!", __OSO_APP_NAME__ ." Says");
@@ -2318,5 +2313,58 @@ if($student_data->stdPassport == NULL || $student_data->stdPassport == ""){
 	return '';
 	}
   }
+
+  public function deleteStudentById($studentId)
+	{
+		$student_data = $this->get_student_data_byId($studentId);
+		$studentImage = "../schoolImages/students/" . $student_data->stdPassport;
+		$regNo = $student_data->stdRegNo;
+
+		try {
+			$this->dbh->beginTransaction();
+				$this->stmt = $this->dbh->prepare("DELETE FROM {$this->table_name} WHERE stdId=? LIMIT 1");
+				if ($this->stmt->execute([$studentId])) {
+					$this->stmt = $this->dbh->prepare("DELETE FROM `visap_student_attendance_tbl` WHERE stdRegNo=?");
+				$this->stmt->execute([$regNo]);
+					$this->stmt = $this->dbh->prepare("DELETE FROM `visap_behavioral_tbl` WHERE reg_number=?");
+				$this->stmt->execute([$regNo]);
+					$this->stmt = $this->dbh->prepare("DELETE FROM `visap_psycho_tbl` WHERE reg_number=?");
+				$this->stmt->execute([$regNo]);
+					$this->stmt = $this->dbh->prepare("DELETE FROM `visap_2nd_term_result_tbl` WHERE stdRegCode=?");
+				$this->stmt->execute([$regNo]);
+					$this->stmt = $this->dbh->prepare("DELETE FROM `visap_1st_term_result_tbl` WHERE stdRegCode=?");
+				$this->stmt->execute([$regNo]);
+				
+				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_termly_result_tbl` WHERE stdRegCode=?");
+				$this->stmt->execute([$regNo]);
+
+				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_student_login_token` WHERE email=?");
+				$this->stmt->execute([$student_data->stdEmail]);
+			//visap_result_comment_tbl
+			$this->stmt = $this->dbh->prepare("DELETE FROM `visap_result_comment_tbl` WHERE stdRegNo=?");
+				$this->stmt->execute([$regNo]);
+
+				$this->stmt = $this->dbh->prepare("DELETE FROM `visap_student_testimonial_tbl` WHERE stdRegNo=?");
+				$this->stmt->execute([$regNo]);
+
+				$this->stmt = $this->dbh->prepare("DELETE FROM `tbl_result_pins_history` WHERE studentRegNo=?");
+				$this->stmt->execute([$regNo]);
+
+				//visap_student_testimonial_tbl
+					if (file_exists($studentImage)) {
+						unlink($studentImage);
+					}
+					$this->dbh->commit();
+		
+					$this->response = $this->alert->alert_toastr("success", "Student Details Deleted Successfully", __OSO_APP_NAME__ . " Says") . "<script>setTimeout(()=>{
+							window.location.reload();
+						},500);</script>";
+				}
+			
+		} catch (PDOException $e) {
+			$this->response = $this->alert->alert_toastr("error", "Error Occurred: " . $e->getMessage(), __OSO_APP_NAME__ . " Says");
+		}
+		return $this->response;
+	}
 
       }

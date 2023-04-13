@@ -150,6 +150,10 @@ switch ($teacher->staffGender) {
         <?php if ($teacher->staffPassport == NULL || $teacher->staffPassport ==""): ?>
            <a href="./uploadstaffpassport?staffRegId=<?php echo $teacher->staffRegNo; ?>&actionId=<?php echo $teacher->staffId; ?>" class="card-link text-white"><span class="fa fa-camera"></span> Upload Passport</a>
         <?php endif ?>
+        <div class="justify-content-center mt-2"><button type="button"
+            class="badge badge-danger badge-pill badge-sm remove_staff_btn __loadingBtn__<?php echo $teacher->staffId; ?>"
+            data-staff="<?php echo $teacher->staffId; ?>"
+            data-action="remove_staff_permanently">Remove</button></div>
           </div>
         </div>
       </div>
@@ -172,6 +176,36 @@ switch ($teacher->staffGender) {
    <?php include "../template/footer.php"; ?>
     <?php include "../template/FooterScript.php"; ?>
      <!-- BEGIN: Page JS-->
+
+     <script>
+  $(document).ready(function() {
+    //remove action
+    $(".remove_staff_btn").on("click", function() {
+      const staffId = $(this).data("staff");
+      const action = $(this).data("action");
+      isTrue = confirm(
+        "Are you sure, you want to remove this staff from your database? there is no undo after this action!");
+      if (isTrue) {
+        $(".__loadingBtn__" + staffId).html(
+            '<img src="../assets/loaders/rolling_loader.svg" width="20">')
+          .attr("disabled", true);
+        $.post("../actions/delete_actions", {
+          staff_Id: staffId,
+          action: action
+        }, function(res) {
+          setTimeout(() => {
+            $(".remove_staff_btn").html(
+                'Remove')
+              .attr("disabled", false);
+            $("#server-response").html(res);
+          }, 500);
+        })
+      } else {
+        return;
+      }
+    })
+  })
+  </script>
   </body>
   <!-- END: Body-->
 </html>

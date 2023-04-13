@@ -23,7 +23,11 @@ class Configuration
 
   public function osotech_session_kick()
   {
-    @session_start();
+   if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    return 1;
   }
 
   public function set_time_Zone()

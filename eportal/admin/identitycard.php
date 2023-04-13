@@ -54,7 +54,9 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         }
        .id-schtag, .id-schaddr, .id-no{
         font-size: x-small;
-        font-weight: 600;
+        letter-spacing: 0.1px;
+        font-weight: 400;
+        white-space: nowrap;
        }
        .id-studname{
         background-color: black;
@@ -175,7 +177,9 @@ if (isset($_GET['student-idcard']) && $_GET['student-idcard'] != "") {
         margin-top: -10px;
        }
        .id-schname, #fet-schname {
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 14px;
+        letter-spacing: 0.2px;
        }
        #fet-schname{
         font-size: 16px;

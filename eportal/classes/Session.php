@@ -1,8 +1,9 @@
 <?php  
+
 require_once 'initialize.php';
 class Session {
 	public static function init_ses(){
-	return @session_start();
+	 return session_start();
 	}
 
 	 public static function web_root(){

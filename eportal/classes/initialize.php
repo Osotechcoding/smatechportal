@@ -1,8 +1,9 @@
 <?php
+//session_name('SmatechSecure');
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 	//development server localhost
 	if (!defined("__OSOTECH__DEV_COMPANY__")) {
-		define("__OSOTECH__DEV_COMPANY__", "Kode Made Eazy");
+		define("__OSOTECH__DEV_COMPANY__", "Flat ERP Technologies");
 		define("__OSO_HOST__", 'localhost');
 		define("__OSO_USER__", 'root');
 		define("__OSO_PASS__", 'osotech');
@@ -22,7 +23,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 }else{
 		//deployment or Production server
 	if (!defined("__OSOTECH__DEV_COMPANY__")) {
-		define("__OSOTECH__DEV_COMPANY__", "Kode Made Eazy");
+		define("__OSOTECH__DEV_COMPANY__", "Flat ERP Technologies");
 		define("__OSO_HOST__", 'localhost');
 		define("__OSO_USER__", 'root');
 		define("__OSO_PASS__", 'osotech');

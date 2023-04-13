@@ -258,6 +258,9 @@ require_once "helpers/helper.php";
                               
                       </div>
                       <!--  -->
+
+          <a href="javascript:void(0);" class="btn btn-danger delete_student_btn loading_<?php echo $filtered->stdId;?>" data-id="<?php echo $filtered->stdId;?>" data-action="remove_student_permanently" class="card-link text-warning"><span class="fa fa-trash-o"></span> Delete</a>
+
                     </td>
                     
                   </tr>
@@ -286,6 +289,26 @@ require_once "helpers/helper.php";
   <!-- END: Footer-->
   <!-- BEGIN: Vendor JS-->
   <?php include("../template/DataTableFooterScript.php"); ?>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+        $(".delete_student_btn").on("click", function(){
+          let studentId = $(this).data("id"),action = $(this).data("action");
+          $(".loading_"+studentId).html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+          if (confirm("Are you sure you want to permanently remove all data associated with this student from your database?")) {
+            $.post("../actions/delete_actions",{studentId:studentId,action:action}, function(response){
+              setTimeout(()=>{
+                $(".loading_"+studentId).html('<span class="fa fa-trash-o"></span>Delete').attr("disabled",false);
+                $("#server-response").html(response);
+              },500);
+            })
+
+          }else{
+            return false;
+          }
+        })
+      })
+    </script>
 
 </body>
 <!-- END: Body-->

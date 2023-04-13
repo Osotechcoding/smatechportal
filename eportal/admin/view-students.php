@@ -134,9 +134,11 @@ $Passport = $Student->displayStudentPassport($student->stdPassport,$student->std
         <!-- <a href="javascript:void(0);" class="card-link text-white"><span class="fa fa-credit-card"></span>  Payment</a> -->
         <?php if ($student->stdPassport == NULL || $student->stdPassport ==""): ?>
            <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $student->stdRegNo; ?>&actionId=<?php echo $student->stdId;?>" class="card-link text-white"><span class="fa fa-camera"></span> Passport</a>
-           <?php else: ?>
-            <a href="./uploadstudentpassport?stdRegistrationId=<?php echo $student->stdRegNo; ?>&actionId=<?php echo $student->stdId;?>" class="card-link text-white"><span class="fa fa-camera"></span> Change</a>
         <?php endif ?>
+        <div class="text-center justified-content-center mt-2">
+          <a href="javascript:void(0);" class="btn btn-danger btn-block delete_student_btn loading_<?php echo $student->stdId;?>" data-id="<?php echo $student->stdId;?>" data-action="remove_student_permanently" class="card-link text-warning"><span class="fa fa-trash-o"></span> Delete</a>
+        </div>
+         
           </div>
         </div>
       </div>
@@ -158,6 +160,26 @@ $Passport = $Student->displayStudentPassport($student->stdPassport,$student->std
     </div>
    <?php include "../template/footer.php"; ?>
     <?php include "../template/FooterScript.php"; ?>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".delete_student_btn").on("click", function(){
+          let studentId = $(this).data("id"),action = $(this).data("action");
+          $(".loading_"+studentId).html('<img src="../assets/loaders/rolling_loader.svg" width="30"> Processing...').attr("disabled",true);
+          if (confirm("Are you sure you want to permanently remove all data associated with this student from your database?")) {
+            $.post("../actions/delete_actions",{studentId:studentId,action:action}, function(response){
+              setTimeout(()=>{
+                $(".loading_"+studentId).html('<span class="fa fa-trash-o"></span>Delete').attr("disabled",false);
+                $("#server-response").html(response);
+              },500);
+            })
+
+          }else{
+            return false;
+          }
+        })
+      })
+    </script>
      <!-- BEGIN: Page JS-->
   </body>
   <!-- END: Body-->

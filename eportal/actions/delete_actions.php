@@ -257,5 +257,14 @@
           echo $result;
         }
       }
+
+      //remove_student_permanently
+      if ($_POST['action'] === "remove_student_permanently") {
+        $studentId = $Configuration->Clean($_POST['studentId']);
+        $result = $Student->deleteStudentById($studentId);
+        if ($result) {
+          echo $result;
+        }
+      }
     }
   }
